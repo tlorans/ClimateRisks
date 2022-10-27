@@ -18,41 +18,25 @@ from selenium.webdriver.chrome.options import Options
 from fake_useragent import UserAgent
 
 
-from climaterisks import earning_calls
 
-#Reset list of URL's
-correct_url = []
-Url_list = []
+from climaterisks import transcript_collector
+from climaterisks import stock_info_collector
 
-#Reset Tables
-ticker_data = []
-company_data = []
-title_data = []
-date_data = []
-time_data = []
-quarter_data = []
-company_info_table = []
-Speech_table = []
-QA_table = []
-Comp_part_table = []
-speech = []
-speaker = []
-QA_speech = []
-QA_speaker = []
-comp_parts = []
-comp_pos = []
-conf_parts = []
-conf_pos = []
-Conf_part_table = []
-comp_ccid = []
-speech_ccid = []
-QA_ccid = []
-comppart_ccid = []
-confpart_ccid = []
-speech_scriptid = []
-QA_scriptid = []
-comppart_partid = []
-confpart_partid = []
-test_list = []
+import pandas as pd 
+
+Stock_Tickers=pd.read_excel('Stoc_industries.xlsx',sheet_name='Test')
+Stock_Tickers.iloc[0]["Description"]
+transcript_collector.Get_Transcripts(Stock_Tickers)
+dfContent=stock_info_collector.Get_from_Yahoo(Stock_Tickers)  
 
 
+transcript_collector.Get_Transcripts(dfContent)
+
+test = transcript_collector.process_page(dfContent.iloc[1])
+print(str(test["Speech"]))
+
+check = test["Speech"][0]
+from climaterisks import earning_calls 
+
+test = earning_calls.reformat(dfContent.iloc[0][1])
+print(test)
