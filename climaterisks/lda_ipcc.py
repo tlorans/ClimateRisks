@@ -9,7 +9,6 @@ from pprint import pprint
 
 # Gensim
 import gensim
-import gensim.corpora as corpora
 from gensim.models import CoherenceModel
 
 
