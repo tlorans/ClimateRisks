@@ -18,7 +18,9 @@ from nltk.stem.porter import PorterStemmer
 from nltk.corpus import stopwords
 from nltk import ngrams
 import re 
-
+from pandera.typing import DataFrame, DateTime, Object, Series
+import pandera as pa
+from climaterisks import stock_info_collector
 
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument('--headless')
@@ -60,7 +62,7 @@ def process_page(StockTicker, quarter:str):
 
 
 
-def get_transcripts(Stock_Tickers):
+def get_transcripts(Stock_Tickers:DataFrame) -> DataFrame:
     quarters = ["q1","q2","q3","q4"]
     years = [2020,2021,2022]
     list_quarters =  [i + '-' + str(j) for i in quarters for j in years]
@@ -73,3 +75,9 @@ def get_transcripts(Stock_Tickers):
             df = pd.concat([df, new_df])
     print('All targeted transcripts done.') 
     return df
+
+def get_earning_calls(filePath) -> DataFrame:
+    Stock_Tickers=pd.read_excel(filePath,sheet_name='Test')
+    dfContent=stock_info_collector.Get_from_Yahoo(Stock_Tickers)  
+    results = get_transcripts(dfContent)
+    return results 

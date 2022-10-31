@@ -1,42 +1,33 @@
-import os
-import re
-import time
-import csv
-import random
-import requests
-from bs4 import BeautifulSoup
-from selenium import webdriver
-from datetime import date, timedelta, datetime
-from urllib.request import urlopen
-import pandas as pd
-import numpy as np
-from time import sleep
-from random import randint
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.chrome.options import Options
-from fake_useragent import UserAgent
-
-
 
 from climaterisks import transcript_collector
-from climaterisks import stock_info_collector
 
-import pandas as pd 
-
-Stock_Tickers=pd.read_excel('Stoc_industries.xlsx',sheet_name='Test')
-Stock_Tickers.iloc[0]["Description"]
-transcript_collector.Get_Transcripts(Stock_Tickers)
-dfContent=stock_info_collector.Get_from_Yahoo(Stock_Tickers)  
+test = transcript_collector.get_earning_calls("Stoc_industries.xlsx")
 
 
-transcript_collector.Get_Transcripts(dfContent)
+import pandas as pd
 
-test = transcript_collector.process_page(dfContent.iloc[1])
-print(str(test["Speech"]))
+from climaterisks import pre_processing 
 
-check = test["Speech"][0]
-from climaterisks import earning_calls 
+reports, id2words, corpus = pre_processing.get_ipcc("03_SROCC_Ch01_FINAL.txt")
 
-test = earning_calls.reformat(dfContent.iloc[0][1])
-print(test)
+[[(id2words[id], freq) for id, freq in cp] for cp in corpus[:1]]
+
+
+import gensim 
+
+lda_model = gensim.models.ldamodel.LdaModel(corpus=corpus,
+                                           id2word=id2words,
+                                           num_topics=7, 
+                                           random_state=100,
+                                           update_every=1,
+                                           chunksize=100,
+                                           passes=10,
+                                           alpha='auto',
+                                           per_word_topics=True)
+
+print(lda_model.print_topics())
+
+from gensim.models import CoherenceModel
+
+coherence_model_lda = CoherenceModel(model=lda_model, texts=reports, dictionary=id2words, coherence='c_v')
+coherence_lda = coherence_model_lda.get_coherence()
