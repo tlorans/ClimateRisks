@@ -5,13 +5,14 @@
 
 # Welcome to Climate Risks Modelling's documentation!
 
+
+
+```{warning}
+This course is under heavy development
+```
+
 ```{toctree}
 :caption: 'Contents:'
 :maxdepth: 2
 ```
 
-# Indices and tables
-
-- {ref}`genindex`
-- {ref}`modindex`
-- {ref}`search`
