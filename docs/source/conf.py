@@ -6,7 +6,7 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'Climate Risks Modelling'
+project = 'Climate Risks Modelling with NLP'
 copyright = '2022, Thomas Lorans'
 author = 'Thomas Lorans'
 release = '0.1'
