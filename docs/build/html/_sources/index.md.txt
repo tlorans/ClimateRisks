@@ -3,16 +3,19 @@
 % You can adapt this file completely to your liking, but it should at least
 % contain the root `toctree` directive.
 
-# Climate Risks Modelling with Python Course Website
+# Climate Risks Modelling with Natural Language Processing
 
 
 
 ```{warning}
-This course is under heavy development
+This book is under heavy development
 ```
 
 ```{toctree}
 :caption: 'Contents:'
 :maxdepth: 2
+
+introduction
+notebooks/1_Climate_Change_Risks
 ```
 
