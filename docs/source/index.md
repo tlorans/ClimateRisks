@@ -16,6 +16,6 @@ This book is under heavy development
 :maxdepth: 2
 
 introduction
-notebooks/1_Climate_Change_Risks
+notebooks/ClimateChangeKeywords
 ```
 
