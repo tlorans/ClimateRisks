@@ -325,8 +325,8 @@ title="Print to PDF"
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#Creating-a-Paragraphed-Representation">
-       Creating a Paragraphed Representation
+      <a class="reference internal nav-link" href="#Creating-Meaningful-Paragraphs">
+       Creating Meaningful Paragraphs
       </a>
      </li>
     </ul>
@@ -342,23 +342,6 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#Project:-Step-1">
    Project: Step 1
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#IPCC-Reports">
-     IPCC Reports
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#Preprocessing">
-     Preprocessing
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#Keywords-Extraction">
-     Keywords Extraction
-    </a>
-   </li>
-  </ul>
  </li>
 </ul>
 
@@ -473,8 +456,8 @@ title="Print to PDF"
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#Creating-a-Paragraphed-Representation">
-       Creating a Paragraphed Representation
+      <a class="reference internal nav-link" href="#Creating-Meaningful-Paragraphs">
+       Creating Meaningful Paragraphs
       </a>
      </li>
     </ul>
@@ -490,23 +473,6 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#Project:-Step-1">
    Project: Step 1
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#IPCC-Reports">
-     IPCC Reports
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#Preprocessing">
-     Preprocessing
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#Keywords-Extraction">
-     Keywords Extraction
-    </a>
-   </li>
-  </ul>
  </li>
 </ul>
 
@@ -812,8 +778,8 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[51]:
 </pre></div>
 </div>
 <div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">keybert</span> <span class="kn">import</span> <span class="n">KeyBERT</span>
@@ -822,6 +788,22 @@ div.rendered_html tbody tr:hover {
 <span class="n">keywords</span> <span class="o">=</span> <span class="n">kw_model</span><span class="o">.</span><span class="n">extract_keywords</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">highlight</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">Physical <span style="color: #000000; text-decoration-color: #000000; background-color: #ffff00">risks</span> resulting from climate change can be event driven acute or longer term shifts chronic in climate
+patterns Physical <span style="color: #000000; text-decoration-color: #000000; background-color: #ffff00">risks</span> may have financial implications for organizations such as direct damage to assets and
+indirect impacts from supply chain disruption Organizations financial performance may also be affected by changes
+in water availability sourcing and quality food security and extreme temperature changes affecting organizations
+premises operations supply chain transport needs and employee safety American <span style="color: #000000; text-decoration-color: #000000; background-color: #ffff00">stocks</span> closed out 2022 lower on
+Friday capping year of sharp losses driven by aggressive interest rate hikes to curb inflation <span style="color: #000000; text-decoration-color: #000000; background-color: #ffff00">recession</span> fears the
+Russia Ukraine war and rising concerns over COVID cases in China Wall Street three main indexes booked their first
+yearly drop since 2018 as an era of loose monetary policy ended with the Federal Reserve fastest pace of rate hikes
+since the 1980s The benchmark 500 SPX has shed 19 this year marking roughly trillion decline in market cap The tech
+heavy <span style="color: #000000; text-decoration-color: #000000; background-color: #ffff00">Nasdaq</span> IXIC is down 33 while the <span style="color: #000000; text-decoration-color: #000000; background-color: #ffff00">Dow</span> Jones Industrial Average DJI has fallen
+</pre></div>
 </div>
 <p>We can change the set <code class="docutils literal notranslate"><span class="pre">keyphrase_ngram_range</span></code> to set the length of the keywords/keyphrases we are looking for. For example, to get keyphrases we can set <code class="docutils literal notranslate"><span class="pre">keyphrase_ngram_range</span></code> to (1,2) if we want keyphrases up to 2 words:</p>
 <div class="nbinput docutils container">
@@ -923,7 +905,7 @@ transport needs and employee safety
 </div>
 <p>Using <code class="docutils literal notranslate"><span class="pre">sentence-transformers</span></code>, the step to transform our document and candidates keywords into numerical vectors is easy:</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sentence_transformers</span> <span class="kn">import</span> <span class="n">SentenceTransformer</span>
@@ -1081,7 +1063,7 @@ the cosine is close to -1, the candidate and the document meanings are opposite 
 </div>
 <p>But as we increase the <code class="docutils literal notranslate"><span class="pre">nr_candidates</span></code> parameter, we diversify our results:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">max_sum_sim</span><span class="p">(</span><span class="n">doc_embedding</span><span class="p">,</span> <span class="n">candidates_embeddings</span><span class="p">,</span> <span class="n">candidates</span><span class="p">,</span> <span class="n">top_n</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">nr_candidates</span> <span class="o">=</span> <span class="mi">10</span><span class="p">))</span>
@@ -1212,7 +1194,7 @@ the cosine is close to -1, the candidate and the document meanings are opposite 
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-2022-12-31 05:52:30,127 - KeyphraseVectorizer - INFO - It looks like you do not have downloaded a list of stopwords yet. It is attempted to download the stopwords now.
+2022-12-31 14:06:12,425 - KeyphraseVectorizer - INFO - It looks like you do not have downloaded a list of stopwords yet. It is attempted to download the stopwords now.
 INFO:KeyphraseVectorizer:It looks like you do not have downloaded a list of stopwords yet. It is attempted to download the stopwords now.
 [nltk_data] Downloading package stopwords to /root/nltk_data...
 [nltk_data]   Unzipping corpora/stopwords.zip.
@@ -1224,7 +1206,7 @@ INFO:KeyphraseVectorizer:It looks like you do not have downloaded a list of stop
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;matplotlib.image.AxesImage at 0x7fe5659297c0&gt;
+&lt;matplotlib.image.AxesImage at 0x7f7061322a90&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -1253,7 +1235,7 @@ INFO:KeyphraseVectorizer:It looks like you do not have downloaded a list of stop
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;matplotlib.image.AxesImage at 0x7fe564535f70&gt;
+&lt;matplotlib.image.AxesImage at 0x7f706142c580&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -1285,7 +1267,7 @@ INFO:KeyphraseVectorizer:It looks like you do not have downloaded a list of stop
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;matplotlib.image.AxesImage at 0x7fe5635eac70&gt;
+&lt;matplotlib.image.AxesImage at 0x7f705fe0afd0&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -1312,7 +1294,7 @@ INFO:KeyphraseVectorizer:It looks like you do not have downloaded a list of stop
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;matplotlib.image.AxesImage at 0x7fe5626fbd60&gt;
+&lt;matplotlib.image.AxesImage at 0x7f705eec5a30&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -1329,7 +1311,7 @@ INFO:KeyphraseVectorizer:It looks like you do not have downloaded a list of stop
 <h2>Extracting Keywords from IPCC Reports<a class="headerlink" href="#Extracting-Keywords-from-IPCC-Reports" title="Permalink to this headline">#</a></h2>
 <p>We’ve converted the pdf reports to text files, downloaded from the IPCC website. The first step is in loading the report.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[76]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
 </pre></div>
 </div>
 <div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fileObject</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;03_SROCC_Ch01_FINAL.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
@@ -1360,7 +1342,7 @@ Marine heat waves are occurring everywhere across the surface ocean, and are bec
 <p>First, we will proceed to the embedding, using <code class="docutils literal notranslate"><span class="pre">all-MiniLM-L6-v2</span></code>.</p>
 <p>Let’s work with an illustrative example first. We’ll take our example from above regarding physical risks and add an unrelated piece of text.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[170]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
 </pre></div>
 </div>
 <div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">doc</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
@@ -1376,17 +1358,9 @@ Marine heat waves are occurring everywhere across the surface ocean, and are bec
 </pre></div>
 </div>
 </div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[160]:
-</pre></div>
-</div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">doc</span> <span class="o">=</span> <span class="s2">&quot;Let me tell you a little story. When I was a little kid I really liked to play football. I wanted to be like Messi and play at Camp Nou. However, I was really bad at it and now I’m not training at Camp Nou. I’m writing a medium article on embeddings. In this article, I want to show how are we going to split a text into parts. We first embed sentences. Then we compute sentence similarities. After that, we detect the split point in the text. After finishing this process we will go play chess with friends.&quot;</span>
-</pre></div>
-</div>
-</div>
 <p>Let’s encode this text using <code class="docutils literal notranslate"><span class="pre">all-MiniLM-L6-v2</span></code> model:</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[171]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
 </pre></div>
 </div>
 <div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">SentenceTransformer</span><span class="p">(</span><span class="s1">&#39;all-MiniLM-L6-v2&#39;</span><span class="p">)</span>
@@ -1400,7 +1374,7 @@ Marine heat waves are occurring everywhere across the surface ocean, and are bec
 <h4>Identifying Split Points<a class="headerlink" href="#Identifying-Split-Points" title="Permalink to this headline">#</a></h4>
 <p>There is a way to see sentence similarities (computed with the cosine similarity we’ve seen earlier) all at once by creating a similarity matrix:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[172]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
 </pre></div>
 </div>
 <div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
@@ -1415,7 +1389,7 @@ Marine heat waves are occurring everywhere across the surface ocean, and are bec
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_ClimateChangeKeywords_65_0.png" src="../_images/notebooks_ClimateChangeKeywords_65_0.png" />
+<img alt="../_images/notebooks_ClimateChangeKeywords_64_0.png" src="../_images/notebooks_ClimateChangeKeywords_64_0.png" />
 </div>
 </div>
 <p>What pattern can we see here? The lighter the square, the more similar the two sentences are. We can see that the second and the third sentences seem to be really similar. Right after, the we have a drop in the cosine similarity between the third and the fourth sentence. This is the step where the text begins to switch to the stock price drop topic. However, you can observe that the approach is far from being perfect, as the fourth and fifth sentence seems to have a low similarity according to
@@ -1426,7 +1400,7 @@ Grouping those diagonals into a new matrix, on which we will activation weights 
 <p>That’s a lot! Let’s tackle these steps one by one.</p>
 <p>First, let’s take each diagonal to the right of the main diagonal:</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[181]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
 </pre></div>
 </div>
 <div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">diagonals</span> <span class="o">=</span> <span class="p">[</span><span class="n">similarities</span><span class="o">.</span><span class="n">diagonal</span><span class="p">(</span><span class="n">each</span><span class="p">)</span> <span class="k">for</span> <span class="n">each</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">similarities</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
@@ -1435,7 +1409,7 @@ Grouping those diagonals into a new matrix, on which we will activation weights 
 </div>
 <p>Now, let’s pad each diagonal by zeros at the end in order to get the same length for each diagonal:</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[182]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
 </pre></div>
 </div>
 <div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">diagonals</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">each</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">similarities</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">each</span><span class="p">)))</span> <span class="k">for</span> <span class="n">each</span> <span class="ow">in</span> <span class="n">diagonals</span><span class="p">]</span>
@@ -1444,7 +1418,7 @@ Grouping those diagonals into a new matrix, on which we will activation weights 
 </div>
 <p>Because all diagonals have the same length after padding, we can group them into a matrix:</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[183]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[42]:
 </pre></div>
 </div>
 <div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">diagonals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">diagonals</span><span class="p">)</span>
@@ -1453,7 +1427,7 @@ Grouping those diagonals into a new matrix, on which we will activation weights 
 </div>
 <p>Now comes the part regarding the application of the activation weights. First, we need an activation function (here the reverse sigmoid one):</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[102]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[43]:
 </pre></div>
 </div>
 <div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
@@ -1465,7 +1439,7 @@ Grouping those diagonals into a new matrix, on which we will activation weights 
 </div>
 <p>We construct the application weights to be applied to our matrix with the diagonals:</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[184]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[44]:
 </pre></div>
 </div>
 <div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p_size</span> <span class="o">=</span> <span class="mi">5</span> <span class="c1"># the number of sentences we are using to calculate the weighted sum (ie. the window we are looking into)</span>
@@ -1477,7 +1451,7 @@ Grouping those diagonals into a new matrix, on which we will activation weights 
 </div>
 <p>Now we apply these activation weights to our matrix with our diagonals:</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[185]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[45]:
 </pre></div>
 </div>
 <div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">activated_similarities</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">diagonals</span> <span class="o">*</span> <span class="n">activation_weights</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
@@ -1486,7 +1460,7 @@ Grouping those diagonals into a new matrix, on which we will activation weights 
 </div>
 <p>And finally, we determine the split by finding the local minima:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[187]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[46]:
 </pre></div>
 </div>
 <div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.signal</span> <span class="kn">import</span> <span class="n">argrelextrema</span>
@@ -1500,28 +1474,28 @@ Grouping those diagonals into a new matrix, on which we will activation weights 
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[187]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[46]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;matplotlib.collections.LineCollection at 0x7fe564e98dc0&gt;
+&lt;matplotlib.collections.LineCollection at 0x7f705d0b6eb0&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_ClimateChangeKeywords_80_1.png" src="../_images/notebooks_ClimateChangeKeywords_80_1.png" />
+<img alt="../_images/notebooks_ClimateChangeKeywords_79_1.png" src="../_images/notebooks_ClimateChangeKeywords_79_1.png" />
 </div>
 </div>
 <p>And that’s it! The algorithm found that the split is at the third sentence!</p>
 </section>
-<section id="Creating-a-Paragraphed-Representation">
-<h4>Creating a Paragraphed Representation<a class="headerlink" href="#Creating-a-Paragraphed-Representation" title="Permalink to this headline">#</a></h4>
+<section id="Creating-Meaningful-Paragraphs">
+<h4>Creating Meaningful Paragraphs<a class="headerlink" href="#Creating-Meaningful-Paragraphs" title="Permalink to this headline">#</a></h4>
 <p>Now that we have identified our splitting points, we can group our sentences into more meaningful paragraphs:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[222]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[47]:
 </pre></div>
 </div>
 <div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">paragraphs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
@@ -1561,23 +1535,88 @@ Wall Street&#39;s three main indexes booked their first yearly drop since 2018 a
 The benchmark S&amp;P 500 (.SPX) has shed 19.4% this year, marking a roughly $8 trillion decline in market cap. The tech-heavy Nasdaq (.IXIC) is down 33.1%, while the Dow Jones Industrial Average (.DJI) has fallen 8.9%..
 </pre></div></div>
 </div>
+<p><strong>EXERCISE</strong>: Change the document content with other sentences, and include a topic switch. Conduct the same approach in order to test if the algorithm correctly identify the stipping point.</p>
 </section>
 </section>
 <section id="KeyBERT-and-Long-Documents">
 <h3>KeyBERT and Long Documents<a class="headerlink" href="#KeyBERT-and-Long-Documents" title="Permalink to this headline">#</a></h3>
+<p>Due to the context length limitation of LLMs, KeyBERT cannot directly proceed long document. That’s why we’ve implemented the algorithm trying to group sentences into paragraphs focused on the same topic.</p>
+<p>Now that we have our list of paragraphs, we can apply the <code class="docutils literal notranslate"><span class="pre">KeyphraseCountVectorizer</span></code> to select candidates keyphrases and extract keywords with <code class="docutils literal notranslate"><span class="pre">KeyBERT</span></code>:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[49]:
+</pre></div>
+</div>
+<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">vectorizer</span> <span class="o">=</span> <span class="n">KeyphraseCountVectorizer</span><span class="p">(</span><span class="n">stop_words</span> <span class="o">=</span> <span class="s1">&#39;english&#39;</span><span class="p">)</span>
+<span class="n">keywords_doc</span> <span class="o">=</span> <span class="n">kw_model</span><span class="o">.</span><span class="n">extract_keywords</span><span class="p">(</span><span class="n">paragraphs</span><span class="p">,</span> <span class="n">vectorizer</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="p">)</span>
+<span class="n">keywords_doc</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[49]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[[(&#39;climate change&#39;, 0.5448),
+  (&#39;physical risks&#39;, 0.5415),
+  (&#39;supply chain disruption&#39;, 0.486),
+  (&#39;financial implications&#39;, 0.4791),
+  (&#39;extreme temperature changes&#39;, 0.4332)],
+ [(&#39;american stocks&#39;, 0.5183),
+  (&#39;dow jones industrial average&#39;, 0.4402),
+  (&#39;first yearly drop&#39;, 0.4275),
+  (&#39;market cap&#39;, 0.4052),
+  (&#39;federal reserve&#39;, 0.3968)]]
+</pre></div></div>
+</div>
+<p>However, as you can see above, we now have a list of lists of tuples, with the extracted keyword and the cosine similarity. What we want at the final stage is to get keywords for the entire document.</p>
+<p>One way to handle this is to simply compute the average cosine similarity for each keyphrase, and finally select the <code class="docutils literal notranslate"><span class="pre">top_n</span></code> one:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[50]:
+</pre></div>
+</div>
+<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">keywords</span> <span class="o">=</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="n">keywords_doc</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">keywords_doc</span><span class="p">))]</span>
+
+<span class="n">my_result</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">sub</span> <span class="ow">in</span> <span class="n">keywords</span><span class="p">:</span>
+   <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">sub</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+      <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">my_result</span><span class="p">:</span>
+         <span class="n">my_result</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+      <span class="k">else</span><span class="p">:</span>
+         <span class="n">my_result</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">val</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">my_val</span> <span class="ow">in</span> <span class="n">my_result</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+   <span class="n">my_result</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">my_val</span><span class="p">)</span>
+
+<span class="n">list_k</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">my_result</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">my_result</span><span class="o">.</span><span class="n">get</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)[:</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">d1</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">my_result</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">list_k</span><span class="p">}</span>
+<span class="n">wc</span> <span class="o">=</span> <span class="n">WordCloud</span><span class="p">(</span><span class="n">background_color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="n">max_words</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">relative_scaling</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">normalize_plurals</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">generate_from_frequencies</span><span class="p">(</span><span class="n">d1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">wc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[50]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;matplotlib.image.AxesImage at 0x7f705ff44ca0&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_ClimateChangeKeywords_88_1.png" src="../_images/notebooks_ClimateChangeKeywords_88_1.png" />
+</div>
+</div>
 </section>
 </section>
 <section id="Project:-Step-1">
 <h2>Project: Step 1<a class="headerlink" href="#Project:-Step-1" title="Permalink to this headline">#</a></h2>
-<section id="IPCC-Reports">
-<h3>IPCC Reports<a class="headerlink" href="#IPCC-Reports" title="Permalink to this headline">#</a></h3>
-</section>
-<section id="Preprocessing">
-<h3>Preprocessing<a class="headerlink" href="#Preprocessing" title="Permalink to this headline">#</a></h3>
-</section>
-<section id="Keywords-Extraction">
-<h3>Keywords Extraction<a class="headerlink" href="#Keywords-Extraction" title="Permalink to this headline">#</a></h3>
-</section>
+<p>Now is the time for the first part of the project. It will be asked to apply the pipeline we’ve seen above to the IPCC reports. The objective is to get a thousand keyphrases that will constitute our basis for our climate risks vocabulary. To recall, you will need to: - Read the text files with the IPCC reports - Apply the algorithm to group sentences into meaningful paragraphs - Apply KeyBERT extraction algorithm to obtain your keywords / keyphrases</p>
 </section>
 </section>
 
