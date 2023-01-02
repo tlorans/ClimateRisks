@@ -17,5 +17,6 @@ This book is under heavy development
 
 introduction
 notebooks/ClimateChangeKeywords
+notebooks/EarningsCallTranscripts
 ```
 
