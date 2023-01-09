@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Earnings Call Transcripts &#8212; Climate Risks Modelling with NLP 0.1 documentation</title>
+    <title>Climate Risks Discussions in Earnings Call &#8212; Climate Risks Modelling with NLP 0.1 documentation</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -101,7 +101,7 @@
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Earnings Call Transcripts
+   Climate Risks Discussions in Earnings Call
   </a>
  </li>
 </ul>
@@ -272,7 +272,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Earnings Call Transcripts</h1>
+                <h1>Climate Risks Discussions in Earnings Call</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -576,8 +576,8 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<section id="Earnings-Call-Transcripts">
-<h1>Earnings Call Transcripts<a class="headerlink" href="#Earnings-Call-Transcripts" title="Permalink to this headline">#</a></h1>
+<section id="Climate-Risks-Discussions-in-Earnings-Call">
+<h1>Climate Risks Discussions in Earnings Call<a class="headerlink" href="#Climate-Risks-Discussions-in-Earnings-Call" title="Permalink to this headline">#</a></h1>
 <section id="What-is-Discussed-During-Earnings-Call?">
 <h2>What is Discussed During Earnings Call?<a class="headerlink" href="#What-is-Discussed-During-Earnings-Call?" title="Permalink to this headline">#</a></h2>
 <p>First, we need to load the csv file containing some earnings transcripts for S&amp;P500 stocks:</p>
@@ -721,7 +721,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <p>Then, we embed our climate risks vocabulary:</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[65]:
 </pre></div>
 </div>
 <div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">keywords</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;keywords.csv&#39;</span><span class="p">)[</span><span class="s1">&#39;keyword&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
@@ -731,7 +731,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <p>We also embed our earnings call transcript:</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[66]:
 </pre></div>
 </div>
 <div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">transcript_embeddings</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">new_sentences</span><span class="p">,</span> <span class="n">convert_to_tensor</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
@@ -740,7 +740,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <p>Finally, we use the <code class="docutils literal notranslate"><span class="pre">util.semantic_search</span></code> function from the <code class="docutils literal notranslate"><span class="pre">sentence-transformer</span></code> package in order to get the 5 most similars (in terms of cosine similarity score) sentences / paragraphs in our earnings call transcript for each climate risks keywords. We set a threshold in terms of cosine similarity, in order to retain only sentences / paragraphs with high similarity to the keywords:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[64]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[67]:
 </pre></div>
 </div>
 <div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">itertools</span>
@@ -760,15 +760,15 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[64]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[67]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&#39;And we’re really at the early stage of our journey. We only crossed 1 million units in the past 12 months recently, and we aspire to head to 20 million units a year, so we’re basically 5% along the way towards our goal. And we are growing very rapidly year-over-year and remain confident of exceeding 50% annual growth for the foreseeable future for basically several of the next years, I mean, so — yeah. But I think if you zoom out, like as you said, our mission is to accelerate the transition to sustainable energy. So we are looking with our existing suppliers and others to figure out how to grow all of these raw materials as quickly as possible to not slow down the transition. Energy business has continued to be impacted by macro conditions more severely than the vehicle business. Our storage products are need of chip supply and new import processes have impacted supply of certain components for solar systems, which is reflected in our solar volume for the quarter.&#39;
+&#39;But I think if you zoom out, like as you said, our mission is to accelerate the transition to sustainable energy. So we are looking with our existing suppliers and others to figure out how to grow all of these raw materials as quickly as possible to not slow down the transition. Energy business has continued to be impacted by macro conditions more severely than the vehicle business. Our storage products are need of chip supply and new import processes have impacted supply of certain components for solar systems, which is reflected in our solar volume for the quarter.&#39;
 </pre></div></div>
 </div>
-<p>So, even if the final result is far from perfect, we still have achieved to retrieve a climate risks-related discussion in the Tesla’s earnings call transcript, without having to proceed to a <code class="docutils literal notranslate"><span class="pre">Word2Vec</span></code> implementation and finding synonyms as an intermediary step!</p>
+<p>Here we go! We have achieved to retrieve a climate risks-related discussion in the Tesla’s earnings call transcript, without having to proceed to a <code class="docutils literal notranslate"><span class="pre">Word2Vec</span></code> implementation and finding synonyms as an intermediary step!</p>
 </section>
 </section>
 <section id="Project:-Step-2">
