@@ -61,13 +61,14 @@ def generate_df(Stock_Tickers, list_quarters):
         stockname = get_yahoo_longname(ticker)
         stockname_formated = str(reformat(stockname))
         ticker_formated = str(reformat(ticker))
-        df = pd.concat([df, pd.DataFrame({'Ticker':ticker, 
-                                          'quarter':list_quarters,
-                                          'StockName': stockname,
-                                          'StockNameFormated':stockname_formated,
-                                          'TickerFormated':ticker_formated
-                                          
-                                          })])
+        if len(stockname_formated) > 0:
+            df = pd.concat([df, pd.DataFrame({'Ticker':ticker, 
+                                              'quarter':list_quarters,
+                                              'StockName': stockname,
+                                              'StockNameFormated':stockname_formated,
+                                              'TickerFormated':ticker_formated
+                                              
+                                              })])
     
     return df
     
@@ -100,14 +101,15 @@ def process_page(row:Object):
     return list_res
 
 
-    
-Stock_Tickers=pd.read_excel(filePath,sheet_name='Test')
+
+Stock_Tickers=pd.read_excel('materials/Stoc_industries.xlsx',sheet_name='Test')
 years = [2022]
-quarters = ["q1","q2","q3","q4"]
+quarters = ["q1"]
 list_quarters =  [i + '-' + str(j) for i in quarters for j in years]
-test = generate_df(Stock_Tickers[:10], list_quarters)
+test = generate_df(Stock_Tickers, list_quarters)
 
 tqdm.pandas()
+
 test['Transcript'] = test.progress_apply(process_page, axis = 1)
 
 
