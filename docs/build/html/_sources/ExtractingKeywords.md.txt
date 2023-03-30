@@ -1,0 +1,60 @@
+# Extracting Climate Change Keywords with PatternRank
+
+## Introduction
+
+## Literature
+
+A growing literature makes use of earnings calls transcripts as a source for identifying firms' risks and opportunities. Among these new area of research, climate change-related risks is gaining in importance, with our two main reference papers (Sautner et al. 2022 and Hu et al. 2022) published last year.
+
+However, as acknownledged by Sautner et al. (2022), focusing on climate change risks with textual analysis brings specific challenges. Indeed, climate change-related vocabulary is quite a niche language, differing according to the type of the source (newspapers, scientific articles or reports, politics, business news, etc.). Some pre-processing steps need to be undertaken in order to specifically identify climate related discussions in the earnings calls transcripts. More precisely, both Sautner et al. (2022) and Hu et al. (2022) first create a climate change keywords set to be used in identifying climate change-related sentences.
+
+Sautner et al. (2022) use a machine-learning algorithm to extract climate change-related keywords from earnings calls transcripts. The climate change keywords set is composed as the union of (i) an initial set of 50 general and manually identified climate change keywords and (ii) a set created with a searching algorithm that constructs keywords from earnings calls transcripts. The approach can be summarized in five stages. 
+
+First, the authors define a "search set" by compiling a set of earnings calls transcripts that potentially discuss climate change-related issues. To do so, the authors uses a large set of keywords extracted from the IPCC reports (that potentially focuses on climate change issues) and another set of more general keywords (extracted from news articles on tech, politics from the BBC and Reuters, English-language novels, etc.) to compute a "rough" climate change exposure score for each transcript. Transcripts with positive "rough" climate change exposure score are identified as containing potential climate change keywords. Sentences contained in this subset of transcripts are refered as the set M.
+
+Second, the authors define a "reference set" and a "search set" within the set M. To do so, the authors manually built a set of 50 general climate change keywords such as "global warming" or "carbon emission". Sentences in the transcripts containing at least one of these keywords are refered as the "reference set" (the R set thereafter), the rest is refered as the search set (the S set thereafter). The latter may contains new climate change keywords. 
+
+Third, the authors construct a training set containing the R set and a random sample of the S set. They train machine learning algorithms to predict the probabiltiy that the sentence belongs to R with this training set. Once fitter, they apply the trained algorithm on the S set to determine a target set T for which at least one of the algorithm predict a probability higher than 80% that the sentence belongs to R. The resulting set is likely to contain new climate change keywords according to the authors.
+
+Fourth, the authors find new climate change keywords by identifying keywords that best discriminates the belonging to the set T versus the other sentences in S. The resulting keywords compose the new set of keywords.
+
+Finally, the authors combine the set of 50 general climate keywords with these newly discovered keywords in T.
+
+Hu et al. (2022) uses a two-step approach in constructing their climate change keywords library: (i) obtaining climate change seed words from IPCC reports and (ii) expand the climate change keywords set with similar words in earnings calls transcripts. 
+
+First, they apply an unsupervised learning technic (Latent Dirichlet Allocation, or LDA for short) in order to discover climate change keywords from IPCC reports. The objective of applying LDA is to extract words appearing frequently in these reports. The auhors choose to generate 7 topics per IPCC chapter, and collect the "dominant" keywords in each of this topics. This generate a final initial seeds keywords set of more than 50 keywords. 
+
+Second, the authors apply the Word2Vec algorithm on earnings calls transcripts in order to expand the climate change keywords set. The authors group initial keywords resulting from the LDA on IPCC reports into six groups, and search for similar words at this group level. The Word2Vec algorithm is a neural network approach aiming to predict the probability of the coocurrence of words, and used for transforming words into numerical representation (vector) reflecting their contextual meaning. Once transformed into a numerical vector representation, similarity between words used in the earnings calls transcripts and initial climate change keywords from the IPCC reports can be assessed with the cosine similarity (basically a dot product between the two vectors). Words in the earnings calls transcripts with the highest mean cosine similarity are used to expand the initial climate change keywords set. The full resulting keywords set includes more than 1100 keywords. 
+
+Hu et al. (2022) and Sautner et al. (2022) approaches for building a climate change keywords set are distinct in multiple dimensions.
+
+First, initial and resulting climate change keywords set are grouped according to topics choosen ex-ante by the authors in Sautner et al. (2022), while Hu et al. (2022) doen't assigned any group at this stage (we'll see later that they will rely on unsupervised learning with LDA in order to determine hierarchical groups of climate change risks).
+
+Second, Sautner et al. (2022) use an ex-ante list of initial climate change keywords, while Hu et al. (2022) use unsupervised learning with LDA on the IPCC reports for determining the initial seed words.
+
+Third, Sautner et al. (2022) rely on machine learning algorithms prediction and then statistical properties to expand the initial keywords set with words from the earnings calls transcripts, while Hu et al. (2022) rely on the similarity between initial keywords and potential keywords in the earnings calls transcripts.
+
+However, it is noteworthy that both Hu et al. (2022) and Sautner et al. (2022) make no use of Pretrained Language Model (PLM) capabilities.
+
+In our sense, both approaches could be expanded by the uses of PLM capabilities. 
+
+First, Sautner et al. (2022) search for expanding the initial climate change keywords set with various machine learning algorithms rely on statistical properties and trained machine learning algorithms outputs. It could be interesting to investigate if expanding the initial keywords set can be done more efficiently by finding based on contextual similarity. Hu et al. (2022) move in this way by relying on the cosine similarity from the Word2Vec algorithm to expand the climate change keywords set. However, Hu et al. (2022) trained from scratch a Word2Vec algorithm, while PLM with more rich resulting embeddings could have been used, and be more computationaly efficient.
+
+Second, Hu et al. (2022) rely on unsupervised learning for determining the initial set of keywords, while achieving a resulting initial set similar in size and content to the one determined ex-ante by Sautner et al. (2022). Maybe a new approach with semi-supervised learning (using an ex-ante determined initial set of keywords) could be investigated.
+
+## Data 
+
+## Methodology 
+
+I propose an alternative methodology to Sautner et al. (2022) and Hu et al. (2022), by relying on PLM capabilities. 
+My hypothesis is that building the climate change keywords set can be done more efficiently (ie. with less processing steps) while achieving the same qualitative results. 
+
+I will use the PatternRank algorithm (Schopf et al. 2022) to expand an initial climate change keywords set with new keywords from the earnings calls transcripts. More specifically, the setting is the following: (i) define the initial climate change keywords sets by using the one defined by Sautner et al. (2022); (ii) determine a sentences set from the earnings calls transcripts by retrieving the sentences with the highest cosine similarity with the initial keywords set; (iii) run the PatternRank algorithm on this set of sentences to identify new climate change keywords; (iv) define the final climate change keywords set as the union between the initial ex-ante determined climate change keywords and the new keywords identified in the earnings calls transcripts.
+
+I will then compare qualitatively the resulting climate change keywords vocabulary.
+
+## Results 
+
+## Conclusion
+
+## References

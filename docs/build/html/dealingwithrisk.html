@@ -1,0 +1,934 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Dealing with Risk(s) in Portfolio Construction &#8212; Climate Risks in Finance 0.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'dealingwithrisk';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="References" href="references.html" />
+    <link rel="prev" title="Climate Risks in Finance" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Climate Risks in Finance 0.1 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Dealing with Risk(s) in Portfolio Construction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/dealingwithrisk.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Dealing with Risk(s) in Portfolio Construction</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#portfolio-s-risk-and-returns">Portfolio’s Risk and Returns</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-portfolio-s-two-moments">Simple Portfolio’s Two Moments</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#risk-and-returns-in-the-presence-of-a-benchmark-tracking-error-and-excess-expected-returns">Risk and Returns in the Presence of a Benchmark: Tracking Error and Excess Expected Returns</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tracking-error">Tracking Error</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-excess-return">Expected Excess Return</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#portfolio-construction-with-optimization-managing-the-risk-returns-trade-off-efficiently">Portfolio Construction with Optimization: Managing the Risk &amp; Returns Trade-Off Efficiently</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-variance-portfolio">Mean-Variance Portfolio</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#portfolio-optimization-in-the-presence-of-a-benchmark">Portfolio Optimization in the Presence of a Benchmark</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-capm-to-risk-factors-models-capturing-new-risk-premia-with-factor-investing">From CAPM to Risk Factors Models: Capturing New Risk Premia with Factor Investing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-the-market-portfolio-to-factors-models">From the Market Portfolio to Factors Models</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#portfolio-allocation-with-risk-factors">Portfolio Allocation with Risk Factors</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#market-risk-portfolio-capitalization-weighted-indexation">Market Risk Portfolio: Capitalization-Weighted Indexation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#risk-factor-portfolio">Risk Factor Portfolio</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="dealing-with-risk-s-in-portfolio-construction">
+<h1>Dealing with Risk(s) in Portfolio Construction<a class="headerlink" href="#dealing-with-risk-s-in-portfolio-construction" title="Permalink to this headline">#</a></h1>
+<p>Before discussing the implementation of these strategies, we need to make a quick overview of some fundamentals frameworks:</p>
+<ul class="simple">
+<li><p>Portfolio optimization, relying on the modern portfolio theory</p></li>
+<li><p>Factor investing, relying on the arbitrage pricing theory</p></li>
+</ul>
+<p>These tools will be at the basis of the three strategies we will present thereafter in this course:</p>
+<ul class="simple">
+<li><p>Low-Carbon Strategy (Portfolio Optimization)</p></li>
+<li><p>Minimum Variance with Carbon Beta (Portfolio Optimization and Factor Investing)</p></li>
+<li><p>Green Factor (Factor Investing)</p></li>
+</ul>
+<p>We will discuss these basic tools with implementation in Python.</p>
+<p>An important point to consider is that, in Finance, there is no such thing as a free-lunch. This well-known expression means that potential “rewards” (returns) arise from risk-taking. The purpose in portfolio construction is thus to manage this trade-off between returns and risk. In the simple mean-variance portfolio framework, the approach is to find the most efficient risk-returns couple, according to the investor risk-tolerance. In the factor investing approach, the investors want to gain extra long-term returns with the exposure to a risk factor (or an anomaly) through a factor portfolio.
+Along this course, we’ll see how climate risks can be considered with these different approaches.</p>
+<section id="portfolio-s-risk-and-returns">
+<h2>Portfolio’s Risk and Returns<a class="headerlink" href="#portfolio-s-risk-and-returns" title="Permalink to this headline">#</a></h2>
+<p>Before introducing climate risks in the portfolio construction process, a first step is to consider how to measure portfolio’s risk and returns. In practice, investors build a portfolio in a context of a benchmark (the S&amp;P 500 for example). We’ll build on the previous definition of the portfolio’s risk and returns to show that risk and returns measures in a context of a benchmark is just a slight variation. This is also a good introduction to the low-carbon strategy that we will cover in the next part.</p>
+<section id="simple-portfolio-s-two-moments">
+<h3>Simple Portfolio’s Two Moments<a class="headerlink" href="#simple-portfolio-s-two-moments" title="Permalink to this headline">#</a></h3>
+<p>As the name of the mean-variance framework indicates, the mean (expected returns) and the variance are the two moments needed for building an efficient portfolio (efficient in the sense of the risk-rewards trade-off).</p>
+<p>Let’s consider a universe of <span class="math notranslate nohighlight">\(n\)</span> assets. We have a vector of assets’ weights in the portfolio: <span class="math notranslate nohighlight">\(x = (x_1, ..., x_n)\)</span>.</p>
+<p>The portfolio is fully invested:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a03c4b84-058a-4971-a5f6-2123be3f0daa">
+<span class="eqno">(1)<a class="headerlink" href="#equation-a03c4b84-058a-4971-a5f6-2123be3f0daa" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\sum^n_{i=1}x_i = 1^T_n x = 1
+\end{equation}\]</div>
+<p>We have a vector of assets’ returns <span class="math notranslate nohighlight">\(R = (R_1, ..., R_n)\)</span>.</p>
+<p>The return of the portfolio is equal to:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-40bb333d-7492-4d0f-9d86-1d176a59bb29">
+<span class="eqno">(2)<a class="headerlink" href="#equation-40bb333d-7492-4d0f-9d86-1d176a59bb29" title="Permalink to this equation">#</a></span>\[\begin{equation}
+R(x) = \sum^n_{i=1}x_iR_i = x^T R
+\end{equation}\]</div>
+<p>The expected return of the portfolio is:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-9a799c91-e5ed-42cd-928a-3316e8c1086e">
+<span class="eqno">(3)<a class="headerlink" href="#equation-9a799c91-e5ed-42cd-928a-3316e8c1086e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\mu(x) = \mathbb{E}[R(x)] = \mathbb{E}[x^TR] = x^T \mathbb{E}[R] = x^T \mu
+\end{equation}\]</div>
+<p>The expected return of the portfolio is then simply the weighted average of the assets’ returns in the portfolio (weighted by their relative weight).</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">])</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.06</span><span class="p">,</span> <span class="mf">0.08</span><span class="p">,</span> <span class="mf">0.06</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mu_portfolio</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">mu</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mu_portfolio</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">0.0625</span>
+</pre></div>
+</div>
+<p>The thing is slightly more complicated here for the portfolio’s variance. Indeed, you need to take into account the covariance matrix between the assets in the portfolio in order to obtain a proper measure of the variance of the portfolio:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-32707f31-1d2c-453c-88d4-2cc69f16bf0b">
+<span class="eqno">(4)<a class="headerlink" href="#equation-32707f31-1d2c-453c-88d4-2cc69f16bf0b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\sigma^2(x) = \mathbb{E}[(R(x) - \mu(x))(R(x) - \mu(x))^T]
+\end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-9bb812e7-c480-4390-8d5d-d4b2b09dfdb8">
+<span class="eqno">(5)<a class="headerlink" href="#equation-9bb812e7-c480-4390-8d5d-d4b2b09dfdb8" title="Permalink to this equation">#</a></span>\[\begin{equation}
+= \mathbb{E}[(x^TR - x^T\mu) (x^TR - x^T\mu)^T]
+\end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-2fe09010-282f-4001-b708-c8bf125e9b09">
+<span class="eqno">(6)<a class="headerlink" href="#equation-2fe09010-282f-4001-b708-c8bf125e9b09" title="Permalink to this equation">#</a></span>\[\begin{equation}
+= \mathbb{E}[x^T(R-\mu)(R - \mu)^T x]
+\end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-c1fa0403-fb39-4796-9450-9164a428eb70">
+<span class="eqno">(7)<a class="headerlink" href="#equation-c1fa0403-fb39-4796-9450-9164a428eb70" title="Permalink to this equation">#</a></span>\[\begin{equation}
+x^T \mathbb{E}[(R-\mu)(R-\mu)^T]x
+\end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-1df7a089-5c7e-40a4-938f-b2059c24343a">
+<span class="eqno">(8)<a class="headerlink" href="#equation-1df7a089-5c7e-40a4-938f-b2059c24343a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+= x^T \Sigma x
+\end{equation}\]</div>
+<p>Why? Because when building a portfolio, the variance of the portfolio will be determined by both the volatilities of the underlying assets AND the correlation between them.</p>
+<p>In practice, we use the historical average for estimating <span class="math notranslate nohighlight">\(\mu\)</span>. For the covariance matrix, we can compute it with historical observations with the historical volatilities and correlation matrix, such as:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-c0a34ab1-c847-436b-81d0-11105c8cfc90">
+<span class="eqno">(9)<a class="headerlink" href="#equation-c0a34ab1-c847-436b-81d0-11105c8cfc90" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\Sigma = diag(\sigma) \cdot \rho \cdot  diag(\sigma)
+\end{equation}\]</div>
+<p>with <span class="math notranslate nohighlight">\(\sigma\)</span> are the volatilities of returns and <span class="math notranslate nohighlight">\(\rho\)</span> the correlation matrix.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.20</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.30</span><span class="p">])</span>
+<span class="n">rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span>
+               <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.7</span> <span class="p">,</span> <span class="mf">0.4</span> <span class="p">],</span>
+               <span class="p">[</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">],</span>
+               <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+
+<span class="n">Sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span> <span class="o">@</span> <span class="n">rho</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span>               
+</pre></div>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">variance_portfolio</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">Sigma</span> <span class="o">@</span> <span class="n">x</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">variance_portfolio</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">0.033375</span>
+</pre></div>
+</div>
+<p>Rather than writing again and again the same formula, let’s create a simple dataclass with the informations we need for computing the portfolio’s two moments and with the corresponding methos:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span> 
+
+<span class="nd">@dataclass</span> 
+<span class="k">class</span> <span class="nc">Portfolio</span><span class="p">:</span>
+  <span class="sd">&quot;&quot;&quot;A simple dataclass storing the basics information of a porfolio and </span>
+<span class="sd">  implementing the methods for the two moments computation.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="c1"># Weights</span>
+  <span class="n">mu</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="c1"># Expected Returns</span>
+  <span class="n">Sigma</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span> <span class="c1"># Covariance Matrix</span>
+
+  <span class="k">def</span> <span class="nf">get_expected_returns</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">mu</span>
+
+  <span class="k">def</span> <span class="nf">get_variance</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span>
+</pre></div>
+</div>
+<p>Let’ test if with the same values than before:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">simple_portfolio</span> <span class="o">=</span> <span class="n">Portfolio</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span>
+                 <span class="n">mu</span> <span class="o">=</span> <span class="n">mu</span><span class="p">,</span>
+                 <span class="n">Sigma</span> <span class="o">=</span> <span class="n">Sigma</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">simple_portfolio</span><span class="o">.</span><span class="n">get_expected_returns</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">simple_portfolio</span><span class="o">.</span><span class="n">get_variance</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="risk-and-returns-in-the-presence-of-a-benchmark-tracking-error-and-excess-expected-returns">
+<h3>Risk and Returns in the Presence of a Benchmark: Tracking Error and Excess Expected Returns<a class="headerlink" href="#risk-and-returns-in-the-presence-of-a-benchmark-tracking-error-and-excess-expected-returns" title="Permalink to this headline">#</a></h3>
+<p>With the rise of passive investing is the rise of index replication. The purpose of index replication is to build a hedging strategy by investing in stocks. In this case of index replication, the portfolio’s expected returns is replaced by the expected excess returns of the strategy, while the variance of the portfolio is replaced by the volatility of the tracking error (the difference between the return of the strategy and the return of the index). You may distinguish different cases of index replications:</p>
+<ul class="simple">
+<li><p>Low tracking error volatility (less than 10bps) corresponds to physical or synthetic replication;</p></li>
+<li><p>Moderate tracking error volatility (between 10 bps and 50 bps) corresponds to sampling (ie. less assets) replication;</p></li>
+<li><p>Higher tracking error volatility (larger than 50 bps) corresponds to enhanced/tilted index, such as the low-carbon strategy or ESG-enhanced indexes.</p></li>
+</ul>
+<section id="tracking-error">
+<h4>Tracking Error<a class="headerlink" href="#tracking-error" title="Permalink to this headline">#</a></h4>
+<p>In order to monitor the closeness of the portfolio’s return to the benchmark’s return, investors use the tracking error (TE) measure. In this part, we will define the TE and TE volality concepts that needs to be controlled in the portfolio optimization problem in the presence of a benchmark (Roncalli, 2013 <span id="id1">[<a class="reference internal" href="references.html#id3" title="Thierry Roncalli. Introduction to risk parity and budgeting. CRC Press, 2013.">Ron13</a>]</span>).</p>
+<p>Let’s first define <span class="math notranslate nohighlight">\(b = (b_1, ..., b_n)\)</span> and <span class="math notranslate nohighlight">\(x = (x_1, ..., x_n)\)</span> the stocks weights in the benchmark and the portfolio.</p>
+<p>The tracking error between a portfolio <span class="math notranslate nohighlight">\(x\)</span> and its benchmark <span class="math notranslate nohighlight">\(b\)</span> is the difference between the return of the portfolio and the return of the benchmark:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-be9be5ce-53b2-4c09-881d-19fda73e5e11">
+<span class="eqno">(10)<a class="headerlink" href="#equation-be9be5ce-53b2-4c09-881d-19fda73e5e11" title="Permalink to this equation">#</a></span>\[\begin{equation}
+e = R(x) - R(b) = (x - b)^{T}R
+\end{equation}\]</div>
+<p>The volatility of the tracking error is:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-47c79248-c828-47c4-b3cd-8a89b7f211b1">
+<span class="eqno">(11)<a class="headerlink" href="#equation-47c79248-c828-47c4-b3cd-8a89b7f211b1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\sigma(x|b) = \sigma(e) = \sqrt{(x-b)^T \Sigma (x-b)}
+\end{equation}\]</div>
+<p>With <span class="math notranslate nohighlight">\(\Sigma\)</span> the covariance matrix.</p>
+<p>Let’s implement it in Python:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_tracking_error_volatility</span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> 
+                                  <span class="n">b</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
+                                  <span class="n">Sigma</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+  <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">Sigma</span> <span class="o">@</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">b</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+<section id="expected-excess-return">
+<h4>Expected Excess Return<a class="headerlink" href="#expected-excess-return" title="Permalink to this headline">#</a></h4>
+<p>The expected excess return is:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-64d9f9f1-daf6-4cc0-bb92-da59a6c9fe47">
+<span class="eqno">(12)<a class="headerlink" href="#equation-64d9f9f1-daf6-4cc0-bb92-da59a6c9fe47" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\mu(x|b) = E[e] = (x - b)^T\mu 
+\end{equation}\]</div>
+<p>Where <span class="math notranslate nohighlight">\(\mu\)</span> is the vector of expected returns <span class="math notranslate nohighlight">\((\mu_1,...,\mu_n)\)</span>.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_excess_expected_returns</span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> 
+                                <span class="n">b</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
+                                <span class="n">mu</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+  <span class="k">return</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">mu</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="portfolio-construction-with-optimization-managing-the-risk-returns-trade-off-efficiently">
+<h2>Portfolio Construction with Optimization: Managing the Risk &amp; Returns Trade-Off Efficiently<a class="headerlink" href="#portfolio-construction-with-optimization-managing-the-risk-returns-trade-off-efficiently" title="Permalink to this headline">#</a></h2>
+<p>Let’s go now on the first approach for managing risk in portfolio construction, with the optimization approach in the mean-variance framework. We’ll first address the simple mean-variance portfolio, then tackle the case with portfolio construction in the context of a benchmark.</p>
+<section id="mean-variance-portfolio">
+<h3>Mean-Variance Portfolio<a class="headerlink" href="#mean-variance-portfolio" title="Permalink to this headline">#</a></h3>
+<p>In the simple Markowitz framework, the mean-variance investor considers maximizing the expected return of the portfolio under a volatility constraint:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\begin{aligned}
+&amp; x^* = 
+&amp; &amp; argmax &amp; \mu(x) \\
+&amp; \text{subject to}
+&amp; &amp; 1_n^Tx = 1, \\
+&amp;&amp;&amp; \sigma(x) \leq \sigma^*
+\end{aligned}
+\end{equation*}\]</div>
+<p>Or, equivalently, minimizing the volatility of the portfolio under a return constraint:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\begin{aligned}
+&amp; x^* = 
+&amp; &amp; argmin &amp; \sigma(x) \\
+&amp; \text{subject to}
+&amp; &amp; 1_n^Tx = 1, \\
+&amp;&amp;&amp; \mu* \leq \mu(x)
+\end{aligned}
+\end{equation*}\]</div>
+<p>This is the optimization formulation of finding the most efficient risk-returns couple mentioned previously, with the portfolio’s two moments.</p>
+<p>For easier computation, Markowitz transforms the two original non-linear optimization problems into a quadratic optimization problem. Introducing a risk-tolerance parameter and the long-only constraint, we obtain the following quadratic problem:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\begin{aligned}
+&amp; x^* = 
+&amp; &amp; argmin &amp; \frac{1}{2} x^T \Sigma x - \gamma x ^T \mu\\
+&amp; \text{subject to}
+&amp; &amp; 1_n^Tx = 1 \\
+&amp; &amp; &amp; 0_n \leq x \leq 1_n
+\end{aligned}
+\end{equation*}\]</div>
+<p>Solvers consider the following QP formulation:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\begin{aligned}
+&amp; x^* = 
+&amp; &amp; argmin \frac{1}{2} x^T Q x - x^T R \\
+&amp; \text{subject to}
+&amp; &amp; Ax = B, \\
+&amp;&amp;&amp; Cx \leq D,\\
+&amp; &amp; &amp; x^- \leq x \leq x^+
+\end{aligned}
+\end{equation*}\]</div>
+<p>We need to find the parameters <span class="math notranslate nohighlight">\(\{Q, R, A, B, C, D, x^-, x^+\}\)</span>. In the previous case, <span class="math notranslate nohighlight">\(Q = \Sigma\)</span>, <span class="math notranslate nohighlight">\(R = \gamma \mu\)</span>, <span class="math notranslate nohighlight">\(A = 1_n^T\)</span>, <span class="math notranslate nohighlight">\(B = 1\)</span>, <span class="math notranslate nohighlight">\(x^- = 0_n\)</span> and <span class="math notranslate nohighlight">\(x^+ = 1_n\)</span>.</p>
+<p>We begin the implementation in Python by defining a <code class="docutils literal notranslate"><span class="pre">PortfolioConstruction</span></code> dataclass, with <code class="docutils literal notranslate"><span class="pre">mu</span></code> and <code class="docutils literal notranslate"><span class="pre">Sigma</span></code> as the two elements requested and an abstract method <code class="docutils literal notranslate"><span class="pre">get_portfolio</span></code> without any specific definition:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+
+<span class="nd">@dataclass</span> 
+<span class="k">class</span> <span class="nc">PortfolioConstruction</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot;The parent class of portfolio construction approaches&quot;&quot;&quot;</span>
+    <span class="n">mu</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="c1"># Expected Returns</span>
+    <span class="n">Sigma</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span> <span class="c1"># Covariance Matrix</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">get_portfolio</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Portfolio</span><span class="p">:</span>
+      <span class="k">pass</span>
+</pre></div>
+</div>
+<p>Some would say that such a definition of a portfolio construction overarching class wasn’t needed. They are right. The only purpose here is to highlight the fact that every approaches that we will cover are different ways to build a portfolio. All the children classes will be related in some ways, because they all are frameworks for building a portfolio.</p>
+<p>Let’s then define a child for this class with the <code class="docutils literal notranslate"><span class="pre">PortfolioOptimization</span></code> dataclass:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nd">@dataclass</span> 
+<span class="k">class</span> <span class="nc">PortfolioOptimization</span><span class="p">(</span><span class="n">PortfolioConstruction</span><span class="p">):</span>
+<span class="sd">&quot;&quot;&quot;Portfolio Construction with Optimization approaches&quot;&quot;&quot;</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">get_portfolio</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Portfolio</span><span class="p">:</span>
+      <span class="k">pass</span>
+</pre></div>
+</div>
+<p>Here we are. We have defined our first family of portfolio construction with the portfolio optimization.</p>
+<p>To go further, we first need to install the package <code class="docutils literal notranslate"><span class="pre">qpsolvers</span></code>:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span>!pip install qpsolvers 
+</pre></div>
+</div>
+<p>We can now define a concrete dataclass with the <code class="docutils literal notranslate"><span class="pre">MeanVariance</span></code> class. This class will inherits from the <code class="docutils literal notranslate"><span class="pre">PortfolioConstruction</span></code> and <code class="docutils literal notranslate"><span class="pre">PortfolioOptimization</span></code> classes the two required elements <code class="docutils literal notranslate"><span class="pre">mu</span></code> and <code class="docutils literal notranslate"><span class="pre">Sigma</span></code>. We also define the first concrete implementation of the method <code class="docutils literal notranslate"><span class="pre">get_portfolio</span></code>, requiring a <code class="docutils literal notranslate"><span class="pre">gamma</span></code> parameter to be provided:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qpsolvers</span> <span class="kn">import</span> <span class="n">solve_qp</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">MeanVariance</span><span class="p">(</span><span class="n">PortfolioOptimization</span><span class="p">):</span>
+  
+  <span class="k">def</span> <span class="nf">get_portfolio</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gamma</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Portfolio</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;QP Formulation&quot;&quot;&quot;</span>
+    <span class="n">Q</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="n">gamma</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">mu</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="p">))</span><span class="o">.</span><span class="n">T</span> <span class="c1"># fully invested</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">])</span> <span class="c1"># fully invested</span>
+    <span class="n">x_inf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="p">))</span> <span class="c1"># long-only position</span>
+    <span class="n">x_sup</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="p">))</span> <span class="c1"># long-only position</span>
+
+    <span class="n">x_optim</span> <span class="o">=</span> <span class="n">solve_qp</span><span class="p">(</span><span class="n">P</span> <span class="o">=</span> <span class="n">Q</span><span class="p">,</span>
+              <span class="n">q</span> <span class="o">=</span> <span class="o">-</span><span class="n">R</span><span class="p">,</span> <span class="c1"># we put a minus here because this QP solver consider +x^T R</span>
+              <span class="n">A</span> <span class="o">=</span> <span class="n">A</span><span class="p">,</span> 
+              <span class="n">b</span> <span class="o">=</span> <span class="n">B</span><span class="p">,</span>
+              <span class="n">lb</span> <span class="o">=</span> <span class="n">x_inf</span><span class="p">,</span>
+              <span class="n">ub</span> <span class="o">=</span> <span class="n">x_sup</span><span class="p">,</span>
+              <span class="n">solver</span> <span class="o">=</span> <span class="s1">&#39;osqp&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">Portfolio</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x_optim</span><span class="p">,</span> <span class="n">mu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="p">,</span> <span class="n">Sigma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This new class will return a <code class="docutils literal notranslate"><span class="pre">Portfolio</span></code> object if we call the <code class="docutils literal notranslate"><span class="pre">get_portfolio</span></code> method with an instantiated object. Let’s find several optimum portfolios with various value of <span class="math notranslate nohighlight">\(\gamma\)</span>, and plot the result:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">test</span> <span class="o">=</span> <span class="n">MeanVariance</span><span class="p">(</span><span class="n">mu</span> <span class="o">=</span> <span class="n">mu</span><span class="p">,</span> <span class="n">Sigma</span> <span class="o">=</span> <span class="n">Sigma</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">arange</span>
+
+<span class="n">list_gammas</span> <span class="o">=</span> <span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+<span class="n">list_portfolios</span> <span class="o">=</span> <span class="p">[]</span>
+
+
+<span class="k">for</span> <span class="n">gamma</span> <span class="ow">in</span> <span class="n">list_gammas</span><span class="p">:</span>
+  <span class="n">list_portfolios</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">get_portfolio</span><span class="p">(</span><span class="n">gamma</span> <span class="o">=</span> <span class="n">gamma</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">returns</span> <span class="o">=</span> <span class="p">[</span><span class="n">portfolio</span><span class="o">.</span><span class="n">get_expected_returns</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span> <span class="k">for</span> <span class="n">portfolio</span> <span class="ow">in</span> <span class="n">list_portfolios</span><span class="p">]</span>
+<span class="n">variances</span> <span class="o">=</span> <span class="p">[</span><span class="n">portfolio</span><span class="o">.</span><span class="n">get_variance</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span> <span class="k">for</span> <span class="n">portfolio</span> <span class="ow">in</span> <span class="n">list_portfolios</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">variances</span><span class="p">,</span> <span class="n">returns</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Volatility (in %)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Expected Return (in %)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Efficient Frontier&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This is the well-known efficient frontier. Every portfolios on the efficient frontier (that is, the upper side of this curve) are efficient in the Markowitz framework, depending on the risk-tolerance of the investor.</p>
+</section>
+<section id="portfolio-optimization-in-the-presence-of-a-benchmark">
+<h3>Portfolio Optimization in the Presence of a Benchmark<a class="headerlink" href="#portfolio-optimization-in-the-presence-of-a-benchmark" title="Permalink to this headline">#</a></h3>
+<p>In practice, many problems consist in tracking a benchmark while improving some properties (reducing the carbon portfolio for example).</p>
+<p>To construct such a portfolio tracking a benchmark, the main tool is to control the tracking error, that is the difference between the benchmark’s return and the portfolio’s return.</p>
+<p>In this part, we will define the tracking error and the minimization of this tracking error.</p>
+<p>In the presence of a benchmark, the expected return of the portfolio <span class="math notranslate nohighlight">\(\mu(x)\)</span> is replaced by the expected excess return <span class="math notranslate nohighlight">\(\mu(x|b)\)</span> and the volatility of the portfolio <span class="math notranslate nohighlight">\(\sigma(x)\)</span>is replaced by the volatility of the tracking error <span class="math notranslate nohighlight">\(\sigma(x|b)\)</span>:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\begin{aligned}
+&amp; x^* = 
+&amp; &amp; argmin &amp; \frac{1}{2} \sigma^2 (x|b) - \gamma \mu(x|b)\\
+&amp; \text{subject to}
+&amp; &amp; 1_n^Tx = 1\\
+&amp; &amp; &amp; 0_n \leq x \leq 1_n
+\end{aligned}
+\end{equation*}\]</div>
+<p>Without any further constraint, the optimal solution <span class="math notranslate nohighlight">\(x^*\)</span> equals to the benchmark weights <span class="math notranslate nohighlight">\(b\)</span>.</p>
+<p>We have a few more steps to consider before finding our QP formulation parameters.</p>
+<p>First, let’s recall that:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-d58817ba-daea-48e9-9411-f5e11f8eda25">
+<span class="eqno">(13)<a class="headerlink" href="#equation-d58817ba-daea-48e9-9411-f5e11f8eda25" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\sigma^2(x|b) = (x - b)^T \Sigma (x -b)
+\end{equation}\]</div>
+<p>and</p>
+<div class="amsmath math notranslate nohighlight" id="equation-ddde923b-92e5-479c-b29b-70adf59ff383">
+<span class="eqno">(14)<a class="headerlink" href="#equation-ddde923b-92e5-479c-b29b-70adf59ff383" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\mu(x|b) = (x -b)^T \mu
+\end{equation}\]</div>
+<p>If we replace <span class="math notranslate nohighlight">\(\sigma^2(x|b)\)</span> and <span class="math notranslate nohighlight">\(\mu(x|b)\)</span> in our objective function, we get:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-4c8ee5d8-5f0e-4ac3-a43a-a0e0bf62f9ec">
+<span class="eqno">(15)<a class="headerlink" href="#equation-4c8ee5d8-5f0e-4ac3-a43a-a0e0bf62f9ec" title="Permalink to this equation">#</a></span>\[\begin{equation}
+* = \frac{1}{2}(x-b)^T \Sigma (x -b) - \gamma (x -b)^T \mu
+\end{equation}\]</div>
+<p>With further developments, you end up with the following QP objective function formulation:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-b15c042d-9b79-46c2-8d74-51badfa09299">
+<span class="eqno">(16)<a class="headerlink" href="#equation-b15c042d-9b79-46c2-8d74-51badfa09299" title="Permalink to this equation">#</a></span>\[\begin{equation}
+* = \frac{1}{2} x^T \Sigma x - x^T(\gamma \mu + \Sigma b)
+\end{equation}\]</div>
+<p>We have exactly the same QP problem than with the initial long-only mean-variance portfolio, except that <span class="math notranslate nohighlight">\(R = \gamma \mu + \Sigma b\)</span></p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">EnhancedIndexConstruction</span><span class="p">(</span><span class="n">PortfolioOptimization</span><span class="p">):</span>
+  <span class="n">b</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="c1"># Benchmark Weights</span>
+
+  <span class="k">def</span> <span class="nf">get_portfolio</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gamma</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Portfolio</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;QP Formulation&quot;&quot;&quot;</span>
+    <span class="n">Q</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="n">gamma</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">mu</span> <span class="o">+</span> <span class="n">Sigma</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="p">))</span><span class="o">.</span><span class="n">T</span> <span class="c1"># fully invested</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">])</span> <span class="c1"># fully invested</span>
+    <span class="n">x_inf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="p">))</span> <span class="c1"># long-only position</span>
+    <span class="n">x_sup</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="p">))</span> <span class="c1"># long-only position</span>
+
+    <span class="n">x_optim</span> <span class="o">=</span> <span class="n">solve_qp</span><span class="p">(</span><span class="n">P</span> <span class="o">=</span> <span class="n">Q</span><span class="p">,</span>
+              <span class="n">q</span> <span class="o">=</span> <span class="o">-</span><span class="n">R</span><span class="p">,</span> <span class="c1"># we put a minus here because this QP solver consider +x^T R</span>
+              <span class="n">A</span> <span class="o">=</span> <span class="n">A</span><span class="p">,</span> 
+              <span class="n">b</span> <span class="o">=</span> <span class="n">B</span><span class="p">,</span>
+              <span class="n">lb</span> <span class="o">=</span> <span class="n">x_inf</span><span class="p">,</span>
+              <span class="n">ub</span> <span class="o">=</span> <span class="n">x_sup</span><span class="p">,</span>
+              <span class="n">solver</span> <span class="o">=</span> <span class="s1">&#39;osqp&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">Portfolio</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x_optim</span><span class="p">,</span> <span class="n">mu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="p">,</span> <span class="n">Sigma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="from-capm-to-risk-factors-models-capturing-new-risk-premia-with-factor-investing">
+<h2>From CAPM to Risk Factors Models: Capturing New Risk Premia with Factor Investing<a class="headerlink" href="#from-capm-to-risk-factors-models-capturing-new-risk-premia-with-factor-investing" title="Permalink to this headline">#</a></h2>
+<section id="from-the-market-portfolio-to-factors-models">
+<h3>From the Market Portfolio to Factors Models<a class="headerlink" href="#from-the-market-portfolio-to-factors-models" title="Permalink to this headline">#</a></h3>
+<p>The capital asset pricing model (CAPM) was introduced by Sharpe in 1964, and may be viewed as an equilibrium model based on the framework defined by Markowitz (1952). Sharpe (1964) showed that the tangency portfolio corresponds to the market-capitalization portfolio, and deduced the following relationship between the risk premium of asset <span class="math notranslate nohighlight">\(i\)</span> and the risk premium of the market portfolio:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-b6cc3854-5cfb-4ba6-8b47-26e7adfea4d5">
+<span class="eqno">(17)<a class="headerlink" href="#equation-b6cc3854-5cfb-4ba6-8b47-26e7adfea4d5" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\mathbb{E}[R_i] - R_f = \beta^m_i(\mathbb{E}[R_m] - R_f)
+\end{equation}\]</div>
+<p>Where <span class="math notranslate nohighlight">\(R_i\)</span> and <span class="math notranslate nohighlight">\(R_m\)</span> are the asset and market returns, <span class="math notranslate nohighlight">\(R_f\)</span> the risk-free rate and the coefficient <span class="math notranslate nohighlight">\(\beta^m_i\)</span> is the beta of the asset <span class="math notranslate nohighlight">\(i\)</span> with respect to the market portfolio.</p>
+<p>Risk factors are common factors that explain the cross-section variance of expected returns:</p>
+<ul class="simple">
+<li><p>1964: Market or MKT (or BETA) factor</p></li>
+<li><p>1972: Low beta or BAB factor</p></li>
+<li><p>1981: Size of SMB factor</p></li>
+<li><p>1985: Value or HML factor</p></li>
+<li><p>1991: Low volatility or VOL factor</p></li>
+<li><p>1993: Momentum or WML factor</p></li>
+<li><p>2000: Quality of QMJ factor</p></li>
+</ul>
+<p>Risk factors corresponds to systematic risk factors (in constrat to idiosyncratic risk factors). Systematic risk factors are associated to Betas, while idiosyncratic risk factors are associated with alphas.</p>
+<p>Fama and French (1992):</p>
+<div class="amsmath math notranslate nohighlight" id="equation-807ad797-bb39-4bfa-8146-1e68a0ba584b">
+<span class="eqno">(18)<a class="headerlink" href="#equation-807ad797-bb39-4bfa-8146-1e68a0ba584b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\mathbb{E}[R_i] - R_f = \beta^m_i(\mathbb{E}[R_m] - R_f) + \beta^{smb}_i \mathbb{E}[R_{smb}] + \beta_i^{hml}{E}[R_{hml}]
+\end{equation}\]</div>
+<p>Carhart (1997):</p>
+<div class="amsmath math notranslate nohighlight" id="equation-8f885510-01b8-442e-8875-aaedc0a18fb9">
+<span class="eqno">(19)<a class="headerlink" href="#equation-8f885510-01b8-442e-8875-aaedc0a18fb9" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\mathbb{E}[R_i] - R_f = \beta^m_i(\mathbb{E}[R_m] - R_f) + \beta^{smb}_i \mathbb{E}[R_{smb}] + \beta_i^{hml}{E}[R_{hml}] + \beta_i^{wml}{E}[R_{wml}]
+\end{equation}\]</div>
+</section>
+</section>
+<section id="portfolio-allocation-with-risk-factors">
+<h2>Portfolio Allocation with Risk Factors<a class="headerlink" href="#portfolio-allocation-with-risk-factors" title="Permalink to this headline">#</a></h2>
+<p>As investors are compensated for taking systematic risk(s), they can look for gaining exposure to these risks with a Risk Factor Portfolio.</p>
+<section id="market-risk-portfolio-capitalization-weighted-indexation">
+<h3>Market Risk Portfolio: Capitalization-Weighted Indexation<a class="headerlink" href="#market-risk-portfolio-capitalization-weighted-indexation" title="Permalink to this headline">#</a></h3>
+<p>In the Capital Asset Pricing Model theory, there is a single market risk premium, which can be otained by investing in market-capitalization indexes.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">MarketCapIndex</span><span class="p">(</span><span class="n">PortfolioConstruction</span><span class="p">):</span>
+  <span class="n">mv</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="c1"># Market Cap</span>
+
+  <span class="k">def</span> <span class="nf">get_portfolio</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Portfolio</span><span class="p">:</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mv</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mv</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Portfolio</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">mu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="p">,</span> <span class="n">Sigma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>But critics against market-cap indexation arised with empirical evidences against the efficiency of market-cap investing:</p>
+<ul class="simple">
+<li><p>capitalization-weightin is prone to concentrated portfolios: for example, the top 100 market caps of the S&amp;P 500 account for around 70%;</p></li>
+<li><p>market risk is not the only systematic risk, then the market-cap weighted index is exposed to unrewarded systematic risks (example Growth bias)</p></li>
+</ul>
+</section>
+<section id="risk-factor-portfolio">
+<h3>Risk Factor Portfolio<a class="headerlink" href="#risk-factor-portfolio" title="Permalink to this headline">#</a></h3>
+<p>Theory and empirical evidences introduce other common factors factors models to capture new risk premia.</p>
+<p>Index providers and asset managers now offer the opportunity to invest in these risk factors, through factor indexes and mutual funds. The idea of factor investing is then to enlarge the asset universe by adding these risk factors to the existing market risk factor, with the goal is to generate more returns in the long run.</p>
+<p>How do we estimate empirically <span class="math notranslate nohighlight">\(\mathbb{E}[R_{\mathbb{j}}]\)</span> the expected return for a risk factor <span class="math notranslate nohighlight">\(j\)</span>?</p>
+<p>Universe of <span class="math notranslate nohighlight">\(\mathbb{U}\)</span> stocks (example, the MSCI World Index)</p>
+<p>We define a rebalancing period of the portfolio (every month, quarter or year)</p>
+<p>At each rebalancing date <span class="math notranslate nohighlight">\(t_{\tau}\)</span>:</p>
+<ul class="simple">
+<li><p>We define a score <span class="math notranslate nohighlight">\(S_i(t_{\tau})\)</span> for each stock <span class="math notranslate nohighlight">\(i\)</span></p></li>
+<li><p>Stocks with high scores are selected to form the long exposure <span class="math notranslate nohighlight">\(\mathbb{L}(t_{\tau})\)</span> of the risk factor</p></li>
+<li><p>Stocks with low scores are selected to form the short exposure <span class="math notranslate nohighlight">\(S(t_{\tau})\)</span> of the risk factor</p></li>
+</ul>
+<p>We specify a weighting scheme <span class="math notranslate nohighlight">\(w_i(t_{\tau})\)</span> (value-weighted or equally-weighted).</p>
+<p>The performance of the risk factor between two rebalancing dates corresponds to the performance of the long / short portfolio:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-1f6ca1f1-d9a6-4cde-b328-ae418a035e3c">
+<span class="eqno">(20)<a class="headerlink" href="#equation-1f6ca1f1-d9a6-4cde-b328-ae418a035e3c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\mathbb{F}(t) = \mathbb{F}(t_{\tau}) (
+  (\sum_{i \in \mathbb{L}(t_{\tau})}w_i(t_{\tau})(1 + R_i(t))
+  - 
+  (\sum_{i \in \mathbb{S}(t_{\tau})}w_i(t_{\tau})(1 + R_i(t))
+)
+\end{equation}\]</div>
+<p>where <span class="math notranslate nohighlight">\(t \in ]t_{tau}, t_{\tau+1}]\)</span> and <span class="math notranslate nohighlight">\(\mathbb{t_0} = 100\)</span></p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># We define a new way to build a portfolio: the Long-Short Portfolio Construction</span>
+
+<span class="nd">@dataclass</span> 
+<span class="k">class</span> <span class="nc">LongShortConstruction</span><span class="p">(</span><span class="n">PortfolioConstruction</span><span class="p">):</span>
+    <span class="n">S</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="c1"># Score</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">get_portfolio</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Portfolio</span><span class="p">:</span>
+      <span class="k">pass</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">QuintileConstruction</span><span class="p">(</span><span class="n">LongShortConstruction</span><span class="p">):</span>
+
+  <span class="k">def</span> <span class="nf">get_portfolio</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Portfolio</span><span class="p">:</span>
+    <span class="c1"># find the borns to define Q1 and Q5</span>
+    <span class="n">born_Q1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">S</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">)</span>
+    <span class="n">born_Q5</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">S</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>
+
+    <span class="c1"># define the long and short stocks</span>
+    <span class="n">long_stocks</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">S</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">S</span> <span class="o">&gt;</span> <span class="n">born_Q1</span><span class="p">)]</span>
+    <span class="n">short_stocks</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">S</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">S</span> <span class="o">&lt;</span> <span class="n">born_Q5</span><span class="p">)]</span>
+
+    <span class="c1"># define the vector of weights (equally-weighted here)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">S</span><span class="p">))</span>
+    <span class="n">x</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">S</span> <span class="o">&gt;</span> <span class="n">born_Q1</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">long_stocks</span><span class="p">)</span>
+    <span class="n">x</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">S</span> <span class="o">&lt;</span> <span class="n">born_Q5</span><span class="p">)]</span> <span class="o">=</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">short_stocks</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">Portfolio</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">mu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="p">,</span> <span class="n">Sigma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span><span class="p">)</span>
+    
+</pre></div>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.1</span><span class="p">,</span> 
+     <span class="mf">0.5</span><span class="p">,</span>
+     <span class="o">-</span><span class="mf">1.3</span><span class="p">,</span>
+     <span class="mf">1.5</span><span class="p">,</span>
+     <span class="o">-</span><span class="mf">2.8</span><span class="p">,</span>
+     <span class="mf">0.3</span><span class="p">,</span>
+     <span class="mf">0.1</span><span class="p">,</span>
+     <span class="mf">2.3</span><span class="p">,</span>
+     <span class="o">-</span><span class="mf">0.7</span><span class="p">,</span>
+     <span class="o">-</span><span class="mf">0.3</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Climate Risks in Finance</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="references.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">References</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#portfolio-s-risk-and-returns">Portfolio’s Risk and Returns</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-portfolio-s-two-moments">Simple Portfolio’s Two Moments</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#risk-and-returns-in-the-presence-of-a-benchmark-tracking-error-and-excess-expected-returns">Risk and Returns in the Presence of a Benchmark: Tracking Error and Excess Expected Returns</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tracking-error">Tracking Error</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-excess-return">Expected Excess Return</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#portfolio-construction-with-optimization-managing-the-risk-returns-trade-off-efficiently">Portfolio Construction with Optimization: Managing the Risk &amp; Returns Trade-Off Efficiently</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-variance-portfolio">Mean-Variance Portfolio</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#portfolio-optimization-in-the-presence-of-a-benchmark">Portfolio Optimization in the Presence of a Benchmark</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-capm-to-risk-factors-models-capturing-new-risk-premia-with-factor-investing">From CAPM to Risk Factors Models: Capturing New Risk Premia with Factor Investing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-the-market-portfolio-to-factors-models">From the Market Portfolio to Factors Models</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#portfolio-allocation-with-risk-factors">Portfolio Allocation with Risk Factors</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#market-risk-portfolio-capitalization-weighted-indexation">Market Risk Portfolio: Capitalization-Weighted Indexation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#risk-factor-portfolio">Risk Factor Portfolio</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            <div class="bd-footer-content__inner">
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Thomas Lorans
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022, Thomas Lorans.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div></div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

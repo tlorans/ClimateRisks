@@ -1,0 +1,442 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Extracting Climate Change Keywords with PatternRank &#8212; Climate Risks Modelling with NLP 0.1 documentation</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Climate Change Risks Keywords" href="notebooks/ClimateChangeKeywords.html" />
+    <link rel="prev" title="Introduction" href="introduction.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Climate Risks Modelling with NLP 0.1 documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Contents:
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Extracting Climate Change Keywords with PatternRank
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="notebooks/ClimateChangeKeywords.html">
+   Climate Change Risks Keywords
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="notebooks/EarningsCallTranscripts.html">
+   Climate Risks Discussions in Earnings Call
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="notebooks/TaxonomyClimateRisks.html">
+   A Taxonomy of Climate Risks with Hierarchical Topic Modelling
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/ExtractingKeywords.md.txt"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#literature">
+   Literature
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data">
+   Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#methodology">
+   Methodology
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#results">
+   Results
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusion">
+   Conclusion
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Extracting Climate Change Keywords with PatternRank</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#literature">
+   Literature
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data">
+   Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#methodology">
+   Methodology
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#results">
+   Results
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusion">
+   Conclusion
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section id="extracting-climate-change-keywords-with-patternrank">
+<h1>Extracting Climate Change Keywords with PatternRank<a class="headerlink" href="#extracting-climate-change-keywords-with-patternrank" title="Permalink to this headline">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="literature">
+<h2>Literature<a class="headerlink" href="#literature" title="Permalink to this headline">#</a></h2>
+<p>A growing literature makes use of earnings calls transcripts as a source for identifying firms’ risks and opportunities. Among these new area of research, climate change-related risks is gaining in importance, with our two main reference papers (Sautner et al. 2022 and Hu et al. 2022) published last year.</p>
+<p>However, as acknownledged by Sautner et al. (2022), focusing on climate change risks with textual analysis brings specific challenges. Indeed, climate change-related vocabulary is quite a niche language, differing according to the type of the source (newspapers, scientific articles or reports, politics, business news, etc.). Some pre-processing steps need to be undertaken in order to specifically identify climate related discussions in the earnings calls transcripts. More precisely, both Sautner et al. (2022) and Hu et al. (2022) first create a climate change keywords set to be used in identifying climate change-related sentences.</p>
+<p>Sautner et al. (2022) use a machine-learning algorithm to extract climate change-related keywords from earnings calls transcripts. The climate change keywords set is composed as the union of (i) an initial set of 50 general and manually identified climate change keywords and (ii) a set created with a searching algorithm that constructs keywords from earnings calls transcripts. The approach can be summarized in five stages.</p>
+<p>First, the authors define a “search set” by compiling a set of earnings calls transcripts that potentially discuss climate change-related issues. To do so, the authors uses a large set of keywords extracted from the IPCC reports (that potentially focuses on climate change issues) and another set of more general keywords (extracted from news articles on tech, politics from the BBC and Reuters, English-language novels, etc.) to compute a “rough” climate change exposure score for each transcript. Transcripts with positive “rough” climate change exposure score are identified as containing potential climate change keywords. Sentences contained in this subset of transcripts are refered as the set M.</p>
+<p>Second, the authors define a “reference set” and a “search set” within the set M. To do so, the authors manually built a set of 50 general climate change keywords such as “global warming” or “carbon emission”. Sentences in the transcripts containing at least one of these keywords are refered as the “reference set” (the R set thereafter), the rest is refered as the search set (the S set thereafter). The latter may contains new climate change keywords.</p>
+<p>Third, the authors construct a training set containing the R set and a random sample of the S set. They train machine learning algorithms to predict the probabiltiy that the sentence belongs to R with this training set. Once fitter, they apply the trained algorithm on the S set to determine a target set T for which at least one of the algorithm predict a probability higher than 80% that the sentence belongs to R. The resulting set is likely to contain new climate change keywords according to the authors.</p>
+<p>Fourth, the authors find new climate change keywords by identifying keywords that best discriminates the belonging to the set T versus the other sentences in S. The resulting keywords compose the new set of keywords.</p>
+<p>Finally, the authors combine the set of 50 general climate keywords with these newly discovered keywords in T.</p>
+<p>Hu et al. (2022) uses a two-step approach in constructing their climate change keywords library: (i) obtaining climate change seed words from IPCC reports and (ii) expand the climate change keywords set with similar words in earnings calls transcripts.</p>
+<p>First, they apply an unsupervised learning technic (Latent Dirichlet Allocation, or LDA for short) in order to discover climate change keywords from IPCC reports. The objective of applying LDA is to extract words appearing frequently in these reports. The auhors choose to generate 7 topics per IPCC chapter, and collect the “dominant” keywords in each of this topics. This generate a final initial seeds keywords set of more than 50 keywords.</p>
+<p>Second, the authors apply the Word2Vec algorithm on earnings calls transcripts in order to expand the climate change keywords set. The authors group initial keywords resulting from the LDA on IPCC reports into six groups, and search for similar words at this group level. The Word2Vec algorithm is a neural network approach aiming to predict the probability of the coocurrence of words, and used for transforming words into numerical representation (vector) reflecting their contextual meaning. Once transformed into a numerical vector representation, similarity between words used in the earnings calls transcripts and initial climate change keywords from the IPCC reports can be assessed with the cosine similarity (basically a dot product between the two vectors). Words in the earnings calls transcripts with the highest mean cosine similarity are used to expand the initial climate change keywords set. The full resulting keywords set includes more than 1100 keywords.</p>
+<p>Hu et al. (2022) and Sautner et al. (2022) approaches for building a climate change keywords set are distinct in multiple dimensions.</p>
+<p>First, initial and resulting climate change keywords set are grouped according to topics choosen ex-ante by the authors in Sautner et al. (2022), while Hu et al. (2022) doen’t assigned any group at this stage (we’ll see later that they will rely on unsupervised learning with LDA in order to determine hierarchical groups of climate change risks).</p>
+<p>Second, Sautner et al. (2022) use an ex-ante list of initial climate change keywords, while Hu et al. (2022) use unsupervised learning with LDA on the IPCC reports for determining the initial seed words.</p>
+<p>Third, Sautner et al. (2022) rely on machine learning algorithms prediction and then statistical properties to expand the initial keywords set with words from the earnings calls transcripts, while Hu et al. (2022) rely on the similarity between initial keywords and potential keywords in the earnings calls transcripts.</p>
+<p>However, it is noteworthy that both Hu et al. (2022) and Sautner et al. (2022) make no use of Pretrained Language Model (PLM) capabilities.</p>
+<p>In our sense, both approaches could be expanded by the uses of PLM capabilities.</p>
+<p>First, Sautner et al. (2022) search for expanding the initial climate change keywords set with various machine learning algorithms rely on statistical properties and trained machine learning algorithms outputs. It could be interesting to investigate if expanding the initial keywords set can be done more efficiently by finding based on contextual similarity. Hu et al. (2022) move in this way by relying on the cosine similarity from the Word2Vec algorithm to expand the climate change keywords set. However, Hu et al. (2022) trained from scratch a Word2Vec algorithm, while PLM with more rich resulting embeddings could have been used, and be more computationaly efficient.</p>
+<p>Second, Hu et al. (2022) rely on unsupervised learning for determining the initial set of keywords, while achieving a resulting initial set similar in size and content to the one determined ex-ante by Sautner et al. (2022). Maybe a new approach with semi-supervised learning (using an ex-ante determined initial set of keywords) could be investigated.</p>
+</section>
+<section id="data">
+<h2>Data<a class="headerlink" href="#data" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="methodology">
+<h2>Methodology<a class="headerlink" href="#methodology" title="Permalink to this headline">#</a></h2>
+<p>I propose an alternative methodology to Sautner et al. (2022) and Hu et al. (2022), by relying on PLM capabilities.
+My hypothesis is that building the climate change keywords set can be done more efficiently (ie. with less processing steps) while achieving the same qualitative results.</p>
+<p>I will use the PatternRank algorithm (Schopf et al. 2022) to expand an initial climate change keywords set with new keywords from the earnings calls transcripts. More specifically, the setting is the following: (i) define the initial climate change keywords sets by using the one defined by Sautner et al. (2022); (ii) determine a sentences set from the earnings calls transcripts by retrieving the sentences with the highest cosine similarity with the initial keywords set; (iii) run the PatternRank algorithm on this set of sentences to identify new climate change keywords; (iv) define the final climate change keywords set as the union between the initial ex-ante determined climate change keywords and the new keywords identified in the earnings calls transcripts.</p>
+<p>I will then compare qualitatively the resulting climate change keywords vocabulary.</p>
+</section>
+<section id="results">
+<h2>Results<a class="headerlink" href="#results" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
+</section>
+</section>
+
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="introduction.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Introduction</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="notebooks/ClimateChangeKeywords.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Climate Change Risks Keywords</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Thomas Lorans<br/>
+  
+      &copy; Copyright 2022, Thomas Lorans.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
