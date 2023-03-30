@@ -25,6 +25,7 @@ While a lot of refinements and alternatives can be considered for each strategy,
 
 dealingwithrisk
 lowcarbonstrategy
+minimumvariancecarbonbeta
 references
 ```
 
