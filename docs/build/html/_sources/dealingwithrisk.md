@@ -418,9 +418,7 @@ Once instantiated, an object of class `IndexReplication` will return a `Portfoli
 
 ## From CAPM to Risk Factors Models: Capturing New Risk Premia with Factor Investing
 
-Introducing the notion of climate risks into Finance can be also made through the lens of systematic risks exposure. Risks can be decomposed into a systematic (common for all stocks) and an idiosyncratic ($\alpha$, specific to a stock) components. Factor investing treats the question of managing the exposure to systematic risks factors. 
-
-### From the Market Portfolio to Factors Models
+Introducing the notion of climate risks into Finance can be also made through the lens of systematic risks exposure. Risks can be decomposed into a systematic (common for all stocks) and an idiosyncratic ($\alpha$, specific to a stock) components. Theoretically, because idiosyncratic risk can be eliminated with diversification, $\alpha = 0$ and only the exposure to systematic risk should be rewarded by the markets. Factor investing treats the question of managing the exposure to systematic risks factors. 
 
 The capital asset pricing model (CAPM), introduced by Sharpe in 1964, is an equilibrium model based on the Markowitz framework. Before Sharpe, and in the absence of an equilibrium model, expected excess return of an asset $i$ was only explained by the idiosyncratic component:
 
@@ -465,15 +463,17 @@ And $\alpha$ reappeared again...
 \mathbb{E}[R_i] - R_f = \alpha_i + \beta^m_i(\mathbb{E}[R_m] - R_f) + \beta^{smb}_i \mathbb{E}[R_{smb}] + \beta_i^{hml}{E}[R_{hml}] + \beta_i^{wml}{E}[R_{wml}]
 \end{equation}
 
-### Betas 
-
+```Python
+# to be done: download the FF factors and estimate betas for a handful of stocks
+```
 ## Portfolio Allocation with Risk Factors
 
-As investors are compensated for taking systematic risk(s), they can look for gaining exposure to these risks with a Risk Factor Portfolio. 
+As investors are compensated for taking systematic risk(s), they can look for gaining exposure to these risks with a Risk Factor Portfolio. We'll see how long/short risk factor portfolio can be built.
 
 ### Market Risk Portfolio: Capitalization-Weighted Indexation
 
-In the Capital Asset Pricing Model theory, there is a single market risk premium, which can be otained by investing in market-capitalization indexes.
+
+In the CAPM framework, there is a single market risk premium, which can be otained by investing in market-capitalization indexes. 
 
 ```Python
 @dataclass
@@ -486,14 +486,14 @@ class MarketCapIndex(PortfolioConstruction):
 
 ```
 But critics against market-cap indexation arised with empirical evidences against the efficiency of market-cap investing:
-- capitalization-weightin is prone to concentrated portfolios: for example, the top 100 market caps of the S&P 500 account for around 70%;
+- capitalization-weighting is prone to concentrated portfolios: for example, the top 100 market caps of the S&P 500 account for around 70%;
 - market risk is not the only systematic risk, then the market-cap weighted index is exposed to unrewarded systematic risks (example Growth bias)
 
 ### Risk Factor Portfolio
 
-Theory and empirical evidences introduce other common factors factors models to capture new risk premia.
+As we've seen above, theory and empirical evidences introduced other systematic factors models to capture new risk premia.
 
-Index providers and asset managers now offer the opportunity to invest in these risk factors, through factor indexes and mutual funds. The idea of factor investing is then to enlarge the asset universe by adding these risk factors to the existing market risk factor, with the goal is to generate more returns in the long run.
+To generate excess returns in the long-run, investors can adopt factor investing by adding these risk factors to the existing market risk one, and invest in the corresponding factor portfolio.
 
 How do we estimate empirically $\mathbb{E}[R_{\mathbb{j}}]$ the expected return for a risk factor $j$?
 
