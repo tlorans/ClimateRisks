@@ -24,6 +24,7 @@ While a lot of refinements and alternatives can be considered for each strategy,
 :maxdepth: 2
 
 dealingwithrisk
+lowcarbonstrategy
 references
 ```
 
