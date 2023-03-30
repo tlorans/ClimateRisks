@@ -12,7 +12,6 @@ These tools will be at the basis of the three strategies we will present thereaf
 
 We will discuss these basic tools with implementation in Python.
 
-An important point to consider is that, in Finance, there is no such thing as a free-lunch. This well-known expression means that potential "rewards" (returns) arise from risk-taking. The purpose in portfolio construction is thus to manage this trade-off between returns and risk. In the simple mean-variance portfolio framework, the approach is to find the most efficient risk-returns couple, according to the investor risk-tolerance. In the factor investing approach, the investors want to gain extra long-term returns with the exposure to a risk factor (or an anomaly) through a factor portfolio.
 Along this course, we'll see how climate risks can be considered with these different approaches.
 
 ## Portfolio's Risk and Returns
@@ -62,7 +61,7 @@ print(mu_portfolio)
 0.0625
 ```
 
-The thing is slightly more complicated here for the portfolio's variance. Indeed, you need to take into account the covariance matrix between the assets in the portfolio in order to obtain a proper measure of the variance of the portfolio:
+The thing is slightly more complicated with the portfolio's variance. Indeed, you need to take into account the covariance matrix between the assets in the portfolio in order to obtain a proper measure of the variance of the portfolio:
 
 \begin{equation}
 \sigma^2(x) = \mathbb{E}[(R(x) - \mu(x))(R(x) - \mu(x))^T]
@@ -83,9 +82,6 @@ x^T \mathbb{E}[(R-\mu)(R-\mu)^T]x
 \begin{equation}
 = x^T \Sigma x
 \end{equation}
-
-Why? Because when building a portfolio, the variance of the portfolio will be determined by both the volatilities of the underlying assets AND the correlation between them.
-
 
 In practice, we use the historical average for estimating $\mu$. For the covariance matrix, we can compute it with historical observations with the historical volatilities and correlation matrix, such as:
 
@@ -114,7 +110,7 @@ print(variance_portfolio)
 0.033375
 ```
 
-Rather than writing again and again the same formula, let's create a simple dataclass with the informations we need for computing the portfolio's two moments and with the corresponding methods:
+Rather than writing again and again the same formula, let's create a simple dataclass with the data we need for computing the portfolio's two moments and the corresponding methods:
 ```Python
 from dataclasses import dataclass 
 
@@ -135,7 +131,6 @@ class Portfolio:
 
 ```
 
-Let' test if with the same values than before:
 ```Python
 simple_portfolio = Portfolio(x = x,
                  mu = mu,
@@ -157,7 +152,7 @@ With the rise of passive investing is the rise of index replication. The purpose
 
 #### Tracking Error
 
-In order to monitor the quality of the hedging strategy, investors use the tracking error (TE) measure. In this part, we will define the TE and TE volality concepts that needs to be controlled in the portfolio optimization problem in the presence of a benchmark (Roncalli, 2013 {cite:p}`roncalli2013introduction`).
+In order to monitor the quality of the hedging strategy, investors use the tracking error (TE) measure. In this part, we will define the TE and TE volatility concepts that needs to be controlled in the portfolio optimization problem in the presence of a benchmark (Roncalli, 2013 {cite:p}`roncalli2013introduction`).
 
 Let's define $b = (b_1, ..., b_n)$ and $x = (x_1, ..., x_n)$ the stocks weights in the benchmark and the portfolio. 
 
@@ -202,7 +197,7 @@ def get_excess_expected_returns(x:np.array,
 
 ## Portfolio Construction with Optimization: Managing the Risk & Returns Trade-Off Efficiently
 
-Let's go now on the first approach for managing risk in portfolio construction, with the optimization approach in the mean-variance framework. We'll first address the simple mean-variance portfolio, then tackle the case with portfolio construction in the context of a benchmark. We'll see that the last case is just a slight variation from the simple mean-variance portfolio, and can be considered as belonging to the same mean-variance framework.
+Let's go now on the first approach for managing risk in portfolio construction, with the optimization approach in the mean-variance framework. We'll first address the simple mean-variance portfolio, then tackle the case with portfolio construction in the context of a benchmark. We'll see that the last case is just a slight variation from the simple mean-variance portfolio.
 
 ### Simple Mean-Variance Portfolio
 
@@ -230,9 +225,9 @@ Or, equivalently, minimizing the volatility of the portfolio under a return cons
 \end{aligned}
 \end{equation*}
 
-This is the optimization formulation of finding the most efficient risk-returns couple mentioned previously, with the portfolio's two moments.
+This is the optimization problem of finding the most efficient risk-returns couple mentioned previously, with the portfolio's two moments.
 
-For easier computation, Markowitz transforms the two original non-linear optimization problems into a quadratic optimization problem. Introducing a risk-tolerance parameter ($\gamma$-problem) and the long-only constraint, we obtain the following quadratic problem:
+For ease of computation, Markowitz transformed the two original non-linear optimization problems into a quadratic optimization problem. Introducing a risk-tolerance parameter ($\gamma$-problem) and the long-only constraint, we obtain the following quadratic problem:
 
 \begin{equation*}
 \begin{aligned}
@@ -249,7 +244,7 @@ Solvers consider the following QP formulation:
 \begin{equation*}
 \begin{aligned}
 & x^* = 
-& & argmin \frac{1}{2} x^T Q x - x^T R \\
+& & argmin & \frac{1}{2} x^T Q x - x^T R \\
 & \text{subject to}
 & & Ax = B, \\
 &&& Cx \leq D,\\
@@ -367,7 +362,7 @@ In the presence of a benchmark, the expected return of the portfolio $\mu(x)$ is
 \end{aligned}
 \end{equation*}
 
-Without any further constraint, the optimal solution $x^*$ will be equal to the benchmark weights $b$. This is the case aiming to perfect replication strategy. A enhanced or tilted version will add further constraints, depending on the objective of the strategy (decarbonization for example).
+Without any further constraint, the optimal solution $x^*$ will be equal to the benchmark weights $b$. This is the case aiming to perfect replication strategy. An enhanced or tilted version will add further constraints, depending on the objective of the strategy (decarbonization for example).
 
 We have a few more steps to consider before finding our QP formulation parameters.
 
