@@ -466,12 +466,9 @@ And $\alpha$ reappeared again...
 ```Python
 # to be done: download the FF factors and estimate betas for a handful of stocks
 ```
-## Portfolio Allocation with Risk Factors
+## Risk Factor Portfolio
 
 As investors are compensated for taking systematic risk(s), they can look for gaining exposure to these risks with a Risk Factor Portfolio. We'll see how long/short risk factor portfolio can be built.
-
-### Market Risk Portfolio: Capitalization-Weighted Indexation
-
 
 In the CAPM framework, there is a single market risk premium, which can be otained by investing in market-capitalization indexes. 
 
@@ -485,40 +482,14 @@ class MarketCapIndex(PortfolioConstruction):
     return Portfolio(x = x, mu = self.mu, Sigma = self.Sigma)
 
 ```
-But critics against market-cap indexation arised with empirical evidences against the efficiency of market-cap investing:
-- capitalization-weighting is prone to concentrated portfolios: for example, the top 100 market caps of the S&P 500 account for around 70%;
-- market risk is not the only systematic risk, then the market-cap weighted index is exposed to unrewarded systematic risks (example Growth bias)
+But critics against market-cap indexation arised with empirical evidences against the efficiency of market-cap investing: as we've seen in the previous part, theory and empirical evidences introduced other systematic factors models to capture new risk premia. To generate excess returns in the long-run, investors can adopt factor investing by adding these risk factors to the existing market risk one, and invest in the corresponding factor portfolio.
 
-### Risk Factor Portfolio
+We can illustrate the construction of a long/short portfolio with the quintile approach:
+- We define a score $S_i(t_{\tau})$ for each stock $i$ at each rebalancing data $t_{\tau}$
+- We specify a weighting scheme $w_i(t_{\tau})$ (value-weighted or equally-weighted).
+- Stocks with the 20\% highest scores are assigned a positive weight according to the weighting sheme ($Q1(t_{\tau})$ portfolio or the long portfolio)
+- Stocks with the 20% lowest scores are assigned a negative weight according to the weighting scheme ($Q5(t_{\tau})$ portfolio, or the short portfolio)
 
-As we've seen above, theory and empirical evidences introduced other systematic factors models to capture new risk premia.
-
-To generate excess returns in the long-run, investors can adopt factor investing by adding these risk factors to the existing market risk one, and invest in the corresponding factor portfolio.
-
-How do we estimate empirically $\mathbb{E}[R_{\mathbb{j}}]$ the expected return for a risk factor $j$?
-
-Universe of $\mathbb{U}$ stocks (example, the MSCI World Index)
-
-We define a rebalancing period of the portfolio (every month, quarter or year)
-
-At each rebalancing date $t_{\tau}$:
-- We define a score $S_i(t_{\tau})$ for each stock $i$
-- Stocks with high scores are selected to form the long exposure $\mathbb{L}(t_{\tau})$ of the risk factor
-- Stocks with low scores are selected to form the short exposure $S(t_{\tau})$ of the risk factor
-
-We specify a weighting scheme $w_i(t_{\tau})$ (value-weighted or equally-weighted).
-
-The performance of the risk factor between two rebalancing dates corresponds to the performance of the long / short portfolio:
-
-\begin{equation}
-\mathbb{F}(t) = \mathbb{F}(t_{\tau}) (
-  (\sum_{i \in \mathbb{L}(t_{\tau})}w_i(t_{\tau})(1 + R_i(t))
-  - 
-  (\sum_{i \in \mathbb{S}(t_{\tau})}w_i(t_{\tau})(1 + R_i(t))
-)
-\end{equation}
-
-where $t \in ]t_{tau}, t_{\tau+1}]$ and $\mathbb{t_0} = 100$
 
 ```Python
 # We define a new way to build a portfolio: the Long-Short Portfolio Construction
