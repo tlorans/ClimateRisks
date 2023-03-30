@@ -485,7 +485,7 @@ class MarketCapIndex(PortfolioConstruction):
 But critics against market-cap indexation arised with empirical evidences against the efficiency of market-cap investing: as we've seen in the previous part, theory and empirical evidences introduced other systematic factors models to capture new risk premia. To generate excess returns in the long-run, investors can adopt factor investing by adding these risk factors to the existing market risk one, and invest in the corresponding factor portfolio.
 
 We can illustrate the construction of a long/short portfolio with the quintile approach:
-- We define a score $S_i(t_{\tau})$ for each stock $i$ at each rebalancing data $t_{\tau}$
+- We define a score $S_i(t_{\tau})$ for each stock $i$ at each rebalancing date $t_{\tau}$
 - We specify a weighting scheme $w_i(t_{\tau})$ (value-weighted or equally-weighted).
 - Stocks with the 20\% highest scores are assigned a positive weight according to the weighting sheme ($Q1(t_{\tau})$ portfolio or the long portfolio)
 - Stocks with the 20% lowest scores are assigned a negative weight according to the weighting scheme ($Q5(t_{\tau})$ portfolio, or the short portfolio)
