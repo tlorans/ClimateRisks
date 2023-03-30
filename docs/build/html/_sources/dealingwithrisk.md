@@ -418,39 +418,54 @@ Once instantiated, an object of class `IndexReplication` will return a `Portfoli
 
 ## From CAPM to Risk Factors Models: Capturing New Risk Premia with Factor Investing
 
+Introducing the notion of climate risks into Finance can be also made through the lens of systematic risks exposure. Risks can be decomposed into a systematic (common for all stocks) and an idiosyncratic ($\alpha$, specific to a stock) components. Factor investing treats the question of managing the exposure to systematic risks factors. 
+
 ### From the Market Portfolio to Factors Models
 
-The capital asset pricing model (CAPM) was introduced by Sharpe in 1964, and may be viewed as an equilibrium model based on the framework defined by Markowitz (1952). Sharpe (1964) showed that the tangency portfolio corresponds to the market-capitalization portfolio, and deduced the following relationship between the risk premium of asset $i$ and the risk premium of the market portfolio:
+The capital asset pricing model (CAPM), introduced by Sharpe in 1964, is an equilibrium model based on the Markowitz framework. Before Sharpe, and in the absence of an equilibrium model, expected excess return of an asset $i$ was only explained by the idiosyncratic component:
+
+\begin{equation}
+E[R_i] - R_f = \alpha_i
+\end{equation}
+
+Where $R_i$ is the asset returns, $R_f$ the risk-free rate and $\alpha_i$ the idiosyncratic risk premia of the asset $i$.
+In the CAPM framework, the expected excess return of an asset $i$ can be defined by the sensitivity of the stock to the market portfolio $\beta_i$ times the market portfolio's return:
 
 \begin{equation}
 \mathbb{E}[R_i] - R_f = \beta^m_i(\mathbb{E}[R_m] - R_f)
 \end{equation}
 
+Where $R_m$ are market returns and the coefficient $\beta^m_i$ is the beta of the asset $i$ with respect to the market portfolio. In that framework, the excess return of an asset $i$ is then explained by its exposure to the systematic market risk.
 
-Where $R_i$ and $R_m$ are the asset and market returns, $R_f$ the risk-free rate and the coefficient $\beta^m_i$ is the beta of the asset $i$ with respect to the market portfolio.
+However, empirical evidences accumulated to prove the existence of a remaining idiosyncratic $\alpha$ component, that is a part of the cross-section of expected returns unexplained by the exposure to market risk:
 
-Risk factors are common factors that explain the cross-section variance of expected returns:
-
-- 1964: Market or MKT (or BETA) factor
-- 1972: Low beta or BAB factor
-- 1981: Size of SMB factor
-- 1985: Value or HML factor
-- 1991: Low volatility or VOL factor
-- 1993: Momentum or WML factor
-- 2000: Quality of QMJ factor
-
-Risk factors corresponds to systematic risk factors (in constrat to idiosyncratic risk factors). Systematic risk factors are associated to Betas, while idiosyncratic risk factors are associated with alphas.
-
-
-Fama and French (1992):
 \begin{equation}
-\mathbb{E}[R_i] - R_f = \beta^m_i(\mathbb{E}[R_m] - R_f) + \beta^{smb}_i \mathbb{E}[R_{smb}] + \beta_i^{hml}{E}[R_{hml}]
+\mathbb{E}[R_i] - R_f = \alpha_i + \beta^m_i(\mathbb{E}[R_m] - R_f)
 \end{equation}
 
-Carhart (1997):
+A revolution with risk factors took place with Fama and French (1992), adding two supplementary systematic risk factors to the initial Market Risk (SMB and HML):
+
+\begin{equation}
+\mathbb{E}[R_i] - R_f = \beta^m_i(\mathbb{E}[R_m] - R_f) + \beta^{SMB}_i \mathbb{E}[R_{SMB}] + \beta^{HML}_i \mathbb{E}[R_{HML}]
+\end{equation}
+
+Then $\alpha$ reappeared:
+
+\begin{equation}
+\mathbb{E}[R_i] - R_f = \alpha_i + \beta^m_i(\mathbb{E}[R_m] - R_f) + \beta^{SMB}_i \mathbb{E}[R_{SMB}] + \beta^{HML}_i \mathbb{E}[R_{HML}]
+\end{equation}
+
+Carhart complemented the Fama-French 3-factors model with the WML risk factor (1997):
 \begin{equation}
 \mathbb{E}[R_i] - R_f = \beta^m_i(\mathbb{E}[R_m] - R_f) + \beta^{smb}_i \mathbb{E}[R_{smb}] + \beta_i^{hml}{E}[R_{hml}] + \beta_i^{wml}{E}[R_{wml}]
 \end{equation}
+
+And $\alpha$ reappeared again...
+\begin{equation}
+\mathbb{E}[R_i] - R_f = \alpha_i + \beta^m_i(\mathbb{E}[R_m] - R_f) + \beta^{smb}_i \mathbb{E}[R_{smb}] + \beta_i^{hml}{E}[R_{hml}] + \beta_i^{wml}{E}[R_{wml}]
+\end{equation}
+
+### Betas 
 
 ## Portfolio Allocation with Risk Factors
 
