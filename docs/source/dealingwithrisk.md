@@ -1,6 +1,5 @@
 # Dealing with Risk(s) in Portfolio Construction
 
-
 Before discussing the implementation of these strategies, we need to make a quick overview of some fundamentals frameworks:
 - Portfolio optimization, relying on the modern portfolio theory
 - Factor investing, relying on the arbitrage pricing theory

@@ -164,3 +164,4 @@ A "naive" solution consists in re-weighting the remaining stocks:
 \begin{equation}
 x_i = \frac{𝟙\{CI_i < CI^{m,n}\}b_i}{\sum^n_{k=1} 𝟙\{CI_k < CI^{m,n}\}b_k}
 \end{equation}
+
