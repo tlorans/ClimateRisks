@@ -76,6 +76,7 @@ Once the regression is performed, we can then build the counterfactual by adding
 ### A Green Factor Portfolio
 
 
+
 ### Key Takeaways
 
 

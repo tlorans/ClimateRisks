@@ -336,8 +336,8 @@ The empirical framework for testing this is the following:</p>
 <li><p>set the prediction error to month <span class="math notranslate nohighlight">\(t\)</span> level of MCCC minus the AR(1) model’s prediction</p></li>
 </ul>
 <p>More formally, given a climate change concerns at time <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(MCCC(t)\)</span>, we want to capture the unexpected shock as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a4376afc-bfac-4ed6-ba3b-e0a92873071e">
-<span class="eqno">(1)<a class="headerlink" href="#equation-a4376afc-bfac-4ed6-ba3b-e0a92873071e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-2c91118b-b0ce-43c1-9752-a742a4fe87e3">
+<span class="eqno">(1)<a class="headerlink" href="#equation-2c91118b-b0ce-43c1-9752-a742a4fe87e3" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \Delta C(t) = \Delta MCCC(t) - \mathbb{E}[\Delta MCCC(t)|I(t-1)]
 \end{equation}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(\Delta MCCC(t)\)</span> is the change in climate change concerns at time <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(I(t-1)\)</span> is the information set available at time <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(\Delta C(t)\)</span> is the climate change concerns shock.</p>
@@ -354,11 +354,18 @@ The empirical framework for testing this is the following:</p>
 <p>To assess whether climate concerns shocks <span class="math notranslate nohighlight">\(\Delta C (t)\)</span> can explains green assets outperformance, Pastor et al. (2022) propose to build a counterfactual returns.</p>
 <p>The approach relies on the problem of inferring an asset’s expected return <span class="math notranslate nohighlight">\(\mu = \mathbb[r(t)]\)</span> using historical observations. The most common approach is to use the asset’s sample average return, <span class="math notranslate nohighlight">\(\bar{r}\)</span>, as an estimate of <span class="math notranslate nohighlight">\(\mu\)</span>.</p>
 <p>Pastor et al. (2022) propose another approach introducing the additional information from climate shocks. We can estimate the following regression:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d9057e87-50d4-42ed-b449-53087fc6e4d9">
-<span class="eqno">(2)<a class="headerlink" href="#equation-d9057e87-50d4-42ed-b449-53087fc6e4d9" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c041c0aa-9945-4c1e-93a6-fb16d2b71a0e">
+<span class="eqno">(2)<a class="headerlink" href="#equation-c041c0aa-9945-4c1e-93a6-fb16d2b71a0e" title="Permalink to this equation">#</a></span>\[\begin{equation}
 r(t) = \alpha + \beta \Delta C(t) + u(t)
 \end{equation}\]</div>
-<p>Where <span class="math notranslate nohighlight">\(\alpha = \mu\)</span> because <span class="math notranslate nohighlight">\(\Delta C(t)\)</span> has zero mean ex ante. Performing the regression, we can then build the counterfactual by adding the regression intercept <span class="math notranslate nohighlight">\(\hat{\alpha}\)</span> plus the estimated residual.</p>
+<p>Where <span class="math notranslate nohighlight">\(\alpha = \mu\)</span> because <span class="math notranslate nohighlight">\(\Delta C(t)\)</span> has zero mean ex ante.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Perform the regression</span>
+</pre></div>
+</div>
+<p>Once the regression is performed, we can then build the counterfactual by adding the regression intercept <span class="math notranslate nohighlight">\(\hat{\alpha}\)</span> plus the estimated residual.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot cumulative counterfactual returns</span>
+</pre></div>
+</div>
 </section>
 </section>
 <section id="a-green-factor-portfolio">

@@ -62,9 +62,19 @@ Pastor et al. (2022) propose another approach introducing the additional informa
 r(t) = \alpha + \beta \Delta C(t) + u(t)
 \end{equation}
 
-Where $\alpha = \mu$ because $\Delta C(t)$ has zero mean ex ante. Performing the regression, we can then build the counterfactual by adding the regression intercept $\hat{\alpha}$ plus the estimated residual.
+Where $\alpha = \mu$ because $\Delta C(t)$ has zero mean ex ante. 
+
+```Python
+# Perform the regression
+```
+Once the regression is performed, we can then build the counterfactual by adding the regression intercept $\hat{\alpha}$ plus the estimated residual.
+
+```Python
+# plot cumulative counterfactual returns
+```
 
 ### A Green Factor Portfolio
+
 
 
 ### Key Takeaways
