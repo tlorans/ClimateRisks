@@ -148,11 +148,11 @@ class MinimumVarianceCarbonBeta(PortfolioConstruction):
 
 ### Key Takeaways
 
-We've seen that we can relax the assumption of no climate risks pricing from Andersson et al. (2016) with the framework proposed by Gorgen et al. (2019). Carbon risk seems to corresponds to a systematic risk, with the existence of a Brown-Minus-Green Factor. 
+We've seen that we can relax the assumption that carbon risk is not priced in by the market. Carbon risk seems to corresponds to a systematic risk, with the existence of a Brown-Minus-Green Factor. 
 
-We can integrate the market-based measure (the carbon betas) into a minimum variance framework, as proposed by Roncalli et al. (2021). This is a climate risk hedging strategy based on the assumption that carbon is priced-in by the markets and correspond to a systematic risk. 
+Stocks sentivities to the BMG factor can be integrated into a minimum variance framework, in order to hedge for carbon risk. This strategy is based on a marked-based measure of carbon risk.
 
-However, one could question the sign associated with the BMG factor. Indeed, at least in theory, returns reward risk. With carbon risk, brown companies are significantly exposed to the risk. Then, investors should require higher returns to bear the risk with investment in brown companies. 
+Question remains regarding the returns associated the BMG factor. Indeed, returns should reward risk. With carbon risk, brown companies are significantly exposed to the risk. Then, investors should require higher returns to bear the risk with investment in brown companies. 
 
 The thing is that the Carima's BMG factor provide significant negative returns. With historic returns, it seems that investors require higher returns from green companies than for brown companies. This doesn't make sense in a theoretical (and common sense) point of view. 
 
