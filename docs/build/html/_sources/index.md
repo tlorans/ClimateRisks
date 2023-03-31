@@ -25,6 +25,7 @@ climaterisks
 dealingwithrisk
 lowcarbonstrategy
 minimumvariancecarbonbeta
+greenfactor
 netzeroinvesting
 netzeroemissionsscenarios
 decarbonizationapproach
