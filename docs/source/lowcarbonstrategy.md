@@ -1,4 +1,4 @@
-# Low-Carbon Strategy
+## Low-Carbon Strategy
 
 As a first climate risks hedging strategy, we propose to follow Andersson et al. (2016) and Roncalli et al. (2021), with a simple **low-carbon index strategy**.
 
@@ -20,7 +20,7 @@ In order to implement this low-carbon strategy, we follow Roncalli (2013) formul
 
 More precisely, we will integrate the carbon risk exposure reduction into the portfolio optimization in the presence of a benchmark problem. This is equivalent to adding a new constraint to our initial optimization problem.
 
-## Threshold Approach
+### Threshold Approach
 
 With the threshold approach, the objective is to minimize the tracking error with the benchmark while imposing a reduction $\Re$ in terms of carbon intensity.
 
@@ -108,7 +108,7 @@ class LowCarbonStrategy(PortfolioConstruction):
   def get_portfolio(self) -> CarbonPortfolio:
     pass
 ```
-## Order-Statistic Approach
+### Order-Statistic Approach
 
 Andersson et al. (2016) and Roncalli et al. (2021) propose a second approach by eliminating the $m$ worst performing issuers in terms of carbon intensity.
 
@@ -136,7 +136,7 @@ To implement this decarbonization strategy, the resulting weightings can be dete
 - finding the optimal weightings that minimize the TE volatility
 - reweighting the remaining stocks with a naïve approach
 
-### Optimal Weights with TE Minimization
+#### Optimal Weights with TE Minimization
 
 We can introduce the order-statistic approach into our optimization problem with the new constraint. 
 
@@ -201,7 +201,7 @@ class LowCarbonStrategy(PortfolioConstruction):
     pass
 ```
 
-### Naive Re-weighting
+#### Naive Re-weighting
 
 A "naive" solution consists in re-weighting the remaining stocks:
 
@@ -232,7 +232,7 @@ class LowCarbonStrategy(PortfolioConstruction):
     pass
 ```
 
-## Conclusion
+### Conclusion
 
 We've covered the most frequent climate risks hedging strategy with the low-carbon strategy approach. It relies on minimizing the tracking error relative to a CW benchmark while diminishing the exposure to carbon risk, measured with the carbon intensity.
 

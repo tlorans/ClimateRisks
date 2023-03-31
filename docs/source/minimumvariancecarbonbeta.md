@@ -1,10 +1,10 @@
-# Minimum Variance Portfolio with Carbon Beta
+## Minimum Variance Portfolio with Carbon Beta
 
 While low-carbon strategy relies on the hypothesis that carbon risk is unpriced by the markets, one could ask if it is still the case, with the growth of climate investing in asset management and the rise of public concerns about global warming. In contrast with Andersson et al. (2016), Gorgen et al. (2019) and Roncalli et al. (2021) define carbon risk from a financial point of view and consider that the carbon risk of equities corresponds to the market risk priced in by the stock market. This relax the low-carbon strategy assumption that carbon risk is not priced by the market.
 
 In this part, we will introduce how Gorgen et al. (2019) show that carbon systematic risk is priced in by the market. We will rely on this Brown-Minus-Green (BMG) factor to estimate a market-based estimate for carbon risk with carbon beta. Finally, we will follow Roncalli et al. (2021) by introducing carbon beta into the Minimum Variance framework and build a smart carbon beta strategy to hedge for carbon risk.
 
-## A Brown-Minus-Green Factor: Carbon Systematic Risk
+### A Brown-Minus-Green Factor: Carbon Systematic Risk
 
 Gorgen et al. (2019) developed the carbon risk management project (Carima). This framework proposes to measure the carbon risk of a firm or a portfolio by considering the dynamics of stock prices, partly determined by climate policies and transition process towards a green economy.
 
@@ -37,7 +37,7 @@ f_{BMG}(t) = \frac{1}{2}(SB(t)+BB(t)) - \frac{1}{2} (SG(t) + BG(t))
 
 Let's have a look at the resulting BMG factor:
 
-## Carbon Beta: A Market-Based Measure
+### Carbon Beta: A Market-Based Measure
 
 Once the BMG factor is built, Gorgen et al. (2019) propose to define the carbon financial risk of a stock by using its price sentivity to the BMG factor (carbon beta).
 
@@ -66,7 +66,7 @@ And the resulting carbon beta for BP is then:
 
 The result is consistent with the interpretation of the carbon beta: as the carbon beta for BP is highly positive, it means that the company is negatively exposed to the carbon financial risk priced by the market.
 
-## Introducing Carbon Beta into a Minimum Variance Portfolio
+### Introducing Carbon Beta into a Minimum Variance Portfolio
 
 If carbon risk is proved to be a systematic risk, alongside the market risk, we can introduce it into a minimum variance framework (recall that the minimum variance portfolio corresponds to the $\gamma$-problem formulation we've seen in the previous part with $\gamma = 0$, ie. no risk-tolerance).
 
@@ -85,7 +85,7 @@ Following Roncalli et al. (2021), we can directly add a BMG constraint in a mini
 
 With $\beta_{bmg}^+$ as the maximum tolerance of the investor with respect to the relative BMG risk. 
 
-## Conclusion
+### Conclusion
 
 We've seen that we can relax the assumption of no climate risks pricing from Andersson et al. (2016) with the framework proposed by Gorgen et al. (2019). Carbon risk seems to corresponds to a systematic risk, with the existence of a Brown-Minus-Green Factor. 
 

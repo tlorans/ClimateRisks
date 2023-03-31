@@ -127,6 +127,7 @@
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="climaterisks.html">Integrating Climate Risks in Portfolio Construction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dealingwithrisk.html">Dealing with Risk(s) in Portfolio Construction</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Low-Carbon Strategy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="minimumvariancecarbonbeta.html">Minimum Variance Portfolio with Carbon Beta</a></li>
@@ -295,7 +296,7 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="low-carbon-strategy">
+  <section id="low-carbon-strategy">
 <h1>Low-Carbon Strategy<a class="headerlink" href="#low-carbon-strategy" title="Permalink to this headline">#</a></h1>
 <p>As a first climate risks hedging strategy, we propose to follow Andersson et al. (2016) and Roncalli et al. (2021), with a simple <strong>low-carbon index strategy</strong>.</p>
 <p>The underlying main assuption is that climate risks is unpriced by the market. The financial aspect of climate risks is then a risk of abrupt pricing by the market, once the markets participants integrate it.</p>
@@ -317,14 +318,14 @@ document.write(`
 <h2>Threshold Approach<a class="headerlink" href="#threshold-approach" title="Permalink to this headline">#</a></h2>
 <p>With the threshold approach, the objective is to minimize the tracking error with the benchmark while imposing a reduction <span class="math notranslate nohighlight">\(\Re\)</span> in terms of carbon intensity.</p>
 <p>The weighted-average carbon intensity (WACI) of the benchmark is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5e79bbea-7063-40e0-b3e4-e71d579fe6a2">
-<span class="eqno">(1)<a class="headerlink" href="#equation-5e79bbea-7063-40e0-b3e4-e71d579fe6a2" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-78579c56-36ca-4a48-b532-f95efd45ea43">
+<span class="eqno">(1)<a class="headerlink" href="#equation-78579c56-36ca-4a48-b532-f95efd45ea43" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI(b) = b^T CI
 \end{equation}\]</div>
 <p>With <span class="math notranslate nohighlight">\(CI = (CI_1, ..., CI_n)\)</span> the vector of carbon intensities.</p>
 <p>The same is for the WACI of the portfolio:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e0064aef-1017-4516-82d6-799d434923f0">
-<span class="eqno">(2)<a class="headerlink" href="#equation-e0064aef-1017-4516-82d6-799d434923f0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0764a4be-ac0f-4c4b-9982-b233d6639228">
+<span class="eqno">(2)<a class="headerlink" href="#equation-0764a4be-ac0f-4c4b-9982-b233d6639228" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI(x) = x^T CI
 \end{equation}\]</div>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
@@ -396,19 +397,19 @@ CI(x) = x^T CI
 <h2>Order-Statistic Approach<a class="headerlink" href="#order-statistic-approach" title="Permalink to this headline">#</a></h2>
 <p>Andersson et al. (2016) and Roncalli et al. (2021) propose a second approach by eliminating the <span class="math notranslate nohighlight">\(m\)</span> worst performing issuers in terms of carbon intensity.</p>
 <p>We note <span class="math notranslate nohighlight">\(CI_{i:n}\)</span> the order statistics of <span class="math notranslate nohighlight">\([CI_1, ..., CI_n]\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2fc04901-fd6e-46bf-aa1e-c81cbdf184f4">
-<span class="eqno">(3)<a class="headerlink" href="#equation-2fc04901-fd6e-46bf-aa1e-c81cbdf184f4" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d7982ebb-7a1e-41df-92e0-6eab26012c77">
+<span class="eqno">(3)<a class="headerlink" href="#equation-d7982ebb-7a1e-41df-92e0-6eab26012c77" title="Permalink to this equation">#</a></span>\[\begin{equation}
 minCI_i = CI_{1:n} \leq ... \leq CI_{n:n} = max CI_i
 \end{equation}\]</div>
 <p>The carbon intensity bound <span class="math notranslate nohighlight">\(CI^{m,n}\)</span> is defined as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-258f85cf-366e-44a7-ab86-a5028047da56">
-<span class="eqno">(4)<a class="headerlink" href="#equation-258f85cf-366e-44a7-ab86-a5028047da56" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a724fb58-c499-4e8a-8a39-7bdead2b4f02">
+<span class="eqno">(4)<a class="headerlink" href="#equation-a724fb58-c499-4e8a-8a39-7bdead2b4f02" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI^{m,n} = CI_{n-m+1:n}
 \end{equation}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(CI_{n-m+1:n}\)</span> is the <span class="math notranslate nohighlight">\((n-m+1)\)</span>-th order statistic of <span class="math notranslate nohighlight">\([CI_1, ..., CI_n]\)</span></p>
 <p>Eliminating the <span class="math notranslate nohighlight">\(m\)</span> worst performing assets is then equivalent to imposing the following constraint:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d933da2c-b7aa-4934-b0e9-12cc25a5946e">
-<span class="eqno">(5)<a class="headerlink" href="#equation-d933da2c-b7aa-4934-b0e9-12cc25a5946e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-dac9a941-b1b2-4b6f-bfdd-28680606b787">
+<span class="eqno">(5)<a class="headerlink" href="#equation-dac9a941-b1b2-4b6f-bfdd-28680606b787" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI_i \geq CI^{m,n} → x_i = 0
 \end{equation}\]</div>
 <p>To implement this decarbonization strategy, the resulting weightings can be determined by:</p>
@@ -478,8 +479,8 @@ CI_i \geq CI^{m,n} → x_i = 0
 <section id="naive-re-weighting">
 <h3>Naive Re-weighting<a class="headerlink" href="#naive-re-weighting" title="Permalink to this headline">#</a></h3>
 <p>A “naive” solution consists in re-weighting the remaining stocks:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-477d1910-5000-45ab-ad2b-9a3f23e19151">
-<span class="eqno">(6)<a class="headerlink" href="#equation-477d1910-5000-45ab-ad2b-9a3f23e19151" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-cfe1371f-5dee-4cc7-b7df-68c1eeba811f">
+<span class="eqno">(6)<a class="headerlink" href="#equation-cfe1371f-5dee-4cc7-b7df-68c1eeba811f" title="Permalink to this equation">#</a></span>\[\begin{equation}
 x_i = \frac{𝟙\{CI_i &lt; CI^{m,n}\}b_i}{\sum^n_{k=1} 𝟙\{CI_k &lt; CI^{m,n}\}b_k}
 \end{equation}\]</div>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># implement the second method: order-statistic approach</span>

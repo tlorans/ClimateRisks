@@ -1,4 +1,4 @@
-# Dealing with Risk(s) in Portfolio Construction
+## Dealing with Risk(s) in Portfolio Construction
 
 Before discussing the implementation of these strategies, we need to make a quick overview of some fundamentals frameworks:
 - Portfolio optimization, relying on the modern portfolio theory
@@ -13,11 +13,11 @@ We will discuss these basic tools with implementation in Python.
 
 Along this course, we'll see how climate risks can be considered with these different approaches.
 
-## Portfolio's Risk and Returns
+### Portfolio's Risk and Returns
 
 Before introducing climate risks in the portfolio construction process, a first step is to consider how to measure portfolio's risk and returns. In practice, investors build a portfolio in a context of a benchmark (the S&P 500 for example). We'll build on the previous definition of the portfolio's risk and returns to show that risk and returns measures in a context of a benchmark is just a slight variation. This is also a good introduction to the low-carbon strategy that we will cover in the next part.
 
-### Simple Portfolio's Two Moments
+#### Simple Portfolio's Two Moments
 
 As the name of the mean-variance framework indicates, the mean (expected returns) and the variance are the two moments needed for building an efficient portfolio (efficient in the sense of the risk-rewards trade-off). 
 
@@ -142,14 +142,14 @@ simple_portfolio.get_expected_returns()
 simple_portfolio.get_variance()
 ```
 
-### Risk and Returns in the Presence of a Benchmark: Tracking Error and Excess Expected Returns
+#### Risk and Returns in the Presence of a Benchmark: Tracking Error and Excess Expected Returns
 
 With the rise of passive investing is the rise of index replication. The purpose of index replication is to build a hedging strategy by investing in stocks. In this case of index replication, the portfolio's expected returns is replaced by the expected excess returns of the strategy, while the variance of the portfolio is replaced by the volatility of the tracking error (the difference between the return of the strategy and the return of the index). You may distinguish different cases of index replications:
 - Low tracking error volatility (less than 10bps) corresponds to physical or synthetic replication;
 - Moderate tracking error volatility (between 10 bps and 50 bps) corresponds to sampling (ie. less assets) replication;
 - Higher tracking error volatility (larger than 50 bps) corresponds to enhanced/tilted index, such as the low-carbon strategy or ESG-enhanced indexes.
 
-#### Tracking Error
+##### Tracking Error
 
 In order to monitor the quality of the hedging strategy, investors use the tracking error (TE) measure. In this part, we will define the TE and TE volatility concepts that needs to be controlled in the portfolio optimization problem in the presence of a benchmark (Roncalli, 2013 {cite:p}`roncalli2013introduction`).
 
@@ -177,7 +177,7 @@ def get_tracking_error_volatility(x:np.array,
   return np.sqrt((x - b).T @ Sigma @ (x - b))
 ```
 
-#### Expected Excess Return
+##### Expected Excess Return
 
 The expected excess return is:
 
@@ -194,11 +194,11 @@ def get_excess_expected_returns(x:np.array,
   return (x - b).T @ mu
 ```
 
-## Portfolio Construction with Optimization: Managing the Risk & Returns Trade-Off Efficiently
+### Portfolio Construction with Optimization: Managing the Risk & Returns Trade-Off Efficiently
 
 Let's go now on the first approach for managing risk in portfolio construction, with the optimization approach in the mean-variance framework. We'll first address the simple mean-variance portfolio, then tackle the case with portfolio construction in the context of a benchmark. We'll see that the last case is just a slight variation from the simple mean-variance portfolio.
 
-### Simple Mean-Variance Portfolio
+#### Simple Mean-Variance Portfolio
 
 In the Markowitz framework, the mean-variance investor considers maximizing the expected return of the portfolio under a volatility constraint:
 
@@ -343,7 +343,7 @@ plt.show()
 ```
 This is the well-known efficient frontier. Every portfolios on the efficient frontier (that is, the upper side of this curve) are efficient in the Markowitz framework, depending on the risk-tolerance of the investor.
 
-### Portfolio Optimization in the Presence of a Benchmark
+#### Portfolio Optimization in the Presence of a Benchmark
 
 In practice, many problems consist in tracking a benchmark while improving some properties (reducing the carbon portfolio for example). 
 
@@ -415,7 +415,7 @@ class IndexReplication(PortfolioOptimization):
 ```
 Once instantiated, an object of class `IndexReplication` will return a `Portfolio` object with the method `get_portfolio`. Because we don't have any further constraint here, this is a pure index replication strategy, and it will return a portfolio with the same weights than the benchmark.
 
-## From CAPM to Risk Factors Models: Capturing New Risk Premia with Factor Investing
+### From CAPM to Risk Factors Models: Capturing New Risk Premia with Factor Investing
 
 Introducing the notion of climate risks into Finance can be also made through the lens of systematic risks exposure. Risks can be decomposed into a systematic (common for all stocks) and an idiosyncratic ($\alpha$, specific to a stock) components. Theoretically, because idiosyncratic risk can be eliminated with diversification, $\alpha = 0$ and only the exposure to systematic risk should be rewarded by the markets. Factor investing treats the question of managing the exposure to systematic risks factors. 
 
@@ -465,7 +465,7 @@ And $\alpha$ reappeared again...
 ```Python
 # to be done: download the FF factors and estimate betas for a handful of stocks
 ```
-## Risk Factor Portfolio
+### Risk Factor Portfolio
 
 As investors are compensated for taking systematic risk(s), they can look for gaining exposure to these risks with a Risk Factor Portfolio. We'll see how long/short risk factor portfolio can be built.
 
