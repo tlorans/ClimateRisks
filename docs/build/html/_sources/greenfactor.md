@@ -14,17 +14,41 @@ Then, a transitory green factor, driven by attention shift, can arise. In this p
 
 Pastor et al. (2022) explain the past green assets outperformance by the unanticipated increases in climate concerns, confirming the theoretical green factor portfolio from Pastor et al. (2021). 
 The empirical framework for testing this is the following:
-- Measure the unanticipated climate concerns using the Media Climate Change Concerns Index (MCCC) from Ardia et al. (2021) {cite:p}`ardia2020climate`
+- Measure the unanticipated climate concerns using the Media Climate Change Concerns Index (MCCC) from Ardia et al. (2020) {cite:p}`ardia2020climate`
 - Use the new measure of the unanticipated climate concerns in a regression, and use the estimated parameters to build a counterfactual green factor returns, with climate shock equals to zero
 
-We will follow the same approach.
+We will follow the same approach, explaining the differences between realized and expected returns.
 
 #### Measuring Climate Concerns
 
+To build a measure of unanticipated climate concerns shock, Pastor et al. (2022) use the MCCC from Ardia et al. (2021). This MCCC:
+- aggregates news from eight major US newspapers
+- captures the number of climate news stories each day and their negativity / focus on risk
+
+```Python
+# download and look at the index https://sentometrics-research.com/download/mccc/
+```
+
+Following Pastor et al. (2022), we will measure shocks to climate concerns as prediction errors from AR(1) models applied to the MCCC index. To compute the prediction error in month $t$, the steps are the followings:
+- estimate an AR(1) model using the 36 months of MCCC data ending in month $t-1$
+- set the prediction error to month $t$ level of MCCC minus the AR(1) model's prediction
+
+```Python
+# AR model
+```
+
+Let's plot the cumultative shocks to climate concerns:
+```Python
+#plot
+```
 #### Counterfactual
 
 
 ### A Green Factor Portfolio
+
+
+## Key Takeaways
+
 
 
 

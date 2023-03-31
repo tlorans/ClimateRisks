@@ -42,6 +42,8 @@
     <script src="_static/doctools.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'greenfactor';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -130,6 +132,7 @@
 <li class="toctree-l1"><a class="reference internal" href="lowcarbonstrategy.html">Low-Carbon Strategy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="minimumvariancecarbonbeta.html">Minimum Variance Portfolio with Carbon Beta</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Green Factor</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="netzeroinvesting.html">Net Zero Invetment Portfolios</a></li>
 <li class="toctree-l1"><a class="reference internal" href="netzeroemissionsscenarios.html">Net Zero Emissions Scenario</a></li>
 <li class="toctree-l1"><a class="reference internal" href="decarbonizationapproach.html">Net Zero Portfolio: Decarbonization Approach</a></li>
@@ -281,6 +284,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Green Factor</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#green-stocks-outperformance-realized-vs-expected-returns">Green Stocks Outperformance: Realized vs. Expected Returns</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-climate-concerns">Measuring Climate Concerns</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#counterfactual">Counterfactual</a></li>
@@ -288,6 +292,10 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-green-factor-portfolio">A Green Factor Portfolio</a></li>
 </ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways">Key Takeaways</a></li>
+</ul>
+
             </nav>
         </div>
     </div>
@@ -313,12 +321,32 @@ document.write(`
 <p>Pastor et al. (2022) explain the past green assets outperformance by the unanticipated increases in climate concerns, confirming the theoretical green factor portfolio from Pastor et al. (2021).
 The empirical framework for testing this is the following:</p>
 <ul class="simple">
-<li><p>Measure the unanticipated climate concerns using the Media Climate Change Concerns Index (MCCC) from Ardia et al. (2021) <span id="id3">[<a class="reference internal" href="references.html#id9" title="David Ardia, Keven Bluteau, Kris Boudt, and Koen Inghelbrecht. Climate change concerns and the performance of green versus brown stocks. Available at SSRN 3717722, 2020.">ABBI20</a>]</span></p></li>
+<li><p>Measure the unanticipated climate concerns using the Media Climate Change Concerns Index (MCCC) from Ardia et al. (2020) <span id="id3">[<a class="reference internal" href="references.html#id9" title="David Ardia, Keven Bluteau, Kris Boudt, and Koen Inghelbrecht. Climate change concerns and the performance of green versus brown stocks. Available at SSRN 3717722, 2020.">ABBI20</a>]</span></p></li>
 <li><p>Use the new measure of the unanticipated climate concerns in a regression, and use the estimated parameters to build a counterfactual green factor returns, with climate shock equals to zero</p></li>
 </ul>
-<p>We will follow the same approach.</p>
+<p>We will follow the same approach, explaining the differences between realized and expected returns.</p>
 <section id="measuring-climate-concerns">
 <h3>Measuring Climate Concerns<a class="headerlink" href="#measuring-climate-concerns" title="Permalink to this headline">#</a></h3>
+<p>To build a measure of unanticipated climate concerns shock, Pastor et al. (2022) use the MCCC from Ardia et al. (2021). This MCCC:</p>
+<ul class="simple">
+<li><p>aggregates news from eight major US newspapers</p></li>
+<li><p>captures the number of climate news stories each day and their negativity / focus on risk</p></li>
+</ul>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># download and look at the index https://sentometrics-research.com/download/mccc/</span>
+</pre></div>
+</div>
+<p>Following Pastor et al. (2022), we will measure shocks to climate concerns as prediction errors from AR(1) models applied to the MCCC index. To compute the prediction error in month <span class="math notranslate nohighlight">\(t\)</span>, the steps are the followings:</p>
+<ul class="simple">
+<li><p>estimate an AR(1) model using the 36 months of MCCC data ending in month <span class="math notranslate nohighlight">\(t-1\)</span></p></li>
+<li><p>set the prediction error to month <span class="math notranslate nohighlight">\(t\)</span> level of MCCC minus the AR(1) model’s prediction</p></li>
+</ul>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># AR model</span>
+</pre></div>
+</div>
+<p>Let’s plot the cumultative shocks to climate concerns:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1">#plot</span>
+</pre></div>
+</div>
 </section>
 <section id="counterfactual">
 <h3>Counterfactual<a class="headerlink" href="#counterfactual" title="Permalink to this headline">#</a></h3>
@@ -327,6 +355,9 @@ The empirical framework for testing this is the following:</p>
 <section id="a-green-factor-portfolio">
 <h2>A Green Factor Portfolio<a class="headerlink" href="#a-green-factor-portfolio" title="Permalink to this headline">#</a></h2>
 </section>
+</section>
+<section id="key-takeaways">
+<h1>Key Takeaways<a class="headerlink" href="#key-takeaways" title="Permalink to this headline">#</a></h1>
 </section>
 
 
@@ -371,6 +402,7 @@ The empirical framework for testing this is the following:</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Green Factor</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#green-stocks-outperformance-realized-vs-expected-returns">Green Stocks Outperformance: Realized vs. Expected Returns</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-climate-concerns">Measuring Climate Concerns</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#counterfactual">Counterfactual</a></li>
@@ -378,6 +410,10 @@ The empirical framework for testing this is the following:</p>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-green-factor-portfolio">A Green Factor Portfolio</a></li>
 </ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways">Key Takeaways</a></li>
+</ul>
+
   </nav></div>
 
 </div></div>
