@@ -47,7 +47,7 @@ Let's plot the cumultative shocks to climate concerns:
 ### A Green Factor Portfolio
 
 
-## Key Takeaways
+### Key Takeaways
 
 
 

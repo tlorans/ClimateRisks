@@ -10,7 +10,7 @@
 This course is under heavy development
 ```
 
-We propose here a quick overview of climate investing, from climate risks integration strategies to net zero investing.
+We propose an overview of climate investing, from climate risks integration strategies to net zero investing.
 
 This quick overview is by no mean exhaustive. While we try to follow a rigourous approach, noteworthy thanks to Roncalli's (2023) {cite:p}`2023:Roncalli` course, we definitely take a practician approach and do not cover the theoretical fundations.
 
