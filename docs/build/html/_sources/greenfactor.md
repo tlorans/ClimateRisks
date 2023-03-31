@@ -33,6 +33,15 @@ Following Pastor et al. (2022), we will measure shocks to climate concerns as pr
 - estimate an AR(1) model using the 36 months of MCCC data ending in month $t-1$
 - set the prediction error to month $t$ level of MCCC minus the AR(1) model's prediction
 
+More formally, given a climate change concerns at time $t$, $MCCC(t)$, we want to capture the unexpected shock as:
+
+\begin{equation}
+\Delta C(t) = \Delta MCCC(t) - \mathbb{E}[\Delta MCCC(t)|I(t-1)]
+\end{equation}
+
+Where $\Delta MCCC(t)$ is the change in climate change concerns at time $t$, $I(t-1)$ is the information set available at time $t$ and $\Delta C(t)$ is the climate change concerns shock.
+
+
 ```Python
 # AR model
 ```
@@ -43,6 +52,17 @@ Let's plot the cumultative shocks to climate concerns:
 ```
 #### Counterfactual
 
+To assess whether climate concerns shocks $\Delta C (t)$ can explains green assets outperformance, Pastor et al. (2022) propose to build a counterfactual returns. 
+
+The approach relies on the problem of inferring an asset's expected return $\mu = \mathbb[r(t)]$ using historical observations. The most common approach is to use the asset's sample average return, $\bar{r}$, as an estimate of $\mu$.
+
+Pastor et al. (2022) propose another approach introducing the additional information from climate shocks. We can estimate the following regression:
+
+\begin{equation}
+r(t) = \alpha + \beta \Delta C(t) + u(t)
+\end{equation}
+
+Where $\alpha = \mu$ because $\Delta C(t)$ has zero mean ex ante. Performing the regression, we can then build the counterfactual by adding the regression intercept $\hat{\alpha}$ plus the estimated residual.
 
 ### A Green Factor Portfolio
 
