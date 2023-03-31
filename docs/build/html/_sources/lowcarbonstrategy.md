@@ -1,16 +1,16 @@
 ## Low-Carbon Strategy
 
-As a first climate risks hedging strategy, we propose to follow Andersson et al. (2016) and Roncalli et al. (2021), with a simple **low-carbon index strategy**.
+As a first climate risks hedging strategy, we propose to follow Andersson et al. (2016) {cite:p}`andersson2016hedging` and Roncalli et al. (2021) {cite:p}`roncalli2020measuring`, with a simple low-carbon index strategy.
 
-The underlying main assuption is that climate risks is unpriced by the market. The financial aspect of climate risks is then a risk of abrupt pricing by the market, once the markets participants integrate it. 
+The underlying main assuption is that carbon risk is unpriced by the market. The financial aspect of carbon risk is then a risk of abrupt pricing by the market, once the markets participants integrate it. 
 
-In that context, Andersson et al. (2016) propose a climate risk-hedging strategy by:
+In that context, Andersson et al. (2016) propose a carbon risk-hedging strategy by:
 1. Reducing the weighted-average carbon intensity (WACI) of the portfolio
 2. Minimizing the tracking error relative to a capitalization-weighted benchmark
 
 By reducing the portfolio's WACI, Andersson et al. (2016) suppose that the portfolio's carbon risk (here, the repricing risk associated with an abrupt carbon tax or carbon policy implementation) will be reduced. 
 
-This climate risks strategy is widely followed by index providers and asset managers, and can be defined as a low-carbon strategy.
+This carbon risk-hedging strategy is widely followed by index providers and asset managers, and can be defined as a low-carbon strategy.
 
 In what follow, we will implement a simple low-carbon strategy, following Andersson et al. (2016) and Roncalli et al. (2021). We will test two alternatives approach for the climate objective: 
 - the threshold approach, which consists in reducing the portfolio's WACI by changing the weights of stocks;
@@ -232,9 +232,9 @@ class LowCarbonStrategy(PortfolioConstruction):
     pass
 ```
 
-### Conclusion
+### Key Takeaways
 
-We've covered the most frequent climate risks hedging strategy with the low-carbon strategy approach. It relies on minimizing the tracking error relative to a CW benchmark while diminishing the exposure to carbon risk, measured with the carbon intensity.
+We've covered the most frequent carbon risk-hedging strategy with the low-carbon strategy approach. It relies on minimizing the tracking error volatiltiy relative to a CW benchmark while diminishing the exposure to carbon risk, measured with the carbon intensity. This is a fundamental-based approach (carbon intensity is the fundamental data of the carbon risk).
 
 We've seen that the max-threshold approach dominates the order-statistic with TE minimization and the order-statistic with naïve reweighting in terms of decarbonization and tracking error volatility trade-off.
 
