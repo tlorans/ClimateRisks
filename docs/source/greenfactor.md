@@ -59,7 +59,7 @@ The approach relies on the problem of inferring an asset's expected return $\mu 
 Pastor et al. (2022) propose another approach introducing the additional information from climate shocks. We can estimate the following regression:
 
 \begin{equation}
-R(t) = \alpha + \beta \Delta C(t) + u(t)
+R_{GMB}(t) = \alpha + \beta \Delta C(t) + u(t)
 \end{equation}
 
 Where $\alpha = \mu$ because $\Delta C(t)$ has zero mean ex ante and $R(t)$ is the monthly return of the Green-Minus-Brown portfolio.
@@ -83,7 +83,19 @@ In this part, we will construct a green factor, using stocks' greeness measure.
 
 #### Measuring Greeness
 
+Pastor et al. (2022) use MSCI Environmental scores to measure stocks' greeness. In our application, we will rather use the carbon intensity. 
+
+We measure the relative greeness of each stock compared to the market portfolio, such as:
+
+\begin{equation}
+ci_i(t) = CI_i(t) - \bar{CI(t)} 
+\end{equation}
+
+Where $\bar{CI(t)} = b^TCI(t)$ with $b$ the vector of market-capitalization and $CI$ the vector of carbon intensities. $\bar{CI(t)}$ corresponds to the weighted-average carbon intensity (WACI) of the market-capitalization portfolio.
+
 #### The Green Factor
+
+#### Explaining Value Underperformance with the Green Factor
 
 ### Key Takeaways
 
