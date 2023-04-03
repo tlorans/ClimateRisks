@@ -19,7 +19,7 @@ While a lot of refinements and alternatives can be considered for each methodolo
 
 ```{toctree}
 :caption: 'Contents:'
-:maxdepth: 3
+:maxdepth: 2
 
 climaterisks
 dealingwithrisk
