@@ -75,7 +75,7 @@ Once the regression is performed, we can then build the counterfactual by adding
 
 The counterfactual, with $\Delta C(t) = 0$ is close to zero. In fact, it turns to be negative in Pastor et al. (2022) when including other proxies for attention shift. 
 
-### Constructing the Green Factor
+### Constructing the Green Factor Portfolio
 
 The green factor was theoretically defined in a two-factors models by Pastor et al. (2021). The authors show that, along with the market factor, the green factor prices assets in equilibrium. 
 
@@ -88,10 +88,10 @@ Pastor et al. (2022) use MSCI Environmental scores to measure stocks' greeness. 
 We measure the relative greeness of each stock compared to the market portfolio, such as:
 
 \begin{equation}
-ci_i(t) = CI_i(t) - \bar{CI(t)} 
+ci_i = CI_i - \bar{CI} 
 \end{equation}
 
-Where $\bar{CI(t)} = b(t)^TCI(t)$ with $b$ the vector of market-capitalization weights and $CI$ the vector of carbon intensities. $\bar{CI(t)}$ corresponds to the weighted-average carbon intensity (WACI) of the market-capitalization portfolio.
+Where $\bar{CI} = b^T \cdot CI$ with $b$ the vector of market-capitalization weights and $CI$ the vector of carbon intensities. $\bar{CI}$ corresponds to the weighted-average carbon intensity (WACI) of the market-capitalization portfolio.
 
 ```Python
 import numpy as np
@@ -106,10 +106,10 @@ waci = b.T @ CI
 ci = CI - waci
 ```
 
-Thus, we have:
+And we have:
 
 \begin{equation}
-b(t)^Tci(t) = 0
+b^T \cdot ci= 0
 \end{equation}
 
 ```Python
@@ -123,12 +123,25 @@ Which is a condition imposed in the equilibrium model from Pastor et al. (2021).
 
 #### The Green Factor
 
-The green factor portfolio is then constructed with the weights proportional to their relative greeness measure $ci(t-1)$. The green factor portfolio is a portfolio containing long positions in green stocks ($ci(t-1)>0$) and short positions in brown stocks ($ci(t-1)<0$).
+The green factor portfolio is then constructed with the weights proportional to their relative greeness measure $ci$. The green factor portfolio is a portfolio containing long positions in green stocks ($ci>0$) and short positions in brown stocks ($ci<0$).
+
+The vector of weights $x$ is given by:
+
+\begin{equation}
+x = \frac{1}{ci^T \cdot ci} ci
+\end{equation}
 
 ```Python
-# code to get the green factor portfolio
+x = (1 / (ci.T @ ci) * ci)
 ```
 
+And the green factor portfolio greeness is equal to one:
+
+\begin{equation}
+x^T \cdot ci = 1
+\end{equation}
+
+This is also a condition imposed by the equilibrium model from Pastor et al. (2021).
 
 ### Key Takeaways
 
