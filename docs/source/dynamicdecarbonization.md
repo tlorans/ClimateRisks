@@ -12,4 +12,4 @@ In this part, we are going to compare the approach for performing a portfolio al
 
 ### NZE Decarbonization Metric
 
-### NZE Optimizatino Problem
+### NZE Optimization Problem
