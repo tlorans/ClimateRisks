@@ -123,15 +123,12 @@ Which is a condition imposed in the equilibrium model from Pastor et al. (2021).
 
 #### The Green Factor
 
-The green factor portfolio is then constructed with the weights defined by the relative greeness measure $ci(t-1)$. The green factor portfolio is a portfolio containing long positions in green stocks ($ci(t-1)>0$) and short positions in brown stocks ($ci(t-1)<0$).
+The green factor portfolio is then constructed with the weights proportional to their relative greeness measure $ci(t-1)$. The green factor portfolio is a portfolio containing long positions in green stocks ($ci(t-1)>0$) and short positions in brown stocks ($ci(t-1)<0$).
 
 ```Python
 # code to get the green factor portfolio
 ```
 
-
-
-#### Explaining Value Underperformance with the Green Factor
 
 ### Key Takeaways
 

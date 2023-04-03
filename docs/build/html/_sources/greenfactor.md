@@ -130,9 +130,6 @@ The green factor portfolio is then constructed with the weights defined by the r
 ```
 
 
-
-#### Explaining Value Underperformance with the Green Factor
-
 ### Key Takeaways
 
 

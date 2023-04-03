@@ -291,7 +291,6 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constructing-the-green-factor">Constructing the Green Factor</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-greeness">Measuring Greeness</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-green-factor">The Green Factor</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explaining-value-underperformance-with-the-green-factor">Explaining Value Underperformance with the Green Factor</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways">Key Takeaways</a></li>
@@ -341,8 +340,8 @@ The empirical framework for testing this is the following:</p>
 <li><p>set the prediction error to month <span class="math notranslate nohighlight">\(t\)</span> level of MCCC minus the AR(1) model’s prediction</p></li>
 </ul>
 <p>More formally, given a climate change concerns at time <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(MCCC(t)\)</span>, we want to capture the unexpected shock as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d8480b90-c0f7-4507-b379-8458213b3a10">
-<span class="eqno">(1)<a class="headerlink" href="#equation-d8480b90-c0f7-4507-b379-8458213b3a10" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-1e086243-747b-4300-8660-0bb83f1e2487">
+<span class="eqno">(1)<a class="headerlink" href="#equation-1e086243-747b-4300-8660-0bb83f1e2487" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \Delta C(t) = \Delta MCCC(t) - \mathbb{E}[\Delta MCCC(t)|I(t-1)]
 \end{equation}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(\Delta MCCC(t)\)</span> is the change in climate change concerns at time <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(I(t-1)\)</span> is the information set available at time <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(\Delta C(t)\)</span> is the climate change concerns shock.</p>
@@ -359,8 +358,8 @@ The empirical framework for testing this is the following:</p>
 <p>To assess whether climate concerns shocks <span class="math notranslate nohighlight">\(\Delta C (t)\)</span> can explains green assets outperformance, Pastor et al. (2022) propose to build a counterfactual returns.</p>
 <p>The approach relies on the problem of inferring an asset’s expected return <span class="math notranslate nohighlight">\(\mu = \mathbb[r(t)]\)</span> using historical observations. The most common approach is to use the asset’s sample average return, <span class="math notranslate nohighlight">\(\bar{r}\)</span>, as an estimate of <span class="math notranslate nohighlight">\(\mu\)</span>.</p>
 <p>Pastor et al. (2022) propose another approach introducing the additional information from climate shocks. We can estimate the following regression:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1398a73b-0718-4566-99ef-d4b7e66998b5">
-<span class="eqno">(2)<a class="headerlink" href="#equation-1398a73b-0718-4566-99ef-d4b7e66998b5" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-af873754-1fc5-4f2c-89d0-3469556a7f2a">
+<span class="eqno">(2)<a class="headerlink" href="#equation-af873754-1fc5-4f2c-89d0-3469556a7f2a" title="Permalink to this equation">#</a></span>\[\begin{equation}
 R_{GMB}(t) = \alpha + \beta \Delta C(t) + u(t)
 \end{equation}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(\alpha = \mu\)</span> because <span class="math notranslate nohighlight">\(\Delta C(t)\)</span> has zero mean ex ante and <span class="math notranslate nohighlight">\(R(t)\)</span> is the monthly return of the Green-Minus-Brown portfolio.</p>
@@ -382,8 +381,8 @@ R_{GMB}(t) = \alpha + \beta \Delta C(t) + u(t)
 <h3>Measuring Greeness<a class="headerlink" href="#measuring-greeness" title="Permalink to this headline">#</a></h3>
 <p>Pastor et al. (2022) use MSCI Environmental scores to measure stocks’ greeness. In our application, we will rather use the carbon intensity.</p>
 <p>We measure the relative greeness of each stock compared to the market portfolio, such as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3db8af67-dc29-452f-96a0-79ffb008d961">
-<span class="eqno">(3)<a class="headerlink" href="#equation-3db8af67-dc29-452f-96a0-79ffb008d961" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f25cb7a4-7959-475e-abfe-46606076228a">
+<span class="eqno">(3)<a class="headerlink" href="#equation-f25cb7a4-7959-475e-abfe-46606076228a" title="Permalink to this equation">#</a></span>\[\begin{equation}
 ci_i(t) = CI_i(t) - \bar{CI(t)} 
 \end{equation}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(\bar{CI(t)} = b(t)^TCI(t)\)</span> with <span class="math notranslate nohighlight">\(b\)</span> the vector of market-capitalization weights and <span class="math notranslate nohighlight">\(CI\)</span> the vector of carbon intensities. <span class="math notranslate nohighlight">\(\bar{CI(t)}\)</span> corresponds to the weighted-average carbon intensity (WACI) of the market-capitalization portfolio.</p>
@@ -400,8 +399,8 @@ ci_i(t) = CI_i(t) - \bar{CI(t)}
 </pre></div>
 </div>
 <p>Thus, we have:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-57f20628-0b1a-4f3b-aca5-67ef1f5b508c">
-<span class="eqno">(4)<a class="headerlink" href="#equation-57f20628-0b1a-4f3b-aca5-67ef1f5b508c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-2c16345b-697c-4ac8-8ff2-8c6e0fe656c2">
+<span class="eqno">(4)<a class="headerlink" href="#equation-2c16345b-697c-4ac8-8ff2-8c6e0fe656c2" title="Permalink to this equation">#</a></span>\[\begin{equation}
 b(t)^Tci(t) = 0
 \end{equation}\]</div>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">ci</span><span class="p">)</span>
@@ -418,9 +417,6 @@ b(t)^Tci(t) = 0
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># code to get the green factor portfolio</span>
 </pre></div>
 </div>
-</section>
-<section id="explaining-value-underperformance-with-the-green-factor">
-<h3>Explaining Value Underperformance with the Green Factor<a class="headerlink" href="#explaining-value-underperformance-with-the-green-factor" title="Permalink to this headline">#</a></h3>
 </section>
 </section>
 <section id="key-takeaways">
@@ -478,7 +474,6 @@ b(t)^Tci(t) = 0
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constructing-the-green-factor">Constructing the Green Factor</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-greeness">Measuring Greeness</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-green-factor">The Green Factor</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explaining-value-underperformance-with-the-green-factor">Explaining Value Underperformance with the Green Factor</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways">Key Takeaways</a></li>
