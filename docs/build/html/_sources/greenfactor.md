@@ -91,9 +91,45 @@ We measure the relative greeness of each stock compared to the market portfolio,
 ci_i(t) = CI_i(t) - \bar{CI(t)} 
 \end{equation}
 
-Where $\bar{CI(t)} = b^TCI(t)$ with $b$ the vector of market-capitalization and $CI$ the vector of carbon intensities. $\bar{CI(t)}$ corresponds to the weighted-average carbon intensity (WACI) of the market-capitalization portfolio.
+Where $\bar{CI(t)} = b(t)^TCI(t)$ with $b$ the vector of market-capitalization weights and $CI$ the vector of carbon intensities. $\bar{CI(t)}$ corresponds to the weighted-average carbon intensity (WACI) of the market-capitalization portfolio.
+
+```Python
+import numpy as np
+
+
+b = np.array([0.1, 0.2, 0.3, 0.4])
+
+CI = np.array((1.45, 7.8, 2.3, 4.8))
+
+waci = b.T @ CI
+
+ci = CI - waci
+```
+
+Thus, we have:
+
+\begin{equation}
+b(t)^Tci(t) = 0
+\end{equation}
+
+```Python
+print(b.T @ ci)
+```
+```
+3.885780586188048e-16
+```
+
+Which is a condition imposed in the equilibrium model from Pastor et al. (2021).
 
 #### The Green Factor
+
+The green factor portfolio is then constructed with the weights defined by the relative greeness measure $ci(t-1)$. The green factor portfolio is a portfolio containing long positions in green stocks ($ci(t-1)>0$) and short positions in brown stocks ($ci(t-1)<0$).
+
+```Python
+# code to get the green factor portfolio
+```
+
+
 
 #### Explaining Value Underperformance with the Green Factor
 
