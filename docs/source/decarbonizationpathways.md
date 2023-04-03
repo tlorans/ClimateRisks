@@ -54,6 +54,4 @@ CB(t_0,t) = (\frac{(1 - \Delta \mathfrak{R})^{t-t_0} - 1}{ln(1 - \Delta \mathfra
 # reproduce results in Table 1 p7 in Net Zero Portfolio, an integrated approach
 ```
 
-### Carbon Reduction
-
-### Carbon Reduction Targets
+### Reduction Rates
