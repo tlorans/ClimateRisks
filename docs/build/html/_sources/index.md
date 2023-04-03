@@ -27,9 +27,9 @@ lowcarbonstrategy
 minimumvariancecarbonbeta
 greenfactor
 netzeroinvesting
-netzeroemissionsscenarios
-decarbonizationapproach
-integratedapproach
+decarbonizationpathways
+dynamicdecarbonization
+integratingtransition
 references
 ```
 
