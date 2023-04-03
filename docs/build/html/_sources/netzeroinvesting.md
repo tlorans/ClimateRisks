@@ -1,1 +1,1 @@
-## Net Zero Investing
+# Net Zero Investing
