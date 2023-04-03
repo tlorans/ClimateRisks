@@ -44,7 +44,7 @@ CE(2050) \approx 0
 
 Where $CB^+$ is the maximum carbon budget. For example, with the estimates from the IPCC (2018), we would have $t_0 = 2019$ and $CB^+ = 580$.
 
-From Le Guenedal et al. (2022), we find the carbon budget with a given value for $\mathfrak{R}^-$ and $\Delta \mathfrak{R}$ such as:
+From Le Guenedal et al. (2022), we find the carbon budget with a given value for $\mathfrak{R}^-$, $\Delta \mathfrak{R}$ and $CE(t_0)$ with:
 
 \begin{equation}
 CB(t_0,t) = (\frac{(1 - \Delta \mathfrak{R})^{t-t_0} - 1}{ln(1 - \Delta \mathfrak{R})})(1 - \mathfrak{R}^-)CE(t_0)
@@ -53,5 +53,15 @@ CB(t_0,t) = (\frac{(1 - \Delta \mathfrak{R})^{t-t_0} - 1}{ln(1 - \Delta \mathfra
 ```Python
 # reproduce results in Table 1 p7 in Net Zero Portfolio, an integrated approach
 ```
+
+Let's now take the International Energy Agency (IEA) net zero scenario. Wa can compute the carbon budget $CB(2019, 2050)$ by considering the carbon pathway as a piecewise linear function. We assume that $CE(s)$ is known for $s \in \{t_0,...,t_m = t\}$ and $CE(s)$ 
+
+Using the IEA scneario, we obtain $CB(2019, 2050) = 512.35$. Since $CB(2019, 2050) \leq CB^+$ and $CE(2050) = 1.94$, we can consider the IEA scenario as a 2050 net zero emissions scenario.
+
+```Python
+# Reproduce Figure 9.18 p355 of the handbook
+#done by setting CE 2019 = 36 Gt and assuming a constant compound reduction rate R
+```
+
 
 ### Reduction Rates
