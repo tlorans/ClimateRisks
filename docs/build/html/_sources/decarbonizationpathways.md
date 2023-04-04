@@ -1,4 +1,4 @@
-## Decarbonization Pathways
+## Net Zero Decarbonization Pathways
 
 To be able to implement a net zero investing policy, investors have to define a net zero emissions (NZE) scenario, which is summarized by a decarbonization pathway.
 
@@ -17,8 +17,44 @@ CB(t_0, 2050) \leq CB^+
 CE(2050) \approx 0
 \end{equation}
 
-With $CE(t)$ the global carbon emissions at time $t$, $CB(t_0,t)$ the global carbon budget between $t_0$ and $t$ and $CB^+$ the maximum carbon budget to attain a given objective of global warming mitigation.
+With $CE(t)$ the global carbon emissions at time $t$, $CB(t_0,t)$ the global carbon budget between $t_0$ and $t$ and $CB^+$ the maximum carbon budget to attain a given objective of global warming mitigation. If we consider the AR5 results of IPCC (2018), we can set $CB^+ = 580$.
 
+The carbon budget defines the amount of CO2eq emissions produced over the time period $[t_0,t]$ for a given emissions scenario. Checking if a given emissions scenario complies with the Net Zero objective corresponds to checking if the corresponding carbon budget respect the constraint above, with a carbon emissions level in 2050 close to 0.
+
+### From Decarbonization Pathway to Net Zero Compliance
+
+#### Decarbonization Pathway
+
+A decarbonization pathway summarized an emissions scenario. It is structured among the following principles:
+1. A year-on-year self-decarbonization $\Delta \mathfrak{R}$ on average per annum emissions
+2. A minimum carbon reduction $\mathfrak{R}^-$
+
+A decarbonization pathway is then defined as:
+
+\begin{equation}
+\mathfrak{R}(t_0,t) = 1 - (1 - \Delta \mathfrak{R})^{t-t_0}(1 - \mathfrak{R^-})
+\end{equation}
+
+
+Where $t_0$ is the base year, $t$ the year index and $\mathfrak{R}(t_0,t)$ is the reduction rate of the carbon footprint between $t_0$ and $t$.
+
+
+```Python
+# Reproduce figure 1 page 6 in Net Zero Investment Portfolios Part 1
+```
+
+#### From Decarbonization Pathway to Carbon Budget
+
+
+From Le Guenedal et al. (2022), we find the carbon budget with a given value for $\mathfrak{R}^-$, $\Delta \mathfrak{R}$ and $CE(t_0)$ with:
+
+\begin{equation}
+CB(t_0,t) = (\frac{(1 - \Delta \mathfrak{R})^{t-t_0} - 1}{ln(1 - \Delta \mathfrak{R})})(1 - \mathfrak{R}^-)CE(t_0)
+\end{equation}
+
+```Python
+# reproduce results in Table 1 p7 in Net Zero Portfolio, an integrated approach
+```
 
 ### Paris-Aligned Benchmark Pathway
 
@@ -39,9 +75,6 @@ Where $t_0$ is the base year, $t$ the year index and $\mathfrak{R}(t_0,t)$ is th
 
 For the PAB, $\mathfrak{R}^-$ is equal to 50\%, $\Delta \mathfrak{R}$ to 7\%. 
 
-```Python
-# Reproduce figure 1 page 6 in Net Zero Investment Portfolios Part 1
-```
 
 While PAB is the most known pathway in finance, its construction lacks of theoretical and solid fundations. It has been created such that the carbon footprint is close to zero by 2050, but has no physical or economic foundations.
 
@@ -65,15 +98,6 @@ Where $CB^+$ is the maximum carbon budget. For example, with the estimates from 
 
 #### Estimating the Carbon Budget From a Decarbonization Pathway
 
-From Le Guenedal et al. (2022), we find the carbon budget with a given value for $\mathfrak{R}^-$, $\Delta \mathfrak{R}$ and $CE(t_0)$ with:
-
-\begin{equation}
-CB(t_0,t) = (\frac{(1 - \Delta \mathfrak{R})^{t-t_0} - 1}{ln(1 - \Delta \mathfrak{R})})(1 - \mathfrak{R}^-)CE(t_0)
-\end{equation}
-
-```Python
-# reproduce results in Table 1 p7 in Net Zero Portfolio, an integrated approach
-```
 
 
 #### Estimating a Carbon Budget From an Emissions Scenario 
