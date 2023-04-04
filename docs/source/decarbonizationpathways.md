@@ -33,7 +33,7 @@ Indeed, a net zero emissions (NZE) scenario corresponds to a carbon pathway, whi
 
 The carbon budget defines the amount of CO2eq emissions that an organization produces over the time period $[t_0,t]$. The carbon budget constraint corresponds to the constraint that a carbon budget is limited by a maximum level, in order to attain a specific target. As an example, the IPCC (2018) gives an estimate of the remaining carbon budget of 580 GtC02eq for a 50% probability of limiting warming to 1.5°C.
 
-Let's $CE(t)$ being the global carbon emissions at time $t$ and $CB(t_0,t)$ the global carbon budget between $t_0$ and $t$. A NZE scenario can be defined by a carbon patwhay that satisfies the following constraints:
+Let's $CE(t)$ being the global carbon emissions at time $t$ and $CB(t_0,t)$ the global carbon budget between $t_0$ and $t$. A NZE scenario can be defined by a carbon pathwhay that satisfies the following constraints:
 
 \begin{equation}
 CB(t_0, 2050) \leq CB^+
@@ -43,6 +43,9 @@ CE(2050) \approx 0
 \end{equation}
 
 Where $CB^+$ is the maximum carbon budget. For example, with the estimates from the IPCC (2018), we would have $t_0 = 2019$ and $CB^+ = 580$.
+
+
+#### Estimating the Carbon Budget From 
 
 From Le Guenedal et al. (2022), we find the carbon budget with a given value for $\mathfrak{R}^-$, $\Delta \mathfrak{R}$ and $CE(t_0)$ with:
 
@@ -54,7 +57,13 @@ CB(t_0,t) = (\frac{(1 - \Delta \mathfrak{R})^{t-t_0} - 1}{ln(1 - \Delta \mathfra
 # reproduce results in Table 1 p7 in Net Zero Portfolio, an integrated approach
 ```
 
+
+#### Estimating a Carbon Budget From an Emissions Scenario 
+
 Let's now take the International Energy Agency (IEA) net zero scenario. Wa can compute the carbon budget $CB(2019, 2050)$ by considering the carbon pathway as a piecewise linear function. We assume that $CE(s)$ is known for $s \in \{t_0,...,t_m = t\}$ and $CE(s)$ 
+
+
+#### Constant Reduction Rate 
 
 Using the IEA scneario, we obtain $CB(2019, 2050) = 512.35$. Since $CB(2019, 2050) \leq CB^+$ and $CE(2050) = 1.94$, we can consider the IEA scenario as a 2050 net zero emissions scenario.
 
