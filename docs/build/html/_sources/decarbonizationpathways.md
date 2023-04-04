@@ -103,3 +103,24 @@ Where $g_Y(t_0,t)$ is the growth rate of the normalization variable. As we assum
 \mathfrak{R}_{CI}(t_0,t) \geq \mathfrak{R}_{CE}(t_0,t)
 \end{equation}
 
+
+
+```Python
+# reproduce figure 3 page 9 Net Zero Integrated approach about the impact of the growth rate g_Y on the intensity decarbonization pathway
+```
+
+#### Intensity Decarbonization Pathway
+
+### Key Takeaways
+
+- Net Zero Emissions Scenario is a carbon pathway with a resulting carbon budget compliant with global warming mitigation objective
+
+- The investor can use the carbon budget constraint to check if a given decarbonization pathway corresponds to a NZE
+
+- Portfolio decarbonization pathway use carbon intensity decarbonization pathway rather than carbon emissions pathway
+
+- The investor can deduce an intensity decarbonization pathway from a decarbonization pathway
+
+- PAB and CAB are ad-hoc portfolio intensity decarbonization pathways that doesn't rely on a global emissions scenario
+
+- PAB and CAB resulting intensity decarbonization pathways are far more aggressive than the intensity decarbonization pathway deduced from the IEA Scenario
