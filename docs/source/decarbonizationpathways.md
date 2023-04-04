@@ -1,6 +1,24 @@
 ## Decarbonization Pathways
 
-To be able to implement a net zero investing policy, investors have to define a net zero scenario, which is summarized by a decarbonization pathway.
+To be able to implement a net zero investing policy, investors have to define a net zero emissions (NZE) scenario, which is summarized by a decarbonization pathway.
+
+### Net Zero Emissions (NZE) Scenario as a Carbon Budget Constraint
+
+A net zero emissions (NZE) scenario corresponds to an emissions scenario, which is compatible with a carbon budget corresponding to a certain objective of global warming mitigation.
+
+As an example, the IPCC (2018) gives an estimate of a remaining carbon budget of 580 GtC02eq for a 50% probability of limiting the warming to 1.5°C. The objective is to limit the global warming to 1.5°C while the corresponding carbon budget is 580°C. What is missing in this statement is the corresponding emissions scenario. We will see later how to determine a carbon pathway (or emission scenario) based on a carbon budget.
+
+A NZE scenario can then be defined by a carbon pathway that satisfies the following constraints (Roncalli et al., 2022):
+
+\begin{equation}
+CB(t_0, 2050) \leq CB^+
+\end{equation}
+\begin{equation}
+CE(2050) \approx 0
+\end{equation}
+
+With $CE(t)$ the global carbon emissions at time $t$, $CB(t_0,t)$ the global carbon budget between $t_0$ and $t$ and $CB^+$ the maximum carbon budget to attain a given objective of global warming mitigation.
+
 
 ### Paris-Aligned Benchmark Pathway
 
@@ -45,7 +63,7 @@ CE(2050) \approx 0
 Where $CB^+$ is the maximum carbon budget. For example, with the estimates from the IPCC (2018), we would have $t_0 = 2019$ and $CB^+ = 580$.
 
 
-#### Estimating the Carbon Budget From 
+#### Estimating the Carbon Budget From a Decarbonization Pathway
 
 From Le Guenedal et al. (2022), we find the carbon budget with a given value for $\mathfrak{R}^-$, $\Delta \mathfrak{R}$ and $CE(t_0)$ with:
 
@@ -63,7 +81,7 @@ CB(t_0,t) = (\frac{(1 - \Delta \mathfrak{R})^{t-t_0} - 1}{ln(1 - \Delta \mathfra
 Let's now take the International Energy Agency (IEA) net zero scenario. Wa can compute the carbon budget $CB(2019, 2050)$ by considering the carbon pathway as a piecewise linear function. We assume that $CE(s)$ is known for $s \in \{t_0,...,t_m = t\}$ and $CE(s)$ 
 
 
-#### Constant Reduction Rate 
+#### Emissions Scenario Compliance to Net Zero Objective with Constant Reduction Rate
 
 Using the IEA scneario, we obtain $CB(2019, 2050) = 512.35$. Since $CB(2019, 2050) \leq CB^+$ and $CE(2050) = 1.94$, we can consider the IEA scenario as a 2050 net zero emissions scenario.
 
