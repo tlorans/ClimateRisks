@@ -1,7 +1,4 @@
-# Integrating the Transition Dimension
-
-
-### Net Zero Transition Metrics
+## Integrating the Transition Dimension
 
 ### Transition Dimension
 
