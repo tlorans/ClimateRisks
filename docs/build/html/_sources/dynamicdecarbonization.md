@@ -6,6 +6,23 @@ The dynamic problem is trickier since it involves rebalancing decisions and depe
 
 In this part, we are going to compare the approach for performing a portfolio alignment with the Paris-Aligned Benchmarks (PAB) and the NZE frameworks. The main difference between both approaches is that portfolio alignment is conducted at the portfolio level in the PABs, while portfolio alignment is checked at the stock level in the NZE approach.
 
+
+### Net Zero Backtesting
+
+The objective of net zero investment portfolio is to promote self-decarbonization rather than sequential decarbonization (ie. decarbonization obtained by the dynamic of the issuers' decarbonization rather than with successive or sequential decarbonization obtained by rebalancement).
+
+Let $CI(t,x;F_t)$ be the carbon intensity of portfolio $x$ calculated at time $t$ with the information $F_t$ available at time $t$.
+
+The portfolio $x(t)$ must satisfy:
+
+```Python
+# Reproduces table 4 page 23 of Net Zero Investment portfolio
+```
+
+```Python
+# Reproduces figure 45 and 46 page 87 in net zero investment portfoli
+```
+
 ### Dynamic Decarbonization at Portfolio Level
 
 Let's first address the PAB approach of the dynamic portfolio decarbonization. 
@@ -54,8 +71,6 @@ b(t) = b(t_0)
 
 In the previous section, we have performed a portfolio alignment by considering a global decarbonization path for the portfolio, as recommended by the PAB approach. In this section, we consider the decarbonization path of the issuers, as in Le Guenedal and Roncalli (2022). 
 
-
-
 Carbon emission trends.
 
 ```Python
@@ -66,12 +81,4 @@ The optimization problem is the same as the previous optimization problem except
 
 ```Python
 # Reproduce Table 11 in page 40 of Portfolio Construction with Carbon Risk
-```
-
-### Net Zero Backtesting
-
-The objective of 
-
-```Python
-# Reproduces table 4 page 23 of Net Zero Investment portfolio
 ```
