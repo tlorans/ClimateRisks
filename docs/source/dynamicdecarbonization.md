@@ -8,6 +8,22 @@ In this part, we are going to compare the approach for performing a portfolio al
 
 ### Paris-Aligned Benchmarks
 
-### NZE Decarbonization Metric
+#### Decarbonization Pathway 
 
-### NZE Optimization Problem
+#### Climate Impact Sector
+
+#### One-Period Optimization Problem
+
+#### Multi-Periods Optimization Problem
+
+### Net Zero Objective 
+
+#### Net Zero Metric
+
+#### NZE Optimization Problem
+
+The optimization problem is the same as the PAB exepect that we explicitly introduce the NZE trajectories for the individual carbon intensity trajectories.
+
+```Python
+# Reproduce Table 11 in page 40 of Portfolio Construction with Carbon Risk
+```
