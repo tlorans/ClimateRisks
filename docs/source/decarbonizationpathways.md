@@ -129,7 +129,14 @@ Then, the relationship between the financial and the economic decarbonization pa
 
 #### From Economic to Financial Decarbonization Pathway
 
+
+```Python
+# reproduce Table 2 Intensity decarbonization pathway
+# page 10 in NZE integrated approach
+```
+
 #### From Financial Decarbonization Pathway to Carbon Budget
+
 
 ### Key Takeaways
 
