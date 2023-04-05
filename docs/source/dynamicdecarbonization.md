@@ -15,6 +15,37 @@ Let $CI(t,x;F_t)$ be the carbon intensity of portfolio $x$ calculated at time $t
 
 The portfolio $x(t)$ must satisfy:
 
+\begin{equation}
+CI(t, x(t); F_t) \leq (1 - \mathfrak{R}_{CI}(t_0,t))CI(t_0,b(t_0); F_{t_0})
+\end{equation}
+
+Where $b(t_0)$ is the benchmark at time $t_0$. The portfolio is rebalanced at time $t+1$ and we will choose a new portfolio $x(t+1)$ such that:
+
+\begin{equation}
+CI(t + 1, x(t+1); F_{t+1}) \leq (1 - \mathfrak{R}_{CI}(t_0, t+1))CI(t_0, b(t_0);F_{t_0})
+\end{equation}
+
+We don't have to rebalance (ie. add carbon reduction by new sequential decarbonization) if:
+
+\begin{equation}
+CI(t + 1, x(t); F_{t+1}) \leq (1 - \mathfrak{R}_{CI}(t_0, t+1))CI(t_0, b(t_0);F_{t_0})
+\end{equation}
+
+The variation between two rebalancing dates $CI(t+1, x(t + 1);F_{t+1}) - CI(t, x(t), F_t)$ is decomposed between two components:
+
+1. The self-decarbonization $CI(t+1, x(t);F_{t+1}) - CI(t, x(t), F_t)$
+2. The additional decarbonization with sequential decarbonization $CI(t+1, x(t + 1);F_{t+1}) - CI(t + 1, x(t), F_{t+1})$
+
+The self-decarbonization ratio is then defined as:
+
+\begin{equation}
+SR(t+1) = \frac{CI(t, x(t);F_{t}) - CI(t + 1, x(t), F_{t+1})}{CI(t, x(t);F_{t}) - CI(t + 1, x(t + 1), F_{t+1})}
+\end{equation}
+
+The upper bound is reached when do not have to rebalance the portfolio, with the decarbonization achieved through self-decarbonization rather than sequential decarbonization. This is a first step towards the backesting of net zero portoflios. 
+
+To maximize the self-decarbonization ratio, we need to have an idea about the dynamics of the carbon footprint, that is an estimate of $CI(t+1, x(t); F_t)$.
+
 ```Python
 # Reproduces table 4 page 23 of Net Zero Investment portfolio
 ```
@@ -65,6 +96,10 @@ b(t) = b(t_0)
 
 ```Python
 #show figure of projected tracking error
+```
+
+```Python
+# Apply figure 45 and 46 page 87 in net zero investment portfolio with PAB strat
 ```
 
 ### Dynamic Decarbonization at Stock Level
