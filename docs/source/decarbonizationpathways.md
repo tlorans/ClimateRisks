@@ -30,7 +30,7 @@ To check if a given decarbonization pathway or an emissions scenario is a NZE, i
 #### Decarbonization Pathway
 
 A decarbonization pathway summarized an emissions scenario. It is structured among the following principles:
-1. A year-on-year self-decarbonization $\Delta \mathfrak{R}$ on average per annum emissions
+1. An average yearly reduction rate $\Delta \mathfrak{R}$ 
 2. A minimum carbon reduction $\mathfrak{R}^-$
 
 A decarbonization pathway is then defined as:
@@ -104,9 +104,29 @@ Where $g_Y(t_0,t)$ is the growth rate of the normalization variable. As we assum
 \end{equation}
 
 
+The emissions decarbonization pathway $\mathfrak{R}_{CE}(t_0,t)$ is called the economic decarbonization pathway, while the intensity decarbonization pathway $\mathfrak{R}_{CI}(t_0,t)$ is called the financial decarbonization pathway.
+
+We generally simplify the financial / economic pathway relationship by considering both the annual growth rate of normalization variable $g_{Y}$ and the annual reduction rate of carbon emissions $\Delta \mathfrak{R}_{CE}$ as constant. We then have the compound growth rate of the normalization variable:
+
+\begin{equation}
+g_Y(t_0,t) = (1 + g_Y)^{t-t_0} - 1
+\end{equation}
+
+And the carbon reduction rate as:
+
+\begin{equation}
+\mathfrak{R}_{CE}(t_0,t) = 1 - (1 - \Delta \mathfrak{R}_{CE})^{t - t_0}
+\end{equation}
+
+Then, the relationship between the financial and the economic decarbonization pathway becomes:
+
+\begin{equation}
+\mathfrak{R}_{CI}(t_0,t) = 1 - (1 - \frac{(g_Y + \Delta \mathfrak{R}_{CE})}{1 + g_Y})^{t - t_0}
+\end{equation}
+
 
 ```Python
-# reproduce figure 3 page 9 Net Zero Integrated approach about the impact of the growth rate g_Y on the intensity decarbonization pathway
+# reproduce figure 3 page 9 Net Zero Integrated approach about the impact of the growth rate g_Y on the intensity decarbonization pathway and Delta R_CE set to 7% -> on y-axis the R_CI
 ```
 
 #### Intensity Decarbonization Pathway
