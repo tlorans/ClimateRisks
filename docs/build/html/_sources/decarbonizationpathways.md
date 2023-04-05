@@ -23,9 +23,9 @@ The carbon budget defines the amount of CO2eq emissions produced over the time p
 
 ### The IEA Scenario
 
-### Checking Net Zero Compliance
+### Net Zero Objective Compliance
 
-To check if a given decarbonization pathway or an emissions scenario is a NZE, investors need to assess if the resulting carbon budget $CB(t_0, 2050)$ and the final carbon emissions level $CE(2050)$ comply with the carbon budget constraint stated above.
+To check if a given decarbonization pathway or an emissions scenario fulfill the Net Zero objective, investors need to assess if the resulting carbon budget $CB(t_0, 2050)$ and the final carbon emissions level $CE(2050)$ comply with the carbon budget constraint stated above.
 
 #### Decarbonization Pathway
 
@@ -129,7 +129,9 @@ Then, the relationship between the financial and the economic decarbonization pa
 # reproduce figure 3 page 9 Net Zero Integrated approach about the impact of the growth rate g_Y on the intensity decarbonization pathway and Delta R_CE set to 7% -> on y-axis the R_CI
 ```
 
-#### Intensity Decarbonization Pathway
+#### From Economic to Financial Decarbonization Pathway
+
+#### From Financial Decarbonization Pathway to Carbon Budget
 
 ### Key Takeaways
 
