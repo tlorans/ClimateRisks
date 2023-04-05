@@ -129,14 +129,17 @@ Then, the relationship between the financial and the economic decarbonization pa
 
 #### From Economic to Financial Decarbonization Pathway
 
+With a given economic decarbonization pathway $\mathfrak{R}_CE(t_0,t)$ and given normalization variable growth $g_Y(t_0,t)$, we can try to approximate the relationship between the economic and the financial decarbonization pathway in order to estimate the parameters $\mathfrak{R}^-_{CI}$ and $\Delta \mathfrak{R}_{CI}$ with the following regression model estimated by least squares:
+
+\begin{equation}
+\mathfrak{R}_{CI}(t_0,t) = f_1(t; \mathfrak{R^-}_{CI}, \Delta \mathfrak{R}_{CI}) + \epsilon(t)
+\end{equation}
 
 ```Python
 # reproduce Table 2 Intensity decarbonization pathway
 # page 10 in NZE integrated approach
 ```
-
-#### From Financial Decarbonization Pathway to Carbon Budget
-
+PAB financial decarbonization very aggressive pathway compared to the IEA deduced pathway for the next ten years.
 
 ### Key Takeaways
 
