@@ -52,6 +52,7 @@ b(t) = b(t_0)
 
 ### Sequential Decarbonization at Stock Level
 
+In the previous section, we have performed a portfolio alignment by considering a global decarbonization path for the portfolio, as recommended by the PAB approach. In this section, we consider the decarbonization path of the issuers, as in Le Guenedal and Roncalli (2022). 
 #### Net Zero Metric
 
 Carbon emission trends.

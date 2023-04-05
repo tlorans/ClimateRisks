@@ -18,7 +18,7 @@ CI(x(t)) \leq (1 - \mathfrak{R}_{CI}(t_0,t))CI(b(t_0))
 
 The base year $t_0$ thus defines the reference level of the carbon intensity, as the reference level is $CI(b(t_0))$ and not $CI(b(t))$. This is a first important difference compared to the low-carbon strategy.
 
-In this case, the decarbonization problem becomes dynmaic:
+In this case, the decarbonization problem becomes dynamic:
 \begin{equation*}
 \begin{aligned}
 & x* = 
@@ -52,6 +52,7 @@ b(t) = b(t_0)
 
 ### Sequential Decarbonization at Stock Level
 
+In the previous section, we have performed a portfolio alignment by considering a global decarbonization path for the portfolio, as recommended by the PAB approach. In this section, we consider the decarbonization path of the issuers. 
 #### Net Zero Metric
 
 Carbon emission trends.
