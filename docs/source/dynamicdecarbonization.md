@@ -18,12 +18,11 @@ CI(x(t)) \leq (1 - \mathfrak{R}_{CI}(t_0,t))CI(b(t_0))
 
 The base year $t_0$ thus defines the reference level of the carbon intensity, as the reference level is $CI(b(t_0))$ and not $CI(b(t))$. This is a first important difference compared to the low-carbon strategy.
 
-The sequential optimization problem is:
-
+In this case, the decarbonization problem becomes dynamic:
 \begin{equation*}
 \begin{aligned}
 & x* = 
-& & argmin \frac{1}{2} \sigma^2(x(t)|b(t))\\
+& & argmin \frac{1}{2} (x(t)-b(t))^T \Sigma(t)(x(t)-b(t))\\
 & \text{subject to}
 & & 1_n^Tx = 1\\
 & & &  0_n \leq x \leq 1_n \\
@@ -31,10 +30,16 @@ The sequential optimization problem is:
 \end{aligned}
 \end{equation*}
 
-With the objective function depending on the tracking error risk, as in the low-carbon strategy framework:
+In this problem, finding $x^*(t)$ at time $t$ requires to know the covariance matrix $\Sigma(t)$, the carbon intensities $CI(t)$ and the investable universe $b(t)$. However, in the current year $t_1$ the observations are only available for $t_0$ and $t_1$. We can however do the exercise b assuming that the world does not change. In this case, we can assume that the covariance matrix, the carbon intensities and the investable universe remain constat, such as:
 
 \begin{equation}
-\sigma(x(t)|b(t)) = \sqrt{(x(t)-b(t))^T \Sigma(t)(x(t)-b(t))}
+\Sigma(t) = \Sigma(t_0)
+\end{equation}
+\begin{equation}
+CI(t) = CI(t_0)
+\end{equation}
+\begin{equation}
+b(t) = b(t_0)
 \end{equation}
 
 ```Python
