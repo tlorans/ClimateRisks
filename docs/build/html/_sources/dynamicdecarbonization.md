@@ -18,8 +18,24 @@ CI(x(t)) \leq (1 - \mathfrak{R}_{CI}(t_0,t))CI(b(t_0))
 
 The base year $t_0$ thus defines the reference level of the carbon intensity, as the reference level is $CI(b(t_0))$ and not $CI(b(t))$. This is a first important difference compared to the low-carbon strategy.
 
-#### Sequential Optimization Problem
-The one-period optimization problem or sequential optimization process:
+The sequential optimization problem is:
+
+\begin{equation*}
+\begin{aligned}
+& x* = 
+& & argmin \frac{1}{2} \sigma^2(x(t)|b(t))\\
+& \text{subject to}
+& & 1_n^Tx = 1\\
+& & &  0_n \leq x \leq 1_n \\
+& & & CI(x(t)) \leq (1 - \mathfrak{R}_{CI}(t_0,t))CI(b(t_0))
+\end{aligned}
+\end{equation*}
+
+With the objective function depending on the tracking error risk, as in the low-carbon strategy framework:
+
+\begin{equation}
+\sigma(x(t)|b(t)) = \sqrt{(x(t)-b(t))^T \Sigma(t)(x(t)-b(t))}
+\end{equation}
 
 ```Python
 # show figure of projected decarbonation
