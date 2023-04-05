@@ -6,9 +6,9 @@ The dynamic problem is trickier since it involves rebalancing decisions and depe
 
 In this part, we are going to compare the approach for performing a portfolio alignment with the Paris-Aligned Benchmarks (PAB) and the NZE frameworks. The main difference between both approaches is that portfolio alignment is conducted at the portfolio level in the PABs, while portfolio alignment is checked at the stock level in the NZE approach.
 
-### Sequential Decarbonization at Portfolio Level
+### Dynamic Decarbonization at Portfolio Level
 
-Let's first address the PAB approach of sequential portfolio decarbonization. 
+Let's first address the PAB approach of the dynamic portfolio decarbonization. 
 
 At date $t$, the PAB label imposes the following inequality constraint for the portfolio $x(t)$:
 
@@ -30,7 +30,7 @@ In this case, the decarbonization problem becomes dynamic:
 \end{aligned}
 \end{equation*}
 
-In this problem, finding $x^*(t)$ at time $t$ requires to know the covariance matrix $\Sigma(t)$, the carbon intensities $CI(t)$ and the investable universe $b(t)$. However, in the current year $t_1$ the observations are only available for $t_0$ and $t_1$. We can however do the exercise b assuming that the world does not change. In this case, we can assume that the covariance matrix, the carbon intensities and the investable universe remain constat, such as:
+In this problem, finding $x^*(t)$ at time $t$ requires to know the covariance matrix $\Sigma(t)$, the carbon intensities $CI(t)$ and the investable universe $b(t)$. However, in the current year $t_1$ the observations are only available for $t_0$ and $t_1$. We can however do the exercise b assuming that the world does not change. In this case, we can assume that the covariance matrix, the carbon intensities and the investable universe remain constant, such as:
 
 \begin{equation}
 \Sigma(t) = \Sigma(t_0)
@@ -50,7 +50,7 @@ b(t) = b(t_0)
 #show figure of projected tracking error
 ```
 
-### Sequential Decarbonization at Stock Level
+### Dynamic Decarbonization at Stock Level
 
 In the previous section, we have performed a portfolio alignment by considering a global decarbonization path for the portfolio, as recommended by the PAB approach. In this section, we consider the decarbonization path of the issuers, as in Le Guenedal and Roncalli (2022). 
 
@@ -62,8 +62,16 @@ Carbon emission trends.
 # reproduce figure 20 for few stocks in page 38 of portfolio construction with climate risk
 ```
 
-The optimization problem is the same as the sequential optimization problem except that we explicitly introduce the NZE trajectories for the individual carbon intensity trajectories.
+The optimization problem is the same as the previous optimization problem except that we explicitly introduce the NZE trajectories for the individual carbon intensity trajectories.
 
 ```Python
 # Reproduce Table 11 in page 40 of Portfolio Construction with Carbon Risk
+```
+
+### Net Zero Backtesting
+
+The objective of 
+
+```Python
+# Reproduces table 4 page 23 of Net Zero Investment portfolio
 ```
