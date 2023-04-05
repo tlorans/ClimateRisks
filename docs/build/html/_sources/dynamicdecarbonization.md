@@ -4,7 +4,7 @@ We've seen in the low-carbon strategy framework how investors can conduct a port
 
 The dynamic problem is trickier since it involves rebalancing decisions and depends on the future behavior of corporate issuers. 
 
-In this part, we are going to compare the approach for performing a portfolio alignment with the Paris-Aligned Benchmarks (PAB) and the NZE frameworks. The main difference between both approaches is that portfolio alignment is conducted at the portfolio level in the PABs, while portfolio alignment is checked at the stock level in the NZE approach.
+In this part, we are going to compare the approach for performing a portfolio alignment with the Paris-Aligned Benchmarks (PAB) and the NZE frameworks. Introducing the concept of Net Zero Backtesting, we'll see that the dynamic decarbonization in the PAB relies on sequential decarbonization rather than self-decarbonization, because the issuers' carbon footprint dynamic is not taken into account. We will introduce carbon footprint dynamics measure, following Roncalli et al. (2022), in order to maximize the self-decarbonization ratio of the net zero portfolio. 
 
 ### Dynamic Portfolio's Decarbonization
 
