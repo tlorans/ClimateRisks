@@ -139,7 +139,24 @@ With a given economic decarbonization pathway $\mathfrak{R}_CE(t_0,t)$ and given
 # reproduce Table 2 Intensity decarbonization pathway
 # page 10 in NZE integrated approach
 ```
+Let's compare the financial decarbonization pathway deduced from the IEA scenario to the PAB decarbonization pathway.
+The PAB's intensity decarbonization is stated as:
+1. A year-on-year self-decarbonization $\Delta \mathfrak{R}_{CI}$ of 7\% on average per annum, based on scope 1, 2 and 3 carbon emissions intensities.
+2. A minimum carbon intensity reduction $\mathfrak{R}_{CI}^-$ at 50\% compared to the invetable universe.
+
+This financial decarbonization pathway is thus:
+
+\begin{equation}
+\mathfrak{R}_{CI}(t_0, t) = 1 - (1 - 7\%)^{t-t_0}(1 - 50\%)
+\end{equation}
+
+```Python
+# reproduce figure 17 page 30 of portfolio construction with climate measures
+```
+
 PAB financial decarbonization very aggressive pathway compared to the IEA deduced pathway for the next ten years.
+
+
 
 ### Key Takeaways
 
