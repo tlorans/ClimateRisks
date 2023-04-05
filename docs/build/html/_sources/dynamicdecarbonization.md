@@ -6,9 +6,7 @@ The dynamic problem is trickier since it involves rebalancing decisions and depe
 
 In this part, we are going to compare the approach for performing a portfolio alignment with the Paris-Aligned Benchmarks (PAB) approach and the net zero emissions (NZE) scenario for 2050.
 
-### Paris-Aligned Benchmarks
-
-#### Decarbonization Pathway 
+### Portfolio's Alignment with Paris-Aligned Benchmarks Rulebook
 
 #### Climate Impact Sector
 
@@ -16,9 +14,15 @@ In this part, we are going to compare the approach for performing a portfolio al
 
 #### Multi-Periods Optimization Problem
 
-### Net Zero Objective 
+### Portfolio's Alignment with Net Zero Objective 
 
 #### Net Zero Metric
+
+Carbon emission trends.
+
+```Python
+# reproduce figure 20 for few stocks in page 38 of portfolio construction with climate risk
+```
 
 #### NZE Optimization Problem
 
