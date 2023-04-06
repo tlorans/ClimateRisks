@@ -46,7 +46,21 @@ The PAB's optimization problem becomes:
 
 If the idea behing the concept of HCIS in the PAB approach was to ensure that the resulting portfolio promotes activities contributing to the low-carbon transition, the constraint applied at the portfolio level has many drawbacks. Indeed, the constraint tends to encourages substitutions between sectors or industries and not substitutions between issuers within a same sector. The trade-off is not between green electricity and brown electricity for example, but between electricity generation and health care equipment. This approach doesn't contribute to financing the transition, which is an objective of a net zero portfolio. To assess if a portfolio is really contributing to the low-carbon transition, Roncalli et al. (2022) propose a green intensity measure. 
 
+A green intensity measure starts with a green taxonomy. The most famous example is the European green taxonomy. Developed by the TEG (TEG, 2020), the EU green taxonomy defines economic activities which make a contribution to environmental objectives while do no significant harm to the other environmental objectives (DNSH constraint) and comply with minimum social safeguards (MS constraint). Other taxonomies exist, such as the climate solutions listed by the Project Drawdown in each important sectors. Proprietary taxonomies from data vendors can also be used.
 
+A bottom-up approach to measure the green intensity of a portfolio starts with the green revenue share at the issuer level:
+
+\begin{equation}
+GI_i = \frac{GR_i}{TR_i}
+\end{equation}
+
+Where $GR_i$ and $TR_i$ are respectively the green revenues and the total turnover of the issuer $i$.
+
+The green intensity of the portfolio is then:
+
+\begin{equation}
+GI(x) = \sum^n_{i=1}x_i \cdot GI_i
+\end{equation}
 
 ### Controlling for Green Intensity
 
