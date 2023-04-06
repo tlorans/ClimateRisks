@@ -419,20 +419,15 @@ Once instantiated, an object of class `IndexReplication` will return a `Portfoli
 
 Introducing the notion of climate risks into Finance can be also made through the lens of systematic risks exposure. Risks can be decomposed into a systematic (common for all stocks) and an idiosyncratic ($\alpha$, specific to a stock) components. Theoretically, because idiosyncratic risk can be eliminated with diversification, $\alpha = 0$ and only the exposure to systematic risk should be rewarded by the markets. Factor investing treats the question of managing the exposure to systematic risks factors. 
 
-The capital asset pricing model (CAPM), introduced by Sharpe in 1964, is an equilibrium model based on the Markowitz framework. Before Sharpe, and in the absence of an equilibrium model, expected excess return of an asset $i$ was only explained by the idiosyncratic component:
+The capital asset pricing model (CAPM), introduced by Sharpe in 1964 {cite:p}`sharpe1964capital`, is an equilibrium model based on the Markowitz framework. 
 
-\begin{equation}
-E[R_i] - R_f = \alpha_i
-\end{equation}
-
-Where $R_i$ is the asset returns, $R_f$ the risk-free rate and $\alpha_i$ the idiosyncratic risk premia of the asset $i$.
 In the CAPM framework, the expected excess return of an asset $i$ can be defined by the sensitivity of the stock to the market portfolio $\beta_i$ times the market portfolio's return:
 
 \begin{equation}
 \mathbb{E}[R_i] - R_f = \beta^m_i(\mathbb{E}[R_m] - R_f)
 \end{equation}
 
-Where $R_m$ are market returns and the coefficient $\beta^m_i$ is the beta of the asset $i$ with respect to the market portfolio. In that framework, the excess return of an asset $i$ is then explained by its exposure to the systematic market risk.
+Where $R_m$ are market returns, $R_i$ is the asset returns, $R_f$ the risk-free rate, $\alpha_i$ the idiosyncratic risk premia of the asset $i$ and  the coefficient $\beta^m_i$ is the beta of the asset $i$ with respect to the market portfolio. In that framework, the excess return of an asset $i$ is then explained by its exposure to the systematic market risk.
 
 However, empirical evidences accumulated to prove the existence of a remaining idiosyncratic $\alpha$ component, that is a part of the cross-section of expected returns unexplained by the exposure to market risk:
 
@@ -440,7 +435,7 @@ However, empirical evidences accumulated to prove the existence of a remaining i
 \mathbb{E}[R_i] - R_f = \alpha_i + \beta^m_i(\mathbb{E}[R_m] - R_f)
 \end{equation}
 
-A revolution with risk factors took place with Fama and French (1992), adding two supplementary systematic risk factors to the initial Market Risk (SMB and HML):
+A revolution with risk factors took place with Fama and French (1992 {cite:p}`fama1992cross`, 1993 {cite:p}`fama1993common`), adding two supplementary systematic risk factors to the initial Market Risk (SMB and HML):
 
 \begin{equation}
 \mathbb{E}[R_i] - R_f = \beta^m_i(\mathbb{E}[R_m] - R_f) + \beta^{SMB}_i \mathbb{E}[R_{SMB}] + \beta^{HML}_i \mathbb{E}[R_{HML}]
@@ -452,7 +447,7 @@ Then $\alpha$ reappeared:
 \mathbb{E}[R_i] - R_f = \alpha_i + \beta^m_i(\mathbb{E}[R_m] - R_f) + \beta^{SMB}_i \mathbb{E}[R_{SMB}] + \beta^{HML}_i \mathbb{E}[R_{HML}]
 \end{equation}
 
-Carhart complemented the Fama-French 3-factors model with the WML risk factor (1997):
+Carhart complemented the Fama-French 3-factors model with the WML risk factor (1997 {cite:p}`carhart1997persistence`):
 \begin{equation}
 \mathbb{E}[R_i] - R_f = \beta^m_i(\mathbb{E}[R_m] - R_f) + \beta^{smb}_i \mathbb{E}[R_{smb}] + \beta_i^{hml}{E}[R_{hml}] + \beta_i^{wml}{E}[R_{wml}]
 \end{equation}
@@ -501,6 +496,7 @@ class LongShortConstruction(PortfolioConstruction):
     def get_portfolio(self) -> Portfolio:
       pass
 
+### NEED TO BE MODIFIED, ISSUE WITH WEIGHTINGS LONG AND SHORT -> if we sum absolute value of weights we have 2. Should normalize weights based on the total numver of long and short stocks
 @dataclass
 class QuintileConstruction(LongShortConstruction):
 
