@@ -10,11 +10,13 @@
 This course is under heavy development
 ```
 
-We propose an overview of climate investing, from climate risks integration strategies to net zero investing.
+In this course, I propose an overview climate investing, from the climate risks integration strategies to net zero investing. Snippets of Python codes accompany this course. Please follow along and try to implement those codes on your side.
 
-This quick overview is by no mean exhaustive. While we try to follow a rigourous approach, noteworthy thanks to Roncalli's (2023) {cite:p}`2023:Roncalli` course, we definitely take a practician approach and do not cover the theoretical fundations.
+This quick overview is by no mean exhaustive. While I've tried to follow a rigourous approach, noteworthy thanks to Thierry Roncalli's (2023) {cite:p}`2023:Roncalli` course, I definitely take a practician approach and do not cover the theoretical fundations.
 
-While a lot of refinements and alternatives can be considered for each methodology, we will focus on the "default" or most widely used approach.
+Most of this material is an adaption from Thierry Roncalli's (2023) course and its publications. The value added from this course is only in the accompanying Python code and the effort to summarize / articulate the various strategies. 
+If any doubt in my notations or implementations, please refer to Thierry Roncalli's course and / or publications. If you want to get a deeper knowledge of some notions in this course, please refer to Thierry Roncalli's course and / or publications.
+Any error in this course is mine. Unless it is sourced, any opinion expressed in this course is my personnal opinion only. 
 
 
 ```{toctree}
