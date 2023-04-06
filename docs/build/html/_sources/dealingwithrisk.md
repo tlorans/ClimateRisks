@@ -496,7 +496,7 @@ class LongShortConstruction(PortfolioConstruction):
     def get_portfolio(self) -> Portfolio:
       pass
 
-### NEED TO BE MODIFIED, ISSUE WITH WEIGHTINGS LONG AND SHORT -> if we sum absolute value of weights we have 2
+### NEED TO BE MODIFIED, ISSUE WITH WEIGHTINGS LONG AND SHORT -> if we sum absolute value of weights we have 2. Should normalize weights based on the total numver of long and short stocks
 @dataclass
 class QuintileConstruction(LongShortConstruction):
 

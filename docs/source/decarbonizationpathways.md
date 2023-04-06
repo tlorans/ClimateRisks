@@ -6,9 +6,9 @@ To be able to implement a net zero investing policy, investors have to define a 
 
 A net zero emissions (NZE) scenario corresponds to an emissions scenario, which is compatible with a carbon budget corresponding to a certain objective of global warming mitigation.
 
-As an example, the IPCC (2018) gives an estimate of a remaining carbon budget of 580 GtC02eq for a 50% probability of limiting the warming to 1.5°C. The objective is to limit the global warming to 1.5°C while the corresponding carbon budget is 580 GTCO2eq. What is missing in this statement is the corresponding emissions scenario. We will see later how to determine a carbon pathway (or emission scenario) based on a carbon budget.
+As an example, the IPCC (2018 {cite:p}`masson2018global`) gives an estimate of a remaining carbon budget of 580 GtC02eq for a 50% probability of limiting the warming to 1.5°C. The objective is to limit the global warming to 1.5°C while the corresponding carbon budget is 580 GTCO2eq. What is missing in this statement is the corresponding emissions scenario. We will see later how to determine a carbon pathway (or emission scenario) based on a carbon budget.
 
-A NZE scenario can then be defined by a carbon pathway that satisfies the following constraints (Roncalli et al., 2022):
+A NZE scenario can then be defined by a carbon pathway that satisfies the following constraints (Roncalli et al., 2022 {cite:p}`barahhou2022net`):
 
 \begin{equation}
 CB(t_0, 2050) \leq CB^+
@@ -45,7 +45,6 @@ Where $t_0$ is the base year, $t$ the year index and $\mathfrak{R}(t_0,t)$ is th
 # Reproduce figure 1 page 6 in Net Zero Investment Portfolios Part 1
 ```
 
-
 Considering the definition of the decarbonization pathway, we have the following emissions scenario (Roncalli et al., 2022):
 
 \begin{equation}
@@ -54,7 +53,7 @@ CE(t) = (1 - \Delta \mathfrak{R})^{t - t_0}(1 - \mathfrak{R}^-) CE(t_0)
 
 #### From Decarbonization Pathway to Carbon Budget
 
-From Le Guenedal et al. (2022), we find the carbon budget with a given value for $\mathfrak{R}^-$, $\Delta \mathfrak{R}$ and $CE(t_0)$ with:
+From Le Guenedal et al. (2022 {cite:p}`le2022net`), we find the carbon budget with a given value for $\mathfrak{R}^-$, $\Delta \mathfrak{R}$ and $CE(t_0)$ with:
 
 \begin{equation}
 CB(t_0,t) = (\frac{(1 - \Delta \mathfrak{R})^{t-t_0} - 1}{ln(1 - \Delta \mathfrak{R})})(1 - \mathfrak{R}^-)CE(t_0)
