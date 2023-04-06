@@ -39,6 +39,6 @@ The PAB's optimization problem becomes:
 & & & CIS_{High}(x(t)) \geq \phi_{CIS} \cdot CIS_{High}(b(t))
 \end{aligned}
 \end{equation*}
-
+### Financing the Transition
 
 ### Controlling for Green Intensity

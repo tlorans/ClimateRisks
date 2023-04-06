@@ -41,4 +41,6 @@ The PAB's optimization problem becomes:
 \end{equation*}
 
 
+### Financing the Transition
+
 ### Controlling for Green Intensity
