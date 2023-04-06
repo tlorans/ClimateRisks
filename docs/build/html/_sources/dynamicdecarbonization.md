@@ -162,3 +162,5 @@ With $CM^*$ a global threshold. For example, setting $CM^* = -7\%$, we expect th
 - Roncalli et al. (2022) intoduced the notion of net zero backtesting: as net zero investment portfolio promote self-decarbonization rather than sequential decarbonization, investors need to be able to verify where does the portfolio's decarbonization comes from, with the self-decarbonization ratio for example
 
 - Improving the self-decarbonization ratio calls for the integration of issuers' carbon footprint dynamics. It constrats with the PAB's approach, that doesn't include any forward-looking information. PAB's decarbonization comes almost entirely from sequential decarbonization.
+
+- We introduce a measure of carbon footprint dynamics in our optimization problem, improving the resulting self-decarbonization ratio.

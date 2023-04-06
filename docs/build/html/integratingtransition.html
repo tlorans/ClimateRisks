@@ -42,11 +42,13 @@
     <script src="_static/doctools.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'integratingtransition';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="References" href="references.html" />
-    <link rel="prev" title="Dynamic Decarbonization" href="dynamicdecarbonization.html" />
+    <link rel="prev" title="Portfolio Alignment" href="dynamicdecarbonization.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -132,7 +134,7 @@
 <li class="toctree-l1"><a class="reference internal" href="greenfactor.html">Green Factor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="netzeroinvesting.html">Net Zero Investing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="decarbonizationpathways.html">Net Zero Emissions Scenario</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dynamicdecarbonization.html">Dynamic Decarbonization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dynamicdecarbonization.html">Portfolio Alignment</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Integrating the Transition Dimension</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 </ul>
@@ -281,8 +283,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transition-dimension">Transition Dimension</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#combining-decarbonization-and-transition">Combining Decarbonization and Transition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#controlling-for-climate-impact-sectors">Controlling for Climate Impact Sectors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#controlling-for-green-intensity">Controlling for Green Intensity</a></li>
 </ul>
             </nav>
         </div>
@@ -296,11 +298,47 @@ document.write(`
                   
   <section id="integrating-the-transition-dimension">
 <h1>Integrating the Transition Dimension<a class="headerlink" href="#integrating-the-transition-dimension" title="Permalink to this headline">#</a></h1>
-<section id="transition-dimension">
-<h2>Transition Dimension<a class="headerlink" href="#transition-dimension" title="Permalink to this headline">#</a></h2>
+<section id="controlling-for-climate-impact-sectors">
+<h2>Controlling for Climate Impact Sectors<a class="headerlink" href="#controlling-for-climate-impact-sectors" title="Permalink to this headline">#</a></h2>
+<p>The PAB label require the exposure to sectors highly exposed to climate change to be at least equal to the exposure in the investment universe. According to the TEG (2019a), we can distinguish two types of sectors:</p>
+<ol class="arabic simple">
+<li><p>High climate impact sectors (HCIS or <span class="math notranslate nohighlight">\(CIS_{High}\)</span>)</p></li>
+<li><p>Low climate impact sectors (LCIS or <span class="math notranslate nohighlight">\(CIS_{Low}\)</span>)</p></li>
+</ol>
+<p>The HCIS are sectors that are identified as key to the low-carbon transition. They corresponds to the following NACE classes:</p>
+<ul class="simple">
+<li><p>A. Agriculture, Forestry and Fishing</p></li>
+<li><p>B. Mining and Quarrying</p></li>
+<li><p>C. Manufacturing</p></li>
+<li><p>D. Electricity, Gas, Steam and Air Conditioning Supply</p></li>
+<li><p>E. Water Supply, Sewerage, Waste Management and Remediation Activities</p></li>
+<li><p>F. Construction</p></li>
+<li><p>G. Wholesale and Retail Trade, Repair of Motor Vehicles and Motorcycles</p></li>
+<li><p>H. Transportation and Storage</p></li>
+<li><p>L. Real Estate Activities</p></li>
+</ul>
+<p>We have <span class="math notranslate nohighlight">\(CIS_{High}(x) = \sum_{i \in CIS_{High}}x_i\)</span> the HCIS weight of the portfolio <span class="math notranslate nohighlight">\(x\)</span>. At each rebalancing date <span class="math notranslate nohighlight">\(t\)</span>, we must verify that:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a1b1f1f8-2478-4d3c-9a35-382e5967d4cb">
+<span class="eqno">(1)<a class="headerlink" href="#equation-a1b1f1f8-2478-4d3c-9a35-382e5967d4cb" title="Permalink to this equation">#</a></span>\[\begin{equation}
+CIS_{High}(x(t)) \geq \phi_{CIS} \cdot CIS_{High}(b(t))
+\end{equation}\]</div>
+<p>Where <span class="math notranslate nohighlight">\(\phi_{CIS} = 1\)</span>.</p>
+<p>The PAB’s optimization problem becomes:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\begin{aligned}
+&amp; x* = 
+&amp; &amp; argmin \frac{1}{2} (x(t)-b(t))^T \Sigma(t)(x(t)-b(t))\\
+&amp; \text{subject to}
+&amp; &amp; 1_n^Tx = 1\\
+&amp; &amp; &amp;  0_n \leq x \leq 1_n \\
+&amp; &amp; &amp; CI(x(t)) \leq (1 - \mathfrak{R}_{CI}(t_0,t))CI (b(t_0)) \\
+&amp; &amp; &amp; CIS_{High}(x(t)) \geq \phi_{CIS} \cdot CIS_{High}(b(t))
+\end{aligned}
+\end{equation*}\]</div>
 </section>
-<section id="combining-decarbonization-and-transition">
-<h2>Combining Decarbonization and Transition<a class="headerlink" href="#combining-decarbonization-and-transition" title="Permalink to this headline">#</a></h2>
+<section id="controlling-for-green-intensity">
+<h2>Controlling for Green Intensity<a class="headerlink" href="#controlling-for-green-intensity" title="Permalink to this headline">#</a></h2>
 </section>
 </section>
 
@@ -319,7 +357,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Dynamic Decarbonization</p>
+        <p class="prev-next-title">Portfolio Alignment</p>
       </div>
     </a>
     <a class="right-next"
@@ -346,8 +384,8 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transition-dimension">Transition Dimension</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#combining-decarbonization-and-transition">Combining Decarbonization and Transition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#controlling-for-climate-impact-sectors">Controlling for Climate Impact Sectors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#controlling-for-green-intensity">Controlling for Green Intensity</a></li>
 </ul>
   </nav></div>
 
