@@ -101,19 +101,55 @@ To maximize the self-decarbonization ratio, we need to have an idea about the dy
 # Reproduces figure 45 and 46 page 87 in net zero investment portfolio
 ```
 
-
+By definition, and because the PAB approach doesn't integrate any information about carbon footprint dynamics, the PAB's decarbonization is almost entirely due to sequential decarbonization.
 
 ### Integrating Carbon Footprint Dynamics
 
-In the previous section, we have performed a portfolio alignment by considering a global decarbonization path for the portfolio, as recommended by the PAB approach. In this section, we consider the decarbonization path of the issuers, as in Le Guenedal and Roncalli (2022). 
+In the previous section, we have performed a portfolio alignment by considering a global decarbonization path for the portfolio, as recommended by the PAB approach. In this section, we consider the decarbonization path of the issuers, as in Le Guenedal and Roncalli (2022) and Roncalli et al. (2022). This approach allows to improve the self-decarbonization ratio of the portfolio.
 
-Carbon emission trends.
+#### Carbon Momentum
+
+In order to have an idea of the potential issuers carbon footprint dynamics, we can exploit the historical trajectory of the past carbon emissions. We can therefore, as Roncalli et al. (2022), estimate the associated linear trend model and project the future carbon emissions by assuming that the issuer will do the same efforts in the future than in the past.
+
+Le Guenedal et al. (2022) define the carbon trend by considering the following linear constant trend model:
+
+\begin{equation}
+CE(t) = \beta_0 + \beta_1 \cdot t + u(t)
+\end{equation}
+
+We can estimate $\beta_0$ and $\beta_1$ using the least squares approach. Then, we can build the carbon trajectory iplied by the trend by applying the projection:
+
+\begin{equation}
+\hat{CE}(t) = CE(t_0) + \hat{\beta_1} \cdot (t - t_0)
+\end{equation}
+
+Le Guenedal et al. (2022) then define a long-term carbon momentum $CM(t)$ as the ratio between the slope estimated at time $t$, $\hat{\beta_1}(t)$, and the current carbon emissions:
+
+\begin{equation}
+CM(t) = \frac{\hat{\beta_1}(t)}{CE(t)}
+\end{equation}
 
 ```Python
 # reproduce figure 20 for few stocks in page 38 of portfolio construction with climate risk
 ```
 
-The optimization problem is the same as the previous optimization problem except that we explicitly introduce the NZE trajectories for the individual carbon intensity trajectories.
+#### Managing the Carbon Footprint Dynamic
+
+The optimization problem is the same as the previous optimization problem except that we explicitly introduce the issuers carbon footprint dynamics with the carbon momentum:
+
+\begin{equation*}
+\begin{aligned}
+& x* = 
+& & argmin \frac{1}{2} (x(t)-b(t))^T \Sigma(t)(x(t)-b(t))\\
+& \text{subject to}
+& & 1_n^Tx = 1\\
+& & &  0_n \leq x \leq 1_n \\
+& & & CI(x(t)) \leq (1 - \mathfrak{R}_{CI}(t_0,t))CI(b(t_0))
+& & & CM(t, x) \leq CM^*
+\end{aligned}
+\end{equation*}
+
+With $CM^*$ a global threshold. For example, setting $CM^* = -7\%$, we expect the aligned portfolio to decarbonize itself by 7\%, improving the self-decarbonization ratio.
 
 ```Python
 # Reproduce Table 11 in page 40 of Portfolio Construction with Carbon Risk
