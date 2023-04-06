@@ -144,7 +144,7 @@ The optimization problem is the same as the previous optimization problem except
 & \text{subject to}
 & & 1_n^Tx = 1\\
 & & &  0_n \leq x \leq 1_n \\
-& & & CI(x(t)) \leq (1 - \mathfrak{R}_{CI}(t_0,t))CI(b(t_0))
+& & & CI(x(t)) \leq (1 - \mathfrak{R}_{CI}(t_0,t))CI(b(t_0)) \\
 & & & CM(t, x) \leq CM^*
 \end{aligned}
 \end{equation*}
@@ -154,3 +154,13 @@ With $CM^*$ a global threshold. For example, setting $CM^* = -7\%$, we expect th
 ```Python
 # Reproduce Table 11 in page 40 of Portfolio Construction with Carbon Risk
 ```
+
+### Key Takeaways 
+
+- Net zero portfolios introduce the notion of portfolio alignment, with a dynamic decarbonization compared to a reference base year. This contrasts with the low-carbon strategy
+
+- Roncalli et al. (2022) intoduced the notion of net zero backtesting: as net zero investment portfolio promote self-decarbonization rather than sequential decarbonization, investors need to be able to verify where does the portfolio's decarbonization comes from, with the self-decarbonization ratio for example
+
+- Improving the self-decarbonization ratio calls for the integration of issuers' carbon footprint dynamics. It constrats with the PAB's approach, that doesn't include any forward-looking information. PAB's decarbonization comes almost entirely from sequential decarbonization.
+
+- We introduce a measure of carbon footprint dynamics in our optimization problem, improving the resulting self-decarbonization ratio.

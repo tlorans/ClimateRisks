@@ -135,8 +135,30 @@ CM(t) = \frac{\hat{\beta_1}(t)}{CE(t)}
 
 #### Managing the Carbon Footprint Dynamic
 
-The optimization problem is the same as the previous optimization problem except that we explicitly introduce the issuers carbon footprint dynamics with the carbon momentum.
+The optimization problem is the same as the previous optimization problem except that we explicitly introduce the issuers carbon footprint dynamics with the carbon momentum:
+
+\begin{equation*}
+\begin{aligned}
+& x* = 
+& & argmin \frac{1}{2} (x(t)-b(t))^T \Sigma(t)(x(t)-b(t))\\
+& \text{subject to}
+& & 1_n^Tx = 1\\
+& & &  0_n \leq x \leq 1_n \\
+& & & CI(x(t)) \leq (1 - \mathfrak{R}_{CI}(t_0,t))CI(b(t_0)) \\
+& & & CM(t, x) \leq CM^*
+\end{aligned}
+\end{equation*}
+
+With $CM^*$ a global threshold. For example, setting $CM^* = -7\%$, we expect the aligned portfolio to decarbonize itself by 7\%, improving the self-decarbonization ratio.
 
 ```Python
 # Reproduce Table 11 in page 40 of Portfolio Construction with Carbon Risk
 ```
+
+### Key Takeaways 
+
+- Net zero portfolios introduce the notion of portfolio alignment, with a dynamic decarbonization compared to a reference base year. This contrasts with the low-carbon strategy
+
+- Roncalli et al. (2022) intoduced the notion of net zero backtesting: as net zero investment portfolio promote self-decarbonization rather than sequential decarbonization, investors need to be able to verify where does the portfolio's decarbonization comes from, with the self-decarbonization ratio for example
+
+- Improving the self-decarbonization ratio calls for the integration of issuers' carbon footprint dynamics. It constrats with the PAB's approach, that doesn't include any forward-looking information. PAB's decarbonization comes almost entirely from sequential decarbonization.
