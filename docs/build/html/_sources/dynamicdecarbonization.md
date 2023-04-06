@@ -105,7 +105,7 @@ By definition, and because the PAB approach doesn't integrate any information ab
 
 ### Integrating Carbon Footprint Dynamics
 
-In the previous section, we have performed a portfolio alignment by considering a global decarbonization path for the portfolio, as recommended by the PAB approach. In this section, we consider the decarbonization path of the issuers, as in Le Guenedal and Roncalli (2022) and Roncalli et al. (2022). This approach allows to improve the self-decarbonization ratio of the portfolio.
+In the previous section, we have performed a portfolio alignment by considering a global decarbonization path for the portfolio, as recommended by the PAB approach. In this section, we consider the decarbonization path of the issuers, as in Le Guenedal and Roncalli (2022 {cite:p}`le2022portfolio`) and Roncalli et al. (2022). This approach allows to improve the self-decarbonization ratio of the portfolio.
 
 #### Carbon Momentum
 
