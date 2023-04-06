@@ -81,3 +81,12 @@ We finally add the green intensity constraint to our previous optimization probl
 \end{equation*}
 
 With $G(t)$ is a greeness multiplier. The underlying idea is to maintain a green intensity for the net zero portfolio that is higher than the green intesity of the benchmark.
+
+### Key Takeaways
+
+- Financing the transition is one of the objective of net zero portfolios
+- PAB approach to integrate the transition dimension relies on the HCIS constraint
+- A measure to assess the contribution to the transition to a low-carbon economy has been proposed by Roncalli et al. (2022): the green intensity
+- The HCIS constraint from the PAB falls short in improving the green intensity of the portoflio compared to the benchmark, and then underlies failures in the PAB's integration of the transition dimension
+- In fact, the decarbonization and the transition dimensions seems to be negatively correlated
+- This negative correlation calls for the direct inclusion of a green intensity constraint for net zero portfolios construction
