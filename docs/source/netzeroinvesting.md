@@ -10,3 +10,5 @@ Based on a decarbonization pathway, net zero portfolio involves dynamic decarbon
 
 Finally, an innovation with the construction of net zero portfolio, again compared with the traditional low-carbon strategy, is the introduction of the transition dimension. A net zero portfolio must ensure its contribution towards a low-carbon economy. However, the PAB approach in including the transition dimension, with the climate impact sectors constraint, falls short to fullfill this objective. In fact, the issue is that the decarbonization and the transition dimensions seem to be negatively correlated. An additional constraint on the green intensity of the portfolio is needed to ensure the net zero portfolio alignment with the goal of financing the transition.
 
+If the low-carbon strategy is again outdated regarding the net zero investing movement, the PAB label also has any drawbacks. A more robust net zero portfolio should ensure that both the decarbonization and the transition dimensions are well-addressed, with an acceptable level of self-decarbonization.
+
