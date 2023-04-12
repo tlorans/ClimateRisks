@@ -127,14 +127,15 @@
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="climaterisks.html">Integrating Climate Risks in Portfolio Construction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="climaterisks.html">Climate Risks Integration Strategies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dealingwithrisk.html">Dealing with Risk(s) in Portfolio Construction</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Low-Carbon Strategy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="minimumvariancecarbonbeta.html">Minimum Variance Portfolio with Carbon Beta</a></li>
-<li class="toctree-l1"><a class="reference internal" href="netzeroinvesting.html">Net Zero Invetment Portfolios</a></li>
-<li class="toctree-l1"><a class="reference internal" href="netzeroemissionsscenarios.html">Net Zero Emissions Scenario</a></li>
-<li class="toctree-l1"><a class="reference internal" href="decarbonizationapproach.html">Net Zero Portfolio: Decarbonization Approach</a></li>
-<li class="toctree-l1"><a class="reference internal" href="integratedapproach.html">Net Zero Portfolio: Integrated Approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="greenfactor.html">Green Factor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="netzeroinvesting.html">Net Zero Investing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decarbonizationpathways.html">Net Zero Emissions Scenario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dynamicdecarbonization.html">Portfolio Alignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integratingtransition.html">Integrating the Transition Dimension</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 </ul>
 
@@ -302,34 +303,27 @@ document.write(`
                   
   <section id="low-carbon-strategy">
 <h1>Low-Carbon Strategy<a class="headerlink" href="#low-carbon-strategy" title="Permalink to this headline">#</a></h1>
-<p>As a first climate risks hedging strategy, we propose to follow Andersson et al. (2016) <span id="id1">[<a class="reference internal" href="references.html#id4" title="Mats Andersson, Patrick Bolton, and Frédéric Samama. Hedging climate risk. Financial Analysts Journal, 72(3):13–32, 2016.">ABS16</a>]</span> and Roncalli et al. (2021) <span id="id2">[<a class="reference internal" href="references.html#id5" title="Théo Roncalli, Théo Le Guenedal, Frédéric Lepetit, Thierry Roncalli, and Takaya Sekine. Measuring and managing carbon risk in investment portfolios. arXiv preprint arXiv:2008.13198, 2020.">RGL+20</a>]</span>, with a simple low-carbon index strategy.</p>
-<p>The underlying main assuption is that carbon risk is unpriced by the market. The financial aspect of carbon risk is then a risk of abrupt pricing by the market, once the markets participants integrate it.</p>
-<p>In that context, Andersson et al. (2016) propose a carbon risk-hedging strategy by:</p>
-<ol class="arabic simple">
-<li><p>Reducing the weighted-average carbon intensity (WACI) of the portfolio</p></li>
-<li><p>Minimizing the tracking error relative to a capitalization-weighted benchmark</p></li>
-</ol>
-<p>By reducing the portfolio’s WACI, Andersson et al. (2016) suppose that the portfolio’s carbon risk (here, the repricing risk associated with an abrupt carbon tax or carbon policy implementation) will be reduced.</p>
+<p>As a first climate risks hedging strategy, we propose to follow Andersson et al. (2016) <span id="id1">[<a class="reference internal" href="references.html#id4" title="Mats Andersson, Patrick Bolton, and Frédéric Samama. Hedging climate risk. Financial Analysts Journal, 72(3):13–32, 2016.">ABS16</a>]</span> and Roncalli et al. (2020) <span id="id2">[<a class="reference internal" href="references.html#id5" title="Théo Roncalli, Théo Le Guenedal, Frédéric Lepetit, Thierry Roncalli, and Takaya Sekine. Measuring and managing carbon risk in investment portfolios. arXiv preprint arXiv:2008.13198, 2020.">RGL+20</a>]</span>, with a simple low-carbon index strategy.</p>
+<p>The strategy consists in (i) reducing the weighted-average carbon intensity (WACI of the portoflio) while (ii) minimizing the tracking error relative to a benchmark.</p>
+<p>The underlying assuption is that carbon risk is unpriced by the market. The financial aspect of carbon risk is then a risk of abrupt pricing by the market, once the markets participants integrate it. By reducing the portfolio’s WACI, Andersson et al. (2016) suppose that the portfolio’s carbon risk (here, the repricing risk associated with an abrupt carbon tax or carbon policy implementation) will be reduced.</p>
 <p>This carbon risk-hedging strategy is widely followed by index providers and asset managers, and can be defined as a low-carbon strategy.</p>
-<p>In what follow, we will implement a simple low-carbon strategy, following Andersson et al. (2016) and Roncalli et al. (2021). We will test two alternatives approach for the climate objective:</p>
+<p>In what follow, we will test two alternatives formulations for the climate objective:</p>
 <ul class="simple">
 <li><p>the threshold approach, which consists in reducing the portfolio’s WACI by changing the weights of stocks;</p></li>
 <li><p>the order-statistic approach, which consists in excluding the <span class="math notranslate nohighlight">\(m\)</span> most emitting stocks.</p></li>
 </ul>
-<p>In order to implement this low-carbon strategy, we follow Roncalli (2013) formulation of the problem as a portfolio optimization in the presence of a benchmark. We have seen in the previous part how the TE component helps in tracking the benchmark. In this part, we will address the carbon risk exposure reduction, as exposed by Andersson et al. (2016) and Roncalli et al. (2021).</p>
-<p>More precisely, we will integrate the carbon risk exposure reduction into the portfolio optimization in the presence of a benchmark problem. This is equivalent to adding a new constraint to our initial optimization problem.</p>
 <section id="threshold-approach">
 <h2>Threshold Approach<a class="headerlink" href="#threshold-approach" title="Permalink to this headline">#</a></h2>
 <p>With the threshold approach, the objective is to minimize the tracking error with the benchmark while imposing a reduction <span class="math notranslate nohighlight">\(\Re\)</span> in terms of carbon intensity.</p>
 <p>The weighted-average carbon intensity (WACI) of the benchmark is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3c9add5d-d41c-479c-a1f0-7fe239383055">
-<span class="eqno">(1)<a class="headerlink" href="#equation-3c9add5d-d41c-479c-a1f0-7fe239383055" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-da65da0f-ddd2-4019-949d-f9cbf9f81f2d">
+<span class="eqno">(1)<a class="headerlink" href="#equation-da65da0f-ddd2-4019-949d-f9cbf9f81f2d" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI(b) = b^T CI
 \end{equation}\]</div>
 <p>With <span class="math notranslate nohighlight">\(CI = (CI_1, ..., CI_n)\)</span> the vector of carbon intensities.</p>
 <p>The same is for the WACI of the portfolio:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0061ba59-eb7b-4180-b318-7f0887eae529">
-<span class="eqno">(2)<a class="headerlink" href="#equation-0061ba59-eb7b-4180-b318-7f0887eae529" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-5c3012b6-9a7a-4379-b7ac-c931bed7a61b">
+<span class="eqno">(2)<a class="headerlink" href="#equation-5c3012b6-9a7a-4379-b7ac-c931bed7a61b" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI(x) = x^T CI
 \end{equation}\]</div>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
@@ -401,19 +395,19 @@ CI(x) = x^T CI
 <h2>Order-Statistic Approach<a class="headerlink" href="#order-statistic-approach" title="Permalink to this headline">#</a></h2>
 <p>Andersson et al. (2016) and Roncalli et al. (2021) propose a second approach by eliminating the <span class="math notranslate nohighlight">\(m\)</span> worst performing issuers in terms of carbon intensity.</p>
 <p>We note <span class="math notranslate nohighlight">\(CI_{i:n}\)</span> the order statistics of <span class="math notranslate nohighlight">\([CI_1, ..., CI_n]\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4db79312-3f25-46cd-b04e-2e45c6cdae6e">
-<span class="eqno">(3)<a class="headerlink" href="#equation-4db79312-3f25-46cd-b04e-2e45c6cdae6e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-14feb7d9-31e2-4393-a195-53da294936ca">
+<span class="eqno">(3)<a class="headerlink" href="#equation-14feb7d9-31e2-4393-a195-53da294936ca" title="Permalink to this equation">#</a></span>\[\begin{equation}
 minCI_i = CI_{1:n} \leq ... \leq CI_{n:n} = max CI_i
 \end{equation}\]</div>
 <p>The carbon intensity bound <span class="math notranslate nohighlight">\(CI^{m,n}\)</span> is defined as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f9d70190-f90d-4800-97fb-5389ae5f995c">
-<span class="eqno">(4)<a class="headerlink" href="#equation-f9d70190-f90d-4800-97fb-5389ae5f995c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-3634575f-84d3-4020-bb2c-60a3b95b3793">
+<span class="eqno">(4)<a class="headerlink" href="#equation-3634575f-84d3-4020-bb2c-60a3b95b3793" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI^{m,n} = CI_{n-m+1:n}
 \end{equation}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(CI_{n-m+1:n}\)</span> is the <span class="math notranslate nohighlight">\((n-m+1)\)</span>-th order statistic of <span class="math notranslate nohighlight">\([CI_1, ..., CI_n]\)</span></p>
 <p>Eliminating the <span class="math notranslate nohighlight">\(m\)</span> worst performing assets is then equivalent to imposing the following constraint:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-757ac9c3-f373-46e4-9318-7f2be87f2aaf">
-<span class="eqno">(5)<a class="headerlink" href="#equation-757ac9c3-f373-46e4-9318-7f2be87f2aaf" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a57da65c-af03-484a-821e-7dace8460569">
+<span class="eqno">(5)<a class="headerlink" href="#equation-a57da65c-af03-484a-821e-7dace8460569" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI_i \geq CI^{m,n} → x_i = 0
 \end{equation}\]</div>
 <p>To implement this decarbonization strategy, the resulting weightings can be determined by:</p>
@@ -483,8 +477,8 @@ CI_i \geq CI^{m,n} → x_i = 0
 <section id="naive-re-weighting">
 <h3>Naive Re-weighting<a class="headerlink" href="#naive-re-weighting" title="Permalink to this headline">#</a></h3>
 <p>A “naive” solution consists in re-weighting the remaining stocks:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e17ceeda-5530-4831-855c-274f993820e4">
-<span class="eqno">(6)<a class="headerlink" href="#equation-e17ceeda-5530-4831-855c-274f993820e4" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8eb23501-b8bc-4b91-83a3-1c64984c36f8">
+<span class="eqno">(6)<a class="headerlink" href="#equation-8eb23501-b8bc-4b91-83a3-1c64984c36f8" title="Permalink to this equation">#</a></span>\[\begin{equation}
 x_i = \frac{𝟙\{CI_i &lt; CI^{m,n}\}b_i}{\sum^n_{k=1} 𝟙\{CI_k &lt; CI^{m,n}\}b_k}
 \end{equation}\]</div>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># implement the second method: order-statistic approach</span>

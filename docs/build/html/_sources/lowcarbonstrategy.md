@@ -1,24 +1,16 @@
 ## Low-Carbon Strategy
 
-As a first climate risks hedging strategy, we propose to follow Andersson et al. (2016) {cite:p}`andersson2016hedging` and Roncalli et al. (2021) {cite:p}`roncalli2020measuring`, with a simple low-carbon index strategy.
+As a first climate risks hedging strategy, we propose to follow Andersson et al. (2016) {cite:p}`andersson2016hedging` and Roncalli et al. (2020) {cite:p}`roncalli2020measuring`, with a simple low-carbon index strategy.
 
-The underlying main assuption is that carbon risk is unpriced by the market. The financial aspect of carbon risk is then a risk of abrupt pricing by the market, once the markets participants integrate it. 
+The strategy consists in (i) reducing the weighted-average carbon intensity (WACI of the portoflio) while (ii) minimizing the tracking error relative to a benchmark.
 
-In that context, Andersson et al. (2016) propose a carbon risk-hedging strategy by:
-1. Reducing the weighted-average carbon intensity (WACI) of the portfolio
-2. Minimizing the tracking error relative to a capitalization-weighted benchmark
-
-By reducing the portfolio's WACI, Andersson et al. (2016) suppose that the portfolio's carbon risk (here, the repricing risk associated with an abrupt carbon tax or carbon policy implementation) will be reduced. 
+The underlying assuption is that carbon risk is unpriced by the market. The financial aspect of carbon risk is then a risk of abrupt pricing by the market, once the markets participants integrate it. By reducing the portfolio's WACI, Andersson et al. (2016) suppose that the portfolio's carbon risk (here, the repricing risk associated with an abrupt carbon tax or carbon policy implementation) will be reduced. 
 
 This carbon risk-hedging strategy is widely followed by index providers and asset managers, and can be defined as a low-carbon strategy.
 
-In what follow, we will implement a simple low-carbon strategy, following Andersson et al. (2016) and Roncalli et al. (2021). We will test two alternatives approach for the climate objective: 
+In what follow, we will test two alternatives formulations for the climate objective: 
 - the threshold approach, which consists in reducing the portfolio's WACI by changing the weights of stocks;
 - the order-statistic approach, which consists in excluding the $m$ most emitting stocks.
-
-In order to implement this low-carbon strategy, we follow Roncalli (2013) formulation of the problem as a portfolio optimization in the presence of a benchmark. We have seen in the previous part how the TE component helps in tracking the benchmark. In this part, we will address the carbon risk exposure reduction, as exposed by Andersson et al. (2016) and Roncalli et al. (2021). 
-
-More precisely, we will integrate the carbon risk exposure reduction into the portfolio optimization in the presence of a benchmark problem. This is equivalent to adding a new constraint to our initial optimization problem.
 
 ### Threshold Approach
 
