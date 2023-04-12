@@ -479,6 +479,54 @@ name: riskfactors
 Figure: Carhart 4 factors
 ```
 
+With these factors returns, you can then estimate the individual stocks loading into each factors, with the following linear regression:
+
+\begin{equation}
+R_i = \alpha_i + \beta^m_i(\mathbb{E}[R_m] - R_f) + \beta^{smb}_i \mathbb{E}[R_{smb}] + \beta_i^{hml}{E}[R_{hml}] + \beta_i^{wml}{E}[R_{wml}] 
+\end{equation}
+
+Let's retrieve historical returns for a handful of stocks:
+```Python
+url = 'https://assets.uni-augsburg.de/media/filer_public/67/d8/67d814ce-0aa9-4156-ad25-fb2a9202769d/carima_exceltool_en.xlsx'
+returns = pd.read_excel(url, sheet_name = 'Asset Returns').iloc[:,4:14]
+returns['Month'] = pd.to_datetime(returns['Month'].astype(str)).dt.strftime('%Y-%m')
+returns.index = returns['Month']
+returns.iloc[:,1:].rolling(3).mean().plot(figsize=(12,12))
+```
+
+```{figure} returnsexample.png
+---
+name: returnsexamples
+---
+Figure: Monthly returns - 3-months rolling average
+```
+
+We can now perform the linear regression to estimate individual betas. Let's do the test with British Petroleum (BP):
+
+```Python
+from statsmodels.api import OLS
+import statsmodels.tools
+
+factors_for_reg = statsmodels.tools.add_constant(risk_factors, prepend = True) # we add a constant for the alpha component
+factors_for_reg['erM_rf'] = factors_for_reg['erM'] - factors_for_reg['rf'] # The Market factor return is Market returns minus risk free rate
+
+results = OLS(endog = returns['BP'] - factors_for_reg['rf'],
+              exog = factors_for_reg[['const','erM_rf','SMB','HML','WML']],
+              missing = 'drop').fit()
+
+results.params
+```
+and the output is:
+```
+const    -0.005202
+erM_rf    1.409346
+SMB      -0.696120
+HML       0.995068
+WML       0.117735
+```
+
+What does it means? The idiosyncratic risk associated to BP is close to zero. BP is strongly exposed to the market risk and to the value factor. It is negatively loaded into the size factor (not surprising, as it is a big company) and neutral regarding the momentum factor (close to zero).
+
 ### Risk Factor Portfolio
 
 As investors are compensated for taking systematic risk(s), they can look for gaining exposure to these risks with a Risk Factor Portfolio. We'll see how long/short risk factor portfolio can be built.
