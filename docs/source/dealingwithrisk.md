@@ -1,25 +1,23 @@
 ## Dealing with Risk(s) in Portfolio Construction
 
 Before discussing the implementation of these strategies, we need to make a quick overview of some fundamentals frameworks:
-- Portfolio optimization, relying on the modern portfolio theory
-- Factor investing, relying on the arbitrage pricing theory
+- Portfolio optimization
+- Factor investing
 
 These tools will be at the basis of the three strategies we will present thereafter in this course:
 - Low-Carbon Strategy (Portfolio Optimization)
 - Minimum Variance with Carbon Beta (Portfolio Optimization and Factor Investing)
 - Green Factor (Factor Investing)
 
-We will discuss these basic tools with implementation in Python.
-
-Along this course, we'll see how climate risks can be considered with these different approaches.
+We will discuss these basic tools with implementation in Python. In this course, we'll see how climate risks can be considered with these different approaches.
 
 ### Portfolio's Risk and Returns
 
-Before introducing climate risks in the portfolio construction process, a first step is to consider how to measure portfolio's risk and returns. In practice, investors build a portfolio in a context of a benchmark (the S&P 500 for example). We'll build on the previous definition of the portfolio's risk and returns to show that risk and returns measures in a context of a benchmark is just a slight variation. This is also a good introduction to the low-carbon strategy that we will cover in the next part.
+Before introducing climate risks in the portfolio construction process, a first step is to consider how to measure portfolio's risk and returns. In practice, investors build a portfolio in a context of a benchmark (the S&P 500 for example). We'll build on the definition of the portfolio's risk and returns to show that risk and returns measures in a context of a benchmark is just a slight variation. This is also a good introduction to the low-carbon strategy that we will cover in the next part.
 
 #### Simple Portfolio's Two Moments
 
-As the name of the mean-variance framework indicates, the mean (expected returns) and the variance are the two moments needed for building an efficient portfolio (efficient in the sense of the risk-rewards trade-off). 
+Our first tool, portfolio optimization, relies on the mean-variance framework. As the name of the mean-variance framework indicates, the mean (expected returns) and the variance are the two moments needed for building an efficient portfolio (efficient in the sense of the risk-rewards trade-off). 
 
 Let's consider a universe of $n$ assets. We have a vector of assets' weights in the portfolio: $x = (x_1, ..., x_n)$.
 
@@ -144,7 +142,7 @@ simple_portfolio.get_variance()
 
 #### Risk and Returns in the Presence of a Benchmark: Tracking Error and Excess Expected Returns
 
-With the rise of passive investing is the rise of index replication. The purpose of index replication is to build a hedging strategy by investing in stocks. In this case of index replication, the portfolio's expected returns is replaced by the expected excess returns of the strategy, while the variance of the portfolio is replaced by the volatility of the tracking error (the difference between the return of the strategy and the return of the index). You may distinguish different cases of index replications:
+With the rise of passive investing is the rise of index replication. The purpose of index replication is to build a hedging strategy by investing in stocks. In this case of index replication, the portfolio's expected returns is replaced by the expected excess returns of the strategy, while the variance of the portfolio is replaced by the volatility of the tracking error (the difference between the return of the strategy and the return of the index). You may distinguish different cases of index replications (Roncalli, 2023):
 - Low tracking error volatility (less than 10bps) corresponds to physical or synthetic replication;
 - Moderate tracking error volatility (between 10 bps and 50 bps) corresponds to sampling (ie. less assets) replication;
 - Higher tracking error volatility (larger than 50 bps) corresponds to enhanced/tilted index, such as the low-carbon strategy or ESG-enhanced indexes.
@@ -196,11 +194,11 @@ def get_excess_expected_returns(x:np.array,
 
 ### Portfolio Construction with Optimization: Managing the Risk & Returns Trade-Off Efficiently
 
-Let's go now on the first approach for managing risk in portfolio construction, with the optimization approach in the mean-variance framework. We'll first address the simple mean-variance portfolio, then tackle the case with portfolio construction in the context of a benchmark. We'll see that the last case is just a slight variation from the simple mean-variance portfolio.
+Now, let's see our first tool for managing risk in portfolio construction, with the optimization approach in the mean-variance framework. We'll first address the simple mean-variance portfolio, then tackle the case with portfolio construction in the context of a benchmark. We'll see that the last case is just a slight variation from the simple mean-variance portfolio.
 
 #### Simple Mean-Variance Portfolio
 
-In the Markowitz framework, the mean-variance investor considers maximizing the expected return of the portfolio under a volatility constraint:
+In the Markowitz framework, the mean-variance investor considers maximizing the expected return of the portfolio under a volatility constraint (Roncalli, 2023):
 
 \begin{equation*}
 \begin{aligned}
@@ -226,7 +224,8 @@ Or, equivalently, minimizing the volatility of the portfolio under a return cons
 
 This is the optimization problem of finding the most efficient risk-returns couple mentioned previously, with the portfolio's two moments.
 
-For ease of computation, Markowitz transformed the two original non-linear optimization problems into a quadratic optimization problem. Introducing a risk-tolerance parameter ($\gamma$-problem) and the long-only constraint, we obtain the following quadratic problem:
+For ease of computation, Markowitz transformed the two original non-linear optimization problems into a quadratic optimization problem. 
+Introducing a risk-tolerance parameter ($\gamma$-problem, Roncalli 2013) and the long-only constraint, we obtain the following quadratic problem:
 
 \begin{equation*}
 \begin{aligned}
@@ -341,7 +340,14 @@ plt.ylabel("Expected Return (in %)")
 plt.title("Efficient Frontier")
 plt.show()
 ```
-This is the well-known efficient frontier. Every portfolios on the efficient frontier (that is, the upper side of this curve) are efficient in the Markowitz framework, depending on the risk-tolerance of the investor.
+```{figure} efficient_frontier.png
+---
+name: efficientfrontier
+---
+Figure: Efficient Frontier
+```
+
+This is the well-known efficient frontier. Every portfolios on the efficient frontier (that is, the upper side of this curve) are efficient in the Markowitz framework, depending on the risk-tolerance ($\gamma$ parameter) of the investor.
 
 #### Portfolio Optimization in the Presence of a Benchmark
 
