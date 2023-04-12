@@ -347,15 +347,13 @@ name: efficientfrontier
 Figure: Efficient Frontier
 ```
 
-This is the well-known efficient frontier. Every portfolios on the efficient frontier (that is, the upper side of this curve) are efficient in the Markowitz framework, depending on the risk-tolerance of the investor.
+This is the well-known efficient frontier. Every portfolios on the efficient frontier (that is, the upper side of this curve) are efficient in the Markowitz framework, depending on the risk-tolerance ($\gamma$ parameter) of the investor.
 
 #### Portfolio Optimization in the Presence of a Benchmark
 
-In practice, many problems consist in tracking a benchmark while improving some properties (reducing the carbon portfolio for example). 
+In practice, many problems consist in tracking a benchmark while improving some properties (reducing the carbon portfolio for example). To construct such a portfolio tracking a benchmark, the main tool is to control the tracking error, that is the difference between the benchmark's return and the portfolio's return.
 
-To construct such a portfolio tracking a benchmark, the main tool is to control the tracking error, that is the difference between the benchmark's return and the portfolio's return.
-
-In the presence of a benchmark, the expected return of the portfolio $\mu(x)$ is replaced by the expected excess return $\mu(x|b)$. The volatility of the portfolio $\sigma(x)$is replaced by the volatility of the tracking error $\sigma(x|b)$:
+In the presence of a benchmark, the expected return of the portfolio $\mu(x)$ is replaced by the expected excess return $\mu(x|b)$. The volatility of the portfolio $\sigma(x)$is replaced by the volatility of the tracking error $\sigma(x|b)$ (Roncalli, 2013):
 
 \begin{equation*}
 \begin{aligned}
@@ -367,9 +365,7 @@ In the presence of a benchmark, the expected return of the portfolio $\mu(x)$ is
 \end{aligned}
 \end{equation*}
 
-Without any further constraint, the optimal solution $x^*$ will be equal to the benchmark weights $b$. This is the case aiming to perfect replication strategy. An enhanced or tilted version will add further constraints, depending on the objective of the strategy (decarbonization for example).
-
-We have a few more steps to consider before finding our QP formulation parameters.
+Without any further constraint, the optimal solution $x^*$ will be equal to the benchmark weights $b$. This is the case aiming to perfect replication strategy. An enhanced or tilted version will add further constraints, depending on the objective of the strategy (decarbonization for example). We have a few more steps to consider before finding our QP formulation parameters.
 
 First, let's recall that:
 \begin{equation}
@@ -392,7 +388,7 @@ With further developments, you end up with the following QP objective function f
 * = \frac{1}{2} x^T \Sigma x - x^T(\gamma \mu + \Sigma b)
 \end{equation}
 
-We have exactly the same QP problem than with the initial long-only mean-variance portfolio, except that $R = \gamma \mu + \Sigma b$
+We have exactly the same QP problem than with the initial long-only mean-variance portfolio, except that $R = \gamma \mu + \Sigma b$.
 
 Let's implement a new dataclass `IndexReplication`:
 ```Python
