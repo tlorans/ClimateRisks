@@ -419,17 +419,17 @@ Once instantiated, an object of class `IndexReplication` will return a `Portfoli
 
 ### From CAPM to Risk Factors Models: Capturing New Risk Premia with Factor Investing
 
-Introducing the notion of climate risks into Finance can be also made through the lens of systematic risks exposure. Risks can be decomposed into a systematic (common for all stocks) and an idiosyncratic ($\alpha$, specific to a stock) components. Theoretically, because idiosyncratic risk can be eliminated with diversification, $\alpha = 0$ and only the exposure to systematic risk should be rewarded by the markets. Factor investing treats the question of managing the exposure to systematic risks factors. 
+Introducing the notion of climate risks into Finance can be also made through the lens of systematic risks exposure. Risks can be decomposed into a systematic (common for all stocks) and an idiosyncratic (specific to a stock) components. The expected returns can then be decomposed between an $\alpha$ (rewards for idiosyncratic risk exposure) and a $\beta$ (rewards for systematic risk exposure).
 
-The capital asset pricing model (CAPM), introduced by Sharpe in 1964 {cite:p}`sharpe1964capital`, is an equilibrium model based on the Markowitz framework. 
+Theoretically, because idiosyncratic risk can be eliminated with diversification (with the Markowitz framework), $\alpha = 0$ and only the exposure to systematic risk should be rewarded by the markets. Factor investing treats the question of managing the exposure to systematic risks factors. But what are the systematic risks factors, and how to measure the stocks' exposure to these risks?
 
-In the CAPM framework, the expected excess return of an asset $i$ can be defined by the sensitivity of the stock to the market portfolio $\beta_i$ times the market portfolio's return:
+The capital asset pricing model (CAPM), introduced by Sharpe in 1964 {cite:p}`sharpe1964capital`, is an equilibrium model based on the Markowitz framework, and is the a first step in the quest towards risk factors identification. In the CAPM framework, the expected excess return of an asset $i$ can be defined by the sensitivity of the stock to the market portfolio $\beta_i$ times the market portfolio's return:
 
 \begin{equation}
 \mathbb{E}[R_i] - R_f = \beta^m_i(\mathbb{E}[R_m] - R_f)
 \end{equation}
 
-Where $R_m$ are market returns, $R_i$ is the asset returns, $R_f$ the risk-free rate, $\alpha_i$ the idiosyncratic risk premia of the asset $i$ and  the coefficient $\beta^m_i$ is the beta of the asset $i$ with respect to the market portfolio. In that framework, the excess return of an asset $i$ is then explained by its exposure to the systematic market risk.
+Where $R_m$ are market returns, $R_i$ is the asset returns, $R_f$ the risk-free rate, $\alpha_i$ the idiosyncratic risk premia of the asset $i$ and  the coefficient $\beta^m_i$ is the beta of the asset $i$ with respect to the market portfolio. In that framework, the excess return of an asset $i$ is then explained by its exposure to the systematic market risk. Market risk is the only systematic risk in that framework.
 
 However, empirical evidences accumulated to prove the existence of a remaining idiosyncratic $\alpha$ component, that is a part of the cross-section of expected returns unexplained by the exposure to market risk:
 
@@ -437,19 +437,21 @@ However, empirical evidences accumulated to prove the existence of a remaining i
 \mathbb{E}[R_i] - R_f = \alpha_i + \beta^m_i(\mathbb{E}[R_m] - R_f)
 \end{equation}
 
-A revolution with risk factors took place with Fama and French (1992 {cite:p}`fama1992cross`, 1993 {cite:p}`fama1993common`), adding two supplementary systematic risk factors to the initial Market Risk (SMB and HML):
+Fama and French (1992 {cite:p}`fama1992cross`, 1993 {cite:p}`fama1993common`), added two supplementary systematic risk factors to the initial Market Risk:
+- Small Minus Big (SMB) that corresponds to a Size factor.
+- High Minus Low (HML) that corresponds to the Value factor
 
 \begin{equation}
 \mathbb{E}[R_i] - R_f = \beta^m_i(\mathbb{E}[R_m] - R_f) + \beta^{SMB}_i \mathbb{E}[R_{SMB}] + \beta^{HML}_i \mathbb{E}[R_{HML}]
 \end{equation}
 
-Then $\alpha$ reappeared:
+But then, $\alpha$ reappeared:
 
 \begin{equation}
 \mathbb{E}[R_i] - R_f = \alpha_i + \beta^m_i(\mathbb{E}[R_m] - R_f) + \beta^{SMB}_i \mathbb{E}[R_{SMB}] + \beta^{HML}_i \mathbb{E}[R_{HML}]
 \end{equation}
 
-Carhart complemented the Fama-French 3-factors model with the WML risk factor (1997 {cite:p}`carhart1997persistence`):
+Carhart complemented the Fama-French 3-factors model with the Winners Minus Losers (WML) or Momentum factor (1997 {cite:p}`carhart1997persistence`):
 \begin{equation}
 \mathbb{E}[R_i] - R_f = \beta^m_i(\mathbb{E}[R_m] - R_f) + \beta^{smb}_i \mathbb{E}[R_{smb}] + \beta_i^{hml}{E}[R_{hml}] + \beta_i^{wml}{E}[R_{wml}]
 \end{equation}
@@ -459,9 +461,24 @@ And $\alpha$ reappeared again...
 \mathbb{E}[R_i] - R_f = \alpha_i + \beta^m_i(\mathbb{E}[R_m] - R_f) + \beta^{smb}_i \mathbb{E}[R_{smb}] + \beta_i^{hml}{E}[R_{hml}] + \beta_i^{wml}{E}[R_{wml}]
 \end{equation}
 
+And many more factors were published!
+
+Let's have a look to the risk factors from the Carhart model:
 ```Python
-# to be done: download the FF factors and estimate betas for a handful of stocks
+import pandas as pd
+url = 'https://assets.uni-augsburg.de/media/filer_public/67/d8/67d814ce-0aa9-4156-ad25-fb2a9202769d/carima_exceltool_en.xlsx'
+risk_factors = pd.read_excel(url, sheet_name = 'Risk Factors').iloc[:,4:10]
+risk_factors['Month'] = pd.to_datetime(risk_factors['Month'].astype(str)).dt.strftime('%Y-%m')
+risk_factors.index = risk_factors['Month']
+risk_factors.plot(subplots = True, figsize = (12, 12))
 ```
+```{figure} riskfactors.png
+---
+name: riskfactors
+---
+Figure: Carhart 4 factors
+```
+
 ### Risk Factor Portfolio
 
 As investors are compensated for taking systematic risk(s), they can look for gaining exposure to these risks with a Risk Factor Portfolio. We'll see how long/short risk factor portfolio can be built.
