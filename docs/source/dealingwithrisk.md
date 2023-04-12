@@ -529,13 +529,14 @@ What does it means? The idiosyncratic risk associated to BP is close to zero. BP
 
 ### Risk Factor Portfolio
 
-As investors are compensated for taking systematic risk(s), they can look for gaining exposure to these risks with a Risk Factor Portfolio. We'll see how long/short risk factor portfolio can be built.
+In this part, we'll see how to construct a risk factor portfolio. As investors are compensated for taking systematic risk(s), they can look for gaining exposure to these risks with the latter.
 
-In the CAPM framework, there is a single market risk premium, which can be otained by investing in market-capitalization indexes. 
+Let's begin with the first and more broadly invested risk factor: the market risk. From the CAPM framework, the only systematic risk is the market risk. Exposure to market risk can be otained by investing in market-capitalization indexes. 
 
+We ca create such a portfolio with a new dataclass `Market`, with the `mv` (market value) data. The `get_portfolio` method is simply defined as the market-capitalization weighting:
 ```Python
 @dataclass
-class MarketCapIndex(PortfolioConstruction):
+class Market(PortfolioConstruction):
   mv: np.array # Market Cap
 
   def get_portfolio(self) -> Portfolio:
@@ -543,18 +544,17 @@ class MarketCapIndex(PortfolioConstruction):
     return Portfolio(x = x, mu = self.mu, Sigma = self.Sigma)
 
 ```
-But critics against market-cap indexation arised with empirical evidences against the efficiency of market-cap investing: as we've seen in the previous part, theory and empirical evidences introduced other systematic factors models to capture new risk premia. To generate excess returns in the long-run, investors can adopt factor investing by adding these risk factors to the existing market risk one, and invest in the corresponding factor portfolio.
+Despite the commercial success in passive investing with market portfolio (ie. market-cap indexes), critics arised with empirical evidences against the efficiency of market-cap investing: theory and empirical evidences introduced other systematic factors models to capture new risk premia. To generate excess returns in the long-run, investors can adopt factor investing by adding these risk factors to the existing market risk. But how can we build factor portfolio?
 
-We can illustrate the construction of a long/short portfolio with the quintile approach:
+In the literature, factor portfolio are built with a long/short approach. It means that the weights can be negative (short positions) or positive (long positions). We can illustrate the construction of a long/short portfolio with the quintile approach:
 - We define a score $S_i(t_{\tau})$ for each stock $i$ at each rebalancing date $t_{\tau}$
 - We specify a weighting scheme $w_i(t_{\tau})$ (value-weighted or equally-weighted).
 - Stocks with the 20\% highest scores are assigned a positive weight according to the weighting sheme ($Q1(t_{\tau})$ portfolio or the long portfolio)
 - Stocks with the 20% lowest scores are assigned a negative weight according to the weighting scheme ($Q5(t_{\tau})$ portfolio, or the short portfolio)
 
 
+Let's first define a `LongShortConstruction` dataclass, which is a child of the `PortfolioConstruction`:
 ```Python
-# We define a new way to build a portfolio: the Long-Short Portfolio Construction
-
 @dataclass 
 class LongShortConstruction(PortfolioConstruction):
     S: np.array # Score
@@ -562,8 +562,11 @@ class LongShortConstruction(PortfolioConstruction):
     @abstractmethod
     def get_portfolio(self) -> Portfolio:
       pass
+```
+The `get_portfolio` is not defined yet, as many methods for the stocks selection and weighting can be defined. 
 
-### NEED TO BE MODIFIED, ISSUE WITH WEIGHTINGS LONG AND SHORT -> if we sum absolute value of weights we have 2. Should normalize weights based on the total numver of long and short stocks
+Let's illustrate with the quintile method we've covered previously, by creating a `QuintileConstruction` dataclass, child of the `LongShortConstruction`:
+```Python
 @dataclass
 class QuintileConstruction(LongShortConstruction):
 
@@ -585,15 +588,21 @@ class QuintileConstruction(LongShortConstruction):
     
 ```
 
+We can test it with a vector of scores:
 ```Python
 S = np.array([1.1, 
      0.5,
-     -1.3,
-     1.5,
-     -2.8,
-     0.3,
-     0.1,
      2.3,
-     -0.7,
-     -0.3])
+     0.3])
+
+test_ls = QuintileConstruction(mu = mu, Sigma = Sigma, S = S)
+
+new_port = test_ls.get_portfolio()
+
+new_port.x
+```
+
+And the resulting portfolio's weighting is:
+```
+array([ 0.,  0.,  1., -1.])
 ```
