@@ -1,6 +1,6 @@
 ## Low-Carbon Strategy
 
-As a first climate risks hedging strategy, we propose to follow Andersson et al. (2016) {cite:p}`andersson2016hedging` and Roncalli et al. (2020) {cite:p}`roncalli2020measuring`, with a simple low-carbon index strategy.
+As a first climate risks hedging strategy, we propose to follow Andersson et al. (2016) {cite:p}`andersson2016hedging` and Roncalli (2023), with a simple low-carbon index strategy.
 
 The strategy consists in (i) reducing the weighted-average carbon intensity (WACI of the portoflio) while (ii) minimizing the tracking error relative to a benchmark.
 
@@ -14,7 +14,9 @@ In what follow, we will test two alternatives formulations for the climate objec
 
 ### Threshold Approach
 
-With the threshold approach, the objective is to minimize the tracking error with the benchmark while imposing a reduction $\Re$ in terms of carbon intensity.
+With the threshold approach, the objective is to minimize the tracking error with the benchmark while imposing a reduction $\mathfrak{R}$ in terms of carbon intensity. In practice, implementing such approach involves the weighted-average carbon intensity (WACI) computation and the introduction of a new constraint in a portfolio optimization problem with the presence of a benchmark (Roncalli, 2023).
+
+#### Weighted-Average Carbon Intensity
 
 The weighted-average carbon intensity (WACI) of the benchmark is:
 
@@ -42,6 +44,8 @@ class CarbonPortfolio(Portfolio):
   def get_waci(self) -> float:
     pass
 ```
+
+#### Integrating WACI Reduction as a Constraint
 
 The optimization problem becomes:
 
