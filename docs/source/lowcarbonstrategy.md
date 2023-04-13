@@ -32,46 +32,40 @@ The same is for the WACI of the portfolio:
 CI(x) = x^T CI
 \end{equation}
 
+Let's implement a `CarbonPortfolio` dataclass that is a child of the `Portfolio` class. This new class inherits from the `Portfolio` methods and data elements, adding a vector of carbon intensities and the `get_waci` method:
 ```Python
 from dataclasses import dataclass
 
 @dataclass 
 class CarbonPortfolio(Portfolio):
-  """xx
+  """
+  A class that implement supplementary information CI and new method get_waci,
+  to be used in the low-carbon strategy implementation.
   """
   CI: np.array # Carbon Intensities
 
   def get_waci(self) -> float:
-    pass
+    return self.x.T @ self.CI
 ```
 
-#### Integrating WACI Reduction as a Constraint
+#### Integrating Carbon Intensity Reduction as a Constraint
+
+The low-carbon strategy involves the reduction $\mathfrak{R}$ of the portfolio's carbon intensity $CI(x)$ compared to the benchmark's carbon intensity $CI(b)$. It can be viewed as the following constraint:
+
+\begin{equation}
+CI(x) \leq (1 - \mathfrak{R})CI(b)
+\end{equation}
 
 The optimization problem becomes:
-
-
-\begin{equation*}
-\begin{aligned}
-& x(ℜ) = 
-& & argmin \frac{1}{2}(x-b)^T \Sigma (x - b)\\
-& \text{subject to}
-& & 1_n^Tx = 1\\
-& & & x \geq 0_n \\
-&&&  CI^T x \leq (1 - ℜ) CI(b)
-\end{aligned}
-\end{equation*}
-
-And the QP formulation is:
-
 
 \begin{equation*}
 \begin{aligned}
 & x* = 
-& & argmin \frac{1}{2}x^T \Sigma x - x^T \Sigma b\\
+& & argmin \frac{1}{2}(x-b)^T \Sigma (x - b)\\
 & \text{subject to}
 & & 1_n^Tx = 1\\
-&&&  CI^T x \leq (1 - ℜ) (b^T CI) \\
-&&& 0_n \leq x \leq 1
+& & & 0_n \leq x \leq 1_n \\
+&&&  CI(x) \leq (1 - ℜ) CI(b)
 \end{aligned}
 \end{equation*}
 
@@ -84,15 +78,13 @@ with the following QP parameters:
 & A = 1^T_n \\
 & B = 1 \\
 & C = CI^T \\
-& D = CI^{+} = (1 - ℜ) (b^T CI) \\
+& D = CI^{+} = (1 - ℜ)CI(b) \\
 & x^- = 0_n \\
 & x^+ = 1_n
 \end{aligned}
 \end{equation*}
 
 ```Python
-# implement the first method: threshold appraoch
-
 @dataclass
 class LowCarbonStrategy(PortfolioConstruction):
   b: np.array # Benchmark Weights
@@ -104,6 +96,8 @@ class LowCarbonStrategy(PortfolioConstruction):
   def get_portfolio(self) -> CarbonPortfolio:
     pass
 ```
+
+Because we impose a constraint and minimize the TE risk, the resulting portfolio will have fewer stocks than the initial benchmark $b$. This imply that the portfolio $x$ is less diversified than the initial benchmark $b$. In order to explicitly control the number of removed stocks, Andersson et al. (2016) and Roncalli (2023) propose another methodology: the order-statistic approach.
 ### Order-Statistic Approach
 
 Andersson et al. (2016) and Roncalli et al. (2021) propose a second approach by eliminating the $m$ worst performing issuers in terms of carbon intensity.
