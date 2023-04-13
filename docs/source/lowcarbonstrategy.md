@@ -138,7 +138,7 @@ class ThresholdApproach(LowCarbonStrategy):
                            Sigma = self.Sigma, CI = self.CI)
 ```
 
-Let's work on an example with the following benchmark weights $b$ and carbon intensities $CI$:
+Let's work on an example (from Roncalli, 2023) with the following benchmark weights $b$ and carbon intensities $CI$:
 
 ```Python
 b = np.array([0.20,
