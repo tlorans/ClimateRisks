@@ -267,25 +267,8 @@ To implement this decarbonization strategy, the resulting weightings can be dete
 
 #### Optimal Weights with TE Minimization
 
-We can introduce the order-statistic approach into our optimization problem with the new constraint. 
+We can introduce the order-statistic approach into our optimization problem with the new constraint. The optimization problem becomes:
 
-The optimization problem becomes:
-
-\begin{equation*}
-\begin{aligned}
-& x* = 
-& & argmin \frac{1}{2}x^T \Sigma x - x^T \Sigma b\\
-& \text{subject to}
-& & 1_n^Tx = 1\\
-& & & 0_n \leq x \leq x^+
-\end{aligned}
-\end{equation*}
-
-Where $x_i^+ = 𝟙\{CI_i < CI^{m,n}\}$
-
-Which is again a QP Problem.
-
-Thus we have the following QP problem:
 
 \begin{equation*}
 \begin{aligned}
@@ -297,6 +280,8 @@ Thus we have the following QP problem:
 & & & x+ =  𝟙\{CI_i < CI^{m,n}\}
 \end{aligned}
 \end{equation*}
+
+Where $x_i^+ = 𝟙\{CI_i < CI^{m,n}\}$, which is a vector of zeros and ones (zero if the stock is excluded, 1 otherwise).
 
 And the following QP parameters:
 

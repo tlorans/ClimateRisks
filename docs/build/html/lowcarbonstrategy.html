@@ -322,14 +322,14 @@ document.write(`
 <section id="weighted-average-carbon-intensity">
 <h3>Weighted-Average Carbon Intensity<a class="headerlink" href="#weighted-average-carbon-intensity" title="Permalink to this headline">#</a></h3>
 <p>The weighted-average carbon intensity (WACI) of the benchmark is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0c892c10-0763-46cd-a9b8-ab22cb5f530a">
-<span class="eqno">(1)<a class="headerlink" href="#equation-0c892c10-0763-46cd-a9b8-ab22cb5f530a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-bd31210e-6d54-4526-89fe-8aa69670bc5a">
+<span class="eqno">(1)<a class="headerlink" href="#equation-bd31210e-6d54-4526-89fe-8aa69670bc5a" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI(b) = b^T CI
 \end{equation}\]</div>
 <p>With <span class="math notranslate nohighlight">\(CI = (CI_1, ..., CI_n)\)</span> the vector of carbon intensities.</p>
 <p>The same is for the WACI of the portfolio:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a870a37c-f76b-4139-8bba-75647c499b06">
-<span class="eqno">(2)<a class="headerlink" href="#equation-a870a37c-f76b-4139-8bba-75647c499b06" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-9ff9a2db-f70d-4e76-9ee5-e3aa7631a25f">
+<span class="eqno">(2)<a class="headerlink" href="#equation-9ff9a2db-f70d-4e76-9ee5-e3aa7631a25f" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI(x) = x^T CI
 \end{equation}\]</div>
 <p>Let’s implement a <code class="docutils literal notranslate"><span class="pre">CarbonPortfolio</span></code> dataclass:</p>
@@ -354,8 +354,8 @@ CI(x) = x^T CI
 <section id="integrating-carbon-intensity-reduction-as-a-constraint">
 <h3>Integrating Carbon Intensity Reduction as a Constraint<a class="headerlink" href="#integrating-carbon-intensity-reduction-as-a-constraint" title="Permalink to this headline">#</a></h3>
 <p>The low-carbon strategy involves the reduction <span class="math notranslate nohighlight">\(\mathfrak{R}\)</span> of the portfolio’s carbon intensity <span class="math notranslate nohighlight">\(CI(x)\)</span> compared to the benchmark’s carbon intensity <span class="math notranslate nohighlight">\(CI(b)\)</span>. It can be viewed as the following constraint:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b6a401f4-ac80-4b90-951a-e80c3e5f47b5">
-<span class="eqno">(3)<a class="headerlink" href="#equation-b6a401f4-ac80-4b90-951a-e80c3e5f47b5" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e7a4b7c1-eb62-4f06-86c0-228b826f14b1">
+<span class="eqno">(3)<a class="headerlink" href="#equation-e7a4b7c1-eb62-4f06-86c0-228b826f14b1" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI(x) \leq (1 - \mathfrak{R})CI(b)
 \end{equation}\]</div>
 <p>The optimization problem becomes:</p>
@@ -455,8 +455,8 @@ CI(x) \leq (1 - \mathfrak{R})CI(b)
 </div>
 <p>We can use the market one-factor model to estimate the covariance matrix, based on stocks betas <span class="math notranslate nohighlight">\(\beta\)</span>, idiosyncratic volatilities <span class="math notranslate nohighlight">\(\tilde{\sigma}\)</span>
 and market volatiltiy <span class="math notranslate nohighlight">\(\sigma_m\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-bd07c2d9-020c-4f37-89d7-6624ba638d31">
-<span class="eqno">(4)<a class="headerlink" href="#equation-bd07c2d9-020c-4f37-89d7-6624ba638d31" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d3147b74-5c41-4c23-a154-21ffb2148945">
+<span class="eqno">(4)<a class="headerlink" href="#equation-d3147b74-5c41-4c23-a154-21ffb2148945" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \Sigma = \beta \beta^T \sigma_m^2 + D
 \end{equation}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(D\)</span> is a diagonal matrix with <span class="math notranslate nohighlight">\(\tilde{\sigma}^2\)</span> on its diagonal.</p>
@@ -528,19 +528,19 @@ and market volatiltiy <span class="math notranslate nohighlight">\(\sigma_m\)</s
 <h2>Order-Statistic Approach<a class="headerlink" href="#order-statistic-approach" title="Permalink to this headline">#</a></h2>
 <p>Andersson et al. (2016) and Roncalli et al. (2021) propose a second approach by eliminating the <span class="math notranslate nohighlight">\(m\)</span> worst performing issuers in terms of carbon intensity.</p>
 <p>We note <span class="math notranslate nohighlight">\(CI_{i:n}\)</span> the order statistics of <span class="math notranslate nohighlight">\([CI_1, ..., CI_n]\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-21ad371f-7242-4914-afcb-14d1f22bc65c">
-<span class="eqno">(5)<a class="headerlink" href="#equation-21ad371f-7242-4914-afcb-14d1f22bc65c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8eefe6d8-ba40-4328-a040-b535c2f88fd6">
+<span class="eqno">(5)<a class="headerlink" href="#equation-8eefe6d8-ba40-4328-a040-b535c2f88fd6" title="Permalink to this equation">#</a></span>\[\begin{equation}
 minCI_i = CI_{1:n} \leq ... \leq CI_{n:n} = max CI_i
 \end{equation}\]</div>
 <p>The carbon intensity bound <span class="math notranslate nohighlight">\(CI^{m,n}\)</span> is defined as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-55f1220d-3de9-4d87-824c-b12870e62538">
-<span class="eqno">(6)<a class="headerlink" href="#equation-55f1220d-3de9-4d87-824c-b12870e62538" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-886fae6e-ae8c-4ef6-b5c5-a9648301970d">
+<span class="eqno">(6)<a class="headerlink" href="#equation-886fae6e-ae8c-4ef6-b5c5-a9648301970d" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI^{m,n} = CI_{n-m+1:n}
 \end{equation}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(CI_{n-m+1:n}\)</span> is the <span class="math notranslate nohighlight">\((n-m+1)\)</span>-th order statistic of <span class="math notranslate nohighlight">\([CI_1, ..., CI_n]\)</span></p>
 <p>Eliminating the <span class="math notranslate nohighlight">\(m\)</span> worst performing assets is then equivalent to imposing the following constraint:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b98f7de3-131d-4160-8538-9c94215c19e0">
-<span class="eqno">(7)<a class="headerlink" href="#equation-b98f7de3-131d-4160-8538-9c94215c19e0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8f19cdf6-4afd-4f61-bb1b-f630c6b90c2f">
+<span class="eqno">(7)<a class="headerlink" href="#equation-8f19cdf6-4afd-4f61-bb1b-f630c6b90c2f" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI_i \geq CI^{m,n} → x_i = 0
 \end{equation}\]</div>
 <p>To implement this decarbonization strategy, the resulting weightings can be determined by:</p>
@@ -550,21 +550,7 @@ CI_i \geq CI^{m,n} → x_i = 0
 </ul>
 <section id="optimal-weights-with-te-minimization">
 <h3>Optimal Weights with TE Minimization<a class="headerlink" href="#optimal-weights-with-te-minimization" title="Permalink to this headline">#</a></h3>
-<p>We can introduce the order-statistic approach into our optimization problem with the new constraint.</p>
-<p>The optimization problem becomes:</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{equation*}
-\begin{aligned}
-&amp; x* = 
-&amp; &amp; argmin \frac{1}{2}x^T \Sigma x - x^T \Sigma b\\
-&amp; \text{subject to}
-&amp; &amp; 1_n^Tx = 1\\
-&amp; &amp; &amp; 0_n \leq x \leq x^+
-\end{aligned}
-\end{equation*}\]</div>
-<p>Where <span class="math notranslate nohighlight">\(x_i^+ = 𝟙\{CI_i &lt; CI^{m,n}\}\)</span></p>
-<p>Which is again a QP Problem.</p>
-<p>Thus we have the following QP problem:</p>
+<p>We can introduce the order-statistic approach into our optimization problem with the new constraint. The optimization problem becomes:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 \begin{aligned}
@@ -576,6 +562,7 @@ CI_i \geq CI^{m,n} → x_i = 0
 &amp; &amp; &amp; x+ =  𝟙\{CI_i &lt; CI^{m,n}\}
 \end{aligned}
 \end{equation*}\]</div>
+<p>Where <span class="math notranslate nohighlight">\(x_i^+ = 𝟙\{CI_i &lt; CI^{m,n}\}\)</span>, which is a vector of zeros and ones (zero if the stock is excluded, 1 otherwise).</p>
 <p>And the following QP parameters:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
@@ -610,8 +597,8 @@ CI_i \geq CI^{m,n} → x_i = 0
 <section id="naive-re-weighting">
 <h3>Naive Re-weighting<a class="headerlink" href="#naive-re-weighting" title="Permalink to this headline">#</a></h3>
 <p>A “naive” solution consists in re-weighting the remaining stocks:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a5962750-bc10-419d-a7f8-be47d03c78d8">
-<span class="eqno">(8)<a class="headerlink" href="#equation-a5962750-bc10-419d-a7f8-be47d03c78d8" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-85f7c620-1b91-4ed1-9c0d-546a3fcb0314">
+<span class="eqno">(8)<a class="headerlink" href="#equation-85f7c620-1b91-4ed1-9c0d-546a3fcb0314" title="Permalink to this equation">#</a></span>\[\begin{equation}
 x_i = \frac{𝟙\{CI_i &lt; CI^{m,n}\}b_i}{\sum^n_{k=1} 𝟙\{CI_k &lt; CI^{m,n}\}b_k}
 \end{equation}\]</div>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># implement the second method: order-statistic approach</span>
