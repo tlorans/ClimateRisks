@@ -49,23 +49,6 @@ class CarbonPortfolio:
   def get_waci(self) -> float:
     return self.x.T @ self.CI
 ```
-
-The reduction rate of the portfolio's WACI compared to the initial benchmark's WACI is then given by:
-
-\begin{equation}
-\mathfrak{R}(x | b) = (x - b)^T CI
-\end{equation}
-
-We can implement it as a function in Python:
-
-```Python
-def get_waci_reduction(x:np.array,
-                       b:np.array,
-                       CI:np.array) -> float:
-    return (x - b).T @ CI
-```
-
-
 #### Integrating Carbon Intensity Reduction as a Constraint
 
 The low-carbon strategy involves the reduction $\mathfrak{R}$ of the portfolio's carbon intensity $CI(x)$ compared to the benchmark's carbon intensity $CI(b)$. It can be viewed as the following constraint:
