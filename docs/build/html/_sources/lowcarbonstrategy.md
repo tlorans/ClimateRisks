@@ -33,8 +33,25 @@ CI(x) = x^T CI
 \end{equation}
 
 Let's implement a `CarbonPortfolio` dataclass that is a child of the `Portfolio` class. This new class inherits from the `Portfolio` methods and data elements, adding a vector of carbon intensities and the `get_waci` method:
+
 ```Python
 from dataclasses import dataclass
+import numpy as np
+
+@dataclass 
+class Portfolio:
+  """A simple dataclass storing the basics information of a porfolio and 
+  implementing the methods for the two moments computation.
+  """
+  x: np.array # Weights
+  mu: np.array # Expected Returns
+  Sigma: np.matrix # Covariance Matrix
+
+  def get_expected_returns(self) -> float:
+    return self.x.T @ self.mu
+
+  def get_variance(self) -> float:
+    return self.x.T @ self.Sigma @ self.x
 
 @dataclass 
 class CarbonPortfolio(Portfolio):
