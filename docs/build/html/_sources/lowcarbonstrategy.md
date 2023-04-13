@@ -15,7 +15,6 @@ In what follow, we will test two alternatives formulations for the climate objec
 ### Threshold Approach
 
 With the threshold approach, the objective is to minimize the tracking error with the benchmark while imposing a reduction $\mathfrak{R}$ in terms of carbon intensity. In practice, implementing such approach involves the weighted-average carbon intensity (WACI) computation and the introduction of a new constraint in a portfolio optimization problem with the presence of a benchmark (Roncalli, 2023).
-
 #### Weighted-Average Carbon Intensity
 
 The weighted-average carbon intensity (WACI) of the benchmark is:
@@ -32,38 +31,40 @@ The same is for the WACI of the portfolio:
 CI(x) = x^T CI
 \end{equation}
 
-Let's implement a `CarbonPortfolio` dataclass that is a child of the `Portfolio` class. This new class inherits from the `Portfolio` methods and data elements, adding a vector of carbon intensities and the `get_waci` method:
-
+Let's implement a `CarbonPortfolio` dataclass:
 ```Python
 from dataclasses import dataclass
 import numpy as np
 
 @dataclass 
-class Portfolio:
-  """A simple dataclass storing the basics information of a porfolio and 
-  implementing the methods for the two moments computation.
+class CarbonPortfolio:
+  """
+  A class that implement informations and methods needed for a carbon portfolio.
   """
   x: np.array # Weights
-  mu: np.array # Expected Returns
+  CI: np.array # Carbon Intensities
   Sigma: np.matrix # Covariance Matrix
 
-  def get_expected_returns(self) -> float:
-    return self.x.T @ self.mu
-
-  def get_variance(self) -> float:
-    return self.x.T @ self.Sigma @ self.x
-
-@dataclass 
-class CarbonPortfolio(Portfolio):
-  """
-  A class that implement supplementary information CI and new method get_waci,
-  to be used in the low-carbon strategy implementation.
-  """
-  CI: np.array # Carbon Intensities
 
   def get_waci(self) -> float:
     return self.x.T @ self.CI
 ```
+
+The reduction rate of the portfolio's WACI compared to the initial benchmark's WACI is then given by:
+
+\begin{equation}
+\mathfrak{R}(x | b) = (x - b)^T CI
+\end{equation}
+
+We can implement it as a function in Python:
+
+```Python
+def get_waci_reduction(x:np.array,
+                       b:np.array,
+                       CI:np.array) -> float:
+    return (x - b).T @ CI
+```
+
 
 #### Integrating Carbon Intensity Reduction as a Constraint
 
@@ -101,17 +102,155 @@ with the following QP parameters:
 \end{aligned}
 \end{equation*}
 
+If `qpsolvers` is not installed yet:
+
 ```Python
+!pip install qpsolvers 
+```
+
+We define a `LowCarbonStrategy` dataclass, because every low-carbon approaches will use the same information:
+```Python
+from abc import ABC, abstractmethod
+
 @dataclass
-class LowCarbonStrategy(PortfolioConstruction):
+class LowCarbonStrategy:
   b: np.array # Benchmark Weights
   CI:np.array # Carbon Intensity
+  Sigma: np.matrix # Covariance Matrix
 
-  def threshold_approach():
-    pass
 
   def get_portfolio(self) -> CarbonPortfolio:
     pass
+```
+
+Now, we define a `ThresholdApproach` dataclass that inherits from `LowCarbonStrategy`:
+```Python
+from qpsolvers import solve_qp
+
+@dataclass
+class ThresholdApproach(LowCarbonStrategy):
+
+  def get_portfolio(self, reduction_rate:float) -> CarbonPortfolio:
+    """QP Formulation"""
+    Q = self.Sigma
+    R = self.Sigma @ self.b
+    A = np.ones(len(self.b)).T # fully invested
+    B = np.array([1.]) # fully invested
+    x_inf = np.zeros(len(self.b)) # long-only position
+    x_sup = np.ones(len(self.b)) # long-only position
+    C = self.CI.T # resulting WACI
+    D = (1 - reduction_rate) * self.b.T @ self.CI # reduction imposed
+
+    x_optim = solve_qp(P = Q,
+              q = -R, # we put a minus here because this QP solver consider +x^T R
+              A = A, 
+              b = B,
+              G = C,
+              h = D,
+              lb = x_inf,
+              ub = x_sup,
+              solver = 'osqp')
+
+    return CarbonPortfolio(x = x_optim, 
+                           Sigma = self.Sigma, CI = self.CI)
+```
+
+Let's work on an example with the following benchmark weights $b$ and carbon intensities $CI$:
+
+```Python
+b = np.array([0.20,
+              0.19,
+              0.17,
+              0.13,
+              0.12,
+              0.08,
+              0.06,
+              0.05])
+
+CI = np.array([100.5,
+               97.2,
+               250.4,
+               352.3,
+               27.1,
+               54.2,
+               78.6,
+               426.7])
+```
+
+We can use the market one-factor model to estimate the covariance matrix, based on stocks betas $\beta$, idiosyncratic volatilities $\tilde{\sigma}$
+and market volatiltiy $\sigma_m$:
+
+\begin{equation}
+\Sigma = \beta \beta^T \sigma_m^2 + D
+\end{equation}
+
+Where $D$ is a diagonal matrix with $\tilde{\sigma}^2$ on its diagonal.
+
+```Python
+betas = np.array([0.30,
+                  1.80,
+                  0.85,
+                  0.83,
+                  1.47,
+                  0.94,
+                  1.67,
+                  1.08])
+
+sigmas = np.array([0.10,
+                   0.05,
+                   0.06,
+                   0.12,
+                   0.15,
+                   0.04,
+                   0.08,
+                   0.07])
+
+Sigma = betas @ betas.T * 0.18**2 + np.diag(sigmas**2)
+```
+
+We can now instantiate our threshold construction approach:
+
+```Python
+low_carbon_portfolio = ThresholdApproach(b = b, 
+                                         CI = CI,
+                                         Sigma = Sigma)
+```
+
+And let's simulate it with reduction rates $\mathfrak{R}$ between 0 and 70\%:
+
+```Python
+from numpy import arange
+
+list_R = arange(0.0,0.7, 0.05)
+list_portfolios = []
+
+
+for R in list_R:
+  list_portfolios.append(low_carbon_portfolio.get_portfolio(reduction_rate = R))
+
+def get_tracking_error_volatility(x:np.array, 
+                                  b:np.array,
+                                  Sigma:np.array) -> float:
+  return np.sqrt((x - b).T @ Sigma @ (x - b))
+
+import matplotlib.pyplot as plt
+
+reduction_rate = [reduction * 100 for reduction in list_R]
+te = [get_tracking_error_volatility(x = portfolio.x, b = b, Sigma = Sigma) * 100 for portfolio in list_portfolios]
+
+plt.figure(figsize = (10, 10))
+plt.plot(reduction_rate, te)
+plt.xlabel("Carbon Intensity Reduction (in %)")
+plt.ylabel("Tracking Error Volatility (in %)")
+plt.title("Efficient Decarbonization Frontier with Threshold Approach")
+plt.show()
+```
+
+```{figure} thresholdapproach.png
+---
+name: thresholdapproach
+---
+Figure: Efficient Decarbonization Frontier with Threshold Approach
 ```
 
 Because we impose a constraint and minimize the TE risk, the resulting portfolio will have fewer stocks than the initial benchmark $b$. This imply that the portfolio $x$ is less diversified than the initial benchmark $b$. In order to explicitly control the number of removed stocks, Andersson et al. (2016) and Roncalli (2023) propose another methodology: the order-statistic approach.
