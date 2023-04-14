@@ -132,6 +132,21 @@ Following Roncalli et al. (2020), we can directly add a BMG's exposure constrain
 
 With $\beta_{bmg}^+$ as the maximum tolerance of the investor with respect to the relative BMG risk. 
 
+We have the following QP parameters:
+
+\begin{equation*}
+\begin{aligned}
+& Q = \Sigma \\
+& R = \Sigma b \\
+& A = 1^T_n \\
+& B = 1 \\
+& C = \beta_{bmg}^T \\
+& D = \beta_{bmg}^+\\
+& x^- = 0_n \\
+& x^+ = 1_n
+\end{aligned}
+\end{equation*}
+
 ```Python
 #### Use the example in table 6 in page 26 of Roncalli et al. 2021
 

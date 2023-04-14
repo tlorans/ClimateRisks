@@ -338,8 +338,8 @@ document.write(`
 </table>
 <p>Where the classification is based on the terciles of the aggregating BGS and the median market capitalization.</p>
 <p>Finally, the return of the BMG factor is computed as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4b20b6c5-a9f2-4f70-bf29-e5e67ef65bc8">
-<span class="eqno">(1)<a class="headerlink" href="#equation-4b20b6c5-a9f2-4f70-bf29-e5e67ef65bc8" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e409d28a-5e47-4b52-8616-5abf93cd5df9">
+<span class="eqno">(1)<a class="headerlink" href="#equation-e409d28a-5e47-4b52-8616-5abf93cd5df9" title="Permalink to this equation">#</a></span>\[\begin{equation}
 f_{BMG}(t) = \frac{1}{2}(SB(t)+BB(t)) - \frac{1}{2} (SG(t) + BG(t))
 \end{equation}\]</div>
 <p>Let’s have a look at the resulting BMG factor:</p>
@@ -365,8 +365,8 @@ f_{BMG}(t) = \frac{1}{2}(SB(t)+BB(t)) - \frac{1}{2} (SG(t) + BG(t))
 <h2>Carbon Beta: A Market-Based Measure<a class="headerlink" href="#carbon-beta-a-market-based-measure" title="Permalink to this headline">#</a></h2>
 <p>Once the BMG factor is built, Gorgen et al. (2019) propose to define the carbon financial risk of a stock by using its price sentivity to the BMG factor (carbon beta).</p>
 <p>The authors propose to extend the Carhart Model with four factors with the additional BMG carbon risk factor:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2354d598-9826-469c-b6af-c99da98c9510">
-<span class="eqno">(2)<a class="headerlink" href="#equation-2354d598-9826-469c-b6af-c99da98c9510" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-5849c492-82a3-4532-bba0-89c97d122f2e">
+<span class="eqno">(2)<a class="headerlink" href="#equation-5849c492-82a3-4532-bba0-89c97d122f2e" title="Permalink to this equation">#</a></span>\[\begin{equation}
 r(t) = \alpha + \beta_{MKT}f_{MKT}(t) + \beta_{SMB}f_{SMB}(t) + \beta_{HML}f_{HML}(t) + \beta_{WML} f_{WML}(t) + \beta_{BMG} f_{BMG}(t) + u(t)
 \end{equation}\]</div>
 <p>This regression is run on a stock-by-stock basis, and resulting <span class="math notranslate nohighlight">\(\beta_k\)</span> are the sentivity of the stock to each factor.</p>
@@ -428,6 +428,20 @@ r(t) = \alpha + \beta_{MKT}f_{MKT}(t) + \beta_{SMB}f_{SMB}(t) + \beta_{HML}f_{HM
 \end{aligned}
 \end{equation*}\]</div>
 <p>With <span class="math notranslate nohighlight">\(\beta_{bmg}^+\)</span> as the maximum tolerance of the investor with respect to the relative BMG risk.</p>
+<p>We have the following QP parameters:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\begin{aligned}
+&amp; Q = \Sigma \\
+&amp; R = \Sigma b \\
+&amp; A = 1^T_n \\
+&amp; B = 1 \\
+&amp; C = \beta_{bmg}^T \\
+&amp; D = \beta_{bmg}^+\\
+&amp; x^- = 0_n \\
+&amp; x^+ = 1_n
+\end{aligned}
+\end{equation*}\]</div>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1">#### Use the example in table 6 in page 26 of Roncalli et al. 2021</span>
 
 <span class="nd">@dataclass</span>
