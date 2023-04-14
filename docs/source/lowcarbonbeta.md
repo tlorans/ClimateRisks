@@ -108,7 +108,7 @@ results = OLS(endog = returns['BP'] - factors_for_reg['rf'],
 
 results.params['BMG']
 ```
-And the resultign carbon beta for BP is:
+And the resulting carbon beta for BP is:
 ```
 0.9433783665287284
 ```
