@@ -338,8 +338,8 @@ document.write(`
 </table>
 <p>Where the classification is based on the terciles of the aggregating BGS and the median market capitalization.</p>
 <p>Finally, the return of the BMG factor is computed as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-fe17abed-c706-4656-8327-e147f00228fe">
-<span class="eqno">(1)<a class="headerlink" href="#equation-fe17abed-c706-4656-8327-e147f00228fe" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-975b722d-ff3a-461a-b4e5-079945d1e8c7">
+<span class="eqno">(1)<a class="headerlink" href="#equation-975b722d-ff3a-461a-b4e5-079945d1e8c7" title="Permalink to this equation">#</a></span>\[\begin{equation}
 f_{BMG}(t) = \frac{1}{2}(SB(t)+BB(t)) - \frac{1}{2} (SG(t) + BG(t))
 \end{equation}\]</div>
 <p>Let’s have a look at the resulting BMG factor:</p>
@@ -365,8 +365,8 @@ f_{BMG}(t) = \frac{1}{2}(SB(t)+BB(t)) - \frac{1}{2} (SG(t) + BG(t))
 <h2>Carbon Beta: A Market-Based Measure<a class="headerlink" href="#carbon-beta-a-market-based-measure" title="Permalink to this headline">#</a></h2>
 <p>Once the BMG factor is built, Gorgen et al. (2019) propose to define the carbon financial risk of a stock by using its price sentivity to the BMG factor (carbon beta).</p>
 <p>The authors propose to extend the Carhart Model with four factors with the additional BMG carbon risk factor:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-53e3792f-9663-46d5-a0de-98b4dcbdc7bb">
-<span class="eqno">(2)<a class="headerlink" href="#equation-53e3792f-9663-46d5-a0de-98b4dcbdc7bb" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-1b3401f5-3a13-4dc4-a643-37bd8ba94f4a">
+<span class="eqno">(2)<a class="headerlink" href="#equation-1b3401f5-3a13-4dc4-a643-37bd8ba94f4a" title="Permalink to this equation">#</a></span>\[\begin{equation}
 r(t) = \alpha + \beta_{MKT}f_{MKT}(t) + \beta_{SMB}f_{SMB}(t) + \beta_{HML}f_{HML}(t) + \beta_{WML} f_{WML}(t) + \beta_{BMG} f_{BMG}(t) + u(t)
 \end{equation}\]</div>
 <p>This regression is run on a stock-by-stock basis, and resulting <span class="math notranslate nohighlight">\(\beta_k\)</span> are the sentivity of the stock to each factor.</p>
@@ -376,7 +376,24 @@ r(t) = \alpha + \beta_{MKT}f_{MKT}(t) + \beta_{SMB}f_{SMB}(t) + \beta_{HML}f_{HM
 <li><p><span class="math notranslate nohighlight">\(\beta_{BMG} \approx 0\)</span>: transition process influences stock value on average</p></li>
 <li><p><span class="math notranslate nohighlight">\(\beta_{BMG} &lt;&lt; 0\)</span>: stock value increases in comparison to other stocks if transition process is unexpectedly successful</p></li>
 </ul>
-<p>We now can perform the individual estimation of betas. Let’s do the test for British Petroleum (BP):</p>
+<p>To apply the Carhart model with the new BMG factor, let’s first load the data as we did in the first introducing part:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://assets.uni-augsburg.de/media/filer_public/67/d8/67d814ce-0aa9-4156-ad25-fb2a9202769d/carima_exceltool_en.xlsx&#39;</span>
+<span class="n">risk_factors</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">sheet_name</span> <span class="o">=</span> <span class="s1">&#39;Risk Factors&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">4</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>
+<span class="n">risk_factors</span><span class="p">[</span><span class="s1">&#39;Month&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">risk_factors</span><span class="p">[</span><span class="s1">&#39;Month&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">))</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m&#39;</span><span class="p">)</span>
+<span class="n">carbon_risk</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">sheet_name</span> <span class="o">=</span> <span class="s1">&#39;BMG&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">4</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>
+<span class="n">carbon_risk</span><span class="p">[</span><span class="s1">&#39;Month&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">carbon_risk</span><span class="p">[</span><span class="s1">&#39;Month&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">))</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m&#39;</span><span class="p">)</span>
+
+<span class="n">factors_df</span> <span class="o">=</span> <span class="n">risk_factors</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">carbon_risk</span><span class="p">,</span> <span class="n">how</span> <span class="o">=</span> <span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">on</span> <span class="o">=</span> <span class="s2">&quot;Month&quot;</span><span class="p">)</span>
+<span class="n">factors_df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">factors_df</span><span class="p">[</span><span class="s1">&#39;Month&#39;</span><span class="p">]</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://assets.uni-augsburg.de/media/filer_public/67/d8/67d814ce-0aa9-4156-ad25-fb2a9202769d/carima_exceltool_en.xlsx&#39;</span>
+<span class="n">returns</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">sheet_name</span> <span class="o">=</span> <span class="s1">&#39;Asset Returns&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">4</span><span class="p">:</span><span class="mi">14</span><span class="p">]</span>
+<span class="n">returns</span><span class="p">[</span><span class="s1">&#39;Month&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">returns</span><span class="p">[</span><span class="s1">&#39;Month&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">))</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m&#39;</span><span class="p">)</span>
+<span class="n">returns</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">returns</span><span class="p">[</span><span class="s1">&#39;Month&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Now that we have all the data prepared, let’s make the test for British Petroleum (BP):</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.api</span> <span class="kn">import</span> <span class="n">OLS</span>
 <span class="kn">import</span> <span class="nn">statsmodels.tools</span>
 
@@ -387,11 +404,11 @@ r(t) = \alpha + \beta_{MKT}f_{MKT}(t) + \beta_{SMB}f_{SMB}(t) + \beta_{HML}f_{HM
               <span class="n">exog</span> <span class="o">=</span> <span class="n">factors_for_reg</span><span class="p">[[</span><span class="s1">&#39;const&#39;</span><span class="p">,</span><span class="s1">&#39;erM_rf&#39;</span><span class="p">,</span><span class="s1">&#39;SMB&#39;</span><span class="p">,</span><span class="s1">&#39;HML&#39;</span><span class="p">,</span><span class="s1">&#39;WML&#39;</span><span class="p">,</span><span class="s1">&#39;BMG&#39;</span><span class="p">]],</span>
               <span class="n">missing</span> <span class="o">=</span> <span class="s1">&#39;drop&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 
-<span class="n">results</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+<span class="n">results</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;BMG&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>And the resulting carbon beta for BP is then:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;BMG&#39;</span><span class="p">]</span>
+<p>And the resultign carbon beta for BP is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">0.9433783665287284</span>
 </pre></div>
 </div>
 <p>The result is consistent with the interpretation of the carbon beta: as the carbon beta for BP is highly positive, it means that the company is negatively exposed to the carbon financial risk priced by the market.</p>

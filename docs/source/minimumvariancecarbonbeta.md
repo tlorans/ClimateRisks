@@ -75,7 +75,26 @@ The carbon beta interpretation is the following:
 - $\beta_{BMG} \approx 0$: transition process influences stock value on average
 - $\beta_{BMG} << 0$: stock value increases in comparison to other stocks if transition process is unexpectedly successful
 
-We now can perform the individual estimation of betas. Let's do the test for British Petroleum (BP):
+To apply the Carhart model with the new BMG factor, let's first load the data as we did in the first introducing part:
+```Python
+import pandas as pd
+url = 'https://assets.uni-augsburg.de/media/filer_public/67/d8/67d814ce-0aa9-4156-ad25-fb2a9202769d/carima_exceltool_en.xlsx'
+risk_factors = pd.read_excel(url, sheet_name = 'Risk Factors').iloc[:,4:10]
+risk_factors['Month'] = pd.to_datetime(risk_factors['Month'].astype(str)).dt.strftime('%Y-%m')
+carbon_risk = pd.read_excel(url, sheet_name = 'BMG').iloc[:,4:6]
+carbon_risk['Month'] = pd.to_datetime(carbon_risk['Month'].astype(str)).dt.strftime('%Y-%m')
+
+factors_df = risk_factors.merge(carbon_risk, how = "left", on = "Month")
+factors_df.index = factors_df['Month']
+
+url = 'https://assets.uni-augsburg.de/media/filer_public/67/d8/67d814ce-0aa9-4156-ad25-fb2a9202769d/carima_exceltool_en.xlsx'
+returns = pd.read_excel(url, sheet_name = 'Asset Returns').iloc[:,4:14]
+returns['Month'] = pd.to_datetime(returns['Month'].astype(str)).dt.strftime('%Y-%m')
+returns.index = returns['Month']
+```
+
+Now that we have all the data prepared, let's make the test for British Petroleum (BP):
+
 ```Python
 from statsmodels.api import OLS
 import statsmodels.tools
@@ -87,13 +106,11 @@ results = OLS(endog = returns['BP'] - factors_for_reg['rf'],
               exog = factors_for_reg[['const','erM_rf','SMB','HML','WML','BMG']],
               missing = 'drop').fit()
 
-results.summary()
-```
-
-And the resulting carbon beta for BP is then:
-
-```Python
 results.params['BMG']
+```
+And the resultign carbon beta for BP is:
+```
+0.9433783665287284
 ```
 
 The result is consistent with the interpretation of the carbon beta: as the carbon beta for BP is highly positive, it means that the company is negatively exposed to the carbon financial risk priced by the market.
