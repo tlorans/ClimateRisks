@@ -379,33 +379,64 @@ A "naive" solution consists in re-weighting the remaining stocks:
 x_i = \frac{𝟙\{CI_i < CI^{m,n}\}b_i}{\sum^n_{k=1} 𝟙\{CI_k < CI^{m,n}\}b_k}
 \end{equation}
 
+This new approach doesn't rely on any optimization program. It's quite easy to implement in Python:
+
 ```Python
-# implement the second method: order-statistic approach
-
 @dataclass
-class LowCarbonStrategy(PortfolioConstruction):
-  b: np.array # Benchmark Weights
-  CI:np.array # Carbon Intensity
-  
-  def threshold_approach():
-    pass
+class OrderStatisticNaive(LowCarbonStrategy):
+    def get_portfolio(self, m:int) -> CarbonPortfolio:
+      """QP Formulation"""
+      x_sup = np.zeros(len(self.b)) # the vector for exclusion 
+      x_sup[np.where(CI >= np.unique(self.CI)[-m])] = 0
+      x_sup[np.where(CI < np.unique(self.CI)[-m])] = 1
 
-  def order_statistic_approach():
-      if reweighting = "te_minimization":
-        pass
-      elif reweighting = "naive":
-        pass
+      # reweighting
+      x_optim = b / (x_sup.T @ b)
+      x_optim[np.where(x_sup == 0)] = 0
 
-    pass 
-
-  def get_portfolio(self) -> CarbonPortfolio:
-    pass
+      return CarbonPortfolio(x = x_optim, 
+                            Sigma = self.Sigma, CI = self.CI)
 ```
+
+Let's plot the relationship between the reduction rate and the tracking error volatility:
+```Python
+low_carbon_portfolio = OrderStatisticNaive(b = b, 
+                                         CI = CI,
+                                         Sigma = Sigma)
+
+list_m = arange(1,6, 1)
+list_portfolios = []
+
+for m in list_m:
+  list_portfolios.append(low_carbon_portfolio.get_portfolio(m = m))
+
+
+reduction_rate = [get_waci_reduction(x = portfolio.x,
+                   b = b,
+                   CI = CI) * 100 for portfolio in list_portfolios]
+te = [get_tracking_error_volatility(x = portfolio.x, b = b, Sigma = Sigma) * 100 for portfolio in list_portfolios]
+
+plt.figure(figsize = (10, 10))
+plt.plot(reduction_rate, te)
+plt.xlabel("Carbon Intensity Reduction (in %)")
+plt.ylabel("Tracking Error Volatility (in %)")
+plt.title("Efficient Decarbonization Frontier with Order-Statistic and Naive Re-weighting Approach")
+plt.show()
+```
+
+```{figure} orderstatisticnaive.png
+---
+name: orderstatisticnaive
+---
+Figure: Efficient Decarbonization Frontier with Order-Statistic and Naive Re-Weighting Approach
+```
+
+Again, the tracking error increases faster with the reduction rate than with the threshold approach. The increase is even higher than with the minimization of the tracking error for the weighting scheme. But the resulting weights are more easily tractable and easier to explain.
 
 ### Key Takeaways
 
-We've covered the most frequent carbon risk-hedging strategy with the low-carbon strategy approach. It relies on minimizing the tracking error volatiltiy relative to a CW benchmark while diminishing the exposure to carbon risk, measured with the carbon intensity. This is a fundamental-based approach (carbon intensity is the fundamental data of the carbon risk).
+- We've covered the most frequent carbon risk-hedging strategy with the low-carbon strategy approach. It relies on minimizing the tracking error volatiltiy relative to a benchmark while diminishing the exposure to carbon risk, measured with the carbon intensity.
 
-We've seen that the max-threshold approach dominates the order-statistic with TE minimization and the order-statistic with naïve reweighting in terms of decarbonization and tracking error volatility trade-off.
+- We've seen that the max-threshold approach dominates the order-statistic with TE minimization and the order-statistic with naïve reweighting in terms of decarbonization and tracking error volatility trade-off.
 
-The main assumption of the low-carbon strategy is the absence of carbon risk pricing. We will relax this assumption in the next part.
+- The main assumption of the low-carbon strategy is the absence of carbon risk pricing. We will relax this assumption in the next part.
