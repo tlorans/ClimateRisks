@@ -122,7 +122,7 @@ Following Roncalli et al. (2020), we can directly add a BMG's exposure constrain
 \begin{equation*}
 \begin{aligned}
 & x* = 
-& & argmin \frac{1}{2}x^T \Sigma x\\
+& & argmin \frac{1}{2}(x-b)^T \Sigma (x-b)\\
 & \text{subject to}
 & & 1_n^Tx = 1\\
 & & &  0_n \leq x \leq 1_n \\
