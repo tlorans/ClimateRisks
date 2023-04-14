@@ -26,7 +26,7 @@ Any error in this course is mine. Unless it is sourced, any opinion expressed in
 climaterisks
 dealingwithrisk
 lowcarbonstrategy
-minimumvariancecarbonbeta
+lowcarbonbeta
 greenfactor
 netzeroinvesting
 decarbonizationpathways

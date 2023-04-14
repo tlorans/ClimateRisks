@@ -6,7 +6,7 @@ Before discussing the implementation of these strategies, we need to make a quic
 
 These tools will be at the basis of the three strategies we will present thereafter in this course:
 - Low-Carbon Strategy (Portfolio Optimization)
-- Minimum Variance with Carbon Beta (Portfolio Optimization and Factor Investing)
+- Enhanced Index with Carbon Beta (Portfolio Optimization and Factor Investing)
 - Green Factor (Factor Investing)
 
 We will discuss these basic tools with implementation in Python. In this course, we'll see how climate risks can be considered with these different approaches.

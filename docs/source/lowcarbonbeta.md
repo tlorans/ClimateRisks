@@ -1,8 +1,8 @@
-## Minimum Variance Portfolio with Carbon Beta
+## Enhanced Index with Carbon Beta
 
 While low-carbon strategy relies on the hypothesis that carbon risk is unpriced by the markets, one could ask if it is still the case, with the growth of climate investing in asset management and the rise of public concerns about global warming. In contrast with Andersson et al. (2016), Gorgen et al. (2019) {cite:p}`gorgen2020carbon` and Roncalli et al. (2020) define carbon risk from a financial point of view, and consider that the carbon risk of equities corresponds to the market risk is priced in by the market (at least partially). This relax the low-carbon strategy assumption that carbon risk is not priced in by the market.
 
-In this part, we will introduce how Gorgen et al. (2019) show that carbon risk is a systematic risk factor, priced in by the market. Then, we will follow Roncalli et al. (2020) by introducing carbon beta into the Minimum Variance framework in order to hedge for carbon risk.
+In this part, we will introduce how Gorgen et al. (2019) show that carbon risk is a systematic risk factor, priced in by the market. Then, we will follow Roncalli et al. (2020) by introducing carbon beta into a portfolio optimization in a context of a benchmark problem in order to hedge for carbon risk.
 
 ### A Brown-Minus-Green Factor: Carbon Systematic Risk
 
@@ -115,11 +115,9 @@ And the resultign carbon beta for BP is:
 
 The result is consistent with the interpretation of the carbon beta: as the carbon beta for BP is highly positive, it means that the company is negatively exposed to the carbon financial risk priced by the market.
 
-### Introducing Carbon Beta into a Minimum Variance Portfolio
+### Introducing Carbon Beta into a Portfolio Optimization in the Presence of a Benchmark
 
-If carbon risk is proved to be a systematic risk, alongside the market risk, we can introduce it into a minimum variance framework (recall that the minimum variance portfolio corresponds to the $\gamma$-problem formulation we've seen in the previous part with $\gamma = 0$, ie. no risk-tolerance).
-
-Following Roncalli et al. (2020), we can directly add a BMG constraint in a minimum variance framework:
+Following Roncalli et al. (2020), we can directly add a BMG's exposure constraint in a portfolio optimization in the presence of a benchmark framework:
 
 \begin{equation*}
 \begin{aligned}
@@ -132,7 +130,7 @@ Following Roncalli et al. (2020), we can directly add a BMG constraint in a mini
 \end{aligned}
 \end{equation*}
 
-With $\beta_{bmg}^+$ as the maximum tolerance of the investor with respect to the relative carbon risk. 
+With $\beta_{bmg}^+$ as the maximum tolerance of the investor with respect to the relative BMG risk. 
 
 ```Python
 #### Use the example in table 6 in page 26 of Roncalli et al. 2021
