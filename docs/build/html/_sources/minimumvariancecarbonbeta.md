@@ -119,7 +119,7 @@ The result is consistent with the interpretation of the carbon beta: as the carb
 
 If carbon risk is proved to be a systematic risk, alongside the market risk, we can introduce it into a minimum variance framework (recall that the minimum variance portfolio corresponds to the $\gamma$-problem formulation we've seen in the previous part with $\gamma = 0$, ie. no risk-tolerance).
 
-Following Roncalli et al. (2021), we can directly add a BMG constraint in a minimum variance framework and imposing long-only weights:
+Following Roncalli et al. (2020), we can directly add a BMG constraint in a minimum variance framework:
 
 \begin{equation*}
 \begin{aligned}
@@ -132,7 +132,7 @@ Following Roncalli et al. (2021), we can directly add a BMG constraint in a mini
 \end{aligned}
 \end{equation*}
 
-With $\beta_{bmg}^+$ as the maximum tolerance of the investor with respect to the relative BMG risk. 
+With $\beta_{bmg}^+$ as the maximum tolerance of the investor with respect to the relative carbon risk. 
 
 ```Python
 #### Use the example in table 6 in page 26 of Roncalli et al. 2021

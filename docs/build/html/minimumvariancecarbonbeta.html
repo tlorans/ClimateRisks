@@ -338,8 +338,8 @@ document.write(`
 </table>
 <p>Where the classification is based on the terciles of the aggregating BGS and the median market capitalization.</p>
 <p>Finally, the return of the BMG factor is computed as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-975b722d-ff3a-461a-b4e5-079945d1e8c7">
-<span class="eqno">(1)<a class="headerlink" href="#equation-975b722d-ff3a-461a-b4e5-079945d1e8c7" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e123539f-646f-4523-9091-5e710cec7e6e">
+<span class="eqno">(1)<a class="headerlink" href="#equation-e123539f-646f-4523-9091-5e710cec7e6e" title="Permalink to this equation">#</a></span>\[\begin{equation}
 f_{BMG}(t) = \frac{1}{2}(SB(t)+BB(t)) - \frac{1}{2} (SG(t) + BG(t))
 \end{equation}\]</div>
 <p>Let’s have a look at the resulting BMG factor:</p>
@@ -365,8 +365,8 @@ f_{BMG}(t) = \frac{1}{2}(SB(t)+BB(t)) - \frac{1}{2} (SG(t) + BG(t))
 <h2>Carbon Beta: A Market-Based Measure<a class="headerlink" href="#carbon-beta-a-market-based-measure" title="Permalink to this headline">#</a></h2>
 <p>Once the BMG factor is built, Gorgen et al. (2019) propose to define the carbon financial risk of a stock by using its price sentivity to the BMG factor (carbon beta).</p>
 <p>The authors propose to extend the Carhart Model with four factors with the additional BMG carbon risk factor:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1b3401f5-3a13-4dc4-a643-37bd8ba94f4a">
-<span class="eqno">(2)<a class="headerlink" href="#equation-1b3401f5-3a13-4dc4-a643-37bd8ba94f4a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-18065daa-8fdc-4b73-aaa2-03b1baa6fb85">
+<span class="eqno">(2)<a class="headerlink" href="#equation-18065daa-8fdc-4b73-aaa2-03b1baa6fb85" title="Permalink to this equation">#</a></span>\[\begin{equation}
 r(t) = \alpha + \beta_{MKT}f_{MKT}(t) + \beta_{SMB}f_{SMB}(t) + \beta_{HML}f_{HML}(t) + \beta_{WML} f_{WML}(t) + \beta_{BMG} f_{BMG}(t) + u(t)
 \end{equation}\]</div>
 <p>This regression is run on a stock-by-stock basis, and resulting <span class="math notranslate nohighlight">\(\beta_k\)</span> are the sentivity of the stock to each factor.</p>
@@ -416,7 +416,7 @@ r(t) = \alpha + \beta_{MKT}f_{MKT}(t) + \beta_{SMB}f_{SMB}(t) + \beta_{HML}f_{HM
 <section id="introducing-carbon-beta-into-a-minimum-variance-portfolio">
 <h2>Introducing Carbon Beta into a Minimum Variance Portfolio<a class="headerlink" href="#introducing-carbon-beta-into-a-minimum-variance-portfolio" title="Permalink to this headline">#</a></h2>
 <p>If carbon risk is proved to be a systematic risk, alongside the market risk, we can introduce it into a minimum variance framework (recall that the minimum variance portfolio corresponds to the <span class="math notranslate nohighlight">\(\gamma\)</span>-problem formulation we’ve seen in the previous part with <span class="math notranslate nohighlight">\(\gamma = 0\)</span>, ie. no risk-tolerance).</p>
-<p>Following Roncalli et al. (2021), we can directly add a BMG constraint in a minimum variance framework and imposing long-only weights:</p>
+<p>Following Roncalli et al. (2020), we can directly add a BMG constraint in a minimum variance framework:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 \begin{aligned}
@@ -428,7 +428,7 @@ r(t) = \alpha + \beta_{MKT}f_{MKT}(t) + \beta_{SMB}f_{SMB}(t) + \beta_{HML}f_{HM
 &amp; &amp; &amp; \beta_{bmg}^Tx \leq \beta_{bmg}^+
 \end{aligned}
 \end{equation*}\]</div>
-<p>With <span class="math notranslate nohighlight">\(\beta_{bmg}^+\)</span> as the maximum tolerance of the investor with respect to the relative BMG risk.</p>
+<p>With <span class="math notranslate nohighlight">\(\beta_{bmg}^+\)</span> as the maximum tolerance of the investor with respect to the relative carbon risk.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1">#### Use the example in table 6 in page 26 of Roncalli et al. 2021</span>
 
 <span class="nd">@dataclass</span>
