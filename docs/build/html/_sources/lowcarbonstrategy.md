@@ -265,6 +265,15 @@ To implement this decarbonization strategy, the resulting weightings can be dete
 - finding the optimal weightings that minimize the TE volatility
 - reweighting the remaining stocks with a naïve approach
 
+Contrary to the threshold approach, the reduction rate $\mathfrak{R}$ is not a parameter, but an output of the order-statistic approach. We thus need to define a function computing the resulting reduction rate compated to the benchmark, such as:
+
+\begin{equation}
+\mathfrak{R}(x|b) = 1 - \frac{x^T \cdot CI}{b^T \cdot CI}
+\end{equation}
+
+```Python
+```
+
 #### Optimal Weights with TE Minimization
 
 We can introduce the order-statistic approach into our optimization problem with the new constraint. The optimization problem becomes:
