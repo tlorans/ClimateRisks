@@ -1,6 +1,6 @@
 ## Green Factor
 
-In the previous part, we've seen how exposure to the systematic carbon risk can be measured with carbon beta, thanks to the BMG factor from Gorgen et al. (2019) and how to hedge from carbon risk by introducing carbon beta into a minimum variance portfolio. We've observed the puzzling results that green assets outperformed brown assets in the previous decade, according to the BMG negative returns.
+In the previous part, we've seen how exposure to the systematic carbon risk can be measured with carbon beta, thanks to the BMG factor from Gorgen et al. (2019) and how to hedge from carbon risk with an enhanced-index with carbon beta. We've observed the puzzling results that green assets outperformed brown assets in the previous decade, according to the BMG negative returns.
 
 However, as showed by the equilibrium model from Pastor et al. (2021) {cite:p}`pastor2021sustainable`, green assets should have lower expected returns than brown assets, because:
 - some investors have green tastes, and then require lower returns for holding these assets (taste premium)
