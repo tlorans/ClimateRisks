@@ -338,8 +338,8 @@ document.write(`
 </table>
 <p>Where the classification is based on the terciles of the aggregating BGS and the median market capitalization.</p>
 <p>Finally, the return of the BMG factor is computed as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e409d28a-5e47-4b52-8616-5abf93cd5df9">
-<span class="eqno">(1)<a class="headerlink" href="#equation-e409d28a-5e47-4b52-8616-5abf93cd5df9" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ddf0bc59-132f-416c-820a-d461a15a1ed1">
+<span class="eqno">(1)<a class="headerlink" href="#equation-ddf0bc59-132f-416c-820a-d461a15a1ed1" title="Permalink to this equation">#</a></span>\[\begin{equation}
 f_{BMG}(t) = \frac{1}{2}(SB(t)+BB(t)) - \frac{1}{2} (SG(t) + BG(t))
 \end{equation}\]</div>
 <p>Let’s have a look at the resulting BMG factor:</p>
@@ -360,13 +360,14 @@ f_{BMG}(t) = \frac{1}{2}(SB(t)+BB(t)) - \frac{1}{2} (SG(t) + BG(t))
 <p><span class="caption-text">Figure: Cumulative Returns, BMG Factor</span><a class="headerlink" href="#bmg" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
+<p>During the last decade, it seems that the BMG factor returns were constantly negative, that is brown assets underperformed green assets. If we think about carbon risk as a systematic risk, this result is puzzling. We will tackle this question in the next part (green factor).</p>
 </section>
 <section id="carbon-beta-a-market-based-measure">
 <h2>Carbon Beta: A Market-Based Measure<a class="headerlink" href="#carbon-beta-a-market-based-measure" title="Permalink to this headline">#</a></h2>
 <p>Once the BMG factor is built, Gorgen et al. (2019) propose to define the carbon financial risk of a stock by using its price sentivity to the BMG factor (carbon beta).</p>
 <p>The authors propose to extend the Carhart Model with four factors with the additional BMG carbon risk factor:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5849c492-82a3-4532-bba0-89c97d122f2e">
-<span class="eqno">(2)<a class="headerlink" href="#equation-5849c492-82a3-4532-bba0-89c97d122f2e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-81e3911c-4753-458c-9cd8-ee750ddeccb0">
+<span class="eqno">(2)<a class="headerlink" href="#equation-81e3911c-4753-458c-9cd8-ee750ddeccb0" title="Permalink to this equation">#</a></span>\[\begin{equation}
 r(t) = \alpha + \beta_{MKT}f_{MKT}(t) + \beta_{SMB}f_{SMB}(t) + \beta_{HML}f_{HML}(t) + \beta_{WML} f_{WML}(t) + \beta_{BMG} f_{BMG}(t) + u(t)
 \end{equation}\]</div>
 <p>This regression is run on a stock-by-stock basis, and resulting <span class="math notranslate nohighlight">\(\beta_k\)</span> are the sentivity of the stock to each factor.</p>
@@ -407,7 +408,7 @@ r(t) = \alpha + \beta_{MKT}f_{MKT}(t) + \beta_{SMB}f_{SMB}(t) + \beta_{HML}f_{HM
 <span class="n">results</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;BMG&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>And the resultign carbon beta for BP is:</p>
+<p>And the resulting carbon beta for BP is:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">0.9433783665287284</span>
 </pre></div>
 </div>
@@ -442,24 +443,145 @@ r(t) = \alpha + \beta_{MKT}f_{MKT}(t) + \beta_{SMB}f_{SMB}(t) + \beta_{HML}f_{HM
 &amp; x^+ = 1_n
 \end{aligned}
 \end{equation*}\]</div>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1">#### Use the example in table 6 in page 26 of Roncalli et al. 2021</span>
+<p>The approach is similar to the one with the maximum threshold approach in the previous part, except that we use a market-based measure (carbon beta) rather than a fundamental-based measure (carbon intensity) in the low-carbon strategy. Thus, with this strategy, we relax the assumption that carbon risk is not priced in by the market.</p>
+<p>Let’s first create a <code class="docutils literal notranslate"><span class="pre">CarbonPortfolio</span></code> dataclass:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="nd">@dataclass</span>
-<span class="k">class</span> <span class="nc">MinimumVarianceCarbonBeta</span><span class="p">(</span><span class="n">PortfolioConstruction</span><span class="p">):</span>
-  <span class="n">CI</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="c1"># Carbon Intensity</span>
-
-  <span class="k">def</span> <span class="nf">get_portfolio</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CarbonPortfolio</span><span class="p">:</span>
-    <span class="k">pass</span>
+<span class="nd">@dataclass</span> 
+<span class="k">class</span> <span class="nc">CarbonPortfolio</span><span class="p">:</span>
+  <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  A class that implement supplementary information CI and new method get_waci,</span>
+<span class="sd">  to be used in the low-carbon strategy implementation.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="c1"># Weights</span>
+  <span class="n">carbon_betas</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="c1"># Carbon Betas</span>
+  <span class="n">Sigma</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span> <span class="c1"># Covariance Matrix</span>
 </pre></div>
 </div>
+<p>Then, we can implement the optimization problem:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qpsolvers</span> <span class="kn">import</span> <span class="n">solve_qp</span>
+
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">EnhancedIndexCarbonBeta</span><span class="p">:</span>
+  <span class="n">b</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="c1"># Benchmark weights</span>
+  <span class="n">carbon_betas</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="c1"># Carbon Betas</span>
+  <span class="n">Sigma</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span> <span class="c1"># Covariance Matrix</span>
+
+  <span class="k">def</span> <span class="nf">get_portfolio</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">beta_sup</span><span class="p">:</span><span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CarbonPortfolio</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;QP Formulation&quot;&quot;&quot;</span>
+    <span class="n">Q</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">carbon_betas</span><span class="p">))</span><span class="o">.</span><span class="n">T</span> <span class="c1"># fully invested</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">])</span> <span class="c1"># fully invested</span>
+    <span class="n">x_inf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">carbon_betas</span><span class="p">))</span> <span class="c1"># long-only position</span>
+    <span class="n">x_sup</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">carbon_betas</span><span class="p">))</span> <span class="c1"># long-only position</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">carbon_betas</span><span class="o">.</span><span class="n">T</span> <span class="c1"># resulting WACI</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">beta_sup</span><span class="p">])</span> <span class="c1"># reduction imposed</span>
+
+    <span class="n">x_optim</span> <span class="o">=</span> <span class="n">solve_qp</span><span class="p">(</span><span class="n">P</span> <span class="o">=</span> <span class="n">Q</span><span class="p">,</span>
+              <span class="n">q</span> <span class="o">=</span> <span class="o">-</span> <span class="n">R</span><span class="p">,</span> <span class="c1"># we put a minus here because this QP solver consider +x^T R</span>
+              <span class="n">A</span> <span class="o">=</span> <span class="n">A</span><span class="p">,</span> 
+              <span class="n">b</span> <span class="o">=</span> <span class="n">B</span><span class="p">,</span>
+              <span class="n">G</span> <span class="o">=</span> <span class="n">C</span><span class="p">,</span>
+              <span class="n">h</span> <span class="o">=</span> <span class="n">D</span><span class="p">,</span>
+              <span class="n">lb</span> <span class="o">=</span> <span class="n">x_inf</span><span class="p">,</span>
+              <span class="n">ub</span> <span class="o">=</span> <span class="n">x_sup</span><span class="p">,</span>
+              <span class="n">solver</span> <span class="o">=</span> <span class="s1">&#39;osqp&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">CarbonPortfolio</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x_optim</span><span class="p">,</span> 
+                           <span class="n">Sigma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span><span class="p">,</span> <span class="n">carbon_betas</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">carbon_betas</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And let’s test the approach with the following example (same as the previous part, we just replace the carbon intensity measure with carbon betas):</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.20</span><span class="p">,</span>
+              <span class="mf">0.19</span><span class="p">,</span>
+              <span class="mf">0.17</span><span class="p">,</span>
+              <span class="mf">0.13</span><span class="p">,</span>
+              <span class="mf">0.12</span><span class="p">,</span>
+              <span class="mf">0.08</span><span class="p">,</span>
+              <span class="mf">0.06</span><span class="p">,</span>
+              <span class="mf">0.05</span><span class="p">])</span>
+
+<span class="n">carbon_betas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">0.3</span><span class="p">,</span>
+               <span class="mf">0.91</span><span class="p">,</span>
+               <span class="mf">0.01</span><span class="p">,</span>
+               <span class="mf">0.4</span><span class="p">,</span>
+               <span class="o">-</span><span class="mf">0.02</span><span class="p">,</span>
+               <span class="mf">0.5</span><span class="p">,</span>
+               <span class="o">-</span><span class="mf">0.6</span><span class="p">,</span>
+               <span class="mf">0.80</span><span class="p">])</span>
+
+<span class="n">betas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.30</span><span class="p">,</span>
+                  <span class="mf">1.80</span><span class="p">,</span>
+                  <span class="mf">0.85</span><span class="p">,</span>
+                  <span class="mf">0.83</span><span class="p">,</span>
+                  <span class="mf">1.47</span><span class="p">,</span>
+                  <span class="mf">0.94</span><span class="p">,</span>
+                  <span class="mf">1.67</span><span class="p">,</span>
+                  <span class="mf">1.08</span><span class="p">])</span>
+
+<span class="n">sigmas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.10</span><span class="p">,</span>
+                   <span class="mf">0.05</span><span class="p">,</span>
+                   <span class="mf">0.06</span><span class="p">,</span>
+                   <span class="mf">0.12</span><span class="p">,</span>
+                   <span class="mf">0.15</span><span class="p">,</span>
+                   <span class="mf">0.04</span><span class="p">,</span>
+                   <span class="mf">0.08</span><span class="p">,</span>
+                   <span class="mf">0.07</span><span class="p">])</span>
+
+<span class="n">Sigma</span> <span class="o">=</span> <span class="n">betas</span> <span class="o">@</span> <span class="n">betas</span><span class="o">.</span><span class="n">T</span> <span class="o">*</span> <span class="mf">0.18</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">sigmas</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">low_betas_portfolio</span> <span class="o">=</span> <span class="n">EnhancedIndexCarbonBeta</span><span class="p">(</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span>
+                                         <span class="n">carbon_betas</span> <span class="o">=</span> <span class="n">carbon_betas</span><span class="p">,</span>
+                                         <span class="n">Sigma</span> <span class="o">=</span> <span class="n">Sigma</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We can now plot the relationship between maximum carbon beta threshold and the tracking error volatility:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">arange</span>
+
+<span class="n">list_betas</span> <span class="o">=</span> <span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+<span class="n">list_portfolios</span> <span class="o">=</span> <span class="p">[]</span>
+
+
+<span class="k">for</span> <span class="n">B</span> <span class="ow">in</span> <span class="n">list_betas</span><span class="p">:</span>
+  <span class="n">list_portfolios</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">low_betas_portfolio</span><span class="o">.</span><span class="n">get_portfolio</span><span class="p">(</span><span class="n">beta_sup</span> <span class="o">=</span> <span class="n">B</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">get_tracking_error_volatility</span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> 
+                                  <span class="n">b</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
+                                  <span class="n">Sigma</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+  <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">Sigma</span> <span class="o">@</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">b</span><span class="p">))</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">max_beta</span> <span class="o">=</span> <span class="p">[</span><span class="n">beta</span> <span class="k">for</span> <span class="n">beta</span> <span class="ow">in</span> <span class="n">list_betas</span><span class="p">]</span>
+<span class="n">te</span> <span class="o">=</span> <span class="p">[</span><span class="n">get_tracking_error_volatility</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">portfolio</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">Sigma</span> <span class="o">=</span> <span class="n">Sigma</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span> <span class="k">for</span> <span class="n">portfolio</span> <span class="ow">in</span> <span class="n">list_portfolios</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">max_beta</span><span class="p">,</span> <span class="n">te</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Maximum Carbon Beta&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Tracking Error Volatility (in %)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Efficient Carbon Risk Exposure Frontier with Threshold Approach&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<figure class="align-default" id="carbonbetate">
+<img alt="_images/carbonbetate.png" src="_images/carbonbetate.png" />
+<figcaption>
+<p><span class="caption-text">Figure: Efficient Carbon Risk Exposure Frontier with Threshold Approach</span><a class="headerlink" href="#carbonbetate" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>With this example, the more negative the maximum carbon beta is (that is, the more positively exposed to carbon risk the portfolio is), the higher the tracking error volatility with respect to the benchmark is. This is the result we would expect in theory (ie. in equilibrium). However, we’ve seen that in the last decade, brown assets underperformed green assets (BMG factor returns are negative). In practice, with historical returns, there is a chance that the relationship between the maximum carbon beta and the tracking error volatility is inversed. This negative returns associated with the BMG factor is a puzzling result that we will tackle in the next part.</p>
 </section>
 <section id="key-takeaways">
 <h2>Key Takeaways<a class="headerlink" href="#key-takeaways" title="Permalink to this headline">#</a></h2>
-<p>We’ve seen that we can relax the assumption that carbon risk is not priced in by the market. Carbon risk seems to corresponds to a systematic risk, with the existence of a Brown-Minus-Green Factor.</p>
-<p>Stocks sentivities to the BMG factor can be integrated into a minimum variance framework, in order to hedge for carbon risk. This strategy is based on a marked-based measure of carbon risk.</p>
-<p>Question remains regarding the returns associated the BMG factor. Indeed, returns should reward risk. With carbon risk, brown companies are significantly exposed to the risk. Then, investors should require higher returns to bear the risk with investment in brown companies.</p>
-<p>The thing is that the Carima’s BMG factor provide significant negative returns. With historic returns, it seems that investors require higher returns from green companies than for brown companies. This doesn’t make sense in a theoretical (and common sense) point of view.</p>
-<p>We will question the BMG factor puzzling result in the next part.</p>
+<ul class="simple">
+<li><p>We’ve seen that we can relax the assumption that carbon risk is not priced in by the market. Carbon risk seems to corresponds to a systematic risk, with the existence of a Brown-Minus-Green Factor.</p></li>
+<li><p>Stocks sentivities to the BMG factor can be integrated into a enhanced index, in order to hedge for carbon risk. This strategy is based on a marked-based measure of carbon risk.</p></li>
+<li><p>Question remains regarding the returns associated the BMG factor. Indeed, returns should reward risk. With carbon risk, brown companies are significantly exposed to the risk. Then, investors should require higher returns to bear the risk with investment in brown companies. But the Carima’s BMG factor provide significant negative returns. With historic returns, it seems that investors require higher returns from green companies than for brown companies. This doesn’t make sense in a theoretical (and common sense) point of view.</p></li>
+<li><p>We will question the BMG factor puzzling result in the next part.</p></li>
+</ul>
 </section>
 </section>
 
