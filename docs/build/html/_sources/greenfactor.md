@@ -21,16 +21,31 @@ We will follow the same approach, explaining the differences between realized an
 
 #### Measuring Climate Concerns
 
-To build a measure of unanticipated climate concerns shock, Pastor et al. (2022) use the MCCC from Ardia et al. (2021). This MCCC:
+To build a measure of unanticipated climate concerns shock, Pastor et al. (2022) use the MCCC from Ardia et al. (2020). This MCCC:
 - aggregates news from eight major US newspapers
 - captures the number of climate news stories each day and their negativity / focus on risk
 
+Let's have a look to the latest version of the MCCC from Ardia et al. (2022) {cite:p}`ardia2022climate`:
 ```Python
-# download and look at the index https://sentometrics-research.com/download/mccc/
+import pandas as pd
+url = 'https://www.dropbox.com/scl/fi/uucc6401uje293ofc3ahq/Sentometrics_US_Media_Climate_Change_Index.xlsx?dl=1&rlkey=jvgb6xg9w4ctdz5cdl6qun5md'
+mccc = pd.read_excel(url, sheet_name = "SSRN 2022 version (monthly)", header = 5)[['Date','Aggregate']]
+mccc['Date'] = pd.to_datetime(mccc['Date'].astype(str)).dt.strftime('%Y-%m')
+mccc.index = mccc['Date']
+mccc.plot(figsize = (12, 12), ylabel = "MCCC")
 ```
 
-Following Pastor et al. (2022), we will measure shocks to climate concerns as prediction errors from AR(1) models applied to the MCCC index. To compute the prediction error in month $t$, the steps are the followings:
-- estimate an AR(1) model using the 36 months of MCCC data ending in month $t-1$
+```{figure} mcc.png
+---
+name: mcc
+---
+Figure: MCCC (2022 version)
+```
+
+If the resulting index seems quite volatile, we can see an increasing trend in the 2010s.
+
+Following Pastor et al. (2022), we will now measure shocks to climate concerns as prediction errors from AR(1) models applied to this MCCC index. To compute the prediction error in month $t$, the steps are the followings:
+- we estimate an AR(1) model using the 36 months of MCCC data ending in month $t-1$
 - set the prediction error to month $t$ level of MCCC minus the AR(1) model's prediction
 
 More formally, given a climate change concerns at time $t$, $MCCC(t)$, we want to capture the unexpected shock as:
