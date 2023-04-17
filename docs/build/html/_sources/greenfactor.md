@@ -102,16 +102,16 @@ R_{GMB}(t) = \alpha + \beta C(t) + u(t)
 
 Where $\alpha = \mu$ because $C(t)$ has zero mean ex ante and $R(t)$ is the monthly return of the Green-Minus-Brown portfolio.
 
-```Python
-# Perform the regression
-```
 Once the regression is performed, we can then build the counterfactual by adding the regression intercept $\hat{\alpha}$ plus the estimated residual.
 
-```Python
-# plot cumulative counterfactual returns
-```
+The counterfactual, with $C(t) = 0$ is close to zero according to Pastor et al. (2022) results:
 
-The counterfactual, with $C(t) = 0$ is close to zero. In fact, it turns to be negative in Pastor et al. (2022) when including other proxies for attention shift. 
+```{figure} counterfactualreturns.png
+---
+name: counterfactualreturns
+---
+Figure: Cumulative counterfactual vs. realized GMB returns (Pastor et al., 2022)
+```
 
 ### Constructing the Green Factor Portfolio
 
