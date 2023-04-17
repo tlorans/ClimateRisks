@@ -90,17 +90,17 @@ Figure: Cumulative Climate Concern Shocks
 ```
 #### Counterfactual
 
-To assess whether climate concerns shocks $\Delta C (t)$ can explains green assets outperformance, Pastor et al. (2022) propose to build a counterfactual returns. 
+To assess whether climate concerns shocks $C(t)$ can explain green assets outperformance, Pastor et al. (2022) propose to build a counterfactual returns. 
 
-The approach relies on the problem of inferring an asset's expected return $\mu = \mathbb[r(t)]$ using historical observations. The most common approach is to use the asset's sample average return, $\bar{r}$, as an estimate of $\mu$.
+The approach relies on the problem of inferring an asset's expected return $\mu = \mathbb{E}[r(t)]$. The most common approach is to use the asset's sample average return, $\bar{r}$, as an estimate of $\mu$.
 
-Pastor et al. (2022) propose another approach introducing the additional information from climate shocks. We can estimate the following regression:
+Pastor et al. (2022) propose another approach, introducing the additional information from climate shocks. We can estimate the following regression:
 
 \begin{equation}
-R_{GMB}(t) = \alpha + \beta \Delta C(t) + u(t)
+R_{GMB}(t) = \alpha + \beta C(t) + u(t)
 \end{equation}
 
-Where $\alpha = \mu$ because $\Delta C(t)$ has zero mean ex ante and $R(t)$ is the monthly return of the Green-Minus-Brown portfolio.
+Where $\alpha = \mu$ because $C(t)$ has zero mean ex ante and $R(t)$ is the monthly return of the Green-Minus-Brown portfolio.
 
 ```Python
 # Perform the regression
@@ -111,7 +111,7 @@ Once the regression is performed, we can then build the counterfactual by adding
 # plot cumulative counterfactual returns
 ```
 
-The counterfactual, with $\Delta C(t) = 0$ is close to zero. In fact, it turns to be negative in Pastor et al. (2022) when including other proxies for attention shift. 
+The counterfactual, with $C(t) = 0$ is close to zero. In fact, it turns to be negative in Pastor et al. (2022) when including other proxies for attention shift. 
 
 ### Constructing the Green Factor Portfolio
 
