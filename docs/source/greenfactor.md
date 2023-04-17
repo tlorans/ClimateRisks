@@ -113,7 +113,9 @@ Figure: Cumulative counterfactual vs. realized GMB returns (Pastor et al., 2022)
 
 ### Key Takeaways
 
+- We've seen in this part that realized returns for green assets have been higher than expected ones in 2010s, due to unanticipated increases in climate concerns.
 
+- It is an illustration of the fact that measuring $\mathbb{E}[R]$ with recent average realized returns can be dangerous, especially with a sample period with a lot of shocks.
 
 
 
