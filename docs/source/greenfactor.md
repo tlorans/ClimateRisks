@@ -51,19 +51,42 @@ Following Pastor et al. (2022), we will now measure shocks to climate concerns a
 More formally, given a climate change concerns at time $t$, $MCCC(t)$, we want to capture the unexpected shock as:
 
 \begin{equation}
-\Delta C(t) = \Delta MCCC(t) - \mathbb{E}[\Delta MCCC(t)|I(t-1)]
+C(t) = MCCC(t) - \mathbb{E}[MCCC(t)|I(t-1)]
 \end{equation}
 
-Where $\Delta MCCC(t)$ is the change in climate change concerns at time $t$, $I(t-1)$ is the information set available at time $t$ and $\Delta C(t)$ is the climate change concerns shock.
+Where $MCCC(t)$ is the climate change concerns at time $t$, $I(t-1)$ is the information set available at time $t$ and $C(t)$ is the climate change concerns shock.
 
-
+Let's compute the AR(1) model in Python and produce the predictions $\mathbb{E}[MCCC(t)|I(t-1)]$:
 ```Python
-# AR model
+from statsmodels.tsa.ar_model import AutoReg
+
+model = AutoReg(mccc['Aggregate'], lags=1)
+model_fit = model.fit()
+print('Coefficients: %s' % model_fit.params)
+
+import numpy as np
+
+preds = []
+for t in range(0, len(mccc['Aggregate'])):
+    if t < 36:
+      pred = np.nan
+    else:
+      pred = model_fit.params[0] + np.sum(model_fit.params[1:]*mccc['Aggregate'][t-1:t].values[::-1])
+    preds.append(pred)
+
+mccc['Preds'] = preds
 ```
 
-Let's plot the cumultative shocks to climate concerns:
+Let's now compute and plot the cumultative shocks to climate concerns:
 ```Python
-#plot
+mccc['Climate_Shock'] = mccc['Aggregate'] - mccc['Preds']
+```
+
+```{figure} climateshocks.png
+---
+name: climateshocks
+---
+Figure: Cumulative Climate Concern Shocks
 ```
 #### Counterfactual
 

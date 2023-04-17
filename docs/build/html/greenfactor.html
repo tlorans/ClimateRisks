@@ -350,29 +350,52 @@ The empirical framework for testing this is the following:</p>
 <p>Following Pastor et al. (2022), we will now measure shocks to climate concerns as prediction errors from AR(1) models applied to this MCCC index. To compute the prediction error in month <span class="math notranslate nohighlight">\(t\)</span>, the steps are the followings:</p>
 <ul class="simple">
 <li><p>we estimate an AR(1) model using the 36 months of MCCC data ending in month <span class="math notranslate nohighlight">\(t-1\)</span></p></li>
-<li><p>set the prediction error to month <span class="math notranslate nohighlight">\(t\)</span> level of MCCC minus the AR(1) model’s prediction</p></li>
+<li><p>we set the prediction error to month <span class="math notranslate nohighlight">\(t\)</span> level of MCCC minus the AR(1) model’s prediction</p></li>
 </ul>
 <p>More formally, given a climate change concerns at time <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(MCCC(t)\)</span>, we want to capture the unexpected shock as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8622b078-c43b-4b4d-8224-e7ff29556e0c">
-<span class="eqno">(1)<a class="headerlink" href="#equation-8622b078-c43b-4b4d-8224-e7ff29556e0c" title="Permalink to this equation">#</a></span>\[\begin{equation}
-\Delta C(t) = \Delta MCCC(t) - \mathbb{E}[\Delta MCCC(t)|I(t-1)]
+<div class="amsmath math notranslate nohighlight" id="equation-ef81fab6-78ff-442b-86e7-a8c5bb545d85">
+<span class="eqno">(1)<a class="headerlink" href="#equation-ef81fab6-78ff-442b-86e7-a8c5bb545d85" title="Permalink to this equation">#</a></span>\[\begin{equation}
+C(t) = MCCC(t) - \mathbb{E}[MCCC(t)|I(t-1)]
 \end{equation}\]</div>
-<p>Where <span class="math notranslate nohighlight">\(\Delta MCCC(t)\)</span> is the change in climate change concerns at time <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(I(t-1)\)</span> is the information set available at time <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(\Delta C(t)\)</span> is the climate change concerns shock.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># AR model</span>
+<p>Where <span class="math notranslate nohighlight">\(MCCC(t)\)</span> is the climate change concerns at time <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(I(t-1)\)</span> is the information set available at time <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(C(t)\)</span> is the climate change concerns shock.</p>
+<p>Let’s compute the AR(1) model in Python and produce the predictions <span class="math notranslate nohighlight">\(\mathbb{E}[MCCC(t)|I(t-1)]\)</span>:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.tsa.ar_model</span> <span class="kn">import</span> <span class="n">AutoReg</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">AutoReg</span><span class="p">(</span><span class="n">mccc</span><span class="p">[</span><span class="s1">&#39;Aggregate&#39;</span><span class="p">],</span> <span class="n">lags</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">model_fit</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Coefficients: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">model_fit</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">preds</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">mccc</span><span class="p">[</span><span class="s1">&#39;Aggregate&#39;</span><span class="p">])):</span>
+    <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="mi">36</span><span class="p">:</span>
+      <span class="n">pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="n">pred</span> <span class="o">=</span> <span class="n">model_fit</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">model_fit</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">*</span><span class="n">mccc</span><span class="p">[</span><span class="s1">&#39;Aggregate&#39;</span><span class="p">][</span><span class="n">t</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">preds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span>
+
+<span class="n">mccc</span><span class="p">[</span><span class="s1">&#39;Preds&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">preds</span>
 </pre></div>
 </div>
-<p>Let’s plot the cumultative shocks to climate concerns:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1">#plot</span>
+<p>Let’s now compute and plot the cumultative shocks to climate concerns:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mccc</span><span class="p">[</span><span class="s1">&#39;Climate_Shock&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mccc</span><span class="p">[</span><span class="s1">&#39;Aggregate&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">mccc</span><span class="p">[</span><span class="s1">&#39;Preds&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
+<figure class="align-default" id="climateshocks">
+<img alt="_images/climateshocks.png" src="_images/climateshocks.png" />
+<figcaption>
+<p><span class="caption-text">Figure: MCCC (2022 version)</span><a class="headerlink" href="#climateshocks" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 </section>
 <section id="counterfactual">
 <h3>Counterfactual<a class="headerlink" href="#counterfactual" title="Permalink to this headline">#</a></h3>
 <p>To assess whether climate concerns shocks <span class="math notranslate nohighlight">\(\Delta C (t)\)</span> can explains green assets outperformance, Pastor et al. (2022) propose to build a counterfactual returns.</p>
 <p>The approach relies on the problem of inferring an asset’s expected return <span class="math notranslate nohighlight">\(\mu = \mathbb[r(t)]\)</span> using historical observations. The most common approach is to use the asset’s sample average return, <span class="math notranslate nohighlight">\(\bar{r}\)</span>, as an estimate of <span class="math notranslate nohighlight">\(\mu\)</span>.</p>
 <p>Pastor et al. (2022) propose another approach introducing the additional information from climate shocks. We can estimate the following regression:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d94cf079-143b-4222-86ac-8adf4100369d">
-<span class="eqno">(2)<a class="headerlink" href="#equation-d94cf079-143b-4222-86ac-8adf4100369d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-83685e29-6c94-4208-afa4-ca94e591feb5">
+<span class="eqno">(2)<a class="headerlink" href="#equation-83685e29-6c94-4208-afa4-ca94e591feb5" title="Permalink to this equation">#</a></span>\[\begin{equation}
 R_{GMB}(t) = \alpha + \beta \Delta C(t) + u(t)
 \end{equation}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(\alpha = \mu\)</span> because <span class="math notranslate nohighlight">\(\Delta C(t)\)</span> has zero mean ex ante and <span class="math notranslate nohighlight">\(R(t)\)</span> is the monthly return of the Green-Minus-Brown portfolio.</p>
@@ -394,8 +417,8 @@ R_{GMB}(t) = \alpha + \beta \Delta C(t) + u(t)
 <h3>Measuring Greeness<a class="headerlink" href="#measuring-greeness" title="Permalink to this headline">#</a></h3>
 <p>Pastor et al. (2022) use MSCI Environmental scores to measure stocks’ greeness. In our application, we will rather use the carbon intensity.</p>
 <p>We measure the relative greeness of each stock compared to the market portfolio, such as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0ddbfce0-c46f-41ed-ae6d-79b3342fe0c6">
-<span class="eqno">(3)<a class="headerlink" href="#equation-0ddbfce0-c46f-41ed-ae6d-79b3342fe0c6" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a7cf1d03-7d24-40a7-ac42-b5c5395d18f1">
+<span class="eqno">(3)<a class="headerlink" href="#equation-a7cf1d03-7d24-40a7-ac42-b5c5395d18f1" title="Permalink to this equation">#</a></span>\[\begin{equation}
 ci_i = CI_i - \bar{CI} 
 \end{equation}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(\bar{CI} = b^T \cdot CI\)</span> with <span class="math notranslate nohighlight">\(b\)</span> the vector of market-capitalization weights and <span class="math notranslate nohighlight">\(CI\)</span> the vector of carbon intensities. <span class="math notranslate nohighlight">\(\bar{CI}\)</span> corresponds to the weighted-average carbon intensity (WACI) of the market-capitalization portfolio.</p>
@@ -412,8 +435,8 @@ ci_i = CI_i - \bar{CI}
 </pre></div>
 </div>
 <p>And we have:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7850a238-1408-493f-9d91-5cf7e4d44eff">
-<span class="eqno">(4)<a class="headerlink" href="#equation-7850a238-1408-493f-9d91-5cf7e4d44eff" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-1c1549a7-2498-4d34-a0e3-af5e76862fbf">
+<span class="eqno">(4)<a class="headerlink" href="#equation-1c1549a7-2498-4d34-a0e3-af5e76862fbf" title="Permalink to this equation">#</a></span>\[\begin{equation}
 b^T \cdot ci= 0
 \end{equation}\]</div>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">ci</span><span class="p">)</span>
@@ -428,16 +451,16 @@ b^T \cdot ci= 0
 <h3>The Green Factor<a class="headerlink" href="#the-green-factor" title="Permalink to this headline">#</a></h3>
 <p>The green factor portfolio is then constructed with the weights proportional to their relative greeness measure <span class="math notranslate nohighlight">\(ci\)</span>. The green factor portfolio is a portfolio containing long positions in green stocks (<span class="math notranslate nohighlight">\(ci&gt;0\)</span>) and short positions in brown stocks (<span class="math notranslate nohighlight">\(ci&lt;0\)</span>).</p>
 <p>The vector of weights <span class="math notranslate nohighlight">\(x\)</span> is given by:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-23d41ca0-60d8-49fa-9d20-50a57f719a0e">
-<span class="eqno">(5)<a class="headerlink" href="#equation-23d41ca0-60d8-49fa-9d20-50a57f719a0e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b58c2578-f42a-496c-9774-88088da281d9">
+<span class="eqno">(5)<a class="headerlink" href="#equation-b58c2578-f42a-496c-9774-88088da281d9" title="Permalink to this equation">#</a></span>\[\begin{equation}
 x = \frac{1}{ci^T \cdot ci} ci
 \end{equation}\]</div>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">ci</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">ci</span><span class="p">)</span> <span class="o">*</span> <span class="n">ci</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>And the green factor portfolio greeness is equal to one:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-45fe871d-85ba-4143-a0b0-adc944712185">
-<span class="eqno">(6)<a class="headerlink" href="#equation-45fe871d-85ba-4143-a0b0-adc944712185" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-be507022-919b-4a97-a945-7e3dbf86f7f4">
+<span class="eqno">(6)<a class="headerlink" href="#equation-be507022-919b-4a97-a945-7e3dbf86f7f4" title="Permalink to this equation">#</a></span>\[\begin{equation}
 x^T \cdot ci = 1
 \end{equation}\]</div>
 <p>This is also a condition imposed by the equilibrium model from Pastor et al. (2021).</p>
