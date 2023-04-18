@@ -1,6 +1,6 @@
 # Part 2: Net Zero Investing
 
-Before the surge of net zero alliances (GFANZ, NZAOA, NZAM, NZBA) and their pledges towards net zero investment, climate investing mainly involved decarbonizaing portfolios or constructing low-carbon indices with the low-carbon strategy we've seen in the first part of this course.
+Before the surge of net zero alliances (GFANZ, NZAOA, NZAM, NZBA) and their pledges towards net zero investments, climate investing mainly involved decarbonizaing portfolios or constructing low-carbon indices with the low-carbon strategy we've seen in the first part of this course.
 
 But, as stated by Barahhou et al. (2022) {cite:p}`barahhou2022net`, net zero investing has changed the scope of climate investing, as the corresponding strategy cannot be considered as a simple tilt of a business-as-usual portfolio.
 
