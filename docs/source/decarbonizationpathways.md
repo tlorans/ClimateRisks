@@ -197,7 +197,7 @@ Which is close to zero.
 We then can say that our example decarbonization pathway complies with the carbon budget constraint for a NZE scenario.
 ### Decarbonization Pathway for Portfolio
 
-If a decarbonization pathway is generally valid for an economy or a country, we must have in mind that it is defined in terms of absolute carbon emissions in this case. However, portfolio decarbonization uses carbon intensity, and not absolute carbon emissions.
+If a decarbonization pathway is generally valid for an economy or a country, we must have in mind that it is defined in terms of absolute carbon emissions in this case. However, portfolio decarbonization uses carbon intensity, and not absolute carbon emissions. We thus need to introduce the relationship of carbon emissions and carbon intensity pathway.
 
 #### Carbon Emissions and Carbon Intensity Pathway Relationship
 
@@ -240,9 +240,38 @@ Then, the relationship between the financial and the economic decarbonization pa
 \mathfrak{R}_{CI}(t_0,t) = 1 - (1 - \frac{(g_Y + \Delta \mathfrak{R}_{CE})}{1 + g_Y})^{t - t_0}
 \end{equation}
 
+We can create a new dataclass `FinancialDecarbonizationPathway`:
+```Python
+@dataclass 
+class FinancialDecarbonizationPathway:
+
+  delta_R_CE:float # Average yearly reduction rate (absolute emissions)
+  g_Y:float # constant growth rate of the normalization variable
+
+  def get_decarbonization_pathway(self, t_0:int, t:int):
+    pathway = []
+    for i in range(t_0,t+1):
+      r = 1 - (1 - (self.g_Y + self.delta_R_CE) / (1 + self.g_Y))**(i - t_0)
+      pathway.append(r)      
+    
+    return pathway
+```
+And then determine the reduction rate with $g_Y = 0.03$ and $\Delta \mathfrak{R}_{CE} = 0.07$:
 
 ```Python
-# reproduce figure 3 page 9 Net Zero Integrated approach about the impact of the growth rate g_Y on the intensity decarbonization pathway and Delta R_CE set to 7% -> on y-axis the R_CI
+test = FinancialDecarbonizationPathway(delta_R_CE = 0.07, g_Y = 0.03)
+pathway = test.get_decarbonization_pathway(t_0 = 2020, t = 2050)
+plt.plot([i for i in range(2020, 2050 + 1)], pathway)
+plt.ylabel("Reduction rate")
+plt.figure(figsize = (10, 10))
+plt.show()
+```
+
+```{figure} financialpathway.png
+---
+name: financialpathway
+---
+Figure: Decarbonization pathway with $\Delta \mathfrak{R}_{CE} = 0.07$ and $g_Y- = 0.03$
 ```
 
 #### From Economic to Financial Decarbonization Pathway
