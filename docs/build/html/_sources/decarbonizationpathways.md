@@ -141,18 +141,60 @@ Figure: Carbon Emissions Scenario with $\Delta \mathfrak{R} = 0.07$ and $\mathfr
 
 #### From Decarbonization Pathway to Carbon Budget
 
-From Le Guenedal et al. (2022 {cite:p}`le2022net`), we find the carbon budget with a given value for $\mathfrak{R}^-$, $\Delta \mathfrak{R}$ and $CE(t_0)$ with:
+From Le Guenedal et al. (2022 {cite:p}`le2022net`), we can find the carbon budget with a given value for $\mathfrak{R}^-$, $\Delta \mathfrak{R}$ and $CE(t_0)$ with:
 
 \begin{equation}
 CB(t_0,t) = (\frac{(1 - \Delta \mathfrak{R})^{t-t_0} - 1}{ln(1 - \Delta \mathfrak{R})})(1 - \mathfrak{R}^-)CE(t_0)
 \end{equation}
 
+We can add a new method to the `DecarbonizationPathway` dataclass:
 ```Python
-# reproduce results in Table 1 p7 in Net Zero Portfolio, an integrated approach
+@dataclass 
+class DecarbonizationPathway:
+
+  delta_R:float # Average yearly reduction rate
+  R_min:float # Minimum reduction rate
+
+  def get_decarbonization_pathway(self, t_0:int, t:int):
+    pathway = []
+    for i in range(t_0,t+1):
+      r = 1 - (1 - self.delta_R)**(i-t_0)*(1 - self.R_min)
+      pathway.append(r)      
+    
+    return pathway
+
+  def get_emissions_scenario(self, t_0:int, t:int, CE_start:float):
+    scenario = [CE_start]
+    for i in range(t_0, t+1):
+      ce = (1 - self.delta_R)**(i - t_0) * (1 - self.R_min) * CE_start
+      scenario.append(ce)
+
+    return scenario
+    
+  def get_carbon_budget(self, t_0:int, t:int, CE_start:float):
+    return ((1 - self.delta_R)**(t - t_0) - 1)/(np.log(1 - self.delta_R))*(1 - self.R_min)*CE_start
 ```
 
-From a given decarbonization pathway, we can then estimate $CB(t_0,2050)$ and $CE(2050)$, the variables we need to check net zero compliance.
+With a given decarbonization pathway, we can then estimate $CB(t_0,2050)$ and $CE(2050)$ to check if the carbon budget holds. In our previous example we have:
 
+```Python
+test = DecarbonizationPathway(delta_R = 0.07, R_min = 0.3)
+test.get_carbon_budget(t_0 = 2020, t = 2050, CE_start = 36)
+```
+```
+307.8810311773137
+```
+Which is less than $CB^+$.
+And:
+```Python
+test.get_emissions_scenario(t_0 = 2020, t = 2050, CE_start = 36)[-1]
+```
+```
+2.8568602567587567
+```
+Which is close to zero.
+
+We then can say that our example decarbonization pathway complies with the carbon budget constraint for a NZE scenario.
 ### Decarbonization Pathway for Portfolio
 
 If a decarbonization pathway is generally valid for an economy or a country, we must have in mind that it is defined in terms of absolute carbon emissions in this case. However, portfolio decarbonization uses carbon intensity, and not absolute carbon emissions.
