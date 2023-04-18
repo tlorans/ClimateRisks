@@ -41,8 +41,48 @@ A decarbonization pathway is then defined as:
 Where $t_0$ is the base year, $t$ the year index and $\mathfrak{R}(t_0,t)$ is the reduction rate of the carbon emissions between $t_0$ and $t$.
 
 
+Let's make an example of a decarbonization pathway in Python. We first create a dataclass `DecarbonizationPathway`:
 ```Python
-# Reproduce figure 1 page 6 in Net Zero Investment Portfolios Part 1
+from dataclasses import dataclass
+import numpy as np
+
+@dataclass 
+class DecarbonizationPathway:
+
+  delta_R:float # Average yearly reduction rate
+  R_min:float # Minimum reduction rate
+
+  def get_decarbonization_pathway(self, t_0:int, t:int):
+    pathway = []
+    for i in range(t_0,t+1):
+      r = 1 - (1 - self.delta_R)**(i-t_0)*(1 - self.R_min)
+      pathway.append(r)
+    
+    return pathway
+```
+
+Then instantiate it with $\Delta \mathfrak{R} = 0.07$ and $\mathfrak{R}^- = 0.3$:
+
+```Python
+test = DecarbonizationPathway(delta_R = 0.07, R_min = 0.3)
+pathway = test.get_decarbonization_pathway(t_0 = 2020, t = 2050)
+```
+We can then plot the results:
+
+```Python
+import matplotlib.pyplot as plt 
+
+plt.plot([i for i in range(2020, 2050 + 1)], pathway)
+plt.ylabel("Reduction rate")
+plt.figure(figsize = (10, 10))
+plt.show()
+```
+
+```{figure} reductionrate.png
+---
+name: reductionrate
+---
+Figure: Decarbonization Pathway with $\Delta \mathfrak{R} = 0.07$ and $\mathfrak{R}^- = 0.30$
 ```
 
 Starting with the decarbonization pathway, we can deduce the emissions scenario (Barahhou et al., 2022):
