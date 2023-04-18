@@ -1,6 +1,10 @@
 ## Decarbonization Pathway
 
-To be able to implement a net zero investing policy, investors have to define a net zero emissions (NZE) scenario, which is summarized by a decarbonization pathway. In this part, we will see how to check if a given decarbonization pathway or an emissions scenario is net zero compliant.
+To implement a net zero investing policy, investors have to start with a net zero emissions (NZE) scenario and the corresponding decarbonization pathway. The decarbonization pathway of the NZE has two statuses:
+- it is the exogenous pathway that the economy must follow to limit the probability of reaching 1.5°C
+- it becomes the endoenous pathway if the world close the gap between current and needed invetments to finance transition to a low-carbon economy
+
+In this part, we will give a definition of a NZE with the carbon budget constraint and how to check if a decarbnoization pathway complies with a NZE. Then, we will address the portfolio's decarbonization pathway, based on carbon intensity rather than absolute emissions. 
 
 ### Carbon Budget Constraint
 
@@ -20,8 +24,6 @@ CE(2050) \approx 0
 With $CE(t)$ the global carbon emissions at time $t$, $CB(t_0,t)$ the global carbon budget between $t_0$ and $t$ and $CB^+$ the maximum carbon budget to attain a given objective of global warming mitigation. If we consider the AR5 results of IPCC (2018), we can set $CB^+ = 580$.
 
 The carbon budget defines the amount of CO2eq emissions produced over the time period $[t_0,t]$ for a given emissions scenario. Checking if a given emissions scenario complies with the Net Zero objective corresponds to checking if the corresponding carbon budget respect the constraint above, with a carbon emissions level in 2050 close to 0.
-
-### Net Zero Objective Compliance
 
 To check if a given decarbonization pathway or an emissions scenario fulfill the Net Zero objective, investors need to assess if the resulting carbon budget $CB(t_0, 2050)$ and the final carbon emissions level $CE(2050)$ comply with the carbon budget constraint stated above.
 
