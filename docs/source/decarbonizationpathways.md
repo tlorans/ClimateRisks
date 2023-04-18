@@ -1,8 +1,8 @@
-## Net Zero Emissions Scenario
+## Decarbonization Pathway
 
 To be able to implement a net zero investing policy, investors have to define a net zero emissions (NZE) scenario, which is summarized by a decarbonization pathway. In this part, we will see how to check if a given decarbonization pathway or an emissions scenario is net zero compliant.
 
-### Net Zero Emissions (NZE) Scenario as a Carbon Budget Constraint
+### Carbon Budget Constraint
 
 A net zero emissions (NZE) scenario corresponds to an emissions scenario, which is compatible with a carbon budget corresponding to a certain objective of global warming mitigation.
 
@@ -154,8 +154,6 @@ This financial decarbonization pathway is thus:
 ```
 
 PAB financial decarbonization very aggressive pathway compared to the IEA deduced pathway for the next ten years.
-
-
 
 ### Key Takeaways
 
