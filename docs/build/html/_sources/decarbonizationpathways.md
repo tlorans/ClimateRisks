@@ -45,11 +45,15 @@ Where $t_0$ is the base year, $t$ the year index and $\mathfrak{R}(t_0,t)$ is th
 # Reproduce figure 1 page 6 in Net Zero Investment Portfolios Part 1
 ```
 
-Considering the definition of the decarbonization pathway, we have the following emissions scenario (Roncalli et al., 2022):
+Starting with the decarbonization pathway, we can deduce the emissions scenario (Barahhou et al., 2022):
 
 \begin{equation}
 CE(t) = (1 - \Delta \mathfrak{R})^{t - t_0}(1 - \mathfrak{R}^-) CE(t_0)
 \end{equation}
+
+```Python
+# Reproduce figure 1 page 6 in Net Zero Investment Portfolios Part 1
+```
 
 #### From Decarbonization Pathway to Carbon Budget
 
