@@ -4,7 +4,7 @@ To implement a net zero investing policy, investors have to start with a net zer
 - it is the exogenous pathway that the economy must follow to limit the probability of reaching 1.5°C
 - it becomes the endoenous pathway if the world close the gap between current and needed invetments to finance transition to a low-carbon economy
 
-In this part, we will give a definition of a NZE with the carbon budget constraint and how to check if a decarbonization pathway complies with a NZE. Then, we will address the portfolio's decarbonization pathway, based on carbon intensity rather than absolute emissions. 
+In this part, we will give a definition of a NZE scenario with the carbon budget constraint and how to check if a decarbonization pathway complies with a NZE scenario. Then, we will address the portfolio's decarbonization pathway, based on carbon intensity rather than absolute emissions. 
 
 ### Carbon Budget Constraint
 
@@ -91,8 +91,52 @@ Starting with the decarbonization pathway, we can deduce the emissions scenario 
 CE(t) = (1 - \Delta \mathfrak{R})^{t - t_0}(1 - \mathfrak{R}^-) CE(t_0)
 \end{equation}
 
+We can add a new method to the `DecarbonizationPathway` dataclass:
 ```Python
-# Reproduce figure 1 page 6 in Net Zero Investment Portfolios Part 1
+from dataclasses import dataclass
+import numpy as np
+
+@dataclass 
+class DecarbonizationPathway:
+
+  delta_R:float # Average yearly reduction rate
+  R_min:float # Minimum reduction rate
+
+  def get_decarbonization_pathway(self, t_0:int, t:int):
+    pathway = []
+    for i in range(t_0,t+1):
+      r = 1 - (1 - self.delta_R)**(i-t_0)*(1 - self.R_min)
+      pathway.append(r)      
+    
+    return pathway
+
+  def get_emissions_scenario(self, t_0:int, t:int, CE_start:float):
+    scenario = [CE_start]
+    for i in range(t_0, t+1):
+      ce = (1 - self.delta_R)**(i - t_0) * (1 - self.R_min) * CE_start
+      scenario.append(ce)
+
+    return scenario
+```
+
+And then compute the emissions scenario and plot the results:
+```Python
+test = DecarbonizationPathway(delta_R = 0.07, R_min = 0.3)
+scenario = test.get_emissions_scenario(t_0 = 2020, t = 2050, CE_start = 36)
+
+import matplotlib.pyplot as plt 
+
+plt.plot([i for i in range(2019, 2050 + 1)], scenario)
+plt.ylabel("Carbon Emissions (GtC02eq)")
+plt.figure(figsize = (10, 10))
+plt.show()
+```
+
+```{figure} emissionsscenario.png
+---
+name: emissionscenario
+---
+Figure: Carbon Emissions Scenario with $\Delta \mathfrak{R} = 0.07$ and $\mathfrak{R}^- = 0.30$
 ```
 
 #### From Decarbonization Pathway to Carbon Budget
