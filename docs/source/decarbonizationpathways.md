@@ -4,15 +4,16 @@ To implement a net zero investing policy, investors have to start with a net zer
 - it is the exogenous pathway that the economy must follow to limit the probability of reaching 1.5°C
 - it becomes the endoenous pathway if the world close the gap between current and needed invetments to finance transition to a low-carbon economy
 
-In this part, we will give a definition of a NZE with the carbon budget constraint and how to check if a decarbnoization pathway complies with a NZE. Then, we will address the portfolio's decarbonization pathway, based on carbon intensity rather than absolute emissions. 
+In this part, we will give a definition of a NZE with the carbon budget constraint and how to check if a decarbonization pathway complies with a NZE. Then, we will address the portfolio's decarbonization pathway, based on carbon intensity rather than absolute emissions. 
 
 ### Carbon Budget Constraint
 
-A net zero emissions (NZE) scenario corresponds to an emissions scenario, which is compatible with a carbon budget corresponding to a certain objective of global warming mitigation.
+As stated by Barahhou et al. (2022), a net zero emissions (NZE) scenario corresponds to an emissions scenario, which is compatible with a carbon budget. 
+The carbon budget defines the amount of CO2eq emissions produced over the time period $[t_0,t]$ for a given emissions scenario. The carbon budget corresponds to a certain objective of global warming mitigation.
 
 As an example, the IPCC (2018 {cite:p}`masson2018global`) gives an estimate of a remaining carbon budget of 580 GtC02eq for a 50% probability of limiting the warming to 1.5°C. The objective is to limit the global warming to 1.5°C while the corresponding carbon budget is 580 GTCO2eq. What is missing in this statement is the corresponding emissions scenario. We will see later how to determine a carbon pathway (or emission scenario) based on a carbon budget.
 
-A NZE scenario can then be defined by a carbon pathway that satisfies the following constraints (Roncalli et al., 2022 {cite:p}`barahhou2022net`):
+More formally, a NZE scenario can then be defined by a carbon pathway that satisfies the following constraints (Barahhou et al., 2022):
 
 \begin{equation}
 CB(t_0, 2050) \leq CB^+
@@ -23,13 +24,10 @@ CE(2050) \approx 0
 
 With $CE(t)$ the global carbon emissions at time $t$, $CB(t_0,t)$ the global carbon budget between $t_0$ and $t$ and $CB^+$ the maximum carbon budget to attain a given objective of global warming mitigation. If we consider the AR5 results of IPCC (2018), we can set $CB^+ = 580$.
 
-The carbon budget defines the amount of CO2eq emissions produced over the time period $[t_0,t]$ for a given emissions scenario. Checking if a given emissions scenario complies with the Net Zero objective corresponds to checking if the corresponding carbon budget respect the constraint above, with a carbon emissions level in 2050 close to 0.
-
-To check if a given decarbonization pathway or an emissions scenario fulfill the Net Zero objective, investors need to assess if the resulting carbon budget $CB(t_0, 2050)$ and the final carbon emissions level $CE(2050)$ comply with the carbon budget constraint stated above.
-
+A NZE scenario and the corresponding decarbonization pathway must thus comply with the carbon budget constraint above, with a carbon emissions level in 2050 close to 0.
 #### Decarbonization Pathway
 
-A decarbonization pathway summarized an emissions scenario. It is structured among the following principles:
+A decarbonization pathway summarizes an emissions scenario. It is structured among the following principles (Barahhou et al. 2022):
 1. An average yearly reduction rate $\Delta \mathfrak{R}$ 
 2. A minimum carbon reduction $\mathfrak{R}^-$
 
@@ -40,7 +38,7 @@ A decarbonization pathway is then defined as:
 \end{equation}
 
 
-Where $t_0$ is the base year, $t$ the year index and $\mathfrak{R}(t_0,t)$ is the reduction rate of the carbon footprint between $t_0$ and $t$.
+Where $t_0$ is the base year, $t$ the year index and $\mathfrak{R}(t_0,t)$ is the reduction rate of the carbon emissions between $t_0$ and $t$.
 
 
 ```Python
