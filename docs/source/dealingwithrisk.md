@@ -2,12 +2,12 @@
 
 Before discussing the implementation of these strategies, we need to make a quick overview of some fundamentals frameworks:
 - Portfolio optimization
-- Factor investing
+- Factor modelling
 
-These tools will be at the basis of the three strategies we will present thereafter in this course:
+These tools will be at the basis of the three parts we will present thereafter in this course:
 - Low-Carbon Strategy (Portfolio Optimization)
-- Enhanced Index with Carbon Beta (Portfolio Optimization and Factor Investing)
-- Green Factor (Factor Investing)
+- Enhanced Index with Carbon Beta (Portfolio Optimization and Factor Modelling)
+- Green Stocks Outperformance (Factor Modelling)
 
 We will discuss these basic tools with implementation in Python. In this course, we'll see how climate risks can be considered with these different approaches.
 
