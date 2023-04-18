@@ -271,7 +271,7 @@ plt.show()
 ---
 name: financialpathway
 ---
-Figure: Decarbonization pathway with $\Delta \mathfrak{R}_{CE} = 0.07$ and $g_Y- = 0.03$
+Figure: Decarbonization pathway with $\Delta \mathfrak{R}_{CE} = 0.07$ and $g_Y = 0.03$
 ```
 
 #### From Economic to Financial Decarbonization Pathway
