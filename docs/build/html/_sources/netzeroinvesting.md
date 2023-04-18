@@ -1,4 +1,4 @@
-# Net Zero Investing
+# Part 2: Net Zero Investing
 
 For many years, the default strategy proposed to investors for global warming mitigation was the low-carbon strategy. However, this approach has many drawbacks. 
 
