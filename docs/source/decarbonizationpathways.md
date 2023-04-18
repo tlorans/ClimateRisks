@@ -298,7 +298,8 @@ This financial decarbonization pathway is thus:
 \end{equation}
 
 ```Python
-# reproduce figure 17 page 30 of portfolio construction with climate measures
+# reproduce Table 2 Intensity decarbonization pathway
+# page 10 in NZE integrated approach
 ```
 
 PAB financial decarbonization very aggressive pathway compared to the IEA deduced pathway for the next ten years.
