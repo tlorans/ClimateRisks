@@ -153,17 +153,6 @@ CB(t_0,t) = (\frac{(1 - \Delta \mathfrak{R})^{t-t_0} - 1}{ln(1 - \Delta \mathfra
 
 From a given decarbonization pathway, we can then estimate $CB(t_0,2050)$ and $CE(2050)$, the variables we need to check net zero compliance.
 
-#### The IEA Scenario as a Net Zero Emissions Scenario
-
-Let's now take the International Energy Agency (IEA) net zero scenario. Wa can compute the carbon budget $CB(2019, 2050)$ by considering the carbon pathway as a piecewise linear function. We assume that $CE(s)$ is known for $s \in \{t_0,...,t_m = t\}$ and $CE(s)$ 
-
-Using the IEA scneario, we obtain $CB(2019, 2050) = 512.35$. Since $CB(2019, 2050) \leq CB^+$ and $CE(2050) = 1.94$, we can consider the IEA scenario as a 2050 net zero emissions scenario.
-
-```Python
-# Reproduce Figure 9.18 p355 of the handbook
-#done by setting CE 2019 = 36 Gt and assuming a constant compound reduction rate R
-```
-
 ### Decarbonization Pathway for Portfolio
 
 If a decarbonization pathway is generally valid for an economy or a country, we must have in mind that it is defined in terms of absolute carbon emissions in this case. However, portfolio decarbonization uses carbon intensity, and not absolute carbon emissions.
