@@ -1,19 +1,21 @@
 # Part 2: Net Zero Investing
 
-For many years, the default strategy proposed to investors for global warming mitigation was the low-carbon strategy. However, this approach has many drawbacks. 
+Before the surge of net zero alliances (GFANZ, NZAOA, NZAM, NZBA) and their pledges towards net zero investment, climate investing mainly involved decarbonizaing portfolios or constructing low-carbon indices with the low-carbon strategy we've seen in the first part of this course.
 
-First, low-carbon strategy performs portfolio decarbonization without any specific underlying emission scenario. It is therefore difficult for investors to assess the reality behind displayed climate objectives. Second, low-carbon strategy is static, as it relies on decarbonization compared to a reference universe for a stated year. Third, main low-carbon strategy approaches lead to sector biases and, therefore, doesn't contribute to finance transition to a low-carbon economy.
+But, as stated by Barahhou et al. (2022) {cite:p}`barahhou2022net`, net zero investing has changed the scope of climate investing, as the corresponding strategy cannot be considered as a simple tilt of a business-as-usual portfolio.
 
-Net zero investing emerged as a response to the low-carbon strategy drawbacks:
+Indeed, according to the framework proposed by Barahhou et al. (2022), a net zero portfolio:
 
-- Net zero emissions scenario translated to portfolio decarbonization pathway is a first step towards a robust net zero investing approach. With such a scenario, the investor has a sense of its contribution towards net zero objective, and can check if the portfolio's strategy comply with a climate objective. 
-- Based on a decarbonization pathway, net zero portfolio involves dynamic decarbonization, that contrast with the static one proposed by low-carbon strategy. Portfolio alignment in net zero portfolios is based on a reference year, and ensure that the portfolio decarbonization complies with the decarbonization pathway. 
-- Finally, an innovation with the construction of net zero portfolio, again compared with the traditional low-carbon strategy, is the integration of the transition dimension. A net zero portfolio must ensure its contribution towards a low-carbon economy. 
+- starts with a sound decarbonization pathway of a net zero emissions scenario
+- has a dynamic decarbonization dimension, respecting the endogenous aspect of the decarbonization pathway and implying self-decarbonization of the portfolio
+- encompasses the transition dimension, to ensure that the portfolio is financing the transition towards a low-carbon economy
 
-Unfortunately, the most known net zero investing framework to date, the Paris-Aligned Benchmarks methodoly, falls short in adressing consequently all of those themes:
-- The PAB's decarbonization pathway doesn't rely on any economic or physical foundations (ie. a sound and robust net zero emissions scenario). It is far more aggressive than a portfolio decarbonization pathway deduced from the IEA net zero emissions scenario.
-- Most of the portfolio's decarbonization comes from sequential decarbonization rather than self-decarbonization.
-- The PAB approach for the transition dimension integration, with the climate impact sectors constraint, falls short to fullfill this objective. In fact, the issue is that the decarbonization and the transition dimensions seem to be negatively correlated.
+The purpose of this part is to give you an overview of the net zero portfolio construction framework proposed by Barahhou et al. (2022). 
 
-If the low-carbon strategy is outdated regarding the net zero investing movement, the PAB label also has any drawbacks. A more robust net zero portfolio should ensure that both the decarbonization and the transition dimensions are well-addressed, with an acceptable level of self-decarbonization.
+Net zero portfolio starts with a net zero emissions scenario, which is a physical concept, based on carbon budget. We will see how to assess a decarbonization pathway compliance to a net zero objective, and how to derive the portfolio's decarbonization (based on carbon intensity) pathway from it.
 
+Net zero portfolio implies self-decarbonization rather than sequential decarbonization(meaning decarbonization based on rebalancement only). We will see how to determine from which component portfolio's decarbonization comes from, leading to the notion of net zero backtesting. We will see that adding carbon footprint dynamics metric helps in improving the self-decarbonization of the portfolio.
+
+Finally, the net zero portfolio integrates the transition dimension. We will see how a green intensity measure can help in ensuring that the portfolio contributes to the transition towards a low-carbon economy.
+
+In all these dimensions, we will compare the approach promoted by the Paris-Aligned Benchmarks framework to the framework proposed by Barahhou et al. (2022).
