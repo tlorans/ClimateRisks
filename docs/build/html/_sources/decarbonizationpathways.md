@@ -289,7 +289,13 @@ The IEA NZE scenario is the following (in GtCO2eq):
 |---|---|---|---|---|---|---|---|---|
 |$CE(t)$| 35.90  | 33.90   | 30.30  | 21.50  | 13.70 | 7.77 | 4.30 | 1.94 |
 
-We first need to estimate the corresponding decarbonization pathway $\mathfrak{R}_{CE}(t, t_0)$.
+We first need to estimate the corresponding decarbonization pathway $\mathfrak{R}_{CE}(t, t_0)$ with the carbon emissions scenario:
+\begin{equation}
+\mathfrak{R}_{CE}(t_0,t) = - \frac{CE(t)}{CE(t_0)}  - 1
+\end{equation}
+
+Then, for a given normalization variable growth rate $g_Y$ we have the financial decarbonization pathway:
+
 
 ```Python
 # reproduce Table 2 Intensity decarbonization pathway

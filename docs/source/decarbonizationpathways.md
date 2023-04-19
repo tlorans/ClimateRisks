@@ -276,7 +276,7 @@ Figure: Decarbonization pathway with $\Delta \mathfrak{R}_{CE} = 0.07$ and $g_Y 
 
 #### From Economic to Financial Decarbonization Pathway
 
-With a given economic decarbonization pathway $\mathfrak{R}_{CE}(t_0,t)$ and given normalization variable growth $g_Y(t_0,t)$, we can try to approximate the relationship between the economic and the financial decarbonization pathway in order to estimate the parameters $\mathfrak{R}^-_{CI}$ and $\Delta \mathfrak{R}_{CI}$ with the following regression model estimated by least squares:
+With a given economic decarbonization pathway $\mathfrak{R}_{CE}(t_0,t)$ and given normalization variable growth $g_Y(t_0,t)$, we can approximate the relationship between the economic and the financial decarbonization pathway in order to estimate the parameters $\mathfrak{R}^-_{CI}$ and $\Delta \mathfrak{R}_{CI}$ with the following regression model estimated by least squares:
 
 \begin{equation}
 \mathfrak{R}_{CI}(t_0,t) = f_1(t; \mathfrak{R^-}_{CI}, \Delta \mathfrak{R}_{CI}) + \epsilon(t)
@@ -289,7 +289,13 @@ The IEA NZE scenario is the following (in GtCO2eq):
 |---|---|---|---|---|---|---|---|---|
 |$CE(t)$| 35.90  | 33.90   | 30.30  | 21.50  | 13.70 | 7.77 | 4.30 | 1.94 |
 
-We first need to estimate the corresponding decarbonization pathway $\mathfrak{R}_{CE}(t, t_0)$.
+We first need to estimate the corresponding decarbonization pathway $\mathfrak{R}_{CE}(t, t_0)$ with the carbon emissions scenario:
+\begin{equation}
+\mathfrak{R}_{CE}(t_0,t) = - \frac{CE(t)}{CE(t_0)}  - 1
+\end{equation}
+
+Then, for a given normalization variable growth rate $g_Y$ we have the financial decarbonization pathway:
+
 
 ```Python
 # reproduce Table 2 Intensity decarbonization pathway
