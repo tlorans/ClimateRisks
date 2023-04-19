@@ -2,14 +2,14 @@
 
 To implement a net zero investing policy, investors have to start with a net zero emissions (NZE) scenario and the corresponding decarbonization pathway. The decarbonization pathway of the NZE has two statuses:
 - it is the exogenous pathway that the economy must follow to limit the probability of reaching 1.5°C
-- it becomes the endoenous pathway if the world close the gap between current and needed invetments to finance transition to a low-carbon economy
+- it becomes the endogenous pathway if the world closes the gap between current and needed invetments to finance transition to a low-carbon economy
 
 In this part, we will give a definition of a NZE scenario with the carbon budget constraint and how to check if a decarbonization pathway complies with a NZE scenario. Then, we will address the portfolio's decarbonization pathway, based on carbon intensity rather than absolute emissions. 
 
 ### Carbon Budget Constraint
 
 As stated by Barahhou et al. (2022), a net zero emissions (NZE) scenario corresponds to an emissions scenario, which is compatible with a carbon budget. 
-The carbon budget defines the amount of CO2eq emissions produced over the time period $[t_0,t]$ for a given emissions scenario. The carbon budget corresponds to a certain objective of global warming mitigation.
+The carbon budget defines the amount of CO2eq emissions produced over the time period $[t_0,t]$ for a given emissions scenario. 
 
 As an example, the IPCC (2018 {cite:p}`masson2018global`) gives an estimate of a remaining carbon budget of 580 GtC02eq for a 50% probability of limiting the warming to 1.5°C. The objective is to limit the global warming to 1.5°C while the corresponding carbon budget is 580 GTCO2eq. What is missing in this statement is the corresponding emissions scenario. We will see later how to determine a carbon pathway (or emission scenario) based on a carbon budget.
 
@@ -384,12 +384,8 @@ PAB financial decarbonization very aggressive pathway compared to the IEA deduce
 
 - Net Zero Emissions Scenario is a carbon pathway with a resulting carbon budget compliant with global warming mitigation objective
 
-- The investor can use the carbon budget constraint to check if a given decarbonization pathway corresponds to a NZE
-
 - Portfolio decarbonization pathway use carbon intensity decarbonization pathway rather than carbon emissions pathway
 
-- The investor can deduce an intensity decarbonization pathway from a decarbonization pathway
+- We can deduce financial decarbonization pathway from an economic decarbonization pathway, starting with a NZE scenario
 
-- PAB and CAB are ad-hoc portfolio intensity decarbonization pathways that doesn't rely on a global emissions scenario
-
-- PAB and CAB resulting intensity decarbonization pathways are far more aggressive than the intensity decarbonization pathway deduced from the IEA Scenario
+- PAB intensity decarbonization pathways is far more aggressive than the intensity decarbonization pathway deduced from the IEA Scenario
