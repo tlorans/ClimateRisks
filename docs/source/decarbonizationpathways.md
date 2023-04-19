@@ -328,10 +328,24 @@ With $\mathfrak{R}_{CE}(t_0,t)$, we can estimate the financial decarbonization p
 
 with $g_Y(t_0,t) = (1 + g_Y)^{t-t_0} - 1$.
 
-
+Let's make an example with $g_Y = 0.03$:
 ```Python
-# reproduce Table 2 Intensity decarbonization pathway
-# page 10 in NZE integrated approach
+g_Y = 0.03
+growth_trajectory = [(1 + g_Y)**(full_years[i] - full_years[0]) - 1 for i in range(len(full_years))]
+intensity_reduction = [(growth_trajectory[i] + reduction_rate[i])/(1 + growth_trajectory[i]) for i in range(len(full_years))]
+
+plt.plot(full_years, intensity_reduction)
+plt.ylabel("Intensity reduction rate")
+plt.figure(figsize = (10, 10))
+plt.show()
+```
+
+
+```{figure} intensityieareductionrate.png
+---
+name: intensityieareductionrate
+---
+Figure: Financial decarbonization pathway $\mathfrak{R}_{CI}(2020,2050)$ from the IEA scenario, with $g_Y = 0.03$
 ```
 
 Let's compare the financial decarbonization pathway deduced from the IEA scenario to the PAB decarbonization pathway.
