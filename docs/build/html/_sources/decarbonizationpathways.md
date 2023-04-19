@@ -271,7 +271,7 @@ plt.show()
 ---
 name: financialpathway
 ---
-Figure: Decarbonization pathway with $\Delta \mathfrak{R}_{CE} = 0.07$ and $g_Y = 0.03$
+Figure: Financial decarbonization pathway with $\Delta \mathfrak{R}_{CE} = 0.07$ and $g_Y = 0.03$
 ```
 
 #### From Economic to Financial Decarbonization Pathway
@@ -286,20 +286,39 @@ The IEA NZE scenario is the following (in GtCO2eq):
 |$CE(t)$| 35.90  | 33.90   | 30.30  | 21.50  | 13.70 | 7.77 | 4.30 | 1.94 |
 
 
-We first need to interpolate the carbon emissions to obtain the year on year carbon pathway $CE(t_0,t)$:
-
+We linearly interpolate carbon emissions from this scenario and then obtain the corresponding decarbonization pathway $\mathfrak{R}_{CE}(t_0,t)$ with the carbon emissions scenario:
 \begin{equation}
-CE(t) = CE(t_1) + \frac{CE(t_2) - CE(t_1)}{t_2 - t_1}(t_2 - t_1) 
+\mathfrak{R}_{CE}(t_0,t) = 1 - \frac{CE(t)}{CE(t_0)}
 \end{equation}
 
-With $t_1 < t < t_2$.
-
-And then obtain the corresponding decarbonization pathway $\mathfrak{R}_{CE}(t_0,t)$ with the carbon emissions scenario:
-\begin{equation}
-\mathfrak{R}_{CE}(t_0,t) = - \frac{CE(t)}{CE(t_0)}  - 1
-\end{equation}
 ```Python
-# get the full carbon pathway and the reduction rate
+import pandas as pd
+
+years = [2020, 2025, 2030, 2035, 2040, 2045, 2050]
+emissions = [33.90, 30.30, 21.50, 13.70, 7.77, 4.30, 1.94]
+
+import scipy.interpolate
+
+y_interp = scipy.interpolate.interp1d(years, emissions)
+
+full_years = [i for i in range(years[0], years[-1]+1)]
+emissions_interpolated = y_interp(full_years)
+
+reduction_rate = [1 - emissions_interpolated[i] / emissions_interpolated[0] for i in range(len(emissions_interpolated))]
+
+import matplotlib.pyplot as plt 
+
+plt.plot(full_years, reduction_rate)
+plt.ylabel("Reduction rate")
+plt.figure(figsize = (10, 10))
+plt.show()
+```
+
+```{figure} ieareductionrate.png
+---
+name: reductionrate
+---
+Figure: Decarbonization pathway $\mathfrak{R}_{CE}(2020,2050)$ from the IEA scenario
 ```
 
 With $\mathfrak{R}_{CE}(t_0,t)$, we can estimate the financial decarbonization pathway for different values of the constant growth rate $g_Y$:
