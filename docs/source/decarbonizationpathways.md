@@ -360,21 +360,25 @@ This financial decarbonization pathway is thus:
 \end{equation}
 
 ```Python
-# reproduce Table 2 Intensity decarbonization pathway
-# page 10 in NZE integrated approach
+pab_reduction_rate = [1 - (1 - 0.07)**(full_years[i]-full_years[0])*(1 - 0.5) for i in range(len(full_years))]
+
+plt.plot(full_years, intensity_reduction)
+plt.plot(full_years, pab_reduction_rate)
+
+plt.ylabel("Intensity reduction rate")
+plt.legend(['IEA','PAB'])
+plt.figure(figsize = (10, 10))
+plt.show()
 ```
 
-PAB financial decarbonization very aggressive pathway compared to the IEA deduced pathway for the next ten years.
-
-We will see in the next part that $\mathfrak{R}^-_{CI}$ and $\Delta \mathfrak{R}_{CI}$ are the key parameters for implementing portfolio alignment with NZE scenario. We can these parameters with the following regression model estimated by least squares:
-
-\begin{equation}
-\mathfrak{R}_{CI}(t_0,t) = f_1(t; \mathfrak{R^-}_{CI}, \Delta \mathfrak{R}_{CI}) + \epsilon(t)
-\end{equation}
-
-```Python
-### compute delta R CI and R min
+```{figure} ieavspab.png
+---
+name: ieavspab
+---
+Figure: Financial decarbonization pathway $\mathfrak{R}_{CI}(2020,2050)$ from the IEA scenario, with $g_Y = 0.03$ vs. PAB decarbonization pathway
 ```
+
+PAB financial decarbonization very aggressive pathway compared to the IEA deduced pathway..
 
 ### Key Takeaways
 
