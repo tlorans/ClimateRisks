@@ -276,11 +276,13 @@ Figure: Decarbonization pathway with $\Delta \mathfrak{R}_{CE} = 0.07$ and $g_Y 
 
 #### From Economic to Financial Decarbonization Pathway
 
-With a given economic decarbonization pathway $\mathfrak{R}_CE(t_0,t)$ and given normalization variable growth $g_Y(t_0,t)$, we can try to approximate the relationship between the economic and the financial decarbonization pathway in order to estimate the parameters $\mathfrak{R}^-_{CI}$ and $\Delta \mathfrak{R}_{CI}$ with the following regression model estimated by least squares:
+With a given economic decarbonization pathway $\mathfrak{R}_{CE}(t_0,t)$ and given normalization variable growth $g_Y(t_0,t)$, we can try to approximate the relationship between the economic and the financial decarbonization pathway in order to estimate the parameters $\mathfrak{R}^-_{CI}$ and $\Delta \mathfrak{R}_{CI}$ with the following regression model estimated by least squares:
 
 \begin{equation}
 \mathfrak{R}_{CI}(t_0,t) = f_1(t; \mathfrak{R^-}_{CI}, \Delta \mathfrak{R}_{CI}) + \epsilon(t)
 \end{equation}
+
+We can illustrate this transformation from economic to financial decarbonization pathway, starting with the International Energy Agency (IEA) NZE Scenario (IEA, 2021) {cite:p}`bouckaert2021net`.
 
 ```Python
 # reproduce Table 2 Intensity decarbonization pathway
