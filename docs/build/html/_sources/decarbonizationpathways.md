@@ -284,6 +284,13 @@ With a given economic decarbonization pathway $\mathfrak{R}_{CE}(t_0,t)$ and giv
 
 We can illustrate this transformation from economic to financial decarbonization pathway, starting with the International Energy Agency (IEA) NZE Scenario (IEA, 2021) {cite:p}`bouckaert2021net`.
 
+The IEA NZE scenario is the following (in GtCO2eq):
+| Year  | 2019 | 2020 | 2025 | 2030 | 2035 | 2040 | 2045 | 2050 |
+|---|---|---|---|---|---|---|---|---|
+|$CE(t)$| 35.90  | 33.90   | 30.30  | 21.50  | 13.70 | 7.77 | 4.30 | 1.94 |
+
+We first need to estimate the corresponding decarbonization pathway $\mathfrak{R}_{CE}(t, t_0)$.
+
 ```Python
 # reproduce Table 2 Intensity decarbonization pathway
 # page 10 in NZE integrated approach
