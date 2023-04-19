@@ -276,11 +276,7 @@ Figure: Decarbonization pathway with $\Delta \mathfrak{R}_{CE} = 0.07$ and $g_Y 
 
 #### From Economic to Financial Decarbonization Pathway
 
-With a given economic decarbonization pathway $\mathfrak{R}_{CE}(t_0,t)$ and given normalization variable growth $g_Y(t_0,t)$, we can approximate the relationship between the economic and the financial decarbonization pathway in order to estimate the parameters $\mathfrak{R}^-_{CI}$ and $\Delta \mathfrak{R}_{CI}$ with the following regression model estimated by least squares:
-
-\begin{equation}
-\mathfrak{R}_{CI}(t_0,t) = f_1(t; \mathfrak{R^-}_{CI}, \Delta \mathfrak{R}_{CI}) + \epsilon(t)
-\end{equation}
+With a given economic decarbonization pathway $\mathfrak{R}_{CE}(t_0,t)$ and given normalization variable growth $g_Y(t_0,t)$, we can approximate the relationship between the economic and the financial decarbonization pathway.
 
 We can illustrate this transformation from economic to financial decarbonization pathway, starting with the International Energy Agency (IEA) NZE Scenario (IEA, 2021) {cite:p}`bouckaert2021net`.
 
@@ -289,18 +285,36 @@ The IEA NZE scenario is the following (in GtCO2eq):
 |---|---|---|---|---|---|---|---|---|
 |$CE(t)$| 35.90  | 33.90   | 30.30  | 21.50  | 13.70 | 7.77 | 4.30 | 1.94 |
 
-We first need to estimate the corresponding decarbonization pathway $\mathfrak{R}_{CE}(t, t_0)$ with the carbon emissions scenario:
+
+We first need to interpolate the carbon emissions to obtain the year on year carbon pathway $CE(t_0,t)$:
+
+\begin{equation}
+CE(t) = CE(t_1) + \frac{CE(t_2) - CE(t_1)}{t_2 - t_1}(t_2 - t_1) 
+\end{equation}
+
+With $t_1 < t < t_2$.
+
+And then obtain the corresponding decarbonization pathway $\mathfrak{R}_{CE}(t_0,t)$ with the carbon emissions scenario:
 \begin{equation}
 \mathfrak{R}_{CE}(t_0,t) = - \frac{CE(t)}{CE(t_0)}  - 1
 \end{equation}
+```Python
+# get the full carbon pathway and the reduction rate
+```
 
-Then, for a given normalization variable growth rate $g_Y$ we have the financial decarbonization pathway:
+With $\mathfrak{R}_{CE}(t_0,t)$, we can estimate the financial decarbonization pathway for different values of the constant growth rate $g_Y$:
+\begin{equation}
+\mathfrak{R}_{CI}(t_0,t) = \frac{g_Y(t_0,t) + \mathfrak{R}_{CE}(t_0,t)}{1 + g_Y(t_0,t)}
+\end{equation}
+
+with $g_Y(t_0,t) = (1 + g_Y)^{t-t_0} - 1$.
 
 
 ```Python
 # reproduce Table 2 Intensity decarbonization pathway
 # page 10 in NZE integrated approach
 ```
+
 Let's compare the financial decarbonization pathway deduced from the IEA scenario to the PAB decarbonization pathway.
 The PAB's intensity decarbonization is stated as:
 1. A year-on-year self-decarbonization $\Delta \mathfrak{R}_{CI}$ of 7\% on average per annum, based on scope 1, 2 and 3 carbon emissions intensities.
@@ -318,6 +332,16 @@ This financial decarbonization pathway is thus:
 ```
 
 PAB financial decarbonization very aggressive pathway compared to the IEA deduced pathway for the next ten years.
+
+We will see in the next part that $\mathfrak{R}^-_{CI}$ and $\Delta \mathfrak{R}_{CI}$ are the key parameters for implementing portfolio alignment with NZE scenario. We can these parameters with the following regression model estimated by least squares:
+
+\begin{equation}
+\mathfrak{R}_{CI}(t_0,t) = f_1(t; \mathfrak{R^-}_{CI}, \Delta \mathfrak{R}_{CI}) + \epsilon(t)
+\end{equation}
+
+```Python
+### compute delta R CI and R min
+```
 
 ### Key Takeaways
 
