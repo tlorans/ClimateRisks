@@ -2,7 +2,7 @@
 
 We've seen in the low-carbon strategy framework how investors can conduct a portfolio decarbonization with a static approach, compared to a reference universe. On the other side, net zero investing involves portfolio alignment with a decarbonization pathway $\mathfrak{R}_{CI}(t_0,t)$. Because we introduce a pathway between $t_0$ and $t$, the problem now involves a dynamic strategy.
 
-In this part, we are going to compare the approach for performing a portfolio alignment with the Paris-Aligned Benchmarks (PAB) and the NZE frameworks. Introducing the concept of Net Zero Backtesting, we'll see that the dynamic decarbonization in the PAB relies on sequential decarbonization rather than self-decarbonization, because the issuers' carbon footprint dynamic is not taken into account. We will introduce carbon footprint dynamics measure, following Barahhou et al. (2022), in order to maximize the self-decarbonization ratio of the net zero portfolio. 
+In this part, we are going to compare the approach for performing a portfolio alignment with the Paris-Aligned Benchmarks (PAB) and the net zero investment portfolio framework proposed by Barahhou et al. (2022). Introducing the concept of Net Zero Backtesting, we'll see that the dynamic decarbonization in the PAB relies on sequential decarbonization rather than self-decarbonization, because the issuers' carbon footprint dynamic is not taken into account. We will introduce carbon footprint dynamics measure, following Barahhou et al. (2022), in order to maximize the self-decarbonization ratio of the net zero portfolio. 
 
 ### Dynamic Portfolio's Decarbonization
 
@@ -28,7 +28,7 @@ In this case, the decarbonization problem becomes dynamic:
 \end{aligned}
 \end{equation*}
 
-In this problem, finding $x^*(t)$ at time $t$ requires to know the covariance matrix $\Sigma(t)$, the carbon intensities $CI(t)$ and the investable universe $b(t)$. However, in the current year $t_1$ the observations are only available for $t_0$ and $t_1$. We can however do the exercise b assuming that the world does not change. In this case, we can assume that the covariance matrix, the carbon intensities and the investable universe remain constant, such as:
+In this problem, finding $x^*(t)$ at time $t$ requires to know the covariance matrix $\Sigma(t)$, the carbon intensities $CI(t)$ and the investable universe $b(t)$. However, in the current year $t_1$ the observations are only available for $t_0$ and $t_1$. We can however do the exercise by assuming that the world does not change. In this case, we can assume that the covariance matrix, the carbon intensities and the investable universe remain constant, such as:
 
 \begin{equation}
 \Sigma(t) = \Sigma(t_0)
@@ -54,7 +54,7 @@ b(t) = b(t_0)
 
 ### Net Zero Backtesting
 
-The objective of net zero investment portfolio is to promote self-decarbonization rather than sequential decarbonization (ie. decarbonization obtained by the dynamic of the issuers' decarbonization rather than with successive or sequential decarbonization obtained by rebalancement).
+The objective of net zero investment portfolio, according to the framework proposed by Barahhou et al. (2022), is to promote self-decarbonization rather than sequential decarbonization (ie. decarbonization obtained by the dynamic of the issuers' decarbonization rather than with successive or sequential decarbonization obtained by rebalancement).
 
 Let $CI(t,x;F_t)$ be the carbon intensity of portfolio $x$ calculated at time $t$ with the information $F_t$ available at time $t$.
 
@@ -103,7 +103,7 @@ By definition, and because the PAB approach doesn't integrate any information ab
 
 ### Integrating Carbon Footprint Dynamics
 
-In the previous section, we have performed a portfolio alignment by considering a global decarbonization path for the portfolio, as recommended by the PAB approach. In this section, we consider the decarbonization path of the issuers, as in Le Guenedal and Roncalli (2022 {cite:p}`le2022portfolio`) and Roncalli et al. (2022). This approach allows to improve the self-decarbonization ratio of the portfolio.
+In the previous section, we have performed a portfolio alignment by considering a global decarbonization path for the portfolio, as recommended by the PAB approach. In this section, we consider the decarbonization path of the issuers, as in Le Guenedal and Roncalli (2022 {cite:p}`le2022portfolio`) and Barahhou et al. (2022). This approach allows to improve the self-decarbonization ratio of the portfolio.
 
 #### Carbon Momentum
 
