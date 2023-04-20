@@ -1,10 +1,8 @@
 ## Portfolio Alignment
 
-We've seen in the low-carbon strategy framework how investors can conduct a portfolio decarbonization with a static approach. On the other side, net zero investing involves portfolio alignment with a decarbonization pathway, rather than a simple static decarbonization. It involves a dynamic strategy in order to comply with the given net zero scenario.
+We've seen in the low-carbon strategy framework how investors can conduct a portfolio decarbonization with a static approach, compared to a reference universe. On the other side, net zero investing involves portfolio alignment with a decarbonization pathway $\mathfrak{R}_{CI}(t_0,t)$. Because we introduce a pathway between $t_0$ and $t$, the problem now involves a dynamic strategy.
 
-The dynamic problem is trickier since it involves rebalancing decisions and depends on the future behavior of corporate issuers. 
-
-In this part, we are going to compare the approach for performing a portfolio alignment with the Paris-Aligned Benchmarks (PAB) and the NZE frameworks. Introducing the concept of Net Zero Backtesting, we'll see that the dynamic decarbonization in the PAB relies on sequential decarbonization rather than self-decarbonization, because the issuers' carbon footprint dynamic is not taken into account. We will introduce carbon footprint dynamics measure, following Roncalli et al. (2022), in order to maximize the self-decarbonization ratio of the net zero portfolio. 
+In this part, we are going to compare the approach for performing a portfolio alignment with the Paris-Aligned Benchmarks (PAB) and the NZE frameworks. Introducing the concept of Net Zero Backtesting, we'll see that the dynamic decarbonization in the PAB relies on sequential decarbonization rather than self-decarbonization, because the issuers' carbon footprint dynamic is not taken into account. We will introduce carbon footprint dynamics measure, following Barahhou et al. (2022), in order to maximize the self-decarbonization ratio of the net zero portfolio. 
 
 ### Dynamic Portfolio's Decarbonization
 
