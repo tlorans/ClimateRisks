@@ -211,30 +211,32 @@ Furthermore, dynamic decarbonization leads to progressive deviation from the ben
 
 The objective of net zero investment portfolio, according to the framework proposed by Barahhou et al. (2022), is to promote self-decarbonization rather than sequential decarbonization (ie. decarbonization obtained by the dynamic of the issuers' decarbonization rather than with successive or sequential decarbonization obtained by rebalancement).
 
-Let $CI(t,x;F_t)$ be the carbon intensity of portfolio $x$ calculated at time $t$ with the information $F_t$ available at time $t$.
-
-The portfolio $x(t)$ must satisfy:
+Let $CI(t,x;F_t)$ be the carbon intensity of portfolio $x$ calculated at time $t$ with the information $F_t$ available at time $t$. The portfolio $x(t)$'s WACI must satisfy the following constraint:
 
 \begin{equation}
 CI(t, x(t); F_t) \leq (1 - \mathfrak{R}_{CI}(t_0,t))CI(t_0,b(t_0); F_{t_0})
 \end{equation}
 
-Where $b(t_0)$ is the benchmark at time $t_0$. The portfolio is rebalanced at time $t+1$ and we will choose a new portfolio $x(t+1)$ such that:
+Where $b(t_0)$ is the benchmark at time $t_0$. 
+
+Let's know formulate this same constraint, but taking into account the fact that the portfolio is rebalanced at time $t+1$ and we will choose a new portfolio $x(t+1)$. The new constraint is then:
 
 \begin{equation}
 CI(t + 1, x(t+1); F_{t+1}) \leq (1 - \mathfrak{R}_{CI}(t_0, t+1))CI(t_0, b(t_0);F_{t_0})
 \end{equation}
 
-We don't have to rebalance (ie. add carbon reduction by new sequential decarbonization) if:
+The information on the right hand scale are known (because we only need information from the starting date $F_{t_0}$). The information on the left hand scale depends on the information available in the future rebalance date $F_{t+1}$. We don't have to rebalance (ie. adding carbon reduction by new sequential decarbonization in order to respect the constraint) if:
 
 \begin{equation}
 CI(t + 1, x(t); F_{t+1}) \leq (1 - \mathfrak{R}_{CI}(t_0, t+1))CI(t_0, b(t_0);F_{t_0})
 \end{equation}
 
+That is if the portfolio $x(t)$ (before the rebalance in $t+1$) has a WACI in $t+1$ that respect the constraint. If not, we need to rebalance in $t+1$ in order to obtain a new set of weights and a new portfolio $x(t+1)$.
+
 The variation between two rebalancing dates $CI(t+1, x(t + 1);F_{t+1}) - CI(t, x(t), F_t)$ is decomposed between two components:
 
-1. The self-decarbonization $CI(t+1, x(t);F_{t+1}) - CI(t, x(t), F_t)$
-2. The additional decarbonization with sequential decarbonization $CI(t+1, x(t + 1);F_{t+1}) - CI(t + 1, x(t), F_{t+1})$
+1. The self-decarbonization $CI(t+1, x(t);F_{t+1}) - CI(t, x(t), F_t)$ (the decarbonization due to issuers' self-decarbonization)
+2. The additional decarbonization with sequential decarbonization $CI(t+1, x(t + 1);F_{t+1}) - CI(t + 1, x(t), F_{t+1})$ (the decarbonization achieved by rebalancing the portfolio from $x(t)$ to $x(t+1)$)
 
 The self-decarbonization ratio is then defined as:
 
@@ -242,7 +244,7 @@ The self-decarbonization ratio is then defined as:
 SR(t+1) = \frac{CI(t, x(t);F_{t}) - CI(t + 1, x(t), F_{t+1})}{CI(t, x(t);F_{t}) - CI(t + 1, x(t + 1), F_{t+1})}
 \end{equation}
 
-The upper bound is reached when do not have to rebalance the portfolio, with the decarbonization achieved through self-decarbonization rather than sequential decarbonization. This is a first step towards the backesting of net zero portoflios. 
+The higher value for the self-decarbonization ratio $SR(t+1)$ is reached when we do not have to rebalance the portfolio, with the decarbonization achieved through self-decarbonization rather than sequential decarbonization. This is a first step towards the backesting of net zero portoflios. 
 
 To maximize the self-decarbonization ratio, we need to have an idea about the dynamics of the carbon footprint, that is an estimate of $CI(t+1, x(t); F_t)$.
 
