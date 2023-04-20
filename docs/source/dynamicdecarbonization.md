@@ -44,14 +44,6 @@ b(t) = b(t_0)
 # show figure of projected decarbonation
 ```
 
-```Python
-#show figure of projected tracking error
-```
-
-```Python
-# Apply figure 45 and 46 page 87 in net zero investment portfolio with PAB strat
-```
-
 ### Net Zero Backtesting
 
 The objective of net zero investment portfolio, according to the framework proposed by Barahhou et al. (2022), is to promote self-decarbonization rather than sequential decarbonization (ie. decarbonization obtained by the dynamic of the issuers' decarbonization rather than with successive or sequential decarbonization obtained by rebalancement).

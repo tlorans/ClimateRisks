@@ -159,10 +159,7 @@ import numpy as np
 
 @dataclass 
 class CarbonPortfolio:
-  """
-  A class that implement supplementary information CI and new method get_waci,
-  to be used in the low-carbon strategy implementation.
-  """
+  
   x: np.array # Weights
   carbon_betas: np.array # Carbon Betas
   Sigma: np.matrix # Covariance Matrix
