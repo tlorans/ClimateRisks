@@ -1,10 +1,12 @@
 ## Decarbonization Pathway
 
-To implement a net zero investing policy, investors have to start with a net zero emissions (NZE) scenario and the corresponding decarbonization pathway. The decarbonization pathway of the NZE has two statuses:
+A net zero investment portfolio starts with a Net Zero Emissions (NZE) scenario. A decarbonization pathway summarizes the NZE scenario.
+
+The decarbonization pathway has two statuses:
 - it is the exogenous pathway that the economy must follow to limit the probability of reaching 1.5°C
 - it becomes the endogenous pathway if the world closes the gap between current and needed invetments to finance transition to a low-carbon economy
 
-In this part, we will give a definition of a NZE scenario with the carbon budget constraint and how to check if a decarbonization pathway complies with a NZE scenario. Then, we will address the portfolio's decarbonization pathway, based on carbon intensity rather than absolute emissions. 
+In this part, we will give a definition of a NZE scenario with the carbon budget constraint and study the relationship between a NZE scenario and a decarbonization pathway. Then, we will see how to derive an intensity decarbonization pathway that can be use for portfolio construction, from an emissions scenario.
 
 ### Carbon Budget Constraint
 
