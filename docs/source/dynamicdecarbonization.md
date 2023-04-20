@@ -248,12 +248,40 @@ The higher value for the self-decarbonization ratio $SR(t+1)$ is reached when we
 
 To maximize the self-decarbonization ratio, we need to have an idea about the dynamics of the carbon footprint, that is an estimate of $CI(t+1, x(t); F_t)$.
 
-```Python
-# Reproduces table 4 page 23 of Net Zero Investment portfolio
-```
+To illustrate this concept of net zero backtesting with the use of the self-decarbonization ratio, let's take this example from Barahhou et al. (2022):
 
+| $s$  | $CI_*^s$ | $CI^s_x$ | $CI^{s+1}_x$ |   
+|---|---|---|---|
+|t| 100.0  | 100.0  | 99.0  |  
+|t + 1| 93.0  | 93.0  | 91.2  | 
+|t + 2| 86.5  | 86.5  | 91.3  | 
+|t + 3| 80.4  | 80.4  | 78.1  | 
+|t + 4| 74.8  | 74.8  | 74.2  | 
+|t + 5| 69.6  | 69.6  | 70.7  | 
+|t + 6| 64.7  | 64.7  | 62.0  | 
+|t + 7| 60.2  | 60.2  | 60.0  | 
+|t + 8| 55.9  | 55.9  | 58.3  | 
+|t + 9| 52.0  | 52.0  | 53.5  | 
+|t + 10| 48.4  | 48.4  | 50.5  | 
+
+Where:
+
+\begin{equation}
+CI_*^s = (1 - \mathfrak{R}_{CI}(t_0, s))CI(t_0, b(t_0);F_{t_0})
+\end{equation}
+
+\begin{equation}
+CI^s_x = CI(s, x(s); F_s)
+\end{equation}
+
+\begin{equation}
+CI^{s+1}_x = CI(s + 1, x(s); F_{s+1})
+\end{equation}
+
+Let's apply this example in Python
 ```Python
-# Reproduces figure 45 and 46 page 87 in net zero investment portfolio
+
+
 ```
 
 By definition, and because the PAB approach doesn't integrate any information about carbon footprint dynamics, the PAB's decarbonization is almost entirely due to sequential decarbonization.
