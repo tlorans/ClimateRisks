@@ -378,14 +378,14 @@ name: ieavspab
 Figure: Financial decarbonization pathway $\mathfrak{R}_{CI}(2020,2050)$ from the IEA scenario, with $g_Y = 0.03$ vs. PAB decarbonization pathway
 ```
 
-PAB financial decarbonization very aggressive pathway compared to the IEA deduced pathway..
+We can see that the PAB financial decarbonization pathway is far too much aggressive compared with the IEA deduced pathway.
 
 ### Key Takeaways
 
-- Net Zero Emissions Scenario is a carbon pathway with a resulting carbon budget compliant with global warming mitigation objective
+- Net Zero Emissions scenario is a carbon pathway with a resulting carbon budget compliant with global warming mitigation objective
 
 - Portfolio decarbonization pathway use carbon intensity decarbonization pathway rather than carbon emissions pathway
 
 - We can deduce financial decarbonization pathway from an economic decarbonization pathway, starting with a NZE scenario
 
-- PAB intensity decarbonization pathways is far more aggressive than the intensity decarbonization pathway deduced from the IEA Scenario
+- PAB's intensity decarbonization pathways is far more aggressive than the intensity decarbonization pathway deduced from the IEA NZE scenario
