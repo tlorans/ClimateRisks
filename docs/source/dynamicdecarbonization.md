@@ -40,9 +40,172 @@ CI(t) = CI(t_0)
 b(t) = b(t_0)
 \end{equation}
 
+
+We have the following QP parameters:
+
+\begin{equation*}
+\begin{aligned}
+& Q = \Sigma(t) \\
+& R = \Sigma(t) b(t) \\
+& A = 1^T_n \\
+& B = 1 \\
+& C = CI^T(t) \\
+& D = (1 - \mathfrak{R}_{CI}(t_0,t))CI(b(t_0))\\
+& x^- = 0_n \\
+& x^+ = 1_n
+\end{aligned}
+\end{equation*}
+
+Let's first implement the `CarbonPortfolio` and `NetZeroPortfolio` dataclasses:
 ```Python
-# show figure of projected decarbonation
+from dataclasses import dataclass
+import numpy as np
+
+@dataclass 
+class CarbonPortfolio:
+
+  x: np.array # Weights
+  CI: np.array # Carbon Intensity
+  Sigma: np.matrix # Covariance Matrix
+
+  def get_waci(self) -> float:
+    return self.x.T @ self.CI
+
+
+from qpsolvers import solve_qp 
+
+@dataclass 
+class NetZeroPortfolio:
+  b:np.array # Benchmark weights
+  CI:np.array # Carbon intensity
+  Sigma: np.matrix # Covariance matrix
+
+  def get_portfolio(self, decarbonization_pathway:np.array) -> list[CarbonPortfolio]:
+    
+    dynamic_portfolio = []
+
+    for t in range(len(decarbonization_pathway)):
+      """QP Formulation"""
+      Q = self.Sigma
+      R = self.Sigma @ self.b
+      A = np.ones(len(self.b)).T # fully invested
+      B = np.array([1.]) # fully invested
+      x_inf = np.zeros(len(self.b)) # long-only position
+      x_sup = np.ones(len(self.b)) # long-only position
+      C = self.CI.T # resulting WACI
+      D = (1 - decarbonization_pathway[t]) * self.b.T @ self.CI # reduction imposed
+
+      x_optim = solve_qp(P = Q,
+                q = -R, # we put a minus here because this QP solver consider +x^T R
+                A = A, 
+                b = B,
+                G = C,
+                h = D,
+                lb = x_inf,
+                ub = x_sup,
+                solver = 'osqp')
+      dynamic_portfolio.append(CarbonPortfolio(x = x_optim, 
+                           Sigma = self.Sigma, CI = self.CI) )
+    
+    return dynamic_portfolio
 ```
+
+We can use again the same example:
+
+```Python
+b = np.array([0.20,
+              0.19,
+              0.17,
+              0.13,
+              0.12,
+              0.08,
+              0.06,
+              0.05])
+
+CI = np.array([100.5,
+               97.2,
+               250.4,
+               352.3,
+               27.1,
+               54.2,
+               78.6,
+               426.7])
+
+betas = np.array([0.30,
+                  1.80,
+                  0.85,
+                  0.83,
+                  1.47,
+                  0.94,
+                  1.67,
+                  1.08])
+
+sigmas = np.array([0.10,
+                   0.05,
+                   0.06,
+                   0.12,
+                   0.15,
+                   0.04,
+                   0.08,
+                   0.07])
+
+Sigma = betas @ betas.T * 0.18**2 + np.diag(sigmas**2)
+```
+
+Now let's create the PAB's decarbonization pathway:
+```Python
+years = [i for i in range(2020, 2051)]
+pab_decarbonization_patwhay = [1 - (1 - 0.07)**(years[i]-years[0])*(1 - 0.5) for i in range(len(years))]
+```
+
+We can now instantiate our problem and run the `get_portfolio` method:
+
+```Python
+test_dynamic_portfolio = NetZeroPortfolio(b = b,
+                             CI = CI,
+                             Sigma = Sigma)
+
+resulting_pab = test_dynamic_portfolio.get_portfolio(decarbonization_pathway= pab_decarbonization_patwhay)
+```
+
+Let's represent the evolution of the tracking error volatility:
+
+```Python
+def get_tracking_error_volatility(x:np.array, 
+                                  b:np.array,
+                                  Sigma:np.array) -> float:
+  return np.sqrt((x - b).T @ Sigma @ (x - b))
+
+
+te = []
+
+for portfolio in resulting_pab:
+  if portfolio.x is not None:
+    te.append(get_tracking_error_volatility(x = portfolio.x, b = b, Sigma = Sigma) * 100)
+  else:
+    te.append(np.nan)
+
+
+import matplotlib.pyplot as plt
+
+plt.figure(figsize = (10, 10))
+plt.plot(years, te)
+plt.xlim([2020, 2050])
+plt.ylabel("Tracking Error Volatility (in %)")
+plt.title("Tracking error volatility of dynamic net zero portfolio")
+plt.show()
+```
+
+
+```{figure} tedynamicportfolio.png
+---
+name: tedynamicportfolio
+---
+Figure: Tracking error volatility of dynamic net zero portfolio
+```
+
+We can see that, with the assumption that the world doesn't change, we cannot find optimal solution after 2036. 
+Furthermore, dynamic decarbonization leads to progressive deviation from the benchmark, and then to explosive tracking error volatility.
 
 ### Net Zero Backtesting
 

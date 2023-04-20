@@ -47,7 +47,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'lowcarbonbeta';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Green Factor" href="greenfactor.html" />
+    <link rel="next" title="Green Stocks Outperformance: Realized vs. Expected Returns" href="greenfactor.html" />
     <link rel="prev" title="Low-Carbon Strategy" href="lowcarbonstrategy.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
@@ -127,13 +127,13 @@
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="climaterisks.html">Climate Risks Integration Strategies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="climaterisks.html">Part 1: Climate Risks Integration Strategies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dealingwithrisk.html">Dealing with Risk(s) in Portfolio Construction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lowcarbonstrategy.html">Low-Carbon Strategy</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Enhanced Index with Carbon Beta</a></li>
-<li class="toctree-l1"><a class="reference internal" href="greenfactor.html">Green Factor</a></li>
-<li class="toctree-l1"><a class="reference internal" href="netzeroinvesting.html">Net Zero Investing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="decarbonizationpathways.html">Net Zero Emissions Scenario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="greenfactor.html">Green Stocks Outperformance: Realized vs. Expected Returns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="netzeroinvesting.html">Part 2: Net Zero Investing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decarbonizationpathways.html">Decarbonization Pathway</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dynamicdecarbonization.html">Portfolio Alignment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="integratingtransition.html">Integrating the Transition Dimension</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
@@ -338,8 +338,8 @@ document.write(`
 </table>
 <p>Where the classification is based on the terciles of the aggregating BGS and the median market capitalization.</p>
 <p>Finally, the return of the BMG factor is computed as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ddf0bc59-132f-416c-820a-d461a15a1ed1">
-<span class="eqno">(1)<a class="headerlink" href="#equation-ddf0bc59-132f-416c-820a-d461a15a1ed1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-da797fbc-1324-4e46-8b06-2b666fb4f694">
+<span class="eqno">(1)<a class="headerlink" href="#equation-da797fbc-1324-4e46-8b06-2b666fb4f694" title="Permalink to this equation">#</a></span>\[\begin{equation}
 f_{BMG}(t) = \frac{1}{2}(SB(t)+BB(t)) - \frac{1}{2} (SG(t) + BG(t))
 \end{equation}\]</div>
 <p>Let’s have a look at the resulting BMG factor:</p>
@@ -366,8 +366,8 @@ f_{BMG}(t) = \frac{1}{2}(SB(t)+BB(t)) - \frac{1}{2} (SG(t) + BG(t))
 <h2>Carbon Beta: A Market-Based Measure<a class="headerlink" href="#carbon-beta-a-market-based-measure" title="Permalink to this headline">#</a></h2>
 <p>Once the BMG factor is built, Gorgen et al. (2019) propose to define the carbon financial risk of a stock by using its price sentivity to the BMG factor (carbon beta).</p>
 <p>The authors propose to extend the Carhart Model with four factors with the additional BMG carbon risk factor:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-81e3911c-4753-458c-9cd8-ee750ddeccb0">
-<span class="eqno">(2)<a class="headerlink" href="#equation-81e3911c-4753-458c-9cd8-ee750ddeccb0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-6bea1a4e-a046-4a9d-9829-7fe215fd6730">
+<span class="eqno">(2)<a class="headerlink" href="#equation-6bea1a4e-a046-4a9d-9829-7fe215fd6730" title="Permalink to this equation">#</a></span>\[\begin{equation}
 r(t) = \alpha + \beta_{MKT}f_{MKT}(t) + \beta_{SMB}f_{SMB}(t) + \beta_{HML}f_{HML}(t) + \beta_{WML} f_{WML}(t) + \beta_{BMG} f_{BMG}(t) + u(t)
 \end{equation}\]</div>
 <p>This regression is run on a stock-by-stock basis, and resulting <span class="math notranslate nohighlight">\(\beta_k\)</span> are the sentivity of the stock to each factor.</p>
@@ -450,10 +450,7 @@ r(t) = \alpha + \beta_{MKT}f_{MKT}(t) + \beta_{SMB}f_{SMB}(t) + \beta_{HML}f_{HM
 
 <span class="nd">@dataclass</span> 
 <span class="k">class</span> <span class="nc">CarbonPortfolio</span><span class="p">:</span>
-  <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">  A class that implement supplementary information CI and new method get_waci,</span>
-<span class="sd">  to be used in the low-carbon strategy implementation.</span>
-<span class="sd">  &quot;&quot;&quot;</span>
+  
   <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="c1"># Weights</span>
   <span class="n">carbon_betas</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="c1"># Carbon Betas</span>
   <span class="n">Sigma</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span> <span class="c1"># Covariance Matrix</span>
@@ -608,7 +605,7 @@ r(t) = \alpha + \beta_{MKT}f_{MKT}(t) + \beta_{SMB}f_{SMB}(t) + \beta_{HML}f_{HM
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Green Factor</p>
+        <p class="prev-next-title">Green Stocks Outperformance: Realized vs. Expected Returns</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

@@ -310,8 +310,8 @@ document.write(`
 <h2>Dynamic Portfolio’s Decarbonization<a class="headerlink" href="#dynamic-portfolio-s-decarbonization" title="Permalink to this headline">#</a></h2>
 <p>Let’s first address the PAB approach of the dynamic portfolio decarbonization.</p>
 <p>At date <span class="math notranslate nohighlight">\(t\)</span>, the PAB label imposes the following inequality constraint for the portfolio <span class="math notranslate nohighlight">\(x(t)\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d2639eff-6fd3-4796-80f0-2e54c28040af">
-<span class="eqno">(1)<a class="headerlink" href="#equation-d2639eff-6fd3-4796-80f0-2e54c28040af" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b41a4b61-983f-4831-9517-7b44b56baa95">
+<span class="eqno">(1)<a class="headerlink" href="#equation-b41a4b61-983f-4831-9517-7b44b56baa95" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI(x(t)) \leq (1 - \mathfrak{R}_{CI}(t_0,t))CI(b(t_0))
 \end{equation}\]</div>
 <p>The base year <span class="math notranslate nohighlight">\(t_0\)</span> thus defines the reference level of the carbon intensity, as the reference level is <span class="math notranslate nohighlight">\(CI(b(t_0))\)</span> and not <span class="math notranslate nohighlight">\(CI(b(t))\)</span>. This is a first important difference compared to the low-carbon strategy.</p>
@@ -328,39 +328,190 @@ CI(x(t)) \leq (1 - \mathfrak{R}_{CI}(t_0,t))CI(b(t_0))
 \end{aligned}
 \end{equation*}\]</div>
 <p>In this problem, finding <span class="math notranslate nohighlight">\(x^*(t)\)</span> at time <span class="math notranslate nohighlight">\(t\)</span> requires to know the covariance matrix <span class="math notranslate nohighlight">\(\Sigma(t)\)</span>, the carbon intensities <span class="math notranslate nohighlight">\(CI(t)\)</span> and the investable universe <span class="math notranslate nohighlight">\(b(t)\)</span>. However, in the current year <span class="math notranslate nohighlight">\(t_1\)</span> the observations are only available for <span class="math notranslate nohighlight">\(t_0\)</span> and <span class="math notranslate nohighlight">\(t_1\)</span>. We can however do the exercise by assuming that the world does not change. In this case, we can assume that the covariance matrix, the carbon intensities and the investable universe remain constant, such as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-371629ab-c09a-4d60-9252-5e5d2f90f35a">
-<span class="eqno">(2)<a class="headerlink" href="#equation-371629ab-c09a-4d60-9252-5e5d2f90f35a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-871c8730-3764-4473-a960-826aff6f681a">
+<span class="eqno">(2)<a class="headerlink" href="#equation-871c8730-3764-4473-a960-826aff6f681a" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \Sigma(t) = \Sigma(t_0)
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-af99b296-c4b0-4a9a-8db1-8f3cc8eadbe9">
-<span class="eqno">(3)<a class="headerlink" href="#equation-af99b296-c4b0-4a9a-8db1-8f3cc8eadbe9" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-3da73fd4-cac9-4112-82b7-7869afb5dc97">
+<span class="eqno">(3)<a class="headerlink" href="#equation-3da73fd4-cac9-4112-82b7-7869afb5dc97" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI(t) = CI(t_0)
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-8015f78f-0500-4acd-b64f-b2949cc30594">
-<span class="eqno">(4)<a class="headerlink" href="#equation-8015f78f-0500-4acd-b64f-b2949cc30594" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-cc14b8fa-8e5e-4b28-a36d-dbb193958474">
+<span class="eqno">(4)<a class="headerlink" href="#equation-cc14b8fa-8e5e-4b28-a36d-dbb193958474" title="Permalink to this equation">#</a></span>\[\begin{equation}
 b(t) = b(t_0)
 \end{equation}\]</div>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># show figure of projected decarbonation</span>
+<p>We have the following QP parameters:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\begin{aligned}
+&amp; Q = \Sigma(t) \\
+&amp; R = \Sigma(t) b(t) \\
+&amp; A = 1^T_n \\
+&amp; B = 1 \\
+&amp; C = CI^T(t) \\
+&amp; D = (1 - \mathfrak{R}_{CI}(t_0,t))CI(b(t_0))\\
+&amp; x^- = 0_n \\
+&amp; x^+ = 1_n
+\end{aligned}
+\end{equation*}\]</div>
+<p>Let’s first implement the <code class="docutils literal notranslate"><span class="pre">CarbonPortfolio</span></code> and <code class="docutils literal notranslate"><span class="pre">NetZeroPortfolio</span></code> dataclasses:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="nd">@dataclass</span> 
+<span class="k">class</span> <span class="nc">CarbonPortfolio</span><span class="p">:</span>
+
+  <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="c1"># Weights</span>
+  <span class="n">CI</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="c1"># Carbon Intensity</span>
+  <span class="n">Sigma</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span> <span class="c1"># Covariance Matrix</span>
+
+  <span class="k">def</span> <span class="nf">get_waci</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">CI</span>
+
+
+<span class="kn">from</span> <span class="nn">qpsolvers</span> <span class="kn">import</span> <span class="n">solve_qp</span> 
+
+<span class="nd">@dataclass</span> 
+<span class="k">class</span> <span class="nc">NetZeroPortfolio</span><span class="p">:</span>
+  <span class="n">b</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="c1"># Benchmark weights</span>
+  <span class="n">CI</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="c1"># Carbon intensity</span>
+  <span class="n">Sigma</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span> <span class="c1"># Covariance matrix</span>
+
+  <span class="k">def</span> <span class="nf">get_portfolio</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">decarbonization_pathway</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">CarbonPortfolio</span><span class="p">]:</span>
+    
+    <span class="n">dynamic_portfolio</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">decarbonization_pathway</span><span class="p">)):</span>
+      <span class="sd">&quot;&quot;&quot;QP Formulation&quot;&quot;&quot;</span>
+      <span class="n">Q</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span>
+      <span class="n">R</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span>
+      <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">))</span><span class="o">.</span><span class="n">T</span> <span class="c1"># fully invested</span>
+      <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">])</span> <span class="c1"># fully invested</span>
+      <span class="n">x_inf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">))</span> <span class="c1"># long-only position</span>
+      <span class="n">x_sup</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">))</span> <span class="c1"># long-only position</span>
+      <span class="n">C</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">CI</span><span class="o">.</span><span class="n">T</span> <span class="c1"># resulting WACI</span>
+      <span class="n">D</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">decarbonization_pathway</span><span class="p">[</span><span class="n">t</span><span class="p">])</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">CI</span> <span class="c1"># reduction imposed</span>
+
+      <span class="n">x_optim</span> <span class="o">=</span> <span class="n">solve_qp</span><span class="p">(</span><span class="n">P</span> <span class="o">=</span> <span class="n">Q</span><span class="p">,</span>
+                <span class="n">q</span> <span class="o">=</span> <span class="o">-</span><span class="n">R</span><span class="p">,</span> <span class="c1"># we put a minus here because this QP solver consider +x^T R</span>
+                <span class="n">A</span> <span class="o">=</span> <span class="n">A</span><span class="p">,</span> 
+                <span class="n">b</span> <span class="o">=</span> <span class="n">B</span><span class="p">,</span>
+                <span class="n">G</span> <span class="o">=</span> <span class="n">C</span><span class="p">,</span>
+                <span class="n">h</span> <span class="o">=</span> <span class="n">D</span><span class="p">,</span>
+                <span class="n">lb</span> <span class="o">=</span> <span class="n">x_inf</span><span class="p">,</span>
+                <span class="n">ub</span> <span class="o">=</span> <span class="n">x_sup</span><span class="p">,</span>
+                <span class="n">solver</span> <span class="o">=</span> <span class="s1">&#39;osqp&#39;</span><span class="p">)</span>
+      <span class="n">dynamic_portfolio</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">CarbonPortfolio</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x_optim</span><span class="p">,</span> 
+                           <span class="n">Sigma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span><span class="p">,</span> <span class="n">CI</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">CI</span><span class="p">)</span> <span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">dynamic_portfolio</span>
 </pre></div>
 </div>
+<p>We can use again the same example:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.20</span><span class="p">,</span>
+              <span class="mf">0.19</span><span class="p">,</span>
+              <span class="mf">0.17</span><span class="p">,</span>
+              <span class="mf">0.13</span><span class="p">,</span>
+              <span class="mf">0.12</span><span class="p">,</span>
+              <span class="mf">0.08</span><span class="p">,</span>
+              <span class="mf">0.06</span><span class="p">,</span>
+              <span class="mf">0.05</span><span class="p">])</span>
+
+<span class="n">CI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">100.5</span><span class="p">,</span>
+               <span class="mf">97.2</span><span class="p">,</span>
+               <span class="mf">250.4</span><span class="p">,</span>
+               <span class="mf">352.3</span><span class="p">,</span>
+               <span class="mf">27.1</span><span class="p">,</span>
+               <span class="mf">54.2</span><span class="p">,</span>
+               <span class="mf">78.6</span><span class="p">,</span>
+               <span class="mf">426.7</span><span class="p">])</span>
+
+<span class="n">betas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.30</span><span class="p">,</span>
+                  <span class="mf">1.80</span><span class="p">,</span>
+                  <span class="mf">0.85</span><span class="p">,</span>
+                  <span class="mf">0.83</span><span class="p">,</span>
+                  <span class="mf">1.47</span><span class="p">,</span>
+                  <span class="mf">0.94</span><span class="p">,</span>
+                  <span class="mf">1.67</span><span class="p">,</span>
+                  <span class="mf">1.08</span><span class="p">])</span>
+
+<span class="n">sigmas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.10</span><span class="p">,</span>
+                   <span class="mf">0.05</span><span class="p">,</span>
+                   <span class="mf">0.06</span><span class="p">,</span>
+                   <span class="mf">0.12</span><span class="p">,</span>
+                   <span class="mf">0.15</span><span class="p">,</span>
+                   <span class="mf">0.04</span><span class="p">,</span>
+                   <span class="mf">0.08</span><span class="p">,</span>
+                   <span class="mf">0.07</span><span class="p">])</span>
+
+<span class="n">Sigma</span> <span class="o">=</span> <span class="n">betas</span> <span class="o">@</span> <span class="n">betas</span><span class="o">.</span><span class="n">T</span> <span class="o">*</span> <span class="mf">0.18</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">sigmas</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now let’s create the PAB’s decarbonization pathway:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">years</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">2051</span><span class="p">)]</span>
+<span class="n">pab_decarbonization_patwhay</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mf">0.07</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">years</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">years</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">years</span><span class="p">))]</span>
+</pre></div>
+</div>
+<p>We can now instantiate our problem and run the <code class="docutils literal notranslate"><span class="pre">get_portfolio</span></code> method:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">test_dynamic_portfolio</span> <span class="o">=</span> <span class="n">NetZeroPortfolio</span><span class="p">(</span><span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span>
+                             <span class="n">CI</span> <span class="o">=</span> <span class="n">CI</span><span class="p">,</span>
+                             <span class="n">Sigma</span> <span class="o">=</span> <span class="n">Sigma</span><span class="p">)</span>
+
+<span class="n">resulting_pab</span> <span class="o">=</span> <span class="n">test_dynamic_portfolio</span><span class="o">.</span><span class="n">get_portfolio</span><span class="p">(</span><span class="n">decarbonization_pathway</span><span class="o">=</span> <span class="n">pab_decarbonization_patwhay</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s represent the evolution of the tracking error volatility:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_tracking_error_volatility</span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> 
+                                  <span class="n">b</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
+                                  <span class="n">Sigma</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+  <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">Sigma</span> <span class="o">@</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">b</span><span class="p">))</span>
+
+
+<span class="n">te</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">portfolio</span> <span class="ow">in</span> <span class="n">resulting_pab</span><span class="p">:</span>
+  <span class="k">if</span> <span class="n">portfolio</span><span class="o">.</span><span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">te</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">get_tracking_error_volatility</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">portfolio</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">Sigma</span> <span class="o">=</span> <span class="n">Sigma</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">te</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">years</span><span class="p">,</span> <span class="n">te</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">2050</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Tracking Error Volatility (in %)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Tracking error volatility of dynamic net zero portfolio&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<figure class="align-default" id="tedynamicportfolio">
+<img alt="_images/tedynamicportfolio.png" src="_images/tedynamicportfolio.png" />
+<figcaption>
+<p><span class="caption-text">Figure: Tracking error volatility of dynamic net zero portfolio</span><a class="headerlink" href="#tedynamicportfolio" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>We can see that, with the assumption that the world doesn’t change, we cannot find optimal solution after 2036.
+Furthermore, dynamic decarbonization leads to progressive deviation from the benchmark, and then to explosive tracking error volatility.</p>
 </section>
 <section id="net-zero-backtesting">
 <h2>Net Zero Backtesting<a class="headerlink" href="#net-zero-backtesting" title="Permalink to this headline">#</a></h2>
 <p>The objective of net zero investment portfolio, according to the framework proposed by Barahhou et al. (2022), is to promote self-decarbonization rather than sequential decarbonization (ie. decarbonization obtained by the dynamic of the issuers’ decarbonization rather than with successive or sequential decarbonization obtained by rebalancement).</p>
 <p>Let <span class="math notranslate nohighlight">\(CI(t,x;F_t)\)</span> be the carbon intensity of portfolio <span class="math notranslate nohighlight">\(x\)</span> calculated at time <span class="math notranslate nohighlight">\(t\)</span> with the information <span class="math notranslate nohighlight">\(F_t\)</span> available at time <span class="math notranslate nohighlight">\(t\)</span>.</p>
 <p>The portfolio <span class="math notranslate nohighlight">\(x(t)\)</span> must satisfy:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8794302f-319a-4fc8-8463-4c8c9c0cdfcf">
-<span class="eqno">(5)<a class="headerlink" href="#equation-8794302f-319a-4fc8-8463-4c8c9c0cdfcf" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-5e97bfbc-a115-45a3-95a1-7d9ec8c284cb">
+<span class="eqno">(5)<a class="headerlink" href="#equation-5e97bfbc-a115-45a3-95a1-7d9ec8c284cb" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI(t, x(t); F_t) \leq (1 - \mathfrak{R}_{CI}(t_0,t))CI(t_0,b(t_0); F_{t_0})
 \end{equation}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(b(t_0)\)</span> is the benchmark at time <span class="math notranslate nohighlight">\(t_0\)</span>. The portfolio is rebalanced at time <span class="math notranslate nohighlight">\(t+1\)</span> and we will choose a new portfolio <span class="math notranslate nohighlight">\(x(t+1)\)</span> such that:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-88b7afba-3617-4481-8b41-7a6b630a0410">
-<span class="eqno">(6)<a class="headerlink" href="#equation-88b7afba-3617-4481-8b41-7a6b630a0410" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-88212416-a229-4c41-b422-36e090bd9086">
+<span class="eqno">(6)<a class="headerlink" href="#equation-88212416-a229-4c41-b422-36e090bd9086" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI(t + 1, x(t+1); F_{t+1}) \leq (1 - \mathfrak{R}_{CI}(t_0, t+1))CI(t_0, b(t_0);F_{t_0})
 \end{equation}\]</div>
 <p>We don’t have to rebalance (ie. add carbon reduction by new sequential decarbonization) if:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-77759748-d701-41f9-80af-a8c370cc98ca">
-<span class="eqno">(7)<a class="headerlink" href="#equation-77759748-d701-41f9-80af-a8c370cc98ca" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f7567f93-612d-4de9-a5f2-5bbd14f4933c">
+<span class="eqno">(7)<a class="headerlink" href="#equation-f7567f93-612d-4de9-a5f2-5bbd14f4933c" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI(t + 1, x(t); F_{t+1}) \leq (1 - \mathfrak{R}_{CI}(t_0, t+1))CI(t_0, b(t_0);F_{t_0})
 \end{equation}\]</div>
 <p>The variation between two rebalancing dates <span class="math notranslate nohighlight">\(CI(t+1, x(t + 1);F_{t+1}) - CI(t, x(t), F_t)\)</span> is decomposed between two components:</p>
@@ -369,8 +520,8 @@ CI(t + 1, x(t); F_{t+1}) \leq (1 - \mathfrak{R}_{CI}(t_0, t+1))CI(t_0, b(t_0);F_
 <li><p>The additional decarbonization with sequential decarbonization <span class="math notranslate nohighlight">\(CI(t+1, x(t + 1);F_{t+1}) - CI(t + 1, x(t), F_{t+1})\)</span></p></li>
 </ol>
 <p>The self-decarbonization ratio is then defined as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3f077d71-2065-43a7-9edf-7f40725fcdbc">
-<span class="eqno">(8)<a class="headerlink" href="#equation-3f077d71-2065-43a7-9edf-7f40725fcdbc" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-76339a69-a470-4d72-a5b1-8ebc6cfcbae4">
+<span class="eqno">(8)<a class="headerlink" href="#equation-76339a69-a470-4d72-a5b1-8ebc6cfcbae4" title="Permalink to this equation">#</a></span>\[\begin{equation}
 SR(t+1) = \frac{CI(t, x(t);F_{t}) - CI(t + 1, x(t), F_{t+1})}{CI(t, x(t);F_{t}) - CI(t + 1, x(t + 1), F_{t+1})}
 \end{equation}\]</div>
 <p>The upper bound is reached when do not have to rebalance the portfolio, with the decarbonization achieved through self-decarbonization rather than sequential decarbonization. This is a first step towards the backesting of net zero portoflios.</p>
@@ -390,18 +541,18 @@ SR(t+1) = \frac{CI(t, x(t);F_{t}) - CI(t + 1, x(t), F_{t+1})}{CI(t, x(t);F_{t}) 
 <h3>Carbon Momentum<a class="headerlink" href="#carbon-momentum" title="Permalink to this headline">#</a></h3>
 <p>In order to have an idea of the potential issuers carbon footprint dynamics, we can exploit the historical trajectory of the past carbon emissions. We can therefore, as Roncalli et al. (2022), estimate the associated linear trend model and project the future carbon emissions by assuming that the issuer will do the same efforts in the future than in the past.</p>
 <p>Le Guenedal et al. (2022) define the carbon trend by considering the following linear constant trend model:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-be740fb3-4afa-4673-a81b-841b2ec637a6">
-<span class="eqno">(9)<a class="headerlink" href="#equation-be740fb3-4afa-4673-a81b-841b2ec637a6" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-237d429a-c02d-4f70-a9e0-1744e671bee4">
+<span class="eqno">(9)<a class="headerlink" href="#equation-237d429a-c02d-4f70-a9e0-1744e671bee4" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CE(t) = \beta_0 + \beta_1 \cdot t + u(t)
 \end{equation}\]</div>
 <p>We can estimate <span class="math notranslate nohighlight">\(\beta_0\)</span> and <span class="math notranslate nohighlight">\(\beta_1\)</span> using the least squares approach. Then, we can build the carbon trajectory iplied by the trend by applying the projection:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a139290d-a4e3-4230-8bfe-7cdb43602939">
-<span class="eqno">(10)<a class="headerlink" href="#equation-a139290d-a4e3-4230-8bfe-7cdb43602939" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a7436f74-ff62-4b22-a85a-b3479a95d565">
+<span class="eqno">(10)<a class="headerlink" href="#equation-a7436f74-ff62-4b22-a85a-b3479a95d565" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \hat{CE}(t) = CE(t_0) + \hat{\beta_1} \cdot (t - t_0)
 \end{equation}\]</div>
 <p>Le Guenedal et al. (2022) then define a long-term carbon momentum <span class="math notranslate nohighlight">\(CM(t)\)</span> as the ratio between the slope estimated at time <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(\hat{\beta_1}(t)\)</span>, and the current carbon emissions:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-39b0c0a6-dfe5-48ca-aec1-aae4550d8271">
-<span class="eqno">(11)<a class="headerlink" href="#equation-39b0c0a6-dfe5-48ca-aec1-aae4550d8271" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-3af75a20-63d3-4295-976d-d1b3226bb4c2">
+<span class="eqno">(11)<a class="headerlink" href="#equation-3af75a20-63d3-4295-976d-d1b3226bb4c2" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CM(t) = \frac{\hat{\beta_1}(t)}{CE(t)}
 \end{equation}\]</div>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># reproduce figure 20 for few stocks in page 38 of portfolio construction with climate risk</span>
