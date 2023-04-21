@@ -348,7 +348,7 @@ Le Guenedal et al. (2022) define the carbon trend by considering the following l
 CE(t) = \beta_0 + \beta_1 \cdot t + u(t)
 \end{equation}
 
-We can estimate $\beta_0$ and $\beta_1$ using the least squares approach. Then, we can build the carbon trajectory iplied by the trend by applying the projection:
+We can estimate $\beta_0$ and $\beta_1$ using the least squares approach. Then, we can build the carbon trajectory implied by the trend by applying the projection:
 
 \begin{equation}
 \hat{CE}(t) = CE(t_0) + \hat{\beta_1} \cdot (t - t_0)
