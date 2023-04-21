@@ -1,7 +1,7 @@
 ## Integrating the Transition Dimension
 
 While we've addressed the decarbonization dimension in the previous part, net zero portfolio needs also to integrate the transition dimension. Indeed, one of the main objective of a net zero investor is to finance the transition to a low-carbon economy.
-The PAB addresses the transition dimension by imposing a weight constraint on what is defined as climate impact sectors. However, using the green intensity measure proposed by Roncalli et al. (2022), it has been observed that the PAB constraint has no positive impact on the resulting green intensity. An observed negative relationship between the decarbonization and the transition dimensions calls for the inclusion of a green intensity constraint.
+The PAB addresses the transition dimension by imposing a weight constraint on what is defined as climate impact sectors. However, using the green intensity measure proposed by Barahhou et al. (2022), it has been observed that the PAB constraint has no positive impact on the resulting green intensity. Barahhou et al. (2022) observed a negative relationship between the decarbonization and the transition dimensions calls for the inclusion of a green intensity constraint.
 
 ### Controlling for Climate Impact Sectors
 

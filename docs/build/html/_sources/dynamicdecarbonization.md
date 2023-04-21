@@ -450,4 +450,4 @@ The optimization problem is the same as the previous optimization problem except
 
 - Improving the self-decarbonization ratio calls for the integration of issuers' carbon footprint dynamics. It constrats with the PAB's approach, that doesn't include any forward-looking information. PAB's decarbonization comes almost entirely from sequential decarbonization.
 
-- We introduce a measure of carbon footprint dynamics in our optimization problem, improving the resulting self-decarbonization ratio.
+- We introduce a measure of carbon footprint dynamics in our optimization problem, that could help in improving the self-decarbonization ratio.
