@@ -348,11 +348,39 @@ Le Guenedal et al. (2022) define the carbon trend by considering the following l
 CE(t) = \beta_0 + \beta_1 \cdot t + u(t)
 \end{equation}
 
-We can estimate $\beta_0$ and $\beta_1$ using the least squares approach. Then, we can build the carbon trajectory implied by the trend by applying the projection:
+The parameters $\beta_0$ and $\beta_1$ can be estimated with the least squares methods on a sample of observations. 
+
+The projected carbon trajectory is then given by:
 
 \begin{equation}
-\hat{CE}(t) = CE(t_0) + \hat{\beta_1} \cdot (t - t_0)
+CE^{Trend}(t) = \hat{CE}(t) = \hat{\beta_0} + \hat{\beta_1}t
 \end{equation}
+
+The underlying idea heare is to extrapolate the past trajectory. However, we need to reformulate our previous model. Indeed, it is not easy to interpret as $\hat{\beta_0} = \hat{CE(0)}$ when $t = 0$. We can add a base year $t_0$, that converts our model to:
+
+\begin{equation}
+CE(t) = \beta'_0 + \beta'_1(t - t_0) + u(t)
+\end{equation}
+
+And the carbon trajectory is now given by:
+
+\begin{equation}
+CE^{Trend}(t) = \hat{\beta'_0} + \hat{\beta'_1}(t - t_0)
+\end{equation}
+
+This change is just a matter of facilitating the interpretration. Indeed, the two models are equivalent and give the same value $\hat{CE}(t)$ with:
+
+\begin{equation}
+\beta'_0 = \beta_° + \beta_1 t_0
+\end{equation}
+
+and 
+
+\begin{equation}
+\beta'_1 = \beta_1
+\end{equation}
+
+The only change resulting from the new formulation is that now $\hat{\beta}'_0 = \hat{CE}(t_0)$
 
 ```Python
 # Example Table 6 page 11 in net zero carbon metrics
