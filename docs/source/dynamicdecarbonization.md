@@ -382,11 +382,54 @@ and
 
 The only change resulting from the new formulation is that now $\hat{\beta}'_0 = \hat{CE}(t_0)$
 
+Let's implement this with an example in Python:
 ```Python
-# Example Table 6 page 11 in net zero carbon metrics
+years = [i for i in range(2007, 2021)]
+emissions = [57.8, 58.4, 57.9, 55.1,
+            51.6, 48.3, 47.1, 46.1,
+            44.4, 42.7, 41.4, 40.2, 41.9, 45.0]
+
+import pandas as pd
+import statsmodels.api as sm
+
+X = pd.Series([years[t] - years[-1] for t in range(len(years))])
+X = sm.add_constant(X)
+Y = pd.Series(emissions)
+model = sm.OLS(Y, X)
+results = model.fit()
+results.params
+```
+Our estimates for $\hat{\beta_0}'$ and $\hat{\beta_1}'$ are:
+
+```
+const    38.988571
+0        -1.451209
+dtype: float64
 ```
 
-The optimization problem is the same as the previous optimization problem except that we include projected trends in place of current intensities for the portfolio's WACI:
+And now we can define a function `forecast_carbon_emissions` for determining $CE^{Trend}(t)$:
+
+```Python
+beta_0 = results.params["const"]
+beta_1 = results.params[0]
+
+def forecast_carbon_emissions(beta_0:float, beta_1:float, t:int) -> float:
+  carbon_trend = beta_0 + beta_1 * (t - 2020)
+  return carbon_trend
+
+forecast_carbon_emissions(beta_0 = beta_0,
+                          beta_1 = beta_1,
+                          t = 2025)
+```
+
+And the result is:
+
+```
+31.73252747252748
+```
+
+We can apply the same process on the carbon intensity $CI^{Trend}(t)$rather than the carbon emissions level.
+The optimization problem is the same as the previous optimization problem except that we include projected trends (of carbon intensity) in place of current intensities for the portfolio's WACI:
 
 \begin{equation*}
 \begin{aligned}
