@@ -340,8 +340,6 @@ In this example, we can see that almost all yearly portfolio decarbonization com
 
 In the previous section, we have performed a portfolio alignment by considering a global decarbonization path for the portfolio, as recommended by the PAB approach. In this section, we consider the decarbonization path of the issuers, as in Le Guenedal and Roncalli (2022 {cite:p}`le2022portfolio`) and Barahhou et al. (2022). This approach allows to improve the self-decarbonization ratio of the portfolio.
 
-#### A Simple Carbon Trend Metric
-
 In order to have an idea of the potential issuers carbon footprint dynamics, we can exploit the historical trajectory of the past carbon emissions. We can therefore, as Roncalli et al. (2022), estimate the associated linear trend model and project the future carbon emissions by assuming that the issuer will do the same efforts in the future than in the past.
 
 Le Guenedal et al. (2022) define the carbon trend by considering the following linear constant trend model:
@@ -360,9 +358,7 @@ We can estimate $\beta_0$ and $\beta_1$ using the least squares approach. Then, 
 # Example Table 6 page 11 in net zero carbon metrics
 ```
 
-#### Managing the Carbon Footprint Dynamic
-
-The optimization problem is the same as the previous optimization problem except that we explicitly introduce the issuers carbon footprint dynamics with the carbon momentum:
+The optimization problem is the same as the previous optimization problem except that we include projected trends in place of current intensities for the portfolio's WACI:
 
 \begin{equation*}
 \begin{aligned}
@@ -371,16 +367,9 @@ The optimization problem is the same as the previous optimization problem except
 & \text{subject to}
 & & 1_n^Tx = 1\\
 & & &  0_n \leq x \leq 1_n \\
-& & & CI(x(t)) \leq (1 - \mathfrak{R}_{CI}(t_0,t))CI(b(t_0)) \\
-& & & CM(t, x) \leq CM^*
+& & & CI^{trend}(x(t)) \leq (1 - \mathfrak{R}_{CI}(t_0,t))CI(b(t_0)) \\
 \end{aligned}
 \end{equation*}
-
-With $CM^*$ a global threshold. For example, setting $CM^* = -7\%$, we expect the aligned portfolio to decarbonize itself by 7\%, improving the self-decarbonization ratio.
-
-```Python
-# Reproduce Table 11 in page 40 of Portfolio Construction with Carbon Risk
-```
 
 ### Key Takeaways 
 
