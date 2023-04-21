@@ -250,7 +250,7 @@ To maximize the self-decarbonization ratio, we need to have an idea about the dy
 
 To illustrate this concept of net zero backtesting with the use of the self-decarbonization ratio, let's take this example from Barahhou et al. (2022):
 
-| $s$  | $CI_*^s$ | $CI^s_x$ | $CI^{s+1}_x$ |   
+| $s$  | $(1 - \mathfrak{R}_{CI}(t_0, s))CI(t_0, b(t_0);F_{t_0})$ | $CI(s, x(s); F_s)$ | $CI(s + 1, x(s); F_{s+1})$ |   
 |---|---|---|---|
 |t| 100.0  | 100.0  | 99.0  |  
 |t + 1| 93.0  | 93.0  | 91.2  | 
@@ -263,20 +263,6 @@ To illustrate this concept of net zero backtesting with the use of the self-deca
 |t + 8| 55.9  | 55.9  | 58.3  | 
 |t + 9| 52.0  | 52.0  | 53.5  | 
 |t + 10| 48.4  | 48.4  | 50.5  | 
-
-Where:
-
-\begin{equation}
-CI_*^s = (1 - \mathfrak{R}_{CI}(t_0, s))CI(t_0, b(t_0);F_{t_0})
-\end{equation}
-
-\begin{equation}
-CI^s_x = CI(s, x(s); F_s)
-\end{equation}
-
-\begin{equation}
-CI^{s+1}_x = CI(s + 1, x(s); F_{s+1})
-\end{equation}
 
 Let's apply this example in Python
 ```Python
