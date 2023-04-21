@@ -3,9 +3,11 @@
 While we've addressed the decarbonization dimension in the previous part, net zero portfolio needs also to integrate the transition dimension. Indeed, one of the main objective of a net zero investor is to finance the transition to a low-carbon economy.
 The PAB addresses the transition dimension by imposing a weight constraint on what is defined as climate impact sectors. However, using the green intensity measure proposed by Barahhou et al. (2022), it has been observed that the PAB constraint has no positive impact on the resulting green intensity. Barahhou et al. (2022) observed a negative relationship between the decarbonization and the transition dimensions. This negative relationship calls for the inclusion of a green intensity constraint.
 
+
+
 ### Controlling for Climate Impact Sectors
 
-The PAB label require the exposure to sectors highly exposed to climate change to be at least equal to the exposure in the investment universe. According to the TEG (2018 {cite:p}`hoepner2018teg`, 2019 {cite:p}`hoepner2019handbook`), we can distinguish two types of sectors:
+The PAB label requires the portfolio's exposure to sectors highly exposed to climate change to be at least equal to the exposure in the investment universe. According to the TEG (2018 {cite:p}`hoepner2018teg`, 2019 {cite:p}`hoepner2019handbook`), we can distinguish two types of sectors:
 
 1. High climate impact sectors (HCIS or $CIS_{High}$)
 2. Low climate impact sectors (LCIS or $CIS_{Low}$)
@@ -24,12 +26,10 @@ The HCIS are sectors that are identified as key to the low-carbon transition. Th
 We have $CIS_{High}(x) = \sum_{i \in CIS_{High}}x_i$ the HCIS weight of the portfolio $x$. At each rebalancing date $t$, we must verify that:
 
 \begin{equation}
-CIS_{High}(x(t)) \geq \phi_{CIS} \cdot CIS_{High}(b(t))
+CIS_{High}(x(t)) \geq  CIS_{High}(b(t))
 \end{equation}
 
-Where $\phi_{CIS} = 1$.
-
-The PAB's optimization problem becomes:
+The PAB's optimization problem becomes (Le Guenedal and Roncalli, 2022):
 
 \begin{equation*}
 \begin{aligned}
@@ -39,12 +39,31 @@ The PAB's optimization problem becomes:
 & & 1_n^Tx = 1\\
 & & &  0_n \leq x \leq 1_n \\
 & & & CI(x(t)) \leq (1 - \mathfrak{R}_{CI}(t_0,t))CI (b(t_0)) \\
-& & & CIS_{High}(x(t)) \geq \phi_{CIS} \cdot CIS_{High}(b(t))
+& & & CIS_{High}(x(t)) \geq CIS_{High}(b(t))
 \end{aligned}
 \end{equation*}
+
+Regarding the QP parameters, the last two constraints can be casted into $Cx \leq D$ with:
+
+\begin{equation}
+C = \begin{bmatrix}
+CI^T \\
+- CIS_{High}^T
+\end{bmatrix}
+\end{equation}
+
+and 
+
+\begin{equation}
+D = \begin{bmatrix}
+(1 - \mathfrak{R}_{CI}(t_0,t))CI (b(t_0)) \\
+- CIS_{High}(b(t))
+\end{bmatrix}
+\end{equation}
+
 ### Financing the Transition
 
-If the idea behing the concept of HCIS in the PAB approach was to ensure that the resulting portfolio promotes activities contributing to the low-carbon transition, the constraint applied at the portfolio level has many drawbacks. Indeed, the constraint tends to encourages substitutions between sectors or industries and not substitutions between issuers within a same sector. The trade-off is not between green electricity and brown electricity for example, but between electricity generation and health care equipment. This approach doesn't contribute to financing the transition, which is an objective of a net zero portfolio. To assess if a portfolio is really contributing to the low-carbon transition, Roncalli et al. (2022) propose a green intensity measure. 
+If the idea behing the concept of HCIS in the PAB approach was to ensure that the resulting portfolio promotes activities contributing to the low-carbon transition, the constraint applied at the portfolio level has many drawbacks. Indeed, the constraint tends to encourages substitutions between sectors or industries and not substitutions between issuers within a same sector. The trade-off is not between green electricity and brown electricity for example, but between electricity generation and health care equipment. This approach doesn't contribute to financing the transition, which is an objective of a net zero portfolio. To assess if a portfolio is really contributing to the low-carbon transition, Barahhou et al. (2022) propose a green intensity measure. 
 
 A green intensity measure starts with a green taxonomy. The most famous example is the European green taxonomy. Developed by the TEG (2020 {cite:p}`eutaxo2020`), the EU green taxonomy defines economic activities which make a contribution to environmental objectives while do no significant harm to the other environmental objectives (DNSH constraint) and comply with minimum social safeguards (MS constraint). Other taxonomies exist, such as the climate solutions listed by the Project Drawdown (2017 {cite:p}`hawken2017drawdown`)for each important sectors. Proprietary taxonomies from data vendors can also be used.
 
@@ -64,7 +83,7 @@ GI(x) = \sum^n_{i=1}x_i \cdot GI_i
 
 ### Controlling for Green Intensity
 
-As Roncalli et al. (2022) observed, there is a decreasing function between the green intensity and the reduction level. This negative correlation between decarbonization and transition dimensions calls for the introduction of a green intensity constraint. This is for preventing the aligned portfolios from having a lower green intensity.
+As Barahhou et al. (2022) observed, there is a decreasing function between the green intensity and the reduction level. This negative correlation between decarbonization and transition dimensions calls for the introduction of a green intensity constraint. This is for preventing the aligned portfolios from having a lower green intensity.
 
 We finally add the green intensity constraint to our previous optimization problem that includes the carbon footprint dynamics:
 \begin{equation*}
@@ -74,8 +93,7 @@ We finally add the green intensity constraint to our previous optimization probl
 & \text{subject to}
 & & 1_n^Tx = 1\\
 & & &  0_n \leq x \leq 1_n \\
-& & & CI(x(t)) \leq (1 - \mathfrak{R}_{CI}(t_0,t))CI(b(t_0)) \\
-& & & CM(t, x) \leq CM^* \\
+& & & CI^{Trend}(x(t)) \leq (1 - \mathfrak{R}_{CI}(t_0,t))CI(b(t_0)) \\
 & & & GI(t,x) \geq (1 + G(t)) \cdot GI(t_0, b(t_0))
 \end{aligned}
 \end{equation*}
@@ -86,7 +104,7 @@ With $G(t)$ is a greeness multiplier. The underlying idea is to maintain a green
 
 - Financing the transition is one of the objective of net zero portfolios
 - PAB approach to integrate the transition dimension relies on the HCIS constraint
-- A measure to assess the contribution to the transition to a low-carbon economy has been proposed by Roncalli et al. (2022): the green intensity
+- A measure to assess the contribution to the transition to a low-carbon economy has been proposed by Barahhou et al. (2022): the green intensity
 - The HCIS constraint from the PAB falls short in improving the green intensity of the portoflio compared to the benchmark, and then underlies failures in the PAB's integration of the transition dimension
 - In fact, the decarbonization and the transition dimensions seems to be negatively correlated
 - This negative correlation calls for the direct inclusion of a green intensity constraint for net zero portfolios construction
