@@ -340,7 +340,7 @@ In this example, we can see that almost all yearly portfolio decarbonization com
 
 In the previous section, we have performed a portfolio alignment by considering a global decarbonization path for the portfolio, as recommended by the PAB approach. In this section, we consider the decarbonization path of the issuers, as in Le Guenedal and Roncalli (2022 {cite:p}`le2022portfolio`) and Barahhou et al. (2022). This approach allows to improve the self-decarbonization ratio of the portfolio.
 
-#### Carbon Momentum
+#### A Simple Carbon Trend Metric
 
 In order to have an idea of the potential issuers carbon footprint dynamics, we can exploit the historical trajectory of the past carbon emissions. We can therefore, as Roncalli et al. (2022), estimate the associated linear trend model and project the future carbon emissions by assuming that the issuer will do the same efforts in the future than in the past.
 
@@ -356,14 +356,8 @@ We can estimate $\beta_0$ and $\beta_1$ using the least squares approach. Then, 
 \hat{CE}(t) = CE(t_0) + \hat{\beta_1} \cdot (t - t_0)
 \end{equation}
 
-Le Guenedal et al. (2022) then define a long-term carbon momentum $CM(t)$ as the ratio between the slope estimated at time $t$, $\hat{\beta_1}(t)$, and the current carbon emissions:
-
-\begin{equation}
-CM(t) = \frac{\hat{\beta_1}(t)}{CE(t)}
-\end{equation}
-
 ```Python
-# reproduce figure 20 for few stocks in page 38 of portfolio construction with climate risk
+# Example Table 6 page 11 in net zero carbon metrics
 ```
 
 #### Managing the Carbon Footprint Dynamic
