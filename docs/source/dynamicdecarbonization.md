@@ -4,7 +4,7 @@ We've seen in the low-carbon strategy framework how investors can conduct a port
 
 Furthermore, a net zero investing strategy needs to include a mechanism that respect the endogenous aspect of the decarbonization pathway. In particular, a net zero portfolio implies the self-decarbonization of the portolio to respect the endogenous aspect of the decarbonization pathway, as stated by Barahhou et al. (2022).
 
-In this part, we are going to compare the approach for performing a portfolio alignment with the Paris-Aligned Benchmarks (PAB) and the net zero investment portfolio framework proposed by Barahhou et al. (2022). Introducing the concept of Net Zero Backtesting, we'll see that the dynamic decarbonization in the PAB relies on sequential decarbonization rather than self-decarbonization, because the issuers' carbon footprint dynamic is not taken into account. We will introduce carbon footprint dynamics measure, following Barahhou et al. (2022), in order to maximize the self-decarbonization ratio of the net zero portfolio. 
+In this part, we are going to compare the approach for performing a portfolio alignment with the Paris-Aligned Benchmarks (PAB) and the net zero investment portfolio framework proposed by Barahhou et al. (2022). Introducing the concept of Net Zero Backtesting, we'll see that the dynamic decarbonization in the PAB relies on sequential decarbonization rather than self-decarbonization, because the issuers' carbon footprint dynamic is not taken into account. We will introduce carbon footprint dynamic measure, following Barahhou et al. (2022), in order to maximize the self-decarbonization ratio of the net zero portfolio. 
 
 ### Dynamic Portfolio's Decarbonization
 
