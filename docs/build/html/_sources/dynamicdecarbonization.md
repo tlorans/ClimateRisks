@@ -444,9 +444,9 @@ The optimization problem is the same as the previous optimization problem except
 
 ### Key Takeaways 
 
-- Net zero portfolios introduce the notion of portfolio alignment, with a dynamic decarbonization compared to a reference base year. This contrasts with the low-carbon strategy
+- Net zero portfolios introduce the notion of portfolio alignment, with a dynamic decarbonization compared to a reference base year. This contrasts with the low-carbon strategy.
 
-- Roncalli et al. (2022) intoduced the notion of net zero backtesting: as net zero investment portfolio promote self-decarbonization rather than sequential decarbonization, investors need to be able to verify where does the portfolio's decarbonization comes from, with the self-decarbonization ratio for example
+- Barahhou et al. (2022) intoduced the notion of net zero backtesting: as net zero investment portfolio promote self-decarbonization rather than sequential decarbonization, investors need to be able to verify where does the portfolio's decarbonization comes from, with the self-decarbonization ratio for example
 
 - Improving the self-decarbonization ratio calls for the integration of issuers' carbon footprint dynamics. It constrats with the PAB's approach, that doesn't include any forward-looking information. PAB's decarbonization comes almost entirely from sequential decarbonization.
 
