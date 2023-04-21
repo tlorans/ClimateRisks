@@ -266,13 +266,75 @@ To illustrate this concept of net zero backtesting with the use of the self-deca
 |t + 9| 52.0  | 52.0  | 53.5  | 
 |t + 10| 48.4  | 48.4  | 50.5  | 
 
-Let's apply this example in Python
+Let's apply this example in Python. First, we create a `NetZeroBacktesting` with the methods we need:
 ```Python
 
+@dataclass 
+class NetZeroBacktesting:
 
+  CI_s_star: np.array # Targets
+  CI_s_x: np.array # Carbon Intensity of the portfolio x at s
+  CI_s_plus_one_x: np.array # Carbon intensity of the portfolio x at s+1
+
+  def get_self_decarbonization_ratio(self):
+    sr_s = []
+
+    for t in range(len(self.CI_s_star)-1):
+      sr = (self.CI_s_x[t] - self.CI_s_plus_one_x[t]) / (self.CI_s_x[t] - self.CI_s_x[t+1])
+      sr_s.append(sr)
+    
+    return sr_s
+
+  def get_self_decarbonization(self):
+    return [self.CI_s_plus_one_x[t] - self.CI_s_x[t] for t in range(0, len(self.CI_s_x) - 1)]
+    
+  def get_sequential_decarbonization(self):
+    return [self.CI_s_x[t+1] - self.CI_s_plus_one_x[t] for t in range(0, len(self.CI_s_x)-1)]
 ```
 
-By definition, and because the PAB approach doesn't integrate any information about carbon footprint dynamics, the PAB's decarbonization is almost entirely due to sequential decarbonization.
+Then we can implement our example:
+```Python
+CI_s_star = [100.0, 93.0, 86.5, 80.4, 74.8, 69.6, 64.7, 60.2, 55.9, 52.0, 48.4]
+CI_s_x =  [100.0, 93.0, 86.5, 80.4, 74.8, 69.6, 64.7, 60.2, 55.9, 52.0, 48.4]
+CI_s_plus_one_x = [99.0, 91.2, 91.3, 78.1, 74.2, 70.7, 62.0, 60.0, 58.3, 53.5, 50.5]
+
+test = NetZeroBacktesting(CI_s_star = CI_s_star,
+                          CI_s_x = CI_s_x,
+                          CI_s_plus_one_x = CI_s_plus_one_x)
+```
+
+And let's plot the results:
+
+```Python
+self_decarbonization = np.array(test.get_self_decarbonization())
+negative_decarbonization = np.zeros(len(self_decarbonization))
+negative_decarbonization[np.where(self_decarbonization > 0)] = self_decarbonization[np.where(self_decarbonization > 0)]
+self_decarbonization[np.where(self_decarbonization > 0)] = 0
+sequential_decarbonization = np.array(test.get_sequential_decarbonization())
+
+import matplotlib.pyplot as plt 
+
+s = ["t+1","t+2", "t+3","t+4","t+5","t+6","t+7","t+8","t+9","t+10"]
+
+fig, ax = plt.subplots()
+fig.set_size_inches(10, 10)
+
+ax.bar(s, sequential_decarbonization, label='Sequential decarbonization', color ='b')
+ax.bar(s, self_decarbonization,
+       label='Self-decarbonization', color = 'g')
+ax.bar(s, negative_decarbonization,
+       label='Negative decarbonization', color = 'r')
+ax.legend()
+```
+
+```{figure} nzebacktestingsequential.png
+---
+name: nzebacktestingsequential
+---
+Figure: Sequential versus self-decarbonization
+```
+
+In this example, we can see that almost all yearly portfolio decarbonization comes from the rebalancement process (sequential decarbonization). This is typically what we can expect by applying the PAB methodology. Indeed, because the PAB approach doesn't integrate any information about carbon footprint dynamics, the PAB's decarbonization is almost entirely due to sequential decarbonization.
 
 ### Integrating Carbon Footprint Dynamics
 
