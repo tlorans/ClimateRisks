@@ -532,27 +532,35 @@ Finally, the performance of the risk factor between two rebalancing dates corres
 F(t) = F(t_{\tau}) \cdot (\sum_{i \in Q1(t_{\tau})} w_i(t_{\tau}) (1 + R_i(t)) - \sum_{i \in Q5(t_{\tau})} w_i(t_{\tau}) (1 + R_i(t)))
 \end{equation}
 
-Let's illustrate with the quintile method we've covered previously, by creating a `QuintileConstruction` dataclass, child of the `LongShortConstruction`:
+Let's illustrate with the quintile method we've covered previously, by creating a `LongShortQuintile` dataclass. This dataclass has the method `get_portfolio` returning two `Portfolio` objects:
+
 ```Python
 @dataclass
-class QuintileConstruction(LongShortConstruction):
+class LongShortQuintile:
+  mu: np.array # Expected Returns
+  Sigma: np.matrix # Covariance Matrix
+  S: np.array # scores
 
-  def get_portfolio(self) -> Portfolio:
+  def get_portfolio(self) -> list[Portfolio]:
     # find the borns to define Q1 and Q5
     born_Q1 = np.quantile(self.S, 0.8)
     born_Q5 = np.quantile(self.S, 0.2)
 
     # define the long and short stocks
-    long_stocks = self.S[np.where(self.S > born_Q1)]
-    short_stocks = self.S[np.where(self.S < born_Q5)]
+    long_stocks = np.where(self.S > born_Q1)
+    short_stocks = np.where(self.S < born_Q5)
 
     # define the vector of weights (equally-weighted here)
-    x = np.zeros(len(self.S))
-    x[np.where(self.S > born_Q1)] = 1 / len(long_stocks)
-    x[np.where(self.S < born_Q5)] = - 1 / len(short_stocks)
+
+    long_portfolio = np.zeros(len(self.S))
+    long_portfolio[long_stocks] = 1 / len(long_stocks)
     
-    return Portfolio(x = x, mu = self.mu, Sigma = self.Sigma)
+    short_portfolio = np.zeros(len(self.S))
+    short_portfolio[short_stocks] = 1 / len(short_stocks)
     
+    return [Portfolio(x = long_portfolio, mu = self.mu, Sigma = self.Sigma),
+            Portfolio(x = short_portfolio, mu = self.mu, Sigma = self.Sigma)
+            ]
 ```
 
 We can test it with a vector of scores:
@@ -562,14 +570,20 @@ S = np.array([1.1,
      2.3,
      0.3])
 
-test_ls = QuintileConstruction(mu = mu, Sigma = Sigma, S = S)
+test_ls = LongShortQuintile(mu = mu, Sigma = Sigma, S = S)
 
 new_port = test_ls.get_portfolio()
 
-new_port.x
 ```
 
-And the resulting portfolio's weighting is:
+The long portfolio is:
+```Python
+new_port[0].x
 ```
-array([ 0.,  0.,  1., -1.])
+```
+array([0., 0., 1., 0.])
+```
+And the short portfolio:
+```Python
+new_port[1].x
 ```
