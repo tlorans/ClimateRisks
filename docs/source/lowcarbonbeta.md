@@ -175,23 +175,15 @@ class EnhancedIndexCarbonBeta:
 
   def get_portfolio(self, beta_sup:float) -> CarbonPortfolio:
     """QP Formulation"""
-    Q = self.Sigma
-    R = self.Sigma @ self.b
-    A = np.ones(len(self.carbon_betas)).T # fully invested
-    B = np.array([1.]) # fully invested
-    x_inf = np.zeros(len(self.carbon_betas)) # long-only position
-    x_sup = np.ones(len(self.carbon_betas)) # long-only position
-    C = self.carbon_betas.T # resulting WACI
-    D = np.array([beta_sup]) # reduction imposed
 
-    x_optim = solve_qp(P = Q,
-              q = - R, # we put a minus here because this QP solver consider +x^T R
-              A = A, 
-              b = B,
-              G = C,
-              h = D,
-              lb = x_inf,
-              ub = x_sup,
+    x_optim = solve_qp(P = self.Sigma,
+              q = - self.Sigma @ self.b, 
+              A = np.ones(len(self.carbon_betas)).T, 
+              b = np.array([1.]),
+              G = self.carbon_betas.T,
+              h = np.array([beta_sup]),
+              lb = np.zeros(len(self.carbon_betas)),
+              ub = np.ones(len(self.carbon_betas)) ,
               solver = 'osqp')
 
     return CarbonPortfolio(x = x_optim, 
@@ -243,44 +235,32 @@ low_betas_portfolio = EnhancedIndexCarbonBeta( b = b,
                                          Sigma = Sigma)
 ```
 
-We can now plot the relationship between maximum carbon beta threshold and the tracking error volatility:
+Let's now plot the relationship between the carbon betas and the new optimal weights deviation from the benchmark, with $\beta_{bmg}^+ = 0$:
 
 ```Python
-from numpy import arange
+low_betas_portfolio = EnhancedIndexCarbonBeta( b = b,
+                                         carbon_betas = carbon_betas,
+                                         Sigma = Sigma)
 
-list_betas = arange(-0.5,0.5, 0.01)
-list_portfolios = []
+dev = (low_betas_portfolio.get_portfolio(beta_sup = 0).x - b) * 100
 
-
-for B in list_betas:
-  list_portfolios.append(low_betas_portfolio.get_portfolio(beta_sup = B))
-
-def get_tracking_error_volatility(x:np.array, 
-                                  b:np.array,
-                                  Sigma:np.array) -> float:
-  return np.sqrt((x - b).T @ Sigma @ (x - b))
-
-import matplotlib.pyplot as plt
-
-max_beta = [beta for beta in list_betas]
-te = [get_tracking_error_volatility(x = portfolio.x, b = b, Sigma = Sigma) * 100 for portfolio in list_portfolios]
 
 plt.figure(figsize = (10, 10))
-plt.plot(max_beta, te)
-plt.xlabel("Maximum Carbon Beta")
-plt.ylabel("Tracking Error Volatility (in %)")
-plt.title("Efficient Carbon Risk Exposure Frontier with Threshold Approach")
+plt.scatter(carbon_betas, dev)
+plt.xlabel("Carbon Beta")
+plt.ylabel("Weights deviation from benchmark (in %)")
+plt.title("Relationship between Carbon Beta and optimal weights")
 plt.show()
 ```
 
-```{figure} carbonbetate.png
+```{figure} carbonbetavsoptimalweights.png
 ---
-name: carbonbetate
+name: carbonbetavsoptimalweights
 ---
-Figure: Efficient Carbon Risk Exposure Frontier with Threshold Approach
+Figure: Relationship between Carbon Beta and optimal weights with $\beta_{bmg}^+ = 0$
 ```
 
-With this example, the more negative the maximum carbon beta is (that is, the more positively exposed to carbon risk the portfolio is), the higher the tracking error volatility with respect to the benchmark is. This is the result we would expect in theory (ie. in equilibrium). However, we've seen that in the last decade, brown assets underperformed green assets (BMG factor returns are negative). In practice, with historical returns, there is a chance that the relationship between the maximum carbon beta and the tracking error volatility is inversed. This negative returns associated with the BMG factor is a puzzling result that we will tackle in the next part.
+The impact of the carbon beta threshold introduction, with $\beta_{bmg}^+$ leads, as expected, to an overweighting of stocks negatively loaded into the BMG factor and the underweighting of stocks positively loaded ino the BMG factor.
 
 ### Key Takeaways
 
@@ -288,6 +268,4 @@ With this example, the more negative the maximum carbon beta is (that is, the mo
 
 - Stocks sentivities to the BMG factor can be integrated into a enhanced index, in order to hedge for carbon risk. This strategy is based on a marked-based measure of carbon risk.
 
-- Question remains regarding the returns associated the BMG factor. Indeed, returns should reward risk. With carbon risk, brown companies are significantly exposed to the risk. Then, investors should require higher returns to bear the risk with investment in brown companies. But the Carima's BMG factor provide significant negative returns. With historic returns, it seems that investors require higher returns from green companies than for brown companies. This doesn't make sense in a theoretical (and common sense) point of view. 
-
-- We will question the BMG factor puzzling result in the next part.
+- Question remains regarding the returns associated the BMG factor. Indeed, returns should reward risk. With carbon risk, brown companies are significantly exposed to the risk. Then, investors should require higher returns to bear the risk with investment in brown companies. But the Carima's BMG factor provide significant negative returns. With historic returns, it seems that investors require higher returns from green companies than for brown companies. This doesn't make sense in a theoretical (and common sense) point of view. We will question the BMG factor puzzling result in the next part.
