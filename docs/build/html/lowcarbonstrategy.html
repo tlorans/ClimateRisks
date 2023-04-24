@@ -322,14 +322,14 @@ document.write(`
 <section id="weighted-average-carbon-intensity">
 <h3>Weighted-Average Carbon Intensity<a class="headerlink" href="#weighted-average-carbon-intensity" title="Permalink to this headline">#</a></h3>
 <p>The weighted-average carbon intensity (WACI) of the benchmark is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6159f553-8d6a-411a-8b72-b639297a0c52">
-<span class="eqno">(1)<a class="headerlink" href="#equation-6159f553-8d6a-411a-8b72-b639297a0c52" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d329a405-8a31-4f50-9483-fa84fdcb1eac">
+<span class="eqno">(1)<a class="headerlink" href="#equation-d329a405-8a31-4f50-9483-fa84fdcb1eac" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI(b) = b^T CI
 \end{equation}\]</div>
 <p>With <span class="math notranslate nohighlight">\(CI = (CI_1, ..., CI_n)\)</span> the vector of carbon intensities.</p>
 <p>The same is for the WACI of the portfolio:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5e0cc48f-2d5a-4cea-9c25-da01ffd7a779">
-<span class="eqno">(2)<a class="headerlink" href="#equation-5e0cc48f-2d5a-4cea-9c25-da01ffd7a779" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-99fd5dec-13b3-4a26-8ee9-a090cfd31ce5">
+<span class="eqno">(2)<a class="headerlink" href="#equation-99fd5dec-13b3-4a26-8ee9-a090cfd31ce5" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI(x) = x^T CI
 \end{equation}\]</div>
 <p>Let’s implement a <code class="docutils literal notranslate"><span class="pre">CarbonPortfolio</span></code> dataclass:</p>
@@ -354,8 +354,8 @@ CI(x) = x^T CI
 <section id="integrating-carbon-intensity-reduction-as-a-constraint">
 <h3>Integrating Carbon Intensity Reduction as a Constraint<a class="headerlink" href="#integrating-carbon-intensity-reduction-as-a-constraint" title="Permalink to this headline">#</a></h3>
 <p>The low-carbon strategy involves the reduction <span class="math notranslate nohighlight">\(\mathfrak{R}\)</span> of the portfolio’s carbon intensity <span class="math notranslate nohighlight">\(CI(x)\)</span> compared to the benchmark’s carbon intensity <span class="math notranslate nohighlight">\(CI(b)\)</span>. It can be viewed as the following constraint (Roncalli, 2023):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-77efb1b2-55ea-4771-a901-e3693f71d635">
-<span class="eqno">(3)<a class="headerlink" href="#equation-77efb1b2-55ea-4771-a901-e3693f71d635" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a0941f8e-27bb-4b9d-98dc-741aca159413">
+<span class="eqno">(3)<a class="headerlink" href="#equation-a0941f8e-27bb-4b9d-98dc-741aca159413" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI(x) \leq (1 - \mathfrak{R})CI(b)
 \end{equation}\]</div>
 <p>The optimization problem becomes:</p>
@@ -410,23 +410,14 @@ CI(x) \leq (1 - \mathfrak{R})CI(b)
 
   <span class="k">def</span> <span class="nf">get_portfolio</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reduction_rate</span><span class="p">:</span><span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CarbonPortfolio</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;QP Formulation&quot;&quot;&quot;</span>
-    <span class="n">Q</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span>
-    <span class="n">R</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span>
-    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">))</span><span class="o">.</span><span class="n">T</span> <span class="c1"># fully invested</span>
-    <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">])</span> <span class="c1"># fully invested</span>
-    <span class="n">x_inf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">))</span> <span class="c1"># long-only position</span>
-    <span class="n">x_sup</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">))</span> <span class="c1"># long-only position</span>
-    <span class="n">C</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">CI</span><span class="o">.</span><span class="n">T</span> <span class="c1"># resulting WACI</span>
-    <span class="n">D</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">reduction_rate</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">CI</span> <span class="c1"># reduction imposed</span>
-
-    <span class="n">x_optim</span> <span class="o">=</span> <span class="n">solve_qp</span><span class="p">(</span><span class="n">P</span> <span class="o">=</span> <span class="n">Q</span><span class="p">,</span>
-              <span class="n">q</span> <span class="o">=</span> <span class="o">-</span><span class="n">R</span><span class="p">,</span> <span class="c1"># we put a minus here because this QP solver consider +x^T R</span>
-              <span class="n">A</span> <span class="o">=</span> <span class="n">A</span><span class="p">,</span> 
-              <span class="n">b</span> <span class="o">=</span> <span class="n">B</span><span class="p">,</span>
-              <span class="n">G</span> <span class="o">=</span> <span class="n">C</span><span class="p">,</span>
-              <span class="n">h</span> <span class="o">=</span> <span class="n">D</span><span class="p">,</span>
-              <span class="n">lb</span> <span class="o">=</span> <span class="n">x_inf</span><span class="p">,</span>
-              <span class="n">ub</span> <span class="o">=</span> <span class="n">x_sup</span><span class="p">,</span>
+    <span class="n">x_optim</span> <span class="o">=</span> <span class="n">solve_qp</span><span class="p">(</span><span class="n">P</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span><span class="p">,</span>
+              <span class="n">q</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">),</span> <span class="c1"># we put a minus here because this QP solver consider +x^T R</span>
+              <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">))</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> 
+              <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">]),</span>
+              <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">CI</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="c1"># resulting WACI</span>
+              <span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">reduction_rate</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">CI</span><span class="p">,</span> <span class="c1"># reduction</span>
+              <span class="n">lb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)),</span>
+              <span class="n">ub</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)),</span>
               <span class="n">solver</span> <span class="o">=</span> <span class="s1">&#39;osqp&#39;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">CarbonPortfolio</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x_optim</span><span class="p">,</span> 
@@ -455,8 +446,8 @@ CI(x) \leq (1 - \mathfrak{R})CI(b)
 </div>
 <p>We can use the market one-factor model to estimate the covariance matrix, based on stocks betas <span class="math notranslate nohighlight">\(\beta\)</span>, idiosyncratic volatilities <span class="math notranslate nohighlight">\(\tilde{\sigma}\)</span>
 and market volatiltiy <span class="math notranslate nohighlight">\(\sigma_m\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b5bec5f3-4735-4a29-9593-eef87ea76ba7">
-<span class="eqno">(4)<a class="headerlink" href="#equation-b5bec5f3-4735-4a29-9593-eef87ea76ba7" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-3217043c-ab1c-4874-8a8c-f21957406c26">
+<span class="eqno">(4)<a class="headerlink" href="#equation-3217043c-ab1c-4874-8a8c-f21957406c26" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \Sigma = \beta \beta^T \sigma_m^2 + D
 \end{equation}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(D\)</span> is a diagonal matrix with <span class="math notranslate nohighlight">\(\tilde{\sigma}^2\)</span> on its diagonal.</p>
@@ -504,8 +495,9 @@ and market volatiltiy <span class="math notranslate nohighlight">\(\sigma_m\)</s
 
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
-<span class="n">reduction_rate</span> <span class="o">=</span> <span class="p">[</span><span class="n">reduction</span> <span class="o">*</span> <span class="mi">100</span> <span class="k">for</span> <span class="n">reduction</span> <span class="ow">in</span> <span class="n">list_R</span><span class="p">]</span>
-<span class="n">te</span> <span class="o">=</span> <span class="p">[</span><span class="n">get_tracking_error_volatility</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">portfolio</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">Sigma</span> <span class="o">=</span> <span class="n">Sigma</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span> <span class="k">for</span> <span class="n">portfolio</span> <span class="ow">in</span> <span class="n">list_portfolios</span><span class="p">]</span>
+
+<span class="n">reduction_rate_threshold</span> <span class="o">=</span> <span class="p">[</span><span class="n">reduction</span> <span class="o">*</span> <span class="mi">100</span> <span class="k">for</span> <span class="n">reduction</span> <span class="ow">in</span> <span class="n">list_R</span><span class="p">]</span>
+<span class="n">te_threshold</span> <span class="o">=</span> <span class="p">[</span><span class="n">get_tracking_error_volatility</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">portfolio</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">Sigma</span> <span class="o">=</span> <span class="n">Sigma</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span> <span class="k">for</span> <span class="n">portfolio</span> <span class="ow">in</span> <span class="n">list_portfolios</span><span class="p">]</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">reduction_rate</span><span class="p">,</span> <span class="n">te</span><span class="p">)</span>
@@ -526,21 +518,21 @@ and market volatiltiy <span class="math notranslate nohighlight">\(\sigma_m\)</s
 </section>
 <section id="order-statistic-approach">
 <h2>Order-Statistic Approach<a class="headerlink" href="#order-statistic-approach" title="Permalink to this headline">#</a></h2>
-<p>Andersson et al. (2016) and Roncalli et al. (2021) propose a second approach by eliminating the <span class="math notranslate nohighlight">\(m\)</span> worst performing issuers in terms of carbon intensity.</p>
+<p>Andersson et al. (2016) and Roncalli (2023) propose a second approach by eliminating the <span class="math notranslate nohighlight">\(m\)</span> worst performing issuers in terms of carbon intensity. The choice of the parameter <span class="math notranslate nohighlight">\(m\)</span> allows for a direct control of number of removed stocks.</p>
 <p>We note <span class="math notranslate nohighlight">\(CI_{i:n}\)</span> the order statistics of <span class="math notranslate nohighlight">\([CI_1, ..., CI_n]\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-fa437d05-036c-4a50-8bf4-d2493890325c">
-<span class="eqno">(5)<a class="headerlink" href="#equation-fa437d05-036c-4a50-8bf4-d2493890325c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-9614c847-17b2-4619-bae0-b162e7f00c9f">
+<span class="eqno">(5)<a class="headerlink" href="#equation-9614c847-17b2-4619-bae0-b162e7f00c9f" title="Permalink to this equation">#</a></span>\[\begin{equation}
 minCI_i = CI_{1:n} \leq ... \leq CI_{n:n} = max CI_i
 \end{equation}\]</div>
 <p>The carbon intensity bound <span class="math notranslate nohighlight">\(CI^{m,n}\)</span> is defined as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4f2607a5-40a4-4c2a-9f1b-97028f2b0b0e">
-<span class="eqno">(6)<a class="headerlink" href="#equation-4f2607a5-40a4-4c2a-9f1b-97028f2b0b0e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8e5b8e06-ef6a-4e23-b774-11a231374645">
+<span class="eqno">(6)<a class="headerlink" href="#equation-8e5b8e06-ef6a-4e23-b774-11a231374645" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI^{m,n} = CI_{n-m+1:n}
 \end{equation}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(CI_{n-m+1:n}\)</span> is the <span class="math notranslate nohighlight">\((n-m+1)\)</span>-th order statistic of <span class="math notranslate nohighlight">\([CI_1, ..., CI_n]\)</span></p>
 <p>Eliminating the <span class="math notranslate nohighlight">\(m\)</span> worst performing assets is then equivalent to imposing the following constraint:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b425d1bc-7fc6-4f00-ad60-0c8e5fa39d79">
-<span class="eqno">(7)<a class="headerlink" href="#equation-b425d1bc-7fc6-4f00-ad60-0c8e5fa39d79" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8b8b61a5-45f7-464f-a25e-30f6a48e4a8b">
+<span class="eqno">(7)<a class="headerlink" href="#equation-8b8b61a5-45f7-464f-a25e-30f6a48e4a8b" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI_i \geq CI^{m,n} → x_i = 0
 \end{equation}\]</div>
 <p>To implement this decarbonization strategy, the resulting weightings can be determined by:</p>
@@ -549,8 +541,8 @@ CI_i \geq CI^{m,n} → x_i = 0
 <li><p>reweighting the remaining stocks with a naïve approach</p></li>
 </ul>
 <p>Contrary to the threshold approach, the reduction rate <span class="math notranslate nohighlight">\(\mathfrak{R}\)</span> is not a parameter, but an output of the order-statistic approach. We thus need to define a function computing the resulting reduction rate compated to the benchmark, such as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-355fd66d-e2bf-46bb-9e4c-7c949f387cdc">
-<span class="eqno">(8)<a class="headerlink" href="#equation-355fd66d-e2bf-46bb-9e4c-7c949f387cdc" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-db6ad1a9-c9c9-4950-9ea8-022a6d4d3d58">
+<span class="eqno">(8)<a class="headerlink" href="#equation-db6ad1a9-c9c9-4950-9ea8-022a6d4d3d58" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathfrak{R}(x|b) = 1 - \frac{x^T \cdot CI}{b^T \cdot CI}
 \end{equation}\]</div>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_waci_reduction</span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
@@ -561,7 +553,7 @@ CI_i \geq CI^{m,n} → x_i = 0
 </div>
 <section id="optimal-weights-with-te-minimization">
 <h3>Optimal Weights with TE Minimization<a class="headerlink" href="#optimal-weights-with-te-minimization" title="Permalink to this headline">#</a></h3>
-<p>We can introduce the order-statistic approach into our optimization problem with the new constraint. The optimization problem becomes:</p>
+<p>We can introduce the order-statistic approach into our optimization problem with the new constraint. The optimization problem becomes (Roncalli, 2023):</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 \begin{aligned}
@@ -578,12 +570,12 @@ CI_i \geq CI^{m,n} → x_i = 0
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 \begin{aligned}
-&amp; Q = \Sigma \\
-&amp; R = \Sigma b \\
+&amp; P = \Sigma \\
+&amp; q = \Sigma b \\
 &amp; A = 1^T_n \\
-&amp; B = 1 \\
-&amp; x^- = 0_n \\
-&amp; x^+ = 𝟙\{CI_i &lt; CI^{m,n}\}
+&amp; b = 1 \\
+&amp; lb = 0_n \\
+&amp; ub = 𝟙\{CI_i &lt; CI^{m,n}\}
 \end{aligned}
 \end{equation*}\]</div>
 <p>Let’s implement this approach in Python:</p>
@@ -647,8 +639,8 @@ CI_i \geq CI^{m,n} → x_i = 0
 <section id="naive-re-weighting">
 <h3>Naive Re-weighting<a class="headerlink" href="#naive-re-weighting" title="Permalink to this headline">#</a></h3>
 <p>A “naive” solution consists in re-weighting the remaining stocks:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-de88b89c-1523-43d7-a5fc-a80b2fa62c18">
-<span class="eqno">(9)<a class="headerlink" href="#equation-de88b89c-1523-43d7-a5fc-a80b2fa62c18" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-1f0535d7-f763-42cc-b8f3-d190c59aac9d">
+<span class="eqno">(9)<a class="headerlink" href="#equation-1f0535d7-f763-42cc-b8f3-d190c59aac9d" title="Permalink to this equation">#</a></span>\[\begin{equation}
 x_i = \frac{𝟙\{CI_i &lt; CI^{m,n}\}b_i}{\sum^n_{k=1} 𝟙\{CI_k &lt; CI^{m,n}\}b_k}
 \end{equation}\]</div>
 <p>This new approach doesn’t rely on any optimization program. It’s quite easy to implement in Python:</p>

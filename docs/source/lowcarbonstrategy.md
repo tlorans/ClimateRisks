@@ -210,11 +210,12 @@ def get_tracking_error_volatility(x:np.array,
 
 import matplotlib.pyplot as plt
 
-reduction_rate = [reduction * 100 for reduction in list_R]
-te = [get_tracking_error_volatility(x = portfolio.x, b = b, Sigma = Sigma) * 100 for portfolio in list_portfolios]
+
+reduction_rate_threshold = [reduction * 100 for reduction in list_R]
+te_threshold = [get_tracking_error_volatility(x = portfolio.x, b = b, Sigma = Sigma) * 100 for portfolio in list_portfolios]
 
 plt.figure(figsize = (10, 10))
-plt.plot(reduction_rate, te)
+plt.plot(reduction_rate_threshold, te_threshold)
 plt.xlabel("Carbon Intensity Reduction (in %)")
 plt.ylabel("Tracking Error Volatility (in %)")
 plt.title("Efficient Decarbonization Frontier with Threshold Approach")
@@ -231,7 +232,7 @@ Figure: Efficient Decarbonization Frontier with Threshold Approach
 Because we impose a constraint and minimize the TE risk, the resulting portfolio will have fewer stocks than the initial benchmark $b$. This imply that the portfolio $x$ is less diversified than the initial benchmark $b$. In order to explicitly control the number of removed stocks, Andersson et al. (2016) and Roncalli (2023) propose another methodology: the order-statistic approach.
 ### Order-Statistic Approach
 
-Andersson et al. (2016) and Roncalli et al. (2021) propose a second approach by eliminating the $m$ worst performing issuers in terms of carbon intensity.
+Andersson et al. (2016) and Roncalli (2023) propose a second approach by eliminating the $m$ worst performing issuers in terms of carbon intensity. The choice of the parameter $m$ allows for a direct control of number of removed stocks.
 
 We note $CI_{i:n}$ the order statistics of $[CI_1, ..., CI_n]$:
 
@@ -272,7 +273,7 @@ def get_waci_reduction(x:np.array,
 
 #### Optimal Weights with TE Minimization
 
-We can introduce the order-statistic approach into our optimization problem with the new constraint. The optimization problem becomes:
+We can introduce the order-statistic approach into our optimization problem with the new constraint. The optimization problem becomes (Roncalli, 2023):
 
 
 \begin{equation*}
@@ -292,12 +293,12 @@ And the following QP parameters:
 
 \begin{equation*}
 \begin{aligned}
-& Q = \Sigma \\
-& R = \Sigma b \\
+& P = \Sigma \\
+& q = \Sigma b \\
 & A = 1^T_n \\
-& B = 1 \\
-& x^- = 0_n \\
-& x^+ = 𝟙\{CI_i < CI^{m,n}\}
+& b = 1 \\
+& lb = 0_n \\
+& ub = 𝟙\{CI_i < CI^{m,n}\}
 \end{aligned}
 \end{equation*}
 
