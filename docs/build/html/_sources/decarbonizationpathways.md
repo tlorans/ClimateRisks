@@ -2,20 +2,20 @@
 
 A net zero investment portfolio starts with a Net Zero Emissions (NZE) scenario. A decarbonization pathway summarizes the NZE scenario.
 
-The decarbonization pathway has two statuses:
+The decarbonization pathway has two statuses (Barahhou et al., 2022):
 - it is the exogenous pathway that the economy must follow to limit the probability of reaching 1.5°C
 - it becomes the endogenous pathway if the world closes the gap between current and needed invetments to finance transition to a low-carbon economy
 
-In this part, we will give a definition of a NZE scenario with the carbon budget constraint and study the relationship between a NZE scenario and a decarbonization pathway. Then, we will see how to derive an intensity decarbonization pathway that can be use for portfolio construction, from an emissions scenario.
+In this part, we will give a definition of a NZE scenario with the carbon budget constraint and study the relationship between a NZE scenario and a decarbonization pathway. Then, we will see how to derive an intensity decarbonization pathway from an emissions scenario.
 
 ### Carbon Budget Constraint
 
 As stated by Barahhou et al. (2022), a net zero emissions (NZE) scenario corresponds to an emissions scenario, which is compatible with a carbon budget. 
 The carbon budget defines the amount of CO2eq emissions produced over the time period $[t_0,t]$ for a given emissions scenario. 
 
-As an example, the IPCC (2018 {cite:p}`masson2018global`) gives an estimate of a remaining carbon budget of 580 GtC02eq for a 50% probability of limiting the warming to 1.5°C. The objective is to limit the global warming to 1.5°C while the corresponding carbon budget is 580 GTCO2eq. What is missing in this statement is the corresponding emissions scenario. We will see later how to determine a carbon pathway (or emission scenario) based on a carbon budget.
+As an example, the IPCC (2018) {cite:p}`masson2018global` gives an estimate of a remaining carbon budget of 580 GtC02eq for a 50% probability of limiting the warming to 1.5°C. The objective is to limit the global warming to 1.5°C while the corresponding carbon budget is 580 GTCO2eq.
 
-More formally, a NZE scenario can then be defined by a carbon pathway that satisfies the following constraints (Barahhou et al., 2022):
+More formally, a NZE scenario can be defined by a carbon pathway that satisfies the following constraints (Barahhou et al., 2022):
 
 \begin{equation}
 CB(t_0, 2050) \leq CB^+
@@ -29,7 +29,7 @@ With $CE(t)$ the global carbon emissions at time $t$, $CB(t_0,t)$ the global car
 A NZE scenario and the corresponding decarbonization pathway must thus comply with the carbon budget constraint above, with a carbon emissions level in 2050 close to 0.
 #### Decarbonization Pathway
 
-A decarbonization pathway summarizes an emissions scenario. It is structured among the following principles (Barahhou et al. 2022):
+A decarbonization pathway is structured among the following parameters (Barahhou et al. 2022):
 1. An average yearly reduction rate $\Delta \mathfrak{R}$ 
 2. A minimum carbon reduction $\mathfrak{R}^-$
 
@@ -143,7 +143,7 @@ Figure: Carbon Emissions Scenario with $\Delta \mathfrak{R} = 0.07$ and $\mathfr
 
 #### From Decarbonization Pathway to Carbon Budget
 
-From Le Guenedal et al. (2022 {cite:p}`le2022net`), we can find the carbon budget with a given value for $\mathfrak{R}^-$, $\Delta \mathfrak{R}$ and $CE(t_0)$ with:
+From Le Guenedal et al. (2022 {cite:p}`le2022net`), we can find the corresponding carbon budget with a given value for $\mathfrak{R}^-$, $\Delta \mathfrak{R}$ and $CE(t_0)$ with:
 
 \begin{equation}
 CB(t_0,t) = (\frac{(1 - \Delta \mathfrak{R})^{t-t_0} - 1}{ln(1 - \Delta \mathfrak{R})})(1 - \mathfrak{R}^-)CE(t_0)
@@ -187,6 +187,7 @@ test.get_carbon_budget(t_0 = 2020, t = 2050, CE_start = 36)
 307.8810311773137
 ```
 Which is less than $CB^+$.
+
 And:
 ```Python
 test.get_emissions_scenario(t_0 = 2020, t = 2050, CE_start = 36)[-1]
@@ -196,20 +197,20 @@ test.get_emissions_scenario(t_0 = 2020, t = 2050, CE_start = 36)[-1]
 ```
 Which is close to zero.
 
-We then can say that our example decarbonization pathway complies with the carbon budget constraint for a NZE scenario.
+We then can say that in previous example, the decarbonization pathway complies with the carbon budget constraint for a NZE scenario.
 ### Decarbonization Pathway for Portfolio
 
-If a decarbonization pathway is generally valid for an economy or a country, we must have in mind that it is defined in terms of absolute carbon emissions in this case. However, portfolio decarbonization uses carbon intensity, and not absolute carbon emissions. We thus need to introduce the relationship of carbon emissions and carbon intensity pathway.
+If a decarbonization pathway is generally valid for an economy or a country, we must have in mind that it is defined in terms of absolute carbon emissions. However, portfolio decarbonization uses carbon intensity, and not absolute carbon emissions. We thus need to introduce the relationship of carbon emissions and carbon intensity pathway.
 
 #### Carbon Emissions and Carbon Intensity Pathway Relationship
 
-The carbon intensity $CI(t)$ is defined as the ratio between the carbon emissions $CE(t)$ and a normalization variable $Y(t)$ (a physical or monetary value):
+Let's recall that the carbon intensity $CI(t)$ is defined as the ratio between the carbon emissions $CE(t)$ and a normalization variable $Y(t)$ (a physical or monetary value):
 
 \begin{equation}
 CI(t) = \frac{CE(t)}{Y(t)}
 \end{equation}
 
-If $\mathfrak{R}_{CI}(t_0)$ and $\mathfrak{R}_{CE}(t,t_0)$ are the reduction rates of carbon intensity and emissions between the base date $t_0$ and $t$, we have the following relationship:
+If $\mathfrak{R}_{CI}(t_0)$ and $\mathfrak{R}_{CE}(t,t_0)$ are the reduction rates of carbon intensity and emissions between the base date $t_0$ and $t$, we have the following relationship (Barahhou et al., 2022):
 
 \begin{equation}
 \mathfrak{R}_{CI}(t_0,t) = \frac{g_Y(t_0,t) + \mathfrak{R}_{CE}(t_0,t)}{1 + g_Y(t_0,t)}
@@ -224,7 +225,7 @@ Where $g_Y(t_0,t)$ is the growth rate of the normalization variable. As we assum
 
 The emissions decarbonization pathway $\mathfrak{R}_{CE}(t_0,t)$ is called the economic decarbonization pathway, while the intensity decarbonization pathway $\mathfrak{R}_{CI}(t_0,t)$ is called the financial decarbonization pathway.
 
-We generally simplify the financial / economic pathway relationship by considering both the annual growth rate of normalization variable $g_{Y}$ and the annual reduction rate of carbon emissions $\Delta \mathfrak{R}_{CE}$ as constant. We then have the compound growth rate of the normalization variable:
+We can simplify the financial / economic pathway relationship by considering both the annual growth rate of normalization variable $g_{Y}$ and the annual reduction rate of carbon emissions $\Delta \mathfrak{R}_{CE}$ as constant. We then have the compound growth rate of the normalization variable:
 
 \begin{equation}
 g_Y(t_0,t) = (1 + g_Y)^{t-t_0} - 1
@@ -236,7 +237,7 @@ And the carbon reduction rate as:
 \mathfrak{R}_{CE}(t_0,t) = 1 - (1 - \Delta \mathfrak{R}_{CE})^{t - t_0}
 \end{equation}
 
-Then, the relationship between the financial and the economic decarbonization pathway becomes:
+Then, the relationship between the financial and the economic decarbonization pathway becomes (Barahhou et al., 2022):
 
 \begin{equation}
 \mathfrak{R}_{CI}(t_0,t) = 1 - (1 - \frac{(g_Y + \Delta \mathfrak{R}_{CE})}{1 + g_Y})^{t - t_0}
@@ -350,7 +351,7 @@ name: intensityieareductionrate
 Figure: Financial decarbonization pathway $\mathfrak{R}_{CI}(2020,2050)$ from the IEA scenario, with $g_Y = 0.03$
 ```
 
-Let's compare the financial decarbonization pathway deduced from the IEA scenario to the PAB decarbonization pathway.
+Let's compare the financial decarbonization pathway deduced from the IEA scenario to the Paris-Aligned Benchmarks (PAB) decarbonization pathway.
 The PAB's intensity decarbonization is stated as:
 1. A year-on-year self-decarbonization $\Delta \mathfrak{R}_{CI}$ of 7\% on average per annum, based on scope 1, 2 and 3 carbon emissions intensities.
 2. A minimum carbon intensity reduction $\mathfrak{R}_{CI}^-$ at 50\% compared to the invetable universe.
