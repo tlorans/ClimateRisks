@@ -391,7 +391,7 @@ Once instantiated, an object of class `IndexReplication` will return a `Portfoli
 
 ### From CAPM to Risk Factors Models: Capturing New Risk Premia with Factor Investing
 
-Introducing the notion of climate risks into Finance can be also made through the lens of systematic risks exposure. Risks can be decomposed into a systematic (common for all stocks) and an idiosyncratic (specific to a stock) components. The expected returns can then be decomposed between an $\alpha$ (rewards for idiosyncratic risk exposure) and a $\beta$ (rewards for systematic risk exposure).
+Introducing the notion of climate risks into Finance can be also made through the lens of systematic risks exposure. In this part and the following part, we refer to the [specific course from Thierry Roncalli](http://www.thierry-roncalli.com/download/AM-Lecture3.pdf) for notations and main formulas. Risks can be decomposed into a systematic (common for all stocks) and an idiosyncratic (specific to a stock) components. The expected returns can then be decomposed between an $\alpha$ (rewards for idiosyncratic risk exposure) and a $\beta$ (rewards for systematic risk exposure).
 
 Theoretically, because idiosyncratic risk can be eliminated with diversification (with the Markowitz framework), $\alpha = 0$ and only the exposure to systematic risk should be rewarded by the markets. Factor investing treats the question of managing the exposure to systematic risks factors. But what are the systematic risks factors, and how to measure the stocks' exposure to these risks?
 
@@ -501,15 +501,17 @@ What does it means? The idiosyncratic risk associated to BP is close to zero. BP
 
 ### Risk Factor Portfolio
 
-In this part, we'll see how to construct a risk factor portfolio. As investors are compensated for taking systematic risk(s), they can look for gaining exposure to these risks with the latter.
+In this part, we'll see how to construct a risk factor portfolio. As investors are compensated for taking systematic risk(s), they can look for gaining exposure to these risks with the latter. Again, for further details, the interested reader should refer to [these slides](http://www.thierry-roncalli.com/download/AM-Lecture3.pdf).
 
 Let's begin with the first and more broadly invested risk factor: the market risk. From the CAPM framework, the only systematic risk is the market risk. Exposure to market risk can be otained by investing in market-capitalization indexes. 
 
-We ca create such a portfolio with a new dataclass `Market`, with the `mv` (market value) data. The `get_portfolio` method is simply defined as the market-capitalization weighting:
+We can create such a portfolio with a new dataclass `Market`, with the new `mv` (market value) data. The `get_portfolio` method is simply defined as the market-capitalization weighting:
 ```Python
 @dataclass
-class Market(PortfolioConstruction):
+class MarketCapitalizationIndex:
   mv: np.array # Market Cap
+  mu: np.array # Expected Returns
+  Sigma: np.matrix # Covariance Matrix
 
   def get_portfolio(self) -> Portfolio:
     x = self.mv / np.sum(self.mv)
@@ -524,18 +526,11 @@ In the literature, factor portfolio are built with a long/short approach. It mea
 - Stocks with the 20\% highest scores are assigned a positive weight according to the weighting sheme ($Q1(t_{\tau})$ portfolio or the long portfolio)
 - Stocks with the 20% lowest scores are assigned a negative weight according to the weighting scheme ($Q5(t_{\tau})$ portfolio, or the short portfolio)
 
+Finally, the performance of the risk factor between two rebalancing dates corresponds to the performance of the long/short portfolio:
 
-Let's first define a `LongShortConstruction` dataclass, which is a child of the `PortfolioConstruction`:
-```Python
-@dataclass 
-class LongShortConstruction(PortfolioConstruction):
-    S: np.array # Score
-
-    @abstractmethod
-    def get_portfolio(self) -> Portfolio:
-      pass
-```
-The `get_portfolio` is not defined yet, as many methods for the stocks selection and weighting can be defined. 
+\begin{equation}
+F(t) = F(t_{\tau}) \cdot (\sum_{i \in Q1(t_{\tau})} w_i(t_{\tau}) (1 + R_i(t)) - \sum_{i \in Q5(t_{\tau})} w_i(t_{\tau}) (1 + R_i(t)))
+\end{equation}
 
 Let's illustrate with the quintile method we've covered previously, by creating a `QuintileConstruction` dataclass, child of the `LongShortConstruction`:
 ```Python
