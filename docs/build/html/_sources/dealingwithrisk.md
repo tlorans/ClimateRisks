@@ -376,7 +376,7 @@ class IndexReplication:
 
   def get_portfolio(self, gamma:int) -> Portfolio:
     """QP Formulation"""
-    
+
     x_optim = solve_qp(P = self.Sigma,
               q = -(gamma * self.mu + Sigma @ self.b), 
               A = np.ones(len(self.mu)).T, # fully invested,
@@ -401,7 +401,7 @@ The capital asset pricing model (CAPM), introduced by Sharpe in 1964 {cite:p}`sh
 \mathbb{E}[R_i] - R_f = \beta^m_i(\mathbb{E}[R_m] - R_f)
 \end{equation}
 
-Where $R_m$ are market returns, $R_i$ is the asset returns, $R_f$ the risk-free rate, $\alpha_i$ the idiosyncratic risk premia of the asset $i$ and  the coefficient $\beta^m_i$ is the beta of the asset $i$ with respect to the market portfolio. In that framework, the excess return of an asset $i$ is then explained by its exposure to the systematic market risk. Market risk is the only systematic risk in that framework.
+Where $R_i$ is the asset returns, $R_m$ are market returns, the coefficient $\beta^m_i$ is the beta of the asset $i$ with respect to the market portfolio, $R_f$ the risk-free rate and $\alpha_i$ the idiosyncratic risk premia of the asset $i$. In this framework, the excess return of an asset $i$ is then explained by its exposure to the systematic market risk. Market risk is the only systematic risk in the CAPM.
 
 However, empirical evidences accumulated to prove the existence of a remaining idiosyncratic $\alpha$ component, that is a part of the cross-section of expected returns unexplained by the exposure to market risk:
 
