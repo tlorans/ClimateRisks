@@ -138,20 +138,26 @@ simple_portfolio = Portfolio(x = x,
 ```Python
 simple_portfolio.get_expected_returns()
 ```
+```
+0.0625
+```
 ```Python
 simple_portfolio.get_variance()
+```
+```
+0.033375
 ```
 
 #### Risk and Returns in the Presence of a Benchmark: Tracking Error and Excess Expected Returns
 
-With the rise of passive investing is the rise of index replication. The purpose of index replication is to build a hedging strategy by investing in stocks. In this case of index replication, the portfolio's expected returns is replaced by the expected excess returns of the strategy, while the variance of the portfolio is replaced by the volatility of the tracking error (the difference between the return of the strategy and the return of the index). You may distinguish different cases of index replications (Roncalli, 2023):
+With the rise of passive investing is the rise of index replication. In the case of index replication, the portfolio's expected returns is replaced by the expected excess returns of the strategy, while the variance of the portfolio is replaced by the volatility of the tracking error (the difference between the return of the strategy and the return of the index). You may distinguish different cases of index replications (Roncalli, 2023):
 - Low tracking error volatility (less than 10bps) corresponds to physical or synthetic replication;
 - Moderate tracking error volatility (between 10 bps and 50 bps) corresponds to sampling (ie. less assets) replication;
 - Higher tracking error volatility (larger than 50 bps) corresponds to enhanced/tilted index, such as the low-carbon strategy or ESG-enhanced indexes.
 
 ##### Tracking Error
 
-In order to monitor the quality of the hedging strategy, investors use the tracking error (TE) measure. In this part, we will define the TE and TE volatility concepts that needs to be controlled in the portfolio optimization problem in the presence of a benchmark (Roncalli, 2013 {cite:p}`roncalli2013introduction`).
+In order to monitor the quality of the replication strategy, investors use the tracking error (TE) measure. In this part, we will define the TE and TE volatility concepts that needs to be controlled in the portfolio optimization problem in the presence of a benchmark (Roncalli, 2013).
 
 Let's define $b = (b_1, ..., b_n)$ and $x = (x_1, ..., x_n)$ the stocks weights in the benchmark and the portfolio. 
 
@@ -232,83 +238,53 @@ Introducing a risk-tolerance parameter ($\gamma$-problem, Roncalli 2013) and the
 \begin{equation*}
 \begin{aligned}
 & x^* = 
-& & argmin & \frac{1}{2} x^T \Sigma x - \gamma x ^T \mu\\
+& & argmin \frac{1}{2} x^T \Sigma x - \gamma x ^T \mu\\
 & \text{subject to}
 & & 1_n^Tx = 1 \\
 & & & 0_n \leq x \leq 1_n
 \end{aligned}
 \end{equation*}
 
-Solvers consider the following QP formulation:
+To solve this problem with Python, we will use the `qpsolvers` library. This library considers the following QP formulation:
+
 
 \begin{equation*}
 \begin{aligned}
 & x^* = 
-& & argmin & \frac{1}{2} x^T Q x - x^T R \\
+& & argmin \frac{1}{2} x^T P x + q^T x \\
 & \text{subject to}
-& & Ax = B, \\
-&&& Cx \leq D,\\
-& & & x^- \leq x \leq x^+
+& & Ax = b, \\
+&&& Gx \leq h,\\
+& & & lb \leq x \leq ub
 \end{aligned}
 \end{equation*}
 
-We need to find the parameters $\{Q, R, A, B, C, D, x^-, x^+\}$. In the previous case, $Q = \Sigma$, $R = \gamma \mu$, $A = 1_n^T$, $B = 1$, $x^- = 0_n$ and $x^+ = 1_n$.
-
-We begin the implementation in Python by defining a `PortfolioConstruction` dataclass, with `mu` and `Sigma` as the two elements requested and an abstract method `get_portfolio` without any specific definition:
-```Python
-from abc import ABC, abstractmethod
-
-@dataclass 
-class PortfolioConstruction(ABC):
-  """The parent class of portfolio construction approaches"""
-    mu: np.array # Expected Returns
-    Sigma: np.matrix # Covariance Matrix
-
-    @abstractmethod
-    def get_portfolio(self) -> Portfolio:
-      pass
-```
-Some would say that such a definition of a portfolio construction overarching class wasn't needed. They are right. The only purpose here is to highlight the fact that every approaches that we will cover are different ways to build a portfolio. All the children classes will be related, because they all are frameworks for building a portfolio. Noteworthy, all children classes will inherit the `mu` and `Sigma` elements needed for instantiating an object inheriting from this class.
-
-Let's then define a child for this class with the `PortfolioOptimization` dataclass:
-```Python
-@dataclass 
-class PortfolioOptimization(PortfolioConstruction):
-"""Portfolio Construction with Optimization approaches"""
-
-    @abstractmethod
-    def get_portfolio(self) -> Portfolio:
-      pass
-
-```
-Here we are. We have defined our first family of portfolio construction with the portfolio optimization.
+We need to find $\{P, q, A, b, G, h, lb, ub\}$. In the previous case, $P = \Sigma$, $q = \gamma \mu$, $A = 1_n^T$, $b = 1$, $lb = 0_n$ and $ub = 1_n$.
 
 To go further, we first need to install the package `qpsolvers`:
 ```Python
 !pip install qpsolvers 
 ```
-We can now define a concrete dataclass with the `MeanVariance` class. This class will inherits from the `PortfolioConstruction` and `PortfolioOptimization` classes the two required elements `mu` and `Sigma`. We also define the first concrete implementation of the method `get_portfolio`, requiring a `gamma` parameter to be provided:
+We can now define a concrete dataclass with the `MeanVariance` class. This class will require two elements `mu` and `Sigma`. We also define the method `get_portfolio`, requiring a `gamma` parameter to be provided:
+
 ```Python
 from qpsolvers import solve_qp
 
 @dataclass
-class MeanVariance(PortfolioOptimization):
+class MeanVariance:
+
+  mu: np.array # Expected Returns
+  Sigma: np.matrix # Covariance Matrix
   
   def get_portfolio(self, gamma:int) -> Portfolio:
     """QP Formulation"""
-    Q = self.Sigma
-    R = gamma * self.mu
-    A = np.ones(len(self.mu)).T # fully invested
-    B = np.array([1.]) # fully invested
-    x_inf = np.zeros(len(self.mu)) # long-only position
-    x_sup = np.ones(len(self.mu)) # long-only position
 
-    x_optim = solve_qp(P = Q,
-              q = -R, # we put a minus here because this QP solver consider +x^T R
-              A = A, 
-              b = B,
-              lb = x_inf,
-              ub = x_sup,
+    x_optim = solve_qp(P = self.Sigma,
+              q = -(gamma * self.mu),
+              A = np.ones(len(self.mu)).T, # fully invested
+              b = np.array([1.]), # fully invested
+              lb = np.zeros(len(self.mu)), # long-only position
+              ub = np.ones(len(self.mu)), # long-only position
               solver = 'osqp')
 
     return Portfolio(x = x_optim, mu = self.mu, Sigma = self.Sigma)
