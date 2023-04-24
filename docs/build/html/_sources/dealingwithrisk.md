@@ -587,3 +587,6 @@ And the short portfolio:
 ```Python
 new_port[1].x
 ```
+```
+array([0., 0., 0., 1.])
+```
