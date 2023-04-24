@@ -1,6 +1,6 @@
 ## Green Stocks Outperformance: Realized vs. Expected Returns
 
-In the previous part, we've seen how exposure to the systematic carbon risk can be measured with carbon beta, thanks to the BMG factor from Gorgen et al. (2019) and how to hedge from carbon risk with an enhanced-index with carbon beta. We've observed the puzzling results that green assets outperformed brown assets in the previous decade, according to the BMG negative returns.
+In the previous part, we've seen how exposure to the systematic carbon risk can be measured with carbon beta, thanks to the BMG factor from Gorgen et al. (2019) and how to hedge from carbon risk with an enhanced-index with carbon beta (Roncalli et al., 2020). We've observed the puzzling results that green assets outperformed brown assets in the previous decade, according to the BMG negative returns.
 
 However, as showed by the equilibrium model from Pastor et al. (2021) {cite:p}`pastor2021sustainable`, green assets should have lower expected returns than brown assets, because:
 - some investors have green tastes, and then require lower returns for holding these assets (taste premium)
@@ -14,8 +14,6 @@ Pastor et al. (2022) explain the past green assets outperformance by the unantic
 The empirical framework for testing this is the following:
 - Measuring the unanticipated climate concerns using the Media Climate Change Concerns Index (MCCC) from Ardia et al. (2020) {cite:p}`ardia2020climate`
 - Using the new measure of the unanticipated climate concerns in a regression, and use the estimated parameters to build a counterfactual green factor returns, with climate shock equals to zero
-
-We will follow the same approach, explaining the differences between realized and expected returns.
 
 ### Measuring Climate Concerns
 
@@ -49,10 +47,10 @@ Following Pastor et al. (2022), we will now measure shocks to climate concerns a
 More formally, given a climate change concerns at time $t$, $MCCC(t)$, we want to capture the unexpected shock as:
 
 \begin{equation}
-C(t) = MCCC(t) - \mathbb{E}[MCCC(t)|I(t-1)]
+CC(t) = MCCC(t) - \mathbb{E}[MCCC(t)|I(t-1)]
 \end{equation}
 
-Where $MCCC(t)$ is the climate change concerns at time $t$, $I(t-1)$ is the information set available at time $t$ and $C(t)$ is the climate change concerns shock.
+Where $MCCC(t)$ is the climate change concerns at time $t$, $I(t-1)$ is the information set available at time $t$ and $CC(t)$ is the climate change concerns shock.
 
 Let's compute the AR(1) model in Python and produce the predictions $\mathbb{E}[MCCC(t)|I(t-1)]$:
 ```Python
@@ -88,21 +86,21 @@ Figure: Cumulative Climate Concern Shocks
 ```
 ### Counterfactual
 
-To assess whether climate concerns shocks $C(t)$ can explain green assets outperformance, Pastor et al. (2022) propose to build a counterfactual returns. 
+To assess whether climate concerns shocks $CC(t)$ can explain green assets outperformance, Pastor et al. (2022) propose to build a counterfactual returns. 
 
 The approach relies on the problem of inferring an asset's expected return $\mu = \mathbb{E}[r(t)]$. The most common approach is to use the asset's sample average return, $\bar{r}$, as an estimate of $\mu$.
 
 Pastor et al. (2022) propose another approach, introducing the additional information from climate shocks. We can estimate the following regression:
 
 \begin{equation}
-R_{GMB}(t) = \alpha + \beta C(t) + u(t)
+R_{GMB}(t) = \alpha + \beta CC(t) + u(t)
 \end{equation}
 
-Where $\alpha = \mu$ because $C(t)$ has zero mean ex ante and $R(t)$ is the monthly return of the Green-Minus-Brown portfolio.
+Where $\alpha = \mu$ because $CC(t)$ has zero mean ex ante and $R(t)$ is the monthly return of the Green-Minus-Brown portfolio.
 
 Once the regression is performed, we can then build the counterfactual by adding the regression intercept $\hat{\alpha}$ plus the estimated residual.
 
-The counterfactual, with $C(t) = 0$ is close to zero according to Pastor et al. (2022) results:
+The counterfactual, with $CC(t) = 0$ is close to zero according to Pastor et al. (2022) results:
 
 ```{figure} counterfactualreturns.png
 ---
