@@ -1,6 +1,6 @@
 # Part 2: Net Zero Investing
 
-Before the surge of net zero alliances (GFANZ, NZAOA, NZAM, NZBA) and their pledges towards net zero investments, climate investing mainly involved decarbonizing portfolios or constructing low-carbon indices with the low-carbon strategy we've seen in the first part of this course.
+Before the surge of net zero investors, insurers and asset managers alliances, climate investing mainly involved decarbonizing portfolios or constructing low-carbon indices with the low-carbon strategy that we have seen in the first part of this course.
 
 But, as stated by Barahhou et al. (2022) {cite:p}`barahhou2022net`, net zero investing has changed the scope of climate investing, as the corresponding strategy cannot be considered as a simple tilt of a business-as-usual portfolio.
 
@@ -14,7 +14,7 @@ The purpose of this part is to give you an overview of the net zero portfolio co
 
 Net zero portfolio starts with a net zero emissions scenario, which is a physical concept, based on carbon budget. We will see how to assess a decarbonization pathway compliance to a net zero objective, and how to derive the portfolio's decarbonization (based on carbon intensity) pathway from it.
 
-Net zero portfolio implies self-decarbonization rather than sequential decarbonization(meaning decarbonization based on rebalancement only). We will see how to determine from which component portfolio's decarbonization comes from, leading to the notion of net zero backtesting. We will see that adding carbon footprint dynamics metric helps in improving the self-decarbonization of the portfolio.
+Net zero portfolio implies self-decarbonization rather than sequential decarbonization (meaning decarbonization based on rebalancement only). We will see how to determine from which component portfolio's decarbonization comes from, leading to the notion of net zero backtesting. We will see that adding carbon footprint dynamics metric helps in improving the self-decarbonization property of the portfolio.
 
 Finally, the net zero portfolio integrates the transition dimension. We will see how a green intensity measure can help in ensuring that the portfolio contributes to the transition towards a low-carbon economy.
 
