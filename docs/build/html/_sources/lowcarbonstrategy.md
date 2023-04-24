@@ -363,7 +363,11 @@ Figure: Efficient Decarbonization Frontier
 ```
 
 
-Because we are directly excluding high-emitters stocks rather than underweighting them, tracking error volalitility increases faster with the reduction rate than with the threshold approach. However, resulting portfolio is more explainable than with the threshold approach. There is a trade-off between tractability and efficiency. Because we still rely on an optimization program in order to find the portfolio weights after exclusions, final weights between the remaning stocks can still be challenging to explain. Another approach, easier to explain, is the naive re-weighting. 
+Because we are directly excluding high-emitters stocks rather than underweighting them, tracking error volatility increases faster with the reduction rate than with the threshold approach, as we deviate more from the initial benchmark. 
+
+However, the resulting portfolio is more explainable than with the threshold approach. There is a trade-off between tractability and efficiency. 
+
+Because we still rely on an optimization program in order to find the portfolio weights after exclusions, final weights between the remaning stocks can still be challenging to explain. Another approach, easier to explain, is the naive re-weighting. 
 
 #### Naive Re-weighting
 
@@ -379,7 +383,6 @@ This new approach doesn't rely on any optimization program. It's quite easy to i
 @dataclass
 class OrderStatisticNaive(LowCarbonStrategy):
     def get_portfolio(self, m:int) -> CarbonPortfolio:
-      """QP Formulation"""
       x_sup = np.zeros(len(self.b)) # the vector for exclusion 
       x_sup[np.where(CI >= np.unique(self.CI)[-m])] = 0
       x_sup[np.where(CI < np.unique(self.CI)[-m])] = 1
@@ -405,24 +408,30 @@ for m in list_m:
   list_portfolios.append(low_carbon_portfolio.get_portfolio(m = m))
 
 
-reduction_rate = [get_waci_reduction(x = portfolio.x,
+reduction_rate_naive = [get_waci_reduction(x = portfolio.x,
                    b = b,
                    CI = CI) * 100 for portfolio in list_portfolios]
-te = [get_tracking_error_volatility(x = portfolio.x, b = b, Sigma = Sigma) * 100 for portfolio in list_portfolios]
+te_naive = [get_tracking_error_volatility(x = portfolio.x, b = b, Sigma = Sigma) * 100 for portfolio in list_portfolios]
+
 
 plt.figure(figsize = (10, 10))
-plt.plot(reduction_rate, te)
+plt.plot(reduction_rate_threshold, te_threshold)
+plt.plot(reduction_rate_order_te, te_order_te)
+plt.plot(reduction_rate_naive, te_naive)
+
+plt.legend(["Threshold Approach", "Order-Statistic with TE minimization",
+            "Order-Statistic with naive reweighting"], loc=0)
 plt.xlabel("Carbon Intensity Reduction (in %)")
 plt.ylabel("Tracking Error Volatility (in %)")
-plt.title("Efficient Decarbonization Frontier with Order-Statistic and Naive Re-weighting Approach")
+plt.title("Efficient Decarbonization Frontier")
 plt.show()
 ```
 
-```{figure} orderstatisticnaive.png
+```{figure} orderstatisticnaive2.png
 ---
-name: orderstatisticnaive
+name: orderstatisticnaive2
 ---
-Figure: Efficient Decarbonization Frontier with Order-Statistic and Naive Re-Weighting Approach
+Figure: Efficient Decarbonization Frontier
 ```
 
 Again, the tracking error increases faster with the reduction rate than with the threshold approach. The increase is even higher than with the minimization of the tracking error for the weighting scheme. But the resulting weights are more easily tractable and easier to explain.

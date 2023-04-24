@@ -322,14 +322,14 @@ document.write(`
 <section id="weighted-average-carbon-intensity">
 <h3>Weighted-Average Carbon Intensity<a class="headerlink" href="#weighted-average-carbon-intensity" title="Permalink to this headline">#</a></h3>
 <p>The weighted-average carbon intensity (WACI) of the benchmark is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-fe1b94a8-3d51-49df-9eb6-38cce4549943">
-<span class="eqno">(1)<a class="headerlink" href="#equation-fe1b94a8-3d51-49df-9eb6-38cce4549943" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-9d243deb-b83f-489f-89be-63a314dd4e40">
+<span class="eqno">(1)<a class="headerlink" href="#equation-9d243deb-b83f-489f-89be-63a314dd4e40" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI(b) = b^T CI
 \end{equation}\]</div>
 <p>With <span class="math notranslate nohighlight">\(CI = (CI_1, ..., CI_n)\)</span> the vector of carbon intensities.</p>
 <p>The same is for the WACI of the portfolio:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f6c63212-5038-4cf0-8e41-ce670f20d67b">
-<span class="eqno">(2)<a class="headerlink" href="#equation-f6c63212-5038-4cf0-8e41-ce670f20d67b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-fda2fe0a-1653-41a0-bf69-f84cbb0e7a9d">
+<span class="eqno">(2)<a class="headerlink" href="#equation-fda2fe0a-1653-41a0-bf69-f84cbb0e7a9d" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI(x) = x^T CI
 \end{equation}\]</div>
 <p>Let’s implement a <code class="docutils literal notranslate"><span class="pre">CarbonPortfolio</span></code> dataclass:</p>
@@ -354,8 +354,8 @@ CI(x) = x^T CI
 <section id="integrating-carbon-intensity-reduction-as-a-constraint">
 <h3>Integrating Carbon Intensity Reduction as a Constraint<a class="headerlink" href="#integrating-carbon-intensity-reduction-as-a-constraint" title="Permalink to this headline">#</a></h3>
 <p>The low-carbon strategy involves the reduction <span class="math notranslate nohighlight">\(\mathfrak{R}\)</span> of the portfolio’s carbon intensity <span class="math notranslate nohighlight">\(CI(x)\)</span> compared to the benchmark’s carbon intensity <span class="math notranslate nohighlight">\(CI(b)\)</span>. It can be viewed as the following constraint (Roncalli, 2023):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-44f17b38-e2d7-4a25-9f99-2ff298930c29">
-<span class="eqno">(3)<a class="headerlink" href="#equation-44f17b38-e2d7-4a25-9f99-2ff298930c29" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-59cef6f8-10df-4259-9cd3-ba87888219a7">
+<span class="eqno">(3)<a class="headerlink" href="#equation-59cef6f8-10df-4259-9cd3-ba87888219a7" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI(x) \leq (1 - \mathfrak{R})CI(b)
 \end{equation}\]</div>
 <p>The optimization problem becomes:</p>
@@ -446,8 +446,8 @@ CI(x) \leq (1 - \mathfrak{R})CI(b)
 </div>
 <p>We can use the market one-factor model to estimate the covariance matrix, based on stocks betas <span class="math notranslate nohighlight">\(\beta\)</span>, idiosyncratic volatilities <span class="math notranslate nohighlight">\(\tilde{\sigma}\)</span>
 and market volatiltiy <span class="math notranslate nohighlight">\(\sigma_m\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-72205b2c-8ee9-4c4e-8e09-57d30368b04b">
-<span class="eqno">(4)<a class="headerlink" href="#equation-72205b2c-8ee9-4c4e-8e09-57d30368b04b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f6b4c980-324c-4891-a813-5ea5059e8a76">
+<span class="eqno">(4)<a class="headerlink" href="#equation-f6b4c980-324c-4891-a813-5ea5059e8a76" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \Sigma = \beta \beta^T \sigma_m^2 + D
 \end{equation}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(D\)</span> is a diagonal matrix with <span class="math notranslate nohighlight">\(\tilde{\sigma}^2\)</span> on its diagonal.</p>
@@ -520,19 +520,19 @@ and market volatiltiy <span class="math notranslate nohighlight">\(\sigma_m\)</s
 <h2>Order-Statistic Approach<a class="headerlink" href="#order-statistic-approach" title="Permalink to this headline">#</a></h2>
 <p>Andersson et al. (2016) and Roncalli (2023) propose a second approach by eliminating the <span class="math notranslate nohighlight">\(m\)</span> worst performing issuers in terms of carbon intensity. The choice of the parameter <span class="math notranslate nohighlight">\(m\)</span> allows for a direct control of number of removed stocks.</p>
 <p>We note <span class="math notranslate nohighlight">\(CI_{i:n}\)</span> the order statistics of <span class="math notranslate nohighlight">\([CI_1, ..., CI_n]\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2e378070-6154-4c29-8907-9df3b5129925">
-<span class="eqno">(5)<a class="headerlink" href="#equation-2e378070-6154-4c29-8907-9df3b5129925" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8041ca04-54a2-406a-82f8-cf264f175bae">
+<span class="eqno">(5)<a class="headerlink" href="#equation-8041ca04-54a2-406a-82f8-cf264f175bae" title="Permalink to this equation">#</a></span>\[\begin{equation}
 minCI_i = CI_{1:n} \leq ... \leq CI_{n:n} = max CI_i
 \end{equation}\]</div>
 <p>The carbon intensity bound <span class="math notranslate nohighlight">\(CI^{m,n}\)</span> is defined as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-dcb51883-7ff0-4dab-ad83-997bb5fc103d">
-<span class="eqno">(6)<a class="headerlink" href="#equation-dcb51883-7ff0-4dab-ad83-997bb5fc103d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-275b7112-9cd5-4d2e-b9cd-4cc9998e14b4">
+<span class="eqno">(6)<a class="headerlink" href="#equation-275b7112-9cd5-4d2e-b9cd-4cc9998e14b4" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI^{m,n} = CI_{n-m+1:n}
 \end{equation}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(CI_{n-m+1:n}\)</span> is the <span class="math notranslate nohighlight">\((n-m+1)\)</span>-th order statistic of <span class="math notranslate nohighlight">\([CI_1, ..., CI_n]\)</span></p>
 <p>Eliminating the <span class="math notranslate nohighlight">\(m\)</span> worst performing assets is then equivalent to imposing the following constraint:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-09a9de56-aede-42a4-a707-97aabfc2ed10">
-<span class="eqno">(7)<a class="headerlink" href="#equation-09a9de56-aede-42a4-a707-97aabfc2ed10" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-3cc6a25f-3329-460c-aebd-de83d44a786e">
+<span class="eqno">(7)<a class="headerlink" href="#equation-3cc6a25f-3329-460c-aebd-de83d44a786e" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI_i \geq CI^{m,n} → x_i = 0
 \end{equation}\]</div>
 <p>To implement this decarbonization strategy, the resulting weightings can be determined by:</p>
@@ -541,8 +541,8 @@ CI_i \geq CI^{m,n} → x_i = 0
 <li><p>reweighting the remaining stocks with a naïve approach</p></li>
 </ul>
 <p>Contrary to the threshold approach, the reduction rate <span class="math notranslate nohighlight">\(\mathfrak{R}\)</span> is not a parameter, but an output of the order-statistic approach. We thus need to define a function computing the resulting reduction rate compated to the benchmark, such as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ad239991-7153-4e6f-b51e-68d39e047ccc">
-<span class="eqno">(8)<a class="headerlink" href="#equation-ad239991-7153-4e6f-b51e-68d39e047ccc" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b3245603-0267-41c5-a922-85b9971378d0">
+<span class="eqno">(8)<a class="headerlink" href="#equation-b3245603-0267-41c5-a922-85b9971378d0" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathfrak{R}(x|b) = 1 - \frac{x^T \cdot CI}{b^T \cdot CI}
 \end{equation}\]</div>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_waci_reduction</span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
@@ -633,20 +633,21 @@ CI_i \geq CI^{m,n} → x_i = 0
 <p><span class="caption-text">Figure: Efficient Decarbonization Frontier</span><a class="headerlink" href="#orderstatisticte3" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Because we are directly excluding high-emitters stocks rather than underweighting them, tracking error volalitility increases faster with the reduction rate than with the threshold approach. However, resulting portfolio is more explainable than with the threshold approach. There is a trade-off between tractability and efficiency. Because we still rely on an optimization program in order to find the portfolio weights after exclusions, final weights between the remaning stocks can still be challenging to explain. Another approach, easier to explain, is the naive re-weighting.</p>
+<p>Because we are directly excluding high-emitters stocks rather than underweighting them, tracking error volatility increases faster with the reduction rate than with the threshold approach, as we deviate more from the initial benchmark.</p>
+<p>However, the resulting portfolio is more explainable than with the threshold approach. There is a trade-off between tractability and efficiency.</p>
+<p>Because we still rely on an optimization program in order to find the portfolio weights after exclusions, final weights between the remaning stocks can still be challenging to explain. Another approach, easier to explain, is the naive re-weighting.</p>
 </section>
 <section id="naive-re-weighting">
 <h3>Naive Re-weighting<a class="headerlink" href="#naive-re-weighting" title="Permalink to this headline">#</a></h3>
 <p>A “naive” solution consists in re-weighting the remaining stocks:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9c09c3ef-fe4b-416d-8293-ca61e8965f6b">
-<span class="eqno">(9)<a class="headerlink" href="#equation-9c09c3ef-fe4b-416d-8293-ca61e8965f6b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f8b965a3-1fbe-4274-a708-6a6b19da3d3e">
+<span class="eqno">(9)<a class="headerlink" href="#equation-f8b965a3-1fbe-4274-a708-6a6b19da3d3e" title="Permalink to this equation">#</a></span>\[\begin{equation}
 x_i = \frac{𝟙\{CI_i &lt; CI^{m,n}\}b_i}{\sum^n_{k=1} 𝟙\{CI_k &lt; CI^{m,n}\}b_k}
 \end{equation}\]</div>
 <p>This new approach doesn’t rely on any optimization program. It’s quite easy to implement in Python:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">OrderStatisticNaive</span><span class="p">(</span><span class="n">LowCarbonStrategy</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">get_portfolio</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">m</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CarbonPortfolio</span><span class="p">:</span>
-      <span class="sd">&quot;&quot;&quot;QP Formulation&quot;&quot;&quot;</span>
       <span class="n">x_sup</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">))</span> <span class="c1"># the vector for exclusion </span>
       <span class="n">x_sup</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">CI</span> <span class="o">&gt;=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CI</span><span class="p">)[</span><span class="o">-</span><span class="n">m</span><span class="p">])]</span> <span class="o">=</span> <span class="mi">0</span>
       <span class="n">x_sup</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">CI</span> <span class="o">&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CI</span><span class="p">)[</span><span class="o">-</span><span class="n">m</span><span class="p">])]</span> <span class="o">=</span> <span class="mi">1</span>
@@ -671,23 +672,29 @@ x_i = \frac{𝟙\{CI_i &lt; CI^{m,n}\}b_i}{\sum^n_{k=1} 𝟙\{CI_k &lt; CI^{m,n}
   <span class="n">list_portfolios</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">low_carbon_portfolio</span><span class="o">.</span><span class="n">get_portfolio</span><span class="p">(</span><span class="n">m</span> <span class="o">=</span> <span class="n">m</span><span class="p">))</span>
 
 
-<span class="n">reduction_rate</span> <span class="o">=</span> <span class="p">[</span><span class="n">get_waci_reduction</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">portfolio</span><span class="o">.</span><span class="n">x</span><span class="p">,</span>
+<span class="n">reduction_rate_naive</span> <span class="o">=</span> <span class="p">[</span><span class="n">get_waci_reduction</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">portfolio</span><span class="o">.</span><span class="n">x</span><span class="p">,</span>
                    <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span>
                    <span class="n">CI</span> <span class="o">=</span> <span class="n">CI</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span> <span class="k">for</span> <span class="n">portfolio</span> <span class="ow">in</span> <span class="n">list_portfolios</span><span class="p">]</span>
-<span class="n">te</span> <span class="o">=</span> <span class="p">[</span><span class="n">get_tracking_error_volatility</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">portfolio</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">Sigma</span> <span class="o">=</span> <span class="n">Sigma</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span> <span class="k">for</span> <span class="n">portfolio</span> <span class="ow">in</span> <span class="n">list_portfolios</span><span class="p">]</span>
+<span class="n">te_naive</span> <span class="o">=</span> <span class="p">[</span><span class="n">get_tracking_error_volatility</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">portfolio</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">Sigma</span> <span class="o">=</span> <span class="n">Sigma</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span> <span class="k">for</span> <span class="n">portfolio</span> <span class="ow">in</span> <span class="n">list_portfolios</span><span class="p">]</span>
+
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">reduction_rate</span><span class="p">,</span> <span class="n">te</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">reduction_rate_threshold</span><span class="p">,</span> <span class="n">te_threshold</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">reduction_rate_order_te</span><span class="p">,</span> <span class="n">te_order_te</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">reduction_rate_naive</span><span class="p">,</span> <span class="n">te_naive</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s2">&quot;Threshold Approach&quot;</span><span class="p">,</span> <span class="s2">&quot;Order-Statistic with TE minimization&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Order-Statistic with naive reweighting&quot;</span><span class="p">],</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Carbon Intensity Reduction (in %)&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Tracking Error Volatility (in %)&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Efficient Decarbonization Frontier with Order-Statistic and Naive Re-weighting Approach&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Efficient Decarbonization Frontier&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<figure class="align-default" id="orderstatisticnaive">
-<img alt="_images/orderstatisticnaive.png" src="_images/orderstatisticnaive.png" />
+<figure class="align-default" id="orderstatisticnaive2">
+<img alt="_images/orderstatisticnaive2.png" src="_images/orderstatisticnaive2.png" />
 <figcaption>
-<p><span class="caption-text">Figure: Efficient Decarbonization Frontier with Order-Statistic and Naive Re-Weighting Approach</span><a class="headerlink" href="#orderstatisticnaive" title="Permalink to this image">#</a></p>
+<p><span class="caption-text">Figure: Efficient Decarbonization Frontier</span><a class="headerlink" href="#orderstatisticnaive2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Again, the tracking error increases faster with the reduction rate than with the threshold approach. The increase is even higher than with the minimization of the tracking error for the weighting scheme. But the resulting weights are more easily tractable and easier to explain.</p>
