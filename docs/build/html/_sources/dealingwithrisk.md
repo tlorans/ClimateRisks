@@ -336,14 +336,14 @@ In the presence of a benchmark, the expected return of the portfolio $\mu(x)$ is
 \begin{equation*}
 \begin{aligned}
 & x^* = 
-& & argmin & \frac{1}{2} \sigma^2 (x|b) - \gamma \mu(x|b)\\
+& & argmin \frac{1}{2} \sigma^2 (x|b) - \gamma \mu(x|b)\\
 & \text{subject to}
 & & 1_n^Tx = 1\\
 & & & 0_n \leq x \leq 1_n
 \end{aligned}
 \end{equation*}
 
-Without any further constraint, the optimal solution $x^*$ will be equal to the benchmark weights $b$. This is the case aiming to perfect replication strategy. An enhanced or tilted version will add further constraints, depending on the objective of the strategy (decarbonization for example). We have a few more steps to consider before finding our QP formulation parameters.
+Without any further constraint, the optimal solution $x^*$ will be equal to the benchmark weights $b$. This is the case of a perfect replication strategy. An enhanced or tilted version will add further constraints, depending on the objective of the strategy (decarbonization for example). We have a few more steps to consider before finding our QP formulation parameters.
 
 First, let's recall that:
 \begin{equation}
@@ -366,29 +366,23 @@ With further developments, you end up with the following QP objective function f
 * = \frac{1}{2} x^T \Sigma x - x^T(\gamma \mu + \Sigma b)
 \end{equation}
 
-We have exactly the same QP problem than with the initial long-only mean-variance portfolio, except that $R = \gamma \mu + \Sigma b$.
+We have exactly the same QP problem than with the initial long-only mean-variance portfolio, except that $q = -(\gamma \mu + \Sigma b)$.
 
 Let's implement a new dataclass `IndexReplication`:
 ```Python
 @dataclass
-class IndexReplication(PortfolioOptimization):
+class IndexReplication:
   b: np.array # Benchmark Weights
 
   def get_portfolio(self, gamma:int) -> Portfolio:
     """QP Formulation"""
-    Q = self.Sigma
-    R = gamma * self.mu + Sigma @ self.b
-    A = np.ones(len(self.mu)).T # fully invested
-    B = np.array([1.]) # fully invested
-    x_inf = np.zeros(len(self.mu)) # long-only position
-    x_sup = np.ones(len(self.mu)) # long-only position
-
-    x_optim = solve_qp(P = Q,
-              q = -R, # we put a minus here because this QP solver consider +x^T R
-              A = A, 
-              b = B,
-              lb = x_inf,
-              ub = x_sup,
+    
+    x_optim = solve_qp(P = self.Sigma,
+              q = -(gamma * self.mu + Sigma @ self.b), 
+              A = np.ones(len(self.mu)).T, # fully invested,
+              b = np.array([1.]), # fully invested
+              lb = np.zeros(len(self.mu)), # long-only position
+              ub = np.ones(len(self.mu)), # long-only position
               solver = 'osqp')
 
     return Portfolio(x = x_optim, mu = self.mu, Sigma = self.Sigma)
