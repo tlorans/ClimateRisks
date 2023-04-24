@@ -387,7 +387,7 @@ We can see that the PAB financial decarbonization pathway is far too much aggres
 
 - Net Zero Emissions scenario is a carbon pathway with a resulting carbon budget compliant with global warming mitigation objective
 
-- Portfolio decarbonization pathway use carbon intensity decarbonization pathway rather than carbon emissions pathway
+- Portfolio decarbonization pathway uses carbon intensity decarbonization pathway rather than carbon emissions pathway
 
 - We can deduce financial decarbonization pathway from an economic decarbonization pathway, starting with a NZE scenario
 

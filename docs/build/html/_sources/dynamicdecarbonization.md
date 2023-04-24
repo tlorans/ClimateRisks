@@ -4,7 +4,7 @@ We've seen in the low-carbon strategy framework how investors can conduct a port
 
 Furthermore, a net zero investing strategy needs to include a mechanism that respect the endogenous aspect of the decarbonization pathway. In particular, a net zero portfolio implies the self-decarbonization of the portolio to respect the endogenous aspect of the decarbonization pathway, as stated by Barahhou et al. (2022).
 
-In this part, we are going to compare the approach for performing a portfolio alignment with the Paris-Aligned Benchmarks (PAB) and the net zero investment portfolio framework proposed by Barahhou et al. (2022). Introducing the concept of Net Zero Backtesting, we'll see that the dynamic decarbonization in the PAB relies on sequential decarbonization rather than self-decarbonization, because the issuers' carbon footprint dynamic is not taken into account. We will introduce carbon footprint dynamic measure, following Barahhou et al. (2022), in order to maximize the self-decarbonization ratio of the net zero portfolio. 
+In this part, we are going to compare the approach for performing a portfolio alignment with the Paris-Aligned Benchmarks (PAB) and the net zero investment portfolio framework proposed by Barahhou et al. (2022). Introducing the concept of Net Zero Backtesting, we'll see that the dynamic decarbonization in the PAB relies on sequential decarbonization rather than self-decarbonization, because the issuers' carbon footprint dynamics are not taken into account. We will introduce a carbon footprint dynamic measure, following Barahhou et al. (2022), in order to maximize the self-decarbonization property of the net zero portfolio. 
 
 ### Dynamic Portfolio's Decarbonization
 
@@ -18,7 +18,7 @@ CI(x(t)) \leq (1 - \mathfrak{R}_{CI}(t_0,t))CI(b(t_0))
 
 The base year $t_0$ thus defines the reference level of the carbon intensity, as the reference level is $CI(b(t_0))$ and not $CI(b(t))$. This is a first important difference compared to the low-carbon strategy.
 
-In this case, the decarbonization problem becomes dynamic:
+In this case, the decarbonization problem becomes dynamic (Barahhou et al., 2022):
 \begin{equation*}
 \begin{aligned}
 & x* = 
@@ -30,7 +30,7 @@ In this case, the decarbonization problem becomes dynamic:
 \end{aligned}
 \end{equation*}
 
-In this problem, finding $x^*(t)$ at time $t$ requires to know the covariance matrix $\Sigma(t)$, the carbon intensities $CI(t)$ and the investable universe $b(t)$. However, in the current year $t_1$ the observations are only available for $t_0$ and $t_1$. We can however do the exercise by assuming that the world does not change. In this case, we can assume that the covariance matrix, the carbon intensities and the investable universe remain constant, such as:
+In this problem, finding $x^*(t)$ at time $t$ requires to know the covariance matrix $\Sigma(t)$, the carbon intensities $CI(t)$ and the investable universe $b(t)$. However, in the current year $t_1$ the observations are only available for $t_0$ and $t_1$. We can however do the exercise by assuming that the world does not change. In this case, we can assume that the covariance matrix, the carbon intensities and the investable universe remain constant, such as (Barahhou et al., 2022):
 
 \begin{equation}
 \Sigma(t) = \Sigma(t_0)
@@ -43,18 +43,18 @@ b(t) = b(t_0)
 \end{equation}
 
 
-We have the following QP parameters:
+Thus, we have the following QP parameters:
 
 \begin{equation*}
 \begin{aligned}
-& Q = \Sigma(t) \\
-& R = \Sigma(t) b(t) \\
+& P = \Sigma(t) \\
+& q = - \Sigma(t) b(t) \\
 & A = 1^T_n \\
-& B = 1 \\
-& C = CI^T(t) \\
-& D = (1 - \mathfrak{R}_{CI}(t_0,t))CI(b(t_0))\\
-& x^- = 0_n \\
-& x^+ = 1_n
+& b = 1 \\
+& G = CI^T(t) \\
+& h = (1 - \mathfrak{R}_{CI}(t_0,t))CI(b(t_0))\\
+& lb = 0_n \\
+& ub = 1_n
 \end{aligned}
 \end{equation*}
 
