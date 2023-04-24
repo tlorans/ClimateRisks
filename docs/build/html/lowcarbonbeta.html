@@ -300,21 +300,19 @@ document.write(`
                   
   <section id="enhanced-index-with-carbon-beta">
 <h1>Enhanced Index with Carbon Beta<a class="headerlink" href="#enhanced-index-with-carbon-beta" title="Permalink to this headline">#</a></h1>
-<p>While low-carbon strategy relies on the hypothesis that carbon risk is unpriced by the markets, one could ask if it is still the case, with the growth of climate investing in asset management and the rise of public concerns about global warming. In contrast with Andersson et al. (2016), Gorgen et al. (2019) <span id="id1">[<a class="reference internal" href="references.html#id6" title="Maximilian Görgen, Andrea Jacob, Martin Nerlinger, Ryan Riordan, Martin Rohleder, and Marco Wilkens. Carbon risk. Available at SSRN 2930897, 2020.">GorgenJN+20</a>]</span> and Roncalli et al. (2020) define carbon risk from a financial point of view, and consider that the carbon risk of equities corresponds to the market risk is priced in by the market (at least partially). This relax the low-carbon strategy assumption that carbon risk is not priced in by the market.</p>
-<p>In this part, we will introduce how Gorgen et al. (2019) show that carbon risk is a systematic risk factor, priced in by the market. Then, we will follow Roncalli et al. (2020) by introducing carbon beta into a portfolio optimization in a context of a benchmark problem in order to hedge for carbon risk.</p>
+<p>While low-carbon strategy relies on the hypothesis that carbon risk is unpriced by the markets, one could ask if it is still the case, with the growth of climate investing in asset management and the rise of public concerns about global warming. In contrast with Andersson et al. (2016), Gorgen et al. (2019) <span id="id1">[<a class="reference internal" href="references.html#id6" title="Maximilian Görgen, Andrea Jacob, Martin Nerlinger, Ryan Riordan, Martin Rohleder, and Marco Wilkens. Carbon risk. Available at SSRN 2930897, 2020.">GorgenJN+20</a>]</span> and Roncalli et al. (2020) <span id="id2">[<a class="reference internal" href="references.html#id5" title="Théo Roncalli, Théo Le Guenedal, Frédéric Lepetit, Thierry Roncalli, and Takaya Sekine. Measuring and managing carbon risk in investment portfolios. arXiv preprint arXiv:2008.13198, 2020.">RGL+20</a>]</span> define carbon risk from a financial point of view, considering that the carbon risk is priced in by the market (at least partially). This relax the low-carbon strategy assumption that carbon risk is not priced in by the market.</p>
+<p>In this part, we will introduce how Gorgen et al. (2019) show that carbon risk is a systematic risk factor, priced in by the market. Then, we will follow Roncalli et al. (2020) by introducing carbon beta into a portfolio optimization in a context of a benchmark problem.</p>
 <section id="a-brown-minus-green-factor-carbon-systematic-risk">
 <h2>A Brown-Minus-Green Factor: Carbon Systematic Risk<a class="headerlink" href="#a-brown-minus-green-factor-carbon-systematic-risk" title="Permalink to this headline">#</a></h2>
-<p>Gorgen et al. (2019) developed the carbon risk management project (Carima). They propose to measure the carbon risk of a firm or a portfolio by considering the dynamics of stock prices, partly determined by climate policies and transition process towards a green economy.</p>
-<p>To do so, they developped and made public a Brown-Minus-Green Factor. This BMG factor is based on large amount of climate information from different dathabases.</p>
+<p>Gorgen et al. (2019) developed the carbon risk management project (Carima). They propose to measure the carbon risk of a stock or a portfolio by considering the dynamics of stock prices.</p>
+<p>To do so, they developped and made public a Brown-Minus-Green Factor (BMG). The BMG factor construction is based various climate-related informations.</p>
 <p>The Carima’s BMG factor construction involves:</p>
 <ol class="arabic simple">
 <li><p>The development of a scoring system to determine if a firm is green, neutral or brown</p></li>
-<li><p>The construction of a mimicking factor portfolio for carbon risk which has a long exposure to brown firms and a short exposure to green firms</p></li>
+<li><p>The construction of a factor portfolio for carbon risk which has a long exposure to brown firms and a short exposure to green firms</p></li>
 </ol>
-<p>The first step uses four ESG Databases (55 carbon risk proxy variables are retained). based on the scoring of three dimensions that may affect the stock value of a firm in the event of unexpected shifts towards a low carbon economy: (i) value chain; (ii) public perception and (iii) adaptability.</p>
-<p>The scores on each three dimensions are then aggregated with a weighted average, resulting in a Brown-Green score. The higher the BGS value, the browner the firm.</p>
-<p>The second step corresponds to the construction of the BMG risk factor.</p>
-<p>The construction of the BMG factor follows the methodoly of Fama and French (1992, 1993) consisting in splitting the stocks into six portfolios:</p>
+<p>The first step uses four ESG Databases (55 carbon risk proxy variables are retained) in order to determine a Brown-Green score. The higher the score, the browner the firm.</p>
+<p>The second step corresponds to the construction of the BMG risk factor. The construction of the BMG factor follows the methodoly of Fama and French (1992, 1993) consisting in splitting the stocks into six portfolios:</p>
 <table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="head"><p></p></th>
@@ -336,11 +334,11 @@ document.write(`
 </tr>
 </tbody>
 </table>
-<p>Where the classification is based on the terciles of the aggregating BGS and the median market capitalization.</p>
+<p>Where the classification is based on the terciles of the aggregating score and the median market capitalization.</p>
 <p>Finally, the return of the BMG factor is computed as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-da797fbc-1324-4e46-8b06-2b666fb4f694">
-<span class="eqno">(1)<a class="headerlink" href="#equation-da797fbc-1324-4e46-8b06-2b666fb4f694" title="Permalink to this equation">#</a></span>\[\begin{equation}
-f_{BMG}(t) = \frac{1}{2}(SB(t)+BB(t)) - \frac{1}{2} (SG(t) + BG(t))
+<div class="amsmath math notranslate nohighlight" id="equation-587908f5-4b5c-44c1-86aa-bbcb10a1f5b1">
+<span class="eqno">(1)<a class="headerlink" href="#equation-587908f5-4b5c-44c1-86aa-bbcb10a1f5b1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+F_{BMG}(t) = \frac{1}{2}(SB(t)+BB(t)) - \frac{1}{2} (SG(t) + BG(t))
 \end{equation}\]</div>
 <p>Let’s have a look at the resulting BMG factor:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -360,15 +358,15 @@ f_{BMG}(t) = \frac{1}{2}(SB(t)+BB(t)) - \frac{1}{2} (SG(t) + BG(t))
 <p><span class="caption-text">Figure: Cumulative Returns, BMG Factor</span><a class="headerlink" href="#bmg" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>During the last decade, it seems that the BMG factor returns were constantly negative, that is brown assets underperformed green assets. If we think about carbon risk as a systematic risk, this result is puzzling. We will tackle this question in the next part (green factor).</p>
+<p>During the last decade, it seems that the BMG factor returns were constantly negative, that is brown assets underperformed green assets. If we think about carbon risk as a systematic risk, this result is puzzling. We will tackle this question in the next part (green assets outperformance).</p>
 </section>
 <section id="carbon-beta-a-market-based-measure">
 <h2>Carbon Beta: A Market-Based Measure<a class="headerlink" href="#carbon-beta-a-market-based-measure" title="Permalink to this headline">#</a></h2>
 <p>Once the BMG factor is built, Gorgen et al. (2019) propose to define the carbon financial risk of a stock by using its price sentivity to the BMG factor (carbon beta).</p>
 <p>The authors propose to extend the Carhart Model with four factors with the additional BMG carbon risk factor:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6bea1a4e-a046-4a9d-9829-7fe215fd6730">
-<span class="eqno">(2)<a class="headerlink" href="#equation-6bea1a4e-a046-4a9d-9829-7fe215fd6730" title="Permalink to this equation">#</a></span>\[\begin{equation}
-r(t) = \alpha + \beta_{MKT}f_{MKT}(t) + \beta_{SMB}f_{SMB}(t) + \beta_{HML}f_{HML}(t) + \beta_{WML} f_{WML}(t) + \beta_{BMG} f_{BMG}(t) + u(t)
+<div class="amsmath math notranslate nohighlight" id="equation-0649c3cb-ca32-45b9-8703-f2a087326159">
+<span class="eqno">(2)<a class="headerlink" href="#equation-0649c3cb-ca32-45b9-8703-f2a087326159" title="Permalink to this equation">#</a></span>\[\begin{equation}
+R(t) = \alpha + \beta_{MKT}F_{MKT}(t) + \beta_{SMB}F_{SMB}(t) + \beta_{HML}F_{HML}(t) + \beta_{WML} F_{WML}(t) + \beta_{BMG} F_{BMG}(t) + u(t)
 \end{equation}\]</div>
 <p>This regression is run on a stock-by-stock basis, and resulting <span class="math notranslate nohighlight">\(\beta_k\)</span> are the sentivity of the stock to each factor.</p>
 <p>The carbon beta interpretation is the following:</p>
@@ -433,18 +431,19 @@ r(t) = \alpha + \beta_{MKT}f_{MKT}(t) + \beta_{SMB}f_{SMB}(t) + \beta_{HML}f_{HM
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 \begin{aligned}
-&amp; Q = \Sigma \\
-&amp; R = \Sigma b \\
+&amp; P = \Sigma \\
+&amp; q = \Sigma b \\
 &amp; A = 1^T_n \\
-&amp; B = 1 \\
-&amp; C = \beta_{bmg}^T \\
-&amp; D = \beta_{bmg}^+\\
-&amp; x^- = 0_n \\
-&amp; x^+ = 1_n
+&amp; b = 1 \\
+&amp; G = \beta_{bmg}^T \\
+&amp; h = \beta_{bmg}^+\\
+&amp; lb = 0_n \\
+&amp; ub = 1_n
 \end{aligned}
 \end{equation*}\]</div>
 <p>The approach is similar to the one with the maximum threshold approach in the previous part, except that we use a market-based measure (carbon beta) rather than a fundamental-based measure (carbon intensity) in the low-carbon strategy. Thus, with this strategy, we relax the assumption that carbon risk is not priced in by the market.</p>
-<p>Let’s first create a <code class="docutils literal notranslate"><span class="pre">CarbonPortfolio</span></code> dataclass:</p>
+<p>We can implement this new strategy with Python.
+Let’s first create a <code class="docutils literal notranslate"><span class="pre">CarbonPortfolio</span></code> dataclass:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 

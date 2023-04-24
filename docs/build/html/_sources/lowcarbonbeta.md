@@ -1,38 +1,34 @@
 ## Enhanced Index with Carbon Beta
 
-While low-carbon strategy relies on the hypothesis that carbon risk is unpriced by the markets, one could ask if it is still the case, with the growth of climate investing in asset management and the rise of public concerns about global warming. In contrast with Andersson et al. (2016), Gorgen et al. (2019) {cite:p}`gorgen2020carbon` and Roncalli et al. (2020) define carbon risk from a financial point of view, and consider that the carbon risk of equities corresponds to the market risk is priced in by the market (at least partially). This relax the low-carbon strategy assumption that carbon risk is not priced in by the market.
+While low-carbon strategy relies on the hypothesis that carbon risk is unpriced by the markets, one could ask if it is still the case, with the growth of climate investing in asset management and the rise of public concerns about global warming. In contrast with Andersson et al. (2016), Gorgen et al. (2019) {cite:p}`gorgen2020carbon` and Roncalli et al. (2020) {cite:p}`roncalli2020measuring` define carbon risk from a financial point of view, considering that the carbon risk is priced in by the market (at least partially). This relax the low-carbon strategy assumption that carbon risk is not priced in by the market.
 
-In this part, we will introduce how Gorgen et al. (2019) show that carbon risk is a systematic risk factor, priced in by the market. Then, we will follow Roncalli et al. (2020) by introducing carbon beta into a portfolio optimization in a context of a benchmark problem in order to hedge for carbon risk.
+In this part, we will introduce how Gorgen et al. (2019) show that carbon risk is a systematic risk factor, priced in by the market. Then, we will follow Roncalli et al. (2020) by introducing carbon beta into a portfolio optimization in a context of a benchmark problem.
 
 ### A Brown-Minus-Green Factor: Carbon Systematic Risk
 
-Gorgen et al. (2019) developed the carbon risk management project (Carima). They propose to measure the carbon risk of a firm or a portfolio by considering the dynamics of stock prices, partly determined by climate policies and transition process towards a green economy.
+Gorgen et al. (2019) developed the carbon risk management project (Carima). They propose to measure the carbon risk of a stock or a portfolio by considering the dynamics of stock prices.
 
-To do so, they developped and made public a Brown-Minus-Green Factor. This BMG factor is based on large amount of climate information from different dathabases.
+To do so, they developped and made public a Brown-Minus-Green Factor (BMG). The BMG factor construction is based various climate-related informations.
 
 The Carima's BMG factor construction involves:
 1. The development of a scoring system to determine if a firm is green, neutral or brown
-2. The construction of a mimicking factor portfolio for carbon risk which has a long exposure to brown firms and a short exposure to green firms
+2. The construction of a factor portfolio for carbon risk which has a long exposure to brown firms and a short exposure to green firms
 
-The first step uses four ESG Databases (55 carbon risk proxy variables are retained). based on the scoring of three dimensions that may affect the stock value of a firm in the event of unexpected shifts towards a low carbon economy: (i) value chain; (ii) public perception and (iii) adaptability.
+The first step uses four ESG Databases (55 carbon risk proxy variables are retained) in order to determine a Brown-Green score. The higher the score, the browner the firm.
 
-The scores on each three dimensions are then aggregated with a weighted average, resulting in a Brown-Green score. The higher the BGS value, the browner the firm.
-
-The second step corresponds to the construction of the BMG risk factor. 
-
-The construction of the BMG factor follows the methodoly of Fama and French (1992, 1993) consisting in splitting the stocks into six portfolios:
+The second step corresponds to the construction of the BMG risk factor. The construction of the BMG factor follows the methodoly of Fama and French (1992, 1993) consisting in splitting the stocks into six portfolios:
 
 |   | Green  | Neutral  | Brown  |  
 |---|---|---|---|
 |  Small | SG  | SN  | SB  | 
 | Big  |  BG | BN  | BB  |
 
-Where the classification is based on the terciles of the aggregating BGS and the median market capitalization. 
+Where the classification is based on the terciles of the aggregating score and the median market capitalization. 
 
 Finally, the return of the BMG factor is computed as:
 
 \begin{equation}
-f_{BMG}(t) = \frac{1}{2}(SB(t)+BB(t)) - \frac{1}{2} (SG(t) + BG(t))
+F_{BMG}(t) = \frac{1}{2}(SB(t)+BB(t)) - \frac{1}{2} (SG(t) + BG(t))
 \end{equation}
 
 Let's have a look at the resulting BMG factor:
@@ -56,7 +52,7 @@ name: bmg
 Figure: Cumulative Returns, BMG Factor
 ```
 
-During the last decade, it seems that the BMG factor returns were constantly negative, that is brown assets underperformed green assets. If we think about carbon risk as a systematic risk, this result is puzzling. We will tackle this question in the next part (green factor).
+During the last decade, it seems that the BMG factor returns were constantly negative, that is brown assets underperformed green assets. If we think about carbon risk as a systematic risk, this result is puzzling. We will tackle this question in the next part (green assets outperformance).
 
 ### Carbon Beta: A Market-Based Measure
 
@@ -65,7 +61,7 @@ Once the BMG factor is built, Gorgen et al. (2019) propose to define the carbon 
 The authors propose to extend the Carhart Model with four factors with the additional BMG carbon risk factor:
 
 \begin{equation}
-r(t) = \alpha + \beta_{MKT}f_{MKT}(t) + \beta_{SMB}f_{SMB}(t) + \beta_{HML}f_{HML}(t) + \beta_{WML} f_{WML}(t) + \beta_{BMG} f_{BMG}(t) + u(t)
+R(t) = \alpha + \beta_{MKT}F_{MKT}(t) + \beta_{SMB}F_{SMB}(t) + \beta_{HML}F_{HML}(t) + \beta_{WML} F_{WML}(t) + \beta_{BMG} F_{BMG}(t) + u(t)
 \end{equation} 
 
 This regression is run on a stock-by-stock basis, and resulting $\beta_k$ are the sentivity of the stock to each factor.
@@ -137,20 +133,21 @@ We have the following QP parameters:
 
 \begin{equation*}
 \begin{aligned}
-& Q = \Sigma \\
-& R = \Sigma b \\
+& P = \Sigma \\
+& q = \Sigma b \\
 & A = 1^T_n \\
-& B = 1 \\
-& C = \beta_{bmg}^T \\
-& D = \beta_{bmg}^+\\
-& x^- = 0_n \\
-& x^+ = 1_n
+& b = 1 \\
+& G = \beta_{bmg}^T \\
+& h = \beta_{bmg}^+\\
+& lb = 0_n \\
+& ub = 1_n
 \end{aligned}
 \end{equation*}
 
 
 The approach is similar to the one with the maximum threshold approach in the previous part, except that we use a market-based measure (carbon beta) rather than a fundamental-based measure (carbon intensity) in the low-carbon strategy. Thus, with this strategy, we relax the assumption that carbon risk is not priced in by the market.
 
+We can implement this new strategy with Python.
 Let's first create a `CarbonPortfolio` dataclass:
 
 ```Python
