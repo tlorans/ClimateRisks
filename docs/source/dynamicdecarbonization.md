@@ -88,23 +88,15 @@ class NetZeroPortfolio:
 
     for t in range(len(decarbonization_pathway)):
       """QP Formulation"""
-      Q = self.Sigma
-      R = self.Sigma @ self.b
-      A = np.ones(len(self.b)).T # fully invested
-      B = np.array([1.]) # fully invested
-      x_inf = np.zeros(len(self.b)) # long-only position
-      x_sup = np.ones(len(self.b)) # long-only position
-      C = self.CI.T # resulting WACI
-      D = (1 - decarbonization_pathway[t]) * self.b.T @ self.CI # reduction imposed
 
-      x_optim = solve_qp(P = Q,
-                q = -R, # we put a minus here because this QP solver consider +x^T R
-                A = A, 
-                b = B,
-                G = C,
-                h = D,
-                lb = x_inf,
-                ub = x_sup,
+      x_optim = solve_qp(P = self.Sigma,
+                q = -self.Sigma @ self.b, # we put a minus here because this QP solver consider +x^T R
+                A = np.ones(len(self.b)).T, 
+                b = np.array([1.]),
+                G = self.CI.T, # resulting WACI
+                h = (1 - decarbonization_pathway[t]) * self.b.T @ self.CI, # reduction imposed
+                lb = np.zeros(len(self.b)),
+                ub = np.ones(len(self.b)),
                 solver = 'osqp')
       dynamic_portfolio.append(CarbonPortfolio(x = x_optim, 
                            Sigma = self.Sigma, CI = self.CI) )
