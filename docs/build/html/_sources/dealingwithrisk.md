@@ -11,6 +11,8 @@ These tools will be at the basis of the three parts we will present thereafter i
 
 We will discuss these basic tools with implementation in Python. In this course, we'll see how climate risks can be considered with these different approaches.
 
+We relies on notations and frameworks from Roncalli (2013) {cite:p}`roncalli2013introduction`. 
+
 ### Portfolio's Risk and Returns
 
 Before introducing climate risks in the portfolio construction process, a first step is to consider how to measure portfolio's risk and returns. In practice, investors build a portfolio in a context of a benchmark (the S&P 500 for example). We'll build on the definition of the portfolio's risk and returns to show that risk and returns measures in a context of a benchmark is just a slight variation. This is also a good introduction to the low-carbon strategy that we will cover in the next part.
@@ -80,7 +82,7 @@ x^T \mathbb{E}[(R-\mu)(R-\mu)^T]x
 = x^T \Sigma x
 \end{equation}
 
-In practice, we use the historical average for estimating $\mu$. For the covariance matrix, we can compute it with historical observations with the historical volatilities and correlation matrix, such as:
+In practice, we can use the historical average for estimating $\mu$. For the covariance matrix, we can compute it with the historical volatilities and correlation matrix, such as:
 
 \begin{equation}
 \Sigma = diag(\sigma) \cdot \rho \cdot  diag(\sigma)
