@@ -1,6 +1,6 @@
 ## Low-Carbon Strategy
 
-As a first climate risks hedging strategy, we propose to follow Andersson et al. (2016) {cite:p}`andersson2016hedging` and Roncalli (2023), with a simple low-carbon index strategy.
+As a first climate risks integration strategy, we propose to follow Andersson et al. (2016) {cite:p}`andersson2016hedging` and Roncalli (2023), with a simple low-carbon index strategy.
 
 The strategy consists in (i) reducing the weighted-average carbon intensity (WACI of the portoflio) while (ii) minimizing the tracking error relative to a benchmark.
 
@@ -8,13 +8,14 @@ The underlying assuption is that carbon risk is unpriced by the market. The fina
 
 This carbon risk-hedging strategy is widely followed by index providers and asset managers, and can be defined as a low-carbon strategy.
 
-In what follow, we will test two alternatives formulations for the climate objective: 
+In what follow, we will test two alternatives formulations for the climate objective, proposed by Andersson et al. (2016) and following the notations used in Roncalli (2023): 
 - the threshold approach, which consists in reducing the portfolio's WACI by changing the weights of stocks;
 - the order-statistic approach, which consists in excluding the $m$ most emitting stocks.
 
 ### Threshold Approach
 
-With the threshold approach, the objective is to minimize the tracking error with the benchmark while imposing a reduction $\mathfrak{R}$ in terms of carbon intensity. In practice, implementing such approach involves the weighted-average carbon intensity (WACI) computation and the introduction of a new constraint in a portfolio optimization problem with the presence of a benchmark (Roncalli, 2023).
+With the threshold approach, the objective is to minimize the tracking error with the benchmark while imposing a reduction $\mathfrak{R}$ in terms of carbon intensity. In practice, implementing such approach involves the weighted-average carbon intensity (WACI) computation and the introduction of a new constraint in a portfolio optimization problem with the presence of a benchmark (Roncalli, 2023). In this part, we first define the WACI, and then introduce the threshold approach as an additional constraint to the portfolio optimization with a benchmark problem seen in the previous part.
+
 #### Weighted-Average Carbon Intensity
 
 The weighted-average carbon intensity (WACI) of the benchmark is:
@@ -51,7 +52,7 @@ class CarbonPortfolio:
 ```
 #### Integrating Carbon Intensity Reduction as a Constraint
 
-The low-carbon strategy involves the reduction $\mathfrak{R}$ of the portfolio's carbon intensity $CI(x)$ compared to the benchmark's carbon intensity $CI(b)$. It can be viewed as the following constraint:
+The low-carbon strategy involves the reduction $\mathfrak{R}$ of the portfolio's carbon intensity $CI(x)$ compared to the benchmark's carbon intensity $CI(b)$. It can be viewed as the following constraint (Roncalli, 2023):
 
 \begin{equation}
 CI(x) \leq (1 - \mathfrak{R})CI(b)
@@ -74,14 +75,14 @@ with the following QP parameters:
 
 \begin{equation*}
 \begin{aligned}
-& Q = \Sigma \\
-& R = \Sigma b \\
+& P = \Sigma \\
+& q = - \Sigma b \\
 & A = 1^T_n \\
-& B = 1 \\
-& C = CI^T \\
-& D = CI^{+} = (1 - ℜ)CI(b) \\
-& x^- = 0_n \\
-& x^+ = 1_n
+& b = 1 \\
+& G = CI^T \\
+& h = CI^{+} = (1 - ℜ)CI(b) \\
+& lb = 0_n \\
+& ub = 1_n
 \end{aligned}
 \end{equation*}
 
@@ -115,23 +116,14 @@ class ThresholdApproach(LowCarbonStrategy):
 
   def get_portfolio(self, reduction_rate:float) -> CarbonPortfolio:
     """QP Formulation"""
-    Q = self.Sigma
-    R = self.Sigma @ self.b
-    A = np.ones(len(self.b)).T # fully invested
-    B = np.array([1.]) # fully invested
-    x_inf = np.zeros(len(self.b)) # long-only position
-    x_sup = np.ones(len(self.b)) # long-only position
-    C = self.CI.T # resulting WACI
-    D = (1 - reduction_rate) * self.b.T @ self.CI # reduction imposed
-
-    x_optim = solve_qp(P = Q,
-              q = -R, # we put a minus here because this QP solver consider +x^T R
-              A = A, 
-              b = B,
-              G = C,
-              h = D,
-              lb = x_inf,
-              ub = x_sup,
+    x_optim = solve_qp(P = self.Sigma,
+              q = -(self.Sigma @ self.b), # we put a minus here because this QP solver consider +x^T R
+              A = np.ones(len(self.b)).T, 
+              b = np.array([1.]),
+              G = self.CI.T, # resulting WACI
+              h = (1 - reduction_rate) * self.b.T @ self.CI, # reduction
+              lb = np.zeros(len(self.b)),
+              ub = np.ones(len(self.b)),
               solver = 'osqp')
 
     return CarbonPortfolio(x = x_optim, 
