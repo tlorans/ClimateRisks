@@ -294,7 +294,7 @@ And the following QP parameters:
 \begin{equation*}
 \begin{aligned}
 & P = \Sigma \\
-& q = \Sigma b \\
+& q = - \Sigma b \\
 & A = 1^T_n \\
 & b = 1 \\
 & lb = 0_n \\
@@ -308,25 +308,22 @@ Let's implement this approach in Python:
 class OrderStatisticTE(LowCarbonStrategy):
     def get_portfolio(self, m:int) -> CarbonPortfolio:
       """QP Formulation"""
-      Q = self.Sigma
-      R = self.Sigma @ self.b
-      A = np.ones(len(self.b)).T # fully invested
-      B = np.array([1.]) # fully invested
-      x_inf = np.zeros(len(self.b)) # long-only position
+ 
       x_sup = np.zeros(len(self.b)) # the vector for exclusion 
       x_sup[np.where(CI >= np.unique(self.CI)[-m])] = 0
       x_sup[np.where(CI < np.unique(self.CI)[-m])] = 1
 
-      x_optim = solve_qp(P = Q,
-                q = -R, # we put a minus here because this QP solver consider +x^T R
-                A = A, 
-                b = B,
-                lb = x_inf,
+      x_optim = solve_qp(P = self.Sigma,
+                q = -(self.Sigma @ self.b), 
+                A = np.ones(len(self.b)).T, 
+                b = np.array([1.]) ,
+                lb = np.zeros(len(self.b)) ,
                 ub = x_sup,
                 solver = 'osqp')
 
       return CarbonPortfolio(x = x_optim, 
                             Sigma = self.Sigma, CI = self.CI)
+
 ```
 
 Using the same example from Roncalli (2023), let's plot the relationship between reduction rate and tracking error:
@@ -342,25 +339,29 @@ list_portfolios = []
 for m in list_m:
   list_portfolios.append(low_carbon_portfolio.get_portfolio(m = m))
 
-reduction_rate = [get_waci_reduction(x = portfolio.x,
+reduction_rate_order_te = [get_waci_reduction(x = portfolio.x,
                    b = b,
                    CI = CI) * 100 for portfolio in list_portfolios]
-te = [get_tracking_error_volatility(x = portfolio.x, b = b, Sigma = Sigma) * 100 for portfolio in list_portfolios]
+te_order_te = [get_tracking_error_volatility(x = portfolio.x, b = b, Sigma = Sigma) * 100 for portfolio in list_portfolios]
+
 
 plt.figure(figsize = (10, 10))
-plt.plot(reduction_rate, te)
+plt.plot(reduction_rate_threshold, te_threshold)
+plt.plot(reduction_rate_order_te, te_order_te)
+plt.legend(["Threshold Approach", "Order-Statistic with TE minimizatino"], loc=0)
 plt.xlabel("Carbon Intensity Reduction (in %)")
 plt.ylabel("Tracking Error Volatility (in %)")
-plt.title("Efficient Decarbonization Frontier with Order-Statistic and TE Minimization Approach")
+plt.title("Efficient Decarbonization Frontier")
 plt.show()
 ```
 
-```{figure} orderstatisticte.png
+```{figure} orderstatisticte3.png
 ---
-name: orderstatisticte
+name: orderstatisticte3
 ---
-Figure: Efficient Decarbonization Frontier with Order-Statistic and TE Minimization Approach
+Figure: Efficient Decarbonization Frontier
 ```
+
 
 Because we are directly excluding high-emitters stocks rather than underweighting them, tracking error volalitility increases faster with the reduction rate than with the threshold approach. However, resulting portfolio is more explainable than with the threshold approach. There is a trade-off between tractability and efficiency. Because we still rely on an optimization program in order to find the portfolio weights after exclusions, final weights between the remaning stocks can still be challenging to explain. Another approach, easier to explain, is the naive re-weighting. 
 
