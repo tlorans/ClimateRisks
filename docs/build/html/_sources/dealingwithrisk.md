@@ -82,7 +82,7 @@ x^T \mathbb{E}[(R-\mu)(R-\mu)^T]x
 = x^T \Sigma x
 \end{equation}
 
-In practice, we can use the historical average for estimating $\mu$. For the covariance matrix, we can compute it with the historical volatilities and correlation matrix, such as:
+A simple approach is to use the historical average for estimating $\mu$. For the covariance matrix, we can compute it with the historical volatilities and correlation matrix, such as:
 
 \begin{equation}
 \Sigma = diag(\sigma) \cdot \rho \cdot  diag(\sigma)
