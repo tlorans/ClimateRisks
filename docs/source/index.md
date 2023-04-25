@@ -28,12 +28,16 @@ Unless it is sourced, any opinion expressed in this course is my personnal opini
 
 climaterisks
 dealingwithrisk
+project1
 lowcarbonstrategy
+project2
 lowcarbonbeta
 greenfactor
+project3
 netzeroinvesting
 decarbonizationpathways
 dynamicdecarbonization
+project4
 integratingtransition
 references
 ```
