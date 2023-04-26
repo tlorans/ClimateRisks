@@ -5,6 +5,8 @@ In order to implement the Markowitz approach, the estimation of the covariance m
 However, the sample covariance matrix is estimated with a lot of errors when the number of stocks $n$ is larger than the historical return observations $T$ (the condition $T >> n$ is not verified). Using the sample covariance matrix as an input of the Markowitz framework will lead to lack of robustness for the resulting portfolio.
 
 To overcome this issue, shrinkage methods of the covariance are used in practice, in order to obtain a more reliable estimate of the covariance matrix to be used in the mean-variance framework. We will see how to apply the Ledoit-Wolf (2003b) {cite:p}`ledoit2003honey` approach.
+
+For more details about practices of portfolio optimization, please refer to Roncalli (2013) and the part two of these [slides](http://www.thierry-roncalli.com/download/AM-Lecture1.pdf).
 ### Sample Covariance Matrix and Portfolio Stability Issue
 
 We can illustate the stability issue resulting from the sample covariance matrix with an example from Roncalli (2013). We will generate two sample covariance matrices with different correlation (we assume the cross-correlation is equal to 0.8 in the first example, to 0.9 in the second example):
