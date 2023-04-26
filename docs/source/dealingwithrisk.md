@@ -428,9 +428,16 @@ Carhart complemented the Fama-French 3-factors model with the Winners Minus Lose
 \mathbb{E}[R_i] - R_f = \beta^m_i(\mathbb{E}[R_m] - R_f) + \beta^{smb}_i \mathbb{E}[R_{smb}] + \beta_i^{hml}{E}[R_{hml}] + \beta_i^{wml}{E}[R_{wml}]
 \end{equation}
 
-And $\alpha$ reappeared again...
+$\alpha$ reappeared again...
 \begin{equation}
 \mathbb{E}[R_i] - R_f = \alpha_i + \beta^m_i(\mathbb{E}[R_m] - R_f) + \beta^{smb}_i \mathbb{E}[R_{smb}] + \beta_i^{hml}{E}[R_{hml}] + \beta_i^{wml}{E}[R_{wml}]
+\end{equation}
+
+Then, Fama and French (2015) {cite:p}`fama2015five` added two new factors, profitability (RMW) and investment (CMA), leading to a five factors model without the momentum (WML) factor:
+\begin{equation}
+\mathbb{E}[R_i] - R_f = \beta^m_i(\mathbb{E}[R_m] - R_f) + \beta^{smb}_i \mathbb{E}[R_{smb}] + \beta_i^{hml}{E}[R_{hml}]
++ \beta_i^{rmw}{E}[R_{rmw}]
++ \beta_i^{cma}{E}[R_{cma}]
 \end{equation}
 
 And many more factors were published!
