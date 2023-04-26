@@ -88,7 +88,7 @@ A simple approach is to use the historical average for estimating $\mu$. For the
 \Sigma = diag(\sigma) \cdot \rho \cdot  diag(\sigma)
 \end{equation}
 
-with $\sigma$ are the volatilities of returns and $\rho$ the correlation matrix.
+with $\sigma$ are the volatilities of returns and $\rho$ the correlation matrix. We will see in the first project that computing the covariance matrix with the sample covariance matrix leads to significant lack of robustness in the portfolio construction.
 
 ```Python
 sigma = np.array([0.15, 0.20, 0.25, 0.30])

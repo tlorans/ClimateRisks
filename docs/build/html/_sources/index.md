@@ -21,6 +21,7 @@ Any error in this course is mine.
 
 Unless it is sourced, any opinion expressed in this course is my personnal opinion only. 
 
+Projects are calibrated for a short time-period (around 1 hour) and to illustrate some practical refinements. Again, it is by no mean exhaustive and doesn't pretends to lead to a production-ready portfolio.
 
 ```{toctree}
 :caption: 'Contents:'
