@@ -2,14 +2,20 @@
 
 In order to implement the Markowitz approach, the estimation of the covariance matrix of stock returns is required. The standard statistical approach is to retrieve the history of past stock returns and compute the sample covariance matrix $\hat{\Sigma}$.
 
-However, the sample covariance matrix is estimated with a lot of errors when the number of stocks $n$ is larger than the historical return observations $T$ (the condition $T >> n$ is not verified). Using the sample covariance matrix as an input of the Markowitz framework will lead to lack of robustness for the resulting portfolio.
+The sample covariance matrix can be computed as (Roncalli, 2013):
+\begin{equation}
+\hat{\Sigma} = \frac{1}{T}\sum^T_{t=1}(R_t - \bar{R})(R_t - \bar{R})^T
+\end{equation}
 
-To overcome this issue, shrinkage methods of the covariance are used in practice, in order to obtain a more reliable estimate of the covariance matrix to be used in the mean-variance framework. We will see how to apply the Ledoit-Wolf (2003b) {cite:p}`ledoit2003honey` approach.
+However, the sample covariance matrix is estimated with a lot of errors when the number of stocks $n$ is larger than the historical return observations $T$ (the condition $T >> n$ is not verified). Using the sample covariance matrix as an input of the Markowitz framework can lead to a lack of robustness for the resulting portfolio.
+
+To overcome this issue, shrinkage methods of the covariance matrix are used in practice, in order to obtain a more reliable estimate of the covariance matrix to be used in the mean-variance framework. We will see how to apply the Ledoit-Wolf (2003b) {cite:p}`ledoit2003honey` approach.
 
 For more details about practices of portfolio optimization, please refer to Roncalli (2013) and the part two of these [slides](http://www.thierry-roncalli.com/download/AM-Lecture1.pdf).
-### Sample Covariance Matrix and Portfolio Stability Issue
+### Covariance Matrix and Optimized Portfolio Stability Issue
 
-We can illustate the stability issue resulting from the sample covariance matrix with an example from Roncalli (2013). We will generate two sample covariance matrices with different correlation (we assume the cross-correlation is equal to 0.8 in the first example, to 0.9 in the second example):
+We can illustate the stability issue resulting from the covariance matrix errors with an example from Roncalli (2013). We will generate two covariance matrices with different correlation (we assume the cross-correlation is equal to 0.8 in the first example, to 0.9 in the second example):
+
 ```Python
 import numpy as np
 mu = np.array([0.08, 0.08, 0.05])
@@ -89,7 +95,7 @@ name: impactcovmatrix
 ---
 Figure: Optimum weights with $\rho = 0.8$ vs. $\rho = 0.9$
 ```
-We see that a slight difference in terms of estimated cross-correlation leads to significantly different sample covariance matrices, and then to really different optimal weights!
+We see that a slight difference in terms of cross-correlation leads to significantly different covariance matrices, and then to really different optimal weights!
 
 ### Shrinkage Methods: the Ledoit-Wolf Approach
 
@@ -99,10 +105,7 @@ Shrinkage methods approaches modify the sample covariance matrix $\hat{\Sigma}$ 
 
 The Ledoit-Wolf approach (2003a) {cite:p}`ledoit2003improved` proposes to combine two estimators for the covariance matrix: $\hat{\Sigma}$ and $\hat{\Phi}$.
 
-$\hat{\Sigma}$, the sample covariance matrix is known to be unbiased but includes a lot of estimations errors where the number of observations periods is not significantly higher than the number of assets. The sample covariance can be computed as:
-\begin{equation}
-\hat{\Sigma} = \frac{ (R_t - \bar{R})^T \cdot (R_t - \bar{R}) }{T}
-\end{equation}
+$\hat{\Sigma}$, the sample covariance matrix is known to be unbiased but includes a lot of estimations errors where the number of observations periods is not significantly higher than the number of assets.
 
 $\hat{\Phi}$, a structured estimator  (shrinkage target) converges quickly but is a biased estimator. Ledoit and Wolf  proposed to use either the single-factor matrix of Sharpe (2003a) or the constant correlation model (2003b) as the shrinkage target. Thereafter, we will use the second one.
 
@@ -119,7 +122,7 @@ The method involves two stages:
 - determining the shrinkage target $\hat{\Phi}$
 - determining the shrinkage intensity $\delta$
 
-#### Finding the Skrinkage Target
+#### Finding the Shrinkage Target
 
 As a first stage, we need to find the shrinkage target $\hat{\Phi}$. As we follow Ledoit and Wolf (2003b), $\hat{\Phi}$ is the empirical covariance matrix with a constant correlation $\bar{\rho}$, with:
 
@@ -133,7 +136,7 @@ and
 \hat{\Phi}_{i,j} = \bar{\rho} \sqrt{\hat{\Sigma}_{i,i} \hat{\Sigma}_{j,j}} 
 \end{equation}
 
-We then need to determine $\bar{\rho}$.
+We then need to determine $\bar{\rho}$ the constant correlation.
 
 We have:
 
@@ -190,7 +193,7 @@ test.get_shrinkage()
 Then, the problem is now to estimate the optimal value of $\delta$. Ledoit and Wolf consider the quadratic loss $L(\delta)$ defined as:
 
 \begin{equation}
-L(\delta) = ||\delta \hat{\Phi} + (1 - \delta)\hat{\Sigma} - \Sigma||^2
+L(\delta) = ||\tilde{\Sigma}_{\delta}- \Sigma||^2
 \end{equation}
 
 That is, the norm of the difference between the shrinkage estimator $\tilde{\Sigma}_{\delta}$, with $\Sigma$ the true covariance matrix.
