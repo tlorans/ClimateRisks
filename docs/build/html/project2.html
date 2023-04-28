@@ -47,6 +47,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'project2';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Enhanced Index with Carbon Beta" href="lowcarbonbeta.html" />
+    <link rel="prev" title="Low-Carbon Strategy" href="lowcarbonstrategy.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -124,11 +126,12 @@
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="climaterisks.html">Part 1: Climate Risks Integration Strategies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dealingwithrisk.html">Dealing with Risk(s) in Portfolio Construction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="project1.html">Project 1: Portfolio Optimization in Practice</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lowcarbonstrategy.html">Low-Carbon Strategy</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Project 2: Low-Carbon Strategy in Practice</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lowcarbonbeta.html">Enhanced Index with Carbon Beta</a></li>
 <li class="toctree-l1"><a class="reference internal" href="greenfactor.html">Green Stocks Outperformance: Realized vs. Expected Returns</a></li>
 <li class="toctree-l1"><a class="reference internal" href="netzeroinvesting.html">Part 2: Net Zero Investing</a></li>
@@ -284,7 +287,11 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sector-weights-constraint">Sector Weights Constraint</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sector-neutrality">Sector Neutrality</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#your-turn">Your Turn!</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#your-turn">Your Turn!</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -303,39 +310,39 @@ document.write(`
 <section id="sector-weights-constraint">
 <h2>Sector Weights Constraint<a class="headerlink" href="#sector-weights-constraint" title="Permalink to this headline">#</a></h2>
 <p>In order to overcome the first issue regarding the lack of sector diversification with the low-carbon strategies presented in the previous part, we can extend the framework by considering a sector weight constraint (Roncalli, 2023):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d4f72aea-76d1-4045-9d88-3c62b7411fa0">
-<span class="eqno">(1)<a class="headerlink" href="#equation-d4f72aea-76d1-4045-9d88-3c62b7411fa0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a047791a-4ea9-42c5-9233-39dd11f943a0">
+<span class="eqno">(1)<a class="headerlink" href="#equation-a047791a-4ea9-42c5-9233-39dd11f943a0" title="Permalink to this equation">#</a></span>\[\begin{equation}
 s^-_j \leq \sum_{i \in Sector_j} x_i \leq s_j^+
 \end{equation}\]</div>
 <p>With <span class="math notranslate nohighlight">\(s_j\)</span> a <span class="math notranslate nohighlight">\(n \times 1\)</span> vector of sector-mapping (ie. we have here only one sector considered), with elements 0 or 1 if the stock <span class="math notranslate nohighlight">\(n\)</span> belongs to the sector such as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e7f535c3-b4eb-40f8-b405-c96f55fbdf58">
-<span class="eqno">(2)<a class="headerlink" href="#equation-e7f535c3-b4eb-40f8-b405-c96f55fbdf58" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4e095e9c-c013-4284-84a3-613c69c0bde7">
+<span class="eqno">(2)<a class="headerlink" href="#equation-4e095e9c-c013-4284-84a3-613c69c0bde7" title="Permalink to this equation">#</a></span>\[\begin{equation}
 s_{i,j} = 𝟙\{i \in Sector_j\}
 \end{equation}\]</div>
 <p>We note that:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0be20269-bfac-481f-9c13-85a448bb8fb6">
-<span class="eqno">(3)<a class="headerlink" href="#equation-0be20269-bfac-481f-9c13-85a448bb8fb6" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8f825b2f-e73c-496f-9fea-bad63bad8de9">
+<span class="eqno">(3)<a class="headerlink" href="#equation-8f825b2f-e73c-496f-9fea-bad63bad8de9" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sum_{i \in Sector_j} x_i = s_j^T x
 \end{equation}\]</div>
 <p>We can then rewrite the sector constraint <span class="math notranslate nohighlight">\(s^-_j \leq \sum_{i \in Sector_j} x_i \leq s_j^+\)</span> as (Roncalli, 2023):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6616c2fa-ff10-4913-91fc-14d8c42eebf0">
-<span class="eqno">(4)<a class="headerlink" href="#equation-6616c2fa-ff10-4913-91fc-14d8c42eebf0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4dea3e1f-f43f-4d94-92e8-391b6a6a051f">
+<span class="eqno">(4)<a class="headerlink" href="#equation-4dea3e1f-f43f-4d94-92e8-391b6a6a051f" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \begin{cases}
   s^-_j \leq s_j^Tx \\
   s_j^Tx \leq s^+_j
 \end{cases}
 \end{equation}\]</div>
 <p>Which we can reorder (such that the thresholds are on the right and the sector weights on the left) as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-84d36720-7d02-4a73-ae63-30893533a3f4">
-<span class="eqno">(5)<a class="headerlink" href="#equation-84d36720-7d02-4a73-ae63-30893533a3f4" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-7730ee72-c69f-4721-902f-d7f8a7bba60c">
+<span class="eqno">(5)<a class="headerlink" href="#equation-7730ee72-c69f-4721-902f-d7f8a7bba60c" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \begin{cases}
   - s_j^Tx \leq - s^-_j \\
   s_j^Tx \leq s^+_j
 \end{cases}
 \end{equation}\]</div>
 <p>These last constraints can the be included into the QP inequality constraint <span class="math notranslate nohighlight">\(Gx \leq h\)</span> as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b8a1996a-c920-4a16-aa4b-ff75f62e4542">
-<span class="eqno">(6)<a class="headerlink" href="#equation-b8a1996a-c920-4a16-aa4b-ff75f62e4542" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4b60d27f-75e0-42c7-b667-95e223aa5e04">
+<span class="eqno">(6)<a class="headerlink" href="#equation-4b60d27f-75e0-42c7-b667-95e223aa5e04" title="Permalink to this equation">#</a></span>\[\begin{equation}
 G = \begin{bmatrix}
 -s_j^T \\
 -s^T_j
@@ -343,8 +350,8 @@ G = \begin{bmatrix}
 \end{equation}\]</div>
 <p>with G is a <span class="math notranslate nohighlight">\(2 \times n\)</span> matrix,
 and:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ffc210ef-c083-4f7c-80c7-440963885e30">
-<span class="eqno">(7)<a class="headerlink" href="#equation-ffc210ef-c083-4f7c-80c7-440963885e30" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-91734c2d-747b-420e-bf3b-9eb1ca1a5e78">
+<span class="eqno">(7)<a class="headerlink" href="#equation-91734c2d-747b-420e-bf3b-9eb1ca1a5e78" title="Permalink to this equation">#</a></span>\[\begin{equation}
 h = \begin{bmatrix}
 -s_j^- \\
 s_j^+
@@ -413,16 +420,16 @@ s_j^+
 </div>
 <p>Let’s assume two sectors: <span class="math notranslate nohighlight">\(Sector_1\)</span> and <span class="math notranslate nohighlight">\(Sector_2\)</span>.
 We have:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f55f3820-1911-4d20-a6f2-a6cc52eaf4ac">
-<span class="eqno">(8)<a class="headerlink" href="#equation-f55f3820-1911-4d20-a6f2-a6cc52eaf4ac" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-7535629c-98e9-4004-9dba-e3d77df888e2">
+<span class="eqno">(8)<a class="headerlink" href="#equation-7535629c-98e9-4004-9dba-e3d77df888e2" title="Permalink to this equation">#</a></span>\[\begin{equation}
 s_1^T = 
  \begin{bmatrix}
 1 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 1 &amp; 0\\
 \end{bmatrix}
 \end{equation}\]</div>
 <p>and:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-316509c7-84a0-4066-be26-92dc71ed6527">
-<span class="eqno">(9)<a class="headerlink" href="#equation-316509c7-84a0-4066-be26-92dc71ed6527" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a8f8ce11-5523-4fdb-8960-aa1e278470db">
+<span class="eqno">(9)<a class="headerlink" href="#equation-a8f8ce11-5523-4fdb-8960-aa1e278470db" title="Permalink to this equation">#</a></span>\[\begin{equation}
 s_2^T = 
  \begin{bmatrix}
 0 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 1\\
@@ -518,35 +525,35 @@ s_2^T =
 <h2>Sector Neutrality<a class="headerlink" href="#sector-neutrality" title="Permalink to this headline">#</a></h2>
 <p>We can also impose tighter constraint regarding the sector deviation with the benchmark, by imposing sector neutrality of the portfolio.</p>
 <p>It means that:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b5c0e1e8-0922-48d4-909a-6eeaa384f188">
-<span class="eqno">(10)<a class="headerlink" href="#equation-b5c0e1e8-0922-48d4-909a-6eeaa384f188" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-aa3bb514-d542-412c-bd51-98dde09fec33">
+<span class="eqno">(10)<a class="headerlink" href="#equation-aa3bb514-d542-412c-bd51-98dde09fec33" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sum_{i \in Sector_j}x_i = \sum_{i \in Sector_j}b_i
 \end{equation}\]</div>
 <p>In the QP problem, this can be included in the <span class="math notranslate nohighlight">\(Ax = b\)</span> equality constraint, with for example for two sectors <span class="math notranslate nohighlight">\(s_1\)</span> and <span class="math notranslate nohighlight">\(s_2\)</span> and 8 stocks:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3e8c1219-7e04-4f6f-b249-30d4090122c0">
-<span class="eqno">(11)<a class="headerlink" href="#equation-3e8c1219-7e04-4f6f-b249-30d4090122c0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-9b5f02e9-f073-4b87-b8d0-d21f1d487716">
+<span class="eqno">(11)<a class="headerlink" href="#equation-9b5f02e9-f073-4b87-b8d0-d21f1d487716" title="Permalink to this equation">#</a></span>\[\begin{equation}
 A_1 = s^T_1 = \begin{bmatrix}
 1 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 1 &amp; 0 
 \end{bmatrix}
 \end{equation}\]</div>
 <p>and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-13c69f1d-4596-491d-acb1-9e9d2396eaa0">
-<span class="eqno">(12)<a class="headerlink" href="#equation-13c69f1d-4596-491d-acb1-9e9d2396eaa0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b8f850ca-3b44-42bd-86ea-1f6c4e9730f1">
+<span class="eqno">(12)<a class="headerlink" href="#equation-b8f850ca-3b44-42bd-86ea-1f6c4e9730f1" title="Permalink to this equation">#</a></span>\[\begin{equation}
 A_2 = s^T_2 = \begin{bmatrix}
 0 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 1
 \end{bmatrix}
 \end{equation}\]</div>
 <p>Then:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9b33b457-acd2-4545-8a64-30fd7fc5e7a1">
-<span class="eqno">(13)<a class="headerlink" href="#equation-9b33b457-acd2-4545-8a64-30fd7fc5e7a1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0b5b0260-2b00-4315-963d-1431c8feea66">
+<span class="eqno">(13)<a class="headerlink" href="#equation-0b5b0260-2b00-4315-963d-1431c8feea66" title="Permalink to this equation">#</a></span>\[\begin{equation}
 A = \begin{bmatrix}
 A_1 \\
 A_2
 \end{bmatrix}
 \end{equation}\]</div>
 <p>And <span class="math notranslate nohighlight">\(b_1 = s_1^Tb\)</span>, <span class="math notranslate nohighlight">\(b_2 = s_2^Tb\)</span> such that:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8e38349c-5690-42d4-84d7-759f46c5e80f">
-<span class="eqno">(14)<a class="headerlink" href="#equation-8e38349c-5690-42d4-84d7-759f46c5e80f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ab898b43-0d59-4287-97c0-3a52028f93a0">
+<span class="eqno">(14)<a class="headerlink" href="#equation-ab898b43-0d59-4287-97c0-3a52028f93a0" title="Permalink to this equation">#</a></span>\[\begin{equation}
 b = \begin{bmatrix}
 b_1 \\
 b_2
@@ -627,6 +634,30 @@ b_2
 </section>
 <section id="your-turn">
 <h2>Your Turn!<a class="headerlink" href="#your-turn" title="Permalink to this headline">#</a></h2>
+<section id="exercise-1">
+<h3>Exercise 1<a class="headerlink" href="#exercise-1" title="Permalink to this headline">#</a></h3>
+<ol class="arabic simple">
+<li><p>Using the data downloaded in the project 1, compute the carbon intensity (emissions / market cap)</p></li>
+<li><p>Retrive the sector for each stock in the data. You can easily obtain it with:</p></li>
+</ol>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">yfinance</span> <span class="k">as</span> <span class="nn">yf</span>
+
+<span class="n">tickerdata</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">Ticker</span><span class="p">(</span><span class="s1">&#39;TSLA&#39;</span><span class="p">)</span> <span class="c1">#the tickersymbol for Tesla</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">tickerdata</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;sector&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Compute an initial capitalization-weighted benchmark weights vector <span class="math notranslate nohighlight">\(b\)</span> using the market capitalization value</p></li>
+<li><p>Implement a low-carbon strategy with the threshold approach and <span class="math notranslate nohighlight">\(\mathfrak{R] = 0.5\)</span></p></li>
+<li><p>Compare the sectors weights in <span class="math notranslate nohighlight">\(b\)</span> and <span class="math notranslate nohighlight">\(x^*\)</span></p></li>
+</ol>
+</section>
+<section id="exercise-2">
+<h3>Exercise 2<a class="headerlink" href="#exercise-2" title="Permalink to this headline">#</a></h3>
+<ol class="arabic simple">
+<li><p>Implement the same low-carbon strategy but with a sector constraint of your choice.</p></li>
+</ol>
+</section>
 </section>
 </section>
 
@@ -639,6 +670,24 @@ b_2
                 <footer class="bd-footer-article">
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="lowcarbonstrategy.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Low-Carbon Strategy</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="lowcarbonbeta.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Enhanced Index with Carbon Beta</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -656,7 +705,11 @@ b_2
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sector-weights-constraint">Sector Weights Constraint</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sector-neutrality">Sector Neutrality</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#your-turn">Your Turn!</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#your-turn">Your Turn!</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

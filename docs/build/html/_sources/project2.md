@@ -370,3 +370,21 @@ array([ 2.33515514e-01,  2.41846019e-01,  1.25623128e-01,  4.43874304e-02,
 ```
 
 ### Your Turn!
+
+#### Exercise 1
+
+1. Using the data downloaded in the project 1, compute the carbon intensity (emissions / market cap)
+2. Retrive the sector for each stock in the data. You can easily obtain it with:
+```Python
+import yfinance as yf
+
+tickerdata = yf.Ticker('TSLA') #the tickersymbol for Tesla
+print (tickerdata.info['sector'])
+```
+3. Compute an initial capitalization-weighted benchmark weights vector $b$ using the market capitalization value
+4. Implement a low-carbon strategy with the threshold approach and $\mathfrak{R] = 0.5$
+5. Compare the sectors weights in $b$ and $x^*$
+
+#### Exercise 2
+
+1. Implement the same low-carbon strategy but with a sector constraint of your choice.
