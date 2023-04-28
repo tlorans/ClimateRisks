@@ -42,11 +42,11 @@
     <script src="_static/doctools.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'project2';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Enhanced Index with Carbon Beta" href="lowcarbonbeta.html" />
-    <link rel="prev" title="Low-Carbon Strategy" href="lowcarbonstrategy.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -124,12 +124,11 @@
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="climaterisks.html">Part 1: Climate Risks Integration Strategies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dealingwithrisk.html">Dealing with Risk(s) in Portfolio Construction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="project1.html">Project 1: Portfolio Optimization in Practice</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lowcarbonstrategy.html">Low-Carbon Strategy</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Project 2: Low-Carbon Strategy in Practice</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lowcarbonbeta.html">Enhanced Index with Carbon Beta</a></li>
 <li class="toctree-l1"><a class="reference internal" href="greenfactor.html">Green Stocks Outperformance: Realized vs. Expected Returns</a></li>
 <li class="toctree-l1"><a class="reference internal" href="netzeroinvesting.html">Part 2: Net Zero Investing</a></li>
@@ -283,9 +282,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-case-for-scope-3-integration">The Case for Scope 3 Integration</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sector-neutrality-constraint">Sector Neutrality Constraint</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reducing-carbon-footprint-at-the-sector-level">Reducing Carbon Footprint at the Sector Level</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sector-weights-constraint">Sector Weights Constraint</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sector-neutrality">Sector Neutrality</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#your-turn">Your Turn!</a></li>
 </ul>
             </nav>
         </div>
@@ -299,14 +298,335 @@ document.write(`
                   
   <section id="project-2-low-carbon-strategy-in-practice">
 <h1>Project 2: Low-Carbon Strategy in Practice<a class="headerlink" href="#project-2-low-carbon-strategy-in-practice" title="Permalink to this headline">#</a></h1>
-<section id="the-case-for-scope-3-integration">
-<h2>The Case for Scope 3 Integration<a class="headerlink" href="#the-case-for-scope-3-integration" title="Permalink to this headline">#</a></h2>
+<p>In our first exposure to low-carbon strategy, no other constraint than the ones related to portfolio decarbonization was imposed. However, in practice, such approach is useless for investors, as the resulting portfolio will be concentrated to few sectors / stocks and thus lack of diversification. In practice, you will then need to add sector constraints in your approach.</p>
+<p>In what follow, we use Roncalli (2023) as a reference.</p>
+<section id="sector-weights-constraint">
+<h2>Sector Weights Constraint<a class="headerlink" href="#sector-weights-constraint" title="Permalink to this headline">#</a></h2>
+<p>In order to overcome the first issue regarding the lack of sector diversification with the low-carbon strategies presented in the previous part, we can extend the framework by considering a sector weight constraint (Roncalli, 2023):</p>
+<div class="amsmath math notranslate nohighlight" id="equation-d4f72aea-76d1-4045-9d88-3c62b7411fa0">
+<span class="eqno">(1)<a class="headerlink" href="#equation-d4f72aea-76d1-4045-9d88-3c62b7411fa0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+s^-_j \leq \sum_{i \in Sector_j} x_i \leq s_j^+
+\end{equation}\]</div>
+<p>With <span class="math notranslate nohighlight">\(s_j\)</span> a <span class="math notranslate nohighlight">\(n \times 1\)</span> vector of sector-mapping (ie. we have here only one sector considered), with elements 0 or 1 if the stock <span class="math notranslate nohighlight">\(n\)</span> belongs to the sector such as:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-e7f535c3-b4eb-40f8-b405-c96f55fbdf58">
+<span class="eqno">(2)<a class="headerlink" href="#equation-e7f535c3-b4eb-40f8-b405-c96f55fbdf58" title="Permalink to this equation">#</a></span>\[\begin{equation}
+s_{i,j} = 𝟙\{i \in Sector_j\}
+\end{equation}\]</div>
+<p>We note that:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-0be20269-bfac-481f-9c13-85a448bb8fb6">
+<span class="eqno">(3)<a class="headerlink" href="#equation-0be20269-bfac-481f-9c13-85a448bb8fb6" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\sum_{i \in Sector_j} x_i = s_j^T x
+\end{equation}\]</div>
+<p>We can then rewrite the sector constraint <span class="math notranslate nohighlight">\(s^-_j \leq \sum_{i \in Sector_j} x_i \leq s_j^+\)</span> as (Roncalli, 2023):</p>
+<div class="amsmath math notranslate nohighlight" id="equation-6616c2fa-ff10-4913-91fc-14d8c42eebf0">
+<span class="eqno">(4)<a class="headerlink" href="#equation-6616c2fa-ff10-4913-91fc-14d8c42eebf0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\begin{cases}
+  s^-_j \leq s_j^Tx \\
+  s_j^Tx \leq s^+_j
+\end{cases}
+\end{equation}\]</div>
+<p>Which we can reorder (such that the thresholds are on the right and the sector weights on the left) as:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-84d36720-7d02-4a73-ae63-30893533a3f4">
+<span class="eqno">(5)<a class="headerlink" href="#equation-84d36720-7d02-4a73-ae63-30893533a3f4" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\begin{cases}
+  - s_j^Tx \leq - s^-_j \\
+  s_j^Tx \leq s^+_j
+\end{cases}
+\end{equation}\]</div>
+<p>These last constraints can the be included into the QP inequality constraint <span class="math notranslate nohighlight">\(Gx \leq h\)</span> as:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-b8a1996a-c920-4a16-aa4b-ff75f62e4542">
+<span class="eqno">(6)<a class="headerlink" href="#equation-b8a1996a-c920-4a16-aa4b-ff75f62e4542" title="Permalink to this equation">#</a></span>\[\begin{equation}
+G = \begin{bmatrix}
+-s_j^T \\
+-s^T_j
+\end{bmatrix}
+\end{equation}\]</div>
+<p>with G is a <span class="math notranslate nohighlight">\(2 \times n\)</span> matrix,
+and:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-ffc210ef-c083-4f7c-80c7-440963885e30">
+<span class="eqno">(7)<a class="headerlink" href="#equation-ffc210ef-c083-4f7c-80c7-440963885e30" title="Permalink to this equation">#</a></span>\[\begin{equation}
+h = \begin{bmatrix}
+-s_j^- \\
+s_j^+
+\end{bmatrix}
+\end{equation}\]</div>
+<p>with h is a <span class="math notranslate nohighlight">\(2 \times 1\)</span> vector.</p>
+<p>You can extend this approach with many sectors.</p>
+<p>Let’s illustrate the concept by implementing an example in Python. First, let’s take the scripts we’ve used before to define a Carbon Portfolio:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="nd">@dataclass</span> 
+<span class="k">class</span> <span class="nc">CarbonPortfolio</span><span class="p">:</span>
+  <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  A class that implement supplementary information CI and new method get_waci,</span>
+<span class="sd">  to be used in the low-carbon strategy implementation.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="c1"># Weights</span>
+  <span class="n">CI</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="c1"># Carbon Intensities</span>
+  <span class="n">Sigma</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span> <span class="c1"># Covariance Matrix</span>
+
+
+  <span class="k">def</span> <span class="nf">get_waci</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">CI</span>
+</pre></div>
+</div>
+<p>Let’s take again the example we used in the previous part:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.23</span><span class="p">,</span>
+              <span class="mf">0.19</span><span class="p">,</span>
+              <span class="mf">0.17</span><span class="p">,</span>
+              <span class="mf">0.13</span><span class="p">,</span>
+              <span class="mf">0.09</span><span class="p">,</span>
+              <span class="mf">0.08</span><span class="p">,</span>
+              <span class="mf">0.06</span><span class="p">,</span>
+              <span class="mf">0.05</span><span class="p">])</span>
+
+<span class="n">CI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">125</span><span class="p">,</span>
+               <span class="mi">75</span><span class="p">,</span>
+               <span class="mi">254</span><span class="p">,</span>
+               <span class="mi">822</span><span class="p">,</span>
+               <span class="mi">109</span><span class="p">,</span>
+               <span class="mi">17</span><span class="p">,</span>
+               <span class="mi">341</span><span class="p">,</span>
+               <span class="mi">741</span><span class="p">])</span>
+
+<span class="n">betas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.30</span><span class="p">,</span>
+                  <span class="mf">1.80</span><span class="p">,</span>
+                  <span class="mf">0.85</span><span class="p">,</span>
+                  <span class="mf">0.83</span><span class="p">,</span>
+                  <span class="mf">1.47</span><span class="p">,</span>
+                  <span class="mf">0.94</span><span class="p">,</span>
+                  <span class="mf">1.67</span><span class="p">,</span>
+                  <span class="mf">1.08</span><span class="p">])</span>
+
+<span class="n">sigmas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.10</span><span class="p">,</span>
+                   <span class="mf">0.05</span><span class="p">,</span>
+                   <span class="mf">0.06</span><span class="p">,</span>
+                   <span class="mf">0.12</span><span class="p">,</span>
+                   <span class="mf">0.15</span><span class="p">,</span>
+                   <span class="mf">0.04</span><span class="p">,</span>
+                   <span class="mf">0.08</span><span class="p">,</span>
+                   <span class="mf">0.07</span><span class="p">])</span>
+
+<span class="n">Sigma</span> <span class="o">=</span> <span class="n">betas</span> <span class="o">@</span> <span class="n">betas</span><span class="o">.</span><span class="n">T</span> <span class="o">*</span> <span class="mf">0.18</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">sigmas</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s assume two sectors: <span class="math notranslate nohighlight">\(Sector_1\)</span> and <span class="math notranslate nohighlight">\(Sector_2\)</span>.
+We have:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-f55f3820-1911-4d20-a6f2-a6cc52eaf4ac">
+<span class="eqno">(8)<a class="headerlink" href="#equation-f55f3820-1911-4d20-a6f2-a6cc52eaf4ac" title="Permalink to this equation">#</a></span>\[\begin{equation}
+s_1^T = 
+ \begin{bmatrix}
+1 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 1 &amp; 0\\
+\end{bmatrix}
+\end{equation}\]</div>
+<p>and:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-316509c7-84a0-4066-be26-92dc71ed6527">
+<span class="eqno">(9)<a class="headerlink" href="#equation-316509c7-84a0-4066-be26-92dc71ed6527" title="Permalink to this equation">#</a></span>\[\begin{equation}
+s_2^T = 
+ \begin{bmatrix}
+0 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 1\\
+\end{bmatrix}
+\end{equation}\]</div>
+<p>We can prepare the sector constraints specification in Python:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">s_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">s_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">s_j</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="o">-</span> <span class="n">s_1</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="o">-</span> <span class="n">s_1</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="o">-</span> <span class="n">s_2</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="o">-</span> <span class="n">s_2</span><span class="o">.</span><span class="n">T</span><span class="p">])</span> <span class="c1"># we stack the sectors vectors</span>
+</pre></div>
+</div>
+<p>To choose sectors weights constraints, let’s first take a look at their relative weights in the initial benchmark:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">s_1</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">b</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">0.5700000000000001</span>
+</pre></div>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">s_2</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">b</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">0.43000000000000005</span>
+</pre></div>
+</div>
+<p>We can choose for example <span class="math notranslate nohighlight">\(s_1^+ = 0.65\)</span>, <span class="math notranslate nohighlight">\(s_1^- = 0.5\)</span> and <span class="math notranslate nohighlight">\(s_2^+ = 0.5\)</span> and <span class="math notranslate nohighlight">\(s_2^- = 0.4\)</span> for example.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">sectors_constraints</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.65</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">])</span> 
+</pre></div>
+</div>
+<p>We can now implement a low-carbon strategy, let’s say with the threshold approach, while controlling for sector weights.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">LowCarbonStrategy</span><span class="p">:</span>
+  <span class="n">b</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="c1"># Benchmark Weights</span>
+  <span class="n">CI</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="c1"># Carbon Intensity</span>
+  <span class="n">Sigma</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span> <span class="c1"># Covariance Matrix</span>
+
+
+  <span class="k">def</span> <span class="nf">get_portfolio</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CarbonPortfolio</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+<span class="kn">from</span> <span class="nn">qpsolvers</span> <span class="kn">import</span> <span class="n">solve_qp</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">ThresholdApproach</span><span class="p">(</span><span class="n">LowCarbonStrategy</span><span class="p">):</span>
+
+  <span class="k">def</span> <span class="nf">get_portfolio</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reduction_rate</span><span class="p">:</span><span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CarbonPortfolio</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;QP Formulation&quot;&quot;&quot;</span>
+    <span class="n">x_optim</span> <span class="o">=</span> <span class="n">solve_qp</span><span class="p">(</span><span class="n">P</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span><span class="p">,</span>
+              <span class="n">q</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">),</span> 
+              <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">))</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> 
+              <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">]),</span>
+              <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">CI</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="c1"># resulting WACI</span>
+              <span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">reduction_rate</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">CI</span><span class="p">,</span> <span class="c1"># reduction</span>
+              <span class="n">lb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)),</span>
+              <span class="n">ub</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)),</span>
+              <span class="n">solver</span> <span class="o">=</span> <span class="s1">&#39;osqp&#39;</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">CarbonPortfolio</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x_optim</span><span class="p">,</span> 
+                        <span class="n">Sigma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span><span class="p">,</span> <span class="n">CI</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">CI</span><span class="p">)</span>
+    
+  <span class="k">def</span> <span class="nf">get_portfolio_with_sector_constraints</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reduction_rate</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">s_j</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="n">sector_constraints</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CarbonPortfolio</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;QP Formulation&quot;&quot;&quot;</span>
+    <span class="n">x_optim</span> <span class="o">=</span> <span class="n">solve_qp</span><span class="p">(</span><span class="n">P</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span><span class="p">,</span>
+              <span class="n">q</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">),</span> 
+              <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">))</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> 
+              <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">]),</span>
+              <span class="n">G</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">CI</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">s_j</span><span class="p">]),</span> <span class="c1"># nested G</span>
+              <span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">reduction_rate</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">CI</span><span class="p">,</span> <span class="n">sector_constraints</span><span class="p">]),</span> <span class="c1"># reduction + sector constraints</span>
+              <span class="n">lb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)),</span>
+              <span class="n">ub</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)),</span>
+              <span class="n">solver</span> <span class="o">=</span> <span class="s1">&#39;osqp&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">CarbonPortfolio</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x_optim</span><span class="p">,</span> 
+                           <span class="n">Sigma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span><span class="p">,</span> <span class="n">CI</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">CI</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">low_carbon_portfolio</span> <span class="o">=</span> <span class="n">ThresholdApproach</span><span class="p">(</span><span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> 
+                                         <span class="n">CI</span> <span class="o">=</span> <span class="n">CI</span><span class="p">,</span>
+                                         <span class="n">Sigma</span> <span class="o">=</span> <span class="n">Sigma</span><span class="p">)</span>
+
+<span class="n">low_carbon_portfolio</span><span class="o">.</span><span class="n">get_portfolio_with_sector_constraints</span><span class="p">(</span><span class="n">reduction_rate</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+                                                           <span class="n">s_j</span> <span class="o">=</span> <span class="n">s_j</span><span class="p">,</span>
+                                                           <span class="n">sector_constraints</span> <span class="o">=</span> <span class="n">sectors_constraints</span><span class="p">)</span><span class="o">.</span><span class="n">x</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">array</span><span class="p">([</span> <span class="mf">2.36352155e-01</span><span class="p">,</span>  <span class="mf">2.53202952e-01</span><span class="p">,</span>  <span class="mf">1.19930045e-01</span><span class="p">,</span>  <span class="mf">4.29437030e-02</span><span class="p">,</span>
+        <span class="mf">9.41669784e-02</span><span class="p">,</span>  <span class="mf">2.47256857e-01</span><span class="p">,</span>  <span class="mf">6.14731882e-03</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.28467006e-08</span><span class="p">])</span>
+</pre></div>
+</div>
 </section>
-<section id="sector-neutrality-constraint">
-<h2>Sector Neutrality Constraint<a class="headerlink" href="#sector-neutrality-constraint" title="Permalink to this headline">#</a></h2>
+<section id="sector-neutrality">
+<h2>Sector Neutrality<a class="headerlink" href="#sector-neutrality" title="Permalink to this headline">#</a></h2>
+<p>We can also impose tighter constraint regarding the sector deviation with the benchmark, by imposing sector neutrality of the portfolio.</p>
+<p>It means that:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-b5c0e1e8-0922-48d4-909a-6eeaa384f188">
+<span class="eqno">(10)<a class="headerlink" href="#equation-b5c0e1e8-0922-48d4-909a-6eeaa384f188" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\sum_{i \in Sector_j}x_i = \sum_{i \in Sector_j}b_i
+\end{equation}\]</div>
+<p>In the QP problem, this can be included in the <span class="math notranslate nohighlight">\(Ax = b\)</span> equality constraint, with for example for two sectors <span class="math notranslate nohighlight">\(s_1\)</span> and <span class="math notranslate nohighlight">\(s_2\)</span> and 8 stocks:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-3e8c1219-7e04-4f6f-b249-30d4090122c0">
+<span class="eqno">(11)<a class="headerlink" href="#equation-3e8c1219-7e04-4f6f-b249-30d4090122c0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+A_1 = s^T_1 = \begin{bmatrix}
+1 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 1 &amp; 0 
+\end{bmatrix}
+\end{equation}\]</div>
+<p>and</p>
+<div class="amsmath math notranslate nohighlight" id="equation-13c69f1d-4596-491d-acb1-9e9d2396eaa0">
+<span class="eqno">(12)<a class="headerlink" href="#equation-13c69f1d-4596-491d-acb1-9e9d2396eaa0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+A_2 = s^T_2 = \begin{bmatrix}
+0 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 1
+\end{bmatrix}
+\end{equation}\]</div>
+<p>Then:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-9b33b457-acd2-4545-8a64-30fd7fc5e7a1">
+<span class="eqno">(13)<a class="headerlink" href="#equation-9b33b457-acd2-4545-8a64-30fd7fc5e7a1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+A = \begin{bmatrix}
+A_1 \\
+A_2
+\end{bmatrix}
+\end{equation}\]</div>
+<p>And <span class="math notranslate nohighlight">\(b_1 = s_1^Tb\)</span>, <span class="math notranslate nohighlight">\(b_2 = s_2^Tb\)</span> such that:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-8e38349c-5690-42d4-84d7-759f46c5e80f">
+<span class="eqno">(14)<a class="headerlink" href="#equation-8e38349c-5690-42d4-84d7-759f46c5e80f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+b = \begin{bmatrix}
+b_1 \\
+b_2
+\end{bmatrix}
+\end{equation}\]</div>
+<p>Again, we can start to implement the constraints specifications in Python:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">A_sectors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">s_1</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">s_2</span><span class="o">.</span><span class="n">T</span><span class="p">])</span>
+
+<span class="n">b_1</span> <span class="o">=</span> <span class="n">s_1</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">b</span>
+<span class="n">b_2</span> <span class="o">=</span> <span class="n">s_2</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">b</span> 
+<span class="n">b_sectors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">b_1</span><span class="p">,</span> <span class="n">b_2</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Then, let’s create a new method integrating the sector neutrality constraint:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qpsolvers</span> <span class="kn">import</span> <span class="n">solve_qp</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">ThresholdApproach</span><span class="p">(</span><span class="n">LowCarbonStrategy</span><span class="p">):</span>
+
+  <span class="k">def</span> <span class="nf">get_portfolio</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reduction_rate</span><span class="p">:</span><span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CarbonPortfolio</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;QP Formulation&quot;&quot;&quot;</span>
+    <span class="n">x_optim</span> <span class="o">=</span> <span class="n">solve_qp</span><span class="p">(</span><span class="n">P</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span><span class="p">,</span>
+              <span class="n">q</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">),</span> 
+              <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">))</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> 
+              <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">]),</span>
+              <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">CI</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="c1"># resulting WACI</span>
+              <span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">reduction_rate</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">CI</span><span class="p">,</span> <span class="c1"># reduction</span>
+              <span class="n">lb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)),</span>
+              <span class="n">ub</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)),</span>
+              <span class="n">solver</span> <span class="o">=</span> <span class="s1">&#39;osqp&#39;</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">CarbonPortfolio</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x_optim</span><span class="p">,</span> 
+                        <span class="n">Sigma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span><span class="p">,</span> <span class="n">CI</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">CI</span><span class="p">)</span>
+    
+  <span class="k">def</span> <span class="nf">get_portfolio_with_sector_constraints</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reduction_rate</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">s_j</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="n">sector_constraints</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CarbonPortfolio</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;QP Formulation&quot;&quot;&quot;</span>
+    <span class="n">x_optim</span> <span class="o">=</span> <span class="n">solve_qp</span><span class="p">(</span><span class="n">P</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span><span class="p">,</span>
+              <span class="n">q</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">),</span> 
+              <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">))</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> 
+              <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">]),</span>
+              <span class="n">G</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">CI</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">s_j</span><span class="p">]),</span> <span class="c1"># nested G</span>
+              <span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">reduction_rate</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">CI</span><span class="p">,</span> <span class="n">sector_constraints</span><span class="p">]),</span> <span class="c1"># reduction + sector constraints</span>
+              <span class="n">lb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)),</span>
+              <span class="n">ub</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)),</span>
+              <span class="n">solver</span> <span class="o">=</span> <span class="s1">&#39;osqp&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">CarbonPortfolio</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x_optim</span><span class="p">,</span> 
+                           <span class="n">Sigma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span><span class="p">,</span> <span class="n">CI</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">CI</span><span class="p">)</span>
+    
+  <span class="k">def</span> <span class="nf">get_portfolio_with_sector_neutrality</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reduction_rate</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">A_sectors</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="n">b_sectors</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">):</span>
+      <span class="n">x_optim</span> <span class="o">=</span> <span class="n">solve_qp</span><span class="p">(</span><span class="n">P</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span><span class="p">,</span>
+            <span class="n">q</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">),</span> 
+            <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">))</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">A_sectors</span><span class="p">]),</span> 
+            <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="n">b_sectors</span><span class="p">]),</span>
+            <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">CI</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> 
+            <span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">reduction_rate</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">CI</span><span class="p">,</span> <span class="c1"># reduction rate</span>
+            <span class="n">lb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)),</span>
+            <span class="n">ub</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)),</span>
+            <span class="n">solver</span> <span class="o">=</span> <span class="s1">&#39;osqp&#39;</span><span class="p">)</span>
+      
+      <span class="k">return</span> <span class="n">CarbonPortfolio</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x_optim</span><span class="p">,</span> 
+                           <span class="n">Sigma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span><span class="p">,</span> <span class="n">CI</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">CI</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">low_carbon_portfolio</span> <span class="o">=</span> <span class="n">ThresholdApproach</span><span class="p">(</span><span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> 
+                                         <span class="n">CI</span> <span class="o">=</span> <span class="n">CI</span><span class="p">,</span>
+                                         <span class="n">Sigma</span> <span class="o">=</span> <span class="n">Sigma</span><span class="p">)</span>
+
+<span class="n">low_carbon_portfolio</span><span class="o">.</span><span class="n">get_portfolio_with_sector_neutrality</span><span class="p">(</span><span class="n">reduction_rate</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+                                                           <span class="n">A_sectors</span> <span class="o">=</span> <span class="n">A_sectors</span><span class="p">,</span>
+                                                           <span class="n">b_sectors</span> <span class="o">=</span> <span class="n">b_sectors</span><span class="p">)</span><span class="o">.</span><span class="n">x</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">array</span><span class="p">([</span> <span class="mf">2.33515514e-01</span><span class="p">,</span>  <span class="mf">2.41846019e-01</span><span class="p">,</span>  <span class="mf">1.25623128e-01</span><span class="p">,</span>  <span class="mf">4.43874304e-02</span><span class="p">,</span>
+        <span class="mf">9.29058752e-02</span><span class="p">,</span>  <span class="mf">2.59989434e-01</span><span class="p">,</span>  <span class="mf">1.73260956e-03</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.53326324e-09</span><span class="p">])</span>
+</pre></div>
+</div>
 </section>
-<section id="reducing-carbon-footprint-at-the-sector-level">
-<h2>Reducing Carbon Footprint at the Sector Level<a class="headerlink" href="#reducing-carbon-footprint-at-the-sector-level" title="Permalink to this headline">#</a></h2>
+<section id="your-turn">
+<h2>Your Turn!<a class="headerlink" href="#your-turn" title="Permalink to this headline">#</a></h2>
 </section>
 </section>
 
@@ -319,24 +639,6 @@ document.write(`
                 <footer class="bd-footer-article">
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="lowcarbonstrategy.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Low-Carbon Strategy</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="lowcarbonbeta.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Enhanced Index with Carbon Beta</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
@@ -352,9 +654,9 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-case-for-scope-3-integration">The Case for Scope 3 Integration</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sector-neutrality-constraint">Sector Neutrality Constraint</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reducing-carbon-footprint-at-the-sector-level">Reducing Carbon Footprint at the Sector Level</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sector-weights-constraint">Sector Weights Constraint</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sector-neutrality">Sector Neutrality</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#your-turn">Your Turn!</a></li>
 </ul>
   </nav></div>
 
