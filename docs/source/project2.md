@@ -382,7 +382,7 @@ tickerdata = yf.Ticker('TSLA') #the tickersymbol for Tesla
 print (tickerdata.info['sector'])
 ```
 3. Compute an initial capitalization-weighted benchmark weights vector $b$ using the market capitalization value
-4. Implement a low-carbon strategy with the threshold approach and $\mathfrak{R] = 0.5$
+4. Implement a low-carbon strategy with the threshold approach and $\mathfrak{R} = 0.5$
 5. Compare the sectors weights in $b$ and $x^*$
 
 #### Exercise 2

@@ -310,39 +310,39 @@ document.write(`
 <section id="sector-weights-constraint">
 <h2>Sector Weights Constraint<a class="headerlink" href="#sector-weights-constraint" title="Permalink to this headline">#</a></h2>
 <p>In order to overcome the first issue regarding the lack of sector diversification with the low-carbon strategies presented in the previous part, we can extend the framework by considering a sector weight constraint (Roncalli, 2023):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a047791a-4ea9-42c5-9233-39dd11f943a0">
-<span class="eqno">(1)<a class="headerlink" href="#equation-a047791a-4ea9-42c5-9233-39dd11f943a0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-03b6922f-d30d-4243-95d7-617e840cec31">
+<span class="eqno">(1)<a class="headerlink" href="#equation-03b6922f-d30d-4243-95d7-617e840cec31" title="Permalink to this equation">#</a></span>\[\begin{equation}
 s^-_j \leq \sum_{i \in Sector_j} x_i \leq s_j^+
 \end{equation}\]</div>
 <p>With <span class="math notranslate nohighlight">\(s_j\)</span> a <span class="math notranslate nohighlight">\(n \times 1\)</span> vector of sector-mapping (ie. we have here only one sector considered), with elements 0 or 1 if the stock <span class="math notranslate nohighlight">\(n\)</span> belongs to the sector such as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4e095e9c-c013-4284-84a3-613c69c0bde7">
-<span class="eqno">(2)<a class="headerlink" href="#equation-4e095e9c-c013-4284-84a3-613c69c0bde7" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-fb9ef7b7-3710-4d05-8b24-e2165591aa87">
+<span class="eqno">(2)<a class="headerlink" href="#equation-fb9ef7b7-3710-4d05-8b24-e2165591aa87" title="Permalink to this equation">#</a></span>\[\begin{equation}
 s_{i,j} = 𝟙\{i \in Sector_j\}
 \end{equation}\]</div>
 <p>We note that:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8f825b2f-e73c-496f-9fea-bad63bad8de9">
-<span class="eqno">(3)<a class="headerlink" href="#equation-8f825b2f-e73c-496f-9fea-bad63bad8de9" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-5e9a8c9d-ee23-4856-815c-d7f8fb5b9d9d">
+<span class="eqno">(3)<a class="headerlink" href="#equation-5e9a8c9d-ee23-4856-815c-d7f8fb5b9d9d" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sum_{i \in Sector_j} x_i = s_j^T x
 \end{equation}\]</div>
 <p>We can then rewrite the sector constraint <span class="math notranslate nohighlight">\(s^-_j \leq \sum_{i \in Sector_j} x_i \leq s_j^+\)</span> as (Roncalli, 2023):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4dea3e1f-f43f-4d94-92e8-391b6a6a051f">
-<span class="eqno">(4)<a class="headerlink" href="#equation-4dea3e1f-f43f-4d94-92e8-391b6a6a051f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f683a40c-3e01-4d30-a525-fea51528861c">
+<span class="eqno">(4)<a class="headerlink" href="#equation-f683a40c-3e01-4d30-a525-fea51528861c" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \begin{cases}
   s^-_j \leq s_j^Tx \\
   s_j^Tx \leq s^+_j
 \end{cases}
 \end{equation}\]</div>
 <p>Which we can reorder (such that the thresholds are on the right and the sector weights on the left) as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7730ee72-c69f-4721-902f-d7f8a7bba60c">
-<span class="eqno">(5)<a class="headerlink" href="#equation-7730ee72-c69f-4721-902f-d7f8a7bba60c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-bc6b0fda-723f-400f-ab7a-d6bcb2db469f">
+<span class="eqno">(5)<a class="headerlink" href="#equation-bc6b0fda-723f-400f-ab7a-d6bcb2db469f" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \begin{cases}
   - s_j^Tx \leq - s^-_j \\
   s_j^Tx \leq s^+_j
 \end{cases}
 \end{equation}\]</div>
 <p>These last constraints can the be included into the QP inequality constraint <span class="math notranslate nohighlight">\(Gx \leq h\)</span> as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4b60d27f-75e0-42c7-b667-95e223aa5e04">
-<span class="eqno">(6)<a class="headerlink" href="#equation-4b60d27f-75e0-42c7-b667-95e223aa5e04" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-598b93be-2e00-463d-9d36-89f8372e0364">
+<span class="eqno">(6)<a class="headerlink" href="#equation-598b93be-2e00-463d-9d36-89f8372e0364" title="Permalink to this equation">#</a></span>\[\begin{equation}
 G = \begin{bmatrix}
 -s_j^T \\
 -s^T_j
@@ -350,8 +350,8 @@ G = \begin{bmatrix}
 \end{equation}\]</div>
 <p>with G is a <span class="math notranslate nohighlight">\(2 \times n\)</span> matrix,
 and:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-91734c2d-747b-420e-bf3b-9eb1ca1a5e78">
-<span class="eqno">(7)<a class="headerlink" href="#equation-91734c2d-747b-420e-bf3b-9eb1ca1a5e78" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-02604b7c-7e2c-4bc9-b6b8-ec4972843ec6">
+<span class="eqno">(7)<a class="headerlink" href="#equation-02604b7c-7e2c-4bc9-b6b8-ec4972843ec6" title="Permalink to this equation">#</a></span>\[\begin{equation}
 h = \begin{bmatrix}
 -s_j^- \\
 s_j^+
@@ -420,16 +420,16 @@ s_j^+
 </div>
 <p>Let’s assume two sectors: <span class="math notranslate nohighlight">\(Sector_1\)</span> and <span class="math notranslate nohighlight">\(Sector_2\)</span>.
 We have:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7535629c-98e9-4004-9dba-e3d77df888e2">
-<span class="eqno">(8)<a class="headerlink" href="#equation-7535629c-98e9-4004-9dba-e3d77df888e2" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-031665f7-9ec5-446c-8bf1-f75f58eafead">
+<span class="eqno">(8)<a class="headerlink" href="#equation-031665f7-9ec5-446c-8bf1-f75f58eafead" title="Permalink to this equation">#</a></span>\[\begin{equation}
 s_1^T = 
  \begin{bmatrix}
 1 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 1 &amp; 0\\
 \end{bmatrix}
 \end{equation}\]</div>
 <p>and:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a8f8ce11-5523-4fdb-8960-aa1e278470db">
-<span class="eqno">(9)<a class="headerlink" href="#equation-a8f8ce11-5523-4fdb-8960-aa1e278470db" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-bc008714-f836-4c43-868e-669fb15aa066">
+<span class="eqno">(9)<a class="headerlink" href="#equation-bc008714-f836-4c43-868e-669fb15aa066" title="Permalink to this equation">#</a></span>\[\begin{equation}
 s_2^T = 
  \begin{bmatrix}
 0 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 1\\
@@ -525,35 +525,35 @@ s_2^T =
 <h2>Sector Neutrality<a class="headerlink" href="#sector-neutrality" title="Permalink to this headline">#</a></h2>
 <p>We can also impose tighter constraint regarding the sector deviation with the benchmark, by imposing sector neutrality of the portfolio.</p>
 <p>It means that:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-aa3bb514-d542-412c-bd51-98dde09fec33">
-<span class="eqno">(10)<a class="headerlink" href="#equation-aa3bb514-d542-412c-bd51-98dde09fec33" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e0043329-0711-4177-8b0e-85a0b9ca292c">
+<span class="eqno">(10)<a class="headerlink" href="#equation-e0043329-0711-4177-8b0e-85a0b9ca292c" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sum_{i \in Sector_j}x_i = \sum_{i \in Sector_j}b_i
 \end{equation}\]</div>
 <p>In the QP problem, this can be included in the <span class="math notranslate nohighlight">\(Ax = b\)</span> equality constraint, with for example for two sectors <span class="math notranslate nohighlight">\(s_1\)</span> and <span class="math notranslate nohighlight">\(s_2\)</span> and 8 stocks:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9b5f02e9-f073-4b87-b8d0-d21f1d487716">
-<span class="eqno">(11)<a class="headerlink" href="#equation-9b5f02e9-f073-4b87-b8d0-d21f1d487716" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-18bd4aac-8862-4f7a-acea-e29e6eb4b72b">
+<span class="eqno">(11)<a class="headerlink" href="#equation-18bd4aac-8862-4f7a-acea-e29e6eb4b72b" title="Permalink to this equation">#</a></span>\[\begin{equation}
 A_1 = s^T_1 = \begin{bmatrix}
 1 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 1 &amp; 0 
 \end{bmatrix}
 \end{equation}\]</div>
 <p>and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b8f850ca-3b44-42bd-86ea-1f6c4e9730f1">
-<span class="eqno">(12)<a class="headerlink" href="#equation-b8f850ca-3b44-42bd-86ea-1f6c4e9730f1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f24bf4cc-984f-4784-a59e-4f50d8a47245">
+<span class="eqno">(12)<a class="headerlink" href="#equation-f24bf4cc-984f-4784-a59e-4f50d8a47245" title="Permalink to this equation">#</a></span>\[\begin{equation}
 A_2 = s^T_2 = \begin{bmatrix}
 0 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 1
 \end{bmatrix}
 \end{equation}\]</div>
 <p>Then:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0b5b0260-2b00-4315-963d-1431c8feea66">
-<span class="eqno">(13)<a class="headerlink" href="#equation-0b5b0260-2b00-4315-963d-1431c8feea66" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-31fe114e-5e28-45e9-b701-bce98f51adbb">
+<span class="eqno">(13)<a class="headerlink" href="#equation-31fe114e-5e28-45e9-b701-bce98f51adbb" title="Permalink to this equation">#</a></span>\[\begin{equation}
 A = \begin{bmatrix}
 A_1 \\
 A_2
 \end{bmatrix}
 \end{equation}\]</div>
 <p>And <span class="math notranslate nohighlight">\(b_1 = s_1^Tb\)</span>, <span class="math notranslate nohighlight">\(b_2 = s_2^Tb\)</span> such that:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ab898b43-0d59-4287-97c0-3a52028f93a0">
-<span class="eqno">(14)<a class="headerlink" href="#equation-ab898b43-0d59-4287-97c0-3a52028f93a0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-1929f53c-afe3-4332-8c3a-3fa7cb0ae7c4">
+<span class="eqno">(14)<a class="headerlink" href="#equation-1929f53c-afe3-4332-8c3a-3fa7cb0ae7c4" title="Permalink to this equation">#</a></span>\[\begin{equation}
 b = \begin{bmatrix}
 b_1 \\
 b_2
@@ -648,14 +648,14 @@ b_2
 </div>
 <ol class="arabic simple" start="3">
 <li><p>Compute an initial capitalization-weighted benchmark weights vector <span class="math notranslate nohighlight">\(b\)</span> using the market capitalization value</p></li>
-<li><p>Implement a low-carbon strategy with the threshold approach and <span class="math notranslate nohighlight">\(\mathfrak{R] = 0.5\)</span></p></li>
+<li><p>Implement a low-carbon strategy with the threshold approach and <span class="math notranslate nohighlight">\(\mathfrak{R} = 0.5\)</span></p></li>
 <li><p>Compare the sectors weights in <span class="math notranslate nohighlight">\(b\)</span> and <span class="math notranslate nohighlight">\(x^*\)</span></p></li>
 </ol>
 </section>
 <section id="exercise-2">
 <h3>Exercise 2<a class="headerlink" href="#exercise-2" title="Permalink to this headline">#</a></h3>
 <ol class="arabic simple">
-<li><p>Implement the same low-carbon strategy but with a sector constraint of your choice.</p></li>
+<li><p>Implement the same low-carbon strategy but with a sector constraint of your choice. Did you find a solution? Compare the TE between this constrained solution and the one without sector constraints.</p></li>
 </ol>
 </section>
 </section>
