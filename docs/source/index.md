@@ -10,7 +10,7 @@
 This course is under heavy development
 ```
 
-In this course, I propose an overview climate investing, from the climate risks integration strategies to net zero investing, based on Thierry Roncalli's (2023) {cite:p}`2023:Roncalli` course and publications. Snippets of Python codes accompany this course. Please follow along and try to implement those codes on your side.
+In this course, I propose an overview of climate investing, from the climate risks integration strategies to net zero investing, based on Thierry Roncalli's (2023) {cite:p}`2023:Roncalli` course and publications. Snippets of Python codes accompany this course. Please follow along and try to implement those codes on your side.
 
 This quick overview is by no mean exhaustive, and is calibrated as an introductory course (one-week duration).
 
