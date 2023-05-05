@@ -27,17 +27,9 @@ Projects are calibrated for a short time-period (around 1 hour) and to illustrat
 :caption: 'Contents:'
 :maxdepth: 2
 
-climaterisks
-dealingwithrisk
-project1
 lowcarbonstrategy
 project2
-lowcarbonbeta
-greenfactor
 netzeroinvesting
-decarbonizationpathways
-dynamicdecarbonization
 project3
-integratingtransition
 references
 ```
