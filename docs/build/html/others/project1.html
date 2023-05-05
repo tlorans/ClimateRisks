@@ -1,0 +1,680 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Project 1: Portfolio Optimization in Practice &#8212; Climate Risks in Finance 0.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'others/project1';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Climate Risks in Finance 0.1 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../climaterisks.html">Climate Risks Integration Strategies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../project1.html">Project 1: Low-Carbon Strategy in Practice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../netzeroinvesting.html">Net Zero Investing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../project2.html">Project 1: Low-Carbon Strategy in Practice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/others/project1.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Project 1: Portfolio Optimization in Practice</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#covariance-matrix-and-optimized-portfolio-stability-issue">Covariance Matrix and Optimized Portfolio Stability Issue</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shrinkage-methods-the-ledoit-wolf-approach">Shrinkage Methods: the Ledoit-Wolf Approach</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-the-shrinkage-target">Finding the Shrinkage Target</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-the-shrinkage-intensity">Finding the Shrinkage Intensity</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#your-turn">Your Turn!</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="project-1-portfolio-optimization-in-practice">
+<h1>Project 1: Portfolio Optimization in Practice<a class="headerlink" href="#project-1-portfolio-optimization-in-practice" title="Permalink to this headline">#</a></h1>
+<p>In order to implement the Markowitz approach, the estimation of the covariance matrix of stock returns is required. The standard statistical approach is to retrieve the history of past stock returns and compute the sample covariance matrix <span class="math notranslate nohighlight">\(\hat{\Sigma}\)</span>.</p>
+<p>The sample covariance matrix can be computed as (Roncalli, 2013):</p>
+<div class="amsmath math notranslate nohighlight" id="equation-af6aa9d5-43b1-4793-b5ad-1ac98ceefc1c">
+<span class="eqno">(1)<a class="headerlink" href="#equation-af6aa9d5-43b1-4793-b5ad-1ac98ceefc1c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\hat{\Sigma} = \frac{1}{T}\sum^T_{t=1}(R_t - \bar{R})(R_t - \bar{R})^T
+\end{equation}\]</div>
+<p>However, the sample covariance matrix is estimated with a lot of errors when the number of stocks <span class="math notranslate nohighlight">\(n\)</span> is larger than the historical return observations <span class="math notranslate nohighlight">\(T\)</span> (the condition <span class="math notranslate nohighlight">\(T &gt;&gt; n\)</span> is not verified). Using the sample covariance matrix as an input of the Markowitz framework can lead to a lack of robustness for the resulting portfolio.</p>
+<p>To overcome this issue, shrinkage methods of the covariance matrix are used in practice, in order to obtain a more reliable estimate of the covariance matrix to be used in the mean-variance framework. We will see how to apply the Ledoit-Wolf (2003b) <span id="id1">[<a class="reference internal" href="../references.html#id24" title="Olivier Ledoit and Michael Wolf. Honey, i shrunk the sample covariance matrix. UPF economics and business working paper, 2003.">LW03a</a>]</span> approach.</p>
+<p>For more details about practices of portfolio optimization, please refer to Roncalli (2013) and the part two of these <a class="reference external" href="http://www.thierry-roncalli.com/download/AM-Lecture1.pdf">slides</a>.</p>
+<section id="covariance-matrix-and-optimized-portfolio-stability-issue">
+<h2>Covariance Matrix and Optimized Portfolio Stability Issue<a class="headerlink" href="#covariance-matrix-and-optimized-portfolio-stability-issue" title="Permalink to this headline">#</a></h2>
+<p>We can illustate the stability issue resulting from the covariance matrix errors with an example from Roncalli (2013). We will generate two covariance matrices with different correlation (we assume the cross-correlation is equal to 0.8 in the first example, to 0.9 in the second example):</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.08</span><span class="p">,</span> <span class="mf">0.08</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">])</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.21</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">])</span>
+<span class="n">rho_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">],</span>
+               <span class="p">[</span><span class="mf">0.8</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.8</span> <span class="p">],</span>
+               <span class="p">[</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]])</span>
+<span class="n">Sigma_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span> <span class="o">@</span> <span class="n">rho_A</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span>
+<span class="n">rho_B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">],</span>
+               <span class="p">[</span><span class="mf">0.9</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.9</span> <span class="p">],</span>
+               <span class="p">[</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]])</span>
+<span class="n">Sigma_B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span> <span class="o">@</span> <span class="n">rho_B</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s now use the code for portfolio construction as before:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span> 
+
+<span class="nd">@dataclass</span> 
+<span class="k">class</span> <span class="nc">Portfolio</span><span class="p">:</span>
+  <span class="sd">&quot;&quot;&quot;A simple dataclass storing the basics information of a porfolio and </span>
+<span class="sd">  implementing the methods for the two moments computation.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="c1"># Weights</span>
+  <span class="n">mu</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="c1"># Expected Returns</span>
+  <span class="n">Sigma</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span> <span class="c1"># Covariance Matrix</span>
+
+  <span class="k">def</span> <span class="nf">get_expected_returns</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">mu</span>
+
+  <span class="k">def</span> <span class="nf">get_variance</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span>
+
+
+<span class="kn">from</span> <span class="nn">qpsolvers</span> <span class="kn">import</span> <span class="n">solve_qp</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">MeanVariance</span><span class="p">:</span>
+
+  <span class="n">mu</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="c1"># Expected Returns</span>
+  <span class="n">Sigma</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span> <span class="c1"># Covariance Matrix</span>
+  
+  <span class="k">def</span> <span class="nf">get_portfolio</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gamma</span><span class="p">:</span><span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Portfolio</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;QP Formulation&quot;&quot;&quot;</span>
+
+    <span class="n">x_optim</span> <span class="o">=</span> <span class="n">solve_qp</span><span class="p">(</span><span class="n">P</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span><span class="p">,</span>
+              <span class="n">q</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">gamma</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="p">),</span>
+              <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="p">))</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="c1"># fully invested</span>
+              <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">]),</span> <span class="c1"># fully invested</span>
+              <span class="n">lb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="p">)),</span> <span class="c1"># long-only position</span>
+              <span class="n">ub</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="p">)),</span> <span class="c1"># long-only position</span>
+              <span class="n">solver</span> <span class="o">=</span> <span class="s1">&#39;osqp&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">Portfolio</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x_optim</span><span class="p">,</span> <span class="n">mu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="p">,</span> <span class="n">Sigma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span><span class="p">)</span>
+
+<span class="n">portfolio_A</span> <span class="o">=</span> <span class="n">MeanVariance</span><span class="p">(</span><span class="n">mu</span> <span class="o">=</span> <span class="n">mu</span><span class="p">,</span> <span class="n">Sigma</span> <span class="o">=</span> <span class="n">Sigma_A</span><span class="p">)</span>
+<span class="n">weights_A</span> <span class="o">=</span> <span class="n">portfolio_A</span><span class="o">.</span><span class="n">get_portfolio</span><span class="p">(</span><span class="n">gamma</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">x</span>
+
+<span class="n">portfolio_B</span> <span class="o">=</span> <span class="n">MeanVariance</span><span class="p">(</span><span class="n">mu</span> <span class="o">=</span> <span class="n">mu</span><span class="p">,</span> <span class="n">Sigma</span> <span class="o">=</span> <span class="n">Sigma_B</span><span class="p">)</span>
+<span class="n">weights_B</span> <span class="o">=</span> <span class="n">portfolio_B</span><span class="o">.</span><span class="n">get_portfolio</span><span class="p">(</span><span class="n">gamma</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">x</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">width</span> <span class="o">=</span> <span class="mf">0.4</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">weights_A</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">weights_B</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="s2">&quot;B&quot;</span><span class="p">,</span><span class="s2">&quot;C&quot;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;$x^*$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s2">&quot;Sigma A&quot;</span><span class="p">,</span> <span class="s2">&quot;Sigma B&quot;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<figure class="align-default" id="impactcovmatrix">
+<img alt="others/impactcovmatrix.png" src="others/impactcovmatrix.png" />
+<figcaption>
+<p><span class="caption-text">Figure: Optimum weights with <span class="math notranslate nohighlight">\(\rho = 0.8\)</span> vs. <span class="math notranslate nohighlight">\(\rho = 0.9\)</span></span><a class="headerlink" href="#impactcovmatrix" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>We see that a slight difference in terms of cross-correlation leads to significantly different covariance matrices, and then to really different optimal weights!</p>
+</section>
+<section id="shrinkage-methods-the-ledoit-wolf-approach">
+<h2>Shrinkage Methods: the Ledoit-Wolf Approach<a class="headerlink" href="#shrinkage-methods-the-ledoit-wolf-approach" title="Permalink to this headline">#</a></h2>
+<p>In order to overcome unreliable sample covariance, shrinkage methods are used in practice for a better estimate of the covariance matrix.
+Shrinkage methods approaches modify the sample covariance matrix <span class="math notranslate nohighlight">\(\hat{\Sigma}\)</span> by a new estimate <span class="math notranslate nohighlight">\(\tilde{\Sigma}\)</span> in order to take into account uncertainties. <span class="math notranslate nohighlight">\(\tilde{\Sigma}\)</span> generally takes the form of a weighted sum of <span class="math notranslate nohighlight">\(\hat{\Sigma}\)</span> and a correction term.</p>
+<p>The Ledoit-Wolf approach (2003a) <span id="id2">[<a class="reference internal" href="../references.html#id25" title="Olivier Ledoit and Michael Wolf. Improved estimation of the covariance matrix of stock returns with an application to portfolio selection. Journal of empirical finance, 10(5):603–621, 2003.">LW03b</a>]</span> proposes to combine two estimators for the covariance matrix: <span class="math notranslate nohighlight">\(\hat{\Sigma}\)</span> and <span class="math notranslate nohighlight">\(\hat{\Phi}\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(\hat{\Sigma}\)</span>, the sample covariance matrix is known to be unbiased but includes a lot of estimations errors where the number of observations periods is not significantly higher than the number of assets.</p>
+<p><span class="math notranslate nohighlight">\(\hat{\Phi}\)</span>, a structured estimator  (shrinkage target) converges quickly but is a biased estimator. Ledoit and Wolf  proposed to use either the single-factor matrix of Sharpe (2003a) or the constant correlation model (2003b) as the shrinkage target. Thereafter, we will use the second one.</p>
+<p>The Ledoit-Wolf approach combines both estimators to obtain a more efficient one, such as:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-fcfd4eee-4ec5-4ebe-9cda-103721aa997e">
+<span class="eqno">(2)<a class="headerlink" href="#equation-fcfd4eee-4ec5-4ebe-9cda-103721aa997e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\tilde{\Sigma}_{\delta} = \delta \hat{\Phi} + (1 - \delta) \hat{\Sigma}
+\end{equation}\]</div>
+<p>With <span class="math notranslate nohighlight">\(\delta\)</span> the shrinkage intensity, between 0 and 1.</p>
+<p>The method involves two stages:</p>
+<ul class="simple">
+<li><p>determining the shrinkage target <span class="math notranslate nohighlight">\(\hat{\Phi}\)</span></p></li>
+<li><p>determining the shrinkage intensity <span class="math notranslate nohighlight">\(\delta\)</span></p></li>
+</ul>
+<section id="finding-the-shrinkage-target">
+<h3>Finding the Shrinkage Target<a class="headerlink" href="#finding-the-shrinkage-target" title="Permalink to this headline">#</a></h3>
+<p>As a first stage, we need to find the shrinkage target <span class="math notranslate nohighlight">\(\hat{\Phi}\)</span>. As we follow Ledoit and Wolf (2003b), <span class="math notranslate nohighlight">\(\hat{\Phi}\)</span> is the empirical covariance matrix with a constant correlation <span class="math notranslate nohighlight">\(\bar{\rho}\)</span>, with:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-d1868c0a-6633-4239-9859-6276bf205f0b">
+<span class="eqno">(3)<a class="headerlink" href="#equation-d1868c0a-6633-4239-9859-6276bf205f0b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\hat{\Phi}_{i,i} = \hat{\Sigma}_{i,i} 
+\end{equation}\]</div>
+<p>and</p>
+<div class="amsmath math notranslate nohighlight" id="equation-3b500ee3-9c8f-44b9-bd33-5e012bd76757">
+<span class="eqno">(4)<a class="headerlink" href="#equation-3b500ee3-9c8f-44b9-bd33-5e012bd76757" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\hat{\Phi}_{i,j} = \bar{\rho} \sqrt{\hat{\Sigma}_{i,i} \hat{\Sigma}_{j,j}} 
+\end{equation}\]</div>
+<p>We then need to determine <span class="math notranslate nohighlight">\(\bar{\rho}\)</span> the constant correlation.</p>
+<p>We have:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-49dfd333-be3f-4650-abc4-a014e9449b66">
+<span class="eqno">(5)<a class="headerlink" href="#equation-49dfd333-be3f-4650-abc4-a014e9449b66" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\bar{\rho} = \frac{2}{(N-1)N}\sum^{n-1}_{i=1} \sum^n_{j=i+1} \frac{\hat{\Sigma}_{i,j}}{\sqrt{\hat{\Sigma}_{i,i}\hat{\Sigma}_{jj}}}
+\end{equation}\]</div>
+<p>Let’s implement these firsts elements in Python. The code below is directly inspired from <a class="reference external" href="https://github.com/WLM1ke/LedoitWolf">here</a>. Special thanks to its author.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span> 
+
+<span class="nd">@dataclass</span> 
+<span class="k">class</span> <span class="nc">LedoitWolf</span><span class="p">:</span>
+  <span class="n">R</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="c1"># returns of t observation of n stocks</span>
+
+  <span class="k">def</span> <span class="nf">get_shrinkage</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
+    <span class="c1"># sample covariance</span>
+    <span class="n">t</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">R</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">R_bar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">R</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">keepdims</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">Sigma_hat</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">R</span> <span class="o">-</span> <span class="n">R_bar</span><span class="p">)</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">R</span> <span class="o">-</span> <span class="n">R_bar</span><span class="p">)</span> <span class="o">/</span> <span class="n">t</span>
+
+    <span class="c1"># rho_bar</span>
+    <span class="n">var</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">Sigma_hat</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">sqrt_var</span> <span class="o">=</span> <span class="n">var</span> <span class="o">**</span> <span class="mf">0.5</span> 
+    <span class="n">unit_cor_var</span> <span class="o">=</span> <span class="n">sqrt_var</span> <span class="o">@</span> <span class="n">sqrt_var</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">rho_bar</span> <span class="o">=</span> <span class="p">((</span><span class="n">Sigma_hat</span> <span class="o">/</span> <span class="n">unit_cor_var</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">-</span> <span class="n">n</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="c1"># shrinkage target </span>
+    <span class="n">shrinkage_target</span> <span class="o">=</span> <span class="n">rho_bar</span> <span class="o">*</span> <span class="n">unit_cor_var</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">shrinkage_target</span><span class="p">,</span> <span class="n">var</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">rho_bar</span><span class="p">,</span> <span class="n">shrinkage_target</span>
+</pre></div>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">R_example</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.0309</span><span class="p">,</span> <span class="mf">0.0056</span><span class="p">,</span> <span class="mf">0.0011</span><span class="p">],</span>
+     <span class="p">[</span><span class="mf">0.0056</span><span class="p">,</span> <span class="mf">0.0739</span><span class="p">,</span> <span class="mf">0.0148</span><span class="p">],</span> 
+     <span class="p">[</span><span class="mf">0.0011</span><span class="p">,</span> <span class="mf">0.0148</span><span class="p">,</span> <span class="mf">0.0489</span><span class="p">]])</span>
+
+<span class="n">test</span> <span class="o">=</span> <span class="n">LedoitWolf</span><span class="p">(</span><span class="n">R</span> <span class="o">=</span> <span class="n">R_example</span><span class="p">)</span>
+<span class="n">test</span><span class="o">.</span><span class="n">get_shrinkage</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">-</span><span class="mf">0.4713495148122541</span><span class="p">,</span>
+ <span class="n">array</span><span class="p">([[</span> <span class="mf">0.00017204</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0001871</span> <span class="p">,</span> <span class="o">-</span><span class="mf">0.00012425</span><span class="p">],</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">0.0001871</span> <span class="p">,</span>  <span class="mf">0.00091582</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.00028668</span><span class="p">],</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">0.00012425</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.00028668</span><span class="p">,</span>  <span class="mf">0.00040393</span><span class="p">]]))</span>
+</pre></div>
+</div>
+</section>
+<section id="finding-the-shrinkage-intensity">
+<h3>Finding the Shrinkage Intensity<a class="headerlink" href="#finding-the-shrinkage-intensity" title="Permalink to this headline">#</a></h3>
+<p>Then, the problem is now to estimate the optimal value of <span class="math notranslate nohighlight">\(\delta\)</span>. Ledoit and Wolf consider the quadratic loss <span class="math notranslate nohighlight">\(L(\delta)\)</span> defined as:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-8344502a-dad7-4bde-a7d2-f21f40e95d58">
+<span class="eqno">(6)<a class="headerlink" href="#equation-8344502a-dad7-4bde-a7d2-f21f40e95d58" title="Permalink to this equation">#</a></span>\[\begin{equation}
+L(\delta) = ||\tilde{\Sigma}_{\delta}- \Sigma||^2
+\end{equation}\]</div>
+<p>That is, the norm of the difference between the shrinkage estimator <span class="math notranslate nohighlight">\(\tilde{\Sigma}_{\delta}\)</span>, with <span class="math notranslate nohighlight">\(\Sigma\)</span> the true covariance matrix.</p>
+<p>They show that the optimal shrinkage intensity <span class="math notranslate nohighlight">\(\delta\)</span>, solving the minimization problem <span class="math notranslate nohighlight">\(\delta^* = arg min \mathbb{E}[L(\delta)]\)</span> is:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a002209a-e472-4a83-869f-7d40545d22e8">
+<span class="eqno">(7)<a class="headerlink" href="#equation-a002209a-e472-4a83-869f-7d40545d22e8" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\delta^* = max(0, min(\frac{1}{T} \frac{\pi - \rho}{\gamma}, 1))
+\end{equation}\]</div>
+<p>Where:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-93dd704f-365b-42c1-ba2b-888b0f1b5df6">
+<span class="eqno">(8)<a class="headerlink" href="#equation-93dd704f-365b-42c1-ba2b-888b0f1b5df6" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\pi = \sum_{i=1}^n \sum_{j=1}^n \pi_{i,j}
+\end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-5d7cface-c622-4d43-859a-a666bc9272b6">
+<span class="eqno">(9)<a class="headerlink" href="#equation-5d7cface-c622-4d43-859a-a666bc9272b6" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\rho = \sum_{i = 1}^n \pi_{i,i} + \sum_{i=1}^n \sum_{j \neq i} \frac{\bar{\rho}}{2}(\sqrt{\frac{\hat{\Sigma}_{j,j}}{\hat{\Sigma}_{i,i}}} \eta_{i,j} + \sqrt{\frac{\hat{\Sigma}_{i,i}}{\hat{\Sigma}_{j,j}}} \eta_{j,i})
+\end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-1e95a8ef-1065-42d9-8407-13d61d0a3efa">
+<span class="eqno">(10)<a class="headerlink" href="#equation-1e95a8ef-1065-42d9-8407-13d61d0a3efa" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\gamma = \sum^n_{i = 1} \sum^n_{j=1} (\hat{\Phi}_{i,j} - \hat{\Sigma}_{i,j})^2
+\end{equation}\]</div>
+<p>with:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-49bd6939-edaf-439b-9f5f-959fff8b2b71">
+<span class="eqno">(11)<a class="headerlink" href="#equation-49bd6939-edaf-439b-9f5f-959fff8b2b71" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\pi_{i,j} = \frac{1}{T} \sum^n_{t=1}((R_{i,t} - \bar{R}_i)(R_{j,t} - \bar{R}_j) - \hat{\Sigma}_{i,j})^2
+\end{equation}\]</div>
+<p>and</p>
+<div class="amsmath math notranslate nohighlight" id="equation-5ea5eee9-9941-45f6-a3f6-d99677ace1a8">
+<span class="eqno">(12)<a class="headerlink" href="#equation-5ea5eee9-9941-45f6-a3f6-d99677ace1a8" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\eta_{i,j} = \frac{1}{T} \sum^n_{t=1} ((R_{i,t} - \bar{R}_i)^2 - \hat{\Sigma}_{i,j})((R_{i,t} - \bar{R}_i)(R_{j,t} - \bar{R}_j) - \hat{\Sigma}_{i,j})
+\end{equation}\]</div>
+<p>Let’s implement the rest of the <code class="docutils literal notranslate"><span class="pre">get_shrinkage</span></code> method:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span> 
+
+<span class="nd">@dataclass</span> 
+<span class="k">class</span> <span class="nc">LedoitWolf</span><span class="p">:</span>
+  <span class="n">R</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="c1"># returns of t observation of n stocks</span>
+
+  <span class="k">def</span> <span class="nf">get_shrinkage</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
+    <span class="c1"># sample covariance</span>
+    <span class="n">t</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">R</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">R_bar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">R</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">keepdims</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">Sigma_hat</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">R</span> <span class="o">-</span> <span class="n">R_bar</span><span class="p">)</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">R</span> <span class="o">-</span> <span class="n">R_bar</span><span class="p">)</span> <span class="o">/</span> <span class="n">t</span>
+
+    <span class="c1"># rho_bar</span>
+    <span class="n">var</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">Sigma_hat</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">sqrt_var</span> <span class="o">=</span> <span class="n">var</span> <span class="o">**</span> <span class="mf">0.5</span> 
+    <span class="n">unit_cor_var</span> <span class="o">=</span> <span class="n">sqrt_var</span> <span class="o">@</span> <span class="n">sqrt_var</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">rho_bar</span> <span class="o">=</span> <span class="p">((</span><span class="n">Sigma_hat</span> <span class="o">/</span> <span class="n">unit_cor_var</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">-</span> <span class="n">n</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="c1"># shrinkage target </span>
+    <span class="n">shrinkage_target</span> <span class="o">=</span> <span class="n">rho_bar</span> <span class="o">*</span> <span class="n">unit_cor_var</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">shrinkage_target</span><span class="p">,</span> <span class="n">var</span><span class="p">)</span>
+
+    <span class="c1"># pi</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">R</span> <span class="o">-</span> <span class="n">R_bar</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">pi_mat</span> <span class="o">=</span> <span class="p">((</span><span class="n">y</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">y</span><span class="p">)</span> <span class="o">/</span> <span class="n">t</span> <span class="o">-</span> <span class="n">Sigma_hat</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> 
+    <span class="n">pi</span> <span class="o">=</span> <span class="n">pi_mat</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+    <span class="c1"># rho </span>
+    <span class="n">eta_mat</span> <span class="o">=</span> <span class="p">(((</span><span class="bp">self</span><span class="o">.</span><span class="n">R</span> <span class="o">-</span> <span class="n">R_bar</span><span class="p">)</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">R</span> <span class="o">-</span> <span class="n">R_bar</span><span class="p">))</span> <span class="o">/</span> <span class="n">t</span> <span class="o">-</span> <span class="n">var</span> <span class="o">*</span> <span class="n">Sigma_hat</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">eta_mat</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">pi_mat</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="o">+</span> <span class="n">rho_bar</span> <span class="o">*</span> <span class="p">(</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">sqrt_var</span> <span class="o">@</span> <span class="n">sqrt_var</span><span class="o">.</span><span class="n">T</span> <span class="o">*</span> <span class="n">eta_mat</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="p">)</span>
+
+    <span class="c1"># gamma </span>
+    <span class="n">gamma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">Sigma_hat</span> <span class="o">-</span> <span class="n">shrinkage_target</span><span class="p">,</span> <span class="s2">&quot;fro&quot;</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+
+    <span class="c1"># shrinkage intensity</span>
+    <span class="n">shrinkage_intensity</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="n">pi</span> <span class="o">-</span> <span class="n">rho</span><span class="p">)</span> <span class="o">/</span> <span class="n">gamma</span> <span class="o">/</span> <span class="n">t</span><span class="p">))</span>
+
+    <span class="c1"># new sigma</span>
+    <span class="n">Sigma</span> <span class="o">=</span> <span class="n">shrinkage_intensity</span> <span class="o">*</span> <span class="n">shrinkage_target</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">shrinkage_intensity</span><span class="p">)</span> <span class="o">*</span> <span class="n">Sigma_hat</span>
+
+    <span class="k">return</span>  <span class="n">Sigma</span><span class="p">,</span> <span class="n">rho_bar</span><span class="p">,</span> <span class="n">shrinkage_intensity</span>
+</pre></div>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">test</span> <span class="o">=</span> <span class="n">LedoitWolf</span><span class="p">(</span><span class="n">R</span> <span class="o">=</span> <span class="n">R_example</span><span class="p">)</span>
+<span class="n">test</span><span class="o">.</span><span class="n">get_shrinkage</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">array</span><span class="p">([[</span> <span class="mf">0.00017204</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0001871</span> <span class="p">,</span> <span class="o">-</span><span class="mf">0.00012425</span><span class="p">],</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">0.0001871</span> <span class="p">,</span>  <span class="mf">0.00091582</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.00028668</span><span class="p">],</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">0.00012425</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.00028668</span><span class="p">,</span>  <span class="mf">0.00040393</span><span class="p">]]),</span>
+ <span class="o">-</span><span class="mf">0.4713495148122541</span><span class="p">,</span>
+ <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="your-turn">
+<h2>Your Turn!<a class="headerlink" href="#your-turn" title="Permalink to this headline">#</a></h2>
+<p>In this part, you will be asked to build your first mean variance portfolio.</p>
+<p>First, download the set of data we will work with for the rest of this course:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://github.com/shokru/carbon_emissions/blob/main/data_fin.xlsx?raw=true&#39;</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="exercise-1">
+<h3>Exercise 1<a class="headerlink" href="#exercise-1" title="Permalink to this headline">#</a></h3>
+<ol class="arabic simple">
+<li><p>Compute the sample covariance matrix</p></li>
+<li><p>Compute the sample expected return</p></li>
+<li><p>Build a mean-variance portfolio, with <span class="math notranslate nohighlight">\(\gamma = 0.5\)</span></p></li>
+</ol>
+</section>
+<section id="exercise-2">
+<h3>Exercise 2<a class="headerlink" href="#exercise-2" title="Permalink to this headline">#</a></h3>
+<p>Same as Exercise 1, but with an estimate of the covariance matrix with the Ledoit-Wolf shrinkage approach.</p>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#covariance-matrix-and-optimized-portfolio-stability-issue">Covariance Matrix and Optimized Portfolio Stability Issue</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shrinkage-methods-the-ledoit-wolf-approach">Shrinkage Methods: the Ledoit-Wolf Approach</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-the-shrinkage-target">Finding the Shrinkage Target</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-the-shrinkage-intensity">Finding the Shrinkage Intensity</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#your-turn">Your Turn!</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            <div class="bd-footer-content__inner">
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Thomas Lorans
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022, Thomas Lorans.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div></div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

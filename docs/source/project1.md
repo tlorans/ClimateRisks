@@ -1,316 +1,390 @@
-## Project 1: Portfolio Optimization in Practice
+## Project 1: Low-Carbon Strategy in Practice
 
-In order to implement the Markowitz approach, the estimation of the covariance matrix of stock returns is required. The standard statistical approach is to retrieve the history of past stock returns and compute the sample covariance matrix $\hat{\Sigma}$.
+In our first exposure to low-carbon strategy, no other constraint than the ones related to portfolio decarbonization was imposed. However, in practice, such approach is useless for investors, as the resulting portfolio will be concentrated to few sectors / stocks and thus lack of diversification. In practice, you will then need to add sector constraints in your approach. 
 
-The sample covariance matrix can be computed as (Roncalli, 2013):
+In what follow, we use Roncalli (2023) as a reference.
+### Sector Weights Constraint
+
+In order to overcome the first issue regarding the lack of sector diversification with the low-carbon strategies presented in the previous part, we can extend the framework by considering a sector weight constraint (Roncalli, 2023):
+
 \begin{equation}
-\hat{\Sigma} = \frac{1}{T}\sum^T_{t=1}(R_t - \bar{R})(R_t - \bar{R})^T
+s^-_j \leq \sum_{i \in Sector_j} x_i \leq s_j^+
 \end{equation}
 
-However, the sample covariance matrix is estimated with a lot of errors when the number of stocks $n$ is larger than the historical return observations $T$ (the condition $T >> n$ is not verified). Using the sample covariance matrix as an input of the Markowitz framework can lead to a lack of robustness for the resulting portfolio.
+With $s_j$ a $n \times 1$ vector of sector-mapping (ie. we have here only one sector considered), with elements 0 or 1 if the stock $n$ belongs to the sector such as:
 
-To overcome this issue, shrinkage methods of the covariance matrix are used in practice, in order to obtain a more reliable estimate of the covariance matrix to be used in the mean-variance framework. We will see how to apply the Ledoit-Wolf (2003b) {cite:p}`ledoit2003honey` approach.
+\begin{equation}
+s_{i,j} = 𝟙\{i \in Sector_j\}
+\end{equation}
 
-For more details about practices of portfolio optimization, please refer to Roncalli (2013) and the part two of these [slides](http://www.thierry-roncalli.com/download/AM-Lecture1.pdf).
-### Covariance Matrix and Optimized Portfolio Stability Issue
+We note that:
+\begin{equation}
+\sum_{i \in Sector_j} x_i = s_j^T x
+\end{equation}
 
-We can illustate the stability issue resulting from the covariance matrix errors with an example from Roncalli (2013). We will generate two covariance matrices with different correlation (we assume the cross-correlation is equal to 0.8 in the first example, to 0.9 in the second example):
+We can then rewrite the sector constraint $s^-_j \leq \sum_{i \in Sector_j} x_i \leq s_j^+$ as (Roncalli, 2023):
+
+\begin{equation}
+\begin{cases}
+  s^-_j \leq s_j^Tx \\
+  s_j^Tx \leq s^+_j
+\end{cases}
+\end{equation}
+
+Which we can reorder (such that the thresholds are on the right and the sector weights on the left) as:
+
+
+\begin{equation}
+\begin{cases}
+  - s_j^Tx \leq - s^-_j \\
+  s_j^Tx \leq s^+_j
+\end{cases}
+\end{equation}
+
+These last constraints can the be included into the QP inequality constraint $Gx \leq h$ as:
+
+\begin{equation}
+G = \begin{bmatrix}
+-s_j^T \\
+-s^T_j
+\end{bmatrix}
+\end{equation}
+
+with G is a $2 \times n$ matrix,
+and: 
+
+\begin{equation}
+h = \begin{bmatrix}
+-s_j^- \\
+s_j^+
+\end{bmatrix}
+\end{equation}
+
+with h is a $2 \times 1$ vector.
+
+You can extend this approach with many sectors.
+
+Let's illustrate the concept by implementing an example in Python. First, let's take the scripts we've used before to define a Carbon Portfolio:
 
 ```Python
+from dataclasses import dataclass
 import numpy as np
-mu = np.array([0.08, 0.08, 0.05])
-sigma = np.array([0.2, 0.21, 0.1])
-rho_A = np.array([[1., 0.8, 0.8],
-               [0.8, 1, 0.8 ],
-               [0.8, 0.8, 1.]])
-Sigma_A = np.diag(sigma) @ rho_A @ np.diag(sigma)
-rho_B = np.array([[1., 0.9, 0.9],
-               [0.9, 1, 0.9 ],
-               [0.9, 0.9, 1.]])
-Sigma_B = np.diag(sigma) @ rho_B @ np.diag(sigma)
-```
-
-Let's now use the code for portfolio construction as before:
-```Python
-from dataclasses import dataclass 
 
 @dataclass 
-class Portfolio:
-  """A simple dataclass storing the basics information of a porfolio and 
-  implementing the methods for the two moments computation.
+class CarbonPortfolio:
+  """
+  A class that implement supplementary information CI and new method get_waci,
+  to be used in the low-carbon strategy implementation.
   """
   x: np.array # Weights
-  mu: np.array # Expected Returns
+  CI: np.array # Carbon Intensities
   Sigma: np.matrix # Covariance Matrix
 
-  def get_expected_returns(self) -> float:
-    return self.x.T @ self.mu
 
-  def get_variance(self) -> float:
-    return self.x.T @ self.Sigma @ self.x
+  def get_waci(self) -> float:
+    return self.x.T @ self.CI
 
+```
+Let's take again the example we used in the previous part:
+
+```Python
+b = np.array([0.23,
+              0.19,
+              0.17,
+              0.13,
+              0.09,
+              0.08,
+              0.06,
+              0.05])
+
+CI = np.array([125,
+               75,
+               254,
+               822,
+               109,
+               17,
+               341,
+               741])
+
+betas = np.array([0.30,
+                  1.80,
+                  0.85,
+                  0.83,
+                  1.47,
+                  0.94,
+                  1.67,
+                  1.08])
+
+sigmas = np.array([0.10,
+                   0.05,
+                   0.06,
+                   0.12,
+                   0.15,
+                   0.04,
+                   0.08,
+                   0.07])
+
+Sigma = betas @ betas.T * 0.18**2 + np.diag(sigmas**2)
+```
+Let's assume two sectors: $Sector_1$ and $Sector_2$.
+We have:
+
+\begin{equation}
+s_1^T = 
+ \begin{bmatrix}
+1 & 1 & 0 & 0 & 1 & 0 & 1 & 0\\
+\end{bmatrix}
+\end{equation}
+
+and:
+
+\begin{equation}
+s_2^T = 
+ \begin{bmatrix}
+0 & 0 & 1 & 1 & 0 & 1 & 0 & 1\\
+\end{bmatrix}
+\end{equation}
+
+We can prepare the sector constraints specification in Python:
+
+```Python
+s_1 = np.array([1, 1, 0, 0, 1, 0, 1, 0])
+s_2 = np.array([0, 0, 1, 1, 0, 1, 0, 1])
+s_j = np.vstack([- s_1.T, - s_1.T, - s_2.T, - s_2.T]) # we stack the sectors vectors
+
+```
+
+To choose sectors weights constraints, let's first take a look at their relative weights in the initial benchmark:
+
+```Python
+s_1.T @ b
+```
+```
+0.5700000000000001
+```
+```Python
+s_2.T @ b
+```
+```
+0.43000000000000005
+```
+We can choose for example $s_1^+ = 0.65$, $s_1^- = 0.5$ and $s_2^+ = 0.5$ and $s_2^- = 0.4$ for example.
+
+```Python
+sectors_constraints = np.array([ -0.5, 0.65, -0.4, 0.5]) 
+```
+
+We can now implement a low-carbon strategy, let's say with the threshold approach, while controlling for sector weights.
+
+```Python
+
+
+from abc import ABC, abstractmethod
+
+@dataclass
+class LowCarbonStrategy:
+  b: np.array # Benchmark Weights
+  CI:np.array # Carbon Intensity
+  Sigma: np.matrix # Covariance Matrix
+
+
+  def get_portfolio(self) -> CarbonPortfolio:
+    pass
 
 from qpsolvers import solve_qp
 
 @dataclass
-class MeanVariance:
+class ThresholdApproach(LowCarbonStrategy):
 
-  mu: np.array # Expected Returns
-  Sigma: np.matrix # Covariance Matrix
-  
-  def get_portfolio(self, gamma:float) -> Portfolio:
+  def get_portfolio(self, reduction_rate:float) -> CarbonPortfolio:
     """QP Formulation"""
-
     x_optim = solve_qp(P = self.Sigma,
-              q = -(gamma * self.mu),
-              A = np.ones(len(self.mu)).T, # fully invested
-              b = np.array([1.]), # fully invested
-              lb = np.zeros(len(self.mu)), # long-only position
-              ub = np.ones(len(self.mu)), # long-only position
+              q = -(self.Sigma @ self.b), 
+              A = np.ones(len(self.b)).T, 
+              b = np.array([1.]),
+              G = self.CI.T, # resulting WACI
+              h = (1 - reduction_rate) * self.b.T @ self.CI, # reduction
+              lb = np.zeros(len(self.b)),
+              ub = np.ones(len(self.b)),
+              solver = 'osqp')
+    
+    return CarbonPortfolio(x = x_optim, 
+                        Sigma = self.Sigma, CI = self.CI)
+    
+  def get_portfolio_with_sector_constraints(self, reduction_rate:float, s_j:np.array, sector_constraints:np.array) -> CarbonPortfolio:
+    """QP Formulation"""
+    x_optim = solve_qp(P = self.Sigma,
+              q = -(self.Sigma @ self.b), 
+              A = np.ones(len(self.b)).T, 
+              b = np.array([1.]),
+              G = np.vstack([self.CI.T, s_j]), # nested G
+              h = np.hstack([(1 - reduction_rate) * self.b.T @ self.CI, sector_constraints]), # reduction + sector constraints
+              lb = np.zeros(len(self.b)),
+              ub = np.ones(len(self.b)),
               solver = 'osqp')
 
-    return Portfolio(x = x_optim, mu = self.mu, Sigma = self.Sigma)
+    return CarbonPortfolio(x = x_optim, 
+                           Sigma = self.Sigma, CI = self.CI)
 
-portfolio_A = MeanVariance(mu = mu, Sigma = Sigma_A)
-weights_A = portfolio_A.get_portfolio(gamma = 0.5).x
-
-portfolio_B = MeanVariance(mu = mu, Sigma = Sigma_B)
-weights_B = portfolio_B.get_portfolio(gamma = 0.5).x
-
-import matplotlib.pyplot as plt
-x = np.arange(3)
-width = 0.4
-plt.figure(figsize = (10, 10))
-plt.bar(x-0.2, weights_A, width)
-plt.bar(x+0.2, weights_B, width)
-plt.xticks(x, ["A","B","C"])
-plt.ylabel("$x^*$")
-plt.legend(["Sigma A", "Sigma B"])
-plt.show()
-``` 
-
-```{figure} impactcovmatrix.png
----
-name: impactcovmatrix
----
-Figure: Optimum weights with $\rho = 0.8$ vs. $\rho = 0.9$
 ```
-We see that a slight difference in terms of cross-correlation leads to significantly different covariance matrices, and then to really different optimal weights!
 
-### Shrinkage Methods: the Ledoit-Wolf Approach
+```Python
+low_carbon_portfolio = ThresholdApproach(b = b, 
+                                         CI = CI,
+                                         Sigma = Sigma)
 
+low_carbon_portfolio.get_portfolio_with_sector_constraints(reduction_rate = 0.5,
+                                                           s_j = s_j,
+                                                           sector_constraints = sectors_constraints).x
+```
 
-In order to overcome unreliable sample covariance, shrinkage methods are used in practice for a better estimate of the covariance matrix.
-Shrinkage methods approaches modify the sample covariance matrix $\hat{\Sigma}$ by a new estimate $\tilde{\Sigma}$ in order to take into account uncertainties. $\tilde{\Sigma}$ generally takes the form of a weighted sum of $\hat{\Sigma}$ and a correction term. 
+```
+array([ 2.36352155e-01,  2.53202952e-01,  1.19930045e-01,  4.29437030e-02,
+        9.41669784e-02,  2.47256857e-01,  6.14731882e-03, -1.28467006e-08])
+```
 
-The Ledoit-Wolf approach (2003a) {cite:p}`ledoit2003improved` proposes to combine two estimators for the covariance matrix: $\hat{\Sigma}$ and $\hat{\Phi}$.
+### Sector Neutrality
 
-$\hat{\Sigma}$, the sample covariance matrix is known to be unbiased but includes a lot of estimations errors where the number of observations periods is not significantly higher than the number of assets.
+We can also impose tighter constraint regarding the sector deviation with the benchmark, by imposing sector neutrality of the portfolio. 
 
-$\hat{\Phi}$, a structured estimator  (shrinkage target) converges quickly but is a biased estimator. Ledoit and Wolf  proposed to use either the single-factor matrix of Sharpe (2003a) or the constant correlation model (2003b) as the shrinkage target. Thereafter, we will use the second one.
-
-The Ledoit-Wolf approach combines both estimators to obtain a more efficient one, such as:
+It means that:
 
 \begin{equation}
-\tilde{\Sigma}_{\delta} = \delta \hat{\Phi} + (1 - \delta) \hat{\Sigma}
+\sum_{i \in Sector_j}x_i = \sum_{i \in Sector_j}b_i
 \end{equation}
 
-
-With $\delta$ the shrinkage intensity, between 0 and 1.
-
-The method involves two stages:
-- determining the shrinkage target $\hat{\Phi}$
-- determining the shrinkage intensity $\delta$
-
-#### Finding the Shrinkage Target
-
-As a first stage, we need to find the shrinkage target $\hat{\Phi}$. As we follow Ledoit and Wolf (2003b), $\hat{\Phi}$ is the empirical covariance matrix with a constant correlation $\bar{\rho}$, with:
+In the QP problem, this can be included in the $Ax = b$ equality constraint, with for example for two sectors $s_1$ and $s_2$ and 8 stocks:
 
 \begin{equation}
-\hat{\Phi}_{i,i} = \hat{\Sigma}_{i,i} 
+A_1 = s^T_1 = \begin{bmatrix}
+1 & 1 & 0 & 0 & 1 & 0 & 1 & 0 
+\end{bmatrix}
 \end{equation}
 
 and 
 
 \begin{equation}
-\hat{\Phi}_{i,j} = \bar{\rho} \sqrt{\hat{\Sigma}_{i,i} \hat{\Sigma}_{j,j}} 
+A_2 = s^T_2 = \begin{bmatrix}
+0 & 0 & 1 & 1 & 0 & 1 & 0 & 1
+\end{bmatrix}
 \end{equation}
 
-We then need to determine $\bar{\rho}$ the constant correlation.
+Then:
 
-We have:
 
 \begin{equation}
-\bar{\rho} = \frac{2}{(N-1)N}\sum^{n-1}_{i=1} \sum^n_{j=i+1} \frac{\hat{\Sigma}_{i,j}}{\sqrt{\hat{\Sigma}_{i,i}\hat{\Sigma}_{jj}}}
-\end{equation} 
+A = \begin{bmatrix}
+A_1 \\
+A_2
+\end{bmatrix}
+\end{equation}
 
-Let's implement these firsts elements in Python. The code below is directly inspired from [here](https://github.com/WLM1ke/LedoitWolf). Special thanks to its author.
+
+And $b_1 = s_1^Tb$, $b_2 = s_2^Tb$ such that:
+
+
+\begin{equation}
+b = \begin{bmatrix}
+b_1 \\
+b_2
+\end{bmatrix}
+\end{equation}
+
+Again, we can start to implement the constraints specifications in Python:
 
 ```Python
-from dataclasses import dataclass 
+A_sectors = np.vstack([s_1.T, s_2.T])
 
-@dataclass 
-class LedoitWolf:
-  R: np.array # returns of t observation of n stocks
+b_1 = s_1.T @ b
+b_2 = s_2.T @ b 
+b_sectors = np.hstack([b_1, b_2])
+```
 
-  def get_shrinkage(self) -> np.array:
-    # sample covariance
-    t, n = self.R.shape
-    R_bar = np.mean(self.R, axis = 0, keepdims = True)
-    Sigma_hat = (self.R - R_bar).T @ (self.R - R_bar) / t
+Then, let's create a new method integrating the sector neutrality constraint:
 
-    # rho_bar
-    var = np.diag(Sigma_hat).reshape(-1, 1)
-    sqrt_var = var ** 0.5 
-    unit_cor_var = sqrt_var @ sqrt_var.T
-    rho_bar = ((Sigma_hat / unit_cor_var).sum() - n) / n / (n-1)
+```Python
+from qpsolvers import solve_qp
+
+@dataclass
+class ThresholdApproach(LowCarbonStrategy):
+
+  def get_portfolio(self, reduction_rate:float) -> CarbonPortfolio:
+    """QP Formulation"""
+    x_optim = solve_qp(P = self.Sigma,
+              q = -(self.Sigma @ self.b), 
+              A = np.ones(len(self.b)).T, 
+              b = np.array([1.]),
+              G = self.CI.T, # resulting WACI
+              h = (1 - reduction_rate) * self.b.T @ self.CI, # reduction
+              lb = np.zeros(len(self.b)),
+              ub = np.ones(len(self.b)),
+              solver = 'osqp')
     
-    # shrinkage target 
-    shrinkage_target = rho_bar * unit_cor_var
-    np.fill_diagonal(shrinkage_target, var)
-
-    return rho_bar, shrinkage_target
-```
-
-```Python
-R_example = np.array([[0.0309, 0.0056, 0.0011],
-     [0.0056, 0.0739, 0.0148], 
-     [0.0011, 0.0148, 0.0489]])
-
-test = LedoitWolf(R = R_example)
-test.get_shrinkage()
-```
-
-```
-(-0.4713495148122541,
- array([[ 0.00017204, -0.0001871 , -0.00012425],
-        [-0.0001871 ,  0.00091582, -0.00028668],
-        [-0.00012425, -0.00028668,  0.00040393]]))
-```
-
-#### Finding the Shrinkage Intensity
-
-Then, the problem is now to estimate the optimal value of $\delta$. Ledoit and Wolf consider the quadratic loss $L(\delta)$ defined as:
-
-\begin{equation}
-L(\delta) = ||\tilde{\Sigma}_{\delta}- \Sigma||^2
-\end{equation}
-
-That is, the norm of the difference between the shrinkage estimator $\tilde{\Sigma}_{\delta}$, with $\Sigma$ the true covariance matrix.
-
-They show that the optimal shrinkage intensity $\delta$, solving the minimization problem $\delta^* = arg min \mathbb{E}[L(\delta)]$ is:
-
-\begin{equation}
-\delta^* = max(0, min(\frac{1}{T} \frac{\pi - \rho}{\gamma}, 1))
-\end{equation}
-
-Where:
-
-\begin{equation}
-\pi = \sum_{i=1}^n \sum_{j=1}^n \pi_{i,j}
-\end{equation}
-
-\begin{equation}
-\rho = \sum_{i = 1}^n \pi_{i,i} + \sum_{i=1}^n \sum_{j \neq i} \frac{\bar{\rho}}{2}(\sqrt{\frac{\hat{\Sigma}_{j,j}}{\hat{\Sigma}_{i,i}}} \eta_{i,j} + \sqrt{\frac{\hat{\Sigma}_{i,i}}{\hat{\Sigma}_{j,j}}} \eta_{j,i})
-\end{equation}
-
-\begin{equation}
-\gamma = \sum^n_{i = 1} \sum^n_{j=1} (\hat{\Phi}_{i,j} - \hat{\Sigma}_{i,j})^2
-\end{equation}
-
-with:
-
-\begin{equation}
-\pi_{i,j} = \frac{1}{T} \sum^n_{t=1}((R_{i,t} - \bar{R}_i)(R_{j,t} - \bar{R}_j) - \hat{\Sigma}_{i,j})^2
-\end{equation}
-
-and 
-
-\begin{equation}
-\eta_{i,j} = \frac{1}{T} \sum^n_{t=1} ((R_{i,t} - \bar{R}_i)^2 - \hat{\Sigma}_{i,j})((R_{i,t} - \bar{R}_i)(R_{j,t} - \bar{R}_j) - \hat{\Sigma}_{i,j})
-\end{equation}
-
-Let's implement the rest of the `get_shrinkage` method:
-
-```Python
-from dataclasses import dataclass 
-
-@dataclass 
-class LedoitWolf:
-  R: np.array # returns of t observation of n stocks
-
-  def get_shrinkage(self) -> np.array:
-    # sample covariance
-    t, n = self.R.shape
-    R_bar = np.mean(self.R, axis = 0, keepdims = True)
-    Sigma_hat = (self.R - R_bar).T @ (self.R - R_bar) / t
-
-    # rho_bar
-    var = np.diag(Sigma_hat).reshape(-1, 1)
-    sqrt_var = var ** 0.5 
-    unit_cor_var = sqrt_var @ sqrt_var.T
-    rho_bar = ((Sigma_hat / unit_cor_var).sum() - n) / n / (n-1)
+    return CarbonPortfolio(x = x_optim, 
+                        Sigma = self.Sigma, CI = self.CI)
     
-    # shrinkage target 
-    shrinkage_target = rho_bar * unit_cor_var
-    np.fill_diagonal(shrinkage_target, var)
+  def get_portfolio_with_sector_constraints(self, reduction_rate:float, s_j:np.array, sector_constraints:np.array) -> CarbonPortfolio:
+    """QP Formulation"""
+    x_optim = solve_qp(P = self.Sigma,
+              q = -(self.Sigma @ self.b), 
+              A = np.ones(len(self.b)).T, 
+              b = np.array([1.]),
+              G = np.vstack([self.CI.T, s_j]), # nested G
+              h = np.hstack([(1 - reduction_rate) * self.b.T @ self.CI, sector_constraints]), # reduction + sector constraints
+              lb = np.zeros(len(self.b)),
+              ub = np.ones(len(self.b)),
+              solver = 'osqp')
 
-    # pi
-    y = (self.R - R_bar)**2
-    pi_mat = ((y.T @ y) / t - Sigma_hat**2) 
-    pi = pi_mat.sum()
+    return CarbonPortfolio(x = x_optim, 
+                           Sigma = self.Sigma, CI = self.CI)
+    
+  def get_portfolio_with_sector_neutrality(self, reduction_rate:float, A_sectors:np.array, b_sectors:np.array):
+      x_optim = solve_qp(P = self.Sigma,
+            q = -(self.Sigma @ self.b), 
+            A = np.vstack([np.ones(len(self.b)).T, A_sectors]), 
+            b = np.hstack([1., b_sectors]),
+            G = self.CI.T, 
+            h = (1 - reduction_rate) * self.b.T @ self.CI, # reduction rate
+            lb = np.zeros(len(self.b)),
+            ub = np.ones(len(self.b)),
+            solver = 'osqp')
+      
+      return CarbonPortfolio(x = x_optim, 
+                           Sigma = self.Sigma, CI = self.CI)
 
-    # rho 
-    eta_mat = (((self.R - R_bar)**3).T @ (self.R - R_bar)) / t - var * Sigma_hat
-    np.fill_diagonal(eta_mat, 0)
-    rho = (
-        np.diag(pi_mat).sum()
-        + rho_bar * ( 1 / sqrt_var @ sqrt_var.T * eta_mat).sum()
-    )
-
-    # gamma 
-    gamma = np.linalg.norm(Sigma_hat - shrinkage_target, "fro") ** 2
-
-    # shrinkage intensity
-    shrinkage_intensity = max(0, min(1, (pi - rho) / gamma / t))
-
-    # new sigma
-    Sigma = shrinkage_intensity * shrinkage_target + (1 - shrinkage_intensity) * Sigma_hat
-
-    return  Sigma, rho_bar, shrinkage_intensity
 ```
 
 ```Python
-test = LedoitWolf(R = R_example)
-test.get_shrinkage()
+low_carbon_portfolio = ThresholdApproach(b = b, 
+                                         CI = CI,
+                                         Sigma = Sigma)
+
+low_carbon_portfolio.get_portfolio_with_sector_neutrality(reduction_rate = 0.5,
+                                                           A_sectors = A_sectors,
+                                                           b_sectors = b_sectors).x
 ```
 
 ```
-(array([[ 0.00017204, -0.0001871 , -0.00012425],
-        [-0.0001871 ,  0.00091582, -0.00028668],
-        [-0.00012425, -0.00028668,  0.00040393]]),
- -0.4713495148122541,
- 1)
+array([ 2.33515514e-01,  2.41846019e-01,  1.25623128e-01,  4.43874304e-02,
+        9.29058752e-02,  2.59989434e-01,  1.73260956e-03, -8.53326324e-09])
 ```
 
 ### Your Turn!
 
-In this part, you will be asked to build your first mean variance portfolio. 
-
-First, download the set of data we will work with for the rest of this course:
-
-```Python
-import pandas as pd
-url = 'https://github.com/shokru/carbon_emissions/blob/main/data_fin.xlsx?raw=true'
-data = pd.read_excel(url)
-```
-
 #### Exercise 1
 
-1. Compute the sample covariance matrix
-2. Compute the sample expected return
-3. Build a mean-variance portfolio, with $\gamma = 0.5$
+1. Using the data downloaded in the project 1, compute the carbon intensity (emissions / market cap)
+2. Retrive the sector for each stock in the data. You can easily obtain it with:
+```Python
+import yfinance as yf
+
+tickerdata = yf.Ticker('TSLA') #the tickersymbol for Tesla
+print (tickerdata.info['sector'])
+```
+3. Compute an initial capitalization-weighted benchmark weights vector $b$ using the market capitalization value
+4. Implement a low-carbon strategy with the threshold approach and $\mathfrak{R} = 0.5$
+5. Compare the sectors weights in $b$ and $x^*$
 
 #### Exercise 2
 
-Same as Exercise 1, but with an estimate of the covariance matrix with the Ledoit-Wolf shrinkage approach.
+1. Implement the same low-carbon strategy but with a sector constraint of your choice. Did you find a solution? Compare the TE between this constrained solution and the one without sector constraints.
