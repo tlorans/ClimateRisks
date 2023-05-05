@@ -1,5 +1,5 @@
 ## Project 1: Low-Carbon Strategy in Practice
-test
+
 In our first exposure to low-carbon strategy, no other constraint than the ones related to portfolio decarbonization was imposed. However, in practice, such approach is useless for investors, as the resulting portfolio will be concentrated to few sectors / stocks and thus lack of diversification. In practice, you will then need to add sector constraints in your approach. 
 
 In what follow, we use Roncalli (2023) as a reference.

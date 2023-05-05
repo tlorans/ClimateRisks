@@ -966,7 +966,7 @@ We finally add the green intensity constraint to our previous optimization probl
 \end{equation*}
 
 With $G(t)$ is a greeness multiplier. The underlying idea is to maintain a green intensity for the net zero portfolio that is higher than the green intensity of the benchmark.
-
+test
 ### Key Takeaways
 
 - Financing the transition is one of the objective of net zero portfolios
