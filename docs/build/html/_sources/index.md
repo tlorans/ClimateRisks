@@ -31,7 +31,9 @@ physics_economics/physics_economics
 physics_economics/productivity
 physics_economics/temperature_modelling
 climate_data/climate_data
-climate_data/decarbonization_metrics
+climate_data/carbon_budget
+climate_data/emissions_metrics
+climate_data/pac
 climate_investing/climateinvesting
 climate_investing/climaterisks
 climate_investing/project1
