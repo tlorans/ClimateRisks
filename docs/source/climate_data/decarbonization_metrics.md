@@ -151,8 +151,52 @@ where:
 
 And we can finally compute the carbon budget according to the carbon targets declared by the issuer.
 
+Let's consider an illustrative example from Le Guenedal et al. (2022):
+
+| $k$  |  Release Date | Scope | $t^k_1$  | $t^k_2$   | $\mathfrak{R}(t^k_1,t^k_2)$|
+|---|---|---|---|---|---|
+| 1  | 01/08/2013  | $SC_1$  | 2015  | 2030  | 45% |
+| 2  | 01/10/2019  | $SC_2$  | 2020  |  2040 | 40% |
+| 3  | 01/01/2019  | $SC_3$  | 2025  | 2050  | 25% |
+
+Dates $t^k_1$ and $t_k^2$ correspond to the 1st January. In August 2013, the company announced its willingness to reduce its carbon emissions by 45% between January 2015 and January 2030. We assume that $CE_{i,1}(2020) = 10.33$, $CE_{i,2}(2020)=7.72$ and $CE_{i,3}(2020) = 21.86$.
+
+In Python:
 ```Python
 #Figure 4 page 10
+# we apply the formula up to the the linear annual reduction rate
+```
+
+In practice however, we can face carbon targets issuer updateding its expectations and change is reduction policy, with resulting overlapping dates, such as the following:
+
+
+| $k$  |  Release Date | Scope | $t^k_1$  | $t^k_2$   | $\mathfrak{R}(t^k_1,t^k_2)$|
+|---|---|---|---|---|---|
+| 1  | 01/08/2013  | $SC_1$  | 2015  | 2030  | 45% |
+| 2  | 01/03/2016  | $SC_1$  | 2017  |  2032 | 60% |
+| 3  | 01/10/2010  | $SC_2$  | 2019  | 2039  | 40% |
+| 4  | 01/11/2019  | $SC_{1+2+3}$  | 2020  | 2050  | 75% |
+
+To overcome this issue, we can implement the algorithm proposed by Le Guenedal et al. (2022):
+- each target are translated into a vector of emissions reduction per year, with the associated scopes ($SC_1$, $SC_2$ and $SC_3$)
+- we iterate from the most recent target $\mathfrak{R_i}(t_B)$ to the oldest target $\mathfrak{R_i}(t_A)$: at each step, we decide if we should bring the older target into the combined target or if we should replace the combined target with the older target
+
+
+```{figure} algo_targets.png
+---
+name: algo_targets
+---
+Figure: Carbon Target Aggregation, from Le Guenedal et al. (2022)
+```
+
+The decision trigger is the overlap between scopes:
+- if the older target's scopes are complementary with the current combined target, we add the targets (add-up case)
+- if the older target has a better (overlapping) scope emissions coverage, we retain the older target (replace case)
+
+In Python:
+```Python
+#Figure 4 page 10
+# same results but once the overlapping dates are fixed.
 ```
 
 ### Carbon Trend
