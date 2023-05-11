@@ -316,19 +316,74 @@ document.write(`
 <h2>Static Measures: Duration, Gap, Slope and Budget<a class="headerlink" href="#static-measures-duration-gap-slope-and-budget" title="Permalink to this headline">#</a></h2>
 <p>Let’s consider a static approach, where <span class="math notranslate nohighlight">\(t^*\)</span> is the target horizon. We can denote <span class="math notranslate nohighlight">\(CE_i^{NZE}(t^*)\)</span> as the net zero emissions scenario for issuer <span class="math notranslate nohighlight">\(i\)</span>, with <span class="math notranslate nohighlight">\(t_0\)</span> the current date.</p>
 <p>We can compute <span class="math notranslate nohighlight">\(CE^{NZE}_i(t^*)\)</span> by using the issuer’s targets or using a consensus scenario:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9be23dca-2fb7-441e-a785-eaaf099cf6fa">
-<span class="eqno">(1)<a class="headerlink" href="#equation-9be23dca-2fb7-441e-a785-eaaf099cf6fa" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-68663c5a-998d-49bd-8ba6-15e9079ea174">
+<span class="eqno">(1)<a class="headerlink" href="#equation-68663c5a-998d-49bd-8ba6-15e9079ea174" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CE^{NZE}_i(t^*) = (1 - \mathfrak{R}^*(t_0,t^*)) \cdot CE_i(t_0)
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\mathfrak{R}^*(t_0,t^*)\)</span> is the carbon reduction between <span class="math notranslate nohighlight">\(t_0\)</span> and <span class="math notranslate nohighlight">\(t^*\)</span> expected for this issuer. For example, it can be equal to the expected reduction for the sector of the issuer in order to achieve an NZE scenario.</p>
 <section id="duration">
 <h3>Duration<a class="headerlink" href="#duration" title="Permalink to this headline">#</a></h3>
+<p>Using the generic notation <span class="math notranslate nohighlight">\(\hat{CE}_i(t)\)</span> to name <span class="math notranslate nohighlight">\(CE^{Target}_i(t)\)</span> and <span class="math notranslate nohighlight">\(CE^{Trend}_i(t)\)</span>, we define the time to reach the NZE scenario (or NZE duration in short) as:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-02e7b54c-0e1b-42a9-9303-c78afb8c8cd1">
+<span class="eqno">(2)<a class="headerlink" href="#equation-02e7b54c-0e1b-42a9-9303-c78afb8c8cd1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\tau_i = \{inf \; t: \hat{CE}_i(t) \leq CE^{NZE}_i(t^*)\}
+\end{equation}\]</div>
+<p>If <span class="math notranslate nohighlight">\(\hat{CE}_i(t) = CE^{Target}_i(t)\)</span>, we have the NZE duration <span class="math notranslate nohighlight">\(\tau_i^{Target}\)</span>. It measures if the carbon targets announced by the company are in line with the NZE scenario <span class="math notranslate nohighlight">\(CE^{NZE}_i(t^*)\)</span>.</p>
+<p>If <span class="math notranslate nohighlight">\(\hat{CE}_i(t) = CE_i^{Target}(t)\)</span>, we have the NZE duration <span class="math notranslate nohighlight">\(\tau^{Trend}_i\)</span>. It measures if the issuer’s track record is in line with its targets or the NZE scenario.</p>
+<p>Recalling that :</p>
+<div class="amsmath math notranslate nohighlight" id="equation-0d110556-f320-4f53-9b46-519248ebf5ba">
+<span class="eqno">(3)<a class="headerlink" href="#equation-0d110556-f320-4f53-9b46-519248ebf5ba" title="Permalink to this equation">#</a></span>\[\begin{equation}
+CE_i^{Trend}(t) = \hat{\beta}_{i,0} + \hat{\beta}_{i,1}(t)
+\end{equation}\]</div>
+<p>We have two cases:</p>
+<ol class="arabic simple">
+<li><p>The slope <span class="math notranslate nohighlight">\(\hat{\beta}_{i,1}\)</span> is positive: <span class="math notranslate nohighlight">\(CE^{Trend}_i(t)\)</span> is an increasing function. In that case, there is a solution only if the current carbon emissions <span class="math notranslate nohighlight">\(CE_i(t_0)\)</span> are less than the NZE scenario:</p></li>
+</ol>
+<div class="amsmath math notranslate nohighlight" id="equation-9b89c993-71bf-41e6-9fd2-4fd92a778c98">
+<span class="eqno">(4)<a class="headerlink" href="#equation-9b89c993-71bf-41e6-9fd2-4fd92a778c98" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\tau_i^{Trend} = 
+\begin{cases}
+  t_0 &amp; \text{if $CE_i(t_0) \leq CE^{NZE}_i(t)$} \\
+  +\infty &amp; \text{otherwise}
+\end{cases}
+\end{equation}\]</div>
+<ol class="arabic simple" start="2">
+<li><p>The slope <span class="math notranslate nohighlight">\(\hat{\beta}_{i,1}\)</span> is negative: <span class="math notranslate nohighlight">\(CE_i^{Trend}(t)\)</span> is a decreasing function and we have:</p></li>
+</ol>
+<div class="amsmath math notranslate nohighlight" id="equation-c81c625a-7839-40c3-9026-3a0fd5330602">
+<span class="eqno">(5)<a class="headerlink" href="#equation-c81c625a-7839-40c3-9026-3a0fd5330602" title="Permalink to this equation">#</a></span>\[\begin{equation}
+CE_i^{Trend}(t) \leq CE^{NZE}_i(t^*) \Leftrightarrow \hat{\beta}_{i,0} + \hat{\beta}_{i,1}t \leq CE^{NZE}_i(t^*)
+\end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-4ebaa609-3851-48b5-a09a-c38beb5c2d2d">
+<span class="eqno">(6)<a class="headerlink" href="#equation-4ebaa609-3851-48b5-a09a-c38beb5c2d2d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\Leftrightarrow t \geq \frac{CE^{NZE}_i(t) - \hat{\beta}_{i,0}}{\hat{\beta}_{i,1}}
+\end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-39b15827-1bd0-426f-b92c-3023dbdf7b03">
+<span class="eqno">(7)<a class="headerlink" href="#equation-39b15827-1bd0-426f-b92c-3023dbdf7b03" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\Leftrightarrow t \geq t_0 + \frac{CE^{NZE}_i(t^*) - (\hat{\beta}_{i,0}+\hat{\beta}_{i,1}{t_0})}{\hat{\beta}_{i,1}}
+\end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-1051eedb-17d2-436b-ba96-195f88f41615">
+<span class="eqno">(8)<a class="headerlink" href="#equation-1051eedb-17d2-436b-ba96-195f88f41615" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\Leftrightarrow t \geq t_0 + \frac{CE^{NZE}_i(t^*) - \hat{\beta}^{'}_{i,0}}{\hat{\beta}_{i,1}}
+\end{equation}\]</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># reproduce example 5 page 13</span>
+</pre></div>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># reproduce figure 25 on page 66</span>
+</pre></div>
+</div>
 </section>
 <section id="gap">
 <h3>Gap<a class="headerlink" href="#gap" title="Permalink to this headline">#</a></h3>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example page 14</span>
+</pre></div>
+</div>
 </section>
 <section id="slope">
 <h3>Slope<a class="headerlink" href="#slope" title="Permalink to this headline">#</a></h3>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example 5 from page 15</span>
+</pre></div>
+</div>
 </section>
 <section id="budget">
 <h3>Budget<a class="headerlink" href="#budget" title="Permalink to this headline">#</a></h3>
