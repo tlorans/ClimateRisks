@@ -42,6 +42,8 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'climate_data/decarbonization_metrics';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -281,7 +283,11 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basics">Basics</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#carbon-budget">Carbon Budget</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#carbon-budget">Carbon Budget</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#gross-carbon-budget">Gross Carbon Budget</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#net-carbon-budget">Net Carbon Budget</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#carbon-reduction">Carbon Reduction</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#carbon-reduction-targets">Carbon Reduction Targets</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#carbon-trend">Carbon Trend</a></li>
@@ -327,18 +333,60 @@ document.write(`
 <p>Finally, we addres the Participation, Ambition and Credibility (PAC) framework proposed as an analytic grid that can be use for portfolio alignment.</p>
 <section id="basics">
 <h2>Basics<a class="headerlink" href="#basics" title="Permalink to this headline">#</a></h2>
-<p>In this section, we will present the foundations for building and understanding carbon metrics.</p>
+<p>In this section, we will present the foundations for building and understanding carbon metrics. The main tools are the carbon budget, the reduction target and the carbon trend.</p>
+<p>The absolute carbon emissions of issuer <span class="math notranslate nohighlight">\(i\)</span> for the scope <span class="math notranslate nohighlight">\(j\)</span> at time <span class="math notranslate nohighlight">\(t\)</span> is denoted as <span class="math notranslate nohighlight">\(CE_{i,j}(t)\)</span>, and is generally measured annualy, in tC02e. <span class="math notranslate nohighlight">\(j\)</span> is omited when possible, to simplify the notation.</p>
 <section id="carbon-budget">
 <h3>Carbon Budget<a class="headerlink" href="#carbon-budget" title="Permalink to this headline">#</a></h3>
+<section id="gross-carbon-budget">
+<h4>Gross Carbon Budget<a class="headerlink" href="#gross-carbon-budget" title="Permalink to this headline">#</a></h4>
+<p>A carbon budget defines the amount of GHG emissions that a country or a company produces over the time period <span class="math notranslate nohighlight">\([t_0, t]\)</span>.</p>
+<p>It corresponds to the area of the region bounded by the function <span class="math notranslate nohighlight">\(CE_i(t)\)</span>:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-1fae920f-1ee9-416c-ae2c-28feaa4e250b">
+<span class="eqno">(1)<a class="headerlink" href="#equation-1fae920f-1ee9-416c-ae2c-28feaa4e250b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+CB_i(t_0,t) = \int^t_{t_0}CE_i(s)ds
+\end{equation}\]</div>
+<p>This defines a gross carbon budget.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># figure 1, part with CE^*i = 0 and gross carbon budget</span>
+</pre></div>
+</div>
+</section>
+<section id="net-carbon-budget">
+<h4>Net Carbon Budget<a class="headerlink" href="#net-carbon-budget" title="Permalink to this headline">#</a></h4>
+<p>The issuer <span class="math notranslate nohighlight">\(i\)</span> has generally an objective to keep its GHG emissions under an emissions level <span class="math notranslate nohighlight">\(CE^*_i\)</span>. In that case, the carbon budget is:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-023b2d00-7408-44db-803f-4abcae08a8a0">
+<span class="eqno">(2)<a class="headerlink" href="#equation-023b2d00-7408-44db-803f-4abcae08a8a0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+CB_i(t_0,t) = \int^t_{t_0}(CE_i(s) - CE^*_i)df = -(t - t_0) \cdot CE^*_i + \int^t_{t_0} CE_i(s)ds
+\end{equation}\]</div>
+<p>This carbon budget corresponds to a net carbon budget. In this case, the objective of the company is that emissions converge towards the objective at the target date <span class="math notranslate nohighlight">\(t^*\)</span>, such that:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-2a586ae8-8d30-4da0-94d8-ef93b0da0327">
+<span class="eqno">(3)<a class="headerlink" href="#equation-2a586ae8-8d30-4da0-94d8-ef93b0da0327" title="Permalink to this equation">#</a></span>\[\begin{equation}
+CE_i(t^*) \approx CE^*_i
+\end{equation}\]</div>
+<p>Once the objective is met, the goal of the company is to maintain a carbon budget close to zero:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-15e28454-8f58-4729-8e7d-89eefe365a0b">
+<span class="eqno">(4)<a class="headerlink" href="#equation-15e28454-8f58-4729-8e7d-89eefe365a0b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+CB_i(t^*,t) \approx 0
+\end{equation}\]</div>
+<p>when <span class="math notranslate nohighlight">\(t &gt; t^*\)</span>.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1">#figure 1, CE^* = 3 and net carbon budget</span>
+</pre></div>
+</div>
+</section>
 </section>
 <section id="carbon-reduction">
 <h3>Carbon Reduction<a class="headerlink" href="#carbon-reduction" title="Permalink to this headline">#</a></h3>
 </section>
 <section id="carbon-reduction-targets">
 <h3>Carbon Reduction Targets<a class="headerlink" href="#carbon-reduction-targets" title="Permalink to this headline">#</a></h3>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1">#Figure 4 page 10</span>
+</pre></div>
+</div>
 </section>
 <section id="carbon-trend">
 <h3>Carbon Trend<a class="headerlink" href="#carbon-trend" title="Permalink to this headline">#</a></h3>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Figure 5 page 13</span>
+</pre></div>
+</div>
 </section>
 </section>
 <section id="emissions-metrics">
@@ -425,7 +473,11 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basics">Basics</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#carbon-budget">Carbon Budget</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#carbon-budget">Carbon Budget</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#gross-carbon-budget">Gross Carbon Budget</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#net-carbon-budget">Net Carbon Budget</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#carbon-reduction">Carbon Reduction</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#carbon-reduction-targets">Carbon Reduction Targets</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#carbon-trend">Carbon Trend</a></li>
