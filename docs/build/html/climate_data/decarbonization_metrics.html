@@ -341,8 +341,8 @@ document.write(`
 <h4>Gross Carbon Budget<a class="headerlink" href="#gross-carbon-budget" title="Permalink to this headline">#</a></h4>
 <p>A carbon budget defines the amount of GHG emissions that a country or a company produces over the time period <span class="math notranslate nohighlight">\([t_0, t]\)</span>.</p>
 <p>It corresponds to the area of the region bounded by the function <span class="math notranslate nohighlight">\(CE_i(t)\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1fae920f-1ee9-416c-ae2c-28feaa4e250b">
-<span class="eqno">(1)<a class="headerlink" href="#equation-1fae920f-1ee9-416c-ae2c-28feaa4e250b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b5de5d8c-9cc7-43ec-9b8f-c9690f537423">
+<span class="eqno">(1)<a class="headerlink" href="#equation-b5de5d8c-9cc7-43ec-9b8f-c9690f537423" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CB_i(t_0,t) = \int^t_{t_0}CE_i(s)ds
 \end{equation}\]</div>
 <p>This defines a gross carbon budget.</p>
@@ -353,18 +353,18 @@ CB_i(t_0,t) = \int^t_{t_0}CE_i(s)ds
 <section id="net-carbon-budget">
 <h4>Net Carbon Budget<a class="headerlink" href="#net-carbon-budget" title="Permalink to this headline">#</a></h4>
 <p>The issuer <span class="math notranslate nohighlight">\(i\)</span> has generally an objective to keep its GHG emissions under an emissions level <span class="math notranslate nohighlight">\(CE^*_i\)</span>. In that case, the carbon budget is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-023b2d00-7408-44db-803f-4abcae08a8a0">
-<span class="eqno">(2)<a class="headerlink" href="#equation-023b2d00-7408-44db-803f-4abcae08a8a0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-fd5dc37f-b75f-4d20-aeb7-14d2df18e8f0">
+<span class="eqno">(2)<a class="headerlink" href="#equation-fd5dc37f-b75f-4d20-aeb7-14d2df18e8f0" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CB_i(t_0,t) = \int^t_{t_0}(CE_i(s) - CE^*_i)df = -(t - t_0) \cdot CE^*_i + \int^t_{t_0} CE_i(s)ds
 \end{equation}\]</div>
 <p>This carbon budget corresponds to a net carbon budget. In this case, the objective of the company is that emissions converge towards the objective at the target date <span class="math notranslate nohighlight">\(t^*\)</span>, such that:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2a586ae8-8d30-4da0-94d8-ef93b0da0327">
-<span class="eqno">(3)<a class="headerlink" href="#equation-2a586ae8-8d30-4da0-94d8-ef93b0da0327" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-94263e3b-a13b-4f13-822b-56a953574e42">
+<span class="eqno">(3)<a class="headerlink" href="#equation-94263e3b-a13b-4f13-822b-56a953574e42" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CE_i(t^*) \approx CE^*_i
 \end{equation}\]</div>
 <p>Once the objective is met, the goal of the company is to maintain a carbon budget close to zero:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-15e28454-8f58-4729-8e7d-89eefe365a0b">
-<span class="eqno">(4)<a class="headerlink" href="#equation-15e28454-8f58-4729-8e7d-89eefe365a0b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-98f50748-6ba0-46bd-ad76-3152c4818e2b">
+<span class="eqno">(4)<a class="headerlink" href="#equation-98f50748-6ba0-46bd-ad76-3152c4818e2b" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CB_i(t^*,t) \approx 0
 \end{equation}\]</div>
 <p>when <span class="math notranslate nohighlight">\(t &gt; t^*\)</span>.</p>
@@ -375,6 +375,12 @@ CB_i(t^*,t) \approx 0
 </section>
 <section id="carbon-reduction">
 <h3>Carbon Reduction<a class="headerlink" href="#carbon-reduction" title="Permalink to this headline">#</a></h3>
+<p>We assume <span class="math notranslate nohighlight">\(t_{Last}\)</span> to be the last reporting date. It implies that the carbon emissions <span class="math notranslate nohighlight">\(CE_i(t)\)</span> of the issuer <span class="math notranslate nohighlight">\(i\)</span> are only observable when <span class="math notranslate nohighlight">\(t \leq t_{Last}\)</span>. For <span class="math notranslate nohighlight">\(t &gt; t_{Last}\)</span> we define the estimated carbon emissions as:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-98824cc8-3c23-49e3-8b4d-257c68ceeb3e">
+<span class="eqno">(5)<a class="headerlink" href="#equation-98824cc8-3c23-49e3-8b4d-257c68ceeb3e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\hat{CE_i}(t) = (1 - \mathfrak{R}_i(t_{Last},t)) \cdot CE_i(t_{Last})
+\end{equation}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathfrak{R}_i(t_{Last},t)\)</span> is the carbon reduction between <span class="math notranslate nohighlight">\(t_{Last}\)</span> and <span class="math notranslate nohighlight">\(t\)</span>.</p>
 </section>
 <section id="carbon-reduction-targets">
 <h3>Carbon Reduction Targets<a class="headerlink" href="#carbon-reduction-targets" title="Permalink to this headline">#</a></h3>

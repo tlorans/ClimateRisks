@@ -59,6 +59,14 @@ when $t > t^*$.
 
 ### Carbon Reduction
 
+We assume $t_{Last}$ to be the last reporting date. It implies that the carbon emissions $CE_i(t)$ of the issuer $i$ are only observable when $t \leq t_{Last}$. For $t > t_{Last}$ we define the estimated carbon emissions as:
+
+\begin{equation}
+\hat{CE_i}(t) = (1 - \mathfrak{R}_i(t_{Last},t)) \cdot CE_i(t_{Last})
+\end{equation}
+
+where $\mathfrak{R}_i(t_{Last},t)$ is the carbon reduction between $t_{Last}$ and $t$. 
+
 ### Carbon Reduction Targets
 
 ```Python
