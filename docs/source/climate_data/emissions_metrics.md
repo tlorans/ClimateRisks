@@ -78,6 +78,24 @@ We then have:
 
 #### Gap 
 
+The gap measure corresponds to the expected distance between the estimated carbon emissions and the NZE scenario:
+
+\begin{equation}
+Gap_i(t^*) = \hat{CE}_i(t^*) - CE^{NZE}_i(t^*)
+\end{equation}
+
+Again, we can use the target scenario:
+
+\begin{equation}
+Gap_i^{Target}(t^*) = CE_i^{Target}(t^*) - CE^{NZE}_i(t^*)
+\end{equation}
+
+or the trend model:
+
+\begin{equation}
+Gap^{Trend}_i(t^*) = CE^{Trend}_i(t^*) - CE^{NZE}_i(t^*)
+\end{equation}
+
 ```Python
 # example page 14
 ```
@@ -89,6 +107,10 @@ We then have:
 ```
 
 #### Budget
+
+```Python
+# Reproduce figure 6 page 15
+```
 
 ### Dynamic Measures: Time Contribution, Velocity, Burn-Out Scenario
 
