@@ -1,14 +1,4 @@
-# Decarbonization Metrics
-
-In this part, we follow Le Guenedal et al. (2022) {cite}`le2022net` and proposed carbon metrics by the authors to perform portfolio alignment.
-
-First, we cover the foundations of carbon data and analytics, by defining the concepts of carbon budget, reduction target and trend.
-
-Second, we focus on several metrics proposed by Le Guenedal et al. (2022), both static and dynamic.
-
-Finally, we addres the Participation, Ambition and Credibility (PAC) framework proposed as an analytic grid that can be use for portfolio alignment.
-
-## Basics
+## Carbon Budget, Target and Trend
 
 In this section, we will present the foundations for building and understanding carbon metrics. The main tools are the carbon budget, the reduction target and the carbon trend.
 
@@ -227,13 +217,36 @@ If we have the current date as the pivot date $t_p = t_0$, we have $\hat{CE}_i(t
 
 If we want to rescale the trend such that $\hat{CE}_i(t_0) = CE_i(t_0)$, we need to obtain $\beta^{'}_{i,0} = CE_i(t_0)$. We then need to change the intercept of the trend model, that is now equal to $\tilde{\beta}_{i,0} = CE_i(t_0) - \hat{\beta}_{i,1}t_0$.
 
+Let's apply it on an illustrative example from Le Guenedal et al. (2022):
+
+| Year | $CE_i(t)$ | 
+|---|---|
+| 2007  | 57.82 |
+| 2008  | 58.36 |
+| 2009  | 57.70 |
+| 2010  | 55.03 |
+| 2011  | 51.73 |
+| 2012  | 46.44 |
+| 2013  | 47.19 |
+| 2014  | 46.18 |
+| 2015  | 45.37 |
+| 2016  | 40.75 |
+| 2017  | 39.40 |
+| 2018  | 36.16 |
+| 2019  | 38.71 |
+| 2020  | 39.91 |
+
+```Python
+# computation to get the trend as example 4 in page 11
+```
+
 ```Python
 # Figure 5 page 13
 ```
 
 ## Emissions Metrics
 
-### Static Measures 
+### Static Measures: Duration, Gap, Slope and Budget
 
 #### Duration
 
@@ -243,7 +256,7 @@ If we want to rescale the trend such that $\hat{CE}_i(t_0) = CE_i(t_0)$, we need
 
 #### Budget
 
-### Dynamic Measures
+### Dynamic Measures: Time Contribution, Velocity, Burn-Out Scenario
 
 #### Dynamic Analysis of the Track Record
 
