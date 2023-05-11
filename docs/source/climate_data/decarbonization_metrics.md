@@ -1,14 +1,16 @@
 # Decarbonization Metrics
 
-In this part, we follow Le Guenedal et al. (2022) {cite}`le2022net` and proposed net zero carbon metrics by the authors to perform portfolio alignment.
+In this part, we follow Le Guenedal et al. (2022) {cite}`le2022net` and proposed carbon metrics by the authors to perform portfolio alignment.
 
 First, we cover the foundations of carbon data and analytics, by defining the concepts of carbon budget, reduction target and trend.
 
-Second, we focus on several net zero metrics proposed by Le Guenedal et al. (2022), both static and dynamic.
+Second, we focus on several metrics proposed by Le Guenedal et al. (2022), both static and dynamic.
 
-Finally, we addres the Participation, Ambition and Credibility (PAC) framework proposed as an analytic grid that can be use for net zero portfolio construction.
+Finally, we addres the Participation, Ambition and Credibility (PAC) framework proposed as an analytic grid that can be use for portfolio alignment.
 
-## Net Zero Emissions Framework
+## Basics
+
+In this section, we will present the foundations for building and understanding carbon metrics. 
 
 ### Carbon Budget
 
@@ -18,27 +20,27 @@ Finally, we addres the Participation, Ambition and Credibility (PAC) framework p
 
 ### Carbon Trend
 
-## Net Zero Emissions Metrics
+## Emissions Metrics
 
-### Static NZE Measures 
+### Static Measures 
 
-#### NZE Duration
+#### Duration
 
-#### NZE Gap 
+#### Gap 
 
-#### NZE Slope
+#### Slope
 
-#### NZE Budget
+#### Budget
 
-### Dynamic NZE Measures
+### Dynamic Measures
 
 #### Dynamic Analysis of the Track Record
 
-#### NZE Velocity
+#### Velocity
 
-#### NZE Burn-Out Scenario
+#### Burn-Out Scenario
 
-## Participation, Ambition and Credibility for an Effective NZE Alignment Strategy
+## Participation, Ambition and Credibility for an Effective Portfolio Alignment Strategy
 
 ### The PAC Framework
 
