@@ -113,6 +113,30 @@ Gap^{Trend}_i(t^*) = 0 \Leftrightarrow
 \Leftrightarrow \hat{\beta}_{i,1} = \frac{CE^{NZE}_i(t^*) - \hat{\beta}_{i,0}}{t^*}
 \end{equation}
 
+However, $\hat{\beta}_{i,1}$ depends on the intercept of the trend model in the previous equation. We need further transformations. We assume that $\hat{CE}_i(t_0) = CE_i(t_0)$ and we use the current date $t_0$ as the pivot date. We then have:
+
+\begin{equation}
+Gap_i^{Trend}(t^*) = 0 \Leftrightarrow \hat{\beta}^{'}_{i,0} + \hat{\beta}_{i,1}(t^* - t_0) - CE^{NZE}_i(t^*) = 0
+\end{equation}
+
+\begin{equation}
+\Leftrightarrow \hat{\beta}_{i,1} = \frac{CE^{NZE}_i(t^*) - CE_i(t_0)}{t^* - t_0}
+\end{equation}
+
+Because we have $\hat{\beta}^{'}_{i,0} = \hat{CE}_i(t_0)$ and $\hat{CE}_i(t_0) = CE_i(t_0)$, we can deduce that the slope to close the gap is equal to:
+
+\begin{equation}
+Slope_i(t^*) = \frac{CE^{NZE}_i(t^*) - CE_i(t_0)}{t^* - t_0}
+\end{equation}
+
+We can expect the slope to be generally negative because the gap is negative if the NZE scenario has not already been reached. The slope is a decreasing function of the gap: the higher the gap, the steeper the slope.
+
+Finally, we can normalize this slope metric using the current slope $\hat{\beta}_{i,1}$ of the trend model, in order to obtain the slope multiplier:
+
+\begin{equation}
+m_i^{Slope} = \frac{Slope_i(t^*)}{\hat{\beta}_{i,1}}
+\end{equation}
+
 ```Python
 # example 5 from page 15
 ```
