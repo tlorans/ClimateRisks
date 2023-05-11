@@ -29,9 +29,7 @@ Projects are calibrated for a short time-period (around 1 hour) and to illustrat
 
 physics_economics/physics_economics
 physics_economics/productivity
-physics_economics/cost_function
 physics_economics/temperature_modelling
-physics_economics/social_welfare_social_cost
 climate_data/climate_data
 climate_data/decarbonization_metrics
 climate_data/transition_metrics

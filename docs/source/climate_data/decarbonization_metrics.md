@@ -201,6 +201,32 @@ In Python:
 
 ### Carbon Trend
 
+Another alternative to the benchmark global or sector reduction scenario is the carbon trend proposed by Le Guenedal et al. (2022). The authors define the carbon trend by considering a linear constrant trend model. The corresponding linear regression model is:
+
+\begin{equation}
+CE_i(t) = \beta_{i,0} + \beta_{i,1}t + u_i(t)
+\end{equation}
+
+where $t \in [t_{First}, t_{Last}]$. Using the least squares method, we can estimate the parameters $\beta_{i,0}$ and $\beta_{i,1}$. We can then build the carbon trajectory implied by the current rend by applying the projection:
+
+\begin{equation}
+CE^{Trend}_i(t) := \hat{CE}_i(t) = \hat{\beta}_{i,0} + \hat{\beta}_{i,1}t
+\end{equation}
+
+for $t > t_{Last}$. The underlying idea is then to extrapolate the past trajectory. 
+
+Let's assume that $t_p$ is a pivot date (generally the current year). We can have the following reformulation:
+
+\begin{equation}
+CE_i(t) = \beta^{'}_{i,0} + \beta^{'}_{i,1}(t - t_p) + u_i(t)
+\end{equation}
+
+with the relationships: $\beta_{i,0} = \beta^{'}_{i,0}-\beta^{'}_{i,1}t_p$ and $\beta_{i,1} = \beta^{'}_{i,1}$.
+
+If we have the current date as the pivot date $t_p = t_0$, we have $\hat{CE}_i(t) = \beta^{'}_{i,0} + \beta^{'}_{i,1}(t-t_0)$ and $\hat{CE}_i(t_0) \beta^{'}_{i,0}$.
+
+If we want to rescale the trend such that $\hat{CE}_i(t_0) = CE_i(t_0)$, we need to obtain $\beta^{'}_{i,0} = CE_i(t_0)$. We then need to change the intercept of the trend model, that is now equal to $\tilde{\beta}_{i,0} = CE_i(t_0) - \hat{\beta}_{i,1}t_0$.
+
 ```Python
 # Figure 5 page 13
 ```

@@ -1,1 +1,0 @@
-# Social Welfare Maximization and Social Cost of Carbon
