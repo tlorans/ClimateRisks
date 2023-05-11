@@ -107,6 +107,8 @@ Still, these benchmark solutions ignore the idiosyncratic aspect of carbon reduc
 
 ### Carbon Reduction Targets
 
+A first solution to take into account the idiosyncratic aspect of carbon reduction is the use of carbon reduction targets defined by companies. These targets are generally defined at a scope emissions level with different horizons.
+
 ```Python
 #Figure 4 page 10
 ```
