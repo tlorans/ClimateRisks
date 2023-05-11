@@ -27,9 +27,10 @@ Projects are calibrated for a short time-period (around 1 hour) and to illustrat
 :caption: 'Contents:'
 :maxdepth: 2
 
-climaterisks
-project1
-netzeroinvesting
-project2
+climate_investing/climateinvesting
+climate_investing/climaterisks
+climate_investing/project1
+climate_investing/netzeroinvesting
+climate_investing/project2
 references
 ```

@@ -1,6 +1,6 @@
 # Climate Risks Integration Strategies
 
-Climate risks is a hot topic in Finance, from regulators requirements for climate risks stress tests to investors appetite for climate investing. As a future sustainable finance analyst, you will be asked for guidances on climate risks integration strategies. 
+Climate risks is a hot topic in Finance, from regulators requirements for climate risks stress tests to investors appetite for climate investing. As a future sustainable finance analyst, you will be asked for guidances on climate risks integration strategies.
 
 The purpose of this part is to give you a brief overview of the main existing strategies for climate risks integration, from the widely implemented low-carbon strategy with fundamental data (carbon intensity) to the enhanced index with market-based data (carbon beta).
 
