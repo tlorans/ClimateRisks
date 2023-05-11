@@ -102,6 +102,17 @@ Gap^{Trend}_i(t^*) = CE^{Trend}_i(t^*) - CE^{NZE}_i(t^*)
 
 #### Slope
 
+The slope corresponds to the value of $\hat{\beta}_{i,1}$ such that the gap is closed, meaning that $Gap_i^{Trend}(t^*) = 0$. We then have:
+
+\begin{equation}
+Gap^{Trend}_i(t^*) = 0 \Leftrightarrow
+\hat{\beta}_{i,0} + \hat{\beta}_{i,1}t^* - CE^{NZE}_i(t^*) = 0
+\end{equation}
+
+\begin{equation}
+\Leftrightarrow \hat{\beta}_{i,1} = \frac{CE^{NZE}_i(t^*) - \hat{\beta}_{i,0}}{t^*}
+\end{equation}
+
 ```Python
 # example 5 from page 15
 ```
