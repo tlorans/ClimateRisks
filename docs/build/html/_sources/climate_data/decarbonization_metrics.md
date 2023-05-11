@@ -107,7 +107,49 @@ Still, these benchmark solutions ignore the idiosyncratic aspect of carbon reduc
 
 ### Carbon Reduction Targets
 
-A first solution to take into account the idiosyncratic aspect of carbon reduction is the use of carbon reduction targets defined by companies. These targets are generally defined at a scope emissions level with different horizons.
+A first solution to take into account the idiosyncratic aspect of carbon reduction is the use of carbon reduction targets defined by companies. These targets are generally defined at a scope emissions level with different time horizons.
+
+In this section, we present the methodology to compute annual reduction rates implied by the targets and dicuss how to deal with overlapping targets.
+
+Carbon reduction target setting is defined from the space:
+
+\begin{equation}
+\mathfrak{T} = \{k \in [1,m] : (i, j, t^k_1, t^k_2, \mathfrak{R}_{i,j}(t^k_1, t^k_2))\}
+\end{equation}
+
+with $k$ the target index, $m$ the number of historical targets, $i$ the issuer, $j$ the scope, $t^k_1$ the beginning of the target period, $t^k_2$ the end of the target period, and $\mathfrak{R}_{i,j}(t^k_1, t^k_2)$ the carbon reduction between $t^k_1$ and $t^k_2$ for the scope $j$ announced by the issuer $i$.
+
+We have the linear annual reduction rate for scope $j$ and target $k$ at time $t$:
+
+\begin{equation}
+\mathfrak{R}_{i,j}^k = 𝟙\{t \in [t_1^k, t_2^k]\} \cdot \frac{\mathfrak{R}_{i,j}(t^k_1, t^k_2)}{t^k_2 - t^k_1}
+\end{equation}
+
+We can then aggregate the different targets to obtain the linear annual reduction rate for scope $j$:
+
+\begin{equation}
+\mathfrak{R}_{i,j}(t) = \sum^m_{k=1}\mathfrak{R}^k_{i,j}(t)
+\end{equation}
+
+We can then convert these reported targets into absolute emissions reduction as follows:
+
+\begin{equation}
+\mathfrak{R}_i(t) = \frac{1}{\sum^3_{j=1}CE_{i,j}(t_0)} \cdot \sum^3_{j=1}CE_{i,j}(t_0) \cdot \mathfrak{R}_{i,j}(t)
+\end{equation}
+
+After this conversion, the carbon reduction $\mathfrak{R}_i(t)$ no longer depends on the scope and the target period. Once we have established the reduction along the time horizon, we have the implied trajectory of the company emissions:
+
+\begin{equation}
+CE_i^{Target}(t) := \hat{CE}_i(t) = (1 - \mathfrak{R}_i(t_{Last},t)) \cdot CE_i(t_{Last})
+\end{equation}
+
+where:
+
+\begin{equation}
+\mathfrak{R}_i(t_{Last},t) = \sum^t_{s = t_{Last} + 1} \mathfrak{R}_i(s)
+\end{equation}
+
+And we can finally compute the carbon budget according to the carbon targets declared by the issuer.
 
 ```Python
 #Figure 4 page 10
