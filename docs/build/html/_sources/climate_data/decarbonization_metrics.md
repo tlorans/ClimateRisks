@@ -141,6 +141,20 @@ A first solution to take into account the idiosyncratic aspect of carbon reducti
 
 ## Participation, Ambition and Credibility for an Effective Portfolio Alignment Strategy
 
-### The PAC Framework
+### Participation
 
-### PAC Assessment
+```Python
+# Figure 9 page 27, participation
+```
+
+### Ambition 
+
+```Python
+# Figure 9 page 27 ambition
+```
+
+### Credibility 
+
+```Python
+# Figure 9 page 27, credibility
+```
