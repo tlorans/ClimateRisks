@@ -67,6 +67,44 @@ We assume $t_{Last}$ to be the last reporting date. It implies that the carbon e
 
 where $\mathfrak{R}_i(t_{Last},t)$ is the carbon reduction between $t_{Last}$ and $t$. 
 
+With $t_{Last} \in [t_0, t]$ we have the following expression for the carbon budget:
+
+\begin{equation}
+CB_i(t_0,t) = (t - t_{Last})(CE_i(t_{Last}) - CE_i^*) - (t_{Last} - t_0) \cdot CE^*_i + \int^{t_{Last}}_{t_0} CE_i(s)ds - CE_i(t_{Last}) \int^t_{t_{Last}}\mathfrak{R}_i(t_{Last}, s)ds
+\end{equation}
+
+When computing the carbon budget from the last reporting date ($t_0 = t_{Last}$), it reduces to:
+
+\begin{equation}
+CB_i(t_{Last},t) = (t - t_{Last})(CE_i(t_{Last}) - CE^*_i) - CE_i(t_{Last}) \int^t_{t_{Last}}\mathfrak{R}_i(t_{Last}, s)ds
+\end{equation}
+
+The issue here is about the availability of $\mathfrak{R}_i(t_{Last},t)$ for all issuers. One practical solution is to consider a benchmark reduction pathway, using a global carbon reduction scenario for example.
+
+With the IPCC (2021) scenario for example, we need to reduce total emissions by at least 7% every year between 2019 and 2050 if we want to achieve net zero emissions by 2050. 
+
+Using the global approach, the reduction for issuer $i$ is equal to the reduction calculate for the global scenario:
+
+\begin{equation}
+\mathfrak{R}_i(t_{Last},t) = \mathfrak{R}_{Global}(t_{Last}, t)
+\end{equation}
+
+However, this solution is not optimal since there is no difference between issuers. 
+
+Another solution is to use a sector scenario:
+
+\begin{equation}
+\mathfrak{R}_i(t_{Last},t) = \mathfrak{R}_{Sector}(t_{Last}, t)
+\end{equation}
+
+if $i \in Sector(s)$
+
+Still, these benchmark solutions ignore the idiosyncratic aspect of carbon reduction. 
+
+```Python
+#Figure 3 page 7
+```
+
 ### Carbon Reduction Targets
 
 ```Python
