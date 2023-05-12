@@ -1,4 +1,4 @@
-# Part 2: Climate Data and Analytics
+# Part 1: Climate Data and Analytics
 
 
 In this part, we follow Le Guenedal et al. (2022) {cite}`le2022net` and proposed carbon metrics by the authors to perform portfolio alignment.

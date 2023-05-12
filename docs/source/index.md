@@ -27,13 +27,12 @@ Projects are calibrated for a short time-period (around 1 hour) and to illustrat
 :caption: 'Contents:'
 :maxdepth: 2
 
-physics_economics/physics_economics
-physics_economics/productivity
-physics_economics/temperature_modelling
 climate_data/climate_data
 climate_data/carbon_budget
+climate_data/basics_missings
 climate_data/emissions_metrics
 climate_data/pac
+climate_data/project_scoring_pac
 climate_investing/climateinvesting
 climate_investing/climaterisks
 climate_investing/project1
