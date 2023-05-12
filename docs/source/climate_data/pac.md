@@ -5,11 +5,23 @@
 In this part, we discuss the participation, ambition and credibility (PAC) framework proposed by Le Guenedal et al. (2022) to assess a company's NZE alignment strategy, based on the quantitative metrics discussed previously. It can forms the basis for a sound stocks selection for net zero investing in part 3.
 
 This framework depends on the carbon trajectories $CE_i(t)$, $CE_i^{Trend}(t)$, $CE^{Target}_i(t)$ and $CE^{NZE}_i(t)$, where $CE_i(t)$ are the historical carbon emissions, $CE_i^{Trend}$ are the estimated carbon emissions forecasted with the trend model, $CE_i^{Target}(t)$ are the deduced carbon emissions form the targets and $CE^{NZE}_i(t)$ is the NZE scenario.
+
+In what follows, we will note $t_{Base}$ the base date, $t_{Last}$ the last reporting date and $t_{NZE}$ the target date of the NZE scenario.
 ### Participation
 
 The participation dimension generally depends on the past observations and corresponds to the track record analysis of historical carbon emissions.
 This dimension helps to answer the question: is the trend of the issuer in line with the net zero emissions scenario? 
 
+Below is a table with indicators that can be used to assess the participation dimension. We can for example use metrics related to the carbon trend such as the slope $\hat{\beta}_{i,1}$ or the estimated carbon emissions $CE_i^{Trend}(t)$. We can also use current gap with the NZE scenario $Gap^{Trend}_i(t_{Last})$ or the time contribution $TC_i(t_{Last}+1 \| t_{Last}, t_{NZE})$.
+
+| Metric | Condition |  
+|---|---|
+| Gap  | $Gap^{Trend}_i(t_{Last}) \leq 0 $  | 
+| Reduction  | $\mathfrak{R}_i(t_{Base},t_{Last}) < 0$  |  
+| Time contribution  | $TC_i(t_{Last}+1 \| t_{Last}, t_{NZE}) < 0 $  | 
+| Trend  | $\hat{\beta}_{i,1} < 0$ and $R^2_i > 50\%$  |
+| Trend  | $CE^{Trend}_i(t)$ for $t > t_{Last}$  |
+| Velocity  | $v_i^{(1)}(t_{Last}) \leq 0 $  |
 
 ```Python
 # Figure 9 page 27, participation
