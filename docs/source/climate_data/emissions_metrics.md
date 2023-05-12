@@ -279,4 +279,34 @@ where $\omega_0 = \frac{t_1 - t_0}{t^* - t_0}$ and $\omega_1 = \frac{t^* - t_1}{
 
 #### Velocity
 
+In the previous sections, we've seen the importance of the slope change $\Delta \hat{\beta}_{i,1}(t_1,t_2) = \hat{\beta}_{i,1}(t_2) - \hat{\beta}_{i,1}(t_1)$ between the dates $t_1$ and $t_2$.
+
+In this section, we cover the velocity indicator proposed by Le Guenedal et al. (2022), analyzing the slope change.
+
+Le Guenedal et al. (2022) define the velocity metric $v_i(t_1,t_2)$ as:
+
+\begin{equation}
+v_i(t_1,t_2) := \frac{\Delta \hat{\beta}_{i,1}(t_1, t_2)}{t_2 - t_1}
+\end{equation}
+
+It is expressed in MtCO2e. Le Guenedal et al. (2022) also define the $h$-step velocity as:
+
+\begin{equation}
+v_i^{(h)}(t) = v_i(t-h,t)
+\end{equation}
+
+For example, the one-step velocity measures the change of the slope by adding a new observation:
+
+\begin{equation}
+v_i^{(1)}(t) = \hat{\beta}_{i,1}(t) - \hat{\beta}_{i,1}(t - 1)
+\end{equation}
+
+The velocity measures the unit variation of the trend slope. If a net zero emissions commitment implies a negative trend $\hat{\beta}_{i,1}(t) < 0$, it can take many years for a company to change the sign of the trend slope in case of bad track record. 
+
+We can thus use this velocity measure to check if the company is making significant efforts, that is to check if $v_i^{h}(t) < 0$.
+
+```Python
+# reproduce the table 10 page 21
+```
+
 #### Burn-Out Scenario
