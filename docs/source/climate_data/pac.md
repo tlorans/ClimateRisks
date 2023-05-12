@@ -49,12 +49,29 @@ Below is a table with the metrics that can be used to assess the ambition dimens
 
 ### Credibility 
 
-Finally, this last dimension address the most important issue: is the target setting of the issuer relevant and robust? 
-
-Indeed, we may wonder if the target trajectory is a too ambitious promise and a form of greenwashing or a plausible scenario.
+Finally, this last dimension address the most important issue: is the target setting of the issuer relevant and robust? Indeed, we may wonder if the target trajectory is a too ambitious promise and a form of greenwashing or a plausible scenario.
 
 We can measure the credibility of the targets by comparing the current trend of carbon emissions and the reduction targets or by analyzing the recent dynamics of the track record.
 
+Below is a table with metrics that can be used to assess the credibility dimension. Several measures depend on the carbon trend: $\tau_i^{Trend}$, $Gap^{Trend}_i(t_{NZE})$ and $m_i^{Slope}$. 
+
+The implied slope of the company $\bar{Slope}_i(t_{NZE})$ can be compared to the implied slope of the sector $\bar{Slope}_{Sector}(t_{NZE})$. 
+
+The short-term credibility of the company can be measured with the velocity $v_i^{(1)}(t_{Last})$.
+
+The scenarios $ZV^{(1)}_i(t_{Last}+1)$ and $BO_i(t_{Last}+1, CE^{NZE}_i(t^{NZE}))$ can also be compared to the current carbon emissions $CE_i(t_{Last})$. If the scenarios are above the thresholds $\phi_{ZV} \cdot CE_i(t_{Last})$ and $\phi_{BO}CE_i(t_{Last})$, this indicates that the scenarios are credible.
+
+| Metric | Condition |  
+|---|---|
+| Budget  | $CB_i^{Target}(t_{Last},t_{NZE}) > CB_i^{Trend}(t_{Last},t_{NZE})$  | 
+| Burn-out Scenario  | $BO_i(t_{Last}, +1, CE_i^{NZE}(t^{NZE})) \geq \phi_{BO} \cdot CE_i (t_{Last})$  |
+| Duration  | $\tau_i^{Target} \leq t_{NZE}$  |  
+| Gap  | $Gap^{Trend}_i(t_{NZE}) \leq 0$  | 
+| Gap  | $Gap^{Trend}_i(t_{NZE}) \leq Gap_i^{Target}(t_{NZE})$  | 
+| Slope  | $\bar{Slope}_i(t_{NZE}) \geq \bar{Slope}_{Sector}(t_{NZE})$  |
+| Slope  | $m_i^{Slope} << 1$  |
+| Trend  | $R^2_i > 50\%$  |
+| Zero-velocity  | $ZV^(1)_i(t_{Last}+1) \geq \phi_{ZV} \cdot CE_i(t_{Last})$  |    
 ```Python
 # Figure 9 page 27, credibility
 ```

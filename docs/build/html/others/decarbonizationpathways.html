@@ -321,12 +321,12 @@ document.write(`
 The carbon budget defines the amount of CO2eq emissions produced over the time period <span class="math notranslate nohighlight">\([t_0,t]\)</span> for a given emissions scenario.</p>
 <p>As an example, the IPCC (2018) <span id="id1">[<a class="reference internal" href="../references.html#id15" title="Valérie Masson-Delmotte, Panmao Zhai, Hans-Otto Pörtner, Debra Roberts, Jim Skea, Priyadarshi R Shukla, Anna Pirani, Wilfran Moufouma-Okia, Clotilde Péan, Roz Pidcock, and others. Global warming of 1.5 c. An IPCC Special Report on the impacts of global warming of, 1(5):43–50, 2018.">MDZPortner+18</a>]</span> gives an estimate of a remaining carbon budget of 580 GtC02eq for a 50% probability of limiting the warming to 1.5°C. The objective is to limit the global warming to 1.5°C while the corresponding carbon budget is 580 GTCO2eq.</p>
 <p>More formally, a NZE scenario can be defined by a carbon pathway that satisfies the following constraints (Barahhou et al., 2022):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-69dd8c16-7cbd-420e-9f5c-64fbb2ee27bc">
-<span class="eqno">(1)<a class="headerlink" href="#equation-69dd8c16-7cbd-420e-9f5c-64fbb2ee27bc" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-1d7ce24d-3e23-4f9a-96ae-875753341251">
+<span class="eqno">(1)<a class="headerlink" href="#equation-1d7ce24d-3e23-4f9a-96ae-875753341251" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CB(t_0, 2050) \leq CB^+
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-466e8177-5ade-43ad-97e5-12b35c78af57">
-<span class="eqno">(2)<a class="headerlink" href="#equation-466e8177-5ade-43ad-97e5-12b35c78af57" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ec4d5ae7-9e18-4f29-9ec6-0395b3960426">
+<span class="eqno">(2)<a class="headerlink" href="#equation-ec4d5ae7-9e18-4f29-9ec6-0395b3960426" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CE(2050) \approx 0
 \end{equation}\]</div>
 <p>With <span class="math notranslate nohighlight">\(CE(t)\)</span> the global carbon emissions at time <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(CB(t_0,t)\)</span> the global carbon budget between <span class="math notranslate nohighlight">\(t_0\)</span> and <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(CB^+\)</span> the maximum carbon budget to attain a given objective of global warming mitigation. If we consider the AR5 results of IPCC (2018), we can set <span class="math notranslate nohighlight">\(CB^+ = 580\)</span>.</p>
@@ -339,8 +339,8 @@ CE(2050) \approx 0
 <li><p>A minimum carbon reduction <span class="math notranslate nohighlight">\(\mathfrak{R}^-\)</span></p></li>
 </ol>
 <p>A decarbonization pathway is then defined as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a15a24a1-8a08-4395-90ab-7ca8b366e972">
-<span class="eqno">(3)<a class="headerlink" href="#equation-a15a24a1-8a08-4395-90ab-7ca8b366e972" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-2ac14467-bf55-46ef-8351-a050f008d681">
+<span class="eqno">(3)<a class="headerlink" href="#equation-2ac14467-bf55-46ef-8351-a050f008d681" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathfrak{R}(t_0,t) = 1 - (1 - \Delta \mathfrak{R})^{t-t_0}(1 - \mathfrak{R^-})
 \end{equation}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(t_0\)</span> is the base year, <span class="math notranslate nohighlight">\(t\)</span> the year index and <span class="math notranslate nohighlight">\(\mathfrak{R}(t_0,t)\)</span> is the reduction rate of the carbon emissions between <span class="math notranslate nohighlight">\(t_0\)</span> and <span class="math notranslate nohighlight">\(t\)</span>.</p>
@@ -384,8 +384,8 @@ CE(2050) \approx 0
 </figcaption>
 </figure>
 <p>Starting with the decarbonization pathway, we can deduce the emissions scenario (Barahhou et al., 2022):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7ddbd9e8-ac43-41cf-ae83-93265b69c2a8">
-<span class="eqno">(4)<a class="headerlink" href="#equation-7ddbd9e8-ac43-41cf-ae83-93265b69c2a8" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ce0bb722-4e64-4afc-974b-c67b0b4758f9">
+<span class="eqno">(4)<a class="headerlink" href="#equation-ce0bb722-4e64-4afc-974b-c67b0b4758f9" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CE(t) = (1 - \Delta \mathfrak{R})^{t - t_0}(1 - \mathfrak{R}^-) CE(t_0)
 \end{equation}\]</div>
 <p>We can add a new method to the <code class="docutils literal notranslate"><span class="pre">DecarbonizationPathway</span></code> dataclass:</p>
@@ -437,8 +437,8 @@ CE(t) = (1 - \Delta \mathfrak{R})^{t - t_0}(1 - \mathfrak{R}^-) CE(t_0)
 <section id="from-decarbonization-pathway-to-carbon-budget">
 <h3>From Decarbonization Pathway to Carbon Budget<a class="headerlink" href="#from-decarbonization-pathway-to-carbon-budget" title="Permalink to this headline">#</a></h3>
 <p>From Le Guenedal et al. (2022 <span id="id3">[<a class="reference internal" href="../references.html#id17" title="Théo Le Guenedal, François Lombard, Thierry Roncalli, and Takaya Sekine. Net zero carbon metrics. Available at SSRN 4033686, 2022.">LGLRS22</a>]</span>), we can find the corresponding carbon budget with a given value for <span class="math notranslate nohighlight">\(\mathfrak{R}^-\)</span>, <span class="math notranslate nohighlight">\(\Delta \mathfrak{R}\)</span> and <span class="math notranslate nohighlight">\(CE(t_0)\)</span> with:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a4081344-8d33-49f0-a961-17320ed6d664">
-<span class="eqno">(5)<a class="headerlink" href="#equation-a4081344-8d33-49f0-a961-17320ed6d664" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ea9db838-6ea7-4961-b43e-f8ce975a4d84">
+<span class="eqno">(5)<a class="headerlink" href="#equation-ea9db838-6ea7-4961-b43e-f8ce975a4d84" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CB(t_0,t) = (\frac{(1 - \Delta \mathfrak{R})^{t-t_0} - 1}{ln(1 - \Delta \mathfrak{R})})(1 - \mathfrak{R}^-)CE(t_0)
 \end{equation}\]</div>
 <p>We can add a new method to the <code class="docutils literal notranslate"><span class="pre">DecarbonizationPathway</span></code> dataclass:</p>
@@ -494,34 +494,34 @@ CB(t_0,t) = (\frac{(1 - \Delta \mathfrak{R})^{t-t_0} - 1}{ln(1 - \Delta \mathfra
 <section id="carbon-emissions-and-carbon-intensity-pathway-relationship">
 <h3>Carbon Emissions and Carbon Intensity Pathway Relationship<a class="headerlink" href="#carbon-emissions-and-carbon-intensity-pathway-relationship" title="Permalink to this headline">#</a></h3>
 <p>Let’s recall that the carbon intensity <span class="math notranslate nohighlight">\(CI(t)\)</span> is defined as the ratio between the carbon emissions <span class="math notranslate nohighlight">\(CE(t)\)</span> and a normalization variable <span class="math notranslate nohighlight">\(Y(t)\)</span> (a physical or monetary value):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-92d65ba6-6878-4a00-a463-658b0644f240">
-<span class="eqno">(6)<a class="headerlink" href="#equation-92d65ba6-6878-4a00-a463-658b0644f240" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0a210f7f-64f8-4ffc-acdf-29d2a7741958">
+<span class="eqno">(6)<a class="headerlink" href="#equation-0a210f7f-64f8-4ffc-acdf-29d2a7741958" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI(t) = \frac{CE(t)}{Y(t)}
 \end{equation}\]</div>
 <p>If <span class="math notranslate nohighlight">\(\mathfrak{R}_{CI}(t_0)\)</span> and <span class="math notranslate nohighlight">\(\mathfrak{R}_{CE}(t,t_0)\)</span> are the reduction rates of carbon intensity and emissions between the base date <span class="math notranslate nohighlight">\(t_0\)</span> and <span class="math notranslate nohighlight">\(t\)</span>, we have the following relationship (Barahhou et al., 2022):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b4debfac-563f-40f4-90db-7a2012b067ce">
-<span class="eqno">(7)<a class="headerlink" href="#equation-b4debfac-563f-40f4-90db-7a2012b067ce" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-15d8d6f4-44f4-4de4-b979-8810a093a8ed">
+<span class="eqno">(7)<a class="headerlink" href="#equation-15d8d6f4-44f4-4de4-b979-8810a093a8ed" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathfrak{R}_{CI}(t_0,t) = \frac{g_Y(t_0,t) + \mathfrak{R}_{CE}(t_0,t)}{1 + g_Y(t_0,t)}
 \end{equation}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(g_Y(t_0,t)\)</span> is the growth rate of the normalization variable. As we assume that <span class="math notranslate nohighlight">\(g_Y(t_0,t) \geq 0\)</span> and <span class="math notranslate nohighlight">\(0 \leq \mathfrak{R}_{CE}(t_0,t) \leq 1\)</span>, we have the property that the reduction rate of the carbon intensity is always greater than the reduction rate of the carbon emissions:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0eb55c94-71c7-4377-922a-bfc0637bf301">
-<span class="eqno">(8)<a class="headerlink" href="#equation-0eb55c94-71c7-4377-922a-bfc0637bf301" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-98a543ef-5383-472a-a487-ac25b98ea7d8">
+<span class="eqno">(8)<a class="headerlink" href="#equation-98a543ef-5383-472a-a487-ac25b98ea7d8" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathfrak{R}_{CI}(t_0,t) \geq \mathfrak{R}_{CE}(t_0,t)
 \end{equation}\]</div>
 <p>The emissions decarbonization pathway <span class="math notranslate nohighlight">\(\mathfrak{R}_{CE}(t_0,t)\)</span> is called the economic decarbonization pathway, while the intensity decarbonization pathway <span class="math notranslate nohighlight">\(\mathfrak{R}_{CI}(t_0,t)\)</span> is called the financial decarbonization pathway.</p>
 <p>We can simplify the financial / economic pathway relationship by considering both the annual growth rate of normalization variable <span class="math notranslate nohighlight">\(g_{Y}\)</span> and the annual reduction rate of carbon emissions <span class="math notranslate nohighlight">\(\Delta \mathfrak{R}_{CE}\)</span> as constant. We then have the compound growth rate of the normalization variable:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8f86f8fd-b12a-43a8-9655-698bc5950dc4">
-<span class="eqno">(9)<a class="headerlink" href="#equation-8f86f8fd-b12a-43a8-9655-698bc5950dc4" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-dcf0db99-da45-4bb0-8488-bbaf4c71db68">
+<span class="eqno">(9)<a class="headerlink" href="#equation-dcf0db99-da45-4bb0-8488-bbaf4c71db68" title="Permalink to this equation">#</a></span>\[\begin{equation}
 g_Y(t_0,t) = (1 + g_Y)^{t-t_0} - 1
 \end{equation}\]</div>
 <p>And the carbon reduction rate as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b55edca6-dd01-4813-b2c8-3ad7227cab78">
-<span class="eqno">(10)<a class="headerlink" href="#equation-b55edca6-dd01-4813-b2c8-3ad7227cab78" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-235aeb58-c72b-418c-959a-078082df0760">
+<span class="eqno">(10)<a class="headerlink" href="#equation-235aeb58-c72b-418c-959a-078082df0760" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathfrak{R}_{CE}(t_0,t) = 1 - (1 - \Delta \mathfrak{R}_{CE})^{t - t_0}
 \end{equation}\]</div>
 <p>Then, the relationship between the financial and the economic decarbonization pathway becomes (Barahhou et al., 2022):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-182cb9ef-b59a-43b7-8ce1-21ecbf769387">
-<span class="eqno">(11)<a class="headerlink" href="#equation-182cb9ef-b59a-43b7-8ce1-21ecbf769387" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a87e0cb8-b37f-45cf-8aa1-28355270f43e">
+<span class="eqno">(11)<a class="headerlink" href="#equation-a87e0cb8-b37f-45cf-8aa1-28355270f43e" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathfrak{R}_{CI}(t_0,t) = 1 - (1 - \frac{(g_Y + \Delta \mathfrak{R}_{CE})}{1 + g_Y})^{t - t_0}
 \end{equation}\]</div>
 <p>We can create a new dataclass <code class="docutils literal notranslate"><span class="pre">FinancialDecarbonizationPathway</span></code>:</p>
@@ -588,8 +588,8 @@ g_Y(t_0,t) = (1 + g_Y)^{t-t_0} - 1
 </tbody>
 </table>
 <p>We linearly interpolate carbon emissions from this scenario and then obtain the corresponding decarbonization pathway <span class="math notranslate nohighlight">\(\mathfrak{R}_{CE}(t_0,t)\)</span> with the carbon emissions scenario:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9831d5ca-4227-4833-b9e0-2dce9971d505">
-<span class="eqno">(12)<a class="headerlink" href="#equation-9831d5ca-4227-4833-b9e0-2dce9971d505" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-bc14f44c-d40f-4181-b5d2-32973cef06c3">
+<span class="eqno">(12)<a class="headerlink" href="#equation-bc14f44c-d40f-4181-b5d2-32973cef06c3" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathfrak{R}_{CE}(t_0,t) = 1 - \frac{CE(t)}{CE(t_0)}
 \end{equation}\]</div>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -621,8 +621,8 @@ g_Y(t_0,t) = (1 + g_Y)^{t-t_0} - 1
 </figcaption>
 </figure>
 <p>With <span class="math notranslate nohighlight">\(\mathfrak{R}_{CE}(t_0,t)\)</span>, we can estimate the financial decarbonization pathway for different values of the constant growth rate <span class="math notranslate nohighlight">\(g_Y\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1af8b759-3e56-41ad-810a-3463060378e9">
-<span class="eqno">(13)<a class="headerlink" href="#equation-1af8b759-3e56-41ad-810a-3463060378e9" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-477c3673-e9d5-498b-ba09-80a62c32d0a1">
+<span class="eqno">(13)<a class="headerlink" href="#equation-477c3673-e9d5-498b-ba09-80a62c32d0a1" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathfrak{R}_{CI}(t_0,t) = \frac{g_Y(t_0,t) + \mathfrak{R}_{CE}(t_0,t)}{1 + g_Y(t_0,t)}
 \end{equation}\]</div>
 <p>with <span class="math notranslate nohighlight">\(g_Y(t_0,t) = (1 + g_Y)^{t-t_0} - 1\)</span>.</p>
@@ -650,8 +650,8 @@ The PAB’s intensity decarbonization is stated as:</p>
 <li><p>A minimum carbon intensity reduction <span class="math notranslate nohighlight">\(\mathfrak{R}_{CI}^-\)</span> at 50% compared to the invetable universe.</p></li>
 </ol>
 <p>This financial decarbonization pathway is thus:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f3cdbca8-2205-4354-9831-11b4f7736216">
-<span class="eqno">(14)<a class="headerlink" href="#equation-f3cdbca8-2205-4354-9831-11b4f7736216" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-60397a73-fb9f-4fb2-989e-2d9f18e0fe14">
+<span class="eqno">(14)<a class="headerlink" href="#equation-60397a73-fb9f-4fb2-989e-2d9f18e0fe14" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathfrak{R}_{CI}(t_0, t) = 1 - (1 - 7\%)^{t-t_0}(1 - 50\%)
 \end{equation}\]</div>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">pab_reduction_rate</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mf">0.07</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">full_years</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">full_years</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">full_years</span><span class="p">))]</span>
