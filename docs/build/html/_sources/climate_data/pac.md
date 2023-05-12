@@ -29,9 +29,19 @@ Below is a table with indicators that can be used to assess the participation di
 
 ### Ambition 
 
+
+The ambition dimension compares the target trajectory on one side and the NZE scenario or the trend on the other side. It measures to what extent companies are willing to reverse their current carbon emissions and have objectives that match the NZE scenario. This dimension relies on the existence of targets published by the issuer.
+
 This dimension answers to the question: is the commitment of the issuer to fight climate change ambitious? In particular, it helps to understand if the target trajector is above, below or in line with the NZE consensus scenario.
 
-This dimension compares the target trajectory on one side and the NZE scenario or the trend on the other side. We measure to what extent companies are willing to reverse their current carbon emissions and have objectives that match the NZE scenario.
+Below is a table with the metrics that can be used to assess the ambition dimension. Among them are the gap based on the target $Gap_i^{Target}$ or the duration computed with the target $\tau^{Target}_i$. An other measure can be the comparison between the normalized carbon budget $\bar{CB}_i^{Target}(t_{Last}, t_{NZE})$ of the company and the normalized carbon budget (normalized wit the current carbon emissions or the carbon emissions of the base year) of the corresponding sector $\bar{CB}^{Target}_{Sector}(t_{Last},t_{NZE})$.
+
+| Metric | Condition |  
+|---|---|
+| Budget  | $\bar{CB}^{Target}_i(t_{Last}, t_{NZE}) \leq \bar{CB}^{Target}_{Sector}(t_{Last},t_{NZE})$  | 
+| Budget  | $CB^{Target}_i(t_{Last}, t_{NZE}) \leq CB^{Trend}_i(t_{Last},t_{NZE})$  | 
+| Duration  | $\tau_i^{Target} \leq t_{NZE}$  | 
+| Gap  | $Gap^{Target}_i(t_{NZE}) \leq 0$  | 
 
 ```Python
 # Figure 9 page 27 ambition
