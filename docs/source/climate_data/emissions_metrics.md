@@ -233,6 +233,34 @@ and $TC^{revision}_i(t_1 |t_0, t^*)$ corresponds to the forecast revision:
 TC_i^{revision}(t_1 | t_0, t^*) = \int^{t^*}_{t_1}(\mathbb{E}[CE_i(s) |F_{t_1}] - \mathbb{E}[CE_i(s)|F_{t_0}])ds
 \end{equation}
 
+By construction:
+
+- $TC^{error}_i(t_0 | t_0, t^*) = 0$ and $TC^{revision}_i(t_0 |t_0, t^*) = TC_i(t_0 | t_0, t^*)$ at the starting date $t_0$
+
+- $TC^{error}_i(t^*|t_0,t^*) = TC_i(t^* |t_0, t^*)$ and $TC^{revision}_i(t^* |t_0,t^*) = 0$ at the target date $t^*$
+
+Finally, we can normalize the previous quantities by current carbon emissions and the corresponding time period:
+
+\begin{equation}
+\bar{TC}_i(t_1 |t_0, t^*) = \frac{TC_i(t_1|t_0,t^*)}{(t^* - t_0) \cdot CE_i(t_0)}
+\end{equation}
+
+\begin{equation}
+\bar{TC}^{error}_i(t_1 |t_0, t^*) = \frac{TC^{error}_i(t_1 |t_0, t^*)}{(t_1 - t_0) \cdot CE_i(t_0)}
+\end{equation}
+
+\begin{equation}
+\bar{TC}^{revision}_i(t_1 |t_0, t^*) = \frac{TC^{revision}_i(t_1 |t_0, t^*)}{(t^*-t_1) _cdot CE_i(t_0)}
+\end{equation}
+
+And we have the following breakdown:
+
+\begin{equation}
+\bar{TC}_i(t_1 | t_0, t^*) = \omega_0 \cdot \bar{TC}^{error}_i(t_1 |t_0, t^*) + \omega_1 \cdot \bar{TC}^{revision}_i (t_1 |t_0, t^*)
+\end{equation}
+
+where $\omega_0 = \frac{t_1 - t_0}{t^* - t_0}$ and $\omega_1 = \frac{t^* - t_1}{t^* - t_0}$.
+
 ```Python
 # example 6 page 18
 ```
