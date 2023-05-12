@@ -355,3 +355,50 @@ ZV_i^{(1)}(t+1) = CE_i
 ```
 
 #### Burn-Out Scenario
+
+Le Guenedal et al. (2022) proposed a last indicator: the burn-out scenario. It refers to a sudden and violent reduction of carbon emissions in order to satisfy the NZE trajectory. 
+
+To recall, the gap is the expected distance between the estimated carbon emissions and the NZE scenario. The burn-out scenario is then the value of the carbon emissions next year such that the gap is equal to zero, such as the NZE scenario will be achieved on average.
+
+We have $\mathfrak{R}^{Target}_i(t+1, t^*)$ the reduction rate between the date $t+1$ and the NZE date $t^*$ when considering the issuer's carbon targets.
+
+We have:
+
+\begin{equation}
+\hat{CE}_i(t^*) = (1 - \mathfrak{R}^{Target}_i(t+1, t^*)) \cdot CE_i(t+1)
+\end{equation}
+
+The burn-out scenario satisfies the equation $\hat{CE}_i(t^*) = CE^{NZE}_i(t^*)$, then $BO^{Target}_i(t+1, CE^{NZE}_i(t^*))$ the burn-out scenario is defined as:
+
+\begin{equation}
+BO^{Target}_i(t+1, CE^{NZE}_i(t^*)) = \frac{CE^{NZE}_i(t^*)}{1 - \mathfrak{R}^{Target}_i(t+1, t^*)}
+\end{equation}
+
+Considering the linear trend model, we have:
+
+\begin{equation}
+\hat{CE}_i(t^*) = \hat{\beta}_{i,0}(t+1) + \hat{\beta}_{i,1}(t+1) \cdot t^*
+\end{equation}
+
+where:
+
+\begin{equation}
+\hat{\beta}_{i,0}(t+1) = \hat{\beta}_{i,0}(t) + \Delta \hat{\beta}_{i,0}(t, t+1)
+\end{equation}
+
+\begin{equation}
+\hat{\beta}_{i,1}(t+1) = \hat{\beta}_{i,1}(t) + \Delta \hat{\beta}_{i,1}(t,t+1)
+\end{equation}
+
+and where $\Delta \hat{\beta}_{i,0}(t,t+1)$ and $\Delta \hat{\beta}_{i,1}(t,t+1)$ are the variations of the intercept and the slope due to new carbon emissions $CE_i(t+1)$.
+
+We finally have:
+
+\begin{equation}
+BO^{Trend}_i(t+1, CE^{NZE}_i(t^*)) = 
+\{CE_i(t+1):\hat{\beta}_{i,0}(t+1) + \hat{\beta}_{i,1}(t+1) \cdot t^* = CE^{NZE}_i(t^*)\}
+\end{equation}
+
+```Python
+# Table 15 page 24
+```
