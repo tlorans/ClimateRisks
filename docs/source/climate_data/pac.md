@@ -7,10 +7,9 @@ In this part, we discuss the participation, ambition and credibility (PAC) frame
 This framework depends on the carbon trajectories $CE_i(t)$, $CE_i^{Trend}(t)$, $CE^{Target}_i(t)$ and $CE^{NZE}_i(t)$, where $CE_i(t)$ are the historical carbon emissions, $CE_i^{Trend}$ are the estimated carbon emissions forecasted with the trend model, $CE_i^{Target}(t)$ are the deduced carbon emissions form the targets and $CE^{NZE}_i(t)$ is the NZE scenario.
 ### Participation
 
+The participation dimension generally depends on the past observations and corresponds to the track record analysis of historical carbon emissions.
+This dimension helps to answer the question: is the trend of the issuer in line with the net zero emissions scenario? 
 
-This dimension of the PAC framework helps to answer the question: is the trend of the issuer in line with the net zero emissions scenario? 
-
-This dimension generally depends on the past observations and corresponds to the track record analysis of historical carbon emissions.
 
 ```Python
 # Figure 9 page 27, participation
