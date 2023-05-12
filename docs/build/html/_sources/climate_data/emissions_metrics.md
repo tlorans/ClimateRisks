@@ -149,7 +149,23 @@ m_i^{Slope} = \frac{Slope_i(t^*)}{\hat{\beta}_{i,1}}
 
 ### Dynamic Measures: Time Contribution, Velocity, Burn-Out Scenario
 
-#### Dynamic Analysis of the Track Record
+#### Time Contribution
+
+```Python
+# example 6 page 18
+```
+
+```Python
+# table 9 page 19
+```
+
+```Python
+# Figure 7 page 19
+```
+
+```Python
+# Figure 8 page 20
+```
 
 #### Velocity
 
