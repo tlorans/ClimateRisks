@@ -143,13 +143,95 @@ m_i^{Slope} = \frac{Slope_i(t^*)}{\hat{\beta}_{i,1}}
 
 #### Budget
 
+The budget metric corresponds to the carbon budget between the date $t_0$ and the NZE date $t^*$, such as:
+
+\begin{equation}
+CB_i(t_0, t^*) = \int^{t^*}_{t_0}(\hat{CE}_i(s) - CE^{NZE}_i(t^*))ds
+\end{equation}
+
+As before, we can compute the budget metric either with respect to the target trajectory or the trend. 
+
 ```Python
 # Reproduce figure 6 page 15
 ```
 
 ### Dynamic Measures: Time Contribution, Velocity, Burn-Out Scenario
 
+While we've covered static metrics for a target date $t^*$ that generally only needs the current emissions $CE_i(t_0)$ in the previous section, Le Guenedal et al. (2022) also proposed dynamic metrics that depend on a future reporting date. We will cover these metrics in this section.
+
 #### Time Contribution
+
+We consider $t_1 > t_0$ a future reporting date. We have:
+
+\begin{equation}
+CB_i(t_0, t^*) = \int^{t_1}_{t_0}(\hat{CE}_i(s) - CE^{NZE}_i(t^*))ds + 
+\int^{t^*}_{t_1}(\hat{CE}_i(s) - CE^{NZE}_i(t^*))ds 
+\end{equation}
+
+When the current date becomes $t_1$, we have:
+
+\begin{equation}
+CB_i(t_0,t^*) = CB_i(t_0,t_1) + CB_i(t_1,t^*)
+\end{equation}
+
+where the first component $CB_i(t_0,t_1)$ corresponds to the observed / realized carbon emissions and the component $CB_i(t_1, t^*)$ corresponds to the estimated future carbon emissions. This last component corresponds to the mathematical expectation of future carbon emissions.
+Having a new reported value $CE_i(t_1)$ of carbon emissions can change the expectations:
+
+\begin{equation}
+\mathbb{E}[CE_i(t)|F_{t_0}] \neq \mathbb{E}[CE_i(t)|F_{t_1}]
+\end{equation}
+
+for $t \geq t_1$.
+
+For example, $CE_i(t_1)$ can change the carbon trend $CE_i^{Trend}(t)$ because of the next estimated intercept or slope. Or the issuer can announce new carbon targets at ime $t_1$ and the estimates $CE_i^{Target}(t)$ will be different.
+
+To perform the corresponding dynamic analysis, $CB_i(t_0, t_1, t^*)$ is defined as the carbon budget between the starting date $t_0$ and the target date $t^*$, which is evaluated at the current date $t_1$.
+
+We rewrite the previous decomposition of the carbon budget as:
+
+\begin{equation}
+CB_i(t_0,t,t^*) = CB_i(t_0,t_1,t_1) + CB_i(t_1,t_1,t^*)
+\end{equation}
+
+Le Guenedal et al. (2022) defines the contribution $TC_i(t1 |t_0, t^*)$ of the new information observed at the date $t_1$, satisfying:
+
+\begin{equation}
+CB_i(t_0, t_1, t^*) = CB_i(t_0,t_0,t^*) + TC_i(t_1 | t_0, t^*)
+\end{equation}
+
+If we have $TC_i(t_1 |t_0, t^*) \leq 0$, the new information allows the carbon budget to be reduced. If $TC_i(t_1 |t_0, t^*) > 0$, it has a positive contribution and increases the carbon budget. It is called the time contribution of year $t_1$. 
+
+We have:
+
+\begin{equation}
+TC_i(t_1 | t_0, t^*) = CB_i(t_0,t_1, t^*) - CB_i(t_0,t_0,t^*)
+\end{equation}
+
+\begin{equation}
+= \int^{t^*}_{t_0}(\mathbb{E}[CE_i(s)|F_{t_1}] - CE^{NZE}_i(t^*))ds - \int^{t^*}_{t_0}(\mathbb{E}[CE_i(s)|F_{t_0}] - CE^{NZE}_i(t^*))ds
+\end{equation}
+
+\begin{equation}
+= \int^{t^*}_{t_0}(\mathbb{E}[CE_i(s) |F_{t_1}] - \mathbb{E}[CE_i(s)|F_{t_0}])ds
+\end{equation}
+
+The time contribution is then made up of two components:
+
+\begin{equation}
+TC_i(t_1 |t_0, t^*) = TC^{error}_i(t_1 |t_0, t^*) + TC_i^{revision}(t_1 |t_0, t^*)
+\end{equation}
+
+where $TC^{error}_i(t_1 |t_0, t^*)$ measures the forecast error between the observed trajectory and the estimate produced at time $t_0$:
+
+\begin{equation}
+TC_i^{error}(t_1 | t_0, t^*) = \int^{t_1}_{t_0}(CE_i(s) - \mathbb{E}[CE_i(s)|F_{t_0}])ds
+\end{equation}
+
+and $TC^{revision}_i(t_1 |t_0, t^*)$ corresponds to the forecast revision:
+
+\begin{equation}
+TC_i^{revision}(t_1 | t_0, t^*) = \int^{t^*}_{t_1}(\mathbb{E}[CE_i(s) |F_{t_1}] - \mathbb{E}[CE_i(s)|F_{t_0}])ds
+\end{equation}
 
 ```Python
 # example 6 page 18
