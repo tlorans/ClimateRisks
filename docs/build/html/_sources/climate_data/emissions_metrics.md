@@ -277,7 +277,7 @@ where $\omega_0 = \frac{t_1 - t_0}{t^* - t_0}$ and $\omega_1 = \frac{t^* - t_1}{
 # Figure 8 page 20
 ```
 
-#### Velocity
+#### Velocity and Zero-Velocity Scenario
 
 In the previous sections, we've seen the importance of the slope change $\Delta \hat{\beta}_{i,1}(t_1,t_2) = \hat{\beta}_{i,1}(t_2) - \hat{\beta}_{i,1}(t_1)$ between the dates $t_1$ and $t_2$.
 
@@ -307,6 +307,51 @@ We can thus use this velocity measure to check if the company is making signific
 
 ```Python
 # reproduce the table 10 page 21
+```
+
+Based on this definition of the velocity metric, Le Guenedal et al. (2022) proposed a zero-velocity scenario. 
+
+It starts from the fact that:
+
+\begin{equation}
+v_i^{(1)}(t+1) = \hat{\beta}_{i,1}(t+1) - \hat{\beta}_{i,1}(t)
+\end{equation}
+\begin{equation}
+= \phi(n)(12(n+2) \cdot \hat{CE}_i(t) - 18(n+1) \cdot \tilde{CE}_i(t) + 6(n - 1) \cdot CE_i(t+1))
+\end{equation}
+
+where $n$ is the number of available observations until the date $t$, and:
+
+\begin{equation}
+\phi(n) = \frac{1}{(n-1)(n+1)(n+2)}
+\end{equation}
+
+We thus have:
+
+\begin{equation}
+v^{(1)}_i(t+1) \leq 0 \Leftrightarrow CE_i(t+1) \leq ZV_i^{1}(t+1)
+\end{equation}
+
+where $ZV_i^{1}(t+1)$ corresponds to the value of carbon emissions to obtain a zero velocity. It is computed as:
+
+\begin{equation}
+ZV_i^{(1)}(t+1) = \frac{18(n+1) \cdot \tilde{CE}_i(t) - 12(n + 2) \cdot \bar{CE}_i(t)}{6(n-1)}
+\end{equation}
+
+In the case where $CE_i(s) = CE_i$ for all $s \leq t$, we have:
+
+\begin{equation}
+\tilde{CE}_i(t) = \bar{CE}_i(t) = CE_i
+\end{equation}
+
+and:
+
+\begin{equation}
+ZV_i^{(1)}(t+1) = CE_i
+\end{equation}
+
+```Python
+# Table 13 page 22
 ```
 
 #### Burn-Out Scenario
