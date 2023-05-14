@@ -1,5 +1,12 @@
 ## Portfolio Alignment with a Sound Decarbonization Pathway
 
+We've seen in the previous part that traditional carbon risk hedging strategy involves static portfolio decarbonization.
+
+However, as stated by Barahhou et al. (2022), net zero investing changed the static dimension of climate investing by highlighting the need for portfolio alignment to a sound decarbonization pathway. As a decarbonization pathway is by nature dynamic, a portfolio alignment strategy calls for the implementation of a dynamic strategy.
+
+In the first section, we will focus on the concept of decarbonization pathway. Then, we will show how to implement a dynamic portfolio decarbonization strategy, in line with a decarbonization pathway.
+
+
 ### What is a Sound Decarbonization Pathway?
 
 A net zero investment portfolio starts with a Net Zero Emissions (NZE) scenario. A decarbonization pathway summarizes the NZE scenario.
@@ -392,10 +399,6 @@ We can see that the PAB financial decarbonization pathway is far too much aggres
 ### Portfolio Alignment as a Dynamic Portfolio Decarbonization
 
 We've seen in the low-carbon strategy framework how investors can conduct a portfolio decarbonization with a static approach, compared to a reference universe. On the other side, net zero investing involves portfolio alignment with a decarbonization pathway $\mathfrak{R}_{CI}(t_0,t)$. Because we introduce a pathway between $t_0$ and $t$, the problem now involves a dynamic strategy.
-
-Furthermore, a net zero investing strategy needs to include a mechanism that respect the endogenous aspect of the decarbonization pathway. In particular, a net zero portfolio implies the self-decarbonization of the portolio to respect the endogenous aspect of the decarbonization pathway, as stated by Barahhou et al. (2022).
-
-In this part, we are going to compare the approach for performing a portfolio alignment with the Paris-Aligned Benchmarks (PAB) and the net zero investment portfolio framework proposed by Barahhou et al. (2022). Introducing the concept of Net Zero Backtesting, we'll see that the dynamic decarbonization in the PAB relies on sequential decarbonization rather than self-decarbonization, because the issuers' carbon footprint dynamics are not taken into account. We will introduce a carbon footprint dynamic measure, following Barahhou et al. (2022), in order to maximize the self-decarbonization property of the net zero portfolio. 
 
 #### Dynamic Portfolio's Decarbonization
 
