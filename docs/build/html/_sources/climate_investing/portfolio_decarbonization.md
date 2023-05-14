@@ -1,17 +1,12 @@
 ## Portfolio Decarbonization
 
-Climate risks is a hot topic in Finance, from regulators requirements for climate risks stress tests to investors appetite for climate investing. As a future sustainable finance analyst, you will be asked for guidances on climate risks integration strategies.
+A first and simple approach for climate risks hedging strategy is a static portfolio decarbonization, excluding the higher emitting stocks. This strategy is a tool for climate risks hedging, with the assumption that carbon risk is not priced by the market holds and was proposed by Andersson et al. (2016) {cite:p}`andersson2016hedging`.
 
-Low-carbon strategy corresponds to portfolio's decarbonization, excluding the higher emitting stocks. This strategy is a tool for climate risks hedging if the assumption that carbon risk is not priced by the market holds.
-
-
-As a first climate risks integration strategy, we propose to follow Andersson et al. (2016) {cite:p}`andersson2016hedging` and Roncalli (2023), with a simple low-carbon index strategy.
-
-The strategy consists in (i) reducing the weighted-average carbon intensity (WACI of the portoflio) while (ii) minimizing the tracking error relative to a benchmark.
+The strategy consists in (i) reducing the weighted-average carbon intensity (WACI of the portoflio) while (ii) minimizing the tracking error relative to a benchmark (the benchmark as the initial portfolio).
 
 The underlying assuption is that carbon risk is unpriced by the market. The financial aspect of carbon risk is then a risk of abrupt pricing by the market, once the markets participants integrate it. By reducing the portfolio's WACI, Andersson et al. (2016) suppose that the portfolio's carbon risk (here, the repricing risk associated with an abrupt carbon tax or carbon policy implementation) will be reduced. 
 
-This carbon risk-hedging strategy is widely followed by index providers and asset managers, and can be defined as a low-carbon strategy.
+This carbon risk-hedging strategy is widely followed by index providers and asset managers.
 
 In what follow, we will test two alternatives formulations for the climate objective, proposed by Andersson et al. (2016) and following the notations used in Roncalli (2023): 
 - the threshold approach, which consists in reducing the portfolio's WACI by changing the weights of stocks;
@@ -522,8 +517,7 @@ Again, the tracking error increases faster with the reduction rate than with the
 
 ### Key Takeaways
 
-- We've covered the most frequent carbon risk-hedging strategy with the low-carbon strategy approach. It relies on minimizing the tracking error volatiltiy relative to a benchmark while diminishing the exposure to carbon risk, measured with the carbon intensity.
+- We've covered the most frequent carbon risk-hedging strategy with the static portfolio decarbonization. It relies on minimizing the tracking error volatiltiy relative to a benchmark while diminishing the exposure to carbon risk, measured with the carbon intensity.
 
 - We've seen that the max-threshold approach dominates the order-statistic with TE minimization and the order-statistic with naïve reweighting in terms of decarbonization and tracking error volatility trade-off.
 
-- The main assumption of the low-carbon strategy is the absence of carbon risk pricing. We will relax this assumption in the next part.

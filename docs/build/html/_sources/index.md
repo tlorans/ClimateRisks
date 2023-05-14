@@ -34,9 +34,7 @@ climate_investing/self_decarbonization
 climate_investing/transition
 climate_data/climate_data
 climate_data/carbon_budget
-climate_data/basics_missings
 climate_data/emissions_metrics
 climate_data/pac
-climate_data/project_scoring_pac
 references
 ```
