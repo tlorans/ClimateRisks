@@ -1,6 +1,6 @@
 
 
-## Participation, Ambition and Credibility
+## Participation, Ambition and Credibility: the Three Dimensions of an Effective Portfolio Alignment Strategy
 
 In this part, we discuss the participation, ambition and credibility (PAC) framework proposed by Le Guenedal et al. (2022) to assess a company's NZE alignment strategy, based on the quantitative metrics discussed previously. It can forms the basis for a sound stocks selection for net zero investing in part 3.
 

@@ -1,4 +1,4 @@
-## Emissions Metrics
+## Advanced Emissions Metrics
 
 
 ### Static Measures: Duration, Gap, Slope and Budget

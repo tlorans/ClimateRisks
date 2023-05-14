@@ -1,4 +1,4 @@
-# Part 1: Climate Data and Analytics
+# Part 2: Advanced Metrics for an Effective Portfolio Alignment Strategy
 
 
 In this part, we follow Le Guenedal et al. (2022) {cite}`le2022net` and proposed carbon metrics by the authors to perform portfolio alignment.

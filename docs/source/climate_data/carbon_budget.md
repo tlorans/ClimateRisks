@@ -1,4 +1,4 @@
-## Carbon Budget, Target and Trend
+## Foundations: Carbon Budget, Target and Trend
 
 In this section, we will present the foundations for building and understanding carbon metrics. The main tools are the carbon budget, the reduction target and the carbon trend.
 
