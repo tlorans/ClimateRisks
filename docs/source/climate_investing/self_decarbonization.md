@@ -132,9 +132,9 @@ In this example, we can see that almost all yearly portfolio decarbonization com
 
 In the previous section, we have performed a portfolio alignment by considering a global decarbonization path for the portfolio, as recommended by the PAB approach. In this section, we consider the decarbonization path of the issuers, as in Le Guenedal and Roncalli (2022 {cite:p}`le2022portfolio`) and Barahhou et al. (2022). This approach should help in improving the self-decarbonization ratio of the portfolio.
 
-In order to have an idea of the potential issuers carbon footprint dynamics, we can exploit the historical trajectory of the past carbon emissions. We can therefore, as Roncalli et al. (2022), estimate the associated linear trend model and project the future carbon emissions by assuming that the issuer will do the same efforts in the future than in the past.
+In order to have an idea of the potential issuers carbon footprint dynamics, we can exploit the historical trajectory of the past carbon emissions. We can therefore, Le Guenedal et al. (2022), estimate the associated linear trend model and project the future carbon emissions by assuming that the issuer will do the same efforts in the future than in the past.
 
-Le Guenedal et and Roncalli (2022) define the carbon trend by considering the following linear constant trend model:
+Le Guenedal et al. (2022) define the carbon trend by considering the following linear constant trend model:
 
 \begin{equation}
 CE(t) = \beta_0 + \beta_1 \cdot t + u(t)
@@ -234,6 +234,7 @@ The optimization problem is the same as the previous optimization problem except
 \end{aligned}
 \end{equation*}
 
+In the second part of this course, we will introduce more advanced metrics, proposed by Le Guenedal et al. (2022).
 
 ### Key Takeaways 
 
