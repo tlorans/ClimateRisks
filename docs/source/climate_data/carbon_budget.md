@@ -230,17 +230,62 @@ A first solution to take into account the idiosyncratic aspect of carbon reducti
 
 with $k$ the target index, $m$ the number of historical targets, $i$ the issuer, $j$ the scope, $t^k_1$ the beginning of the target period, $t^k_2$ the end of the target period, and $\mathfrak{R}_{i,j}(t^k_1, t^k_2)$ the carbon reduction between $t^k_1$ and $t^k_2$ for the scope $j$ announced by the issuer $i$.
 
-We have the linear annual reduction rate for scope $j$ and target $k$ at time $t$:
+
+Let's start with an illustrative example from Le Guenedal et al. (2022):
+
+| $k$  |  Release Date | Scope | $t^k_1$  | $t^k_2$   | $\mathfrak{R}(t^k_1,t^k_2)$|
+|---|---|---|---|---|---|
+| 1  | 01/08/2013  | $SC_1$  | 2015  | 2030  | 45% |
+| 2  | 01/10/2019  | $SC_2$  | 2020  |  2040 | 40% |
+| 3  | 01/01/2019  | $SC_3$  | 2025  | 2050  | 25% |
+
+Dates $t^k_1$ and $t_k^2$ correspond to the 1st January. In August 2013, the company announced its willingness to reduce its carbon emissions by 45% between January 2015 and January 2030. We assume that $CE_{i,1}(2020) = 10.33$, $CE_{i,2}(2020)=7.72$ and $CE_{i,3}(2020) = 21.86$.
+
+First, we can deduce the linear annual reduction rate for scope $j$ and target $k$ at time $t$:
 
 \begin{equation}
 \mathfrak{R}_{i,j}^k = 𝟙\{t \in [t_1^k, t_2^k]\} \cdot \frac{\mathfrak{R}_{i,j}(t^k_1, t^k_2)}{t^k_2 - t^k_1}
 \end{equation}
 
-We can then aggregate the different targets to obtain the linear annual reduction rate for scope $j$:
+In Python, it can be implemented as:
+```Python
+def get_linear_annual_by_target(start:int, end:int, target:float):
+  t_k = np.array([i for i in range(2015, 2051)])
+  t_R_scope = np.zeros(len(t_k))
+  t_R_scope[np.where(((t_k >= start) & (t_k < end)))] = 1 # vector of dummies
+  return t_R_scope  * target / (end - start) # linear annual reduction rate
+```
+
+And let's plot the results:
+```Python
+R_scope_1 = get_linear_annual_by_target(2015, 2030, 0.45)
+R_scope_2 = get_linear_annual_by_target(2020, 2040, 0.4)
+R_scope_3 = get_linear_annual_by_target(2025, 2050, 0.25)
+
+plt.plot([i for i in range(2015, 2051)], R_scope_1 * 100)
+plt.plot([i for i in range(2015, 2051)], R_scope_2 * 100)
+plt.plot([i for i in range(2015, 2051)], R_scope_3 * 100)
+plt.ylim(ymax=5)
+plt.ylabel("Annual Reduction Rate")
+plt.legend(["Scope 1","Scope 2", "Scope 3"])
+plt.figure(figsize = (10, 10))
+plt.show()
+```
+
+```{figure} linear_reduction_rate.png
+---
+name: linear_reduction_rate
+---
+Figure: Linear Reduction Rate Deduced from Targets
+```
+
+If needed, we can then aggregate the different targets to obtain the linear annual reduction rate for scope $j$:
 
 \begin{equation}
 \mathfrak{R}_{i,j}(t) = \sum^m_{k=1}\mathfrak{R}^k_{i,j}(t)
 \end{equation}
+
+In our illustrative example, this is not necessary as we have only one target $k$ by scope $j$.
 
 We can then convert these reported targets into absolute emissions reduction as follows:
 
@@ -248,7 +293,29 @@ We can then convert these reported targets into absolute emissions reduction as 
 \mathfrak{R}_i(t) = \frac{1}{\sum^3_{j=1}CE_{i,j}(t_0)} \cdot \sum^3_{j=1}CE_{i,j}(t_0) \cdot \mathfrak{R}_{i,j}(t)
 \end{equation}
 
-After this conversion, the carbon reduction $\mathfrak{R}_i(t)$ no longer depends on the scope and the target period. Once we have established the reduction along the time horizon, we have the implied trajectory of the company emissions:
+Let's also implement it in Python:
+
+```Python
+R_total = 1 / (10.33 + 7.72 + 21.86) * (10.33 * R_scope_1 + 7.72 * R_scope_2 + 21.86 * R_scope_3)
+
+plt.plot([i for i in range(2015, 2051)], R_total * 100)
+plt.ylim(ymax=2)
+plt.ylabel("Annual Reduction Rate")
+plt.figure(figsize = (10, 10))
+plt.show()
+```
+
+
+```{figure} annual_reduction_rate.png
+---
+name: annual_reduction_rate
+---
+Figure: Total Emissions Annual Reduction Rate Deduced From Linear Annual Reduction Rate by Scope
+```
+
+After this conversion, the carbon reduction $\mathfrak{R}_i(t)$ no longer depends on the scope and the target period. 
+
+Once we have established the reduction along the time horizon, we have the implied trajectory of the company emissions:
 
 \begin{equation}
 CE_i^{Target}(t) := \hat{CE}_i(t) = (1 - \mathfrak{R}_i(t_{Last},t)) \cdot CE_i(t_{Last})
@@ -261,22 +328,6 @@ where:
 \end{equation}
 
 And we can finally compute the carbon budget according to the carbon targets declared by the issuer.
-
-Let's consider an illustrative example from Le Guenedal et al. (2022):
-
-| $k$  |  Release Date | Scope | $t^k_1$  | $t^k_2$   | $\mathfrak{R}(t^k_1,t^k_2)$|
-|---|---|---|---|---|---|
-| 1  | 01/08/2013  | $SC_1$  | 2015  | 2030  | 45% |
-| 2  | 01/10/2019  | $SC_2$  | 2020  |  2040 | 40% |
-| 3  | 01/01/2019  | $SC_3$  | 2025  | 2050  | 25% |
-
-Dates $t^k_1$ and $t_k^2$ correspond to the 1st January. In August 2013, the company announced its willingness to reduce its carbon emissions by 45% between January 2015 and January 2030. We assume that $CE_{i,1}(2020) = 10.33$, $CE_{i,2}(2020)=7.72$ and $CE_{i,3}(2020) = 21.86$.
-
-In Python:
-```Python
-#Figure 4 page 10
-# we apply the formula up to the the linear annual reduction rate
-```
 
 In practice however, we can face carbon targets issuer updating its expectations and change is reduction policy, with resulting overlapping dates, such as the following:
 

@@ -305,18 +305,18 @@ document.write(`
 <h2>Carbon Budget<a class="headerlink" href="#carbon-budget" title="Permalink to this headline">#</a></h2>
 <p>A carbon budget defines the amount of GHG emissions that a country or a company produces over the time period <span class="math notranslate nohighlight">\([t_0, t]\)</span>.</p>
 <p>It corresponds to the area of the region bounded by the function <span class="math notranslate nohighlight">\(CE_i(t)\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ff72a644-5694-44b4-a9f6-cc31ccc32183">
-<span class="eqno">(1)<a class="headerlink" href="#equation-ff72a644-5694-44b4-a9f6-cc31ccc32183" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-822d1165-5808-4a30-8b33-21905d516a07">
+<span class="eqno">(1)<a class="headerlink" href="#equation-822d1165-5808-4a30-8b33-21905d516a07" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CB_i(t_0,t) = \int^t_{t_0}CE_i(s)ds
 \end{equation}\]</div>
 <p>This defines a gross carbon budget.</p>
 <p>The carbon budget can be approximated with the right Riemann sum with an annual step (Le Guenedal et al. 2022), with <span class="math notranslate nohighlight">\(\Delta t = 1\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-41564842-488a-475a-90ac-fb2e3605e980">
-<span class="eqno">(2)<a class="headerlink" href="#equation-41564842-488a-475a-90ac-fb2e3605e980" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-3af70db9-4352-4d0f-a17b-ac1c08064612">
+<span class="eqno">(2)<a class="headerlink" href="#equation-3af70db9-4352-4d0f-a17b-ac1c08064612" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CB_i(t_0,t) \approx \sum^{m}_{k=1}(CE_i(t_0 + k\Delta t)) \cdot \Delta t
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-fff6bba6-3de1-4a28-8c3d-b4836c51e3af">
-<span class="eqno">(3)<a class="headerlink" href="#equation-fff6bba6-3de1-4a28-8c3d-b4836c51e3af" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c5cb6a1d-a801-4a5f-a8f5-cf80c923acc7">
+<span class="eqno">(3)<a class="headerlink" href="#equation-c5cb6a1d-a801-4a5f-a8f5-cf80c923acc7" title="Permalink to this equation">#</a></span>\[\begin{equation}
 = \sum^t_{s = t_0 + 1}(CE_i(s))
 \end{equation}\]</div>
 <p>Let’s illustrate it with an example from Le Guenedal et al. (2022) in Python:</p>
@@ -408,24 +408,24 @@ CB_i(t_0,t) \approx \sum^{m}_{k=1}(CE_i(t_0 + k\Delta t)) \cdot \Delta t
 </pre></div>
 </div>
 <p>The issuer <span class="math notranslate nohighlight">\(i\)</span> has generally an objective to keep its GHG emissions under an emissions level <span class="math notranslate nohighlight">\(CE^*_i\)</span>. In that case, the carbon budget is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5b1ed9b5-4789-438f-a0d1-ce45a2ba85ce">
-<span class="eqno">(4)<a class="headerlink" href="#equation-5b1ed9b5-4789-438f-a0d1-ce45a2ba85ce" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-bba3c32e-e43d-4b3a-8631-9f723f521034">
+<span class="eqno">(4)<a class="headerlink" href="#equation-bba3c32e-e43d-4b3a-8631-9f723f521034" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CB_i(t_0,t) = \int^t_{t_0}(CE_i(s) - CE^*_i)ds = -(t - t_0) \cdot CE^*_i + \int^t_{t_0} CE_i(s)ds
 \end{equation}\]</div>
 <p>This carbon budget corresponds to a net carbon budget. In this case, the objective of the company is that emissions converge towards the objective at the target date <span class="math notranslate nohighlight">\(t^*\)</span>, such that:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-fbdde60f-3e3b-4229-8a32-61d2bdee7e1d">
-<span class="eqno">(5)<a class="headerlink" href="#equation-fbdde60f-3e3b-4229-8a32-61d2bdee7e1d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-fcd68bc4-1677-4989-8916-0347d27dd113">
+<span class="eqno">(5)<a class="headerlink" href="#equation-fcd68bc4-1677-4989-8916-0347d27dd113" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CE_i(t^*) \approx CE^*_i
 \end{equation}\]</div>
 <p>Once the objective is met, the goal of the company is to maintain a carbon budget close to zero:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ad1e1511-b013-4936-9de6-065196fb46a6">
-<span class="eqno">(6)<a class="headerlink" href="#equation-ad1e1511-b013-4936-9de6-065196fb46a6" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d0132900-1a2f-46bc-9c1a-4e8533b1c5f5">
+<span class="eqno">(6)<a class="headerlink" href="#equation-d0132900-1a2f-46bc-9c1a-4e8533b1c5f5" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CB_i(t^*,t) \approx 0
 \end{equation}\]</div>
 <p>when <span class="math notranslate nohighlight">\(t &gt; t^*\)</span>.</p>
 <p>Again, we can approximate the net carbon budget with the right Riemann sum with an annual step:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ee842314-dd03-42df-a931-ed5808e03a3f">
-<span class="eqno">(7)<a class="headerlink" href="#equation-ee842314-dd03-42df-a931-ed5808e03a3f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f1c2f2f1-4bb7-4e53-8a32-8caf230c2949">
+<span class="eqno">(7)<a class="headerlink" href="#equation-f1c2f2f1-4bb7-4e53-8a32-8caf230c2949" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CB_i(t_0,t) \approx \sum^t_{s=t_0 + 1}(CE_i(s) - CE^*_i)
 \end{equation}\]</div>
 <p>Let’s make an example with <span class="math notranslate nohighlight">\(CE^*_i = 3\)</span>:</p>
@@ -480,51 +480,25 @@ CB_i(t_0,t) \approx \sum^t_{s=t_0 + 1}(CE_i(s) - CE^*_i)
 <section id="carbon-reduction-targets">
 <h2>Carbon Reduction Targets<a class="headerlink" href="#carbon-reduction-targets" title="Permalink to this headline">#</a></h2>
 <p>We assume <span class="math notranslate nohighlight">\(t_{Last}\)</span> to be the last reporting date. It implies that the carbon emissions <span class="math notranslate nohighlight">\(CE_i(t)\)</span> of the issuer <span class="math notranslate nohighlight">\(i\)</span> are only observable when <span class="math notranslate nohighlight">\(t \leq t_{Last}\)</span>. For <span class="math notranslate nohighlight">\(t &gt; t_{Last}\)</span> we define the estimated carbon emissions as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f1aaeb81-3072-4050-88b1-af916131d69b">
-<span class="eqno">(8)<a class="headerlink" href="#equation-f1aaeb81-3072-4050-88b1-af916131d69b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8072add1-79a8-4488-9bb2-740c28324e37">
+<span class="eqno">(8)<a class="headerlink" href="#equation-8072add1-79a8-4488-9bb2-740c28324e37" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \hat{CE_i}(t) = (1 - \mathfrak{R}_i(t_{Last},t)) \cdot CE_i(t_{Last})
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\mathfrak{R}_i(t_{Last},t)\)</span> is the carbon reduction between <span class="math notranslate nohighlight">\(t_{Last}\)</span> and <span class="math notranslate nohighlight">\(t\)</span>.</p>
 <p>The issue here is about the availability of <span class="math notranslate nohighlight">\(\mathfrak{R}_i(t_{Last},t)\)</span> for all issuers. One practical solution is to consider a benchmark reduction pathway, using a global carbon reduction scenario. According to the IPCC (2021) scenario for example, we need to reduce total emissions by at least 7% every year between 2019 and 2050 if we want to achieve net zero emissions by 2050.</p>
 <p>Using the global approach, the reduction for issuer <span class="math notranslate nohighlight">\(i\)</span> is equal to the reduction calculate for the global scenario:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e0847e6e-c9ef-4299-aed4-d75c33fb12d6">
-<span class="eqno">(9)<a class="headerlink" href="#equation-e0847e6e-c9ef-4299-aed4-d75c33fb12d6" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-7469330d-96c8-4e57-9d32-c784fd145262">
+<span class="eqno">(9)<a class="headerlink" href="#equation-7469330d-96c8-4e57-9d32-c784fd145262" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathfrak{R}_i(t_{Last},t) = \mathfrak{R}_{Global}(t_{Last}, t)
 \end{equation}\]</div>
 <p>However, this solution is not optimal since there is no difference between issuers.</p>
 <p>A first solution to take into account the idiosyncratic aspect of carbon reduction is the use of carbon reduction targets defined by companies. These targets are generally defined at a scope emissions level with different time horizons. Carbon reduction target setting is defined from the space:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-fb27f055-1c94-4f11-b876-94475137e66e">
-<span class="eqno">(10)<a class="headerlink" href="#equation-fb27f055-1c94-4f11-b876-94475137e66e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-7832c980-db07-4ac6-b33d-0220373041fb">
+<span class="eqno">(10)<a class="headerlink" href="#equation-7832c980-db07-4ac6-b33d-0220373041fb" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathfrak{T} = \{k \in [1,m] : (i, j, t^k_1, t^k_2, \mathfrak{R}_{i,j}(t^k_1, t^k_2))\}
 \end{equation}\]</div>
 <p>with <span class="math notranslate nohighlight">\(k\)</span> the target index, <span class="math notranslate nohighlight">\(m\)</span> the number of historical targets, <span class="math notranslate nohighlight">\(i\)</span> the issuer, <span class="math notranslate nohighlight">\(j\)</span> the scope, <span class="math notranslate nohighlight">\(t^k_1\)</span> the beginning of the target period, <span class="math notranslate nohighlight">\(t^k_2\)</span> the end of the target period, and <span class="math notranslate nohighlight">\(\mathfrak{R}_{i,j}(t^k_1, t^k_2)\)</span> the carbon reduction between <span class="math notranslate nohighlight">\(t^k_1\)</span> and <span class="math notranslate nohighlight">\(t^k_2\)</span> for the scope <span class="math notranslate nohighlight">\(j\)</span> announced by the issuer <span class="math notranslate nohighlight">\(i\)</span>.</p>
-<p>We have the linear annual reduction rate for scope <span class="math notranslate nohighlight">\(j\)</span> and target <span class="math notranslate nohighlight">\(k\)</span> at time <span class="math notranslate nohighlight">\(t\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e2619ef7-00f0-42d3-a62b-a6cb24ac46e6">
-<span class="eqno">(11)<a class="headerlink" href="#equation-e2619ef7-00f0-42d3-a62b-a6cb24ac46e6" title="Permalink to this equation">#</a></span>\[\begin{equation}
-\mathfrak{R}_{i,j}^k = 𝟙\{t \in [t_1^k, t_2^k]\} \cdot \frac{\mathfrak{R}_{i,j}(t^k_1, t^k_2)}{t^k_2 - t^k_1}
-\end{equation}\]</div>
-<p>We can then aggregate the different targets to obtain the linear annual reduction rate for scope <span class="math notranslate nohighlight">\(j\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8923653f-c4d8-4b2e-926f-0020f67f7504">
-<span class="eqno">(12)<a class="headerlink" href="#equation-8923653f-c4d8-4b2e-926f-0020f67f7504" title="Permalink to this equation">#</a></span>\[\begin{equation}
-\mathfrak{R}_{i,j}(t) = \sum^m_{k=1}\mathfrak{R}^k_{i,j}(t)
-\end{equation}\]</div>
-<p>We can then convert these reported targets into absolute emissions reduction as follows:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d60af562-0369-4863-9ebd-03ecf88ed523">
-<span class="eqno">(13)<a class="headerlink" href="#equation-d60af562-0369-4863-9ebd-03ecf88ed523" title="Permalink to this equation">#</a></span>\[\begin{equation}
-\mathfrak{R}_i(t) = \frac{1}{\sum^3_{j=1}CE_{i,j}(t_0)} \cdot \sum^3_{j=1}CE_{i,j}(t_0) \cdot \mathfrak{R}_{i,j}(t)
-\end{equation}\]</div>
-<p>After this conversion, the carbon reduction <span class="math notranslate nohighlight">\(\mathfrak{R}_i(t)\)</span> no longer depends on the scope and the target period. Once we have established the reduction along the time horizon, we have the implied trajectory of the company emissions:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6a40c1b7-1a07-4892-9526-f59ada82ffb4">
-<span class="eqno">(14)<a class="headerlink" href="#equation-6a40c1b7-1a07-4892-9526-f59ada82ffb4" title="Permalink to this equation">#</a></span>\[\begin{equation}
-CE_i^{Target}(t) := \hat{CE}_i(t) = (1 - \mathfrak{R}_i(t_{Last},t)) \cdot CE_i(t_{Last})
-\end{equation}\]</div>
-<p>where:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a88fb5cd-fdc0-4fc6-8830-7419816c1e2e">
-<span class="eqno">(15)<a class="headerlink" href="#equation-a88fb5cd-fdc0-4fc6-8830-7419816c1e2e" title="Permalink to this equation">#</a></span>\[\begin{equation}
-\mathfrak{R}_i(t_{Last},t) = \sum^t_{s = t_{Last} + 1} \mathfrak{R}_i(s)
-\end{equation}\]</div>
-<p>And we can finally compute the carbon budget according to the carbon targets declared by the issuer.</p>
-<p>Let’s consider an illustrative example from Le Guenedal et al. (2022):</p>
+<p>Let’s start with an illustrative example from Le Guenedal et al. (2022):</p>
 <table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="head"><p><span class="math notranslate nohighlight">\(k\)</span></p></th>
@@ -560,12 +534,80 @@ CE_i^{Target}(t) := \hat{CE}_i(t) = (1 - \mathfrak{R}_i(t_{Last},t)) \cdot CE_i(
 </tbody>
 </table>
 <p>Dates <span class="math notranslate nohighlight">\(t^k_1\)</span> and <span class="math notranslate nohighlight">\(t_k^2\)</span> correspond to the 1st January. In August 2013, the company announced its willingness to reduce its carbon emissions by 45% between January 2015 and January 2030. We assume that <span class="math notranslate nohighlight">\(CE_{i,1}(2020) = 10.33\)</span>, <span class="math notranslate nohighlight">\(CE_{i,2}(2020)=7.72\)</span> and <span class="math notranslate nohighlight">\(CE_{i,3}(2020) = 21.86\)</span>.</p>
-<p>In Python:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1">#Figure 4 page 10</span>
-<span class="c1"># we apply the formula up to the the linear annual reduction rate</span>
+<p>First, we can deduce the linear annual reduction rate for scope <span class="math notranslate nohighlight">\(j\)</span> and target <span class="math notranslate nohighlight">\(k\)</span> at time <span class="math notranslate nohighlight">\(t\)</span>:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-c8ea44b3-00ae-4089-8169-85c0aeb6ae8e">
+<span class="eqno">(11)<a class="headerlink" href="#equation-c8ea44b3-00ae-4089-8169-85c0aeb6ae8e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\mathfrak{R}_{i,j}^k = 𝟙\{t \in [t_1^k, t_2^k]\} \cdot \frac{\mathfrak{R}_{i,j}(t^k_1, t^k_2)}{t^k_2 - t^k_1}
+\end{equation}\]</div>
+<p>In Python, it can be implemented as:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_linear_annual_by_target</span><span class="p">(</span><span class="n">start</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span><span class="nb">float</span><span class="p">):</span>
+  <span class="n">t_k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">2051</span><span class="p">)])</span>
+  <span class="n">t_R_scope</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t_k</span><span class="p">))</span>
+  <span class="n">t_R_scope</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(((</span><span class="n">t_k</span> <span class="o">&gt;=</span> <span class="n">start</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">t_k</span> <span class="o">&lt;</span> <span class="n">end</span><span class="p">)))]</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># vector of dummies</span>
+  <span class="k">return</span> <span class="n">t_R_scope</span>  <span class="o">*</span> <span class="n">target</span> <span class="o">/</span> <span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="c1"># linear annual reduction rate</span>
 </pre></div>
 </div>
-<p>In practice however, we can face carbon targets issuer updateding its expectations and change is reduction policy, with resulting overlapping dates, such as the following:</p>
+<p>And let’s plot the results:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">R_scope_1</span> <span class="o">=</span> <span class="n">get_linear_annual_by_target</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">2030</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">)</span>
+<span class="n">R_scope_2</span> <span class="o">=</span> <span class="n">get_linear_annual_by_target</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">2040</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">)</span>
+<span class="n">R_scope_3</span> <span class="o">=</span> <span class="n">get_linear_annual_by_target</span><span class="p">(</span><span class="mi">2025</span><span class="p">,</span> <span class="mi">2050</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">2051</span><span class="p">)],</span> <span class="n">R_scope_1</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">2051</span><span class="p">)],</span> <span class="n">R_scope_2</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">2051</span><span class="p">)],</span> <span class="n">R_scope_3</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">ymax</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Annual Reduction Rate&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s2">&quot;Scope 1&quot;</span><span class="p">,</span><span class="s2">&quot;Scope 2&quot;</span><span class="p">,</span> <span class="s2">&quot;Scope 3&quot;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<figure class="align-default" id="linear-reduction-rate">
+<img alt="../_images/linear_reduction_rate.png" src="../_images/linear_reduction_rate.png" />
+<figcaption>
+<p><span class="caption-text">Figure: Linear Reduction Rate Deduced from Targets</span><a class="headerlink" href="#linear-reduction-rate" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>If needed, we can then aggregate the different targets to obtain the linear annual reduction rate for scope <span class="math notranslate nohighlight">\(j\)</span>:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-15647c60-477a-4a73-a6a6-1320df08d472">
+<span class="eqno">(12)<a class="headerlink" href="#equation-15647c60-477a-4a73-a6a6-1320df08d472" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\mathfrak{R}_{i,j}(t) = \sum^m_{k=1}\mathfrak{R}^k_{i,j}(t)
+\end{equation}\]</div>
+<p>In our illustrative example, this is not necessary as we have only one target <span class="math notranslate nohighlight">\(k\)</span> by scope <span class="math notranslate nohighlight">\(j\)</span>.</p>
+<p>We can then convert these reported targets into absolute emissions reduction as follows:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-e45efd50-fc88-4491-b95c-7bbb84471238">
+<span class="eqno">(13)<a class="headerlink" href="#equation-e45efd50-fc88-4491-b95c-7bbb84471238" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\mathfrak{R}_i(t) = \frac{1}{\sum^3_{j=1}CE_{i,j}(t_0)} \cdot \sum^3_{j=1}CE_{i,j}(t_0) \cdot \mathfrak{R}_{i,j}(t)
+\end{equation}\]</div>
+<p>Let’s also implement it in Python:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">R_total</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mf">10.33</span> <span class="o">+</span> <span class="mf">7.72</span> <span class="o">+</span> <span class="mf">21.86</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mf">10.33</span> <span class="o">*</span> <span class="n">R_scope_1</span> <span class="o">+</span> <span class="mf">7.72</span> <span class="o">*</span> <span class="n">R_scope_2</span> <span class="o">+</span> <span class="mf">21.86</span> <span class="o">*</span> <span class="n">R_scope_3</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">2051</span><span class="p">)],</span> <span class="n">R_total</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">ymax</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Annual Reduction Rate&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<figure class="align-default" id="annual-reduction-rate">
+<img alt="../_images/annual_reduction_rate.png" src="../_images/annual_reduction_rate.png" />
+<figcaption>
+<p><span class="caption-text">Figure: Total Emissions Annual Reduction Rate Deduced From Linear Annual Reduction Rate by Scope</span><a class="headerlink" href="#annual-reduction-rate" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>After this conversion, the carbon reduction <span class="math notranslate nohighlight">\(\mathfrak{R}_i(t)\)</span> no longer depends on the scope and the target period.</p>
+<p>Once we have established the reduction along the time horizon, we have the implied trajectory of the company emissions:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-b6e01c5e-41a8-4d52-be1f-58051d89b6f6">
+<span class="eqno">(14)<a class="headerlink" href="#equation-b6e01c5e-41a8-4d52-be1f-58051d89b6f6" title="Permalink to this equation">#</a></span>\[\begin{equation}
+CE_i^{Target}(t) := \hat{CE}_i(t) = (1 - \mathfrak{R}_i(t_{Last},t)) \cdot CE_i(t_{Last})
+\end{equation}\]</div>
+<p>where:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-220a6811-3501-4087-89ee-3c67f042e9f8">
+<span class="eqno">(15)<a class="headerlink" href="#equation-220a6811-3501-4087-89ee-3c67f042e9f8" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\mathfrak{R}_i(t_{Last},t) = \sum^t_{s = t_{Last} + 1} \mathfrak{R}_i(s)
+\end{equation}\]</div>
+<p>And we can finally compute the carbon budget according to the carbon targets declared by the issuer.</p>
+<p>In practice however, we can face carbon targets issuer updating its expectations and change is reduction policy, with resulting overlapping dates, such as the following:</p>
 <table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="head"><p><span class="math notranslate nohighlight">\(k\)</span></p></th>
@@ -632,19 +674,19 @@ CE_i^{Target}(t) := \hat{CE}_i(t) = (1 - \mathfrak{R}_i(t_{Last},t)) \cdot CE_i(
 <section id="carbon-trend">
 <h2>Carbon Trend<a class="headerlink" href="#carbon-trend" title="Permalink to this headline">#</a></h2>
 <p>Another alternative to the benchmark global or sector reduction scenario is the carbon trend proposed by Le Guenedal et al. (2022). The authors define the carbon trend by considering a linear constrant trend model. The corresponding linear regression model is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a7ecdfb6-7ded-49fd-bbc7-e1f81217503d">
-<span class="eqno">(16)<a class="headerlink" href="#equation-a7ecdfb6-7ded-49fd-bbc7-e1f81217503d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ae81336d-be17-4529-b27b-bfba39580338">
+<span class="eqno">(16)<a class="headerlink" href="#equation-ae81336d-be17-4529-b27b-bfba39580338" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CE_i(t) = \beta_{i,0} + \beta_{i,1}t + u_i(t)
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(t \in [t_{First}, t_{Last}]\)</span>. Using the least squares method, we can estimate the parameters <span class="math notranslate nohighlight">\(\beta_{i,0}\)</span> and <span class="math notranslate nohighlight">\(\beta_{i,1}\)</span>. We can then build the carbon trajectory implied by the current rend by applying the projection:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9d1374a7-e159-446e-90e2-31ed4f337092">
-<span class="eqno">(17)<a class="headerlink" href="#equation-9d1374a7-e159-446e-90e2-31ed4f337092" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d46cff09-6245-4742-bc9f-13b9669c6f46">
+<span class="eqno">(17)<a class="headerlink" href="#equation-d46cff09-6245-4742-bc9f-13b9669c6f46" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CE^{Trend}_i(t) := \hat{CE}_i(t) = \hat{\beta}_{i,0} + \hat{\beta}_{i,1}t
 \end{equation}\]</div>
 <p>for <span class="math notranslate nohighlight">\(t &gt; t_{Last}\)</span>. The underlying idea is then to extrapolate the past trajectory.</p>
 <p>Let’s assume that <span class="math notranslate nohighlight">\(t_p\)</span> is a pivot date (generally the current year). We can have the following reformulation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9d0e92d0-5214-4020-9912-913095105447">
-<span class="eqno">(18)<a class="headerlink" href="#equation-9d0e92d0-5214-4020-9912-913095105447" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-29481778-8e5f-45e4-83ab-0c6c542c88a3">
+<span class="eqno">(18)<a class="headerlink" href="#equation-29481778-8e5f-45e4-83ab-0c6c542c88a3" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CE_i(t) = \beta^{'}_{i,0} + \beta^{'}_{i,1}(t - t_p) + u_i(t)
 \end{equation}\]</div>
 <p>with the relationships: <span class="math notranslate nohighlight">\(\beta_{i,0} = \beta^{'}_{i,0}-\beta^{'}_{i,1}t_p\)</span> and <span class="math notranslate nohighlight">\(\beta_{i,1} = \beta^{'}_{i,1}\)</span>.</p>
