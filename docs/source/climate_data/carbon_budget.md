@@ -141,8 +141,65 @@ CB_i(t^*,t) \approx 0
 
 when $t > t^*$.
 
+Again, we can approximate the net carbon budget with the right Riemann sum with an annual step:
+
+\begin{equation}
+CB_i(t_0,t) \approx \sum^t_{s=t_0 + 1}(CE_i(s) - CE^*_i)
+\end{equation}
+
+Let's make an example with $CE^*_i = 3$:
+
 ```Python
-#figure 1, CE^* = 3 and net carbon budget
+import matplotlib.pyplot as plt
+
+plt.plot(data['Year'], data["Historical Emissions"])
+plt.plot(data['Year'], data["Estimated Emissions"])
+plt.scatter(data['Year'], data["Historical Emissions"])
+plt.scatter(data['Year'], data["Estimated Emissions"])
+plt.axvline(2020, color='r') # vertical
+plt.axvline(2035, color='r') # vertical
+plt.axhline(3, color = 'black')
+plt.fill_between(
+    data["Year"],
+    3,
+    data["Estimated Emissions"],
+    where = (data["Year"] >= 2020) & (data["Year"] <= 2035),
+    alpha = 0.2
+)
+plt.ylim(ymin=0)
+plt.ylabel("Carbon Emissions")
+plt.figure(figsize = (10, 10))
+plt.show()
+```
+
+```{figure} net_carbon_budget.png
+---
+name: net_carbon_budget
+---
+Figure: Net Carbon Budget
+```
+
+And we can implement the net carbon budget approximation:
+
+```Python
+def get_net_carbon_budget(data:pd.DataFrame, start:int, end:int, target:float):
+  # We assume linear interpolation between two dates
+  period_data =data.iloc[np.where(((data['Year'] >= start) & (data["Year"] <= end)))]
+  y_interp = scipy.interpolate.interp1d(period_data.Year, period_data["Estimated Emissions"])
+  full_years = [i for i in range(list(period_data["Year"])[0], list(period_data["Year"])[-1]+1)]
+  emissions_interpolated = y_interp(full_years)
+  emissions_interpolated
+  
+  # We apply simplified right Riemann Sum with yearly data
+  return sum(emissions_interpolated[1:end] - target)
+
+get_net_carbon_budget(data, 2020, 2035, 3)
+```
+
+Which gives:
+
+```
+6.75
 ```
 
 ### Carbon Reduction
