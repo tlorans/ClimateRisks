@@ -283,11 +283,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#carbon-budget">Carbon Budget</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gross-carbon-budget">Gross Carbon Budget</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#net-carbon-budget">Net Carbon Budget</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#carbon-budget">Carbon Budget</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#carbon-reduction">Carbon Reduction</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#carbon-reduction-targets">Carbon Reduction Targets</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#carbon-trend">Carbon Trend</a></li>
@@ -308,34 +304,123 @@ document.write(`
 <p>The absolute carbon emissions of issuer <span class="math notranslate nohighlight">\(i\)</span> for the scope <span class="math notranslate nohighlight">\(j\)</span> at time <span class="math notranslate nohighlight">\(t\)</span> is denoted as <span class="math notranslate nohighlight">\(CE_{i,j}(t)\)</span>, and is generally measured annualy, in tC02e. <span class="math notranslate nohighlight">\(j\)</span> is omited when possible, to simplify the notation.</p>
 <section id="carbon-budget">
 <h2>Carbon Budget<a class="headerlink" href="#carbon-budget" title="Permalink to this headline">#</a></h2>
-<section id="gross-carbon-budget">
-<h3>Gross Carbon Budget<a class="headerlink" href="#gross-carbon-budget" title="Permalink to this headline">#</a></h3>
 <p>A carbon budget defines the amount of GHG emissions that a country or a company produces over the time period <span class="math notranslate nohighlight">\([t_0, t]\)</span>.</p>
 <p>It corresponds to the area of the region bounded by the function <span class="math notranslate nohighlight">\(CE_i(t)\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a79f5e5f-1b62-4941-9369-792bcf574ade">
-<span class="eqno">(1)<a class="headerlink" href="#equation-a79f5e5f-1b62-4941-9369-792bcf574ade" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ff6cb83b-b651-454b-8481-cde0f54cc19e">
+<span class="eqno">(1)<a class="headerlink" href="#equation-ff6cb83b-b651-454b-8481-cde0f54cc19e" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CB_i(t_0,t) = \int^t_{t_0}CE_i(s)ds
 \end{equation}\]</div>
 <p>This defines a gross carbon budget.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># figure 1, part with CE^*i = 0 and gross carbon budget</span>
+<p>The carbon budget can be approximated with the right Riemann sum with an annual step (Le Guenedal et al. 2022), with <span class="math notranslate nohighlight">\(\Delta t = 1\)</span>:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-ba5c81e8-6325-4195-994c-abd7214afbac">
+<span class="eqno">(2)<a class="headerlink" href="#equation-ba5c81e8-6325-4195-994c-abd7214afbac" title="Permalink to this equation">#</a></span>\[\begin{equation}
+CB_i(t_0,t) \approx \sum^{m}_{k=1}(CE_i(t_0 + k\Delta t)) \cdot \Delta t
+\end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-3f66140a-b7d1-45a0-8c38-cfbd55e9cf02">
+<span class="eqno">(3)<a class="headerlink" href="#equation-3f66140a-b7d1-45a0-8c38-cfbd55e9cf02" title="Permalink to this equation">#</a></span>\[\begin{equation}
+= \sum^t_{s = t_0 + 1}(CE_i(s))
+\end{equation}\]</div>
+<p>Let’s illustrate it with an example from Le Guenedal et al. (2022) in Python:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Year&#39;</span><span class="p">:[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">2021</span><span class="p">)]</span><span class="o">+</span><span class="p">[</span><span class="mi">2025</span><span class="p">,</span> <span class="mi">2030</span><span class="p">,</span> <span class="mi">2035</span><span class="p">,</span> <span class="mi">2040</span><span class="p">,</span> <span class="mi">2050</span><span class="p">],</span>
+                     <span class="s1">&#39;Historical Emissions&#39;</span><span class="p">:[</span><span class="mf">4.8</span><span class="p">,</span> 
+                                             <span class="mf">4.950</span><span class="p">,</span>
+                                             <span class="mf">5.100</span><span class="p">,</span>
+                                             <span class="mf">5.175</span><span class="p">,</span>
+                                             <span class="mf">5.175</span><span class="p">,</span>
+                                             <span class="mf">5.175</span><span class="p">,</span>
+                                             <span class="mf">5.175</span><span class="p">,</span>
+                                             <span class="mf">5.100</span><span class="p">,</span>
+                                             <span class="mf">5.025</span><span class="p">,</span>
+                                             <span class="mf">4.950</span><span class="p">,</span>
+                                             <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
+                                             <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
+                                             <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
+                                             <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
+                                             <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
+                                             <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">],</span>
+                     <span class="s1">&#39;Estimated Emissions&#39;</span><span class="p">:[</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
+                                            <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
+                                            <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
+                                            <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
+                                            <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
+                                            <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
+                                            <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
+                                            <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
+                                            <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
+                                            <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
+                                            <span class="mf">4.875</span><span class="p">,</span>
+                                            <span class="mf">4.200</span><span class="p">,</span>
+                                            <span class="mf">3.300</span><span class="p">,</span>
+                                            <span class="mf">1.500</span><span class="p">,</span>
+                                            <span class="mf">0.750</span><span class="p">,</span>
+                                            <span class="mf">0.150</span>
+                     <span class="p">]</span>
+<span class="p">})</span>
 </pre></div>
 </div>
-</section>
-<section id="net-carbon-budget">
-<h3>Net Carbon Budget<a class="headerlink" href="#net-carbon-budget" title="Permalink to this headline">#</a></h3>
+<p>and plot a graph representation of the gross carbon budget between 2020 and 2035:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Historical Emissions&quot;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Estimated Emissions&quot;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Historical Emissions&quot;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Estimated Emissions&quot;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="c1"># vertical</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">2035</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="c1"># vertical</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Year&quot;</span><span class="p">],</span>
+    <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Estimated Emissions&quot;</span><span class="p">],</span>
+    <span class="n">where</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;Year&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">2020</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;Year&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">2035</span><span class="p">),</span>
+    <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Carbon Emissions&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<figure class="align-default" id="gross-carbon-budget">
+<img alt="../_images/gross_carbon_budget.png" src="../_images/gross_carbon_budget.png" />
+<figcaption>
+<p><span class="caption-text">Figure: Gross Carbon Budget</span><a class="headerlink" href="#gross-carbon-budget" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>We can now approximate the gross carbon budget as:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_gross_carbon_budget</span><span class="p">(</span><span class="n">data</span><span class="p">:</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span><span class="nb">int</span><span class="p">):</span>
+  <span class="c1"># We assume linear interpolation between two dates</span>
+  <span class="n">period_data</span> <span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(((</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">start</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;Year&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">end</span><span class="p">)))]</span>
+  <span class="n">y_interp</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">interpolate</span><span class="o">.</span><span class="n">interp1d</span><span class="p">(</span><span class="n">period_data</span><span class="o">.</span><span class="n">Year</span><span class="p">,</span> <span class="n">period_data</span><span class="p">[</span><span class="s2">&quot;Estimated Emissions&quot;</span><span class="p">])</span>
+  <span class="n">full_years</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">period_data</span><span class="p">[</span><span class="s2">&quot;Year&quot;</span><span class="p">])[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">list</span><span class="p">(</span><span class="n">period_data</span><span class="p">[</span><span class="s2">&quot;Year&quot;</span><span class="p">])[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+  <span class="n">emissions_interpolated</span> <span class="o">=</span> <span class="n">y_interp</span><span class="p">(</span><span class="n">full_years</span><span class="p">)</span>
+  <span class="n">emissions_interpolated</span>
+  
+  <span class="c1"># We apply simplified right Riemann Sum with yearly data</span>
+  <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">emissions_interpolated</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">end</span><span class="p">])</span>
+
+<span class="n">get_gross_carbon_budget</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">start</span> <span class="o">=</span> <span class="mi">2020</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="mi">2035</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And we obtain:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">51.74999999999999</span>
+</pre></div>
+</div>
 <p>The issuer <span class="math notranslate nohighlight">\(i\)</span> has generally an objective to keep its GHG emissions under an emissions level <span class="math notranslate nohighlight">\(CE^*_i\)</span>. In that case, the carbon budget is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4aa01385-1f0d-47bb-9f7a-e121e53d2a02">
-<span class="eqno">(2)<a class="headerlink" href="#equation-4aa01385-1f0d-47bb-9f7a-e121e53d2a02" title="Permalink to this equation">#</a></span>\[\begin{equation}
-CB_i(t_0,t) = \int^t_{t_0}(CE_i(s) - CE^*_i)df = -(t - t_0) \cdot CE^*_i + \int^t_{t_0} CE_i(s)ds
+<div class="amsmath math notranslate nohighlight" id="equation-293fdb30-d0fb-4daa-bedd-9460bd4bfd27">
+<span class="eqno">(4)<a class="headerlink" href="#equation-293fdb30-d0fb-4daa-bedd-9460bd4bfd27" title="Permalink to this equation">#</a></span>\[\begin{equation}
+CB_i(t_0,t) = \int^t_{t_0}(CE_i(s) - CE^*_i)ds = -(t - t_0) \cdot CE^*_i + \int^t_{t_0} CE_i(s)ds
 \end{equation}\]</div>
 <p>This carbon budget corresponds to a net carbon budget. In this case, the objective of the company is that emissions converge towards the objective at the target date <span class="math notranslate nohighlight">\(t^*\)</span>, such that:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c80d4068-25f1-48ba-9809-64198fe8ba26">
-<span class="eqno">(3)<a class="headerlink" href="#equation-c80d4068-25f1-48ba-9809-64198fe8ba26" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-cf7974e6-6e8e-45ac-8087-b473ae890e0e">
+<span class="eqno">(5)<a class="headerlink" href="#equation-cf7974e6-6e8e-45ac-8087-b473ae890e0e" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CE_i(t^*) \approx CE^*_i
 \end{equation}\]</div>
 <p>Once the objective is met, the goal of the company is to maintain a carbon budget close to zero:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c6f5567b-a74d-43ce-a8e1-c034113c8381">
-<span class="eqno">(4)<a class="headerlink" href="#equation-c6f5567b-a74d-43ce-a8e1-c034113c8381" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-40e34341-9c19-4b42-b9ac-5e125753cb09">
+<span class="eqno">(6)<a class="headerlink" href="#equation-40e34341-9c19-4b42-b9ac-5e125753cb09" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CB_i(t^*,t) \approx 0
 \end{equation}\]</div>
 <p>when <span class="math notranslate nohighlight">\(t &gt; t^*\)</span>.</p>
@@ -343,36 +428,35 @@ CB_i(t^*,t) \approx 0
 </pre></div>
 </div>
 </section>
-</section>
 <section id="carbon-reduction">
 <h2>Carbon Reduction<a class="headerlink" href="#carbon-reduction" title="Permalink to this headline">#</a></h2>
 <p>We assume <span class="math notranslate nohighlight">\(t_{Last}\)</span> to be the last reporting date. It implies that the carbon emissions <span class="math notranslate nohighlight">\(CE_i(t)\)</span> of the issuer <span class="math notranslate nohighlight">\(i\)</span> are only observable when <span class="math notranslate nohighlight">\(t \leq t_{Last}\)</span>. For <span class="math notranslate nohighlight">\(t &gt; t_{Last}\)</span> we define the estimated carbon emissions as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-120ce8f7-7f25-4364-a78d-dd7fb083e8d5">
-<span class="eqno">(5)<a class="headerlink" href="#equation-120ce8f7-7f25-4364-a78d-dd7fb083e8d5" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b588b108-5d68-4c3a-9ea8-bdf4d5d3ae9d">
+<span class="eqno">(7)<a class="headerlink" href="#equation-b588b108-5d68-4c3a-9ea8-bdf4d5d3ae9d" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \hat{CE_i}(t) = (1 - \mathfrak{R}_i(t_{Last},t)) \cdot CE_i(t_{Last})
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\mathfrak{R}_i(t_{Last},t)\)</span> is the carbon reduction between <span class="math notranslate nohighlight">\(t_{Last}\)</span> and <span class="math notranslate nohighlight">\(t\)</span>.</p>
 <p>With <span class="math notranslate nohighlight">\(t_{Last} \in [t_0, t]\)</span> we have the following expression for the carbon budget:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-230fc442-ef88-4062-804d-560958b8f4a7">
-<span class="eqno">(6)<a class="headerlink" href="#equation-230fc442-ef88-4062-804d-560958b8f4a7" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-6c802b28-6e69-4f45-800a-7ebafc69f4ae">
+<span class="eqno">(8)<a class="headerlink" href="#equation-6c802b28-6e69-4f45-800a-7ebafc69f4ae" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CB_i(t_0,t) = (t - t_{Last})(CE_i(t_{Last}) - CE_i^*) - (t_{Last} - t_0) \cdot CE^*_i + \int^{t_{Last}}_{t_0} CE_i(s)ds - CE_i(t_{Last}) \int^t_{t_{Last}}\mathfrak{R}_i(t_{Last}, s)ds
 \end{equation}\]</div>
 <p>When computing the carbon budget from the last reporting date (<span class="math notranslate nohighlight">\(t_0 = t_{Last}\)</span>), it reduces to:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2e0668c9-c6d9-4d76-aad7-f485aaa68f57">
-<span class="eqno">(7)<a class="headerlink" href="#equation-2e0668c9-c6d9-4d76-aad7-f485aaa68f57" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-eac77ee4-bca1-4d96-85c4-33e560589ce1">
+<span class="eqno">(9)<a class="headerlink" href="#equation-eac77ee4-bca1-4d96-85c4-33e560589ce1" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CB_i(t_{Last},t) = (t - t_{Last})(CE_i(t_{Last}) - CE^*_i) - CE_i(t_{Last}) \int^t_{t_{Last}}\mathfrak{R}_i(t_{Last}, s)ds
 \end{equation}\]</div>
 <p>The issue here is about the availability of <span class="math notranslate nohighlight">\(\mathfrak{R}_i(t_{Last},t)\)</span> for all issuers. One practical solution is to consider a benchmark reduction pathway, using a global carbon reduction scenario for example.</p>
 <p>With the IPCC (2021) scenario for example, we need to reduce total emissions by at least 7% every year between 2019 and 2050 if we want to achieve net zero emissions by 2050.</p>
 <p>Using the global approach, the reduction for issuer <span class="math notranslate nohighlight">\(i\)</span> is equal to the reduction calculate for the global scenario:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5915e991-19c5-485d-a3f1-50b794722b34">
-<span class="eqno">(8)<a class="headerlink" href="#equation-5915e991-19c5-485d-a3f1-50b794722b34" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d1f9f3c6-eacd-433a-8bc8-4dd2cb7f306b">
+<span class="eqno">(10)<a class="headerlink" href="#equation-d1f9f3c6-eacd-433a-8bc8-4dd2cb7f306b" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathfrak{R}_i(t_{Last},t) = \mathfrak{R}_{Global}(t_{Last}, t)
 \end{equation}\]</div>
 <p>However, this solution is not optimal since there is no difference between issuers.</p>
 <p>Another solution is to use a sector scenario:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6d922258-ee98-40ca-a5d8-d61f9f3276ee">
-<span class="eqno">(9)<a class="headerlink" href="#equation-6d922258-ee98-40ca-a5d8-d61f9f3276ee" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d88932a1-96b2-4d56-a3da-a2054c753491">
+<span class="eqno">(11)<a class="headerlink" href="#equation-d88932a1-96b2-4d56-a3da-a2054c753491" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathfrak{R}_i(t_{Last},t) = \mathfrak{R}_{Sector}(t_{Last}, t)
 \end{equation}\]</div>
 <p>if <span class="math notranslate nohighlight">\(i \in Sector(s)\)</span></p>
@@ -386,34 +470,34 @@ CB_i(t_{Last},t) = (t - t_{Last})(CE_i(t_{Last}) - CE^*_i) - CE_i(t_{Last}) \int
 <p>A first solution to take into account the idiosyncratic aspect of carbon reduction is the use of carbon reduction targets defined by companies. These targets are generally defined at a scope emissions level with different time horizons.</p>
 <p>In this section, we present the methodology to compute annual reduction rates implied by the targets and dicuss how to deal with overlapping targets.</p>
 <p>Carbon reduction target setting is defined from the space:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f0e440a6-7b63-4660-8f41-f5375df1ea3d">
-<span class="eqno">(10)<a class="headerlink" href="#equation-f0e440a6-7b63-4660-8f41-f5375df1ea3d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-bea249eb-8125-462f-8f36-67f75f1d07b6">
+<span class="eqno">(12)<a class="headerlink" href="#equation-bea249eb-8125-462f-8f36-67f75f1d07b6" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathfrak{T} = \{k \in [1,m] : (i, j, t^k_1, t^k_2, \mathfrak{R}_{i,j}(t^k_1, t^k_2))\}
 \end{equation}\]</div>
 <p>with <span class="math notranslate nohighlight">\(k\)</span> the target index, <span class="math notranslate nohighlight">\(m\)</span> the number of historical targets, <span class="math notranslate nohighlight">\(i\)</span> the issuer, <span class="math notranslate nohighlight">\(j\)</span> the scope, <span class="math notranslate nohighlight">\(t^k_1\)</span> the beginning of the target period, <span class="math notranslate nohighlight">\(t^k_2\)</span> the end of the target period, and <span class="math notranslate nohighlight">\(\mathfrak{R}_{i,j}(t^k_1, t^k_2)\)</span> the carbon reduction between <span class="math notranslate nohighlight">\(t^k_1\)</span> and <span class="math notranslate nohighlight">\(t^k_2\)</span> for the scope <span class="math notranslate nohighlight">\(j\)</span> announced by the issuer <span class="math notranslate nohighlight">\(i\)</span>.</p>
 <p>We have the linear annual reduction rate for scope <span class="math notranslate nohighlight">\(j\)</span> and target <span class="math notranslate nohighlight">\(k\)</span> at time <span class="math notranslate nohighlight">\(t\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3067af57-0775-43b7-b76e-b5a3c5d7fa79">
-<span class="eqno">(11)<a class="headerlink" href="#equation-3067af57-0775-43b7-b76e-b5a3c5d7fa79" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c2fb00b6-26ef-4e3e-a695-369857dd22c8">
+<span class="eqno">(13)<a class="headerlink" href="#equation-c2fb00b6-26ef-4e3e-a695-369857dd22c8" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathfrak{R}_{i,j}^k = 𝟙\{t \in [t_1^k, t_2^k]\} \cdot \frac{\mathfrak{R}_{i,j}(t^k_1, t^k_2)}{t^k_2 - t^k_1}
 \end{equation}\]</div>
 <p>We can then aggregate the different targets to obtain the linear annual reduction rate for scope <span class="math notranslate nohighlight">\(j\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2eb02fbf-3e2e-447b-8383-bf93232da4cf">
-<span class="eqno">(12)<a class="headerlink" href="#equation-2eb02fbf-3e2e-447b-8383-bf93232da4cf" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0127256e-8a66-4c3e-98a1-66c91c64d3a2">
+<span class="eqno">(14)<a class="headerlink" href="#equation-0127256e-8a66-4c3e-98a1-66c91c64d3a2" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathfrak{R}_{i,j}(t) = \sum^m_{k=1}\mathfrak{R}^k_{i,j}(t)
 \end{equation}\]</div>
 <p>We can then convert these reported targets into absolute emissions reduction as follows:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-64f6323f-3a3f-4005-a204-6f8c696a93c8">
-<span class="eqno">(13)<a class="headerlink" href="#equation-64f6323f-3a3f-4005-a204-6f8c696a93c8" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-909fcdd9-6b01-4440-b5e1-e4c184e3234a">
+<span class="eqno">(15)<a class="headerlink" href="#equation-909fcdd9-6b01-4440-b5e1-e4c184e3234a" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathfrak{R}_i(t) = \frac{1}{\sum^3_{j=1}CE_{i,j}(t_0)} \cdot \sum^3_{j=1}CE_{i,j}(t_0) \cdot \mathfrak{R}_{i,j}(t)
 \end{equation}\]</div>
 <p>After this conversion, the carbon reduction <span class="math notranslate nohighlight">\(\mathfrak{R}_i(t)\)</span> no longer depends on the scope and the target period. Once we have established the reduction along the time horizon, we have the implied trajectory of the company emissions:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3f346139-f962-441a-85e6-936fbf7f598d">
-<span class="eqno">(14)<a class="headerlink" href="#equation-3f346139-f962-441a-85e6-936fbf7f598d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-fc640d38-ca42-4688-a350-df02541124ca">
+<span class="eqno">(16)<a class="headerlink" href="#equation-fc640d38-ca42-4688-a350-df02541124ca" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CE_i^{Target}(t) := \hat{CE}_i(t) = (1 - \mathfrak{R}_i(t_{Last},t)) \cdot CE_i(t_{Last})
 \end{equation}\]</div>
 <p>where:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6db61a75-0716-400a-882b-8e65cfe940b9">
-<span class="eqno">(15)<a class="headerlink" href="#equation-6db61a75-0716-400a-882b-8e65cfe940b9" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-da9b01e9-b7a0-490d-8938-45cd41ea9a5c">
+<span class="eqno">(17)<a class="headerlink" href="#equation-da9b01e9-b7a0-490d-8938-45cd41ea9a5c" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathfrak{R}_i(t_{Last},t) = \sum^t_{s = t_{Last} + 1} \mathfrak{R}_i(s)
 \end{equation}\]</div>
 <p>And we can finally compute the carbon budget according to the carbon targets declared by the issuer.</p>
@@ -525,19 +609,19 @@ CE_i^{Target}(t) := \hat{CE}_i(t) = (1 - \mathfrak{R}_i(t_{Last},t)) \cdot CE_i(
 <section id="carbon-trend">
 <h2>Carbon Trend<a class="headerlink" href="#carbon-trend" title="Permalink to this headline">#</a></h2>
 <p>Another alternative to the benchmark global or sector reduction scenario is the carbon trend proposed by Le Guenedal et al. (2022). The authors define the carbon trend by considering a linear constrant trend model. The corresponding linear regression model is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e057667d-2bed-4b9c-8384-69e2be9ea5ca">
-<span class="eqno">(16)<a class="headerlink" href="#equation-e057667d-2bed-4b9c-8384-69e2be9ea5ca" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0f4820d4-c175-4cf7-bd86-3b2ff04c5647">
+<span class="eqno">(18)<a class="headerlink" href="#equation-0f4820d4-c175-4cf7-bd86-3b2ff04c5647" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CE_i(t) = \beta_{i,0} + \beta_{i,1}t + u_i(t)
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(t \in [t_{First}, t_{Last}]\)</span>. Using the least squares method, we can estimate the parameters <span class="math notranslate nohighlight">\(\beta_{i,0}\)</span> and <span class="math notranslate nohighlight">\(\beta_{i,1}\)</span>. We can then build the carbon trajectory implied by the current rend by applying the projection:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2eb11ead-ca1e-43a8-b295-c82f50a8660e">
-<span class="eqno">(17)<a class="headerlink" href="#equation-2eb11ead-ca1e-43a8-b295-c82f50a8660e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-2ba34aba-423c-46c3-85c3-034e3d4b64f6">
+<span class="eqno">(19)<a class="headerlink" href="#equation-2ba34aba-423c-46c3-85c3-034e3d4b64f6" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CE^{Trend}_i(t) := \hat{CE}_i(t) = \hat{\beta}_{i,0} + \hat{\beta}_{i,1}t
 \end{equation}\]</div>
 <p>for <span class="math notranslate nohighlight">\(t &gt; t_{Last}\)</span>. The underlying idea is then to extrapolate the past trajectory.</p>
 <p>Let’s assume that <span class="math notranslate nohighlight">\(t_p\)</span> is a pivot date (generally the current year). We can have the following reformulation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-46f20efa-6ac6-4780-b06d-948638576017">
-<span class="eqno">(18)<a class="headerlink" href="#equation-46f20efa-6ac6-4780-b06d-948638576017" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-df4e65ca-f883-4643-8ed9-238246556ef3">
+<span class="eqno">(20)<a class="headerlink" href="#equation-df4e65ca-f883-4643-8ed9-238246556ef3" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CE_i(t) = \beta^{'}_{i,0} + \beta^{'}_{i,1}(t - t_p) + u_i(t)
 \end{equation}\]</div>
 <p>with the relationships: <span class="math notranslate nohighlight">\(\beta_{i,0} = \beta^{'}_{i,0}-\beta^{'}_{i,1}t_p\)</span> and <span class="math notranslate nohighlight">\(\beta_{i,1} = \beta^{'}_{i,1}\)</span>.</p>
@@ -646,11 +730,7 @@ CE_i(t) = \beta^{'}_{i,0} + \beta^{'}_{i,1}(t - t_p) + u_i(t)
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#carbon-budget">Carbon Budget</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gross-carbon-budget">Gross Carbon Budget</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#net-carbon-budget">Net Carbon Budget</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#carbon-budget">Carbon Budget</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#carbon-reduction">Carbon Reduction</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#carbon-reduction-targets">Carbon Reduction Targets</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#carbon-trend">Carbon Trend</a></li>

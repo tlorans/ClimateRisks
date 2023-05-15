@@ -5,8 +5,6 @@ In this section, we will present the foundations for building and understanding 
 The absolute carbon emissions of issuer $i$ for the scope $j$ at time $t$ is denoted as $CE_{i,j}(t)$, and is generally measured annualy, in tC02e. $j$ is omited when possible, to simplify the notation.
 ### Carbon Budget
 
-#### Gross Carbon Budget 
-
 A carbon budget defines the amount of GHG emissions that a country or a company produces over the time period $[t_0, t]$.
 
 It corresponds to the area of the region bounded by the function $CE_i(t)$:
@@ -17,16 +15,116 @@ CB_i(t_0,t) = \int^t_{t_0}CE_i(s)ds
 
 This defines a gross carbon budget.
 
+The carbon budget can be approximated with the right Riemann sum with an annual step (Le Guenedal et al. 2022), with $\Delta t = 1$:
+
+\begin{equation}
+CB_i(t_0,t) \approx \sum^{m}_{k=1}(CE_i(t_0 + k\Delta t)) \cdot \Delta t
+\end{equation}
+
+\begin{equation}
+= \sum^t_{s = t_0 + 1}(CE_i(s))
+\end{equation}
+
+Let's illustrate it with an example from Le Guenedal et al. (2022) in Python:
 ```Python
-# figure 1, part with CE^*i = 0 and gross carbon budget
+
+import pandas as pd
+
+import numpy as np
+
+data = pd.DataFrame({'Year':[i for i in range(2010, 2021)]+[2025, 2030, 2035, 2040, 2050],
+                     'Historical Emissions':[4.8, 
+                                             4.950,
+                                             5.100,
+                                             5.175,
+                                             5.175,
+                                             5.175,
+                                             5.175,
+                                             5.100,
+                                             5.025,
+                                             4.950,
+                                             np.nan,
+                                             np.nan,
+                                             np.nan,
+                                             np.nan,
+                                             np.nan,
+                                             np.nan],
+                     'Estimated Emissions':[np.nan,
+                                            np.nan,
+                                            np.nan,
+                                            np.nan,
+                                            np.nan,
+                                            np.nan,
+                                            np.nan,
+                                            np.nan,
+                                            np.nan,
+                                            np.nan,
+                                            4.875,
+                                            4.200,
+                                            3.300,
+                                            1.500,
+                                            0.750,
+                                            0.150
+                     ]
+})
 ```
 
-#### Net Carbon Budget
+and plot a graph representation of the gross carbon budget between 2020 and 2035:
+
+```Python
+import matplotlib.pyplot as plt
+
+plt.plot(data['Year'], data["Historical Emissions"])
+plt.plot(data['Year'], data["Estimated Emissions"])
+plt.scatter(data['Year'], data["Historical Emissions"])
+plt.scatter(data['Year'], data["Estimated Emissions"])
+plt.axvline(2020, color='r') # vertical
+plt.axvline(2035, color='r') # vertical
+plt.fill_between(
+    data["Year"],
+    data["Estimated Emissions"],
+    where = (data["Year"] >= 2020) & (data["Year"] <= 2035),
+    alpha = 0.2
+)
+plt.ylim(ymin=0)
+plt.ylabel("Carbon Emissions")
+plt.figure(figsize = (10, 10))
+plt.show()
+```
+```{figure} gross_carbon_budget.png
+---
+name: gross_carbon_budget
+---
+Figure: Gross Carbon Budget
+```
+
+We can now approximate the gross carbon budget as:
+
+```Python
+def get_gross_carbon_budget(data:pd.DataFrame, start:int, end:int):
+  # We assume linear interpolation between two dates
+  period_data =data.iloc[np.where(((data['Year'] >= start) & (data["Year"] <= end)))]
+  y_interp = scipy.interpolate.interp1d(period_data.Year, period_data["Estimated Emissions"])
+  full_years = [i for i in range(list(period_data["Year"])[0], list(period_data["Year"])[-1]+1)]
+  emissions_interpolated = y_interp(full_years)
+  emissions_interpolated
+  
+  # We apply simplified right Riemann Sum with yearly data
+  return sum(emissions_interpolated[1:end])
+
+get_gross_carbon_budget(data, start = 2020, end = 2035)
+```
+
+And we obtain:
+```
+51.74999999999999
+```
+
 
 The issuer $i$ has generally an objective to keep its GHG emissions under an emissions level $CE^*_i$. In that case, the carbon budget is:
 
 \begin{equation}
-CB_i(t_0,t) = \int^t_{t_0}(CE_i(s) - CE^*_i)df = -(t - t_0) \cdot CE^*_i + \int^t_{t_0} CE_i(s)ds
+CB_i(t_0,t) = \int^t_{t_0}(CE_i(s) - CE^*_i)ds = -(t - t_0) \cdot CE^*_i + \int^t_{t_0} CE_i(s)ds
 \end{equation}
 
 This carbon budget corresponds to a net carbon budget. In this case, the objective of the company is that emissions converge towards the objective at the target date $t^*$, such that:
