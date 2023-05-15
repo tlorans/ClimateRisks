@@ -1,4 +1,4 @@
-## Portfolio Alignment with a Sound Decarbonization Pathway
+## Portfolio Alignment with a Decarbonization Pathway
 
 We've seen in the previous part that traditional carbon risk hedging strategy involves static portfolio decarbonization.
 
@@ -7,7 +7,7 @@ However, as stated by Barahhou et al. (2022), net zero investing changed the sta
 In the first section, we will focus on the concept of decarbonization pathway. Then, we will show how to implement a dynamic portfolio decarbonization strategy, in line with a decarbonization pathway.
 
 
-### What is a Sound Decarbonization Pathway?
+### Decarbonization Pathway
 
 A net zero investment portfolio starts with a Net Zero Emissions (NZE) scenario. A decarbonization pathway summarizes the NZE scenario.
 
