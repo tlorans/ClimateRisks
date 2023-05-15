@@ -374,55 +374,5 @@ The decision trigger is the overlap between scopes:
 
 ### Carbon Trend
 
-Another alternative to the benchmark global or sector reduction scenario is the carbon trend proposed by Le Guenedal et al. (2022). The authors define the carbon trend by considering a linear constrant trend model. The corresponding linear regression model is:
-
-\begin{equation}
-CE_i(t) = \beta_{i,0} + \beta_{i,1}t + u_i(t)
-\end{equation}
-
-where $t \in [t_{First}, t_{Last}]$. Using the least squares method, we can estimate the parameters $\beta_{i,0}$ and $\beta_{i,1}$. We can then build the carbon trajectory implied by the current rend by applying the projection:
-
-\begin{equation}
-CE^{Trend}_i(t) := \hat{CE}_i(t) = \hat{\beta}_{i,0} + \hat{\beta}_{i,1}t
-\end{equation}
-
-for $t > t_{Last}$. The underlying idea is then to extrapolate the past trajectory. 
-
-Let's assume that $t_p$ is a pivot date (generally the current year). We can have the following reformulation:
-
-\begin{equation}
-CE_i(t) = \beta^{'}_{i,0} + \beta^{'}_{i,1}(t - t_p) + u_i(t)
-\end{equation}
-
-with the relationships: $\beta_{i,0} = \beta^{'}_{i,0}-\beta^{'}_{i,1}t_p$ and $\beta_{i,1} = \beta^{'}_{i,1}$.
-
-If we have the current date as the pivot date $t_p = t_0$, we have $\hat{CE}_i(t) = \beta^{'}_{i,0} + \beta^{'}_{i,1}(t-t_0)$ and $\hat{CE}_i(t_0) \beta^{'}_{i,0}$.
-
-If we want to rescale the trend such that $\hat{CE}_i(t_0) = CE_i(t_0)$, we need to obtain $\beta^{'}_{i,0} = CE_i(t_0)$. We then need to change the intercept of the trend model, that is now equal to $\tilde{\beta}_{i,0} = CE_i(t_0) - \hat{\beta}_{i,1}t_0$.
-
-Let's apply it on an illustrative example from Le Guenedal et al. (2022):
-
-| Year | $CE_i(t)$ | 
-|---|---|
-| 2007  | 57.82 |
-| 2008  | 58.36 |
-| 2009  | 57.70 |
-| 2010  | 55.03 |
-| 2011  | 51.73 |
-| 2012  | 46.44 |
-| 2013  | 47.19 |
-| 2014  | 46.18 |
-| 2015  | 45.37 |
-| 2016  | 40.75 |
-| 2017  | 39.40 |
-| 2018  | 36.16 |
-| 2019  | 38.71 |
-| 2020  | 39.91 |
-
-```Python
-# computation to get the trend as example 4 in page 11
-```
-
-```Python
-# Figure 5 page 13
-```
+Another alternative to the benchmark global or sector reduction scenario is the carbon trend proposed by Le Guenedal et al. (2022).
+We've already covered the carbon trend in the [previous part of this course](../climate_investing/self_decarbonization.md). 
