@@ -372,12 +372,6 @@ The decision trigger is the overlap between scopes:
 - if the older target's scopes are complementary with the current combined target, we add the targets (add-up case)
 - if the older target has a better (overlapping) scope emissions coverage, we retain the older target (replace case)
 
-In Python:
-```Python
-#Figure 4 page 10
-# same results but once the overlapping dates are fixed.
-```
-
 ### Carbon Trend
 
 Another alternative to the benchmark global or sector reduction scenario is the carbon trend proposed by Le Guenedal et al. (2022). The authors define the carbon trend by considering a linear constrant trend model. The corresponding linear regression model is:
