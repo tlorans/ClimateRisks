@@ -327,6 +327,23 @@ where:
 \mathfrak{R}_i(t_{Last},t) = \sum^t_{s = t_{Last} + 1} \mathfrak{R}_i(s)
 \end{equation}
 
+We can plot the reduction $\mathfrak{R}_{2015,t}$:
+
+```Python
+plt.plot([i for i in range(2015, 2051)], np.cumsum(R_total) * 100)
+plt.ylim(ymin = 0)
+plt.ylabel("Total Reduction Rate")
+plt.figure(figsize = (10, 10))
+plt.show()
+```
+
+```{figure} total_reduction_rate.png
+---
+name: total_reduction_rate
+---
+Figure: Total Reduction Rate
+```
+
 And we can finally compute the carbon budget according to the carbon targets declared by the issuer.
 
 In practice however, we can face carbon targets issuer updating its expectations and change is reduction policy, with resulting overlapping dates, such as the following:
