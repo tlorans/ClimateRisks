@@ -45,21 +45,8 @@ y_interp = scipy.interpolate.interp1d(years, emissions)
 full_years = [i for i in range(years[0], years[-1]+1)]
 emissions_interpolated = y_interp(full_years)
 reduction_pathway = 1 - emissions_interpolated / emissions_interpolated[0]
-
-import matplotlib.pyplot as plt 
-
-plt.plot(full_years, reduction_pathway)
-plt.ylabel("Reduction rate")
-plt.figure(figsize = (10, 10))
-plt.show()
 ```
 
-```{figure} reduction_rate_elec.png
----
-name: reduction_rate_elec
----
-Figure: Reduction Rate for the Electricity Sector (IEA)
-```
 
 We can now obtain $CE^{NZE}_i(t)$:
 
