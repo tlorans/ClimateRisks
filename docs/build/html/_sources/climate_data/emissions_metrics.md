@@ -46,12 +46,11 @@ y_interp = scipy.interpolate.interp1d(years, emissions)
 
 full_years = [i for i in range(years[0], years[-1]+1)]
 emissions_interpolated = y_interp(full_years)
-
-reduction_rate = [1 - emissions_interpolated[i] / emissions_interpolated[0] for i in range(len(emissions_interpolated))]
+reduction_pathway = 1 - emissions_interpolated / emissions_interpolated[0]
 
 import matplotlib.pyplot as plt 
 
-plt.plot(full_years, reduction_rate)
+plt.plot(full_years, reduction_pathway)
 plt.ylabel("Reduction rate")
 plt.figure(figsize = (10, 10))
 plt.show()
@@ -62,6 +61,49 @@ plt.show()
 name: reduction_rate_elec
 ---
 Figure: Reduction Rate for the Electricity Sector (IEA)
+```
+
+We can now obtain $CE^{NZE}_i(t)$:
+
+```Python
+import pandas as pd
+
+import numpy as np
+
+data = pd.DataFrame({'Year':[i for i in range(2010, 2020)],
+                     'Historical Emissions':[4.8, 
+                                             4.950,
+                                             5.100,
+                                             5.175,
+                                             5.175,
+                                             5.175,
+                                             5.175,
+                                             5.100,
+                                             5.025,
+                                             4.950]})
+
+def get_emissions_scenario(reduction_pathway:np.array, ce_last:float):
+  return (1 - reduction_pathway) * ce_last
+
+emissions_scenario = get_emissions_scenario(reduction_pathway, 4.950)
+
+plt.plot(data['Year'], data["Historical Emissions"])
+plt.plot([i for i in range(2020, 2051)], emissions_scenario)
+plt.scatter(data['Year'], data["Historical Emissions"])
+plt.scatter([i for i in range(2020, 2051)], emissions_scenario)
+plt.axvline(2020, color='r') # vertical
+
+plt.ylabel("Carbon Emissions")
+plt.figure(figsize = (10, 10))
+plt.show()
+```
+
+
+```{figure} ce_nze.png
+---
+name: ce_nze
+---
+Figure: Carbon Emissions Scenario Deduced from the IEA Electricity NZE scenario
 ```
 
 #### Duration
