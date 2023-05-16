@@ -325,7 +325,31 @@ name: total_reduction_rate
 Figure: Total Reduction Rate
 ```
 
-And we can finally compute the carbon budget according to the carbon targets declared by the issuer.
+And we can obtain the targeted carbon emissions level $CE^{Target}_i(t)$:
+
+```Python
+def get_targeted_emissions(reduction_pathway:np.array, ce_last:float):
+  return (1 - reduction_pathway) * ce_last
+
+ce_target = get_targeted_emissions(reduction_pathway, 10.33 + 7.72 + 21.86)[5:] # to start to get the CE target from 2020 data
+
+import matplotlib.pyplot as plt
+
+plt.figure(figsize = (10, 10))
+plt.ylabel("Carbon Emissions")
+plt.plot([i for i in range(2020, 2051)], ce_target)
+plt.ylim(ymin = 0)
+plt.ylim(ymax = 40)
+plt.show()
+```
+
+
+```{figure} ce_target.png
+---
+name: ce_target
+---
+Figure: Emissions Target
+```
 
 In practice however, we can face carbon targets issuer updating its expectations and change is reduction policy, with resulting overlapping dates, such as the following:
 

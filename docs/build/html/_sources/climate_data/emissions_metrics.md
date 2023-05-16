@@ -20,6 +20,50 @@ CE^{NZE}_i(t^*) = (1 - \mathfrak{R}^*(t_0,t^*)) \cdot CE_i(t_0)
 
 where $\mathfrak{R}^*(t_0,t^*)$ is the carbon reduction between $t_0$ and $t^*$ expected for this issuer. For example, it can be equal to the expected reduction for the sector of the issuer in order to achieve an NZE scenario.
 
+Let's make an example with an electricity company. The corresponding IEA NZE scenario is (in GtCO2eq):
+
+| Year  |  2020 | 2025 | 2030 | 2035 | 2040 | 2045 | 2050 |
+|---|---|---|---|---|---|---|---|
+|$CE_{Electricity}(t)$|  13.5   | 10.8  | 5.8  | 2.1 | -0.1 | -0.3 | -0.4 |
+
+We can obtain the corresponding reduction pathway $\mathfrak{R}^*(t_0,t^*)$ with linearly interpolated  carbon emissions from this scenario:
+
+\begin{equation}
+\mathfrak{R}^*(t_0,t^*) = 1 - \frac{CE^{NZE}(t)}{CE^{NZE}(t_0)}
+\end{equation}
+
+In Python we have:
+
+```Python
+import pandas as pd
+
+years = [2020, 2025, 2030, 2035, 2040, 2045, 2050]
+emissions = [13.5, 10.8, 5.8, 2.1, -0.1, -0.3, -0.4]
+
+import scipy.interpolate
+
+y_interp = scipy.interpolate.interp1d(years, emissions)
+
+full_years = [i for i in range(years[0], years[-1]+1)]
+emissions_interpolated = y_interp(full_years)
+
+reduction_rate = [1 - emissions_interpolated[i] / emissions_interpolated[0] for i in range(len(emissions_interpolated))]
+
+import matplotlib.pyplot as plt 
+
+plt.plot(full_years, reduction_rate)
+plt.ylabel("Reduction rate")
+plt.figure(figsize = (10, 10))
+plt.show()
+```
+
+```{figure} reduction_rate_elec.png
+---
+name: reduction_rate_elec
+---
+Figure: Reduction Rate for the Electricity Sector (IEA)
+```
+
 #### Duration
 
 Using the generic notation $\hat{CE}_i(t)$ to name $CE^{Target}_i(t)$ and $CE^{Trend}_i(t)$, we define the time to reach the NZE scenario (or NZE duration in short) as:
