@@ -159,7 +159,7 @@ Let's consider the following example from Le Guenedal et al. (2022):
 Let's compute $CE_i^{Trend}$ with $\hat{\beta}_{i,0} = 3637.73$ and $\hat{\beta}_{i,1} = - 1.7832$, we have:
 
 \begin{equation}
-CE_i^{Trend}(t) = 3637.73 - 1.7823 \cdot t
+CE_i^{Trend}(t) = 3637.73 - 1.7832 \cdot t
 \end{equation}
 \begin{equation}
 = 35.61 - 1.7822 \cdot ( t - 2020)

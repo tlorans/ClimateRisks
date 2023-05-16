@@ -132,7 +132,7 @@ In this example, we can see that almost all yearly portfolio decarbonization com
 
 In the previous section, we have performed a portfolio alignment by considering a global decarbonization path for the portfolio, as recommended by the PAB approach. In this section, we consider the decarbonization path of the issuers, as in Le Guenedal and Roncalli (2022 {cite:p}`le2022portfolio`) and Barahhou et al. (2022). This approach should help in improving the self-decarbonization ratio of the portfolio.
 
-In order to have an idea of the potential issuers carbon footprint dynamics, we can exploit the historical trajectory of the past carbon emissions. We can therefore, Le Guenedal et al. (2022), estimate the associated linear trend model and project the future carbon emissions by assuming that the issuer will do the same efforts in the future than in the past.
+In order to have an idea of the potential issuers carbon footprint dynamics, we can exploit the historical trajectory of the past carbon emissions. We can follow Le Guenedal et al. (2022) and estimate the associated linear trend model and project the future carbon emissions by assuming that the issuer will do the same efforts in the future than in the past.
 
 Le Guenedal et al. (2022) define the carbon trend by considering the following linear constant trend model:
 
@@ -163,13 +163,13 @@ CE^{Trend}(t) = \hat{\beta'_0} + \hat{\beta'_1}(t - t_0)
 This change is just a matter of facilitating the interpretration. Indeed, the two models are equivalent and give the same value $\hat{CE}(t)$ with:
 
 \begin{equation}
-\beta'_0 = \beta_° + \beta_1 t_0
+\beta^{'}_0 = \beta_0 + \beta_1 t_0
 \end{equation}
 
 and 
 
 \begin{equation}
-\beta'_1 = \beta_1
+\beta^{'}_1 = \beta_1
 \end{equation}
 
 The only change resulting from the new formulation is that now $\hat{\beta}'_0 = \hat{CE}(t_0)$

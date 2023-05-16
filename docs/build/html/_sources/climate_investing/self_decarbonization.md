@@ -163,13 +163,13 @@ CE^{Trend}(t) = \hat{\beta'_0} + \hat{\beta'_1}(t - t_0)
 This change is just a matter of facilitating the interpretration. Indeed, the two models are equivalent and give the same value $\hat{CE}(t)$ with:
 
 \begin{equation}
-\beta'_0 = \beta_° + \beta_1 t_0
+\beta^{'}_0 = \beta_0 + \beta_1 t_0
 \end{equation}
 
 and 
 
 \begin{equation}
-\beta'_1 = \beta_1
+\beta^{'}_1 = \beta_1
 \end{equation}
 
 The only change resulting from the new formulation is that now $\hat{\beta}'_0 = \hat{CE}(t_0)$
