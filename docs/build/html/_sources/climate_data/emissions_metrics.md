@@ -1,4 +1,4 @@
-## Advanced Emissions Metrics
+## Advanced Carbon Metrics
 
 As an introduction to alternative metrics to be used for an effective portfolio alignment strategy, we've [introduced carbon trend into our optimization problem](../climate_investing/self_decarbonization.md) in the previous part of this course. 
 
@@ -160,13 +160,29 @@ We then have:
 \tau^{Trend}_i = t_0 + (\frac{CE^{NZE}_i(t^*) - \hat{\beta}^{'}_{i,0}}{\hat{\beta}_{i,1}})
 \end{equation}
 
+Let's consider the following example from Le Guenedal et al. (2022):
+
+| Year  |  $CE_i(t)$ |
+|---|---|
+| 2007 |  57.82   |
+| 2008 |   58.36  |
+| 2009 |  57.70   |
+| 2010 |  55.03   |
+| 2011 |   51.73  |
+| 2012 |   46.44  |
+| 2013 |   47.19  |
+| 2014 |   46.18  |
+| 2015 |   45.37  |
+| 2016 |   40.75  |
+| 2017 |   39.40  |
+| 2018 |   36.16  |
+| 2019 |   38.71  |
+| 2020 |   39.91  |
+
 ```Python
 # reproduce example 5 page 13
 ```
 
-```Python
-# reproduce figure 25 on page 66
-```
 
 #### Gap 
 
