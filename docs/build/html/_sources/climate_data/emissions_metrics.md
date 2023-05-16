@@ -162,13 +162,13 @@ Let's compute $CE_i^{Trend}$ with $\hat{\beta}_{i,0} = 3637.73$ and $\hat{\beta}
 CE_i^{Trend}(t) = 3637.73 - 1.7832 \cdot t
 \end{equation}
 \begin{equation}
-= 35.61 - 1.7822 \cdot ( t - 2020)
+= 35.67 - 1.7832 \cdot ( t - 2020)
 \end{equation}
 
 We can also rescale the trend such that $CE^{Trend}_i(2020) = CE_i(2020)$:
 
 \begin{equation}
-CE^{Trend}_i(t) = 39.91 - 1.7822 \cdot (t - 2020)
+CE^{Trend}_i(t) = 39.91 - 1.7832 \cdot (t - 2020)
 \end{equation}
 
 We assume that the NZE scenario for 2030 is a reduction of carbon emissions by 30%:
@@ -182,8 +182,8 @@ Let's plot it in Python to have a sense of the duration concept:
 ce_past = np.array([45.37,40.75, 39.40, 36.16, 38.71,39.91]) 
 years = np.array([i for i in range(2015, 2051)])
 
-ce_trend = 35.61 - 1.7822 * (years[5:] - 2020)
-ce_trend_rescaled = 39.91 - 1.7822 * (years[5:] - 2020)
+ce_trend = 35.67 - 1.7832 * (years[5:] - 2020)
+ce_trend_rescaled = 39.91 - 1.7832 * (years[5:] - 2020)
 
 plt.plot(years[:6], ce_past)
 plt.plot(years[5:], ce_trend)
@@ -206,6 +206,16 @@ plt.show()
 name: duration
 ---
 Figure: Trend Model vs. $CE^{NZE}_i(2030) = 27.94$
+```
+
+And we obtain $\tau^{Trend}_i$ with:
+
+```Python
+2020 + (27.94 - (3637.73 - 1.7832 * 2020)) / (- 1.7832)
+```
+with the following result:
+```
+2024.3326603858234
 ```
 
 #### Gap 
