@@ -6,8 +6,6 @@ More advanced static and dynamic metrics have been proposed by Le Guenedal et al
 
 In this section, we will cover the duration, gap, slope and budget measures proposed as static metrics, and the time contribution, velocity and burn-out scenario as advanced dynamic metrics.
 
-
-
 ### Static Measures: Duration, Gap, Slope and Budget
 
 Let's consider a static approach, where $t^*$ is the target horizon. We can denote $CE_i^{NZE}(t^*)$ as the net zero emissions scenario for issuer $i$, with $t_0$ the current date.
@@ -20,7 +18,7 @@ CE^{NZE}_i(t^*) = (1 - \mathfrak{R}^*(t_0,t^*)) \cdot CE_i(t_0)
 
 where $\mathfrak{R}^*(t_0,t^*)$ is the carbon reduction between $t_0$ and $t^*$ expected for this issuer. For example, it can be equal to the expected reduction for the sector of the issuer in order to achieve an NZE scenario.
 
-Let's make an example with an electricity company. The corresponding IEA NZE scenario is (in GtCO2eq):
+For a company in the electricity sector, we can use the corresponding IEA NZE scenario for example (in GtCO2eq):
 
 | Year  |  2020 | 2025 | 2030 | 2035 | 2040 | 2045 | 2050 |
 |---|---|---|---|---|---|---|---|
