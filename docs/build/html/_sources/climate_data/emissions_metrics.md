@@ -105,10 +105,9 @@ name: ce_nze
 ---
 Figure: Carbon Emissions Scenario Deduced from the IEA Electricity NZE scenario
 ```
-
 #### Duration
 
-Using the generic notation $\hat{CE}_i(t)$ to name $CE^{Target}_i(t)$ and $CE^{Trend}_i(t)$, we define the time to reach the NZE scenario (or NZE duration in short) as:
+Using the generic notation $\hat{CE}_i(t)$ to name either $CE^{Target}_i(t)$ or $CE^{Trend}_i(t)$, we define the time to reach the NZE scenario (or duration) as:
 
 \begin{equation}
 \tau_i = \{inf \; t: \hat{CE}_i(t) \leq CE^{NZE}_i(t^*)\}
@@ -116,7 +115,7 @@ Using the generic notation $\hat{CE}_i(t)$ to name $CE^{Target}_i(t)$ and $CE^{T
 
 If $\hat{CE}_i(t) = CE^{Target}_i(t)$, we have the NZE duration $\tau_i^{Target}$. It measures if the carbon targets announced by the company are in line with the NZE scenario $CE^{NZE}_i(t^*)$.
 
-If $\hat{CE}_i(t) = CE_i^{Target}(t)$, we have the NZE duration $\tau^{Trend}_i$. It measures if the issuer's track record is in line with its targets or the NZE scenario.
+If $\hat{CE}_i(t) = CE_i^{Trend}(t)$, we have the NZE duration $\tau^{Trend}_i$. It measures if the issuer's track record is in line with its targets or the NZE scenario.
 
 Recalling that :
 
