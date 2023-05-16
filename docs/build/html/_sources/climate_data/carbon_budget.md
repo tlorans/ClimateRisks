@@ -203,26 +203,7 @@ Which gives:
 ```
 ### Carbon Reduction Targets
 
-
-We assume $t_{Last}$ to be the last reporting date. It implies that the carbon emissions $CE_i(t)$ of the issuer $i$ are only observable when $t \leq t_{Last}$. For $t > t_{Last}$ we define the estimated carbon emissions as:
-
-\begin{equation}
-\hat{CE_i}(t) = (1 - \mathfrak{R}_i(t_{Last},t)) \cdot CE_i(t_{Last})
-\end{equation}
-
-where $\mathfrak{R}_i(t_{Last},t)$ is the carbon reduction between $t_{Last}$ and $t$. 
-
-The issue here is about the availability of $\mathfrak{R}_i(t_{Last},t)$ for all issuers. One practical solution is to consider a benchmark reduction pathway, using a global carbon reduction scenario. According to the IPCC (2021) scenario for example, we need to reduce total emissions by at least 7% every year between 2019 and 2050 if we want to achieve net zero emissions by 2050. 
-
-Using the global approach, the reduction for issuer $i$ is equal to the reduction calculate for the global scenario:
-
-\begin{equation}
-\mathfrak{R}_i(t_{Last},t) = \mathfrak{R}_{Global}(t_{Last}, t)
-\end{equation}
-
-However, this solution is not optimal since there is no difference between issuers. 
-
-A first solution to take into account the idiosyncratic aspect of carbon reduction is the use of carbon reduction targets defined by companies. These targets are generally defined at a scope emissions level with different time horizons. Carbon reduction target setting is defined from the space:
+Some companies define carbon reduction targets. These targets are generally defined at a scope emissions level with different time horizons. Carbon reduction target setting is defined from the space:
 
 \begin{equation}
 \mathfrak{T} = \{k \in [1,m] : (i, j, t^k_1, t^k_2, \mathfrak{R}_{i,j}(t^k_1, t^k_2))\}
