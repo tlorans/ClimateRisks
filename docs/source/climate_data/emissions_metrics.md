@@ -162,14 +162,6 @@ Let's consider the following example from Le Guenedal et al. (2022):
 
 | Year  |  $CE_i(t)$ |
 |---|---|
-| 2007 |  57.82   |
-| 2008 |   58.36  |
-| 2009 |  57.70   |
-| 2010 |  55.03   |
-| 2011 |   51.73  |
-| 2012 |   46.44  |
-| 2013 |   47.19  |
-| 2014 |   46.18  |
 | 2015 |   45.37  |
 | 2016 |   40.75  |
 | 2017 |   39.40  |
@@ -177,10 +169,57 @@ Let's consider the following example from Le Guenedal et al. (2022):
 | 2019 |   38.71  |
 | 2020 |   39.91  |
 
+Let's compute $CE_i^{Trend}$ with $\hat{\beta}_{i,0} = 3637.73$ and $\hat{\beta}_{i,1} = - 1.7832$, we have:
+
+\begin{equation}
+CE_i^{Trend}(t) = 3637.73 - 1.7823 \cdot t
+\end{equation}
+\begin{equation}
+= 35.61 - 1.7822 \cdot ( t - 2020)
+\end{equation}
+
+We can also rescale the trend such that $CE^{Trend}_i(2020) = CE_i(2020)$:
+
+\begin{equation}
+CE^{Trend}_i(t) = 39.91 - 1.7822 \cdot (t - 2020)
+\end{equation}
+
+We assume that the NZE scenario for 2030 is a reduction of carbon emissions by 30%:
+
+\begin{equation}
+CE^{NZE}_i(2030) = 39.91 \times (1 - 30\%) = 27.94
+\end{equation}
+
+Let's plot it in Python to have a sense of the duration concept:
 ```Python
-# reproduce example 5 page 13
+ce_past = np.array([45.37,40.75, 39.40, 36.16, 38.71,39.91]) 
+years = np.array([i for i in range(2015, 2051)])
+
+ce_trend = 35.61 - 1.7822 * (years[5:] - 2020)
+ce_trend_rescaled = 39.91 - 1.7822 * (years[5:] - 2020)
+
+plt.plot(years[:6], ce_past)
+plt.plot(years[5:], ce_trend)
+plt.plot(years[5:], ce_trend_rescaled)
+plt.scatter(years[:6], ce_past)
+plt.scatter(years[5:], ce_trend)
+plt.scatter(years[5:], ce_trend_rescaled)
+
+plt.axhline(27.94, color='r') # vertical
+plt.ylim(ymin = 0)
+plt.ylabel("Carbon Emissions")
+plt.legend(["Historical Emissions","Trend Model", "Trend Model - Rescaled"])
+
+plt.figure(figsize = (10, 10))
+plt.show()
 ```
 
+```{figure} duration.png
+---
+name: duration
+---
+Figure: Trend Model vs. $CE^{NZE}_i(2030) = 27.94$
+```
 
 #### Gap 
 
