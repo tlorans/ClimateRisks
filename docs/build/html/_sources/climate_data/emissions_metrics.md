@@ -1,5 +1,12 @@
 ## Advanced Emissions Metrics
 
+As an introduction to alternative metrics to be used for an effective portfolio alignment strategy, we've [introduced carbon trend into our optimization problem](../climate_investing/self_decarbonization.md) in the previous part of this course. 
+
+More advanced static and dynamic metrics have been proposed by Le Guenedal et al. (2022). These metrics rely on the concepts of carbon budget, target and trend that we've covered in the previous section. 
+
+In this section, we will cover the duration, gap, slope and budget measures proposed as static metrics, and the time contribution, velocity and burn-out scenario as advanced dynamic metrics.
+
+
 
 ### Static Measures: Duration, Gap, Slope and Budget
 

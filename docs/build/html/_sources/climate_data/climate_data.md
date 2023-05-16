@@ -10,4 +10,4 @@ We start by the foundations of carbon metrics, by defining the concepts of carbo
 
 Second, we focus on several advanced metrics proposed by Le Guenedal et al. (2022), both static and dynamic.
 
-Finally, we addres the Participation, Ambition and Credibility (PAC) framework proposed as an analytic grid that can be use for portfolio alignment.
+Finally, we addres the Participation, Ambition and Credibility (PAC) framework proposed as an analytic grid that can be use for improving portfolio alignment and self-decarbonization.
