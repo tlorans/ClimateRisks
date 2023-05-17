@@ -30,7 +30,9 @@ Data used for the projects come from [Guillaume Coqueret's github repository](ht
 intro
 climate_investing/climateinvesting
 climate_investing/portfolio_decarbonization
+climate_investing/project1
 climate_investing/portfolio_alignment
+climate_investing/project2
 climate_investing/self_decarbonization
 climate_investing/transition
 climate_data/climate_data

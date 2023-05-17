@@ -1,11 +1,13 @@
-## Project 3: Low-Carbon Strategy in Practice
+## Project 1: Sector Constraints in Portfolio Decarbonization
 
-In our first exposure to low-carbon strategy, no other constraint than the ones related to portfolio decarbonization was imposed. However, in practice, such approach is useless for investors, as the resulting portfolio will be concentrated to few sectors / stocks and thus lack of diversification. In practice, you will then need to add sector constraints in your approach. 
+In our first exposure to portfolio decarbnoization, no other constraint than the ones related to portfolio decarbonization was imposed. 
+
+However, because portfolio decarbonization needs to take into account the industry in which the company operates, such approach is useless for investors. The resulting portfolio will be concentrated to few sectors / stocks and thus lack of diversification. In practice, you will then need to add sector constraints in your approach. 
 
 In what follow, we use Roncalli (2023) as a reference.
 ### Sector Weights Constraint
 
-In order to overcome the first issue regarding the lack of sector diversification with the low-carbon strategies presented in the previous part, we can extend the framework by considering a sector weight constraint (Roncalli, 2023):
+In order to overcome the first issue regarding the lack of sector diversification with the static portfolio decarbonization presented in the previous part, we can extend the framework by considering a sector weight constraint (Roncalli, 2023):
 
 \begin{equation}
 s^-_j \leq \sum_{i \in Sector_j} x_i \leq s_j^+
@@ -371,20 +373,21 @@ array([ 2.33515514e-01,  2.41846019e-01,  1.25623128e-01,  4.43874304e-02,
 
 ### Your Turn!
 
-#### Exercise 1
-
-1. Using the data downloaded in the project 1, compute the carbon intensity (emissions / market cap)
-2. Retrive the sector for each stock in the data. You can easily obtain it with:
+1. First, download the set of data we will work with for the rest of this course:
+```Python
+import pandas as pd
+url = 'https://github.com/shokru/carbon_emissions/blob/main/data_fin.xlsx?raw=true'
+data = pd.read_excel(url)
+```
+2. Using the data downloaded, compute the carbon intensity (emissions / market cap)
+3. Retrive the sector for each stock in the data. You can easily obtain it with:
 ```Python
 import yfinance as yf
 
 tickerdata = yf.Ticker('TSLA') #the tickersymbol for Tesla
 print (tickerdata.info['sector'])
 ```
-3. Compute an initial capitalization-weighted benchmark weights vector $b$ using the market capitalization value
-4. Implement a low-carbon strategy with the threshold approach and $\mathfrak{R} = 0.5$
-5. Compare the sectors weights in $b$ and $x^*$
-
-#### Exercise 2
-
-1. Implement the same low-carbon strategy but with a sector constraint of your choice. Did you find a solution? Compare the TE between this constrained solution and the one without sector constraints.
+4. Compute an initial capitalization-weighted benchmark weights vector $b$ using the market capitalization value
+5. Implement a low-carbon strategy with the threshold approach and $\mathfrak{R} = 0.5$
+6. Compare the sectors weights in $b$ and $x^*$
+7. Implement the same low-carbon strategy but with a sector constraint of your choice. Did you find a solution? Compare the TE between this constrained solution and the one without sector constraints.
