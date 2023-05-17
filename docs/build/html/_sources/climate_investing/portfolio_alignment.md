@@ -454,3 +454,4 @@ Furthermore, dynamic decarbonization leads to progressive deviation from the ben
 - Net Zero Emissions scenario is a carbon pathway with a resulting carbon budget compliant with global warming mitigation objective
 
 - Because the decarbonization pathway is dynamic, portfolio alignment leads to a dynamic climate risk integration strategy
+

@@ -1,8 +1,8 @@
-## Project 4: Portfolio Alignment in Practice
+## Project 2: Portfolio Alignment in Practice
 
-While we've seen in the previous part how to ensure portfolio alignment with an intensity decarbonization pathway based on a NZE scenario, one should question the idea to use the same decarbonization pathways for all stocks in the portfolio, without taking into account the sector they belong to. Without adding sectors constraint such as the ones we've implemented in the project 2, we would end up with a lack of sector diversification.
+While we've seen in the previous part how to ensure portfolio alignment with an intensity decarbonization pathway based on a NZE scenario, one should question the idea to use the same decarbonization pathways for all stocks in the portfolio.
 
-On the other side, the IEA NZE scenario we've seen in the part regarding the decarbonization pathway is determined on a sector basis. One could use this sector-based decarbonization pathway and implement portfolio alignment on a sector basis. This is what we will do in this project.
+Indeed, the IEA NZE scenario we've seen in the part regarding the decarbonization pathway is determined on a sector basis. One could use this sector-based decarbonization pathway and implement portfolio alignment on a sector basis. This is what we will do in this project.
 
 ### Portfolio Sectors Alignment
 
@@ -74,14 +74,9 @@ The IEA NZE scenario is the following (in GtCO2eq):
 |$CE_{Electricity}(t)$|  13.5   | 10.8  | 5.8  | 2.1 | -0.1 | -0.3 | -0.4 |
 |$CE_{Other}(t)$|  1.9   | 1.7  | 0.9  | 0.1 | -0.5 | -0.8 | -1 |
 
-#### Exercise 1
-
 1. With the data used in the previous projects, and using the global IEA-derived intensity decarbonization pathway, build a net zero portfolio, without integrating the carbon dynamics.
 2. Compute the carbon trends and emissions forecasts.
-3. Implement a net zero portfolio, taking into account the carbon trend.
-
-#### Exercise 2
-
-1. Based on the sectors NZE, determine an intensity decarbonization pathway per sector
-2. Map the IEA sectors to the stocks' sectors in the data we've used in the previous projects.
-3. Using the sector-based intensity decarbonization pathway, build a net zero portfolio. You can integrate the carbon trend or not.
+3. Implement a climate risk integration strategy, taking into account the carbon trend.
+4. Based on the sectors NZE, determine an intensity decarbonization pathway per sector
+5. Map the IEA sectors to the stocks' sectors in the data we've used in the previous projects.
+6. Using the sector-based intensity decarbonization pathway, build a new portfolio. You can integrate the carbon trend or not.
