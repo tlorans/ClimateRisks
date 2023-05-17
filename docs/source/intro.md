@@ -1,10 +1,88 @@
 # Introduction: Climate Risk & Equity Investing
 
-## Introducing Climate Risk with the 2013 DICE Model
+## Economics and Physics of Climate Risk
 
-### Economics
+### Economics and Climate Risk
+
+We start with the economics settings of the DICE 2013 model (Nordhaus and Sztorc, 2013). The gross production $Y(t)$ is given by a standard Cobb-Douglas function:
+
+\begin{equation}
+Y(t) = A(t)K(t)^{\gamma}L(t)^{1 - \gamma}
+\end{equation}
+
+with $A(t)$ the total productivity factor (or technological progress), $K(t)$ the capital input, $L(t)$ the labor input and $\gamma \in ]0,1[$ measures the elasticity of the capital factor:
+
+\begin{equation}
+\gamma = \frac{\partial ln Y(t)}{\partial ln K (t)} = \frac{\partial Y(t)}{\partial K(t)} \frac{K(t)}{Y(t)}
+\end{equation}
+
+In the Integrated Assessment Model (IAM), we have a distinction between the production $Y(t)$ and net output $Q(t)$ because climate risk generate losses:
+
+\begin{equation}
+Q(t) = \Omega_{climate}(t)Y(t) \leq Y(t)
+\end{equation}
+
+where $\Omega_{climate}(t) \in ]0,1[$ is the loss percentage of the production. 
+
+$Q(t)$ is thus the net output when taking into account damages from climate change. 
+
 
 ### Physical Risk and Transition Risk
+
+We've seen that the net output is reduced because of climate change. We have:
+
+\begin{equation}
+\Omega_{climate}(t) = \Omega_D(t)\Omega_{\Lambda}(t) = \frac{1}{1 + D(t)}(1 - \Lambda(t))
+\end{equation}
+
+with $D(t) \geq 0$ corresponds to the damage function (physical risk) and $\Lambda(t) \geq 0$ is the mitigation or abatement cost (transition risk).
+
+The costs $D(t)$ or physical risk result from natural disasters and climatic events (wildfires, floods, storms, etc.). The costs $\Lambda(t)$ come from reducing GHG emissions and policiy for financing the transition to a low-carbon economy.
+
+Nordhaus and Sztorc (2013) assume that $D(t)$ is a function of the atmospheric temperature $T_{AT}(t)$:
+
+\begin{equation}
+D(t) = \psi_1 T_{AT}(t) + \psi_2 T_{AT}(t)^2
+\end{equation}
+
+with $\psi_1 \geq 0$ and $\psi_2 \geq 0$ are two exogenous parameters. $T_{AT}(t)$ corresponds to the global mean surface tempature increase in °C from 1900.
+We then have the fraction of net output lost because of global warming defined as:
+
+\begin{equation}
+\mathfrak{L}_D(t) = 1 - \Omega_D(t) = 1 - (1 + D(t))^{-1} 
+\end{equation}
+
+Various implementations of the damage function have been proposed in the literature. 
+
+
+```{figure} damage_function.png
+---
+name: damage_function
+---
+Figure: Loss Function due to Climate Damage Costs (Roncalli, 2023)
+```
+
+The abatement cost function depends on the control variable $\mu(t)$:
+
+\begin{equation}
+\Lambda(t) = \theta_1(t)\mu(t)^{\theta_2}
+\end{equation}
+
+with $\theta_1 \geq 0$ and $\theta_2 \geq 0$ are two parameters, and $\mu(t) \in ]0,1[$ the emission-control rate.
+
+
+```{figure} abatement_function.png
+---
+name: abatement_function
+---
+Figure: Abatement Cost Function (Roncalli, 2023)
+```
+
+We finally have the global impact of climate change as:
+
+\begin{equation}
+\Omega_{climate}(t) = \frac{1 - \theta_1(t)\mu(t)^{\theta_2}}{1 + \psi_1 T_{AT}(t) + \psi_2 T_{AT}(t)^2}
+\end{equation}
 
 ### Global Warming
 
