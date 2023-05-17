@@ -3,14 +3,14 @@
 % You can adapt this file completely to your liking, but it should at least
 % contain the root `toctree` directive.
 
-# Climate Investing
+# Climate Investing in Equity Markets
 
 
 ```{warning}
 This course is under heavy development
 ```
 
-In this course, I propose an overview of climate investing, from the climate risks integration strategies to net zero investing, based on Thierry Roncalli's (2023) {cite:p}`2023:Roncalli` course and publications. Snippets of Python codes accompany this course. Please follow along and try to implement those codes on your side.
+In this course, I propose an overview of climate risks integration in equity investing, based on Thierry Roncalli's (2023) {cite:p}`2023:Roncalli` course and publications. Snippets of Python codes accompany this course. Please follow along and try to implement those codes on your side.
 
 This quick overview is by no mean exhaustive, and is calibrated as an introductory course (one-week duration).
 
@@ -21,7 +21,7 @@ Any error in this course is mine.
 
 Unless it is sourced, any opinion expressed in this course is my personnal opinion only. 
 
-Projects are calibrated for a short time-period (around 1 hour) and to illustrate some practical refinements. Again, it is by no mean exhaustive and doesn't pretends to lead to a production-ready portfolio. Data used for the projects come from [Guillaume Coqueret's github repository](https://github.com/shokru/carbon_emissions).
+Data used for the projects come from [Guillaume Coqueret's github repository](https://github.com/shokru/carbon_emissions).
 
 ```{toctree}
 :caption: 'Contents:'
