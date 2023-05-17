@@ -305,41 +305,41 @@ document.write(`
 <section id="portfolio-sectors-alignment">
 <h2>Portfolio Sectors Alignment<a class="headerlink" href="#portfolio-sectors-alignment" title="Permalink to this headline">#</a></h2>
 <p>We now assume that we want to reduce the carbon footprint at the sector level. In this case, we can denote by <span class="math notranslate nohighlight">\(CI(x; Sector_j)\)</span> the carbon intensity of the <span class="math notranslate nohighlight">\(j^{th}\)</span> sector, with (Roncalli, 2023):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9323cdc1-b053-4472-b15e-6c7341ceb129">
-<span class="eqno">(1)<a class="headerlink" href="#equation-9323cdc1-b053-4472-b15e-6c7341ceb129" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f0885e38-85f0-4902-9776-538063c7c876">
+<span class="eqno">(1)<a class="headerlink" href="#equation-f0885e38-85f0-4902-9776-538063c7c876" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI(x;Sector_j) = \sum_{i \in Sector_j} \tilde{x_i} CI_i
 \end{equation}\]</div>
 <p>With <span class="math notranslate nohighlight">\(\tilde{x}_i\)</span> the normalized weight in the sector bucket, such as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-45ee599c-278e-4ee4-abb4-cecf9041f5d6">
-<span class="eqno">(2)<a class="headerlink" href="#equation-45ee599c-278e-4ee4-abb4-cecf9041f5d6" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b847aae6-a213-43bf-8da3-f01a07144482">
+<span class="eqno">(2)<a class="headerlink" href="#equation-b847aae6-a213-43bf-8da3-f01a07144482" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \tilde{x}_i = \frac{x_i}{\sum_{k \in Sector_j}x_k}
 \end{equation}\]</div>
 <p>Equivalently:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-76687203-01ab-490c-97de-bb9edd3c0e8f">
-<span class="eqno">(3)<a class="headerlink" href="#equation-76687203-01ab-490c-97de-bb9edd3c0e8f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a3ab014f-97de-4c09-832e-170460718356">
+<span class="eqno">(3)<a class="headerlink" href="#equation-a3ab014f-97de-4c09-832e-170460718356" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI(x;Sector_j) = \frac{(s_j \circ CI)^T x}{s^T_j x}
 \end{equation}\]</div>
 <p>With <span class="math notranslate nohighlight">\(a \circ b\)</span> is the Hardamard product (element-wise product): <span class="math notranslate nohighlight">\((a \circ b)_i = a_ib_i\)</span>.</p>
 <p>Imposing a portfolio alignment at the sector level is equivalent to modify the constraint to become:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-46ea658b-8ad8-4cb9-902e-a811f5eb9b76">
-<span class="eqno">(4)<a class="headerlink" href="#equation-46ea658b-8ad8-4cb9-902e-a811f5eb9b76" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-364f6566-297e-410b-901b-63c9cc355ce7">
+<span class="eqno">(4)<a class="headerlink" href="#equation-364f6566-297e-410b-901b-63c9cc355ce7" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI(x(t); Sector_j) \leq (1 - \mathfrak{R}_{CI}(t_0,t;Sector_j))CI(b(t_0;Sector_j))
 \end{equation}\]</div>
 <p>In order to find the QP form to integrate into our problem, we need a few transformations (because we need to find the form <span class="math notranslate nohighlight">\(G^Tx \leq h\)</span>):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d79e5f6b-e7e1-41ec-9876-c362fc1213fb">
-<span class="eqno">(5)<a class="headerlink" href="#equation-d79e5f6b-e7e1-41ec-9876-c362fc1213fb" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0bf9d491-fe7a-4a92-98ca-2056bae6873b">
+<span class="eqno">(5)<a class="headerlink" href="#equation-0bf9d491-fe7a-4a92-98ca-2056bae6873b" title="Permalink to this equation">#</a></span>\[\begin{equation}
 (*) ↔ CI(x(t); Sector_j) \leq (1 - \mathfrak{R}_{CI}(t_0,t;Sector_j))CI(b(t_0;Sector_j))
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-af2bbc74-5347-499b-966b-3209d378640d">
-<span class="eqno">(6)<a class="headerlink" href="#equation-af2bbc74-5347-499b-966b-3209d378640d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-fd182aae-301e-4970-b6ad-ed03d7b76269">
+<span class="eqno">(6)<a class="headerlink" href="#equation-fd182aae-301e-4970-b6ad-ed03d7b76269" title="Permalink to this equation">#</a></span>\[\begin{equation}
 ↔ (s_j \circ CI)^T x \leq (1 - \mathfrak{R}_{CI}(t_0,t;Sector_j))CI(b(t_0;Sector_j))(s_j^T x)
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-00a72b63-7622-4b4a-8faa-ae53b4c17f26">
-<span class="eqno">(7)<a class="headerlink" href="#equation-00a72b63-7622-4b4a-8faa-ae53b4c17f26" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-88547a42-0237-485e-b1dc-524856428541">
+<span class="eqno">(7)<a class="headerlink" href="#equation-88547a42-0237-485e-b1dc-524856428541" title="Permalink to this equation">#</a></span>\[\begin{equation}
 ↔ ((s_j \circ CI) - (1 - \mathfrak{R}_{CI}(t_0,t;Sector_j))CI(b(t_0;Sector_j)) s_j)^T x \leq 0
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-7ddf8369-9753-4937-b90b-b7dc92dd61b0">
-<span class="eqno">(8)<a class="headerlink" href="#equation-7ddf8369-9753-4937-b90b-b7dc92dd61b0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-2a221c9c-55a2-4880-9d57-bd25ee4c9992">
+<span class="eqno">(8)<a class="headerlink" href="#equation-2a221c9c-55a2-4880-9d57-bd25ee4c9992" title="Permalink to this equation">#</a></span>\[\begin{equation}
 ↔ (s_j \circ (CI - (1 - \mathfrak{R}_{CI}(t_0,t;Sector_j))CI(b(t_0;Sector_j))^T x \leq 0
 \end{equation}\]</div>
 <p>We thus have our QP form <span class="math notranslate nohighlight">\(G = (s_j \circ (CI - (1 - \mathfrak{R}_{CI}(t_0,t;Sector_j))CI(b(t_0;Sector_j))^T\)</span> and <span class="math notranslate nohighlight">\(h = 0\)</span>.</p>
