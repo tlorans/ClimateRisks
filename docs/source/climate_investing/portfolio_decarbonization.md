@@ -1,6 +1,6 @@
 ## Portfolio Decarbonization as a Climate Risk Hedging Strategy
 
-A first and simple approach for climate risks hedging strategy is a static portfolio decarbonization, excluding the higher emitting stocks. This strategy is a tool for climate risks hedging, with the assumption that carbon risk is not priced by the market holds and was proposed by Andersson et al. (2016) {cite:p}`andersson2016hedging`.
+A first and simple approach for climate risks hedging strategy is a static portfolio decarbonization, excluding the higher emitting stocks. This strategy is a tool for climate risks hedging, with the assumption that carbon risk is not priced by the market holds and was proposed by Andersson et al. (2016).
 
 The strategy consists in (i) reducing the weighted-average carbon intensity (WACI of the portoflio) while (ii) minimizing the tracking error relative to a benchmark (the benchmark as the initial portfolio).
 
