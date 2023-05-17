@@ -307,8 +307,8 @@ document.write(`
 <h1>Project 1: Portfolio Optimization in Practice<a class="headerlink" href="#project-1-portfolio-optimization-in-practice" title="Permalink to this headline">#</a></h1>
 <p>In order to implement the Markowitz approach, the estimation of the covariance matrix of stock returns is required. The standard statistical approach is to retrieve the history of past stock returns and compute the sample covariance matrix <span class="math notranslate nohighlight">\(\hat{\Sigma}\)</span>.</p>
 <p>The sample covariance matrix can be computed as (Roncalli, 2013):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d756d97b-dd60-4023-838e-e6c66e9c5cd4">
-<span class="eqno">(1)<a class="headerlink" href="#equation-d756d97b-dd60-4023-838e-e6c66e9c5cd4" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-46bc1811-083f-4520-a095-c03907cae935">
+<span class="eqno">(1)<a class="headerlink" href="#equation-46bc1811-083f-4520-a095-c03907cae935" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \hat{\Sigma} = \frac{1}{T}\sum^T_{t=1}(R_t - \bar{R})(R_t - \bar{R})^T
 \end{equation}\]</div>
 <p>However, the sample covariance matrix is estimated with a lot of errors when the number of stocks <span class="math notranslate nohighlight">\(n\)</span> is larger than the historical return observations <span class="math notranslate nohighlight">\(T\)</span> (the condition <span class="math notranslate nohighlight">\(T &gt;&gt; n\)</span> is not verified). Using the sample covariance matrix as an input of the Markowitz framework can lead to a lack of robustness for the resulting portfolio.</p>
@@ -404,8 +404,8 @@ Shrinkage methods approaches modify the sample covariance matrix <span class="ma
 <p><span class="math notranslate nohighlight">\(\hat{\Sigma}\)</span>, the sample covariance matrix is known to be unbiased but includes a lot of estimations errors where the number of observations periods is not significantly higher than the number of assets.</p>
 <p><span class="math notranslate nohighlight">\(\hat{\Phi}\)</span>, a structured estimator  (shrinkage target) converges quickly but is a biased estimator. Ledoit and Wolf  proposed to use either the single-factor matrix of Sharpe (2003a) or the constant correlation model (2003b) as the shrinkage target. Thereafter, we will use the second one.</p>
 <p>The Ledoit-Wolf approach combines both estimators to obtain a more efficient one, such as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e369c649-97fc-4b56-b216-a2ceac051929">
-<span class="eqno">(2)<a class="headerlink" href="#equation-e369c649-97fc-4b56-b216-a2ceac051929" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-11c45577-3b09-4d0b-b835-99cc0d1cec1c">
+<span class="eqno">(2)<a class="headerlink" href="#equation-11c45577-3b09-4d0b-b835-99cc0d1cec1c" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \tilde{\Sigma}_{\delta} = \delta \hat{\Phi} + (1 - \delta) \hat{\Sigma}
 \end{equation}\]</div>
 <p>With <span class="math notranslate nohighlight">\(\delta\)</span> the shrinkage intensity, between 0 and 1.</p>
@@ -417,19 +417,19 @@ Shrinkage methods approaches modify the sample covariance matrix <span class="ma
 <section id="finding-the-shrinkage-target">
 <h3>Finding the Shrinkage Target<a class="headerlink" href="#finding-the-shrinkage-target" title="Permalink to this headline">#</a></h3>
 <p>As a first stage, we need to find the shrinkage target <span class="math notranslate nohighlight">\(\hat{\Phi}\)</span>. As we follow Ledoit and Wolf (2003b), <span class="math notranslate nohighlight">\(\hat{\Phi}\)</span> is the empirical covariance matrix with a constant correlation <span class="math notranslate nohighlight">\(\bar{\rho}\)</span>, with:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ec540694-69a4-4df6-8261-b016576b6bd2">
-<span class="eqno">(3)<a class="headerlink" href="#equation-ec540694-69a4-4df6-8261-b016576b6bd2" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-6b353540-43e2-45b1-b7d8-0bf238f61487">
+<span class="eqno">(3)<a class="headerlink" href="#equation-6b353540-43e2-45b1-b7d8-0bf238f61487" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \hat{\Phi}_{i,i} = \hat{\Sigma}_{i,i} 
 \end{equation}\]</div>
 <p>and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3c4ff219-6fb9-40b2-8aa3-75e8bd4e456a">
-<span class="eqno">(4)<a class="headerlink" href="#equation-3c4ff219-6fb9-40b2-8aa3-75e8bd4e456a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0343efbe-2e58-4981-9406-3759c7274fad">
+<span class="eqno">(4)<a class="headerlink" href="#equation-0343efbe-2e58-4981-9406-3759c7274fad" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \hat{\Phi}_{i,j} = \bar{\rho} \sqrt{\hat{\Sigma}_{i,i} \hat{\Sigma}_{j,j}} 
 \end{equation}\]</div>
 <p>We then need to determine <span class="math notranslate nohighlight">\(\bar{\rho}\)</span> the constant correlation.</p>
 <p>We have:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e44eb53e-2e7a-4e97-8d8c-6c929be9a804">
-<span class="eqno">(5)<a class="headerlink" href="#equation-e44eb53e-2e7a-4e97-8d8c-6c929be9a804" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-9996b055-50bd-44ac-91d6-31d08f6d7ad5">
+<span class="eqno">(5)<a class="headerlink" href="#equation-9996b055-50bd-44ac-91d6-31d08f6d7ad5" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \bar{\rho} = \frac{2}{(N-1)N}\sum^{n-1}_{i=1} \sum^n_{j=i+1} \frac{\hat{\Sigma}_{i,j}}{\sqrt{\hat{\Sigma}_{i,i}\hat{\Sigma}_{jj}}}
 \end{equation}\]</div>
 <p>Let’s implement these firsts elements in Python. The code below is directly inspired from <a class="reference external" href="https://github.com/WLM1ke/LedoitWolf">here</a>. Special thanks to its author.</p>
@@ -476,37 +476,37 @@ Shrinkage methods approaches modify the sample covariance matrix <span class="ma
 <section id="finding-the-shrinkage-intensity">
 <h3>Finding the Shrinkage Intensity<a class="headerlink" href="#finding-the-shrinkage-intensity" title="Permalink to this headline">#</a></h3>
 <p>Then, the problem is now to estimate the optimal value of <span class="math notranslate nohighlight">\(\delta\)</span>. Ledoit and Wolf consider the quadratic loss <span class="math notranslate nohighlight">\(L(\delta)\)</span> defined as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-13fc85ee-2e5e-4319-886f-0e0efc8bbdc8">
-<span class="eqno">(6)<a class="headerlink" href="#equation-13fc85ee-2e5e-4319-886f-0e0efc8bbdc8" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b8f28d35-2279-4c0d-9386-ac28eb018452">
+<span class="eqno">(6)<a class="headerlink" href="#equation-b8f28d35-2279-4c0d-9386-ac28eb018452" title="Permalink to this equation">#</a></span>\[\begin{equation}
 L(\delta) = ||\tilde{\Sigma}_{\delta}- \Sigma||^2
 \end{equation}\]</div>
 <p>That is, the norm of the difference between the shrinkage estimator <span class="math notranslate nohighlight">\(\tilde{\Sigma}_{\delta}\)</span>, with <span class="math notranslate nohighlight">\(\Sigma\)</span> the true covariance matrix.</p>
 <p>They show that the optimal shrinkage intensity <span class="math notranslate nohighlight">\(\delta\)</span>, solving the minimization problem <span class="math notranslate nohighlight">\(\delta^* = arg min \mathbb{E}[L(\delta)]\)</span> is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b320e740-830b-4f61-8888-a4bb0a7527c3">
-<span class="eqno">(7)<a class="headerlink" href="#equation-b320e740-830b-4f61-8888-a4bb0a7527c3" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d88704ff-c514-481b-9ff2-b1c1a67f134f">
+<span class="eqno">(7)<a class="headerlink" href="#equation-d88704ff-c514-481b-9ff2-b1c1a67f134f" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \delta^* = max(0, min(\frac{1}{T} \frac{\pi - \rho}{\gamma}, 1))
 \end{equation}\]</div>
 <p>Where:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-833a9eea-3908-480c-9ebe-c282db2d4400">
-<span class="eqno">(8)<a class="headerlink" href="#equation-833a9eea-3908-480c-9ebe-c282db2d4400" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-fe34191b-785a-44d4-9dd7-c26911afca88">
+<span class="eqno">(8)<a class="headerlink" href="#equation-fe34191b-785a-44d4-9dd7-c26911afca88" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \pi = \sum_{i=1}^n \sum_{j=1}^n \pi_{i,j}
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-a0b2b0bf-99ef-4251-82fb-baa603f39357">
-<span class="eqno">(9)<a class="headerlink" href="#equation-a0b2b0bf-99ef-4251-82fb-baa603f39357" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-26d3327e-5c0e-4be5-8086-62b72f681b72">
+<span class="eqno">(9)<a class="headerlink" href="#equation-26d3327e-5c0e-4be5-8086-62b72f681b72" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \rho = \sum_{i = 1}^n \pi_{i,i} + \sum_{i=1}^n \sum_{j \neq i} \frac{\bar{\rho}}{2}(\sqrt{\frac{\hat{\Sigma}_{j,j}}{\hat{\Sigma}_{i,i}}} \eta_{i,j} + \sqrt{\frac{\hat{\Sigma}_{i,i}}{\hat{\Sigma}_{j,j}}} \eta_{j,i})
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-00d4c4b8-bbfe-4b9e-be81-0e2b8eb1f288">
-<span class="eqno">(10)<a class="headerlink" href="#equation-00d4c4b8-bbfe-4b9e-be81-0e2b8eb1f288" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-978b43ab-67c2-4736-9893-7d691a020e37">
+<span class="eqno">(10)<a class="headerlink" href="#equation-978b43ab-67c2-4736-9893-7d691a020e37" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \gamma = \sum^n_{i = 1} \sum^n_{j=1} (\hat{\Phi}_{i,j} - \hat{\Sigma}_{i,j})^2
 \end{equation}\]</div>
 <p>with:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-cb863e36-2830-4590-b02e-ef2cf5138ed1">
-<span class="eqno">(11)<a class="headerlink" href="#equation-cb863e36-2830-4590-b02e-ef2cf5138ed1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-1bb0e0de-cf0a-4dac-b068-e0d47200208c">
+<span class="eqno">(11)<a class="headerlink" href="#equation-1bb0e0de-cf0a-4dac-b068-e0d47200208c" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \pi_{i,j} = \frac{1}{T} \sum^n_{t=1}((R_{i,t} - \bar{R}_i)(R_{j,t} - \bar{R}_j) - \hat{\Sigma}_{i,j})^2
 \end{equation}\]</div>
 <p>and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7ff19ab8-9d1f-4608-b3f3-0308455f8a81">
-<span class="eqno">(12)<a class="headerlink" href="#equation-7ff19ab8-9d1f-4608-b3f3-0308455f8a81" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-369183f1-be75-493c-9e26-2ed3dba9f327">
+<span class="eqno">(12)<a class="headerlink" href="#equation-369183f1-be75-493c-9e26-2ed3dba9f327" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \eta_{i,j} = \frac{1}{T} \sum^n_{t=1} ((R_{i,t} - \bar{R}_i)^2 - \hat{\Sigma}_{i,j})((R_{i,t} - \bar{R}_i)(R_{j,t} - \bar{R}_j) - \hat{\Sigma}_{i,j})
 \end{equation}\]</div>
 <p>Let’s implement the rest of the <code class="docutils literal notranslate"><span class="pre">get_shrinkage</span></code> method:</p>

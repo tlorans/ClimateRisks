@@ -449,10 +449,8 @@ Furthermore, dynamic decarbonization leads to progressive deviation from the ben
 
 ### Key Takeaways
 
+- PAB and Barrahou et al. (2022) methodologies proposed to ensure portfolio alignment with a decarbonization pathway, from a Net Zero Emissions scenario
+
 - Net Zero Emissions scenario is a carbon pathway with a resulting carbon budget compliant with global warming mitigation objective
 
-- Portfolio decarbonization pathway uses carbon intensity decarbonization pathway rather than carbon emissions pathway
-
-- We can deduce financial decarbonization pathway from an economic decarbonization pathway, starting with a NZE scenario
-
-- PAB's intensity decarbonization pathways is far more aggressive than the intensity decarbonization pathway deduced from the IEA NZE scenario
+- Because the decarbonization pathway is dynamic, portfolio alignment leads to a dynamic climate risk integration strategy
