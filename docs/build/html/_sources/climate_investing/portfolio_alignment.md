@@ -1,23 +1,19 @@
 ## Portfolio Alignment with a Decarbonization Pathway
 
-We've seen in the previous part that traditional carbon risk hedging strategy involves static portfolio decarbonization.
+We've seen in the previous part that climate risk integration strategy involves portfolio decarbonization. 
 
-However, as stated by Barahhou et al. (2022), net zero investing changed the static dimension of climate investing by highlighting the need for portfolio alignment to a sound decarbonization pathway. As a decarbonization pathway is by nature dynamic, a portfolio alignment strategy calls for the implementation of a dynamic strategy.
+However, this first approach doesn't ensure that the resulting portfolio is in line with any emissions scenario. Indeed, the previous approach only target an arbitrary carbon exposure reduction compared to a benchmark universe at time $t$. 
+
+On the other side, Paris-Aligned Benchmarks (PABs) and methodology from Barahhou et al. (2022) introduced the notion of portfolio's decarbonization pathway and the corresponding portfolio alignment. As a decarbonization pathway is by nature dynamic, a portfolio alignment strategy calls for the implementation of a dynamic strategy. 
 
 In the first section, we will focus on the concept of decarbonization pathway. Then, we will show how to implement a dynamic portfolio decarbonization strategy, in line with a decarbonization pathway.
 
 
 ### Decarbonization Pathway
 
-A net zero investment portfolio starts with a Net Zero Emissions (NZE) scenario. A decarbonization pathway summarizes the NZE scenario.
+In this part, we will give a definition of a net zero emissions (NZE) scenario with the carbon budget constraint and study the relationship between a NZE scenario and a decarbonization pathway. Then, we will see how to derive an intensity decarbonization pathway from an emissions scenario.
 
-The decarbonization pathway has two statuses (Barahhou et al., 2022):
-- it is the exogenous pathway that the economy must follow to limit the probability of reaching 1.5°C
-- it becomes the endogenous pathway if the world closes the gap between current and needed invetments to finance transition to a low-carbon economy
-
-In this part, we will give a definition of a NZE scenario with the carbon budget constraint and study the relationship between a NZE scenario and a decarbonization pathway. Then, we will see how to derive an intensity decarbonization pathway from an emissions scenario.
-
-#### Carbon Budget Constraint
+#### Net Zero Emissions Scenario
 
 As stated by Barahhou et al. (2022), a net zero emissions (NZE) scenario corresponds to an emissions scenario, which is compatible with a carbon budget. 
 The carbon budget defines the amount of CO2eq emissions produced over the time period $[t_0,t]$ for a given emissions scenario. 
@@ -37,7 +33,7 @@ With $CE(t)$ the global carbon emissions at time $t$, $CB(t_0,t)$ the global car
 
 A NZE scenario and the corresponding decarbonization pathway must thus comply with the carbon budget constraint above, with a carbon emissions level in 2050 close to 0.
 
-##### Decarbonization Pathway
+#### Decarbonization Pathway
 
 A decarbonization pathway is structured among the following parameters (Barahhou et al. 2022):
 1. An average yearly reduction rate $\Delta \mathfrak{R}$ 
@@ -97,117 +93,14 @@ name: reductionrate
 Figure: Decarbonization Pathway with $\Delta \mathfrak{R} = 0.07$ and $\mathfrak{R}^- = 0.30$
 ```
 
-Starting with the decarbonization pathway, we can deduce the emissions scenario (Barahhou et al., 2022):
+### Portfolio Alignment as a Dynamic Portfolio Decarbonization
 
-\begin{equation}
-CE(t) = (1 - \Delta \mathfrak{R})^{t - t_0}(1 - \mathfrak{R}^-) CE(t_0)
-\end{equation}
+In the previous section, we've seen the definition of a NZE scenario and the corresponding decarbonization pathway. 
 
-We can add a new method to the `DecarbonizationPathway` dataclass:
-```Python
-from dataclasses import dataclass
-import numpy as np
+However, portfolio decarbonization uses carbon intensity, and not absolute carbon emissions. We will thus see how to obtain a portfolio's decarbonization pathway $\mathfrak{R}_{CI}(t_0,t)$ from a NZE scenario, and cover the PAB's portfolio's decarbonization pathway.
 
-@dataclass 
-class DecarbonizationPathway:
+A more robust climate risk integration strategy will try to ensure portfolio alignment to a decarbonization pathway $\mathfrak{R}_{CI}(t_0,t)$. Because we introduce a pathway between $t_0$ and $t$, the problem now involves a dynamic strategy. We will cover how to build this dynamic strategy.
 
-  delta_R:float # Average yearly reduction rate
-  R_min:float # Minimum reduction rate
-
-  def get_decarbonization_pathway(self, t_0:int, t:int):
-    pathway = []
-    for i in range(t_0,t+1):
-      r = 1 - (1 - self.delta_R)**(i-t_0)*(1 - self.R_min)
-      pathway.append(r)      
-    
-    return pathway
-
-  def get_emissions_scenario(self, t_0:int, t:int, CE_start:float):
-    scenario = [CE_start]
-    for i in range(t_0, t+1):
-      ce = (1 - self.delta_R)**(i - t_0) * (1 - self.R_min) * CE_start
-      scenario.append(ce)
-
-    return scenario
-```
-
-And then compute the emissions scenario and plot the results:
-```Python
-test = DecarbonizationPathway(delta_R = 0.07, R_min = 0.3)
-scenario = test.get_emissions_scenario(t_0 = 2020, t = 2050, CE_start = 36)
-
-import matplotlib.pyplot as plt 
-
-plt.plot([i for i in range(2019, 2050 + 1)], scenario)
-plt.ylabel("Carbon Emissions (GtC02eq)")
-plt.figure(figsize = (10, 10))
-plt.show()
-```
-
-```{figure} emissionsscenario.png
----
-name: emissionscenario
----
-Figure: Carbon Emissions Scenario with $\Delta \mathfrak{R} = 0.07$ and $\mathfrak{R}^- = 0.30$
-```
-
-##### From Decarbonization Pathway to Carbon Budget
-
-From Le Guenedal et al. (2022 {cite:p}`le2022net`), we can find the corresponding carbon budget with a given value for $\mathfrak{R}^-$, $\Delta \mathfrak{R}$ and $CE(t_0)$ with:
-
-\begin{equation}
-CB(t_0,t) = (\frac{(1 - \Delta \mathfrak{R})^{t-t_0} - 1}{ln(1 - \Delta \mathfrak{R})})(1 - \mathfrak{R}^-)CE(t_0)
-\end{equation}
-
-We can add a new method to the `DecarbonizationPathway` dataclass:
-```Python
-@dataclass 
-class DecarbonizationPathway:
-
-  delta_R:float # Average yearly reduction rate
-  R_min:float # Minimum reduction rate
-
-  def get_decarbonization_pathway(self, t_0:int, t:int):
-    pathway = []
-    for i in range(t_0,t+1):
-      r = 1 - (1 - self.delta_R)**(i-t_0)*(1 - self.R_min)
-      pathway.append(r)      
-    
-    return pathway
-
-  def get_emissions_scenario(self, t_0:int, t:int, CE_start:float):
-    scenario = [CE_start]
-    for i in range(t_0, t+1):
-      ce = (1 - self.delta_R)**(i - t_0) * (1 - self.R_min) * CE_start
-      scenario.append(ce)
-
-    return scenario
-    
-  def get_carbon_budget(self, t_0:int, t:int, CE_start:float):
-    return ((1 - self.delta_R)**(t - t_0) - 1)/(np.log(1 - self.delta_R))*(1 - self.R_min)*CE_start
-```
-
-With a given decarbonization pathway, we can then estimate $CB(t_0,2050)$ and $CE(2050)$ to check if the carbon budget holds. In our previous example we have:
-
-```Python
-test = DecarbonizationPathway(delta_R = 0.07, R_min = 0.3)
-test.get_carbon_budget(t_0 = 2020, t = 2050, CE_start = 36)
-```
-```
-307.8810311773137
-```
-Which is less than $CB^+$.
-
-And:
-```Python
-test.get_emissions_scenario(t_0 = 2020, t = 2050, CE_start = 36)[-1]
-```
-```
-2.8568602567587567
-```
-Which is close to zero.
-
-We then can say that in previous example, the decarbonization pathway complies with the carbon budget constraint for a NZE scenario.
 
 #### Decarbonization Pathway for Portfolio
 
@@ -275,17 +168,6 @@ And then determine the reduction rate with $g_Y = 0.03$ and $\Delta \mathfrak{R}
 ```Python
 test = FinancialDecarbonizationPathway(delta_R_CE = 0.07, g_Y = 0.03)
 pathway = test.get_decarbonization_pathway(t_0 = 2020, t = 2050)
-plt.plot([i for i in range(2020, 2050 + 1)], pathway)
-plt.ylabel("Reduction rate")
-plt.figure(figsize = (10, 10))
-plt.show()
-```
-
-```{figure} financialpathway.png
----
-name: financialpathway
----
-Figure: Financial decarbonization pathway with $\Delta \mathfrak{R}_{CE} = 0.07$ and $g_Y = 0.03$
 ```
 
 ##### From Economic to Financial Decarbonization Pathway
@@ -319,21 +201,8 @@ full_years = [i for i in range(years[0], years[-1]+1)]
 emissions_interpolated = y_interp(full_years)
 
 reduction_rate = [1 - emissions_interpolated[i] / emissions_interpolated[0] for i in range(len(emissions_interpolated))]
-
-import matplotlib.pyplot as plt 
-
-plt.plot(full_years, reduction_rate)
-plt.ylabel("Reduction rate")
-plt.figure(figsize = (10, 10))
-plt.show()
 ```
 
-```{figure} ieareductionrate.png
----
-name: reductionrate
----
-Figure: Decarbonization pathway $\mathfrak{R}_{CE}(2020,2050)$ from the IEA scenario
-```
 
 With $\mathfrak{R}_{CE}(t_0,t)$, we can estimate the financial decarbonization pathway for different values of the constant growth rate $g_Y$:
 \begin{equation}
@@ -347,19 +216,6 @@ Let's make an example with $g_Y = 0.03$:
 g_Y = 0.03
 growth_trajectory = [(1 + g_Y)**(full_years[i] - full_years[0]) - 1 for i in range(len(full_years))]
 intensity_reduction = [(growth_trajectory[i] + reduction_rate[i])/(1 + growth_trajectory[i]) for i in range(len(full_years))]
-
-plt.plot(full_years, intensity_reduction)
-plt.ylabel("Intensity reduction rate")
-plt.figure(figsize = (10, 10))
-plt.show()
-```
-
-
-```{figure} intensityieareductionrate.png
----
-name: intensityieareductionrate
----
-Figure: Financial decarbonization pathway $\mathfrak{R}_{CI}(2020,2050)$ from the IEA scenario, with $g_Y = 0.03$
 ```
 
 Let's compare the financial decarbonization pathway deduced from the IEA scenario to the Paris-Aligned Benchmarks (PAB) decarbonization pathway.
@@ -394,15 +250,9 @@ Figure: Financial decarbonization pathway $\mathfrak{R}_{CI}(2020,2050)$ from th
 
 We can see that the PAB financial decarbonization pathway is far too much aggressive compared with the IEA deduced pathway.
 
-
-
-### Portfolio Alignment as a Dynamic Portfolio Decarbonization
-
-We've seen in the low-carbon strategy framework how investors can conduct a portfolio decarbonization with a static approach, compared to a reference universe. On the other side, net zero investing involves portfolio alignment with a decarbonization pathway $\mathfrak{R}_{CI}(t_0,t)$. Because we introduce a pathway between $t_0$ and $t$, the problem now involves a dynamic strategy.
-
 #### Dynamic Portfolio's Decarbonization
 
-Let's first address the PAB approach of the dynamic portfolio decarbonization. 
+In this section, we use the PAB's decarbonization pathway as an illustrative example for a dynamic decarbonization strategy. 
 
 At date $t$, the PAB label imposes the following inequality constraint for the portfolio $x(t)$:
 
