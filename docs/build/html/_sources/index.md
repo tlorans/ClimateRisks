@@ -27,6 +27,7 @@ Projects are calibrated for a short time-period (around 1 hour) and to illustrat
 :caption: 'Contents:'
 :maxdepth: 2
 
+intro
 climate_investing/climateinvesting
 climate_investing/portfolio_decarbonization
 climate_investing/portfolio_alignment
@@ -35,6 +36,6 @@ climate_investing/transition
 climate_data/climate_data
 climate_data/carbon_budget
 climate_data/emissions_metrics
-climate_data/pac
+climate_data/green_taxonomy
 references
 ```

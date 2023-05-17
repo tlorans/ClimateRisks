@@ -1,4 +1,4 @@
-# Part 2: Advanced Metrics for an Effective Portfolio Alignment Strategy
+# Part 2: Advanced Metrics
 
 We've seen in the previous part that a modern approach to climate investing suppose to maximize the self-decarbonization aspect of the portfolio, reflecting the fact that the decarbonization pathway is endogenized rather than coming from annual rebalancement only. 
 

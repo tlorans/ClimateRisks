@@ -1,4 +1,4 @@
-## Foundations: Carbon Budget, Target and Trend
+## The Basics of Carbon Metrics: Carbon Budget, Target and Trend
 
 In this section, we will present the foundations for building and understanding carbon metrics, as proposed by Le Guenedal et al. (2022). The main tools are the carbon budget, the reduction target and the carbon trend.
 
