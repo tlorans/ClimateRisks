@@ -321,6 +321,6 @@ Figure: Cumulative counterfactual vs. realized GMB returns (Pastor et al., 2022)
 
 ## Key Takeaways
 
-- Physical risk is expected to occur by the end of the century, while transition risk can occur during the next decade: this is the consequence of the tragedy of horizons, coming from the economics and physics of climate change. 
+- Physical risk is expected to occur by the end of the century, while transition risk can occur during the next decade: this is the consequence of the tragedy of horizons, coming from the economics and physics of climate change.= 
 
 - Climate risk pricing is noisy, with a mixed between systematic risk pricing and attention shift, resulting in differences between expected and realized returns in the past decade.
