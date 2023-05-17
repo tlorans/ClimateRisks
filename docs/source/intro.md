@@ -124,6 +124,97 @@ $\sigma(t)$ measures the relationshp between the carbon emissions due to anthrop
 
 It can be interpreted as the carbon intensity of the economy.
 
+The relationship between the carbon emissions $CE(t)$ and the atmospheric temperature $T_{AT}(t)$ uses a reduced for of a global circulation model in the DICE 2013 model, describing the evolution of GHG concentratins in three carbon-sink reservoirs:
+
+- the atmosphere $AT$
+- the upper ocean $UP$
+- the deep (or lower) ocean $LO$
+
+Nordhaus and Sztorc (2013) assume the following dynamics of carbon concentrations:
+
+\begin{equation}
+CC_{AT}(t) = \phi_{1,1}CC_{AT}(t-1) + \phi_{1,2}CC_{UP}(t-1) + \phi_1CE(t)
+\end{equation}
+\begin{equation}
+CC_{UP}(t) = \phi_{2,1}CC_{AT}(t-1)+\phi_{2,2}CC_{UP}(t-1) + \phi_{2,3}CC_{LO}(t-1)
+\end{equation}
+\begin{equation}
+CC_{LO}(t) = \phi_{3,2}CC_{UP}(t-1) + \phi_{3,3}CC_{LO}(t-1)
+\end{equation}
+
+with $\phi_{i,j}$ the flow parameters between carbon-sink reservoirs, and $\phi_1$ the mass percentage of carbon in CO2.
+
+Let's define $CC$ as the vector of the three-reservoir layers:
+
+\begin{equation}
+CC = \begin{bmatrix}
+CC_{AT} \\
+CC_{UP} \\
+CC_{LO}
+\end{bmatrix}
+\end{equation}
+
+We then have the dynamics of $CC$ as a vector autoregressive process:
+
+\begin{equation}
+CC(t) = \Phi_{CC}CC(t-1) + B_{CC}CE(t)
+\end{equation}
+
+with:
+
+\begin{equation}
+B_{CC} = \begin{bmatrix}
+\phi_1 \\
+0 \\
+0
+\end{bmatrix}
+\end{equation}
+
+and:
+
+\begin{equation}
+\Phi_{CC} = \begin{bmatrix}
+\phi_{1,1} & \phi_{1,2} & 0 \\
+\phi_{2,1} & \phi_{2,2} & \phi_{3,2} \\
+0 & \phi_{3,2} & \phi_{3,3}
+\end{bmatrix}
+\end{equation}
+
+We can now link accumulated carbon emissions in the atmosphere and global warming at the earth's surface through increases in radiative forcing:
+
+\begin{equation}
+F_{RAD}(t) = \frac{\eta}{ln2}ln(\frac{CC_{AT}(t)}{CC_{AT}(1750)}) + F_{EX}(t)
+\end{equation}
+
+with $F_{RAD}(t)$ the change in total radiative forcing of GHG emissions since 1750, $\eta$ the temperature forcing parameter and $F_{EX}(t)$ an exogenous forcing.
+
+We finally achieve to obtain the climate system for temperatures from the DICE 2013 model as:
+
+\begin{equation}
+T_{AT}(t) = T_{AT}(t-1) + \xi_1(F_{RAD}(t) - \xi_2 T_{AT}(t-1) - \xi_3(T_{AT}(t-1) - T_{LO}(t-1)))
+\end{equation}
+\begin{equation}
+T_{LO}(t) = T_{LO}(t-1) + \xi_4(T_{AT}(t-1) - T_{LO}(t-1))
+\end{equation}
+
+with $T_{AT}(t)$ the mean surface temperature, $T_{LO}(t)$ the temperature of the deep ocean, $\xi_1$ the speed of adjustment parameter for the atmospheric temperature, $\xi_2$ the ratio of increased forcing from CO2 doubling to the climate sensitivity, $\xi_3$ the heat loss coefficient from atmosphere to oceans and $\xi_4$ the heat gain coefficient by deep oceans.
+
+Therefore, to limite global warming $T_{AT}(t)$, we need to reduce the radiative forcing $F_{RAD}(t)$ that is a function of the carbon concentration $CC_{AT}(t)$ in the atmosphere.
+
+Below is a figure taken from Roncalli (2013) and showing the expected temperature increase if no mitigation policies is undertaken.
+
+```{figure} temp_increase.png
+---
+name: temp_increase
+---
+Figure: Global Warming Without Mitigation Policies ($\mu(t)=0$) (Roncalli, 2023)
+```
+
+Carbon concentration in the atmosphere is reduced by emitting lower carbon emissions. To achieve carbon emissions reduction, we have three choices:
+
+1. Reducing the production $Y(t)$
+2. Reducing the carbon intensity $\sigma(t)$ of industrial activities
+3. Increasing the mitiation effort $\mu(t)$ and accelerating the transition to a low-carbon economy
 
 ## Climate Risk Pricing in Equity Markets
 
