@@ -2,6 +2,9 @@
 
 ## Economics and Physics of Climate Risk: The Tragedy of the Horizon
 
+As climate risk is a hot topic in Finance, a step back into the economics and physics of climate change is needed in order to understand it. In particular, we want to highlight the sources of the tragedy of the horizon as explained by Mark Carney in his famous speech (2015).
+
+In what follows, we dig into the DICE 2013 model (Nordhaus and Sztorc, 2013), following the notations and presentation by Roncalli (2023). 
 ### Economics and Climate Risk
 
 We start with the economics settings of the DICE 2013 model (Nordhaus and Sztorc, 2013). The gross production $Y(t)$ is given by a standard Cobb-Douglas function:
@@ -210,6 +213,8 @@ name: temp_increase
 Figure: Global Warming Without Mitigation Policies ($\mu(t)=0$) (Roncalli, 2023)
 ```
 
+We have a sense of the tragedy of the horizon with this figure. Indeed, if no mitigation policy is taken, global temperature is expected to attain level resulting in important economic losses by the end of this century, while economic losses due to more stringent mitigation policies are expected to be immediate.
+
 Carbon concentration in the atmosphere is reduced by emitting lower carbon emissions. To achieve carbon emissions reduction, we have three choices:
 
 1. Reducing the production $Y(t)$
@@ -218,6 +223,14 @@ Carbon concentration in the atmosphere is reduced by emitting lower carbon emiss
 
 ## Climate Risk Pricing in Equity Markets
 
+Because of the tragedy of the horizon arising from the physics and economics of cimate change, climate risk pricing in equity markets studies mostly focus on transition risk, and more particularly on carbon risk.
+
+Indeed, one cannot expect that physical risk, potentially occuring into the end of this century, can reasonably be priced-in by equity markets. 
+
+On the other side, transition risk is 
+a sword of Damocles over the high emitters stocks, that can potentially happen anytime in the coming years.
+
+In what follows, we will focus on the question about climate risk (in fact, carbon risk) pricing in equity markets. If a systematic carbon risk seems to exist according to Gorgen et al. (2019), the corresponding factors returns are puzzling. Pastor et al. (2021, 2022) investigated on this puzzling result and explain realized outperformance of green assets in the past decade due to unexpected change in climate concerns (attention shift).
 ### The Brown-Minus-Green Factor or an Unconventional Risk Pricing
 
 Gorgen et al. (2019) developed the carbon risk management project (Carima). They propose to measure the carbon risk of a stock or a portfolio by considering the dynamics of stock prices.
@@ -308,6 +321,6 @@ Figure: Cumulative counterfactual vs. realized GMB returns (Pastor et al., 2022)
 
 ## Key Takeaways
 
-- Physical risk is expected to occur by the end of the century, while transition risk can occur during the next decade: this is the consequence of the tragedy of horizons. 
+- Physical risk is expected to occur by the end of the century, while transition risk can occur during the next decade: this is the consequence of the tragedy of horizons, coming from the economics and physics of climate change. 
 
-- Climate risk pricing is noisy, with a mixed between risk pricing and attention shift, resulting in differences between expected and realized returns in the past decade.
+- Climate risk pricing is noisy, with a mixed between systematic risk pricing and attention shift, resulting in differences between expected and realized returns in the past decade.
