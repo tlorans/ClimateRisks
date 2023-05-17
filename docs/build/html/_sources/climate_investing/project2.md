@@ -1,4 +1,4 @@
-## Project 2: Portfolio Alignment in Practice
+## Project 2: Portfolio Alignment and Sectors Decarbonization Pathways
 
 While we've seen in the previous part how to ensure portfolio alignment with an intensity decarbonization pathway based on a NZE scenario, one should question the idea to use the same decarbonization pathways for all stocks in the portfolio.
 
@@ -74,7 +74,7 @@ The IEA NZE scenario is the following (in GtCO2eq):
 |$CE_{Electricity}(t)$|  13.5   | 10.8  | 5.8  | 2.1 | -0.1 | -0.3 | -0.4 |
 |$CE_{Other}(t)$|  1.9   | 1.7  | 0.9  | 0.1 | -0.5 | -0.8 | -1 |
 
-1. With the data used in the previous projects, and using the global IEA-derived intensity decarbonization pathway, build a net zero portfolio, without integrating the carbon dynamics.
+1. With the data used in the previous project, and using the global IEA-derived intensity decarbonization pathway, build a net zero portfolio, without integrating the carbon dynamics.
 2. Compute the carbon trends and emissions forecasts.
 3. Implement a climate risk integration strategy, taking into account the carbon trend.
 4. Based on the sectors NZE, determine an intensity decarbonization pathway per sector

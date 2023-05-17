@@ -1,4 +1,4 @@
-## Project 2: Portfolio Alignment in Practice
+## Project 2: Portfolio Alignment and Sectors Decarbonization Pathways
 
 While we've seen in the previous part how to ensure portfolio alignment with an intensity decarbonization pathway based on a NZE scenario, one should question the idea to use the same decarbonization pathways for all stocks in the portfolio.
 
