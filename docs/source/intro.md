@@ -2,9 +2,9 @@
 
 ## Economics and Physics of Climate Risk: The Tragedy of the Horizon
 
-As climate risk is a hot topic in Finance, a step back into the economics and physics of climate change is needed in order to understand it. In particular, we want to highlight the sources of the tragedy of the horizon as explained by Mark Carney in his famous speech (2015).
+As climate risk is a hot topic in Finance, a step back into the economics and physics of climate change is needed in order to understand it. In particular, we want to highlight the sources of the tragedy of the horizon as explained by Mark Carney in his famous speech (2015) {cite:p}`carney2015breaking`.
 
-In what follows, we dig into the DICE 2013 model (Nordhaus and Sztorc, 2013), following the notations and presentation by Roncalli (2023). 
+In what follows, we dig into the DICE 2013 model (Nordhaus and Sztorc, 2013 {cite:p}`nordhaus2013dice`), following the notations and presentation by Roncalli (2023). 
 ### Economics and Climate Risk
 
 We start with the economics settings of the DICE 2013 model (Nordhaus and Sztorc, 2013). The gross production $Y(t)$ is given by a standard Cobb-Douglas function:
@@ -19,7 +19,7 @@ with $A(t)$ the total productivity factor (or technological progress), $K(t)$ th
 \gamma = \frac{\partial ln Y(t)}{\partial ln K (t)} = \frac{\partial Y(t)}{\partial K(t)} \frac{K(t)}{Y(t)}
 \end{equation}
 
-In the Integrated Assessment Model (IAM), we have a distinction between the production $Y(t)$ and net output $Q(t)$ because climate risk generate losses:
+In the Integrated Assessment Models (IAMs), we have a distinction between the production $Y(t)$ and net output $Q(t)$ because climate risk generate losses:
 
 \begin{equation}
 Q(t) = \Omega_{climate}(t)Y(t) \leq Y(t)
@@ -28,7 +28,6 @@ Q(t) = \Omega_{climate}(t)Y(t) \leq Y(t)
 where $\Omega_{climate}(t) \in ]0,1[$ is the loss percentage of the production. 
 
 $Q(t)$ is thus the net output when taking into account damages from climate change. 
-
 
 ### Physical Risk and Transition Risk
 
@@ -55,7 +54,11 @@ We then have the fraction of net output lost because of global warming defined a
 \mathfrak{L}_D(t) = 1 - \Omega_D(t) = 1 - (1 + D(t))^{-1} 
 \end{equation}
 
-Various implementations of the damage function have been proposed in the literature. 
+Various implementations of the damage function have been proposed in the literature, such as:
+- Weitzman (2009 {cite:p}`weitzman2009modeling`, 2010 {cite:p}`weitzman2010damages`, 2012 {cite:p}`weitzman2012ghg`)
+- Hanemann (2008 {cite:p}`hanemann2008economic`)
+- Pindyck (2012 {cite:p}`pindyck2012uncertain`)
+- Newbold-Marten (2014 {cite:p}`newbold2014value`)
 
 
 ```{figure} damage_function.png
@@ -230,12 +233,12 @@ Indeed, one cannot expect that physical risk, potentially occuring into the end 
 On the other side, transition risk is 
 a sword of Damocles over the high emitters stocks, that can potentially happen anytime in the coming years.
 
-In what follows, we will focus on the question about climate risk (in fact, carbon risk) pricing in equity markets. If a systematic carbon risk seems to exist according to Gorgen et al. (2019), the corresponding factors returns are puzzling. Pastor et al. (2021, 2022) investigated on this puzzling result and explain realized outperformance of green assets in the past decade due to unexpected change in climate concerns (attention shift).
-### The Brown-Minus-Green Factor or an Unconventional Risk Pricing
+In what follows, we will focus on the question about climate risk (in fact, carbon risk) pricing in equity markets. If a systematic carbon risk seems to exist according to Gorgen et al. (2020 {cite:p}`gorgen2020carbon`), the corresponding factors returns are puzzling. Pastor et al. (2021 {cite:p}`pastor2021sustainable`, 2022 {cite:p}`pastor2022dissecting`) investigated on this puzzling result and explain realized outperformance of green assets in the past decade due to unexpected change in climate concerns (attention shift).
+### The Brown-Minus-Green Factor or Systematic Carbon Risk
 
-Gorgen et al. (2019) developed the carbon risk management project (Carima). They propose to measure the carbon risk of a stock or a portfolio by considering the dynamics of stock prices.
+Gorgen et al. (2020) developed the carbon risk management project (Carima). They propose to measure the carbon risk of a stock or a portfolio by considering the dynamics of stock prices.
 
-To do so, they developped and made public a Brown-Minus-Green Factor (BMG). The BMG factor construction is based various climate-related informations.
+To do so, they developped and made public a Brown-Minus-Green Factor (BMG). The BMG factor construction is based various climate-related informations, but the purpose is to measure a potential systematic carbon risk priced by the markets.
 
 The Carima's BMG factor construction involves:
 1. The development of a scoring system to determine if a firm is green, neutral or brown
@@ -279,44 +282,44 @@ name: bmg
 Figure: Cumulative Returns, BMG Factor
 ```
 
-During the last decade, it seems that the BMG factor returns were constantly negative, that is brown assets underperformed green assets. If we think about carbon risk as a systematic risk, this result is puzzling. We will tackle this question in the next sub-section (green assets outperformance).
+During the last decade, it seems that the BMG factor returns were constantly negative, that is brown assets underperformed green assets. If we think about carbon risk as a systematic risk, this result is puzzling. We will tackle this question in the next sub-section..
 
 ### Green Assets Outperformance with Attention Shift
 
 In the previous part, we've observed the puzzling results that green assets outperformed brown assets in the previous decade, according to the BMG negative returns.
 
-However, as showed by the equilibrium model from Pastor et al. (2021) {cite:p}`pastor2021sustainable`, green assets should have lower expected returns than brown assets, because:
+However, as shown by the equilibrium model from Pastor et al. (2021), green assets should have lower expected returns than brown assets, because:
 - some investors have green tastes, and then require lower returns for holding these assets (taste premium)
 - greener assets are a better hedge against climate risks (risk premium)
 
 So, how could we explain the negative returns from the BMG factor? Pastor et al. (2021) explain that green assets can have higher realized returns while agents' demand shift unexpectedly in the green direction. Investors' demand for green assets can incease unexpectedly, directly driving up green assets prices. Consumers' demand for green products can also unexpectedly strenghen, driving up green firms' profits and thus stock prices. Then, a transitory green factor, driven by investors' attention shift, can arise. 
 
-Pastor et al. (2022) {cite:p}`pastor2022dissecting` explain the past green assets outperformance by the unanticipated increases in climate concerns, confirming the theoretical green factor portfolio from Pastor et al. (2021). 
+Pastor et al. (2022) explain the past green assets outperformance by the unanticipated increases in climate concerns, confirming the theoretical green factor portfolio from Pastor et al. (2021). 
 The empirical framework for testing this is the following:
 - Measuring the unanticipated climate concerns using the Media Climate Change Concerns Index (MCCC) from Ardia et al. (2020) {cite:p}`ardia2020climate`
 - Using the new measure of the unanticipated climate concerns in a regression, and use the estimated parameters to build a counterfactual green factor returns, with climate shock equals to zero
 
-To assess whether climate concerns shocks $CC(t)$ can explain green assets outperformance, Pastor et al. (2022) propose to build a counterfactual returns. 
+To assess whether climate concerns shocks $C(t)$ can explain green assets outperformance, Pastor et al. (2022) propose to build a counterfactual returns. 
 
 The approach relies on the problem of inferring an asset's expected return $\mu = \mathbb{E}[r(t)]$. The most common approach is to use the asset's sample average return, $\bar{r}$, as an estimate of $\mu$.
 
 Pastor et al. (2022) propose another approach, introducing the additional information from climate shocks. We can estimate the following regression:
 
 \begin{equation}
-R_{GMB}(t) = \alpha + \beta CC(t) + u(t)
+R_{GMB}(t) = \alpha + \beta C(t) + u(t)
 \end{equation}
 
-Where $\alpha = \mu$ because $CC(t)$ has zero mean ex ante and $R(t)$ is the monthly return of the Green-Minus-Brown portfolio.
+Where $\alpha = \mu$ because $C(t)$ has zero mean ex ante and $R(t)$ is the monthly return of the Green-Minus-Brown portfolio.
 
 Once the regression is performed, we can then build the counterfactual by adding the regression intercept $\hat{\alpha}$ plus the estimated residual.
 
-The counterfactual, with $CC(t) = 0$ is close to zero according to Pastor et al. (2022) results:
+The counterfactual, with $C(t) = 0$ is close to zero according to Pastor et al. (2022) results:
 
 ```{figure} counterfactualreturns.png
 ---
 name: counterfactualreturns
 ---
-Figure: Cumulative counterfactual vs. realized GMB returns (Pastor et al., 2022)
+Figure: Cumulative Counterfactual vs. Realized GMB Returns (Pastor et al., 2022)
 ```
 
 ## Key Takeaways
