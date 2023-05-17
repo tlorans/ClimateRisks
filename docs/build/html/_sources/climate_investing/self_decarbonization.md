@@ -1,7 +1,16 @@
 
 ## Portfolio Self-Decarbonization
 
-The objective of net zero investment portfolio, according to the framework proposed by Barahhou et al. (2022), is to promote self-decarbonization rather than sequential decarbonization (ie. decarbonization obtained by the dynamic of the issuers' decarbonization rather than with successive or sequential decarbonization obtained by rebalancement). Indeed, as stated by Barahhou et al. (2022), net zero investing must include a mechanism that respects the endogenous aspect of the decarbonization pathway. If the time-varying decarbonization is only due to rebalancing process, it is clear that the portfolio cannot be claim to be net zero.
+While we've seen that the adoption of portfolio alignment to a decarbonization pathway leads to a dynamic climate risk strategy, questions arise about the status of the portfolio time-varying decarbonization.
+
+Indeed, the time-varying portfolio decarbonization can comes from (Barahhou et al., 2022):
+- sequential decarbonization with successive rebalancements ie. an exogenous decarbonization
+- self-decarbonization ie. an endogenous decarbonization
+
+In our sense, a time-proofed climate risk integration strategy should mostly relies on self-decarbonization rather than decarbonization coming from successive rebalancements (ie. we must ensure that resulting portfolio has endogenized the decarbonization pathway and is on track with the NZE scenario).
+
+In this part, we cover the concept of decarbonization backtesting and the self-decarbonization ratio, introduced by Barahhou et al. (2022). Then, we introduced the use of forward looking metrics such as the carbon footprint dynamics, as advocated by Le Guenedal and Roncalli (2022 {cite:p}`le2022portfolio`) and Barahhou et al. (2022) into the climate risk strategy in order to improve the self-decarbonization property of the portfolio.
+
 
 ### Decarbonization Backtesting
 
@@ -130,7 +139,7 @@ In this example, we can see that almost all yearly portfolio decarbonization com
 
 ### Integrating Carbon Footprint Dynamics
 
-In the previous section, we have performed a portfolio alignment by considering a global decarbonization path for the portfolio, as recommended by the PAB approach. In this section, we consider the decarbonization path of the issuers, as in Le Guenedal and Roncalli (2022 {cite:p}`le2022portfolio`) and Barahhou et al. (2022). This approach should help in improving the self-decarbonization ratio of the portfolio.
+In the previous section, we have performed a portfolio alignment by considering a global decarbonization pathway for the portfolio, as recommended by the PAB approach. In this section, we consider the decarbonization path of the issuers, as in Le Guenedal and Roncalli (2022) and Barahhou et al. (2022). This approach should help in improving the self-decarbonization ratio of the portfolio.
 
 In order to have an idea of the potential issuers carbon footprint dynamics, we can exploit the historical trajectory of the past carbon emissions. We can follow Le Guenedal et al. (2022) and estimate the associated linear trend model and project the future carbon emissions by assuming that the issuer will do the same efforts in the future than in the past.
 
