@@ -616,6 +616,7 @@ name: tedynamicportfolio
 Figure: Tracking error volatility of dynamic net zero portfolio
 ```
 
+
 We can see that, with the assumption that the world doesn't change, we cannot find optimal solution after 2036. 
 Furthermore, dynamic decarbonization leads to progressive deviation from the benchmark, and then to explosive tracking error volatility.
 
