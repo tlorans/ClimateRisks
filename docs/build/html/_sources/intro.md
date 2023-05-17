@@ -1,6 +1,6 @@
 # Introduction: Climate Risk & Equity Investing
 
-## Economics and Physics of Climate Risk
+## Economics and Physics of Climate Risk: The Tragedy of the Horizon
 
 ### Economics and Climate Risk
 
@@ -70,6 +70,7 @@ The abatement cost function depends on the control variable $\mu(t)$:
 
 with $\theta_1 \geq 0$ and $\theta_2 \geq 0$ are two parameters, and $\mu(t) \in ]0,1[$ the emission-control rate.
 
+Below is a figure taken from Roncalli (2023) and showing the immediate and long-lasting economic losses due to the implementation of a stringent transition policy (higher $\mu(t)$).
 
 ```{figure} abatement_function.png
 ---
@@ -85,6 +86,44 @@ We finally have the global impact of climate change as:
 \end{equation}
 
 ### Global Warming
+
+Let's now have a basic view of the physics of the DICE model, in order to have a sense of mechanisms behind the global warming. 
+
+The GHG emissions $CE(t)$ depends on the production $Y(t)$ and the land use emissions $CE_{Land}(t)$:
+
+\begin{equation}
+CE(t) = CE_{Industry}(t) + CE_{Land}(t)
+\end{equation}
+
+\begin{equation}
+= (1 - \mu(t))\sigma(t)Y(t) + CE_{Land}(t)
+\end{equation}
+
+where $\sigma(t)$ is the impact of the production on GHG emissions, $CE_{Industry}(t)$ corresponds to the anthropogeneic emissions due to industrial activities, and the dynamic of $CE_{Land}(t)$ is described as:
+
+\begin{equation}
+CE_{Land}(t) = (1 - \delta_{Land})CE_{Land}(t-1)
+\end{equation}
+
+with $\delta_{Land}$ a parameter.
+
+The control variable $\mu(t)$ introduced previously measures the impact of climate change mitigation policies.
+
+We have two extreme cases:
+
+1. If $\mu(t) = 1$, mitigation policies have eliminated the anthropogenic emissions and then $CE(t) = CE_{Land}(t)$
+2. If $\mu(t) = 0$, no specific policy has been put in place and we have $CE(t) = \sigma(t)Y(t) + CE_{Land}(t)$
+
+In the DICE model, $\mu(t)$ is an endogenous variable and can be viewed as an effort rate that the economy must bear to limit global warming.
+
+$\sigma(t)$ measures the relationshp between the carbon emissions due to anthropogenic activities and the gross output in the absence of mitigation policies ($\mu(t) = 0$):
+
+\begin{equation}
+\sigma(t) = \frac{CE_{Industry}(t)}{Y(t)}
+\end{equation}
+
+It can be interpreted as the carbon intensity of the economy.
+
 
 ## Climate Risk Pricing in Equity Markets
 
