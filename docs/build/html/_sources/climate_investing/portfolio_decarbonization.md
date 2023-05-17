@@ -1,12 +1,12 @@
 ## Portfolio Decarbonization as a Climate Risk Hedging Strategy
 
-A first and simple approach for climate risks hedging strategy is a static portfolio decarbonization, excluding the higher emitting stocks. This strategy is a tool for climate risks hedging, with the assumption that carbon risk is not priced by the market holds and was proposed by Andersson et al. (2016).
+A first and simple approach for climate risks hedging strategy is a static portfolio decarbonization, excluding the higher emitting stocks. This strategy is a tool for climate risks hedging, with the assumption that carbon risk is not (at least entirely) priced by the market holds and was proposed by Andersson et al. (2016).
 
 The strategy consists in (i) reducing the weighted-average carbon intensity (WACI of the portoflio) while (ii) minimizing the tracking error relative to a benchmark (the benchmark as the initial portfolio).
 
-The underlying assuption is that carbon risk is unpriced by the market. The financial aspect of carbon risk is then a risk of abrupt pricing by the market, once the markets participants integrate it. By reducing the portfolio's WACI, Andersson et al. (2016) suppose that the portfolio's carbon risk (here, the repricing risk associated with an abrupt carbon tax or carbon policy implementation) will be reduced. 
+The underlying assuption is that carbon risk is not correctly priced by the market. The financial aspect of carbon risk is then a risk of abrupt pricing by the market, once the markets participants integrate it. By reducing the portfolio's WACI, Andersson et al. (2016) suppose that the portfolio's carbon risk (here, the repricing risk associated with an abrupt carbon tax or carbon policy implementation) will be reduced. 
 
-This carbon risk-hedging strategy is widely followed by index providers and asset managers.
+This carbon risk-hedging strategy is widely followed by index providers and asset managers. We will see later that static decarbonization is a good start but not sufficient.
 
 In what follow, we will test two alternatives formulations for the climate objective, proposed by Andersson et al. (2016) and following the notations used in Roncalli (2023): 
 - the threshold approach, which consists in reducing the portfolio's WACI by changing the weights of stocks;
