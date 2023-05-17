@@ -247,8 +247,10 @@ In the second part of this course, we will introduce more advanced metrics, prop
 
 ### Key Takeaways 
 
-- Barahhou et al. (2022) introduced the concept of net zero backtesting: as net zero investing promotes self-decarbonization rather than sequential decarbonization, investors need to be able to verify where does the portfolio's decarbonization comes from, with the self-decarbonization ratio for example.
+- A time-proofed climate risk integration should relies mostly on self-decarbonization, rather than sequential decarbonization
 
-- Improving the self-decarbonization ratio calls for the integration of issuers' carbon footprint dynamics. It constrats with the PAB's approach, that doesn't include any forward-looking information. PAB's decarbonization comes almost entirely from sequential decarbonization.
+- Barahhou et al. (2022) introduced the concept of decarbonization backtesting and the self-decarbonization ratio
 
-- We introduce a measure of carbon footprint dynamics in our optimization problem, that could help in improving the self-decarbonization ratio.
+- Improving the self-decarbonization ratio calls for the integration of forward looking metrics such as the carbon footprint dynamics for example
+
+- The second part of this course will focus on other advanced metrics that can be used in order to improve this self-decarbonization aspect of the portfolio
