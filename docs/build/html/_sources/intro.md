@@ -214,7 +214,7 @@ Carbon concentration in the atmosphere is reduced by emitting lower carbon emiss
 
 1. Reducing the production $Y(t)$
 2. Reducing the carbon intensity $\sigma(t)$ of industrial activities
-3. Increasing the mitiation effort $\mu(t)$ and accelerating the transition to a low-carbon economy.
+3. Increasing the mitiation effort $\mu(t)$ and accelerating the transition to a low-carbon economy
 
 ## Climate Risk Pricing in Equity Markets
 

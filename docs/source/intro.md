@@ -210,6 +210,8 @@ name: temp_increase
 Figure: Global Warming Without Mitigation Policies ($\mu(t)=0$) (Roncalli, 2023)
 ```
 
+We have a sense of the tragedy of the horizon with this figure. Indeed, if no mitigation policy is taken, global temperature is expected to attain level resulting in important economic losses by the end of this century, while economic losses due to more stringent mitigation policies are expected to be immediate.
+
 Carbon concentration in the atmosphere is reduced by emitting lower carbon emissions. To achieve carbon emissions reduction, we have three choices:
 
 1. Reducing the production $Y(t)$
