@@ -1,4 +1,4 @@
-# Part 1: Climate Investing in Equity Markets
+# Part 1: A Forward-Looking Climate Risk Hedging Strategy
 
 In this first part of this course, we will tackle the question of climate risk integration in equity portfolios.
 

@@ -47,8 +47,6 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'climate_data/project_3';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="References" href="../references.html" />
-    <link rel="prev" title="Advanced Carbon Metrics" href="emissions_metrics.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -126,19 +124,12 @@
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction: Climate Risk &amp; Equity Investing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../climate_investing/climateinvesting.html">Part 1: Climate Investing in Equity Markets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../climate_investing/portfolio_decarbonization.html">Portfolio Decarbonization as a Climate Risk Hedging Strategy</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../climate_investing/project1.html">Project 1: Sector Constraints in Portfolio Decarbonization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../climate_investing/portfolio_alignment.html">Portfolio Alignment with a Decarbonization Pathway</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../climate_investing/project2.html">Project 2: Portfolio Alignment and Sectors Decarbonization Pathways</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../climate_investing/self_decarbonization.html">Portfolio Self-Decarbonization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../climate_investing/transition.html">Integrating the Transition Dimension</a></li>
-<li class="toctree-l1"><a class="reference internal" href="climate_data.html">Part 2: Advanced Metrics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="carbon_budget.html">The Basics of Carbon Metrics: Carbon Budget, Target and Trend</a></li>
-<li class="toctree-l1"><a class="reference internal" href="emissions_metrics.html">Advanced Carbon Metrics</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Project 3: Greeness Weighting</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../climate_investing/forward_looking_approach.html">Part 1: A Forward-Looking Climate Risk Hedging Strategy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../climate_investing/portfolio_decarbonization_pathway.html">Portfolio Decarbonization Pathway</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../climate_investing/portfolio_alignment.html">Forward-Looking Decarbonization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../climate_investing/self_decarbonization.html">Decarbonization Backtesting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 </ul>
 
@@ -310,8 +301,8 @@ document.write(`
 <section id="scoring">
 <h3>Scoring<a class="headerlink" href="#scoring" title="Permalink to this headline">#</a></h3>
 <p>The scoring approach is such as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-122a436c-2285-414f-b3b2-0070b0575f53">
-<span class="eqno">(1)<a class="headerlink" href="#equation-122a436c-2285-414f-b3b2-0070b0575f53" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-fbece2c5-3eca-429a-866b-6303a89b0d4d">
+<span class="eqno">(1)<a class="headerlink" href="#equation-fbece2c5-3eca-429a-866b-6303a89b0d4d" title="Permalink to this equation">#</a></span>\[\begin{equation}
 g_{i,j}(t) = G_{i,j}(t) - \bar{G}_j(t)
 \end{equation}\]</div>
 <p>with <span class="math notranslate nohighlight">\(\bar{G}(t)\)</span> the market capitalization weighted average of <span class="math notranslate nohighlight">\(G_i(t)\)</span> accross all issuers <span class="math notranslate nohighlight">\(i\)</span> for the metric <span class="math notranslate nohighlight">\(j\)</span>. Because we substract <span class="math notranslate nohighlight">\(\bar{G}_{i,j}(t)\)</span>, <span class="math notranslate nohighlight">\(g_{i,j}(t)\)</span> measures the issuer’s greeness relative to the market portfolio, as in Pastor et al. (2021).</p>
@@ -320,13 +311,13 @@ g_{i,j}(t) = G_{i,j}(t) - \bar{G}_j(t)
 <section id="finding-the-optimal-combination-of-metrics">
 <h2>Finding the Optimal Combination of Metrics<a class="headerlink" href="#finding-the-optimal-combination-of-metrics" title="Permalink to this headline">#</a></h2>
 <p>We are interested in long-only portfolio, so we need to keep only positive weights and rescale it such that the sum is equal to one:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0ce92d64-0071-44fe-b1d5-9e41a9923911">
-<span class="eqno">(2)<a class="headerlink" href="#equation-0ce92d64-0071-44fe-b1d5-9e41a9923911" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8fc6d93e-0d9a-4dce-a761-0f6df2beb989">
+<span class="eqno">(2)<a class="headerlink" href="#equation-8fc6d93e-0d9a-4dce-a761-0f6df2beb989" title="Permalink to this equation">#</a></span>\[\begin{equation}
 v_i(t) = \frac{g_i(t)}{\sum_{i=1}^n g_i(t)}
 \end{equation}\]</div>
 <p>Finally, the weight of the portfolio will be defined as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-16846706-121a-4467-b5c5-52f3b5e31a41">
-<span class="eqno">(3)<a class="headerlink" href="#equation-16846706-121a-4467-b5c5-52f3b5e31a41" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d01691a7-46c4-44ad-80a8-cb9412926e77">
+<span class="eqno">(3)<a class="headerlink" href="#equation-d01691a7-46c4-44ad-80a8-cb9412926e77" title="Permalink to this equation">#</a></span>\[\begin{equation}
 x_i(t) = \Pi_{j = 1}^kv_{i,j}^{\theta_j}(t)
 \end{equation}\]</div>
 <p>The parameters to determine are <span class="math notranslate nohighlight">\(\theta_j\)</span>, the relative importance of each metric we are using to define issuer’s greeness.</p>
@@ -342,24 +333,6 @@ x_i(t) = \Pi_{j = 1}^kv_{i,j}^{\theta_j}(t)
                 <footer class="bd-footer-article">
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="emissions_metrics.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Advanced Carbon Metrics</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="../references.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">References</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               

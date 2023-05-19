@@ -1,7 +1,6 @@
+# Decarbonization Backtesting
 
-## Portfolio Self-Decarbonization
-
-While we've seen that the adoption of portfolio alignment to a decarbonization pathway leads to a dynamic climate risk strategy, questions arise about the status of the portfolio time-varying decarbonization.
+While we've seen that the adoption of portfolio alignment to a decarbonization pathway leads to a forward-looking climate risk strategy, questions arise about the status of the portfolio time-varying decarbonization.
 
 Indeed, the time-varying portfolio decarbonization can comes from (Barahhou et al., 2022):
 - sequential decarbonization with successive rebalancements ie. an exogenous decarbonization
@@ -9,10 +8,9 @@ Indeed, the time-varying portfolio decarbonization can comes from (Barahhou et a
 
 In our sense, a time-proofed climate risk integration strategy should mostly relies on self-decarbonization rather than decarbonization coming from successive rebalancements (ie. we must ensure that resulting portfolio has endogenized the decarbonization pathway and is on track with the NZE scenario).
 
-In this part, we cover the concept of decarbonization backtesting and the self-decarbonization ratio, introduced by Barahhou et al. (2022). Then, we introduced the use of forward looking metrics such as the carbon footprint dynamics, as advocated by Le Guenedal and Roncalli (2022 {cite:p}`le2022portfolio`) and Barahhou et al. (2022) into the climate risk strategy in order to improve the self-decarbonization property of the portfolio.
+In this part, we cover the concept of decarbonization backtesting and the self-decarbonization ratio, introduced by Barahhou et al. (2022). 
 
-
-### Decarbonization Backtesting
+## Sequential vs. Self-Decarbonization
 
 Let $CI(t,x;I_t)$ be the carbon intensity of portfolio $x$ calculated at time $t$ with the information $I_t$ available at time $t$. The portfolio $x(t)$'s WACI must satisfy the following constraint (Barahhou et al., 2022):
 
@@ -41,17 +39,20 @@ The variation between two rebalancing dates $CI(t+1, x(t + 1);I_{t+1}) - CI(t, x
 1. The self-decarbonization $CI(t+1, x(t);I_{t+1}) - CI(t, x(t), I_t)$ (the decarbonization due to issuers' self-decarbonization)
 2. The additional decarbonization with sequential decarbonization $CI(t+1, x(t + 1);I_{t+1}) - CI(t + 1, x(t), I_{t+1})$ (the decarbonization achieved by rebalancing the portfolio from $x(t)$ to $x(t+1)$)
 
+
+## The Self-Decarbonization Ratio
+
 The self-decarbonization ratio is finally defined as (Barahhou et al., 2022):
 
 \begin{equation}
 SR(t+1) = \frac{CI(t, x(t);I_{t}) - CI(t + 1, x(t), I_{t+1})}{CI(t, x(t);I_{t}) - CI(t + 1, x(t + 1), I_{t+1})}
 \end{equation}
 
-The higher value for the self-decarbonization ratio $SR(t+1)$ is reached when we do not have to rebalance the portfolio, with the decarbonization achieved through self-decarbonization rather than sequential decarbonization. This is a first step towards the backesting of net zero portoflios. 
+The higher value for the self-decarbonization ratio $SR(t+1)$ is reached when we do not have to rebalance the portfolio, with the decarbonization achieved through self-decarbonization rather than sequential decarbonization. This is a first step towards a decarbonization backtesting. 
 
 To maximize the self-decarbonization ratio, we need to have an idea about the dynamics of the carbon footprint, that is an estimate of $CI(t+1, x(t); I_t)$.
 
-To illustrate this concept of net zero backtesting with the use of the self-decarbonization ratio, let's take this example from Barahhou et al. (2022):
+To illustrate this concept of decarbonization backtesting with the use of the self-decarbonization ratio, let's take this example from Barahhou et al. (2022):
 
 | $s$  | $(1 - \mathfrak{R}_{CI}(t_0, s))CI(t_0, b(t_0);I_{t_0})$ | $CI(s, x(s); I_s)$ | $CI(s + 1, x(s); I_{s+1})$ |   
 |---|---|---|---|
@@ -135,117 +136,9 @@ name: nzebacktestingsequential
 Figure: Sequential versus self-decarbonization
 ```
 
-In this example, we can see that almost all yearly portfolio decarbonization comes from the rebalancement process (sequential decarbonization). This is typically what we can expect by applying the PAB methodology. Indeed, because the PAB approach doesn't integrate any information about carbon footprint dynamics, the PAB's decarbonization is almost entirely due to sequential decarbonization.
+In this example, we can see that almost all yearly portfolio decarbonization comes from the rebalancement process (sequential decarbonization). This is typically what we can expect if we use backward-looking data for such a forward-looking exercice.
 
-### Integrating Carbon Footprint Dynamics
-
-In the previous section, we have performed a portfolio alignment by considering a global decarbonization pathway for the portfolio, as recommended by the PAB approach. In this section, we consider the decarbonization path of the issuers, as in Le Guenedal and Roncalli (2022) and Barahhou et al. (2022). This approach should help in improving the self-decarbonization ratio of the portfolio.
-
-In order to have an idea of the potential issuers carbon footprint dynamics, we can exploit the historical trajectory of the past carbon emissions. We can follow Le Guenedal et al. (2022) and estimate the associated linear trend model and project the future carbon emissions by assuming that the issuer will do the same efforts in the future than in the past.
-
-Le Guenedal et al. (2022) define the carbon trend by considering the following linear constant trend model:
-
-\begin{equation}
-CE(t) = \beta_0 + \beta_1 \cdot t + u(t)
-\end{equation}
-
-The parameters $\beta_0$ and $\beta_1$ can be estimated with the least squares methods on a sample of observations. 
-
-The projected carbon trajectory is then given by:
-
-\begin{equation}
-CE^{Trend}(t) = \hat{CE}(t) = \hat{\beta_0} + \hat{\beta_1}t
-\end{equation}
-
-The underlying idea heare is to extrapolate the past trajectory. However, we need to reformulate our previous model. Indeed, it is not easy to interpret as $\hat{\beta_0} = \hat{CE(0)}$ when $t = 0$. We can add a base year $t_0$, that converts our model to:
-
-\begin{equation}
-CE(t) = \beta'_0 + \beta'_1(t - t_0) + u(t)
-\end{equation}
-
-And the carbon trajectory is now given by:
-
-\begin{equation}
-CE^{Trend}(t) = \hat{\beta'_0} + \hat{\beta'_1}(t - t_0)
-\end{equation}
-
-This change is just a matter of facilitating the interpretration. Indeed, the two models are equivalent and give the same value $\hat{CE}(t)$ with:
-
-\begin{equation}
-\beta^{'}_0 = \beta_0 + \beta_1 t_0
-\end{equation}
-
-and 
-
-\begin{equation}
-\beta^{'}_1 = \beta_1
-\end{equation}
-
-The only change resulting from the new formulation is that now $\hat{\beta}'_0 = \hat{CE}(t_0)$
-
-Let's implement this with an example in Python:
-```Python
-years = [i for i in range(2007, 2021)]
-emissions = [57.8, 58.4, 57.9, 55.1,
-            51.6, 48.3, 47.1, 46.1,
-            44.4, 42.7, 41.4, 40.2, 41.9, 45.0]
-
-import pandas as pd
-import statsmodels.api as sm
-
-X = pd.Series([years[t] - years[-1] for t in range(len(years))])
-X = sm.add_constant(X)
-Y = pd.Series(emissions)
-model = sm.OLS(Y, X)
-results = model.fit()
-results.params
-```
-Our estimates for $\hat{\beta_0}'$ and $\hat{\beta_1}'$ are:
-
-```
-const    38.988571
-0        -1.451209
-dtype: float64
-```
-
-And now we can define a function `forecast_carbon_emissions` for determining $CE^{Trend}(t)$:
-
-```Python
-beta_0 = results.params["const"]
-beta_1 = results.params[0]
-
-def forecast_carbon_emissions(beta_0:float, beta_1:float, t:int) -> float:
-  carbon_trend = beta_0 + beta_1 * (t - 2020)
-  return carbon_trend
-
-forecast_carbon_emissions(beta_0 = beta_0,
-                          beta_1 = beta_1,
-                          t = 2025)
-```
-
-And the result is:
-
-```
-31.73252747252748
-```
-
-We can apply the same process on the carbon intensity $CI^{Trend}(t)$, rather than the carbon emissions level.
-The optimization problem is the same as the previous optimization problem except that we include projected trends (of carbon intensity) in place of current intensities for the portfolio's WACI:
-
-\begin{equation*}
-\begin{aligned}
-& x* = 
-& & argmin \frac{1}{2} (x(t)-b(t))^T \Sigma(t)(x(t)-b(t))\\
-& \text{subject to}
-& & 1_n^Tx = 1\\
-& & &  0_n \leq x \leq 1_n \\
-& & & CI^{trend}(x(t)) \leq (1 - \mathfrak{R}_{CI}(t_0,t))CI(b(t_0)) \\
-\end{aligned}
-\end{equation*}
-
-In the second part of this course, we will introduce more advanced metrics, proposed by Le Guenedal et al. (2022).
-
-### Key Takeaways 
+## Key Takeaways 
 
 - A time-proofed climate risk integration should relies mostly on self-decarbonization, rather than sequential decarbonization
 
@@ -253,4 +146,4 @@ In the second part of this course, we will introduce more advanced metrics, prop
 
 - Improving the self-decarbonization ratio calls for the integration of forward looking metrics such as the carbon footprint dynamics for example
 
-- The second part of this course will focus on other advanced metrics that can be used in order to improve this self-decarbonization aspect of the portfolio
+- The second part of this course will focus on other forward-looking metrics that can be useful for improving the self-decarbonization ratio

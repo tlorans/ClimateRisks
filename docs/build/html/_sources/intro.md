@@ -1,5 +1,4 @@
-# Introduction: Climate Risk & Equity Investing
-
+# Introduction
 ## Economics and Physics of Climate Risk: The Tragedy of the Horizon
 
 As climate risk is a hot topic in Finance, a step back into the economics and physics of climate change is needed in order to understand it. In particular, we want to highlight the sources of the tragedy of the horizon as explained by Mark Carney in his famous speech (2015) {cite:p}`carney2015breaking`.
@@ -207,6 +206,13 @@ with $T_{AT}(t)$ the mean surface temperature, $T_{LO}(t)$ the temperature of th
 
 Therefore, to limite global warming $T_{AT}(t)$, we need to reduce the radiative forcing $F_{RAD}(t)$ that is a function of the carbon concentration $CC_{AT}(t)$ in the atmosphere.
 
+
+Carbon concentration in the atmosphere is reduced by emitting lower carbon emissions. To achieve carbon emissions reduction, we have three choices:
+
+1. Reducing the production $Y(t)$
+2. Reducing the carbon intensity $\sigma(t)$ of industrial activities
+3. Increasing the mitiation effort $\mu(t)$ and accelerating the transition to a low-carbon economy
+
 Below is a figure taken from Roncalli (2013) and showing the expected temperature increase if no mitigation policies is undertaken.
 
 ```{figure} temp_increase.png
@@ -218,112 +224,209 @@ Figure: Global Warming Without Mitigation Policies ($\mu(t)=0$) (Roncalli, 2023)
 
 We have a sense of the tragedy of the horizon with this figure. Indeed, if no mitigation policy is taken, global temperature is expected to attain level resulting in important economic losses by the end of this century, while economic losses due to more stringent mitigation policies are expected to be immediate.
 
-Carbon concentration in the atmosphere is reduced by emitting lower carbon emissions. To achieve carbon emissions reduction, we have three choices:
+## Hedging Climate Risk
 
-1. Reducing the production $Y(t)$
-2. Reducing the carbon intensity $\sigma(t)$ of industrial activities
-3. Increasing the mitiation effort $\mu(t)$ and accelerating the transition to a low-carbon economy
+While perspectives regarding climate physical risk impacts are uncertain and expected to mostly occur in a very long-term horizon, potential transition risk is a sword of Damocles for investors. Indeed, the prospect of policy interventions has increased significantly following the Paris Climate Chance Conference. Therefore, there is a risk with respect to the magnitude and the timing of climate mitigation policies. This relates to the carbon risk that will be the focus of this course.
 
-## Climate Risk Pricing in Equity Markets
+According to Andersson et al. (2016) {cite:p}`andersson2016hedging`, we can divide green portfolio strategies into two groups:
 
-Because of the tragedy of the horizon arising from the physics and economics of cimate change, climate risk pricing in equity markets studies mostly focus on transition risk, and more particularly on carbon risk.
+- pure-play or thematic portfolios, selecting stocks in specific activities such as renewable energy, clean technology or environmental services
+- decarbonized portfolios, starting from a standard benchmark and removing or underweighting the companies with high carbon footprints
 
-Indeed, one cannot expect that physical risk, potentially occuring into the end of this century, can reasonably be priced-in by equity markets. 
+If the first group of strategies doesn't provide any protecting against the timing risk of climate change mitigation policies, the second group does, according to Andersson et al. (2016). Indeed, as the decarbonized portfolios are structured to maintain a low tracking error with respect to the benchmark index, such a portfolio is hedged against the timing risk of climate mitigation policies that are expected to disproportionately hit high-carbon-footprint stocks.
 
-On the other side, transition risk is 
-a sword of Damocles over the high emitters stocks, that can potentially happen anytime in the coming years.
+The main point underlying the climate risk-hedging strategy using decarbonization is to keep an aggregate risk exposure similar to that of the standard initial benchmarks. Indeed, while divesting from high-emitters stocks is the first step, the second key is to minimize the tracking error (TE) with reference to the benchmark index. This ensure to keep the same exposure to risks other than carbon risk.
 
-In what follows, we will focus on the question about climate risk (in fact, carbon risk) pricing in equity markets. If a systematic carbon risk seems to exist according to Gorgen et al. (2020 {cite:p}`gorgen2020carbon`), the corresponding factors returns are puzzling. Pastor et al. (2021 {cite:p}`pastor2021sustainable`, 2022 {cite:p}`pastor2022dissecting`) investigated on this puzzling result and explain realized outperformance of green assets in the past decade due to unexpected change in climate concerns (attention shift).
-### The Brown-Minus-Green Factor or Systematic Carbon Risk
+Minimizing the TE leads to a strategy that obtain similar returns to the benchmark index as long as mitigation policies are postponed. But once significant mitigation policies are introduced, the decarbonized portfolio should outperform the benchmark, as high-emitters stocks should face an abrupt repricing.
 
-Gorgen et al. (2020) developed the carbon risk management project (Carima). They propose to measure the carbon risk of a stock or a portfolio by considering the dynamics of stock prices.
+In what follows, we will cover the climate risk hedging strategy proposed by Andersson et al. (2016), following Roncalli (2023) presentation and notations.
 
-To do so, they developped and made public a Brown-Minus-Green Factor (BMG). The BMG factor construction is based various climate-related informations, but the purpose is to measure a potential systematic carbon risk priced by the markets.
+We begin by introducing the concept of portfolio optimization in the context of a benchmark, highlighting the minimization of the tracking error (Roncalli, 2013, 2023) concept.
 
-The Carima's BMG factor construction involves:
-1. The development of a scoring system to determine if a firm is green, neutral or brown
-2. The construction of a factor portfolio for carbon risk which has a long exposure to brown firms and a short exposure to green firms
 
-The first step uses four ESG Databases (55 carbon risk proxy variables are retained) in order to determine a Brown-Green score. The higher the score, the browner the firm.
+### Portfolio Optimization in the Context of a Benchmark
 
-The second step corresponds to the construction of the BMG risk factor. The construction of the BMG factor follows the methodoly of Fama and French (1992, 1993) consisting in splitting the stocks into six portfolios:
+In practice, many problems consist in tracking a benchmark while improving some properties (reducing the carbon portfolio for example). To construct such a portfolio tracking a benchmark, the main tool is to control the tracking error, that is the difference between the benchmark's return and the portfolio's return.
 
-|   | Green  | Neutral  | Brown  |  
-|---|---|---|---|
-|  Small | SG  | SN  | SB  | 
-| Big  |  BG | BN  | BB  |
+In the presence of a benchmark, the expected return of the portfolio $\mu(x)$ is replaced by the expected excess return $\mu(x|b)$. The volatility of the portfolio $\sigma(x)$is replaced by the volatility of the tracking error $\sigma(x|b)$ (Roncalli, 2013):
 
-Where the classification is based on the terciles of the aggregating score and the median market capitalization. 
+\begin{equation*}
+\begin{aligned}
+& x^* = 
+& & argmin \frac{1}{2} \sigma^2 (x|b) - \gamma \mu(x|b)\\
+& \text{subject to}
+& & 1_n^Tx = 1\\
+& & & 0_n \leq x \leq 1_n
+\end{aligned}
+\end{equation*}
 
-Finally, the return of the BMG factor is computed as:
+Without any further constraint, the optimal solution $x^*$ will be equal to the benchmark weights $b$. This is the case of a perfect replication strategy. An enhanced or tilted version will add further constraints, depending on the objective of the strategy (decarbonization for example). We have a few more steps to consider before finding our QP formulation parameters.
 
+First, let's recall that:
 \begin{equation}
-F_{BMG}(t) = \frac{1}{2}(SB(t)+BB(t)) - \frac{1}{2} (SG(t) + BG(t))
+\sigma^2(x|b) = (x - b)^T \Sigma (x -b)
 \end{equation}
 
-Let's have a look at the resulting BMG factor:
-
-```Python
-import pandas as pd
-import matplotlib.pyplot as plt 
-import numpy as np
-
-url = 'https://assets.uni-augsburg.de/media/filer_public/6f/36/6f36b1e7-9e03-4ca4-a4cd-c17e22a2e895/carbon_risk_factor_updated.xlsx'
-carbon_risk = pd.read_excel(url, sheet_name = 'monthly')
-plt.plot(carbon_risk['month'].values, np.cumprod(1 + carbon_risk['BMG'].values))
-plt.title("Cumulative Returns BMG Factor")
-plt.show()
-```
-
-```{figure} bmg.png
----
-name: bmg
----
-Figure: Cumulative Returns, BMG Factor
-```
-
-During the last decade, it seems that the BMG factor returns were constantly negative, that is brown assets underperformed green assets. If we think about carbon risk as a systematic risk, this result is puzzling. We will tackle this question in the next sub-section..
-
-### Green Assets Outperformance with Attention Shift
-
-In the previous part, we've observed the puzzling results that green assets outperformed brown assets in the previous decade, according to the BMG negative returns.
-
-However, as shown by the equilibrium model from Pastor et al. (2021), green assets should have lower expected returns than brown assets, because:
-- some investors have green tastes, and then require lower returns for holding these assets (taste premium)
-- greener assets are a better hedge against climate risks (risk premium)
-
-So, how could we explain the negative returns from the BMG factor? Pastor et al. (2021) explain that green assets can have higher realized returns while agents' demand shift unexpectedly in the green direction. Investors' demand for green assets can incease unexpectedly, directly driving up green assets prices. Consumers' demand for green products can also unexpectedly strenghen, driving up green firms' profits and thus stock prices. Then, a transitory green factor, driven by investors' attention shift, can arise. 
-
-Pastor et al. (2022) explain the past green assets outperformance by the unanticipated increases in climate concerns, confirming the theoretical green factor portfolio from Pastor et al. (2021). 
-The empirical framework for testing this is the following:
-- Measuring the unanticipated climate concerns using the Media Climate Change Concerns Index (MCCC) from Ardia et al. (2020) {cite:p}`ardia2020climate`
-- Using the new measure of the unanticipated climate concerns in a regression, and use the estimated parameters to build a counterfactual green factor returns, with climate shock equals to zero
-
-To assess whether climate concerns shocks $C(t)$ can explain green assets outperformance, Pastor et al. (2022) propose to build a counterfactual returns. 
-
-The approach relies on the problem of inferring an asset's expected return $\mu = \mathbb{E}[r(t)]$. The most common approach is to use the asset's sample average return, $\bar{r}$, as an estimate of $\mu$.
-
-Pastor et al. (2022) propose another approach, introducing the additional information from climate shocks. We can estimate the following regression:
-
+and
 \begin{equation}
-R_{GMB}(t) = \alpha + \beta C(t) + u(t)
+\mu(x|b) = (x -b)^T \mu
 \end{equation}
 
-Where $\alpha = \mu$ because $C(t)$ has zero mean ex ante and $R(t)$ is the monthly return of the Green-Minus-Brown portfolio.
+If we replace $\sigma^2(x|b)$ and $\mu(x|b)$ in our objective function, we get:
 
-Once the regression is performed, we can then build the counterfactual by adding the regression intercept $\hat{\alpha}$ plus the estimated residual.
+\begin{equation}
+* = \frac{1}{2}(x-b)^T \Sigma (x -b) - \gamma (x -b)^T \mu
+\end{equation}
 
-The counterfactual, with $C(t) = 0$ is close to zero according to Pastor et al. (2022) results:
+With further developments, you end up with the following QP objective function formulation:
+\begin{equation}
+* = \frac{1}{2} x^T \Sigma x - x^T(\gamma \mu + \Sigma b)
+\end{equation}
 
-```{figure} counterfactualreturns.png
+We have exactly the same QP problem than with a long-only mean-variance portfolio, except that $q = -(\gamma \mu + \Sigma b)$.
+
+### The Decarbonization Optimization Problem
+
+We present the decarbonization optimization problem following the threshold approach (Roncalli, 2023).
+With the threshold approach, the objective is to minimize the tracking error with the benchmark while imposing a reduction $\mathfrak{R}$ in terms of carbon intensity. In practice, implementing such approach involves the weighted-average carbon intensity (WACI) computation and the introduction of a new constraint in a portfolio optimization problem with the presence of a benchmark (Roncalli, 2013). In this part, we first define the WACI, and then introduce the threshold approach as an additional constraint to the portfolio optimization with a benchmark problem seen in the previous part.
+
+The weighted-average carbon intensity (WACI) of the benchmark is:
+
+\begin{equation}
+CI(b) = b^T CI
+\end{equation}
+
+With $CI = (CI_1, ..., CI_n)$ the vector of carbon intensities.
+
+The same is for the WACI of the portfolio:
+
+\begin{equation}
+CI(x) = x^T CI
+\end{equation}
+
+The low-carbon strategy involves the reduction $\mathfrak{R}$ of the portfolio's carbon intensity $CI(x)$ compared to the benchmark's carbon intensity $CI(b)$. It can be viewed as the following constraint (Roncalli, 2023):
+
+\begin{equation}
+CI(x) \leq (1 - \mathfrak{R})CI(b)
+\end{equation}
+
+The optimization problem becomes:
+
+\begin{equation*}
+\begin{aligned}
+& x* = 
+& & argmin \frac{1}{2}(x-b)^T \Sigma (x - b)\\
+& \text{subject to}
+& & 1_n^Tx = 1\\
+& & & 0_n \leq x \leq 1_n \\
+&&&  CI(x) \leq (1 - ℜ) CI(b)
+\end{aligned}
+\end{equation*}
+
+with the following QP parameters:
+
+\begin{equation*}
+\begin{aligned}
+& P = \Sigma \\
+& q = - \Sigma b \\
+& A = 1^T_n \\
+& b = 1 \\
+& G = CI^T \\
+& h = CI^{+} = (1 - ℜ)CI(b) \\
+& lb = 0_n \\
+& ub = 1_n
+\end{aligned}
+\end{equation*}
+
+Below is a figure illustrating the efficient decarbonization frontier achieved with this approach. We underlines the trade-off between portfolio decarbonization and the TE.
+
+```{figure} thresholdapproach.png
 ---
-name: counterfactualreturns
+name: thresholdapproach
 ---
-Figure: Cumulative Counterfactual vs. Realized GMB Returns (Pastor et al., 2022)
+Figure: Efficient Decarbonization Frontier with Threshold Approach
 ```
 
+Because we impose a constraint and minimize the TE risk, the resulting portfolio will have fewer stocks than the initial benchmark $b$. This imply that the portfolio $x$ is less diversified than the initial benchmark $b$. In order to explicitly control the number of removed stocks, Andersson et al. (2016) and Roncalli (2023) propose alternative approaches such as the order-statistic. In this course, we will focus on this threshold approach.
+
+Below is a figure taken from Andersson et al. (2016) and illustrating his climate risk hedging strategy property of providing similar returns than the benchmark so long as carbon risk doesn't materializes.
+
+```{figure} andersson_example.png
+---
+name: andersson_example
+---
+Figure: S&P 500 and S&P US Carbon Efficient Indexes, from Andersson et al. (2016)
+```
+
+## The Need for a Forward-Looking Approach
+
+While we've seen in the previous section how an investor could hedge for climate risk by minimizing the tracking error relative to a benchmark index while reducing the portfolio's carbon footprint, one could ask if the approach is sufficient for a forward-looking risk hedging strategy. Indeed, the previous approach performs portfolio decarbonization by underweighting relatively high-emitters stocks and overwheighting low-emitters stocks, without reference other than the benchmark universe. 
+
+In fact, we know that the objective of mitigation policies, if soundly implemented, should be to abate emissions such that the economy follows a net zero emissions (NZE) scenario. Such a scenario is, by definition, forward-looking. In that context, portfolio decarbonization becomes a portfolio alignment exercice (Barahhou et al., 2022) {cite:p}`barahhou2022net`, that is portfolio decarbonization in respect with a NZE scenario. The acknowledgement of such scenario calls for a forward-looking strategy.
+
+In this part, we will give a definition of a net zero emissions (NZE) scenario with the carbon budget constraint and study the relationship between a NZE scenario and a decarbonization pathway. These forward-looking decarbonization references are the very foundation of the need for a forward-looking approach in climate risk hedging.
+
+### Net Zero Emissions Scenario
+
+As stated by Barahhou et al. (2022), a net zero emissions (NZE) scenario corresponds to an emissions scenario, which is compatible with a carbon budget. 
+The carbon budget defines the amount of CO2eq emissions produced over the time period $[t_0,t]$ for a given emissions scenario. 
+
+NZE scenario is informative as it represents a possible target for government while implementing mitigation policies.
+
+As an example, the IPCC (2018) {cite:p}`masson2018global` gives an estimate of a remaining carbon budget of 580 GtC02eq for a 50% probability of limiting the warming to 1.5°C. The objective is to limit the global warming to 1.5°C while the corresponding carbon budget is 580 GTCO2eq.
+
+More formally, a NZE scenario can be defined by a carbon pathway that satisfies the following constraints (Barahhou et al., 2022):
+
+\begin{equation}
+CB(t_0, 2050) \leq CB^+
+\end{equation}
+\begin{equation}
+CE(2050) \approx 0
+\end{equation}
+
+With $CE(t)$ the global carbon emissions at time $t$, $CB(t_0,t)$ the global carbon budget between $t_0$ and $t$ and $CB^+$ the maximum carbon budget to attain a given objective of global warming mitigation. If we consider the AR5 results of IPCC (2018), we can set $CB^+ = 580$.
+
+A NZE scenario must comply with the carbon budget constraint above, with a carbon emissions level in 2050 close to 0.
+
+The figure below, taken from Roncalli (2023), represents the IEA NZE scenario (sector scenario) and the corresponding carbon budget (global).
+
+
+```{figure} scenarios.png
+---
+name: scenarios
+---
+Figure: CO2 emissions by sector in the IEA NZE scenario (in GtCO2eq) from Roncalli (2023)
+```
+
+### Decarbonization Pathway
+
+A decarbonization pathway summarizes a NZE scenario. It is structured among the following parameters (Barahhou et al. 2022):
+1. An average yearly reduction rate $\Delta \mathfrak{R}$ 
+2. A minimum carbon reduction $\mathfrak{R}^-$
+
+A decarbonization pathway is then defined as:
+
+\begin{equation}
+\mathfrak{R}(t_0,t) = 1 - (1 - \Delta \mathfrak{R})^{t-t_0}(1 - \mathfrak{R^-})
+\end{equation}
+
+
+Where $t_0$ is the base year, $t$ the year index and $\mathfrak{R}(t_0,t)$ is the reduction rate of the carbon emissions between $t_0$ and $t$.
+
+Decarbonization pathway gives a forward-looking target for the economy decarbonization. This is the starting point for a forward-looking climate risk integration strategy.
+
+The figure below represents an example of decarbonization pathway, that is the expected emissions reduction compared to a base year.
+
+```{figure} reductionrate.png
+---
+name: reductionrate
+---
+Figure: Decarbonization Pathway with $\Delta \mathfrak{R} = 0.07$ and $\mathfrak{R}^- = 0.30$
+```
 ## Key Takeaways
 
-- Physical risk is expected to occur by the end of the century, while transition risk can occur during the next decade: this is the consequence of the tragedy of horizons, coming from the economics and physics of climate change.
+- Physical risk is expected to occur by the end of the century, while transition risk can occur during the next decade: this is the consequence of the tragedy of horizons, coming from the economics and physics of climate change. Therefore, studies (and this course) focus on transition risk (in fact, carbon risk)
 
-- Climate risk pricing is noisy, with a mix between systematic risk pricing and attention shift, resulting in differences between expected and realized returns in the past decade.
+- Portfolio decarbonization has been proposed as a climate risk hedging strategy by Andersson et al. (2016). It consists in minimizing the tracking error with the benchmark while reducing the carbon footprint of the portfolio. Investors benefit from this hedge if sound climate mitigiations policies are implemented, while the strategy should provide similar returns than the benchmark otherwise
+
+- We know that the objective of potential climate mitigations policies will be to track a NZE scenario. A robust climate risk hedging strategy should target portfolio alignment with this NZE scenario, and thus adopt a forward-looking approach
