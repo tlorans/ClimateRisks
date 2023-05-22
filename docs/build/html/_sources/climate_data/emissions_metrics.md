@@ -1,12 +1,8 @@
-## Advanced Forward-Looking Metrics
+## Duration, Gap and Slope
 
 As an introduction to alternative metrics to be used for an effective portfolio alignment strategy, we've [introduced carbon trend into our optimization problem](../climate_investing/self_decarbonization.md) in the previous part of this course. 
 
 More advanced static and dynamic metrics have been proposed by Le Guenedal et al. (2022). These metrics rely on the concepts of carbon budget, target and trend that we've covered in the previous section. 
-
-In this section, we will cover the duration, gap, slope and budget measures proposed as static metrics, and the time contribution, velocity and burn-out scenario as advanced dynamic metrics.
-
-### Duration, Gap and Slope
 
 Let's consider a static approach, where $t^*$ is the target horizon. We can denote $CE_i^{NZE}(t^*)$ as the net zero emissions scenario for issuer $i$, with $t_0$ the current date.
 
@@ -90,7 +86,7 @@ name: ce_nze
 ---
 Figure: Carbon Emissions Scenario Deduced from the IEA Electricity NZE scenario
 ```
-#### Duration: How Many Time to Attain the NZE Scenario?
+### Duration: How Many Time to Attain the NZE Scenario?
 
 The duration is defined as the time to reach the NZE scenario (or duration):
 
@@ -216,7 +212,7 @@ with the following result:
 2024.3326603858234
 ```
 
-#### Gap: How Far the Trend is From the NZE scenario?
+### Gap: How Far the Trend is From the NZE scenario?
 
 The gap measure corresponds to the expected distance between the estimated carbon emissions and the NZE scenario:
 
@@ -235,7 +231,7 @@ or the trend model:
 \begin{equation}
 Gap^{Trend}_i(t^*) = CE^{Trend}_i(t^*) - CE^{NZE}_i(t^*)
 \end{equation}
-#### Slope: Is the Required Effort to Attain the NZE Scenario is Sustainable?
+### Slope: Is the Required Effort to Attain the NZE Scenario is Sustainable?
 
 The slope corresponds to the value of $\hat{\beta}_{i,1}$ such that the gap is closed, meaning that $Gap_i^{Trend}(t^*) = 0$. We then have:
 
