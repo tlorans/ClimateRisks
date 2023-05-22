@@ -1,4 +1,4 @@
-## Forward-Looking Metrics
+## Advanced Forward-Looking Metrics
 
 As an introduction to alternative metrics to be used for an effective portfolio alignment strategy, we've [introduced carbon trend into our optimization problem](../climate_investing/self_decarbonization.md) in the previous part of this course. 
 
