@@ -231,7 +231,7 @@ or the trend model:
 \begin{equation}
 Gap^{Trend}_i(t^*) = CE^{Trend}_i(t^*) - CE^{NZE}_i(t^*)
 \end{equation}
-### Slope: Is the Required Effort to Attain the NZE Scenario is Sustainable?
+### Slope: Is the Required Effort to Attain the NZE Scenario Sustainable?
 
 The slope corresponds to the value of $\hat{\beta}_{i,1}$ such that the gap is closed, meaning that $Gap_i^{Trend}(t^*) = 0$. We then have:
 
