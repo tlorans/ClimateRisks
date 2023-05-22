@@ -6,7 +6,7 @@ More advanced static and dynamic metrics have been proposed by Le Guenedal et al
 
 In this section, we will cover the duration, gap, slope and budget measures proposed as static metrics, and the time contribution, velocity and burn-out scenario as advanced dynamic metrics.
 
-### Duration, Gap, Slope and Budget
+### Duration, Gap and Slope
 
 Let's consider a static approach, where $t^*$ is the target horizon. We can denote $CE_i^{NZE}(t^*)$ as the net zero emissions scenario for issuer $i$, with $t_0$ the current date.
 
@@ -90,17 +90,15 @@ name: ce_nze
 ---
 Figure: Carbon Emissions Scenario Deduced from the IEA Electricity NZE scenario
 ```
-#### Duration
+#### Duration: How Many Time to Attain the NZE Scenario?
 
-Using the generic notation $\hat{CE}_i(t)$ to name either $CE^{Target}_i(t)$ or $CE^{Trend}_i(t)$, we define the time to reach the NZE scenario (or duration) as:
+The duration is defined as the time to reach the NZE scenario (or duration):
 
 \begin{equation}
-\tau_i = \{inf \; t: \hat{CE}_i(t) \leq CE^{NZE}_i(t^*)\}
+\tau_i^{Trend} = \{inf \; t: CE^{Trend}_i(t) \leq CE^{NZE}_i(t^*)\}
 \end{equation}
 
-If $\hat{CE}_i(t) = CE^{Target}_i(t)$, we have the NZE duration $\tau_i^{Target}$. It measures if the carbon targets announced by the company are in line with the NZE scenario $CE^{NZE}_i(t^*)$.
-
-If $\hat{CE}_i(t) = CE_i^{Trend}(t)$, we have the NZE duration $\tau^{Trend}_i$. It measures if the issuer's track record is in line with its targets or the NZE scenario.
+It measures if the issuer's track record is in line with its targets or the NZE scenario (depending on what we use as the basis for CE^{NZE}_i(t^*)).
 
 Recalling that :
 
@@ -218,7 +216,7 @@ with the following result:
 2024.3326603858234
 ```
 
-#### Gap 
+#### Gap: How Far the Trend is From the NZE scenario?
 
 The gap measure corresponds to the expected distance between the estimated carbon emissions and the NZE scenario:
 
@@ -237,7 +235,7 @@ or the trend model:
 \begin{equation}
 Gap^{Trend}_i(t^*) = CE^{Trend}_i(t^*) - CE^{NZE}_i(t^*)
 \end{equation}
-#### Slope
+#### Slope: Is the Required Effort to Attain the NZE Scenario is Sustainable?
 
 The slope corresponds to the value of $\hat{\beta}_{i,1}$ such that the gap is closed, meaning that $Gap_i^{Trend}(t^*) = 0$. We then have:
 
@@ -284,21 +282,6 @@ m_i^{Slope} = \frac{Slope_i(t^*)}{\hat{\beta}_{i,1}}
 \end{equation}
 
 With the previous example, the slope multiplier is equal to 67.14%. It means that the efforts are less important that what the company has done in the past (represented by $\hat{\beta}_{i,1}$).
- 
-
-#### Budget
-
-The budget metric corresponds to the carbon budget between the date $t_0$ and the NZE date $t^*$, such as:
-
-\begin{equation}
-CB_i(t_0, t^*) = \int^{t^*}_{t_0}(\hat{CE}_i(s) - CE^{NZE}_i(t^*))ds
-\end{equation}
-
-As before, we can compute the budget metric either with respect to the target trajectory or the trend. 
-
-```Python
-# Reproduce figure 6 page 15
-```
 
 ### Time Contribution, Velocity, Burn-Out Scenario
 
