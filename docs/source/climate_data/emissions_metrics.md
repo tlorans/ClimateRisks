@@ -1,4 +1,4 @@
-## Advanced Carbon Metrics
+## Forward-Looking Metrics
 
 As an introduction to alternative metrics to be used for an effective portfolio alignment strategy, we've [introduced carbon trend into our optimization problem](../climate_investing/self_decarbonization.md) in the previous part of this course. 
 
@@ -6,7 +6,7 @@ More advanced static and dynamic metrics have been proposed by Le Guenedal et al
 
 In this section, we will cover the duration, gap, slope and budget measures proposed as static metrics, and the time contribution, velocity and burn-out scenario as advanced dynamic metrics.
 
-### Static Measures: Duration, Gap, Slope and Budget
+### Duration, Gap, Slope and Budget
 
 Let's consider a static approach, where $t^*$ is the target horizon. We can denote $CE_i^{NZE}(t^*)$ as the net zero emissions scenario for issuer $i$, with $t_0$ the current date.
 
@@ -297,7 +297,7 @@ As before, we can compute the budget metric either with respect to the target tr
 # Reproduce figure 6 page 15
 ```
 
-### Dynamic Measures: Time Contribution, Velocity, Burn-Out Scenario
+### Time Contribution, Velocity, Burn-Out Scenario
 
 While we've covered static metrics for a target date $t^*$ that generally only needs the current emissions $CE_i(t_0)$ in the previous section, Le Guenedal et al. (2022) also proposed dynamic metrics that depend on a future reporting date. We will cover these metrics in this section.
 
