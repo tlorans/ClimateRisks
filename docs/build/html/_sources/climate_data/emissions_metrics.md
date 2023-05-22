@@ -237,11 +237,6 @@ or the trend model:
 \begin{equation}
 Gap^{Trend}_i(t^*) = CE^{Trend}_i(t^*) - CE^{NZE}_i(t^*)
 \end{equation}
-
-```Python
-# example page 14
-```
-
 #### Slope
 
 The slope corresponds to the value of $\hat{\beta}_{i,1}$ such that the gap is closed, meaning that $Gap_i^{Trend}(t^*) = 0$. We then have:
@@ -273,15 +268,23 @@ Slope_i(t^*) = \frac{CE^{NZE}_i(t^*) - CE_i(t_0)}{t^* - t_0}
 
 We can expect the slope to be generally negative because the gap is negative if the NZE scenario has not already been reached. The slope is a decreasing function of the gap: the higher the gap, the steeper the slope.
 
+
+If we take the same previous example, with $CE_i(2020) = 39.91$ and $CE^{NZE}_i(2030) = 27.94$ we thus have:
+
+\begin{equation}
+Slope_i(2030) = \frac{27.94 - 39.91}{2030 - 2020} = - 1.1973
+\end{equation}
+
+The result means that in order to achieve the NZE scenario by 2030, the company mist reduce its carbon emissions by 1.1973 MtC02e per year.
+
 Finally, we can normalize this slope metric using the current slope $\hat{\beta}_{i,1}$ of the trend model, in order to obtain the slope multiplier:
 
 \begin{equation}
 m_i^{Slope} = \frac{Slope_i(t^*)}{\hat{\beta}_{i,1}}
 \end{equation}
 
-```Python
-# example 5 from page 15
-```
+With the previous example, the slope multiplier is equal to 67.14%. It means that the efforts are less important that what the company has done in the past (represented by $\hat{\beta}_{i,1}$).
+ 
 
 #### Budget
 
