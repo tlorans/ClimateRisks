@@ -132,7 +132,7 @@
 <li class="toctree-l1"><a class="reference internal" href="portfolio_decarbonization_pathway.html">Portfolio Decarbonization Pathway</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Portfolio Alignment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="self_decarbonization.html">Decarbonization Backtesting</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../climate_data/climate_data.html">Part 2: Forward-Looking Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../climate_data/climate_data.html">Part 2: Carbon Metrics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../climate_data/carbon_budget.html">Carbon Budget, Target and Trend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../climate_data/emissions_metrics.html">Duration, Gap and Slope</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
@@ -282,7 +282,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-backward-looking-data">Using Backward-Looking Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-dynamic-approach">A Dynamic Approach</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integrating-carbon-footprint-dynamics">Integrating Carbon Footprint Dynamics</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways">Key Takeaways</a></li>
 </ul>
@@ -301,12 +301,12 @@ document.write(`
 <p>In this section, we show how portfolio alignment with a decarbonization pathway changes the nature of portfolio decarbonization, making it a dynamic approach by nature.</p>
 <p>We first expose the issues arising when performing portfolio alignment with the PAB decarbonization pathway following the approach from Barahhou et al. (2022), using last available carbon intensity.</p>
 <p>Then, we introduce issuers carbon footprint dynamics following Le Guenedal et Roncalli (2022) <span id="id1">[<a class="reference internal" href="../references.html#id18" title="Théo Le Guenedal and Thierry Roncalli. Portfolio construction with climate risk measures. Available at SSRN 3999971, 2022.">LGR22</a>]</span>.</p>
-<section id="using-backward-looking-data">
-<h2>Using Backward-Looking Data<a class="headerlink" href="#using-backward-looking-data" title="Permalink to this headline">#</a></h2>
+<section id="a-dynamic-approach">
+<h2>A Dynamic Approach<a class="headerlink" href="#a-dynamic-approach" title="Permalink to this headline">#</a></h2>
 <p>Let’s introduce the portfolio alignment strategy, that changes the nature of the portfolio decarbonization strategy.</p>
 <p>At date <span class="math notranslate nohighlight">\(t\)</span>, the portfolio alignment imposes the following inequality constraint for the portfolio <span class="math notranslate nohighlight">\(x(t)\)</span> (Barahhou et al. (2022)):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2f149941-a04c-4ab1-8912-b94cb34e91f5">
-<span class="eqno">(1)<a class="headerlink" href="#equation-2f149941-a04c-4ab1-8912-b94cb34e91f5" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f000ef4e-ec1a-4246-ab06-77e5c4132303">
+<span class="eqno">(1)<a class="headerlink" href="#equation-f000ef4e-ec1a-4246-ab06-77e5c4132303" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI(x(t)) \leq (1 - \mathfrak{R}_{CI}(t_0,t))CI(b(t_0))
 \end{equation}\]</div>
 <p>The base year <span class="math notranslate nohighlight">\(t_0\)</span> thus defines the reference level of the carbon intensity, as the reference level is <span class="math notranslate nohighlight">\(CI(b(t_0))\)</span> and not <span class="math notranslate nohighlight">\(CI(b(t))\)</span>. This is a first important difference compared to the static strategy proposed by Andersson et al. (2016).</p>
@@ -323,16 +323,16 @@ CI(x(t)) \leq (1 - \mathfrak{R}_{CI}(t_0,t))CI(b(t_0))
 \end{aligned}
 \end{equation*}\]</div>
 <p>In this problem, finding <span class="math notranslate nohighlight">\(x^*(t)\)</span> at time <span class="math notranslate nohighlight">\(t\)</span> requires to know the covariance matrix <span class="math notranslate nohighlight">\(\Sigma(t)\)</span>, the carbon intensities <span class="math notranslate nohighlight">\(CI(t)\)</span> and the investable universe <span class="math notranslate nohighlight">\(b(t)\)</span>. However, in the current year <span class="math notranslate nohighlight">\(t_1\)</span> the observations are only available for <span class="math notranslate nohighlight">\(t_0\)</span> and <span class="math notranslate nohighlight">\(t_1\)</span>. We can however do the exercise by assuming that the world does not change. In this case, we can assume that the covariance matrix, the carbon intensities and the investable universe remain constant, such as (Barahhou et al., 2022):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d90ba804-dbe5-4974-8858-dda5d1a57cdd">
-<span class="eqno">(2)<a class="headerlink" href="#equation-d90ba804-dbe5-4974-8858-dda5d1a57cdd" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a5926389-b39f-4661-a7aa-64887d9e7c49">
+<span class="eqno">(2)<a class="headerlink" href="#equation-a5926389-b39f-4661-a7aa-64887d9e7c49" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \Sigma(t) = \Sigma(t_0)
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-56b7ac9e-9714-45fe-855d-8f535ab0df89">
-<span class="eqno">(3)<a class="headerlink" href="#equation-56b7ac9e-9714-45fe-855d-8f535ab0df89" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f62d855e-efd0-472e-a55a-5d13f8fd2470">
+<span class="eqno">(3)<a class="headerlink" href="#equation-f62d855e-efd0-472e-a55a-5d13f8fd2470" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI(t) = CI(t_0)
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-af39ca77-01b8-4b6b-9245-840f88f1f070">
-<span class="eqno">(4)<a class="headerlink" href="#equation-af39ca77-01b8-4b6b-9245-840f88f1f070" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0afdeee1-153d-41a8-923c-8f5b1d846822">
+<span class="eqno">(4)<a class="headerlink" href="#equation-0afdeee1-153d-41a8-923c-8f5b1d846822" title="Permalink to this equation">#</a></span>\[\begin{equation}
 b(t) = b(t_0)
 \end{equation}\]</div>
 <p>Thus, we have the following QP parameters:</p>
@@ -487,34 +487,34 @@ b(t) = b(t_0)
 <p>In this section, we consider the decarbonization path of the issuers, as in Le Guenedal and Roncalli (2022) and Barahhou et al. (2022). This approach should help in finding optimal solutions and smoothing the expected future tracking error from the benchmark.</p>
 <p>In order to have an idea of the potential issuers carbon footprint dynamics, we can exploit the historical trajectory of the past carbon emissions. We can follow Le Guenedal et al. (2022) and estimate the associated linear trend model and project the future carbon emissions by assuming that the issuer will do the same efforts in the future than in the past.</p>
 <p>Le Guenedal et al. (2022) define the carbon trend by considering the following linear constant trend model:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f9ce6516-b35c-43a5-9183-ee8721cdf2d4">
-<span class="eqno">(5)<a class="headerlink" href="#equation-f9ce6516-b35c-43a5-9183-ee8721cdf2d4" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-afc9dc52-b1c1-4d09-8ac4-6e151e01eb5e">
+<span class="eqno">(5)<a class="headerlink" href="#equation-afc9dc52-b1c1-4d09-8ac4-6e151e01eb5e" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CE(t) = \beta_0 + \beta_1 \cdot t + u(t)
 \end{equation}\]</div>
 <p>The parameters <span class="math notranslate nohighlight">\(\beta_0\)</span> and <span class="math notranslate nohighlight">\(\beta_1\)</span> can be estimated with the least squares methods on a sample of observations.</p>
 <p>The projected carbon trajectory is then given by:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-31243554-17f4-442a-9ad6-988351874e92">
-<span class="eqno">(6)<a class="headerlink" href="#equation-31243554-17f4-442a-9ad6-988351874e92" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a1df02f0-82fb-4c5b-a573-490c99f8a6a7">
+<span class="eqno">(6)<a class="headerlink" href="#equation-a1df02f0-82fb-4c5b-a573-490c99f8a6a7" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CE^{Trend}(t) = \hat{CE}(t) = \hat{\beta_0} + \hat{\beta_1}t
 \end{equation}\]</div>
 <p>The underlying idea heare is to extrapolate the past trajectory. However, we need to reformulate our previous model. Indeed, it is not easy to interpret as <span class="math notranslate nohighlight">\(\hat{\beta_0} = \hat{CE(0)}\)</span> when <span class="math notranslate nohighlight">\(t = 0\)</span>. We can add a base year <span class="math notranslate nohighlight">\(t_0\)</span>, that converts our model to:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-74458012-ce47-4523-af70-c2a734ff4275">
-<span class="eqno">(7)<a class="headerlink" href="#equation-74458012-ce47-4523-af70-c2a734ff4275" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e2d6c650-24fe-42d8-9baa-fcfdb782137d">
+<span class="eqno">(7)<a class="headerlink" href="#equation-e2d6c650-24fe-42d8-9baa-fcfdb782137d" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CE(t) = \beta'_0 + \beta'_1(t - t_0) + u(t)
 \end{equation}\]</div>
 <p>And the carbon trajectory is now given by:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-926a5f10-1bf0-44be-ad01-9f9598f4a4ec">
-<span class="eqno">(8)<a class="headerlink" href="#equation-926a5f10-1bf0-44be-ad01-9f9598f4a4ec" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0853dc50-d4e7-4271-a551-2120beb2aca8">
+<span class="eqno">(8)<a class="headerlink" href="#equation-0853dc50-d4e7-4271-a551-2120beb2aca8" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CE^{Trend}(t) = \hat{\beta'_0} + \hat{\beta'_1}(t - t_0)
 \end{equation}\]</div>
 <p>This change is just a matter of facilitating the interpretration. Indeed, the two models are equivalent and give the same value <span class="math notranslate nohighlight">\(\hat{CE}(t)\)</span> with:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-735643a0-f80b-438d-af03-11e5f73ad797">
-<span class="eqno">(9)<a class="headerlink" href="#equation-735643a0-f80b-438d-af03-11e5f73ad797" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-86fa13cd-9434-4bcf-8ee4-2a2b438a2c3b">
+<span class="eqno">(9)<a class="headerlink" href="#equation-86fa13cd-9434-4bcf-8ee4-2a2b438a2c3b" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \beta^{'}_0 = \beta_0 + \beta_1 t_0
 \end{equation}\]</div>
 <p>and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b1489b8e-4fc3-4f62-a785-92c41f1ea3f7">
-<span class="eqno">(10)<a class="headerlink" href="#equation-b1489b8e-4fc3-4f62-a785-92c41f1ea3f7" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-290c41c8-147b-4c2d-8801-360beaf6f0ca">
+<span class="eqno">(10)<a class="headerlink" href="#equation-290c41c8-147b-4c2d-8801-360beaf6f0ca" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \beta^{'}_1 = \beta_1
 \end{equation}\]</div>
 <p>The only change resulting from the new formulation is that now <span class="math notranslate nohighlight">\(\hat{\beta}'_0 = \hat{CE}(t_0)\)</span></p>
@@ -625,7 +625,7 @@ The optimization problem is the same as the previous optimization problem except
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-backward-looking-data">Using Backward-Looking Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-dynamic-approach">A Dynamic Approach</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integrating-carbon-footprint-dynamics">Integrating Carbon Footprint Dynamics</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways">Key Takeaways</a></li>
 </ul>

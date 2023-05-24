@@ -5,7 +5,7 @@ In this section, we show how portfolio alignment with a decarbonization pathway 
 We first expose the issues arising when performing portfolio alignment with the PAB decarbonization pathway following the approach from Barahhou et al. (2022), using last available carbon intensity.
 
 Then, we introduce issuers carbon footprint dynamics following Le Guenedal et Roncalli (2022) {cite:p}`le2022portfolio`. 
-## Using Backward-Looking Data
+## A Dynamic Approach
 
 Let's introduce the portfolio alignment strategy, that changes the nature of the portfolio decarbonization strategy.
 
