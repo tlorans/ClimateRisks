@@ -426,4 +426,4 @@ Figure: Decarbonization Pathway with $\Delta \mathfrak{R} = 0.07$ and $\mathfrak
 
 - Portfolio decarbonization has been proposed as a climate risk integration strategy by Andersson et al. (2016). It consists in minimizing the tracking error with the benchmark while reducing the carbon footprint of the portfolio. 
 
-- We know that the objective of potential climate mitigations policies will be to track a NZE scenario. A robust portfolio decarbonization should target portfolio alignment with this NZE scenario, and thus adopt a forward-looking approach
+- We know that the objective of potential climate mitigations policies will be to track a NZE scenario. A robust portfolio decarbonization should target portfolio alignment with this NZE scenario, and thus adopt a dynamic approach
