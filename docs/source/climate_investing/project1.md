@@ -1,8 +1,10 @@
 ## Project 1: Sector Constraints in Portfolio Decarbonization
 
-In our first exposure to portfolio decarbnoization, no other constraint than the ones related to portfolio decarbonization was imposed. 
+In our first exposure to portfolio decarbonization, no other constraint than the ones related to portfolio decarbonization was imposed. 
 
-However, because portfolio decarbonization needs to take into account the industry in which the company operates, such approach is useless for investors. The resulting portfolio will be concentrated to few sectors / stocks and thus lack of diversification. In practice, you will then need to add sector constraints in your approach. 
+However, portfolio decarbonization needs to take into account the industry in which the company operates. In practice, you will then need to add sector constraints in your approach. 
+
+The question is which industrial classification needs to be used as a reference point. We will address this point.
 
 In what follow, we use Roncalli (2023) as a reference.
 ### Sector Weights Constraint
@@ -87,7 +89,7 @@ class CarbonPortfolio:
     return self.x.T @ self.CI
 
 ```
-Let's take again the example we used in the previous part:
+Let's make an example:
 
 ```Python
 b = np.array([0.23,
@@ -170,13 +172,13 @@ s_2.T @ b
 ```
 0.43000000000000005
 ```
-We can choose for example $s_1^+ = 0.65$, $s_1^- = 0.5$ and $s_2^+ = 0.5$ and $s_2^- = 0.4$ for example.
+We can choose for example $s_1^+ = 0.65$, $s_1^- = 0.5$ and $s_2^+ = 0.5$ and $s_2^- = 0.4$.
 
 ```Python
 sectors_constraints = np.array([ -0.5, 0.65, -0.4, 0.5]) 
 ```
 
-We can now implement a low-carbon strategy, let's say with the threshold approach, while controlling for sector weights.
+We can now implement a low-carbon strategy with the threshold approach, while controlling for sector weights:
 
 ```Python
 
@@ -370,6 +372,49 @@ low_carbon_portfolio.get_portfolio_with_sector_neutrality(reduction_rate = 0.5,
 array([ 2.33515514e-01,  2.41846019e-01,  1.25623128e-01,  4.43874304e-02,
         9.29058752e-02,  2.59989434e-01,  1.73260956e-03, -8.53326324e-09])
 ```
+
+### Which Classification System?
+
+To impose sectors constraints, we need to identify in which sector the stock belongs to. The question arises regarding the classification system to be used.
+
+Assets owners and managers are familiar with the Global Industry Classification System (GICS) (Chan et al., 2007) {cite:p}`chan2007industry`.
+
+```{figure} gics_hierarchy.png
+---
+name: gics_hierarchy
+---
+Figure: GICS Hierarchy, taken from MSCI's website
+```
+
+However, this classification system is built for stocks returns comovement clustering and not for portfolio decarbonization purposes. For example, Energy sector is dedicated to Oil & Gas companies, and doesn't includes electricity (and therefore renewable electricity) producers, classified into the Utilities sector. The Utilities sector regroups water utilities, environmental services and elecricity utilities. Applying sector constraints based on this classification will therefore leads to biased portfolio decarbonization.
+
+| Industry   |   |
+|---|---|
+| 151010  | Chemicals  |
+| | 150101010 Commodity chemicals | 
+| | 15101020 Diversified chemicals | 
+| | 150101030 Fertilizers and agricultural chemicals | 
+| | 150101040 Industrial gases | 
+| | 150101050 Specialty chemicals | 
+| 151020| Construction Materials | 
+| | 150102010 Construction materials (including cement) | 
+| 151030| Containers and packaging | 
+| | 15103010 Metal and glass containers | 
+| | 15103020 Paper packaging | 
+| 151040 | Metals and mining | 
+|  | 15104010 Aluminium | 
+|  | 15 104020Diversified metals and mining | 
+|  | 15104025 Copper | 
+| | 15104030 Gold | 
+| | 15104040 Precious metals and minerals | 
+| | 15104045 Silver | 
+| | 15104050 Steel |  
+| 151050 | Paper and forest products | 
+|  | 15105010 Forest products | 
+|  | 15105020 Paper products | 
+| 25  | Consumer discretionary | 
+|   | 25203030 Textiles | 
+
 
 ### Your Turn!
 

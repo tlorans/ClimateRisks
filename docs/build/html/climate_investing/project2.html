@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Project 2: Portfolio Alignment and Sectors Decarbonization Pathways &#8212; Climate Risks in Finance 0.1 documentation</title>
+    <title>Project 2: Portfolio Alignment and Sector Decarbonization Pathways &#8212; Climate Risks in Finance 0.1 documentation</title>
   
   
   
@@ -47,6 +47,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'climate_investing/project2';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Part 2: Carbon Metrics" href="../climate_data/climate_data.html" />
+    <link rel="prev" title="Project 1: Sector Constraints in Portfolio Decarbonization" href="project1.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -124,12 +126,17 @@
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="forward_looking_approach.html">Part 1: A Forward-Looking Climate Risk Hedging Strategy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="forward_looking_approach.html">Part 1: A Dynamic Portfolio Decarbonization Strategy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="portfolio_decarbonization_pathway.html">Portfolio Decarbonization Pathway</a></li>
-<li class="toctree-l1"><a class="reference internal" href="portfolio_alignment.html">Forward-Looking Decarbonization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="portfolio_alignment.html">Portfolio Alignment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="self_decarbonization.html">Decarbonization Backtesting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="project1.html">Project 1: Sector Constraints in Portfolio Decarbonization</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Project 2: Portfolio Alignment and Sector Decarbonization Pathways</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../climate_data/climate_data.html">Part 2: Carbon Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../climate_data/carbon_budget.html">Carbon Budget, Target and Trend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../climate_data/emissions_metrics.html">Duration, Gap and Slope</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 </ul>
 
@@ -267,7 +274,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Project 2: Portfolio Alignment and Sectors Decarbonization Pathways</h1>
+    <h1>Project 2: Portfolio Alignment and Sector Decarbonization Pathways</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -290,48 +297,48 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="project-2-portfolio-alignment-and-sectors-decarbonization-pathways">
-<h1>Project 2: Portfolio Alignment and Sectors Decarbonization Pathways<a class="headerlink" href="#project-2-portfolio-alignment-and-sectors-decarbonization-pathways" title="Permalink to this headline">#</a></h1>
+  <section id="project-2-portfolio-alignment-and-sector-decarbonization-pathways">
+<h1>Project 2: Portfolio Alignment and Sector Decarbonization Pathways<a class="headerlink" href="#project-2-portfolio-alignment-and-sector-decarbonization-pathways" title="Permalink to this headline">#</a></h1>
 <p>While we’ve seen in the previous part how to ensure portfolio alignment with an intensity decarbonization pathway based on a NZE scenario, one should question the idea to use the same decarbonization pathways for all stocks in the portfolio.</p>
 <p>Indeed, the IEA NZE scenario we’ve seen in the part regarding the decarbonization pathway is determined on a sector basis. One could use this sector-based decarbonization pathway and implement portfolio alignment on a sector basis. This is what we will do in this project.</p>
 <section id="portfolio-sectors-alignment">
 <h2>Portfolio Sectors Alignment<a class="headerlink" href="#portfolio-sectors-alignment" title="Permalink to this headline">#</a></h2>
 <p>We now assume that we want to reduce the carbon footprint at the sector level. In this case, we can denote by <span class="math notranslate nohighlight">\(CI(x; Sector_j)\)</span> the carbon intensity of the <span class="math notranslate nohighlight">\(j^{th}\)</span> sector, with (Roncalli, 2023):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-25c613c1-a517-4d40-ab73-4a8d8b730996">
-<span class="eqno">(1)<a class="headerlink" href="#equation-25c613c1-a517-4d40-ab73-4a8d8b730996" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c125848c-9695-401e-bd93-cf05286f3a2d">
+<span class="eqno">(1)<a class="headerlink" href="#equation-c125848c-9695-401e-bd93-cf05286f3a2d" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI(x;Sector_j) = \sum_{i \in Sector_j} \tilde{x_i} CI_i
 \end{equation}\]</div>
 <p>With <span class="math notranslate nohighlight">\(\tilde{x}_i\)</span> the normalized weight in the sector bucket, such as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-aaad80ce-9dac-4817-9570-28a969a5e223">
-<span class="eqno">(2)<a class="headerlink" href="#equation-aaad80ce-9dac-4817-9570-28a969a5e223" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-042fe929-0251-4173-9783-a94c112971dd">
+<span class="eqno">(2)<a class="headerlink" href="#equation-042fe929-0251-4173-9783-a94c112971dd" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \tilde{x}_i = \frac{x_i}{\sum_{k \in Sector_j}x_k}
 \end{equation}\]</div>
 <p>Equivalently:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c3217ead-0b74-435c-bee5-89fc2442dc32">
-<span class="eqno">(3)<a class="headerlink" href="#equation-c3217ead-0b74-435c-bee5-89fc2442dc32" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-cd277780-0023-4d98-98a5-a10f9ad9b77f">
+<span class="eqno">(3)<a class="headerlink" href="#equation-cd277780-0023-4d98-98a5-a10f9ad9b77f" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI(x;Sector_j) = \frac{(s_j \circ CI)^T x}{s^T_j x}
 \end{equation}\]</div>
-<p>With <span class="math notranslate nohighlight">\(a \circ b\)</span> is the Hardamard product (element-wise product): <span class="math notranslate nohighlight">\((a \circ b)_i = a_ib_i\)</span>.</p>
+<p>With <span class="math notranslate nohighlight">\(a \circ b\)</span> is the Hadamard product (element-wise product): <span class="math notranslate nohighlight">\((a \circ b)_i = a_ib_i\)</span>.</p>
 <p>Imposing a portfolio alignment at the sector level is equivalent to modify the constraint to become:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-624312fd-a3e4-4b41-9fbd-178fde7e888f">
-<span class="eqno">(4)<a class="headerlink" href="#equation-624312fd-a3e4-4b41-9fbd-178fde7e888f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-70e83fd5-0c21-4b4a-aff9-478227c13aef">
+<span class="eqno">(4)<a class="headerlink" href="#equation-70e83fd5-0c21-4b4a-aff9-478227c13aef" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI(x(t); Sector_j) \leq (1 - \mathfrak{R}_{CI}(t_0,t;Sector_j))CI(b(t_0;Sector_j))
 \end{equation}\]</div>
 <p>In order to find the QP form to integrate into our problem, we need a few transformations (because we need to find the form <span class="math notranslate nohighlight">\(G^Tx \leq h\)</span>):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0b66cec3-b875-441e-a2dc-3cd2eb6c1705">
-<span class="eqno">(5)<a class="headerlink" href="#equation-0b66cec3-b875-441e-a2dc-3cd2eb6c1705" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-61666294-80aa-4114-a6dc-0a78b930cfd1">
+<span class="eqno">(5)<a class="headerlink" href="#equation-61666294-80aa-4114-a6dc-0a78b930cfd1" title="Permalink to this equation">#</a></span>\[\begin{equation}
 (*) ↔ CI(x(t); Sector_j) \leq (1 - \mathfrak{R}_{CI}(t_0,t;Sector_j))CI(b(t_0;Sector_j))
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-749b3e31-ad60-4742-a393-77e7260d1437">
-<span class="eqno">(6)<a class="headerlink" href="#equation-749b3e31-ad60-4742-a393-77e7260d1437" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-12c9f662-a188-4459-b47f-d4acebc14531">
+<span class="eqno">(6)<a class="headerlink" href="#equation-12c9f662-a188-4459-b47f-d4acebc14531" title="Permalink to this equation">#</a></span>\[\begin{equation}
 ↔ (s_j \circ CI)^T x \leq (1 - \mathfrak{R}_{CI}(t_0,t;Sector_j))CI(b(t_0;Sector_j))(s_j^T x)
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-b26660f3-83ab-4676-aac8-7a2292018d66">
-<span class="eqno">(7)<a class="headerlink" href="#equation-b26660f3-83ab-4676-aac8-7a2292018d66" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-fbac273a-4eb3-471b-828a-a5167e8e9585">
+<span class="eqno">(7)<a class="headerlink" href="#equation-fbac273a-4eb3-471b-828a-a5167e8e9585" title="Permalink to this equation">#</a></span>\[\begin{equation}
 ↔ ((s_j \circ CI) - (1 - \mathfrak{R}_{CI}(t_0,t;Sector_j))CI(b(t_0;Sector_j)) s_j)^T x \leq 0
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-22c11459-f32f-4f02-8152-55a044f46855">
-<span class="eqno">(8)<a class="headerlink" href="#equation-22c11459-f32f-4f02-8152-55a044f46855" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-2ed53c21-1853-466b-92c4-14b08112e69c">
+<span class="eqno">(8)<a class="headerlink" href="#equation-2ed53c21-1853-466b-92c4-14b08112e69c" title="Permalink to this equation">#</a></span>\[\begin{equation}
 ↔ (s_j \circ (CI - (1 - \mathfrak{R}_{CI}(t_0,t;Sector_j))CI(b(t_0;Sector_j))^T x \leq 0
 \end{equation}\]</div>
 <p>We thus have our QP form <span class="math notranslate nohighlight">\(G = (s_j \circ (CI - (1 - \mathfrak{R}_{CI}(t_0,t;Sector_j))CI(b(t_0;Sector_j))^T\)</span> and <span class="math notranslate nohighlight">\(h = 0\)</span>.</p>
@@ -427,6 +434,24 @@ CI(x(t); Sector_j) \leq (1 - \mathfrak{R}_{CI}(t_0,t;Sector_j))CI(b(t_0;Sector_j
                 <footer class="bd-footer-article">
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="project1.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Project 1: Sector Constraints in Portfolio Decarbonization</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../climate_data/climate_data.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Part 2: Carbon Metrics</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               

@@ -1,4 +1,4 @@
-## Project 2: Portfolio Alignment and Sectors Decarbonization Pathways
+## Project 2: Portfolio Alignment and Sector Decarbonization Pathways
 
 While we've seen in the previous part how to ensure portfolio alignment with an intensity decarbonization pathway based on a NZE scenario, one should question the idea to use the same decarbonization pathways for all stocks in the portfolio.
 
@@ -24,7 +24,7 @@ Equivalently:
 CI(x;Sector_j) = \frac{(s_j \circ CI)^T x}{s^T_j x}
 \end{equation}
 
-With $a \circ b$ is the Hardamard product (element-wise product): $(a \circ b)_i = a_ib_i$.
+With $a \circ b$ is the Hadamard product (element-wise product): $(a \circ b)_i = a_ib_i$.
 
 
 
