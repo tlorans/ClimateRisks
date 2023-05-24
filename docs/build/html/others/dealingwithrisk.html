@@ -330,19 +330,19 @@ document.write(`
 <p>Our first tool, portfolio optimization, relies on the mean-variance framework. As the name of the mean-variance framework indicates, the mean (expected returns) and the variance are the two moments needed for building an efficient portfolio (efficient in the sense of the risk-rewards trade-off).</p>
 <p>Let’s consider a universe of <span class="math notranslate nohighlight">\(n\)</span> assets. We have a vector of assets’ weights in the portfolio: <span class="math notranslate nohighlight">\(x = (x_1, ..., x_n)\)</span>.</p>
 <p>The portfolio is fully invested:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-877005d4-e765-4276-8961-c3c0dcaff42a">
-<span class="eqno">(1)<a class="headerlink" href="#equation-877005d4-e765-4276-8961-c3c0dcaff42a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-535f84c4-52e2-445b-94d3-1f5ea5ed01de">
+<span class="eqno">(1)<a class="headerlink" href="#equation-535f84c4-52e2-445b-94d3-1f5ea5ed01de" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sum^n_{i=1}x_i = 1^T_n x = 1
 \end{equation}\]</div>
 <p>We have a vector of assets’ returns <span class="math notranslate nohighlight">\(R = (R_1, ..., R_n)\)</span>.</p>
 <p>The return of the portfolio is equal to:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-cc6df1f6-407b-462c-ac2b-7ee921b9d0ed">
-<span class="eqno">(2)<a class="headerlink" href="#equation-cc6df1f6-407b-462c-ac2b-7ee921b9d0ed" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-999b59e2-1921-41c2-a12f-e9b84a0dd123">
+<span class="eqno">(2)<a class="headerlink" href="#equation-999b59e2-1921-41c2-a12f-e9b84a0dd123" title="Permalink to this equation">#</a></span>\[\begin{equation}
 R(x) = \sum^n_{i=1}x_iR_i = x^T R
 \end{equation}\]</div>
 <p>The expected return of the portfolio is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-befb40fe-ee04-41d8-bbd8-5373640e15b9">
-<span class="eqno">(3)<a class="headerlink" href="#equation-befb40fe-ee04-41d8-bbd8-5373640e15b9" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-678ff6eb-1575-4cdc-926a-458a10e22a65">
+<span class="eqno">(3)<a class="headerlink" href="#equation-678ff6eb-1575-4cdc-926a-458a10e22a65" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mu(x) = \mathbb{E}[R(x)] = \mathbb{E}[x^TR] = x^T \mathbb{E}[R] = x^T \mu
 \end{equation}\]</div>
 <p>The expected return of the portfolio is then simply the weighted average of the assets’ returns in the portfolio (weighted by their relative weight).</p>
@@ -360,29 +360,29 @@ R(x) = \sum^n_{i=1}x_iR_i = x^T R
 </pre></div>
 </div>
 <p>The thing is slightly more complicated with the portfolio’s variance. Indeed, you need to take into account the covariance matrix between the assets in the portfolio in order to obtain a proper measure of the variance of the portfolio:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-baf09f38-145c-4cf5-9b4b-f2a7a90be7a1">
-<span class="eqno">(4)<a class="headerlink" href="#equation-baf09f38-145c-4cf5-9b4b-f2a7a90be7a1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-5e7f47a2-a5a2-41ac-8faa-943791295e22">
+<span class="eqno">(4)<a class="headerlink" href="#equation-5e7f47a2-a5a2-41ac-8faa-943791295e22" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sigma^2(x) = \mathbb{E}[(R(x) - \mu(x))(R(x) - \mu(x))^T]
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-77323a8d-81ff-41e3-ab88-9a8e0acc7130">
-<span class="eqno">(5)<a class="headerlink" href="#equation-77323a8d-81ff-41e3-ab88-9a8e0acc7130" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-90973658-9089-47b2-8c6c-3d939374d8e2">
+<span class="eqno">(5)<a class="headerlink" href="#equation-90973658-9089-47b2-8c6c-3d939374d8e2" title="Permalink to this equation">#</a></span>\[\begin{equation}
 = \mathbb{E}[(x^TR - x^T\mu) (x^TR - x^T\mu)^T]
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-00b52c39-ede6-4768-9321-bc2d2db88f8a">
-<span class="eqno">(6)<a class="headerlink" href="#equation-00b52c39-ede6-4768-9321-bc2d2db88f8a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-1d39bf59-902a-4ff6-8ae3-c99d81baaa8c">
+<span class="eqno">(6)<a class="headerlink" href="#equation-1d39bf59-902a-4ff6-8ae3-c99d81baaa8c" title="Permalink to this equation">#</a></span>\[\begin{equation}
 = \mathbb{E}[x^T(R-\mu)(R - \mu)^T x]
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-0da4fb8b-0055-4427-a3e9-4aa9f5f37507">
-<span class="eqno">(7)<a class="headerlink" href="#equation-0da4fb8b-0055-4427-a3e9-4aa9f5f37507" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-7d402019-0a84-4e9a-8794-481250cf1a7b">
+<span class="eqno">(7)<a class="headerlink" href="#equation-7d402019-0a84-4e9a-8794-481250cf1a7b" title="Permalink to this equation">#</a></span>\[\begin{equation}
 x^T \mathbb{E}[(R-\mu)(R-\mu)^T]x
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-96f3942b-bb1c-4004-8edd-1bc175d16788">
-<span class="eqno">(8)<a class="headerlink" href="#equation-96f3942b-bb1c-4004-8edd-1bc175d16788" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-6ad41f72-2b2c-4cd3-8245-bc45e1e33011">
+<span class="eqno">(8)<a class="headerlink" href="#equation-6ad41f72-2b2c-4cd3-8245-bc45e1e33011" title="Permalink to this equation">#</a></span>\[\begin{equation}
 = x^T \Sigma x
 \end{equation}\]</div>
 <p>A simple approach is to use the historical average for estimating <span class="math notranslate nohighlight">\(\mu\)</span>. For the covariance matrix, we can compute it with the historical volatilities and correlation matrix, such as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6993faef-bdff-4cd5-9c68-1deedafd8f40">
-<span class="eqno">(9)<a class="headerlink" href="#equation-6993faef-bdff-4cd5-9c68-1deedafd8f40" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-cd139555-4203-4002-83ed-9e158dd1bca4">
+<span class="eqno">(9)<a class="headerlink" href="#equation-cd139555-4203-4002-83ed-9e158dd1bca4" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \Sigma = diag(\sigma) \cdot \rho \cdot  diag(\sigma)
 \end{equation}\]</div>
 <p>with <span class="math notranslate nohighlight">\(\sigma\)</span> are the volatilities of returns and <span class="math notranslate nohighlight">\(\rho\)</span> the correlation matrix. We will see in the first project that computing the covariance matrix with the sample covariance matrix leads to significant lack of robustness in the portfolio construction.</p>
@@ -452,13 +452,13 @@ x^T \mathbb{E}[(R-\mu)(R-\mu)^T]x
 <p>In order to monitor the quality of the replication strategy, investors use the tracking error (TE) measure. In this part, we will define the TE and TE volatility concepts that needs to be controlled in the portfolio optimization problem in the presence of a benchmark (Roncalli, 2013).</p>
 <p>Let’s define <span class="math notranslate nohighlight">\(b = (b_1, ..., b_n)\)</span> and <span class="math notranslate nohighlight">\(x = (x_1, ..., x_n)\)</span> the stocks weights in the benchmark and the portfolio.</p>
 <p>The tracking error between a portfolio <span class="math notranslate nohighlight">\(x\)</span> and its benchmark <span class="math notranslate nohighlight">\(b\)</span> is the difference between the return of the portfolio and the return of the benchmark:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c8dbb07f-7ad4-49ed-8dc4-e9f2a0a06211">
-<span class="eqno">(10)<a class="headerlink" href="#equation-c8dbb07f-7ad4-49ed-8dc4-e9f2a0a06211" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-36231708-b17a-4cf0-9fc1-a1a967a183ba">
+<span class="eqno">(10)<a class="headerlink" href="#equation-36231708-b17a-4cf0-9fc1-a1a967a183ba" title="Permalink to this equation">#</a></span>\[\begin{equation}
 e = R(x) - R(b) = (x - b)^{T}R
 \end{equation}\]</div>
 <p>The volatility of the tracking error is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6297c9b1-e52c-4bf6-9d7a-01732cc0c430">
-<span class="eqno">(11)<a class="headerlink" href="#equation-6297c9b1-e52c-4bf6-9d7a-01732cc0c430" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e2a38364-af0b-4dd8-bb7d-2a810938e9e9">
+<span class="eqno">(11)<a class="headerlink" href="#equation-e2a38364-af0b-4dd8-bb7d-2a810938e9e9" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sigma(x|b) = \sigma(e) = \sqrt{(x-b)^T \Sigma (x-b)}
 \end{equation}\]</div>
 <p>With <span class="math notranslate nohighlight">\(\Sigma\)</span> the covariance matrix.</p>
@@ -473,8 +473,8 @@ e = R(x) - R(b) = (x - b)^{T}R
 <section id="expected-excess-return">
 <h4>Expected Excess Return<a class="headerlink" href="#expected-excess-return" title="Permalink to this headline">#</a></h4>
 <p>The expected excess return is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8abc1cdd-f9bf-4af5-b16b-d4876be3a3cd">
-<span class="eqno">(12)<a class="headerlink" href="#equation-8abc1cdd-f9bf-4af5-b16b-d4876be3a3cd" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-892cba3a-8aad-4abe-9a51-05a6c2128502">
+<span class="eqno">(12)<a class="headerlink" href="#equation-892cba3a-8aad-4abe-9a51-05a6c2128502" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mu(x|b) = E[e] = (x - b)^T\mu 
 \end{equation}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(\mu\)</span> is the vector of expected returns <span class="math notranslate nohighlight">\((\mu_1,...,\mu_n)\)</span>.</p>
@@ -618,23 +618,23 @@ Introducing a risk-tolerance parameter (<span class="math notranslate nohighligh
 \end{equation*}\]</div>
 <p>Without any further constraint, the optimal solution <span class="math notranslate nohighlight">\(x^*\)</span> will be equal to the benchmark weights <span class="math notranslate nohighlight">\(b\)</span>. This is the case of a perfect replication strategy. An enhanced or tilted version will add further constraints, depending on the objective of the strategy (decarbonization for example). We have a few more steps to consider before finding our QP formulation parameters.</p>
 <p>First, let’s recall that:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-aa918e66-56ac-4143-a3a6-e1ab28f5b661">
-<span class="eqno">(13)<a class="headerlink" href="#equation-aa918e66-56ac-4143-a3a6-e1ab28f5b661" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8c9f675a-4dfd-45e5-a8e6-9c43fe935c9e">
+<span class="eqno">(13)<a class="headerlink" href="#equation-8c9f675a-4dfd-45e5-a8e6-9c43fe935c9e" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sigma^2(x|b) = (x - b)^T \Sigma (x -b)
 \end{equation}\]</div>
 <p>and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-71248981-cfb3-4270-a612-4b4a8525997f">
-<span class="eqno">(14)<a class="headerlink" href="#equation-71248981-cfb3-4270-a612-4b4a8525997f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-02877ff6-9058-4d94-960a-e05836bf6521">
+<span class="eqno">(14)<a class="headerlink" href="#equation-02877ff6-9058-4d94-960a-e05836bf6521" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mu(x|b) = (x -b)^T \mu
 \end{equation}\]</div>
 <p>If we replace <span class="math notranslate nohighlight">\(\sigma^2(x|b)\)</span> and <span class="math notranslate nohighlight">\(\mu(x|b)\)</span> in our objective function, we get:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ed84e10d-86fc-421c-866a-eab1b6e26e05">
-<span class="eqno">(15)<a class="headerlink" href="#equation-ed84e10d-86fc-421c-866a-eab1b6e26e05" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f44d681b-87be-4079-a14b-9bcbfa936e50">
+<span class="eqno">(15)<a class="headerlink" href="#equation-f44d681b-87be-4079-a14b-9bcbfa936e50" title="Permalink to this equation">#</a></span>\[\begin{equation}
 * = \frac{1}{2}(x-b)^T \Sigma (x -b) - \gamma (x -b)^T \mu
 \end{equation}\]</div>
 <p>With further developments, you end up with the following QP objective function formulation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-bda443ef-9528-4aba-8a52-72c5dac322c4">
-<span class="eqno">(16)<a class="headerlink" href="#equation-bda443ef-9528-4aba-8a52-72c5dac322c4" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d1a03c46-ef0a-4eb3-99ed-d79c40be2824">
+<span class="eqno">(16)<a class="headerlink" href="#equation-d1a03c46-ef0a-4eb3-99ed-d79c40be2824" title="Permalink to this equation">#</a></span>\[\begin{equation}
 * = \frac{1}{2} x^T \Sigma x - x^T(\gamma \mu + \Sigma b)
 \end{equation}\]</div>
 <p>We have exactly the same QP problem than with the initial long-only mean-variance portfolio, except that <span class="math notranslate nohighlight">\(q = -(\gamma \mu + \Sigma b)\)</span>.</p>
@@ -665,14 +665,14 @@ Introducing a risk-tolerance parameter (<span class="math notranslate nohighligh
 <p>Introducing the notion of climate risks into Finance can be also made through the lens of systematic risks exposure. In this part and the following part, we refer to the <a class="reference external" href="http://www.thierry-roncalli.com/download/AM-Lecture3.pdf">specific course from Thierry Roncalli</a> for notations and main formulas. Risks can be decomposed into a systematic (common for all stocks) and an idiosyncratic (specific to a stock) components. The expected returns can then be decomposed between an <span class="math notranslate nohighlight">\(\alpha\)</span> (rewards for idiosyncratic risk exposure) and a <span class="math notranslate nohighlight">\(\beta\)</span> (rewards for systematic risk exposure).</p>
 <p>Theoretically, because idiosyncratic risk can be eliminated with diversification (with the Markowitz framework), <span class="math notranslate nohighlight">\(\alpha = 0\)</span> and only the exposure to systematic risk should be rewarded by the markets. Factor investing treats the question of managing the exposure to systematic risks factors. But what are the systematic risks factors, and how to measure the stocks’ exposure to these risks?</p>
 <p>The capital asset pricing model (CAPM), introduced by Sharpe in 1964 <span id="id2">[<a class="reference internal" href="../references.html#id11" title="William F Sharpe. Capital asset prices: a theory of market equilibrium under conditions of risk. The journal of finance, 19(3):425–442, 1964.">Sha64</a>]</span>, is an equilibrium model based on the Markowitz framework, and is the a first step in the quest towards risk factors identification. In the CAPM framework, the expected excess return of an asset <span class="math notranslate nohighlight">\(i\)</span> can be defined by the sensitivity of the stock to the market portfolio <span class="math notranslate nohighlight">\(\beta_i\)</span> times the market portfolio’s return:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7334e85f-7279-4fbc-8f5a-73f2b5680e56">
-<span class="eqno">(17)<a class="headerlink" href="#equation-7334e85f-7279-4fbc-8f5a-73f2b5680e56" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a46e7675-0fb5-480c-8414-cd3eb1050574">
+<span class="eqno">(17)<a class="headerlink" href="#equation-a46e7675-0fb5-480c-8414-cd3eb1050574" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathbb{E}[R_i] - R_f = \beta^m_i(\mathbb{E}[R_m] - R_f)
 \end{equation}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(R_i\)</span> is the asset returns, <span class="math notranslate nohighlight">\(R_m\)</span> are market returns, the coefficient <span class="math notranslate nohighlight">\(\beta^m_i\)</span> is the beta of the asset <span class="math notranslate nohighlight">\(i\)</span> with respect to the market portfolio, <span class="math notranslate nohighlight">\(R_f\)</span> the risk-free rate and <span class="math notranslate nohighlight">\(\alpha_i\)</span> the idiosyncratic risk premia of the asset <span class="math notranslate nohighlight">\(i\)</span>. In this framework, the excess return of an asset <span class="math notranslate nohighlight">\(i\)</span> is then explained by its exposure to the systematic market risk. Market risk is the only systematic risk in the CAPM.</p>
 <p>However, empirical evidences accumulated to prove the existence of a remaining idiosyncratic <span class="math notranslate nohighlight">\(\alpha\)</span> component, that is a part of the cross-section of expected returns unexplained by the exposure to market risk:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9d3a9e02-3af1-4d95-b0b0-fdcdb4c00cda">
-<span class="eqno">(18)<a class="headerlink" href="#equation-9d3a9e02-3af1-4d95-b0b0-fdcdb4c00cda" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4f874232-413d-4772-b78a-cbde8f0bc630">
+<span class="eqno">(18)<a class="headerlink" href="#equation-4f874232-413d-4772-b78a-cbde8f0bc630" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathbb{E}[R_i] - R_f = \alpha_i + \beta^m_i(\mathbb{E}[R_m] - R_f)
 \end{equation}\]</div>
 <p>Fama and French (1992 <span id="id3">[<a class="reference internal" href="../references.html#id12" title="Eugene F Fama and Kenneth R French. The cross-section of expected stock returns. the Journal of Finance, 47(2):427–465, 1992.">FF92</a>]</span>, 1993 <span id="id4">[<a class="reference internal" href="../references.html#id13" title="Eugene F Fama and Kenneth R French. Common risk factors in the returns on stocks and bonds. Journal of financial economics, 33(1):3–56, 1993.">FF93</a>]</span>), added two supplementary systematic risk factors to the initial Market Risk:</p>
@@ -680,28 +680,28 @@ Introducing a risk-tolerance parameter (<span class="math notranslate nohighligh
 <li><p>Small Minus Big (SMB) that corresponds to a Size factor.</p></li>
 <li><p>High Minus Low (HML) that corresponds to the Value factor</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-5a3170b9-6d05-40fa-b1e0-00784b559ebd">
-<span class="eqno">(19)<a class="headerlink" href="#equation-5a3170b9-6d05-40fa-b1e0-00784b559ebd" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-7b702d54-25e1-439d-98ba-8d4da01273ff">
+<span class="eqno">(19)<a class="headerlink" href="#equation-7b702d54-25e1-439d-98ba-8d4da01273ff" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathbb{E}[R_i] - R_f = \beta^m_i(\mathbb{E}[R_m] - R_f) + \beta^{SMB}_i \mathbb{E}[R_{SMB}] + \beta^{HML}_i \mathbb{E}[R_{HML}]
 \end{equation}\]</div>
 <p>But then, <span class="math notranslate nohighlight">\(\alpha\)</span> reappeared:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-978fbe32-af90-4098-b045-e98cb6047640">
-<span class="eqno">(20)<a class="headerlink" href="#equation-978fbe32-af90-4098-b045-e98cb6047640" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-6bc1f9bf-9b7e-40aa-a529-b63fa452e0d2">
+<span class="eqno">(20)<a class="headerlink" href="#equation-6bc1f9bf-9b7e-40aa-a529-b63fa452e0d2" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathbb{E}[R_i] - R_f = \alpha_i + \beta^m_i(\mathbb{E}[R_m] - R_f) + \beta^{SMB}_i \mathbb{E}[R_{SMB}] + \beta^{HML}_i \mathbb{E}[R_{HML}]
 \end{equation}\]</div>
 <p>Carhart complemented the Fama-French 3-factors model with the Winners Minus Losers (WML) or Momentum factor (1997 <span id="id5">[<a class="reference internal" href="../references.html#id14" title="Mark M Carhart. On persistence in mutual fund performance. The Journal of finance, 52(1):57–82, 1997.">Car97</a>]</span>):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8b1bd126-c2b2-4f40-a5dd-25448ced62f2">
-<span class="eqno">(21)<a class="headerlink" href="#equation-8b1bd126-c2b2-4f40-a5dd-25448ced62f2" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c034a8fa-676a-42d5-adbf-3179104a9bbf">
+<span class="eqno">(21)<a class="headerlink" href="#equation-c034a8fa-676a-42d5-adbf-3179104a9bbf" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathbb{E}[R_i] - R_f = \beta^m_i(\mathbb{E}[R_m] - R_f) + \beta^{smb}_i \mathbb{E}[R_{smb}] + \beta_i^{hml}{E}[R_{hml}] + \beta_i^{wml}{E}[R_{wml}]
 \end{equation}\]</div>
 <p><span class="math notranslate nohighlight">\(\alpha\)</span> reappeared again…</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6220b6cd-01e7-4fdf-9304-2592b456ddb8">
-<span class="eqno">(22)<a class="headerlink" href="#equation-6220b6cd-01e7-4fdf-9304-2592b456ddb8" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-09bcbab8-85a4-44da-bc84-677fb03cb802">
+<span class="eqno">(22)<a class="headerlink" href="#equation-09bcbab8-85a4-44da-bc84-677fb03cb802" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathbb{E}[R_i] - R_f = \alpha_i + \beta^m_i(\mathbb{E}[R_m] - R_f) + \beta^{smb}_i \mathbb{E}[R_{smb}] + \beta_i^{hml}{E}[R_{hml}] + \beta_i^{wml}{E}[R_{wml}]
 \end{equation}\]</div>
 <p>Then, Fama and French (2015) <span id="id6">[<a class="reference internal" href="../references.html#id26" title="Eugene F Fama and Kenneth R French. A five-factor asset pricing model. Journal of financial economics, 116(1):1–22, 2015.">FF15</a>]</span> added two new factors, profitability (RMW) and investment (CMA), leading to a five factors model without the momentum (WML) factor:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-333daa41-3671-4144-a2d9-a958cb411906">
-<span class="eqno">(23)<a class="headerlink" href="#equation-333daa41-3671-4144-a2d9-a958cb411906" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-5019a9fd-f437-4340-bf82-abf73869f880">
+<span class="eqno">(23)<a class="headerlink" href="#equation-5019a9fd-f437-4340-bf82-abf73869f880" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathbb{E}[R_i] - R_f = \beta^m_i(\mathbb{E}[R_m] - R_f) + \beta^{smb}_i \mathbb{E}[R_{smb}] + \beta_i^{hml}{E}[R_{hml}]
 + \beta_i^{rmw}{E}[R_{rmw}]
 + \beta_i^{cma}{E}[R_{cma}]
@@ -723,8 +723,8 @@ Introducing a risk-tolerance parameter (<span class="math notranslate nohighligh
 </figcaption>
 </figure>
 <p>With these factors returns, you can then estimate the individual stocks loading into each factors, with the following linear regression:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5e26a83a-c595-437a-9a75-b149bc02daf4">
-<span class="eqno">(24)<a class="headerlink" href="#equation-5e26a83a-c595-437a-9a75-b149bc02daf4" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-261807b0-4638-4fbe-9a74-c9f89dbb6832">
+<span class="eqno">(24)<a class="headerlink" href="#equation-261807b0-4638-4fbe-9a74-c9f89dbb6832" title="Permalink to this equation">#</a></span>\[\begin{equation}
 R_i = \alpha_i + \beta^m_i(\mathbb{E}[R_m] - R_f) + \beta^{smb}_i \mathbb{E}[R_{smb}] + \beta_i^{hml}{E}[R_{hml}] + \beta_i^{wml}{E}[R_{wml}] 
 \end{equation}\]</div>
 <p>Let’s retrieve historical returns for a handful of stocks:</p>
@@ -790,8 +790,8 @@ R_i = \alpha_i + \beta^m_i(\mathbb{E}[R_m] - R_f) + \beta^{smb}_i \mathbb{E}[R_{
 <li><p>Stocks with the 20% lowest scores are assigned a negative weight according to the weighting scheme (<span class="math notranslate nohighlight">\(Q5(t_{\tau})\)</span> portfolio, or the short portfolio)</p></li>
 </ul>
 <p>Finally, the performance of the risk factor between two rebalancing dates corresponds to the performance of the long/short portfolio:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-90a0c936-7d8f-4c22-94c4-fda4e0059f4d">
-<span class="eqno">(25)<a class="headerlink" href="#equation-90a0c936-7d8f-4c22-94c4-fda4e0059f4d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a3e80eb9-53e1-4774-afd1-4ba8687bb12a">
+<span class="eqno">(25)<a class="headerlink" href="#equation-a3e80eb9-53e1-4774-afd1-4ba8687bb12a" title="Permalink to this equation">#</a></span>\[\begin{equation}
 F(t) = F(t_{\tau}) \cdot (\sum_{i \in Q1(t_{\tau})} w_i(t_{\tau}) (1 + R_i(t)) - \sum_{i \in Q5(t_{\tau})} w_i(t_{\tau}) (1 + R_i(t)))
 \end{equation}\]</div>
 <p>Let’s illustrate with the quintile method we’ve covered previously, by creating a <code class="docutils literal notranslate"><span class="pre">LongShortQuintile</span></code> dataclass. This dataclass has the method <code class="docutils literal notranslate"><span class="pre">get_portfolio</span></code> returning two <code class="docutils literal notranslate"><span class="pre">Portfolio</span></code> objects:</p>

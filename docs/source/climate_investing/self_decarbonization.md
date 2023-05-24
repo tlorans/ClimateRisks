@@ -1,12 +1,12 @@
 # Decarbonization Backtesting
 
-While we've seen that the adoption of portfolio alignment to a decarbonization pathway leads to a forward-looking climate risk strategy, questions arise about the status of the portfolio time-varying decarbonization.
+While we've seen that the adoption of portfolio alignment to a decarbonization pathway leads to a dynamic strategy, questions arise about the status of the portfolio time-varying decarbonization.
 
 Indeed, the time-varying portfolio decarbonization can comes from (Barahhou et al., 2022):
 - sequential decarbonization with successive rebalancements ie. an exogenous decarbonization
 - self-decarbonization ie. an endogenous decarbonization
 
-In our sense, a time-proofed climate risk integration strategy should mostly relies on self-decarbonization rather than decarbonization coming from successive rebalancements (ie. we must ensure that resulting portfolio has endogenized the decarbonization pathway and is on track with the NZE scenario).
+In our sense, a time-proofed portfolio alignment strategy should mostly relies on self-decarbonization rather than decarbonization coming from successive rebalancements (ie. we must ensure that resulting portfolio has endogenized the decarbonization pathway and is on track with the NZE scenario).
 
 In this part, we cover the concept of decarbonization backtesting and the self-decarbonization ratio, introduced by Barahhou et al. (2022). 
 
@@ -140,7 +140,7 @@ In this example, we can see that almost all yearly portfolio decarbonization com
 
 ## Key Takeaways 
 
-- A time-proofed climate risk integration should relies mostly on self-decarbonization, rather than sequential decarbonization
+- A time-proofed portfolio alignment strategy should relies mostly on self-decarbonization, rather than sequential decarbonization
 
 - Barahhou et al. (2022) introduced the concept of decarbonization backtesting and the self-decarbonization ratio
 
