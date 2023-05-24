@@ -2,7 +2,7 @@
 
 As an introduction to alternative metrics to be used for an effective portfolio alignment strategy, we've [introduced carbon trend into our optimization problem](../climate_investing/self_decarbonization.md) in the previous part of this course. 
 
-More advanced static and dynamic metrics have been proposed by Le Guenedal et al. (2022). These metrics rely on the concepts of carbon budget, target and trend that we've covered in the previous section. 
+More advanced metrics have been proposed by Le Guenedal et al. (2022). These metrics rely on the concepts of carbon budget, target and trend that we've covered in the previous section. 
 
 Let's consider a static approach, where $t^*$ is the target horizon. We can denote $CE_i^{NZE}(t^*)$ as the net zero emissions scenario for issuer $i$, with $t_0$ the current date.
 

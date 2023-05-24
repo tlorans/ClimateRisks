@@ -355,9 +355,9 @@ name: andersson_example
 Figure: S&P 500 and S&P US Carbon Efficient Indexes, from Andersson et al. (2016)
 ```
 
-## Towards Net Zero Portfolio
+## Towards a Dynamic Decarbonization Strategy
 
-While we've seen the low-carbon strategy in the previous section, minimizing the tracking error relative to a benchmark index while reducing the portfolio's carbon footprint, one could ask if the approach is sufficient for a strategy contributing to the transition towards a net zero economy. Indeed, the previous approach performs portfolio decarbonization by underweighting relatively high-emitters stocks and overwheighting low-emitters stocks, without reference other than the benchmark universe. 
+While we've seen the low-carbon strategy in the previous section, minimizing the tracking error relative to a benchmark index while reducing the portfolio's carbon footprint, one could ask if the approach is sufficient for a strategy contributing to the transition towards a net zero economy. Indeed, the previous approach performs portfolio decarbonization by underweighting relatively high-emitters stocks and overwheighting low-emitters stocks, without reference other than the benchmark universe. Furthermore, it is a purely static approach
 
 In fact, we know that the objective of mitigation policies, if soundly implemented, should be to abate emissions such that the economy follows a net zero emissions (NZE) scenario. In that context, portfolio decarbonization becomes a portfolio alignment exercice (Barahhou et al., 2022) {cite:p}`barahhou2022net`, that is portfolio decarbonization in respect with a NZE scenario. The acknowledgement of such scenario calls for a dynamic strategy.
 
