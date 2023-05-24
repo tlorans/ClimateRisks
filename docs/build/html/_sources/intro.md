@@ -224,29 +224,26 @@ Figure: Global Warming Without Mitigation Policies ($\mu(t)=0$) (Roncalli, 2023)
 
 We have a sense of the tragedy of the horizon with this figure. Indeed, if no mitigation policy is taken, global temperature is expected to attain level resulting in important economic losses by the end of this century, while economic losses due to more stringent mitigation policies are expected to be immediate.
 
-## Hedging Climate Risk
+## Portfolio Decarbonization
 
-While perspectives regarding climate physical risk impacts are uncertain and expected to mostly occur in a very long-term horizon, potential transition risk is a sword of Damocles for investors. Indeed, the prospect of policy interventions has increased significantly following the Paris Climate Chance Conference. Therefore, there is a risk with respect to the magnitude and the timing of climate mitigation policies. This relates to the carbon risk that will be the focus of this course.
+While perspectives regarding climate physical risk impacts are uncertain and expected to mostly occur in a very long-term horizon, potential transition risk is a sword of Damocles for investors. Indeed, the prospect of policy interventions has increased significantly following the Paris Climate Chance Conference. Therefore, there is a risk with respect to the magnitude and the timing of climate mitigation policies. 
+In such an increasing climate risk awaraness, climate investing grew up as a specific field in Finance, proposing "green" portfolio strategies.
 
-According to Andersson et al. (2016) {cite:p}`andersson2016hedging`, we can divide green portfolio strategies into two groups:
+One of the main approach so far is portfolio decarbonization or low-carbon strategy, starting from a standard benchmark and removing or underweighting the companies with high carbon footprints.
 
-- pure-play or thematic portfolios, selecting stocks in specific activities such as renewable energy, clean technology or environmental services
-- decarbonized portfolios, starting from a standard benchmark and removing or underweighting the companies with high carbon footprints
+Decarbonized portfolios are structured to maintain a low tracking error with respect to the benchmark index.
 
-If the first group of strategies doesn't provide any protecting against the timing risk of climate change mitigation policies, the second group does, according to Andersson et al. (2016). Indeed, as the decarbonized portfolios are structured to maintain a low tracking error with respect to the benchmark index, such a portfolio is hedged against the timing risk of climate mitigation policies that are expected to disproportionately hit high-carbon-footprint stocks.
-
-The main point underlying the climate risk-hedging strategy using decarbonization is to keep an aggregate risk exposure similar to that of the standard initial benchmarks. Indeed, while divesting from high-emitters stocks is the first step, the second key is to minimize the tracking error (TE) with reference to the benchmark index. This ensure to keep the same exposure to risks other than carbon risk.
+The main point underlying the climate risk-hedging strategy using decarbonization is to keep an aggregate risk exposure similar to that of the standard initial benchmark by minimizing tracking error, while diminishing carbon intensity, seen as a fundamental proxy for carbon risk exposure. 
 
 Minimizing the TE leads to a strategy that obtain similar returns to the benchmark index as long as mitigation policies are postponed. But once significant mitigation policies are introduced, the decarbonized portfolio should outperform the benchmark, as high-emitters stocks should face an abrupt repricing.
 
-In what follows, we will cover the climate risk hedging strategy proposed by Andersson et al. (2016), following Roncalli (2023) presentation and notations.
+In what follows, we will cover the low-carbon strategy proposed by Andersson et al. (2016), following Roncalli (2023) presentation and notations.
 
 We begin by introducing the concept of portfolio optimization in the context of a benchmark, highlighting the minimization of the tracking error (Roncalli, 2013, 2023) concept.
 
-
 ### Portfolio Optimization in the Context of a Benchmark
 
-In practice, many problems consist in tracking a benchmark while improving some properties (reducing the carbon portfolio for example). To construct such a portfolio tracking a benchmark, the main tool is to control the tracking error, that is the difference between the benchmark's return and the portfolio's return.
+As noted by Roncalli (2013), in practice, many problems consist in tracking a benchmark while improving some properties (reducing the carbon portfolio for example). To construct such a portfolio tracking a benchmark, the main tool is to control the tracking error, that is the difference between the benchmark's return and the portfolio's return.
 
 In the presence of a benchmark, the expected return of the portfolio $\mu(x)$ is replaced by the expected excess return $\mu(x|b)$. The volatility of the portfolio $\sigma(x)$is replaced by the volatility of the tracking error $\sigma(x|b)$ (Roncalli, 2013):
 
@@ -349,7 +346,7 @@ Figure: Efficient Decarbonization Frontier with Threshold Approach
 
 Because we impose a constraint and minimize the TE risk, the resulting portfolio will have fewer stocks than the initial benchmark $b$. This imply that the portfolio $x$ is less diversified than the initial benchmark $b$. In order to explicitly control the number of removed stocks, Andersson et al. (2016) and Roncalli (2023) propose alternative approaches such as the order-statistic. In this course, we will focus on this threshold approach.
 
-Below is a figure taken from Andersson et al. (2016) and illustrating his climate risk hedging strategy property of providing similar returns than the benchmark so long as carbon risk doesn't materializes.
+Below is a figure taken from Andersson et al. (2016) and illustrating his low-carbon strategy property of providing similar returns than the benchmark while reducing the portolio's WACI.
 
 ```{figure} andersson_example.png
 ---
@@ -358,13 +355,13 @@ name: andersson_example
 Figure: S&P 500 and S&P US Carbon Efficient Indexes, from Andersson et al. (2016)
 ```
 
-## The Need for a Forward-Looking Approach
+## Towards Net Zero Portfolio
 
-While we've seen in the previous section how an investor could hedge for climate risk by minimizing the tracking error relative to a benchmark index while reducing the portfolio's carbon footprint, one could ask if the approach is sufficient for a forward-looking risk hedging strategy. Indeed, the previous approach performs portfolio decarbonization by underweighting relatively high-emitters stocks and overwheighting low-emitters stocks, without reference other than the benchmark universe. 
+While we've seen the low-carbon strategy in the previous section, minimizing the tracking error relative to a benchmark index while reducing the portfolio's carbon footprint, one could ask if the approach is sufficient for a strategy contributing to the transition towards a net zero economy. Indeed, the previous approach performs portfolio decarbonization by underweighting relatively high-emitters stocks and overwheighting low-emitters stocks, without reference other than the benchmark universe. 
 
-In fact, we know that the objective of mitigation policies, if soundly implemented, should be to abate emissions such that the economy follows a net zero emissions (NZE) scenario. Such a scenario is, by definition, forward-looking. In that context, portfolio decarbonization becomes a portfolio alignment exercice (Barahhou et al., 2022) {cite:p}`barahhou2022net`, that is portfolio decarbonization in respect with a NZE scenario. The acknowledgement of such scenario calls for a forward-looking strategy.
+In fact, we know that the objective of mitigation policies, if soundly implemented, should be to abate emissions such that the economy follows a net zero emissions (NZE) scenario. In that context, portfolio decarbonization becomes a portfolio alignment exercice (Barahhou et al., 2022) {cite:p}`barahhou2022net`, that is portfolio decarbonization in respect with a NZE scenario. The acknowledgement of such scenario calls for a dynamic strategy.
 
-In this part, we will give a definition of a net zero emissions (NZE) scenario with the carbon budget constraint and study the relationship between a NZE scenario and a decarbonization pathway. These forward-looking decarbonization references are the very foundation of the need for a forward-looking approach in climate risk hedging.
+In this part, we will give a definition of a net zero emissions (NZE) scenario with the carbon budget constraint and study the relationship between a NZE scenario and a decarbonization pathway. These dynamic decarbonization reference are the very foundation of the need for a dynamic approach in portfolio decarbonization.
 
 ### Net Zero Emissions Scenario
 
@@ -413,7 +410,7 @@ A decarbonization pathway is then defined as:
 
 Where $t_0$ is the base year, $t$ the year index and $\mathfrak{R}(t_0,t)$ is the reduction rate of the carbon emissions between $t_0$ and $t$.
 
-Decarbonization pathway gives a forward-looking target for the economy decarbonization. This is the starting point for a forward-looking climate risk integration strategy.
+Decarbonization pathway gives a forward-looking target for the economy decarbonization. This is the starting point for a dynamic portfolio decarbonization (portfolio alignment).
 
 The figure below represents an example of decarbonization pathway, that is the expected emissions reduction compared to a base year.
 
@@ -427,6 +424,6 @@ Figure: Decarbonization Pathway with $\Delta \mathfrak{R} = 0.07$ and $\mathfrak
 
 - Physical risk is expected to occur by the end of the century, while transition risk can occur during the next decade: this is the consequence of the tragedy of horizons, coming from the economics and physics of climate change. Therefore, studies (and this course) focus on transition risk (in fact, carbon risk)
 
-- Portfolio decarbonization has been proposed as a climate risk hedging strategy by Andersson et al. (2016). It consists in minimizing the tracking error with the benchmark while reducing the carbon footprint of the portfolio. Investors benefit from this hedge if sound climate mitigiations policies are implemented, while the strategy should provide similar returns than the benchmark otherwise
+- Portfolio decarbonization has been proposed as a climate risk integration strategy by Andersson et al. (2016). It consists in minimizing the tracking error with the benchmark while reducing the carbon footprint of the portfolio. 
 
-- We know that the objective of potential climate mitigations policies will be to track a NZE scenario. A robust climate risk hedging strategy should target portfolio alignment with this NZE scenario, and thus adopt a forward-looking approach
+- We know that the objective of potential climate mitigations policies will be to track a NZE scenario. A robust portfolio decarbonization should target portfolio alignment with this NZE scenario, and thus adopt a forward-looking approach

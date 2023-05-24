@@ -10,11 +10,11 @@
 This course is under heavy development
 ```
 
-In this course, I propose a step-by-step implementation of a forward-looking climate risk hedging strategy with Python. Please follow along and try to implement the scripts on your side.
+In this course, I propose a step-by-step implementation of a net zero portfolio strategy with Python, following methodology proposed by Barahhou et al. (2022). Please follow along and try to implement the scripts on your side.
 
 This course is calibrated as an introductory course (one-week duration).
 
-Most of the underlying methodologies elements are an adaption from Thierry Roncalli's (2023)  {cite:p}`2023:Roncalli` course and publications. The value added from this course is in the accompanying Python code and the effort to summarize / articulate the various strategies. 
+Most of the methodologies presented here are an adaption from Thierry Roncalli's (2023)  {cite:p}`2023:Roncalli` course and publications. The value added from this course is in the accompanying Python code only.
 
 If you want to get a deeper knowledge of some notions in this course, please refer to Thierry Roncalli's course and / or publications.
 Any error in this course is mine. 
