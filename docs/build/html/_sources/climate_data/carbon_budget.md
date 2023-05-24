@@ -1,6 +1,6 @@
 ## Carbon Budget, Target and Trend
 
-In this section, we will present the foundations for building and understanding forward-looking metrics, as proposed by Le Guenedal et al. (2022). The main tools are the carbon budget, the reduction target and the carbon trend.
+In this section, we will present the foundations for building and understanding metrics proposed by Le Guenedal et al. (2022). The main tools are the carbon budget, the reduction target and the carbon trend.
 
 The absolute carbon emissions of issuer $i$ for the scope $j$ at time $t$ is denoted as $CE_{i,j}(t)$, and is generally measured annualy, in tC02e. $j$ is omited when possible, to simplify the notation.
 ### Carbon Budget
