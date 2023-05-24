@@ -1,13 +1,13 @@
-# Forward-Looking Decarbonization
+# Portfolio Alignment
 
-In this section, we show how portfolio alignment with a decarbonization pathway changes the nature of climate risk hedging, making it a forward-looking approach by nature. 
+In this section, we show how portfolio alignment with a decarbonization pathway changes the nature of portfolio decarbonization, making it a dynamic approach by nature. 
 
-We first expose the issues arising when performing portfolio alignment with the PAB decarbonization pathway following the approach from Barahhou et al. (2022), using last available carbon intensity, which is backward-looking by nature.
+We first expose the issues arising when performing portfolio alignment with the PAB decarbonization pathway following the approach from Barahhou et al. (2022), using last available carbon intensity.
 
-Then, we introduce issuers carbon footprint dynamics following Le Guenedal et Roncalli (2022) {cite:p}`le2022portfolio`. Forward-looking climate risk hedging strategy should include such forward-looking metrics.
+Then, we introduce issuers carbon footprint dynamics following Le Guenedal et Roncalli (2022) {cite:p}`le2022portfolio`. 
 ## Using Backward-Looking Data
 
-Let's introduce the portfolio alignment strategy, that changes the nature of the climate risk hedging strategy.
+Let's introduce the portfolio alignment strategy, that changes the nature of the portfolio decarbonization strategy.
 
 
 At date $t$, the portfolio alignment imposes the following inequality constraint for the portfolio $x(t)$ (Barahhou et al. (2022)):
@@ -16,9 +16,9 @@ At date $t$, the portfolio alignment imposes the following inequality constraint
 CI(x(t)) \leq (1 - \mathfrak{R}_{CI}(t_0,t))CI(b(t_0))
 \end{equation}
 
-The base year $t_0$ thus defines the reference level of the carbon intensity, as the reference level is $CI(b(t_0))$ and not $CI(b(t))$. This is a first important difference compared to the strategy proposed by Andersson et al. (2016).
+The base year $t_0$ thus defines the reference level of the carbon intensity, as the reference level is $CI(b(t_0))$ and not $CI(b(t))$. This is a first important difference compared to the static strategy proposed by Andersson et al. (2016).
 
-Then, the decarbonization problem becomes forward-looking, when $t > t_1$ with $t_1$ the current year (Barahhou et al., 2022):
+Then, the decarbonization problem becomes dynamic, with $t > t_1$ with $t_1$ the current year (Barahhou et al., 2022):
 \begin{equation*}
 \begin{aligned}
 & x* = 
@@ -147,6 +147,7 @@ Sigma = betas @ betas.T * 0.18**2 + np.diag(sigmas**2)
 ```
 
 Now let's create the PAB's decarbonization pathway:
+
 ```Python
 years = [i for i in range(2020, 2051)]
 pab_decarbonization_patwhay = [1 - (1 - 0.07)**(years[i]-years[0])*(1 - 0.5) for i in range(len(years))]
@@ -201,7 +202,6 @@ Figure: Tracking error volatility of dynamic net zero portfolio
 
 We can see that, using last available carbon intensities, we cannot find optimal solution after 2036. The more we more towards 2050, the more important the carbon intensity required by the decarbonization pathway is. This leads to more and more concentrated portfolio, until we don't find any solutions anymore.
 
-Implementing such a forward-looking strategy calls for the use of forward-looking metric. 
 ## Integrating Carbon Footprint Dynamics
 
 In the previous section, we have performed a portfolio alignment by using the last available carbon intensity (ie. backward-looking data).
@@ -317,9 +317,7 @@ In the second part of this course, we will introduce more forward-looking metric
 
 ## Key Takeaways
 
-- Portfolio alignment with a decarbonization pathway, such as the methodology proposed by Barahhou et al. (2022), derived from a NZE scenario, is a forward-looking exercice by nature
+- Portfolio alignment with a decarbonization pathway, such as the methodology proposed by Barahhou et al. (2022), derived from a NZE scenario, is a dynamic exercice by nature
 
-- Implementing portfolio alignment as a climate risk hedging strategy thus changes the nature of the strategy, making it forward-looking
-
-- A forward-looking strategy calls for the use of forward-looking metrics
+- Thus portfolio alignment changed the nature of the decarbonized portfolio problem, making it dynamic
 
