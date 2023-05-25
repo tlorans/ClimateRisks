@@ -1,10 +1,18 @@
-## Project 2: Portfolio Alignment and Sector Decarbonization Pathways
+## Project 2: Portfolio Alignment with Energy-System Consistent Decarbonization Pathways
 
 While we've seen in the previous part how to ensure portfolio alignment with an intensity decarbonization pathway based on a NZE scenario, one should question the idea to use the same decarbonization pathways for all stocks in the portfolio.
+### Energy-System NZE Scenarios
 
-Indeed, the IEA NZE scenario we've seen in the part regarding the decarbonization pathway is determined on a sector basis. One could use this sector-based decarbonization pathway and implement portfolio alignment on a sector basis. This is what we will do in this project.
+Primary Energy and Secondary Energy: Shifting to Renewables
 
-### Portfolio Sectors Alignment
+```{figure} primary_energy.png
+---
+name: primary_energy
+---
+Figure: Primary energy sector-energy production under the OECM 1.5°C pathway, from Teske et al. (2022)
+```
+
+### Portfolio Alignment with Energy-System Decarbonization
 
 We now assume that we want to reduce the carbon footprint at the sector level. In this case, we can denote by $CI(x; Sector_j)$ the carbon intensity of the $j^{th}$ sector, with (Roncalli, 2023):
 

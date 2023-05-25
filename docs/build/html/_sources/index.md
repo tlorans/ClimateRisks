@@ -10,7 +10,7 @@
 This course is under heavy development
 ```
 
-In this course, I propose a step-by-step implementation of a dynamic portfolio decarbonization strategy with Python, following methodology proposed by Barahhou et al. (2022) {cite:p}`barahhou2022net`. Please follow along and try to implement the scripts on your side.
+In this course, I propose a step-by-step implementation of a dynamic portfolio decarbonization strategy with Python, following the methodology proposed by Barahhou et al. (2022) {cite:p}`barahhou2022net`. Please follow along and try to implement the scripts on your side.
 
 This course is calibrated as an introductory course (one-week duration).
 
