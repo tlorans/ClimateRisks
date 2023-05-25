@@ -313,22 +313,29 @@ We can also impose tighter constraint regarding energy-system consistency and th
 It means that:
 
 \begin{equation}
-\sum_{i \in Sector_j}x_i = \sum_{i \in Sector_j}b_i
+\sum_{i \in Class_j}x_i = \sum_{i \in Class_j}b_i
 \end{equation}
 
-In the QP problem, this can be included in the $Ax = b$ equality constraint, with for example for two sectors $s_1$ and $s_2$ and 8 stocks:
+In the QP problem, this can be included in the $Ax = b$ equality constraint. With 8 stocks and our three energy-system classes we have $c_{PE}$, $c_{SE}$ and $c_{EU}$:
 
 \begin{equation}
-A_1 = s^T_1 = \begin{bmatrix}
-1 & 1 & 0 & 0 & 1 & 0 & 1 & 0 
+A_{PE} = c_{PE}^T = 
+ \begin{bmatrix}
+1 & 0 & 0 & 0 & 0 & 0 & 1 & 0\\
 \end{bmatrix}
 \end{equation}
 
-and 
+\begin{equation}
+A_{SE} = c_{SE}^T = 
+ \begin{bmatrix}
+0 & 0 & 1 & 1 & 0 & 1 & 0 & 0\\
+\end{bmatrix}
+\end{equation}
 
 \begin{equation}
-A_2 = s^T_2 = \begin{bmatrix}
-0 & 0 & 1 & 1 & 0 & 1 & 0 & 1
+A_{EU} = c_{EU}^T = 
+ \begin{bmatrix}
+0 & 1 & 0 & 0 & 1 & 0 & 0 & 1\\
 \end{bmatrix}
 \end{equation}
 
@@ -337,19 +344,21 @@ Then:
 
 \begin{equation}
 A = \begin{bmatrix}
-A_1 \\
-A_2
+A_{PE} \\
+A_{SE} \\
+A_{EU}
 \end{bmatrix}
 \end{equation}
 
 
-And $b_1 = s_1^Tb$, $b_2 = s_2^Tb$ such that:
+And $b_{PE} = c_{PE}^Tb$, $b_{SE} = c_{SE}^Tb$ and $b_{EU} = c_{EU}^Tb$ such that:
 
 
 \begin{equation}
 b = \begin{bmatrix}
-b_1 \\
-b_2
+b_{PE} \\
+b_{SE} \\
+b_{EU}
 \end{bmatrix}
 \end{equation}
 
@@ -363,7 +372,7 @@ b_2 = s_2.T @ b
 b_sectors = np.hstack([b_1, b_2])
 ```
 
-Then, let's create a new method integrating the sector neutrality constraint:
+Then, let's create a new method integrating the energy-system neutrality constraint:
 
 ```Python
 from qpsolvers import solve_qp
