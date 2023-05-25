@@ -357,56 +357,56 @@ document.write(`
 We use Roncalli (2023) as a reference for implementing the constraints.</p>
 <section id="weights-constraint">
 <h2>Weights Constraint<a class="headerlink" href="#weights-constraint" title="Permalink to this headline">#</a></h2>
-<p>In order to limit the weights deviation for the energy-system, we can extend the framework by considering a sector weights constraint (Roncalli, 2023):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-cf7572dc-4c74-4c99-a089-fb4216969810">
-<span class="eqno">(1)<a class="headerlink" href="#equation-cf7572dc-4c74-4c99-a089-fb4216969810" title="Permalink to this equation">#</a></span>\[\begin{equation}
-s^-_j \leq \sum_{i \in Sector_j} x_i \leq s_j^+
+<p>In order to limit the weights deviation for the energy-system, and limiting the responsibility bias, we can extend the framework by considering a weights constraint, similar to the sector constraint presented by Roncalli (2023):</p>
+<div class="amsmath math notranslate nohighlight" id="equation-aaa084ae-b944-48ff-82b2-28d06da1fdc2">
+<span class="eqno">(1)<a class="headerlink" href="#equation-aaa084ae-b944-48ff-82b2-28d06da1fdc2" title="Permalink to this equation">#</a></span>\[\begin{equation}
+c^-_j \leq \sum_{i \in Class_j} x_i \leq c_j^+
 \end{equation}\]</div>
-<p>With <span class="math notranslate nohighlight">\(s_j\)</span> a <span class="math notranslate nohighlight">\(n \times 1\)</span> vector of sector-mapping (ie. we have here only one sector considered), with elements 0 or 1 if the stock <span class="math notranslate nohighlight">\(n\)</span> belongs to the sector such as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f81f181b-26cc-4e30-9aa6-7dce2cc8f7ce">
-<span class="eqno">(2)<a class="headerlink" href="#equation-f81f181b-26cc-4e30-9aa6-7dce2cc8f7ce" title="Permalink to this equation">#</a></span>\[\begin{equation}
-s_{i,j} = 𝟙\{i \in Sector_j\}
+<p>With <span class="math notranslate nohighlight">\(c_j\)</span> a <span class="math notranslate nohighlight">\(n \times 1\)</span> vector of energy-system class-mapping (ie. we have here only one class considered), with elements 0 or 1 if the stock <span class="math notranslate nohighlight">\(n\)</span> belongs to the class such as:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-4dc19237-5af4-4181-9fa8-a922c640678b">
+<span class="eqno">(2)<a class="headerlink" href="#equation-4dc19237-5af4-4181-9fa8-a922c640678b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+c_{i,j} = 𝟙\{i \in Class_j\}
 \end{equation}\]</div>
 <p>We note that:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-04bdcbe5-093d-4ddc-8924-d549490f0a31">
-<span class="eqno">(3)<a class="headerlink" href="#equation-04bdcbe5-093d-4ddc-8924-d549490f0a31" title="Permalink to this equation">#</a></span>\[\begin{equation}
-\sum_{i \in Sector_j} x_i = s_j^T x
+<div class="amsmath math notranslate nohighlight" id="equation-54d095b8-fda9-4e06-aaa6-d795b8e6112b">
+<span class="eqno">(3)<a class="headerlink" href="#equation-54d095b8-fda9-4e06-aaa6-d795b8e6112b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\sum_{i \in Sector_j} x_i = c_j^T x
 \end{equation}\]</div>
-<p>We can then rewrite the sector constraint <span class="math notranslate nohighlight">\(s^-_j \leq \sum_{i \in Sector_j} x_i \leq s_j^+\)</span> as (Roncalli, 2023):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e22e76a3-f2b7-45a3-8a93-e69de21584a2">
-<span class="eqno">(4)<a class="headerlink" href="#equation-e22e76a3-f2b7-45a3-8a93-e69de21584a2" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<p>We can then rewrite the class constraint constraint <span class="math notranslate nohighlight">\(c^-_j \leq \sum_{i \in Class_j} x_i \leq c_j^+\)</span> as (Roncalli, 2023):</p>
+<div class="amsmath math notranslate nohighlight" id="equation-67dcedc9-38f1-4913-88b3-bf84378ec171">
+<span class="eqno">(4)<a class="headerlink" href="#equation-67dcedc9-38f1-4913-88b3-bf84378ec171" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \begin{cases}
-  s^-_j \leq s_j^Tx \\
-  s_j^Tx \leq s^+_j
+  c^-_j \leq c_j^Tx \\
+  c_j^Tx \leq c^+_j
 \end{cases}
 \end{equation}\]</div>
 <p>Which we can reorder (such that the thresholds are on the right and the sector weights on the left) as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4e262bca-2dea-4118-a00f-231ac8245721">
-<span class="eqno">(5)<a class="headerlink" href="#equation-4e262bca-2dea-4118-a00f-231ac8245721" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-076d54d1-0e00-4208-9153-95b87a102778">
+<span class="eqno">(5)<a class="headerlink" href="#equation-076d54d1-0e00-4208-9153-95b87a102778" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \begin{cases}
-  - s_j^Tx \leq - s^-_j \\
-  s_j^Tx \leq s^+_j
+  - c_j^Tx \leq - c^-_j \\
+  c_j^Tx \leq c^+_j
 \end{cases}
 \end{equation}\]</div>
 <p>These last constraints can the be included into the QP inequality constraint <span class="math notranslate nohighlight">\(Gx \leq h\)</span> as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a29ecfaa-68f7-4afa-b0a4-f23929e5fb46">
-<span class="eqno">(6)<a class="headerlink" href="#equation-a29ecfaa-68f7-4afa-b0a4-f23929e5fb46" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-310bc681-dafc-45a3-943f-17c5f35481ad">
+<span class="eqno">(6)<a class="headerlink" href="#equation-310bc681-dafc-45a3-943f-17c5f35481ad" title="Permalink to this equation">#</a></span>\[\begin{equation}
 G = \begin{bmatrix}
--s_j^T \\
--s^T_j
+-c_j^T \\
+-c^T_j
 \end{bmatrix}
 \end{equation}\]</div>
 <p>with G is a <span class="math notranslate nohighlight">\(2 \times n\)</span> matrix,
 and:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-138c5140-8ca8-4486-a048-d708d189185a">
-<span class="eqno">(7)<a class="headerlink" href="#equation-138c5140-8ca8-4486-a048-d708d189185a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-9f4fbeaa-6427-4cf8-a248-25fa1ba295f4">
+<span class="eqno">(7)<a class="headerlink" href="#equation-9f4fbeaa-6427-4cf8-a248-25fa1ba295f4" title="Permalink to this equation">#</a></span>\[\begin{equation}
 h = \begin{bmatrix}
--s_j^- \\
-s_j^+
+-c_j^- \\
+c_j^+
 \end{bmatrix}
 \end{equation}\]</div>
 <p>with h is a <span class="math notranslate nohighlight">\(2 \times 1\)</span> vector.</p>
-<p>You can extend this approach with many sectors.</p>
+<p>You can extend this approach with the three classes describing the energy-system.</p>
 <p>Let’s illustrate the concept by implementing an example in Python. First, let’s take the scripts we’ve used before to define a Carbon Portfolio:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -466,21 +466,27 @@ s_j^+
 <span class="n">Sigma</span> <span class="o">=</span> <span class="n">betas</span> <span class="o">@</span> <span class="n">betas</span><span class="o">.</span><span class="n">T</span> <span class="o">*</span> <span class="mf">0.18</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">sigmas</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Let’s assume two sectors: <span class="math notranslate nohighlight">\(Sector_1\)</span> and <span class="math notranslate nohighlight">\(Sector_2\)</span>.
-We have:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-605f047f-f276-4a40-a305-55e5fc26dd04">
-<span class="eqno">(8)<a class="headerlink" href="#equation-605f047f-f276-4a40-a305-55e5fc26dd04" title="Permalink to this equation">#</a></span>\[\begin{equation}
-s_1^T = 
+<p>We have three classes in our energy-system: <span class="math notranslate nohighlight">\(Class_{PE}\)</span> the primary energy class, <span class="math notranslate nohighlight">\(Class_{SE}\)</span> the secondary energy and <span class="math notranslate nohighlight">\(Class_{EU}\)</span> the end-use activities.</p>
+<p>We have:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-388d43ee-b4d9-4d67-ac24-29aca61f30c7">
+<span class="eqno">(8)<a class="headerlink" href="#equation-388d43ee-b4d9-4d67-ac24-29aca61f30c7" title="Permalink to this equation">#</a></span>\[\begin{equation}
+c_{PE}^T = 
  \begin{bmatrix}
-1 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 1 &amp; 0\\
+1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0\\
 \end{bmatrix}
 \end{equation}\]</div>
-<p>and:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-05bd69d9-0c9a-4c7c-a5e7-1fe9aa30fb28">
-<span class="eqno">(9)<a class="headerlink" href="#equation-05bd69d9-0c9a-4c7c-a5e7-1fe9aa30fb28" title="Permalink to this equation">#</a></span>\[\begin{equation}
-s_2^T = 
+<div class="amsmath math notranslate nohighlight" id="equation-a5d5ac1f-008e-41c0-8656-e4febfe8f3ec">
+<span class="eqno">(9)<a class="headerlink" href="#equation-a5d5ac1f-008e-41c0-8656-e4febfe8f3ec" title="Permalink to this equation">#</a></span>\[\begin{equation}
+c_{SE}^T = 
  \begin{bmatrix}
-0 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 1\\
+0 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 0\\
+\end{bmatrix}
+\end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-656dc868-b0ea-45c2-9022-d1246641f0f9">
+<span class="eqno">(10)<a class="headerlink" href="#equation-656dc868-b0ea-45c2-9022-d1246641f0f9" title="Permalink to this equation">#</a></span>\[\begin{equation}
+c_{EU}^T = 
+ \begin{bmatrix}
+0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1\\
 \end{bmatrix}
 \end{equation}\]</div>
 <p>We can prepare the sector constraints specification in Python:</p>
@@ -489,7 +495,7 @@ s_2^T =
 <span class="n">s_j</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="o">-</span> <span class="n">s_1</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="o">-</span> <span class="n">s_1</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="o">-</span> <span class="n">s_2</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="o">-</span> <span class="n">s_2</span><span class="o">.</span><span class="n">T</span><span class="p">])</span> <span class="c1"># we stack the sectors vectors</span>
 </pre></div>
 </div>
-<p>To choose sectors weights constraints, let’s first take a look at their relative weights in the initial benchmark:</p>
+<p>To choose classes weights constraints, let’s first take a look at their relative weights in the initial benchmark:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">s_1</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">b</span>
 </pre></div>
 </div>
@@ -506,7 +512,7 @@ s_2^T =
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">sectors_constraints</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.65</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">])</span> 
 </pre></div>
 </div>
-<p>We can now implement a low-carbon strategy with the threshold approach, while controlling for sector weights:</p>
+<p>We can now implement a low-carbon strategy with the threshold approach, while controlling for energy-system and responsibility consistency:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
 
 <span class="nd">@dataclass</span>
@@ -571,37 +577,37 @@ s_2^T =
 </section>
 <section id="neutrality">
 <h2>Neutrality<a class="headerlink" href="#neutrality" title="Permalink to this headline">#</a></h2>
-<p>We can also impose tighter constraint regarding the sector deviation with the benchmark, by imposing sector neutrality of the portfolio.</p>
+<p>We can also impose tighter constraint regarding energy-system consistency and the responsibility, by imposing class neutrality of the portfolio.</p>
 <p>It means that:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-129130fb-6b32-472e-974c-f96a10b15dec">
-<span class="eqno">(10)<a class="headerlink" href="#equation-129130fb-6b32-472e-974c-f96a10b15dec" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-2267d1c8-99a0-4a13-bbaa-b383ee741872">
+<span class="eqno">(11)<a class="headerlink" href="#equation-2267d1c8-99a0-4a13-bbaa-b383ee741872" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sum_{i \in Sector_j}x_i = \sum_{i \in Sector_j}b_i
 \end{equation}\]</div>
 <p>In the QP problem, this can be included in the <span class="math notranslate nohighlight">\(Ax = b\)</span> equality constraint, with for example for two sectors <span class="math notranslate nohighlight">\(s_1\)</span> and <span class="math notranslate nohighlight">\(s_2\)</span> and 8 stocks:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9966deb2-d833-448c-ab08-19fbacc26327">
-<span class="eqno">(11)<a class="headerlink" href="#equation-9966deb2-d833-448c-ab08-19fbacc26327" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-7bf6290f-1f80-449b-a9e0-1a8f6a90a935">
+<span class="eqno">(12)<a class="headerlink" href="#equation-7bf6290f-1f80-449b-a9e0-1a8f6a90a935" title="Permalink to this equation">#</a></span>\[\begin{equation}
 A_1 = s^T_1 = \begin{bmatrix}
 1 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 1 &amp; 0 
 \end{bmatrix}
 \end{equation}\]</div>
 <p>and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9094300b-8065-4856-8ca3-5e518ca3aef4">
-<span class="eqno">(12)<a class="headerlink" href="#equation-9094300b-8065-4856-8ca3-5e518ca3aef4" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c95f0993-26b9-48c3-9916-865a34af11e7">
+<span class="eqno">(13)<a class="headerlink" href="#equation-c95f0993-26b9-48c3-9916-865a34af11e7" title="Permalink to this equation">#</a></span>\[\begin{equation}
 A_2 = s^T_2 = \begin{bmatrix}
 0 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 1
 \end{bmatrix}
 \end{equation}\]</div>
 <p>Then:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-70ca8f83-8d4c-44ef-8885-204548ab484e">
-<span class="eqno">(13)<a class="headerlink" href="#equation-70ca8f83-8d4c-44ef-8885-204548ab484e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-34faf700-fc29-4789-8f74-da48e4edb68d">
+<span class="eqno">(14)<a class="headerlink" href="#equation-34faf700-fc29-4789-8f74-da48e4edb68d" title="Permalink to this equation">#</a></span>\[\begin{equation}
 A = \begin{bmatrix}
 A_1 \\
 A_2
 \end{bmatrix}
 \end{equation}\]</div>
 <p>And <span class="math notranslate nohighlight">\(b_1 = s_1^Tb\)</span>, <span class="math notranslate nohighlight">\(b_2 = s_2^Tb\)</span> such that:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6bd7d726-0c04-4fef-a121-4289a9cbddee">
-<span class="eqno">(14)<a class="headerlink" href="#equation-6bd7d726-0c04-4fef-a121-4289a9cbddee" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a249ae63-c17b-42c1-a696-882567496fc9">
+<span class="eqno">(15)<a class="headerlink" href="#equation-a249ae63-c17b-42c1-a696-882567496fc9" title="Permalink to this equation">#</a></span>\[\begin{equation}
 b = \begin{bmatrix}
 b_1 \\
 b_2

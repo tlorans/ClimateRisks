@@ -62,39 +62,38 @@ In what follow, we will first see how to control potential weights deviation for
 We use Roncalli (2023) as a reference for implementing the constraints.
 ### Weights Constraint
 
-In order to limit the weights deviation for the energy-system, we can extend the framework by considering a sector weights constraint (Roncalli, 2023):
+In order to limit the weights deviation for the energy-system, and limiting the responsibility bias, we can extend the framework by considering a weights constraint, similar to the sector constraint presented by Roncalli (2023):
 
 \begin{equation}
-s^-_j \leq \sum_{i \in Sector_j} x_i \leq s_j^+
+c^-_j \leq \sum_{i \in Class_j} x_i \leq c_j^+
 \end{equation}
 
-With $s_j$ a $n \times 1$ vector of sector-mapping (ie. we have here only one sector considered), with elements 0 or 1 if the stock $n$ belongs to the sector such as:
+With $c_j$ a $n \times 1$ vector of energy-system class-mapping (ie. we have here only one class considered), with elements 0 or 1 if the stock $n$ belongs to the class such as:
 
 \begin{equation}
-s_{i,j} = 𝟙\{i \in Sector_j\}
+c_{i,j} = 𝟙\{i \in Class_j\}
 \end{equation}
 
 We note that:
 \begin{equation}
-\sum_{i \in Sector_j} x_i = s_j^T x
+\sum_{i \in Sector_j} x_i = c_j^T x
 \end{equation}
 
-We can then rewrite the sector constraint $s^-_j \leq \sum_{i \in Sector_j} x_i \leq s_j^+$ as (Roncalli, 2023):
+We can then rewrite the class constraint constraint $c^-_j \leq \sum_{i \in Class_j} x_i \leq c_j^+$ as (Roncalli, 2023):
 
 \begin{equation}
 \begin{cases}
-  s^-_j \leq s_j^Tx \\
-  s_j^Tx \leq s^+_j
+  c^-_j \leq c_j^Tx \\
+  c_j^Tx \leq c^+_j
 \end{cases}
 \end{equation}
 
 Which we can reorder (such that the thresholds are on the right and the sector weights on the left) as:
 
-
 \begin{equation}
 \begin{cases}
-  - s_j^Tx \leq - s^-_j \\
-  s_j^Tx \leq s^+_j
+  - c_j^Tx \leq - c^-_j \\
+  c_j^Tx \leq c^+_j
 \end{cases}
 \end{equation}
 
@@ -102,8 +101,8 @@ These last constraints can the be included into the QP inequality constraint $Gx
 
 \begin{equation}
 G = \begin{bmatrix}
--s_j^T \\
--s^T_j
+-c_j^T \\
+-c^T_j
 \end{bmatrix}
 \end{equation}
 
@@ -112,14 +111,14 @@ and:
 
 \begin{equation}
 h = \begin{bmatrix}
--s_j^- \\
-s_j^+
+-c_j^- \\
+c_j^+
 \end{bmatrix}
 \end{equation}
 
 with h is a $2 \times 1$ vector.
 
-You can extend this approach with many sectors.
+You can extend this approach with the three classes describing the energy-system.
 
 Let's illustrate the concept by implementing an example in Python. First, let's take the scripts we've used before to define a Carbon Portfolio:
 
@@ -183,22 +182,29 @@ sigmas = np.array([0.10,
 
 Sigma = betas @ betas.T * 0.18**2 + np.diag(sigmas**2)
 ```
-Let's assume two sectors: $Sector_1$ and $Sector_2$.
+
+We have three classes in our energy-system: $Class_{PE}$ the primary energy class, $Class_{SE}$ the secondary energy and $Class_{EU}$ the end-use activities.
+
 We have:
 
 \begin{equation}
-s_1^T = 
+c_{PE}^T = 
  \begin{bmatrix}
-1 & 1 & 0 & 0 & 1 & 0 & 1 & 0\\
+1 & 0 & 0 & 0 & 0 & 0 & 1 & 0\\
 \end{bmatrix}
 \end{equation}
 
-and:
+\begin{equation}
+c_{SE}^T = 
+ \begin{bmatrix}
+0 & 0 & 1 & 1 & 0 & 1 & 0 & 0\\
+\end{bmatrix}
+\end{equation}
 
 \begin{equation}
-s_2^T = 
+c_{EU}^T = 
  \begin{bmatrix}
-0 & 0 & 1 & 1 & 0 & 1 & 0 & 1\\
+0 & 1 & 0 & 0 & 1 & 0 & 0 & 1\\
 \end{bmatrix}
 \end{equation}
 
@@ -211,7 +217,7 @@ s_j = np.vstack([- s_1.T, - s_1.T, - s_2.T, - s_2.T]) # we stack the sectors vec
 
 ```
 
-To choose sectors weights constraints, let's first take a look at their relative weights in the initial benchmark:
+To choose classes weights constraints, let's first take a look at their relative weights in the initial benchmark:
 
 ```Python
 s_1.T @ b
@@ -231,7 +237,7 @@ We can choose for example $s_1^+ = 0.65$, $s_1^- = 0.5$ and $s_2^+ = 0.5$ and $s
 sectors_constraints = np.array([ -0.5, 0.65, -0.4, 0.5]) 
 ```
 
-We can now implement a low-carbon strategy with the threshold approach, while controlling for sector weights:
+We can now implement a low-carbon strategy with the threshold approach, while controlling for energy-system and responsibility consistency:
 
 ```Python
 
@@ -302,7 +308,7 @@ array([ 2.36352155e-01,  2.53202952e-01,  1.19930045e-01,  4.29437030e-02,
 
 ### Neutrality
 
-We can also impose tighter constraint regarding the sector deviation with the benchmark, by imposing sector neutrality of the portfolio. 
+We can also impose tighter constraint regarding energy-system consistency and the responsibility, by imposing class neutrality of the portfolio. 
 
 It means that:
 
