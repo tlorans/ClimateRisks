@@ -28,11 +28,11 @@ Data used for the projects come from [Guillaume Coqueret's github repository](ht
 :maxdepth: 2
 
 intro
+climate_investing/project1
 climate_investing/forward_looking_approach
 climate_investing/portfolio_decarbonization_pathway
 climate_investing/portfolio_alignment
 climate_investing/self_decarbonization
-climate_investing/project1
 climate_investing/project2
 climate_data/climate_data
 climate_data/carbon_budget
