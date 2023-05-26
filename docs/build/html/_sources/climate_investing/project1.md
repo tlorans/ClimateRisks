@@ -2,7 +2,7 @@
 
 In our first exposure to portfolio decarbonization, no other constraint than the one related to portfolio decarbonization was imposed. 
 
-### Energy-System and Related-Emissions
+### Energy-System and Energy-Related Emissions: an Industry-Level Accounting Approach
 
 However, carbon emissions is an interlinked phenomenon, especially with the responsibility concept defined by the so-called Scope 1, 2 and 3 emissions (Teske et al., 2022). 
 
@@ -40,7 +40,7 @@ For the secondary energy class we have:
 And for the end-use activities, we generally have:
 - Scope 1: emissions related to fuel used in the activities
 - Scope 2: indirect emissions from the electricity used across the steps of the value chain of the activity
-- Scope 3: all other indirect emissions that are not in Scope 2
+- Scope 3: all other indirect emissions that are not in Scope 2 and attributable to End-use activities
 
 
 This approach leads to the interesting property that the entire energy-related emissions can be attributed to each stage of the energy-system :
@@ -74,7 +74,7 @@ In terms of responsibility for emissions and future decarbonization, we thus rou
 1. End-use activities bear the responsibility for the primary and secondary energy Scope 3 emissions (produced by their own Scope 1) and their own Scope 3 emissions
 2. Primary and secondary energy activities bear the responsibility for the End-use activities Scope 2 emissions (produced by their own Scope 1)
 
-### Energy-System Decarbonization
+#### Energy-System Decarbonization
 
 |  | GICS | Sector Name OECM |
 |---|---|---|
@@ -87,29 +87,35 @@ In terms of responsibility for emissions and future decarbonization, we thus rou
 |   | 10102030 Oil & Gas Refining & Marketing  | Energy |
 |   | 10102040 Oil & Gas Storage & Transportation  | Energy |
 |   | 10102050 Coal & Consumable Fuels  | Energy |
+| 5510 Electric Utilities  |  | Utilities (Power & Gas only) |
+| 5520 Gas Utilities|  | Utilities (Power & Gas only) |
+| 5530 Multi Utilities | | Utilities (Power & Gas only) |
+| 5550 Independent Power and Renewable Electricity Producers | | Utilities (Power & Gas only) |
+#### End-Use Activities Decarbonization
 
-### End-Use Activities Decarbonization
-
-#### Buildings
-
-#### Cement
-
-#### Transport
-
-#### Chemical Industry 
-
-#### Aluminium Industry 
-
-#### Iron & Steel Industry
-
-#### Woods Products 
-
-#### Water 
-
-#### Textile & Leather Industry
-
-#### Food Processing
-
+|  | GICS | Sector Name OECM |
+|---|---|---|
+| 601010  Equity Real Estate Investment Trusts (REITs) |  | Buildings |
+|  | 60101010 Diversified REITs | Buildings |
+|  | 60101020 Industrial REITs | Buildings |
+|  | 60101030 Hotel & Resort REITs | Buildings |
+|  | 60101040 Office REITs | Buildings |
+|  | 60101050 Health Care REITs | Buildings |
+|  | 60101060 Residential REITs | Buildings |
+|  | 60101070 Retail REITs | Buildings |
+|  | 60101080 Specialized REITs | Buildings |
+| 601020 Real Estate Management & Development |  | Buildings |
+|  | 60102010 Diversified Real Estate Activities | Buildings |
+|  | 60102020 Real Estate Operating Companies | Buildings |
+|  | 60102030 Real Estate Development | Buildings |
+|  | 60102040 Real Estate Services | Buildings |
+| 2030 Transportation |  | Transport |
+| 203010 Air Freight & Logistics |  | Aviation |
+|  | 20301010 Air Freight & Logistics | Aviation |
+| 203020 Airlines |  | Aviation |
+|  | 20302010 Airlines | Aviation |
+| 203030 Marine | | Shipping |
+| | 20303010 Marine| Shipping |
 
 
 ## Cross-Responsibility and Energy-System Consistent Decarbonization 
