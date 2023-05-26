@@ -13,9 +13,9 @@ Indeed, portfolio decarbonization increasingly takes into account the indirect e
 - Scope 3: All indirect emissions (not included in Scope 2) that occur in the value chain of the reporting company, including both upstream and downstream emissions
 
 In order to produce sectoral (using GICS classification system) decarbonization scenarios, Teske et al. (2022) adopted an energy-system view, with:
-- a primary energy class
-- a secondary class for the supply utilities
-- an end-use class for all the economic activities that use energy from primary and secondary class companies.
+- a primary energy class $PE$
+- a secondary class for the supply utilities $SE$
+- an end-use class for all the economic activities that use energy from primary and secondary class companies $EU$
 
 The concept is illustrated in the scheme below:
 
@@ -28,28 +28,29 @@ Figure: Schematic Representation of OECM Scopes 1, 2 and 3 According to GICS Cla
 
 For the primary energy class, we have:
 
-- Scope 1: emissions defined as the direct emissions related to extraction, mining and burning of fossils fuels
-- Scope 2: indirect emissions from the electricity used for the operation of mining equipment, oil and gas rigs, refineries and other equipment
-- Scope 3: emissions embedded, which occur when the fossil fuel produced by the primary energy industry is burnt by end users
+- Scope 1 ($SC_1^{PE}$): emissions defined as the direct emissions related to extraction, mining and burning of fossils fuels
+- Scope 2 ($SC_2^{PE}$): indirect emissions from the electricity used for the operation of mining equipment, oil and gas rigs, refineries and other equipment
+- Scope 3 ($SC_3^{PE}$): emissions embedded, which occur when the fossil fuel produced by the primary energy industry is burnt by end users
 
 For the secondary energy class we have:
-- Scope 1: direct emissions from fuels related to the generation and transmission of electricity and the distribution of fossil fuels / renewable gas
-- Scope 2: indirect emissions from the electricity used for the production of a sector's core product. It includes electricity consumption of power plants, losses by power grids etc.
-- Scope 3: emissions embedded, that occur with the use of electricity or gaseous fuels by end users.
+- Scope 1 ($SC_1^{SE}$): direct emissions from fuels related to the generation and transmission of electricity and the distribution of fossil fuels / renewable gas
+- Scope 2 ($SC_2^{SE}$): indirect emissions from the electricity used for the production of a sector's core product. It includes electricity consumption of power plants, losses by power grids etc.
+- Scope 3 ($SC_3^{SE}$): emissions embedded, that occur with the use of electricity or gaseous fuels by end users.
 
 And for the end-use activities, we generally have:
-- Scope 1: emissions related to fuel used in the activities
-- Scope 2: indirect emissions from the electricity used across the steps of the value chain of the activity
-- Scope 3: all other indirect emissions that are not in Scope 2 and attributable to End-use activities
+- Scope 1 ($SC_1^{EU}$): emissions related to fuel used in the activities
+- Scope 2 ($SC_2^{EU}$): indirect emissions from the electricity used across the steps of the value chain of the activity
+- Scope 3 $SC_3^{EU}$: all other indirect emissions that are not in Scope 2 and attributable to End-use activities
 
 
 This approach leads to the interesting property that the entire energy-related emissions can be attributed to each stage of the energy-system :
-- The sum of scopes 1, 2 and 3 for the primary energy class is 35 GtCO2
-- The sum of scopes 1, 2 and 3 for the secondary energy class is 35 GtCO2
-- The sum of scopes 1, 2 and 3 for end-use activities is 35 GtCO2
 
+\begin{equation}
+SC^{PE}_1 + SC^{PE}_2 + SC^{PE}_3 = SC^{SE}_1 + SC^{SE}_2 + SC^{SE}_3 =
+SC^{EU}_1 + SC^{EU}_2 + SC^{EU}_3 = 35 \text{ GtCO2}
+\end{equation}
 
-### Cross-Sector Responsibility for Emissions and Decarbonization Implications
+### Cross-Sector Responsibility for Emissions
 
 It results in a simplified view on the cross-sector responsibility for energy-related emissions:
 
@@ -60,6 +61,53 @@ name: interconnected
 Figure: Global Energy Related CO2 Emissions - Scope 1, 2 and 3, from Teske et al. (2022)
 ```
 
+\begin{equation}
+SC_1^{EU} = \phi_1 SC_3^{SE}
+\end{equation}
+
+with $\phi_1$ the share of the Scope 3 emissions from the secondary energy activities attributable to the end-use direct activities.
+
+\begin{equation}
+SC_2^{EU} = SC_1^{SE} + SC_2^{SE}
+\end{equation}
+
+\begin{equation}
+SC^{EU}_3 = SC^{EU-Intra}_3 = \phi_2 SC_3^{SE}
+\end{equation}
+
+with $SC^{EU-Intra}_3$ the emissions by the end-use of Transport, Buildings, Cement for example, and $\phi_2$ the share of the Scope 3 emissions from the secondary energy attributable to the end-use of Transport, Buildings or Cement.
+
+In terms of responsibility for emissions and future decarbonization, we thus roughly have:
+
+1. End-use activities bear the responsibility for the primary and secondary energy Scope 3 emissions and their own Scope 3 emissions:
+\begin{equation}
+SC^{EU}_1 + SC^{EU}_3 \Leftrightarrow SC^{SE}_3
+\end{equation}
+2. Primary and secondary energy activities bear the responsibility for the End-use activities Scope 2 emissions:
+\begin{equation}
+SC^{SE}_1 + SC^{SE}_2 \Leftrightarrow SC^{EU}_2
+\end{equation}
+
+### Interlinked Decarbonization
+
+In terms of decarbonization, it means that:
+
+\begin{equation}
+\mathfrak{R}(t_0, t) = \mathfrak{R}_{SC^{EU}_1}(t_0,t) + \mathfrak{R}_{SC^{EU}_3}(t_0,t) + \mathfrak{R}_{SC^{SE}_1}(t_0,t) + \mathfrak{R}_{SC^{SE}_2}(t_0,t) 
+\end{equation}
+
+That is, decarbonization of the energy-system will comes from lower Scope 1 and Scope 3 emissions from the end-use activities, and lower Scope 1 and 2 emissions from the secondary energy.
+
+or:
+
+\begin{equation}
+\mathfrak{R}(t_0, t) = \mathfrak{R}_{SC^{SE}_3}(t_0,t) + \mathfrak{R}_{SC^{EU}_2}(t_0,t) 
+\end{equation}
+
+That is, decarbonization of the energy-system will come from lower Scope 3 emissions in the secondary energy activities and lower emissions in the Scope 2 of the end-use activities.
+
+
+
 Taking this energy-system view by the End-Use activities, main actions for decarbonization implies:
 - Electrifying End-Use activities (Scope 1)
 - Energy-supply activities (Primary and Secondary energy activites) should switch from fossil fuels to renewables for electricity and heat generation (Scope 2)
@@ -69,10 +117,7 @@ If we take the view of the primary and secondary energy activities:
 - Switching from fossil fuels to renewables for electricity and heat production (Scope 1 and Scope 2)
 - End-use activities electrification (Scope 3) 
 
-In terms of responsibility for emissions and future decarbonization, we thus roughly have:
 
-1. End-use activities bear the responsibility for the primary and secondary energy Scope 3 emissions (produced by their own Scope 1) and their own Scope 3 emissions
-2. Primary and secondary energy activities bear the responsibility for the End-use activities Scope 2 emissions (produced by their own Scope 1)
 
 #### Energy-System Decarbonization
 
