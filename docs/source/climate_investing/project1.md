@@ -1,6 +1,8 @@
-## Project 1: Energy-System Constraint and Cross-Sector Responsibility for Carbon Emissions
+## Project 1: Energy-System and Cross-Sector Responsibility for Emissions
 
 In our first exposure to portfolio decarbonization, no other constraint than the one related to portfolio decarbonization was imposed. 
+
+### Energy-System and Related-Emissions
 
 However, carbon emissions is an interlinked phenomenon, especially with the responsibility concept defined by the so-called Scope 1, 2 and 3 emissions (Teske et al., 2022). 
 
@@ -38,13 +40,16 @@ For the secondary energy class we have:
 And for the end-use activities, we generally have:
 - Scope 1: emissions related to fuel used in the activities
 - Scope 2: indirect emissions from the electricity used across the steps of the value chain of the activity
-- Scope 3: all indirect emissions, can be quite industry-specific
+- Scope 3: all other indirect emissions that are not in Scope 2
 
 
 This approach leads to the interesting property that the entire energy-related emissions can be attributed to each stage of the energy-system :
 - The sum of scopes 1, 2 and 3 for the primary energy class is 35 GtCO2
 - The sum of scopes 1, 2 and 3 for the secondary energy class is 35 GtCO2
 - The sum of scopes 1, 2 and 3 for end-use activities is 35 GtCO2
+
+
+### Cross-Sector Responsibility for Emissions and Decarbonization Implications
 
 It results in a simplified view on the cross-sector responsibility for energy-related emissions:
 
@@ -55,7 +60,61 @@ name: interconnected
 Figure: Global Energy Related CO2 Emissions - Scope 1, 2 and 3, from Teske et al. (2022)
 ```
 
-Thus, emissions responsibility is equally shared among the three stages of the energy-system. Portfolio decarbonization must be equally ensured within each of these stages, and cannot occur by divesting from one stage to invest into another stage. 
+Taking this energy-system view by the End-Use activities, main actions for decarbonization implies:
+- Electrifying End-Use activities (Scope 1)
+- Energy-supply activities (Primary and Secondary energy activites) should switch from fossil fuels to renewables for electricity and heat generation (Scope 2)
+- Other End-use industries activities electrification (Scope 3)
+
+If we take the view of the primary and secondary energy activities: 
+- Switching from fossil fuels to renewables for electricity and heat production (Scope 1 and Scope 2)
+- End-use activities electrification (Scope 3) 
+
+In terms of responsibility for emissions and future decarbonization, we thus roughly have:
+
+1. End-use activities bear the responsibility for the primary and secondary energy Scope 3 emissions (produced by their own Scope 1) and their own Scope 3 emissions
+2. Primary and secondary energy activities bear the responsibility for the End-use activities Scope 2 emissions (produced by their own Scope 1)
+
+### Energy-System Decarbonization
+
+|  | GICS | Sector Name OECM |
+|---|---|---|
+| 101010   | Energy Equipment & Services  | Energy |
+|   | 10101010 Oil & Gas Drilling  | Energy |
+|   | 10101020 Oil & Gas Equipment & Services | Energy |
+|  101020 | Oil, Gas & Consumable Fuels  | Energy |
+|   | 10102010 Integrated Oil & Gas  | Energy |
+|   | 10102020 Oil & Gas Exploration & Production  | Energy |
+|   | 10102030 Oil & Gas Refining & Marketing  | Energy |
+|   | 10102040 Oil & Gas Storage & Transportation  | Energy |
+|   | 10102050 Coal & Consumable Fuels  | Energy |
+
+### End-Use Activities Decarbonization
+
+#### Buildings
+
+#### Cement
+
+#### Transport
+
+#### Chemical Industry 
+
+#### Aluminium Industry 
+
+#### Iron & Steel Industry
+
+#### Woods Products 
+
+#### Water 
+
+#### Textile & Leather Industry
+
+#### Food Processing
+
+
+
+## Cross-Responsibility and Energy-System Consistent Decarbonization 
+
+For a consistent portfolio decarbonization, you thus need to make sure that decarbonization takes place both in the energy-supply system (primary and secondary energy activities) and in the end-use activities. In particular, portfolio decarbonization shouldn't lead to a portfolio weights deviation towards end-use activities for example. Decarbonization should respect the energy-system constraint.
 
 
 In what follow, we will first see how to control potential weights deviation for the three stages of the energy-system with portfolio decarbonization. Then we will address full neutrality. 
