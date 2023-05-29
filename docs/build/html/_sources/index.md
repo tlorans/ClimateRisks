@@ -27,7 +27,11 @@ Data used for the projects come from [Guillaume Coqueret's github repository](ht
 :caption: 'Contents:'
 :maxdepth: 2
 
-intro
+intro/intro
+intro/climaterisk
+intro/emissions
+intro/lowcarbon
+intro/dynamic
 climate_investing/project1
 climate_investing/forward_looking_approach
 climate_investing/portfolio_decarbonization_pathway

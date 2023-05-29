@@ -26,40 +26,9 @@ name: energy_classes
 Figure: Schematic Representation of OECM Scopes 1, 2 and 3 According to GICS Classes to Avoid Double Counting, from Teske et al. (2022)
 ```
 
-For the primary energy class, we have:
-
-- Scope 1 ($SC_1^{PE}$): emissions defined as the direct emissions related to extraction, mining and burning of fossils fuels
-- Scope 2 ($SC_2^{PE}$): indirect emissions from the electricity used for the operation of mining equipment, oil and gas rigs, refineries and other equipment
-- Scope 3 ($SC_3^{PE}$): emissions embedded, which occur when the fossil fuel produced by the primary energy industry is burnt by end users
-
-For the secondary energy class we have:
-- Scope 1 ($SC_1^{SE}$): direct emissions from fuels related to the generation and transmission of electricity and the distribution of fossil fuels / renewable gas
-- Scope 2 ($SC_2^{SE}$): indirect emissions from the electricity used for the production of a sector's core product. It includes electricity consumption of power plants, losses by power grids etc.
-- Scope 3 ($SC_3^{SE}$): emissions embedded, that occur with the use of electricity or gaseous fuels by end users.
-
-And for the end-use activities, we generally have:
-- Scope 1 ($SC_1^{EU}$): emissions related to fuel used in the activities
-- Scope 2 ($SC_2^{EU}$): indirect emissions from the electricity used across the steps of the value chain of the activity
-- Scope 3 $SC_3^{EU}$: all other indirect emissions that are not in Scope 2 and attributable to End-use activities
-
-
-This approach leads to the interesting property that the entire energy-related emissions can be attributed to each stage of the energy-system :
-
-\begin{equation}
-SC^{PE}_1 + SC^{PE}_2 + SC^{PE}_3 = SC^{SE}_1 + SC^{SE}_2 + SC^{SE}_3 =
-SC^{EU}_1 + SC^{EU}_2 + SC^{EU}_3 = 35 \text{ GtCO2}
-\end{equation}
-
 ### Cross-Sector Responsibility for Emissions
 
-It results in a simplified view on the cross-sector responsibility for energy-related emissions:
 
-```{figure} interconnected.png
----
-name: interconnected
----
-Figure: Global Energy Related CO2 Emissions - Scope 1, 2 and 3, from Teske et al. (2022)
-```
 
 \begin{equation}
 SC_1^{EU} = \phi_1 SC_3^{SE}
