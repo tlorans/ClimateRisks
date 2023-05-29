@@ -22,20 +22,25 @@ CE_{Industry}(t) = CE_{Industry-Related}(t) + CE_{Waste-Related}(t) + CE_{Agricu
 
 Emissions due to the use of fossil fuels $CE_{Energy-Related}(t)$ is by far the most important contributor to global warming.
 
-
+As presented by Teske et al. (2022), emissions due to energy production and consumption can be represented as an energy-system (with GICS sectors), with:
 \begin{equation}
 CE_{Energy-Related}(t) = CE_{Energy}(t) + CE_{Utilities}(t) + CE_{End-Use}(t)
 \end{equation}
 
-with
+Where $CE_{Energy}(t)$ represents the carbon emissions from the (primary) energy sector, $CE_{Utilities}(t)$ represents the secondary energy emissions and $CE_{End-Use}(t)$ the end-use activities emissions.
+
+The end-use activities can be further decomposed into the main end-use sources of energy-related emissions (Teske et al., 2022):
 
 \begin{equation}
-CE_{End-Use}(t) = CE_{Chemicals}(t) + CE_{Aluminium}(t) + CE_{Cement}(t) + CE_{Food \; Processing}(t) + CE_{Transport}(t) + CE_{Buildings}(t) + CE_{Water}(t) + CE_{Forestry}(t)
+CE_{End-Use}(t) = CE_{Cement}(t) + CE_{Steel}(t) + CE_{Chemicals}(t) + CE_{Texxtile \; \& \; Leather}(t) + CE_{Aluminium}(t) + CE_{Buildings}(t) + CE_{Food \; Processing}(t) + CE_{Transport}(t)
 \end{equation}
 
 
 ## Energy System and Cross-Sector Responsibility
 
+Analyzing carbon emissions through the lens of the energy-system as Teske et al. (2022) allows for further comprehesions of interlinkages and cross-sector responsibility for emissions.
+
+Indeed, one can account for both direct and indirect emissions occuring in each stage (primary and secondary energy production and end-use activities), with indirect emissions representing the amount of emissions produced by using the energy / product produced in the previous stage.
 ### Primary Energy
 For the primary energy (Energy sector), we have:
 
@@ -51,10 +56,11 @@ For the secondary energy (Utilities sector) we have:
 - Scope 3 ($SC_3^{Utilities}$): emissions embedded, that occur with the use of electricity or gaseous fuels by end users.
 
 ### End-Use Activities
+
 And for the end-use activities, we generally have:
 - Scope 1 ($SC_1^{End-Use}$): emissions related to fuel used in the activities
 - Scope 2 ($SC_2^{End-Use}$): indirect emissions from the electricity used across the steps of the value chain of the activity
-- Scope 3 ($SC_3^{End-Use}$): all other indirect emissions that are not in Scope 2 and attributable to End-use activities direct emissons
+- Scope 3 ($SC_3^{End-Use}$): in Teske et al. (2022), $SC_3^{Transport}$ is the main energy-related source, corresponding to the emissions from the use of transports.
 
 ### Cross-Sector Responsibility 
 
@@ -84,3 +90,5 @@ Figure: Global Energy Related CO2 Emissions - Scope 1, 2 and 3, from Teske et al
 ```
 
 That is, demand for fossil fuels from the end-use activities and supply of electricity produced with fossil fuels from the Utilities are cross-responsibles for the energy-related emissions.
+
+

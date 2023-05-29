@@ -214,7 +214,7 @@ Carbon concentration in the atmosphere is reduced by emitting lower carbon emiss
 
 Below is a figure taken from Roncalli (2013) and showing the expected temperature increase if no mitigation policies is undertaken.
 
-```{figure} temp_increase.png
+```{figure} temp_increase2.png
 ---
 name: temp_increase
 ---

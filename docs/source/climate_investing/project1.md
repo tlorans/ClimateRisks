@@ -1,94 +1,10 @@
-## Project 1: Energy-System and Cross-Sector Responsibility for Emissions
+## Project 1: Consistent Portfolio Decarbonization
 
 In our first exposure to portfolio decarbonization, no other constraint than the one related to portfolio decarbonization was imposed. 
 
-### Energy-System and Energy-Related Emissions: an Industry-Level Accounting Approach
+## OECM Sectors
 
-However, carbon emissions is an interlinked phenomenon, especially with the responsibility concept defined by the so-called Scope 1, 2 and 3 emissions (Teske et al., 2022). 
-
-Indeed, portfolio decarbonization increasingly takes into account the indirect emissions that occur in supply chains (Hertwich and Wood, 2018). The Greenhouse Gas Protocol (WRI and WBCSD, 2021), defines the three scopes for reporting companies as:
-
-- Scope 1: Direct emissions from owned or controlled sources
-- Scope 2: Indirect emissions from the generation of purchased electricity
-- Scope 3: All indirect emissions (not included in Scope 2) that occur in the value chain of the reporting company, including both upstream and downstream emissions
-
-In order to produce sectoral (using GICS classification system) decarbonization scenarios, Teske et al. (2022) adopted an energy-system view, with:
-- a primary energy class $PE$
-- a secondary class for the supply utilities $SE$
-- an end-use class for all the economic activities that use energy from primary and secondary class companies $EU$
-
-The concept is illustrated in the scheme below:
-
-```{figure} energy_classes.png
----
-name: energy_classes
----
-Figure: Schematic Representation of OECM Scopes 1, 2 and 3 According to GICS Classes to Avoid Double Counting, from Teske et al. (2022)
-```
-
-### Cross-Sector Responsibility for Emissions
-
-
-
-\begin{equation}
-SC_1^{EU} = \phi_1 SC_3^{SE}
-\end{equation}
-
-with $\phi_1$ the share of the Scope 3 emissions from the secondary energy activities attributable to the end-use direct activities.
-
-\begin{equation}
-SC_2^{EU} = SC_1^{SE} + SC_2^{SE}
-\end{equation}
-
-\begin{equation}
-SC^{EU}_3 = SC^{EU-Intra}_3 = \phi_2 SC_3^{SE}
-\end{equation}
-
-with $SC^{EU-Intra}_3$ the emissions by the end-use of Transport, Buildings, Cement for example, and $\phi_2$ the share of the Scope 3 emissions from the secondary energy attributable to the end-use of Transport, Buildings or Cement.
-
-In terms of responsibility for emissions and future decarbonization, we thus roughly have:
-
-1. End-use activities bear the responsibility for the primary and secondary energy Scope 3 emissions and their own Scope 3 emissions:
-\begin{equation}
-SC^{EU}_1 + SC^{EU}_3 \Leftrightarrow SC^{SE}_3
-\end{equation}
-2. Primary and secondary energy activities bear the responsibility for the End-use activities Scope 2 emissions:
-\begin{equation}
-SC^{SE}_1 + SC^{SE}_2 \Leftrightarrow SC^{EU}_2
-\end{equation}
-
-### Interlinked Decarbonization
-
-In terms of decarbonization, it means that:
-
-\begin{equation}
-\mathfrak{R}(t_0, t) = \mathfrak{R}_{SC^{EU}_1}(t_0,t) + \mathfrak{R}_{SC^{EU}_3}(t_0,t) + \mathfrak{R}_{SC^{SE}_1}(t_0,t) + \mathfrak{R}_{SC^{SE}_2}(t_0,t) 
-\end{equation}
-
-That is, decarbonization of the energy-system will comes from lower Scope 1 and Scope 3 emissions from the end-use activities, and lower Scope 1 and 2 emissions from the secondary energy.
-
-or:
-
-\begin{equation}
-\mathfrak{R}(t_0, t) = \mathfrak{R}_{SC^{SE}_3}(t_0,t) + \mathfrak{R}_{SC^{EU}_2}(t_0,t) 
-\end{equation}
-
-That is, decarbonization of the energy-system will come from lower Scope 3 emissions in the secondary energy activities and lower emissions in the Scope 2 of the end-use activities.
-
-
-
-Taking this energy-system view by the End-Use activities, main actions for decarbonization implies:
-- Electrifying End-Use activities (Scope 1)
-- Energy-supply activities (Primary and Secondary energy activites) should switch from fossil fuels to renewables for electricity and heat generation (Scope 2)
-- Other End-use industries activities electrification (Scope 3)
-
-If we take the view of the primary and secondary energy activities: 
-- Switching from fossil fuels to renewables for electricity and heat production (Scope 1 and Scope 2)
-- End-use activities electrification (Scope 3) 
-
-
-
-#### Energy-System Decarbonization
+### Primary and Secondary Energy Sectors
 
 |  | GICS | Sector Name OECM |
 |---|---|---|
@@ -105,7 +21,7 @@ If we take the view of the primary and secondary energy activities:
 | 5520 Gas Utilities|  | Utilities (Power & Gas only) |
 | 5530 Multi Utilities | | Utilities (Power & Gas only) |
 | 5550 Independent Power and Renewable Electricity Producers | | Utilities (Power & Gas only) |
-#### End-Use Activities Decarbonization
+### End-Use Activities Sectors
 
 |  | GICS | Sector Name OECM |
 |---|---|---|
@@ -132,7 +48,7 @@ If we take the view of the primary and secondary energy activities:
 | | 20303010 Marine| Shipping |
 
 
-## Cross-Responsibility and Energy-System Consistent Decarbonization 
+## Energy-System Consistent Decarbonization 
 
 For a consistent portfolio decarbonization, you thus need to make sure that decarbonization takes place both in the energy-supply system (primary and secondary energy activities) and in the end-use activities. In particular, portfolio decarbonization shouldn't lead to a portfolio weights deviation towards end-use activities for example. Decarbonization should respect the energy-system constraint.
 

@@ -59,11 +59,8 @@ We have exactly the same QP problem than with a long-only mean-variance portfoli
 
 ### The Decarbonization Optimization Problem
 
-
-It is generally assumed that the portfolio is an open-end world (Barahhou et al. 2022). In that context, portfolio decarbonization must takes into account every scopes of emissions and cannot be proxied by direct emissions only.
-
 We present the decarbonization optimization problem following the threshold approach (Roncalli, 2023).
-With the threshold approach, the objective is to minimize the tracking error with the benchmark while imposing a reduction $\mathfrak{R}$ in terms of carbon intensity, defined as the ratio between the sum of all scopes and a normalization variable. 
+With the threshold approach, the objective is to minimize the tracking error with the benchmark while imposing a reduction $\mathfrak{R}$ in terms of carbon intensity. 
 
 In practice, implementing such approach involves the weighted-average carbon intensity (WACI) computation and the introduction of a new constraint in a portfolio optimization problem with the presence of a benchmark (Roncalli, 2013). In this part, we first define the WACI, and then introduce the threshold approach as an additional constraint to the portfolio optimization with a benchmark problem seen in the previous part.
 
