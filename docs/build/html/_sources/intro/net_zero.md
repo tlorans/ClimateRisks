@@ -69,3 +69,13 @@ Figure: Decarbonization Pathway with $\Delta \mathfrak{R} = 0.07$ and $\mathfrak
 
 ### Transition to a Low-Carbon Economy
 
+As we have seen in the part regarding cross-sector responsibility, decarbonizing the economy (through the lens of the end-use activities) involves:
+- Decarbonizing the Utilities sector to decrease $SC_2^{End-Use}$
+- Decarbonizing the End-Use activities to decrease $SC_1^{End-Use}$ and $SC_3^{End-Use}$
+
+In fact, decarbonizing the Utilties sector means shifting the energy mix to renewables.
+
+| Sector | Solution | Current Market (in %) | Total Addressable Market by 2050 (in %) |
+| --- | --- | ---- | --- |
+| Utilities  | Biomass Power | 0.28 | 1 |
+| Utilities  | Concentrated Solar Power | 0.28 | 1 |
