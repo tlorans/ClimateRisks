@@ -125,11 +125,17 @@
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../climate_investing/forward_looking_approach.html">Part 1: A Forward-Looking Climate Risk Hedging Strategy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/intro.html">Part 0: Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/climaterisk.html">Economics and Physics of Climate Risk: The Tragedy of the Horizon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/emissions.html">Cross-Sector Reponsibility for Emissions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/lowcarbon.html">Portfolio Decarbonization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/dynamic.html">Towards a Dynamic Decarbonization Strategy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../climate_investing/portfolio_decarbonization_pathway.html">Portfolio Decarbonization Pathway</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../climate_investing/portfolio_alignment.html">Forward-Looking Decarbonization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../climate_investing/portfolio_alignment.html">Portfolio Alignment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../climate_investing/self_decarbonization.html">Decarbonization Backtesting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../climate_data/climate_data.html">Part 2: Carbon Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../climate_data/carbon_budget.html">Carbon Budget, Target and Trend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../climate_data/emissions_metrics.html">Duration, Gap and Slope</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 </ul>
 
@@ -318,8 +324,8 @@ document.write(`
 <li><p>L. Real Estate Activities</p></li>
 </ul>
 <p>We have <span class="math notranslate nohighlight">\(CIS_{High}(x) = \sum_{i \in CIS_{High}}x_i\)</span> the HCIS weight of the portfolio <span class="math notranslate nohighlight">\(x\)</span>. At each rebalancing date <span class="math notranslate nohighlight">\(t\)</span>, we must verify that:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7be54638-37d9-42a8-be8e-f05fb4dd9390">
-<span class="eqno">(1)<a class="headerlink" href="#equation-7be54638-37d9-42a8-be8e-f05fb4dd9390" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e0ba01c3-05bc-4f92-b1b6-eaf2f7977748">
+<span class="eqno">(1)<a class="headerlink" href="#equation-e0ba01c3-05bc-4f92-b1b6-eaf2f7977748" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CIS_{High}(x(t)) \geq  CIS_{High}(b(t))
 \end{equation}\]</div>
 <p>The PAB’s optimization problem becomes (Le Guenedal and Roncalli, 2022):</p>
@@ -336,16 +342,16 @@ CIS_{High}(x(t)) \geq  CIS_{High}(b(t))
 \end{aligned}
 \end{equation*}\]</div>
 <p>Regarding the QP parameters, the last two constraints can be casted into <span class="math notranslate nohighlight">\(Gx \leq h\)</span> with:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0e4cb8e1-37aa-414d-846b-f0247c4c3a80">
-<span class="eqno">(2)<a class="headerlink" href="#equation-0e4cb8e1-37aa-414d-846b-f0247c4c3a80" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-92f805bc-1495-48bc-9199-a3e1e2412bc9">
+<span class="eqno">(2)<a class="headerlink" href="#equation-92f805bc-1495-48bc-9199-a3e1e2412bc9" title="Permalink to this equation">#</a></span>\[\begin{equation}
 G = \begin{bmatrix}
 CI^T \\
 - CIS_{High}^T
 \end{bmatrix}
 \end{equation}\]</div>
 <p>and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-686460c1-6ee8-484c-98ff-c869ac03fdff">
-<span class="eqno">(3)<a class="headerlink" href="#equation-686460c1-6ee8-484c-98ff-c869ac03fdff" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-cac780c4-52ee-48a2-975c-a7f8025664a3">
+<span class="eqno">(3)<a class="headerlink" href="#equation-cac780c4-52ee-48a2-975c-a7f8025664a3" title="Permalink to this equation">#</a></span>\[\begin{equation}
 h = \begin{bmatrix}
 (1 - \mathfrak{R}_{CI}(t_0,t))CI (b(t_0)) \\
 - CIS_{High}(b(t))
@@ -357,14 +363,14 @@ h = \begin{bmatrix}
 <h2>Green Intensity<a class="headerlink" href="#green-intensity" title="Permalink to this headline">#</a></h2>
 <p>A green intensity measure starts with a green taxonomy. The most famous example is the European green taxonomy. Developed by the TEG (2020 <span id="id3">[<a class="reference internal" href="../references.html#id21">oSF20</a>]</span>), the EU green taxonomy defines economic activities which make a contribution to environmental objectives while do no significant harm to the other environmental objectives (DNSH constraint) and comply with minimum social safeguards (MS constraint). Other taxonomies exist, such as the climate solutions listed by the Project Drawdown (2017 <span id="id4">[<a class="reference internal" href="../references.html#id22" title="Paul Hawken. Drawdown: The most comprehensive plan ever proposed to reverse global warming. Penguin, 2017.">Haw17</a>]</span>) for each important sectors. Proprietary taxonomies from data vendors can also be used.</p>
 <p>A bottom-up approach to measure the green intensity of a portfolio starts with the green revenue share at the issuer level:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b03647be-711c-4f86-ae1a-d463e5fc0e32">
-<span class="eqno">(4)<a class="headerlink" href="#equation-b03647be-711c-4f86-ae1a-d463e5fc0e32" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ae5456e9-c654-4003-9b83-933da1be4087">
+<span class="eqno">(4)<a class="headerlink" href="#equation-ae5456e9-c654-4003-9b83-933da1be4087" title="Permalink to this equation">#</a></span>\[\begin{equation}
 GI_i = \frac{GR_i}{TR_i}
 \end{equation}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(GR_i\)</span> and <span class="math notranslate nohighlight">\(TR_i\)</span> are respectively the green revenues and the total turnover of the issuer <span class="math notranslate nohighlight">\(i\)</span>.</p>
 <p>The green intensity of the portfolio is then:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6d7e3027-b93f-4441-a4de-faeb40c7f831">
-<span class="eqno">(5)<a class="headerlink" href="#equation-6d7e3027-b93f-4441-a4de-faeb40c7f831" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-25d27980-08d4-4a03-8c89-9375f9647e2c">
+<span class="eqno">(5)<a class="headerlink" href="#equation-25d27980-08d4-4a03-8c89-9375f9647e2c" title="Permalink to this equation">#</a></span>\[\begin{equation}
 GI(x) = \sum^n_{i=1}x_i \cdot GI_i
 \end{equation}\]</div>
 <p>As Barahhou et al. (2022) observed, there is a decreasing function between the green intensity and the reduction level. This negative correlation between decarbonization and transition dimensions calls for the introduction of a green intensity constraint. This is for preventing the aligned portfolios from having a lower green intensity.</p>

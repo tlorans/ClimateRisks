@@ -1,4 +1,4 @@
-# Decarbonization Backtesting
+# Net Zero Backtesting
 
 While we've seen that the adoption of portfolio alignment to a decarbonization pathway leads to a dynamic strategy, questions arise about the status of the portfolio time-varying decarbonization.
 
@@ -8,7 +8,7 @@ Indeed, the time-varying portfolio decarbonization can comes from (Barahhou et a
 
 In our sense, a time-proofed portfolio alignment strategy should mostly relies on self-decarbonization rather than decarbonization coming from successive rebalancements (ie. we must ensure that resulting portfolio has endogenized the decarbonization pathway and is on track with the NZE scenario).
 
-In this part, we cover the concept of decarbonization backtesting and the self-decarbonization ratio, introduced by Barahhou et al. (2022). 
+In this part, we cover the concept of net zero backtesting and the self-decarbonization ratio, introduced by Barahhou et al. (2022). 
 
 ## Sequential vs. Self-Decarbonization
 
@@ -48,11 +48,11 @@ The self-decarbonization ratio is finally defined as (Barahhou et al., 2022):
 SR(t+1) = \frac{CI(t, x(t);I_{t}) - CI(t + 1, x(t), I_{t+1})}{CI(t, x(t);I_{t}) - CI(t + 1, x(t + 1), I_{t+1})}
 \end{equation}
 
-The higher value for the self-decarbonization ratio $SR(t+1)$ is reached when we do not have to rebalance the portfolio, with the decarbonization achieved through self-decarbonization rather than sequential decarbonization. This is a first step towards a decarbonization backtesting. 
+The higher value for the self-decarbonization ratio $SR(t+1)$ is reached when we do not have to rebalance the portfolio, with the decarbonization achieved through self-decarbonization rather than sequential decarbonization. This is a first step towards net zero backtesting. 
 
 To maximize the self-decarbonization ratio, we need to have an idea about the dynamics of the carbon footprint, that is an estimate of $CI(t+1, x(t); I_t)$.
 
-To illustrate this concept of decarbonization backtesting with the use of the self-decarbonization ratio, let's take this example from Barahhou et al. (2022):
+To illustrate this concept of net zero backtesting with the use of the self-decarbonization ratio, let's take this example from Barahhou et al. (2022):
 
 | $s$  | $(1 - \mathfrak{R}_{CI}(t_0, s))CI(t_0, b(t_0);I_{t_0})$ | $CI(s, x(s); I_s)$ | $CI(s + 1, x(s); I_{s+1})$ |   
 |---|---|---|---|
@@ -142,7 +142,7 @@ In this example, we can see that almost all yearly portfolio decarbonization com
 
 - A time-proofed portfolio alignment strategy should relies mostly on self-decarbonization, rather than sequential decarbonization
 
-- Barahhou et al. (2022) introduced the concept of decarbonization backtesting and the self-decarbonization ratio
+- Barahhou et al. (2022) introduced the concept of net zero backtesting and the self-decarbonization ratio
 
 - Improving the self-decarbonization ratio calls for the integration of forward looking metrics such as the carbon footprint dynamics for example
 

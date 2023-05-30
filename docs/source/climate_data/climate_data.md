@@ -1,4 +1,4 @@
-# Part 2: Carbon Metrics
+# Part 2: Net Zero Metrics
 
 We've seen in the previous part that a dynamic portfolio decarbonization strategy involves advanced metrics to improve the self-decarbonization aspect of the portfolio, reflecting the fact that the decarbonization pathway is endogenized rather than coming from successive rebalancements only. 
 

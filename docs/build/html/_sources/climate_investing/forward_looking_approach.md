@@ -1,4 +1,4 @@
-# Part 1: A Dynamic Portfolio Decarbonization Strategy
+# Part 1: Net Zero Investing
 
 In this first part of this course, we cover a dynamic portfolio decarbonization strategy: portfolio alignment.
 

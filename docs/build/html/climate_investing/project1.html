@@ -47,8 +47,6 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'climate_investing/project1';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Part 1: A Dynamic Portfolio Decarbonization Strategy" href="forward_looking_approach.html" />
-    <link rel="prev" title="Towards a Dynamic Decarbonization Strategy" href="../intro/dynamic.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -126,20 +124,15 @@
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../intro/intro.html">Part 0: Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro/climaterisk.html">Economics and Physics of Climate Risk: The Tragedy of the Horizon</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro/emissions.html">Cross-Sector Reponsibility for Emissions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro/lowcarbon.html">Portfolio Decarbonization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro/dynamic.html">Towards a Dynamic Decarbonization Strategy</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Project 1: Consistent Portfolio Decarbonization</a></li>
-
-
-<li class="toctree-l1"><a class="reference internal" href="forward_looking_approach.html">Part 1: A Dynamic Portfolio Decarbonization Strategy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="portfolio_decarbonization_pathway.html">Portfolio Decarbonization Pathway</a></li>
 <li class="toctree-l1"><a class="reference internal" href="portfolio_alignment.html">Portfolio Alignment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="self_decarbonization.html">Decarbonization Backtesting</a></li>
-<li class="toctree-l1"><a class="reference internal" href="project2.html">Project 2: Portfolio Alignment with Energy-System Consistent Decarbonization Pathways</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../climate_data/climate_data.html">Part 2: Carbon Metrics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../climate_data/carbon_budget.html">Carbon Budget, Target and Trend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../climate_data/emissions_metrics.html">Duration, Gap and Slope</a></li>
@@ -491,39 +484,39 @@ We use Roncalli (2023) as a reference for implementing the constraints.</p>
 <section id="weights-constraint">
 <h2>Weights Constraint<a class="headerlink" href="#weights-constraint" title="Permalink to this headline">#</a></h2>
 <p>In order to limit the weights deviation for the energy-system, and limiting the responsibility bias, we can extend the framework by considering a weights constraint, similar to the sector constraint presented by Roncalli (2023):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b8af8a24-2f19-4336-bb9b-456801d36228">
-<span class="eqno">(1)<a class="headerlink" href="#equation-b8af8a24-2f19-4336-bb9b-456801d36228" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8b49d73e-4424-4d67-87d2-d2288d2d445e">
+<span class="eqno">(1)<a class="headerlink" href="#equation-8b49d73e-4424-4d67-87d2-d2288d2d445e" title="Permalink to this equation">#</a></span>\[\begin{equation}
 c^-_j \leq \sum_{i \in Class_j} x_i \leq c_j^+
 \end{equation}\]</div>
 <p>With <span class="math notranslate nohighlight">\(c_j\)</span> a <span class="math notranslate nohighlight">\(n \times 1\)</span> vector of energy-system class-mapping (ie. we have here only one class considered), with elements 0 or 1 if the stock <span class="math notranslate nohighlight">\(n\)</span> belongs to the class such as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-565aae39-d367-434b-9b6d-bd46468f46d2">
-<span class="eqno">(2)<a class="headerlink" href="#equation-565aae39-d367-434b-9b6d-bd46468f46d2" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4929ee21-8362-4e09-b21d-233f04e2d5c2">
+<span class="eqno">(2)<a class="headerlink" href="#equation-4929ee21-8362-4e09-b21d-233f04e2d5c2" title="Permalink to this equation">#</a></span>\[\begin{equation}
 c_{i,j} = 𝟙\{i \in Class_j\}
 \end{equation}\]</div>
 <p>We note that:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-03558ade-f4bd-4e1e-8404-749b82844f18">
-<span class="eqno">(3)<a class="headerlink" href="#equation-03558ade-f4bd-4e1e-8404-749b82844f18" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-2b6d5cd1-21af-4343-b377-8001f85dc600">
+<span class="eqno">(3)<a class="headerlink" href="#equation-2b6d5cd1-21af-4343-b377-8001f85dc600" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sum_{i \in Sector_j} x_i = c_j^T x
 \end{equation}\]</div>
 <p>We can then rewrite the class constraint constraint <span class="math notranslate nohighlight">\(c^-_j \leq \sum_{i \in Class_j} x_i \leq c_j^+\)</span> as (Roncalli, 2023):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-226f0931-2cd5-4aef-80f6-ef66fdd9bd48">
-<span class="eqno">(4)<a class="headerlink" href="#equation-226f0931-2cd5-4aef-80f6-ef66fdd9bd48" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e7461e73-5b45-49b7-8750-6140d2d5eed2">
+<span class="eqno">(4)<a class="headerlink" href="#equation-e7461e73-5b45-49b7-8750-6140d2d5eed2" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \begin{cases}
   c^-_j \leq c_j^Tx \\
   c_j^Tx \leq c^+_j
 \end{cases}
 \end{equation}\]</div>
 <p>Which we can reorder (such that the thresholds are on the right and the sector weights on the left) as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3ae45ebf-f5c4-4db7-8834-00aa70fc9f8a">
-<span class="eqno">(5)<a class="headerlink" href="#equation-3ae45ebf-f5c4-4db7-8834-00aa70fc9f8a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f4e1b1bb-b78f-4de1-a0ba-98177d974d8a">
+<span class="eqno">(5)<a class="headerlink" href="#equation-f4e1b1bb-b78f-4de1-a0ba-98177d974d8a" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \begin{cases}
   - c_j^Tx \leq - c^-_j \\
   c_j^Tx \leq c^+_j
 \end{cases}
 \end{equation}\]</div>
 <p>These last constraints can the be included into the QP inequality constraint <span class="math notranslate nohighlight">\(Gx \leq h\)</span> as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4f8624cb-c1a5-48c5-9493-07e1aac158ad">
-<span class="eqno">(6)<a class="headerlink" href="#equation-4f8624cb-c1a5-48c5-9493-07e1aac158ad" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ea40c7ea-1d4f-47cb-8b21-83d43966f3bb">
+<span class="eqno">(6)<a class="headerlink" href="#equation-ea40c7ea-1d4f-47cb-8b21-83d43966f3bb" title="Permalink to this equation">#</a></span>\[\begin{equation}
 G = \begin{bmatrix}
 -c_j^T \\
 -c^T_j
@@ -531,8 +524,8 @@ G = \begin{bmatrix}
 \end{equation}\]</div>
 <p>with G is a <span class="math notranslate nohighlight">\(2 \times n\)</span> matrix,
 and:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e26a1be1-e11c-4038-bd78-5bfb08591f30">
-<span class="eqno">(7)<a class="headerlink" href="#equation-e26a1be1-e11c-4038-bd78-5bfb08591f30" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-66a45971-048a-499a-9d5d-ff577814a5e2">
+<span class="eqno">(7)<a class="headerlink" href="#equation-66a45971-048a-499a-9d5d-ff577814a5e2" title="Permalink to this equation">#</a></span>\[\begin{equation}
 h = \begin{bmatrix}
 -c_j^- \\
 c_j^+
@@ -601,22 +594,22 @@ c_j^+
 </div>
 <p>We have three classes in our energy-system: <span class="math notranslate nohighlight">\(Class_{PE}\)</span> the primary energy class, <span class="math notranslate nohighlight">\(Class_{SE}\)</span> the secondary energy and <span class="math notranslate nohighlight">\(Class_{EU}\)</span> the end-use activities.</p>
 <p>We have:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-08477d6f-d4fb-4837-8874-22dc9a553de1">
-<span class="eqno">(8)<a class="headerlink" href="#equation-08477d6f-d4fb-4837-8874-22dc9a553de1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a99b565d-31b3-4d46-8512-a9091b4922fa">
+<span class="eqno">(8)<a class="headerlink" href="#equation-a99b565d-31b3-4d46-8512-a9091b4922fa" title="Permalink to this equation">#</a></span>\[\begin{equation}
 c_{PE}^T = 
  \begin{bmatrix}
 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0\\
 \end{bmatrix}
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-bd392032-07c5-44df-87af-ff7fbd1ff6e4">
-<span class="eqno">(9)<a class="headerlink" href="#equation-bd392032-07c5-44df-87af-ff7fbd1ff6e4" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-fbcb5509-e481-422d-805e-8a455ed8ed21">
+<span class="eqno">(9)<a class="headerlink" href="#equation-fbcb5509-e481-422d-805e-8a455ed8ed21" title="Permalink to this equation">#</a></span>\[\begin{equation}
 c_{SE}^T = 
  \begin{bmatrix}
 0 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 0\\
 \end{bmatrix}
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-9bf6c677-d84a-4ecd-b5d3-d19e53314377">
-<span class="eqno">(10)<a class="headerlink" href="#equation-9bf6c677-d84a-4ecd-b5d3-d19e53314377" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-16558041-1948-40e0-9fab-d9af694a5c81">
+<span class="eqno">(10)<a class="headerlink" href="#equation-16558041-1948-40e0-9fab-d9af694a5c81" title="Permalink to this equation">#</a></span>\[\begin{equation}
 c_{EU}^T = 
  \begin{bmatrix}
 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1\\
@@ -712,35 +705,35 @@ c_{EU}^T =
 <h2>Neutrality<a class="headerlink" href="#neutrality" title="Permalink to this headline">#</a></h2>
 <p>We can also impose tighter constraint regarding energy-system consistency and the responsibility, by imposing class neutrality of the portfolio.</p>
 <p>It means that:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1f45e950-6dbd-4394-8214-3eaba7db8f31">
-<span class="eqno">(11)<a class="headerlink" href="#equation-1f45e950-6dbd-4394-8214-3eaba7db8f31" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4fb6a9dd-ff1f-46a7-8b6e-966188503924">
+<span class="eqno">(11)<a class="headerlink" href="#equation-4fb6a9dd-ff1f-46a7-8b6e-966188503924" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sum_{i \in Class_j}x_i = \sum_{i \in Class_j}b_i
 \end{equation}\]</div>
 <p>In the QP problem, this can be included in the <span class="math notranslate nohighlight">\(Ax = b\)</span> equality constraint. With 8 stocks and our three energy-system classes we have <span class="math notranslate nohighlight">\(c_{PE}\)</span>, <span class="math notranslate nohighlight">\(c_{SE}\)</span> and <span class="math notranslate nohighlight">\(c_{EU}\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-787c3df5-c189-4e17-bfe3-1521c98b57f1">
-<span class="eqno">(12)<a class="headerlink" href="#equation-787c3df5-c189-4e17-bfe3-1521c98b57f1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-fda4d08d-bb2d-4164-bc75-fe0ba6db5bcd">
+<span class="eqno">(12)<a class="headerlink" href="#equation-fda4d08d-bb2d-4164-bc75-fe0ba6db5bcd" title="Permalink to this equation">#</a></span>\[\begin{equation}
 A_{PE} = c_{PE}^T = 
  \begin{bmatrix}
 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0\\
 \end{bmatrix}
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-b9e90a75-a030-49b6-85df-f22bcd106a0b">
-<span class="eqno">(13)<a class="headerlink" href="#equation-b9e90a75-a030-49b6-85df-f22bcd106a0b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0abd423a-cd08-4e0d-8232-ad535ee6e728">
+<span class="eqno">(13)<a class="headerlink" href="#equation-0abd423a-cd08-4e0d-8232-ad535ee6e728" title="Permalink to this equation">#</a></span>\[\begin{equation}
 A_{SE} = c_{SE}^T = 
  \begin{bmatrix}
 0 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 0\\
 \end{bmatrix}
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-ac516849-6f14-4b6b-87d3-8faade79209a">
-<span class="eqno">(14)<a class="headerlink" href="#equation-ac516849-6f14-4b6b-87d3-8faade79209a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a3992730-b3da-4a16-a195-fbfb1b4a70bd">
+<span class="eqno">(14)<a class="headerlink" href="#equation-a3992730-b3da-4a16-a195-fbfb1b4a70bd" title="Permalink to this equation">#</a></span>\[\begin{equation}
 A_{EU} = c_{EU}^T = 
  \begin{bmatrix}
 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1\\
 \end{bmatrix}
 \end{equation}\]</div>
 <p>Then:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8b50de8d-b4e5-458f-9ea2-9d53f281c501">
-<span class="eqno">(15)<a class="headerlink" href="#equation-8b50de8d-b4e5-458f-9ea2-9d53f281c501" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0a6adad1-35e9-4510-816e-102ac3e292f4">
+<span class="eqno">(15)<a class="headerlink" href="#equation-0a6adad1-35e9-4510-816e-102ac3e292f4" title="Permalink to this equation">#</a></span>\[\begin{equation}
 A = \begin{bmatrix}
 A_{PE} \\
 A_{SE} \\
@@ -748,8 +741,8 @@ A_{EU}
 \end{bmatrix}
 \end{equation}\]</div>
 <p>And <span class="math notranslate nohighlight">\(b_{PE} = c_{PE}^Tb\)</span>, <span class="math notranslate nohighlight">\(b_{SE} = c_{SE}^Tb\)</span> and <span class="math notranslate nohighlight">\(b_{EU} = c_{EU}^Tb\)</span> such that:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-62809694-255e-49ad-aef7-746f36e204b3">
-<span class="eqno">(16)<a class="headerlink" href="#equation-62809694-255e-49ad-aef7-746f36e204b3" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-53fc5d44-d5dc-40d2-a128-1d413e743723">
+<span class="eqno">(16)<a class="headerlink" href="#equation-53fc5d44-d5dc-40d2-a128-1d413e743723" title="Permalink to this equation">#</a></span>\[\begin{equation}
 b = \begin{bmatrix}
 b_{PE} \\
 b_{SE} \\
@@ -867,24 +860,6 @@ b_{EU}
                 <footer class="bd-footer-article">
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="../intro/dynamic.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Towards a Dynamic Decarbonization Strategy</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="forward_looking_approach.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Part 1: A Dynamic Portfolio Decarbonization Strategy</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
