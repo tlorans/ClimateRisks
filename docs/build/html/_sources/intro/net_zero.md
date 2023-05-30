@@ -73,9 +73,33 @@ As we have seen in the part regarding cross-sector responsibility, decarbonizing
 - Decarbonizing the Utilities sector to decrease $SC_2^{End-Use}$
 - Decarbonizing the End-Use activities to decrease $SC_1^{End-Use}$ and $SC_3^{End-Use}$
 
-In fact, decarbonizing the Utilties sector means shifting the energy mix to renewables.
+In fact, decarbonizing the Utilties sector means shifting the energy mix to renewables, that is transitioning towards "green" activities (Shift Production category).
+
+| Sector | Category | Solution | Current Market (in %) | Total Addressable Market by 2050 (in %) |
+| --- | --- |---| ---- | --- |
+| Utilities  | Shift Production |  Biomass Power | 0.28 | 1 |
+| Utilities  |Shift Production | Concentrated Solar Power | 0.06 | 8 |
+| Utilities  |Shift Production | Distributed Solar Photovoltaics | 0.7 | 14 |
+| Utilities  |Shift Production | Geothermal Power | 0.34 | 3 |
+| Utilities  |Shift Production | Nuclear Power | 10.5 | 14 |
+| Utilities  |Shift Production | Ocean Power | 0.0004 | 1 |
+| Utilities  |Shift Production | Offshore Wind Turbines | 0.27 | 4 |
+| Utilities  |Shift Production | Offshore Wind Turbines | 0.27 | 4 |
+| Utilities  |Shift Production | Onshore Wind Turbines | 4.36 | 20 |
+| Utilities  |Shift Production | Utility-Scale Solar Photovoltaics | 1.04 | 21 |
+| Utilities  | System Improvement | Distributed Energy Storage |  |  |
+| Utilities  | System Improvement | Grid Flexibility |  |  |
+| Utilities  | System Improvement | Microgrids |  |  |
+| Utilities  | System Improvement | Utility-Scale Energy Storage |  |  |
+
+On the other side, a decrease in fossil fuels burning by end-use activities requires an electricification of industries. For example, the following solutions can help in decreasing $SC_3^{End-Use}$:
 
 | Sector | Solution | Current Market (in %) | Total Addressable Market by 2050 (in %) |
 | --- | --- | ---- | --- |
-| Utilities  | Biomass Power | 0.28 | 1 |
-| Utilities  | Concentrated Solar Power | 0.28 | 1 |
+| Road  | Electric Cars | 0.47 | 21 |
+| Road  | Electric Bicycles | 1 | 3 |
+| Road  | Electric Trains | 2.1 | 6 |
+| Road  | Efficient Trucks | 1.6 | 9 |
+| Shipping  | Efficient Shipping | 5 | 49 |
+| Buildings  | LED Lighting | 3 | 82 |
+| Buildings  | Insulation | 30 | 66 |
