@@ -31,7 +31,7 @@ intro/intro
 intro/climaterisk
 intro/emissions
 intro/lowcarbon
-intro/dynamic
+intro/net_zero
 climate_investing/net_zero_investing
 climate_investing/portfolio_decarbonization_pathway
 climate_investing/portfolio_alignment

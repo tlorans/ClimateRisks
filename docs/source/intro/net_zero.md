@@ -1,11 +1,13 @@
 
-## Towards a Dynamic Decarbonization Strategy
+## Towards a Net Zero Strategy
 
 While we've seen the low-carbon strategy in the previous section, minimizing the tracking error relative to a benchmark index while reducing the portfolio's carbon footprint, one could ask if the approach is sufficient for a strategy contributing to the transition towards a net zero economy. Indeed, the previous approach performs portfolio decarbonization by underweighting relatively high-emitters stocks and overwheighting low-emitters stocks, without reference other than the benchmark universe. Furthermore, it is a purely static approach
 
 In fact, we know that the objective of mitigation policies, if soundly implemented, should be to abate emissions such that the economy follows a net zero emissions (NZE) scenario. In that context, portfolio decarbonization becomes a portfolio alignment exercice (Barahhou et al., 2022) {cite:p}`barahhou2022net`, that is portfolio decarbonization in respect with a NZE scenario. The acknowledgement of such scenario calls for a dynamic strategy.
 
-In this part, we will give a definition of a net zero emissions (NZE) scenario with the carbon budget constraint and study the relationship between a NZE scenario and a decarbonization pathway. These dynamic decarbonization reference are the very foundation of the need for a dynamic approach in portfolio decarbonization.
+While decarbonization focus on excluding high-emitters stocks from the portfolio, Barahhou et al. (2022) advocate for the integration of the transition dimension into a net zero strategy. 
+
+In this part, we will give a definition of a net zero emissions (NZE) scenario with the carbon budget constraint and study the relationship between a NZE scenario and a decarbonization pathway. These dynamic decarbonization reference are the very foundation of the need for a dynamic approach in portfolio decarbonization. We will finally address the need for a transition-aware strategy.
 
 ### Net Zero Emissions Scenario
 
@@ -64,3 +66,6 @@ name: reductionrate
 ---
 Figure: Decarbonization Pathway with $\Delta \mathfrak{R} = 0.07$ and $\mathfrak{R}^- = 0.30$
 ```
+
+### Transition to a Low-Carbon Economy
+
