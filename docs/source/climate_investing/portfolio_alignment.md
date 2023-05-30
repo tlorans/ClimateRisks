@@ -315,9 +315,64 @@ For stocks with a negative slope, $CI^{Trend}_i(t+1) < CI^{Trend}_i(t)$, increas
 
 In the second part of this course, we will introduce more forward-looking metrics, proposed by Le Guenedal et al. (2022).
 
+## Sector-Consistent Alignment
+
+While we've seen in the previous section how to ensure portfolio alignment with an intensity decarbonization pathway based on a NZE scenario, one should question the idea to use the same decarbonization pathways for all stocks in the portfolio. As we have previously seen, portfolio decarbonization should take into account sectors.
+
+On the other side, Teske et al. (2022) have provided GICS-level decarbonization pathways. 
+
+In what follows, we show how to perform portfolio alignment at sector level.
+
+We now assume that we want to reduce the carbon footprint at the sector level. In this case, we can denote by $CI(x; Sector_j)$ the carbon intensity of the $j^{th}$ sector, with (Roncalli, 2023):
+
+\begin{equation}
+CI(x;Sector_j) = \sum_{i \in Sector_j} \tilde{x_i} CI_i
+\end{equation}
+
+With $\tilde{x}_i$ the normalized weight in the sector bucket, such as:
+
+\begin{equation}
+\tilde{x}_i = \frac{x_i}{\sum_{k \in Sector_j}x_k}
+\end{equation}
+
+Equivalently:
+
+\begin{equation}
+CI(x;Sector_j) = \frac{(s_j \circ CI)^T x}{s^T_j x}
+\end{equation}
+
+With $a \circ b$ is the Hadamard product (element-wise product): $(a \circ b)_i = a_ib_i$.
+
+Imposing a portfolio alignment at the sector level is equivalent to modify the constraint to become:
+
+\begin{equation}
+CI(x(t); Sector_j) \leq (1 - \mathfrak{R}_{CI}(t_0,t;Sector_j))CI(b(t_0;Sector_j))
+\end{equation}
+
+In order to find the QP form to integrate into our problem, we need a few transformations (because we need to find the form $G^Tx \leq h$):
+
+\begin{equation}
+(*) ↔ CI(x(t); Sector_j) \leq (1 - \mathfrak{R}_{CI}(t_0,t;Sector_j))CI(b(t_0;Sector_j))
+\end{equation}
+
+\begin{equation}
+↔ (s_j \circ CI)^T x \leq (1 - \mathfrak{R}_{CI}(t_0,t;Sector_j))CI(b(t_0;Sector_j))(s_j^T x)
+\end{equation}
+
+\begin{equation}
+↔ ((s_j \circ CI) - (1 - \mathfrak{R}_{CI}(t_0,t;Sector_j))CI(b(t_0;Sector_j)) s_j)^T x \leq 0
+\end{equation}
+
+\begin{equation}
+↔ (s_j \circ (CI - (1 - \mathfrak{R}_{CI}(t_0,t;Sector_j))CI(b(t_0;Sector_j))^T x \leq 0
+\end{equation}
+
+We thus have our QP form $G = (s_j \circ (CI - (1 - \mathfrak{R}_{CI}(t_0,t;Sector_j))CI(b(t_0;Sector_j))^T$ and $h = 0$.
+
 ## Key Takeaways
 
 - Portfolio alignment with a decarbonization pathway, such as the methodology proposed by Barahhou et al. (2022), derived from a NZE scenario, is a dynamic exercice by nature
 
 - Thus portfolio alignment changed the nature of the decarbonized portfolio problem, making it dynamic
 
+- Portolio alignment can be conducted at sector level
