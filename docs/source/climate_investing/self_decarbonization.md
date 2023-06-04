@@ -137,13 +137,3 @@ Figure: Sequential versus self-decarbonization
 ```
 
 In this example, we can see that almost all yearly portfolio decarbonization comes from the rebalancement process (sequential decarbonization). This is typically what we can expect if we use backward-looking data for such a forward-looking exercice.
-
-## Key Takeaways 
-
-- A time-proofed portfolio alignment strategy should relies mostly on self-decarbonization, rather than sequential decarbonization
-
-- Barahhou et al. (2022) introduced the concept of net zero backtesting and the self-decarbonization ratio
-
-- Improving the self-decarbonization ratio calls for the integration of forward looking metrics such as the carbon footprint dynamics for example
-
-- The second part of this course will focus on other forward-looking metrics that can be useful for improving the self-decarbonization ratio

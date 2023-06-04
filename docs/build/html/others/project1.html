@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Project 1: Portfolio Optimization in Practice &#8212; Climate Risks in Finance 0.1 documentation</title>
+    <title>Project 1: Consistent Portfolio Decarbonization &#8212; Climate Risks in Finance 0.1 documentation</title>
   
   
   
@@ -125,19 +125,13 @@
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../intro/intro.html">Part 0: Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../intro/climaterisk.html">Economics and Physics of Climate Risk: The Tragedy of the Horizon</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../intro/emissions.html">Cross-Sector Reponsibility for Emissions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro/lowcarbon.html">Portfolio Decarbonization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro/net_zero.html">Towards a Net Zero Strategy</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../climate_investing/net_zero_investing.html">Part 1: Net Zero Investing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../climate_investing/net_zero_investing.html">Net Zero Investing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../climate_investing/portfolio_decarbonization_pathway.html">Portfolio Decarbonization Pathway</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../climate_investing/portfolio_alignment.html">Portfolio Alignment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../climate_investing/self_decarbonization.html">Net Zero Backtesting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../climate_investing/integratingtransition.html">Integrating the Transition Dimension</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../climate_data/climate_data.html">Part 2: Net Zero Metrics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../climate_data/carbon_budget.html">Carbon Budget, Target and Trend</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../climate_data/emissions_metrics.html">Duration, Gap and Slope</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 </ul>
 
@@ -275,7 +269,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Project 1: Portfolio Optimization in Practice</h1>
+    <h1>Project 1: Consistent Portfolio Decarbonization</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -285,18 +279,20 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#covariance-matrix-and-optimized-portfolio-stability-issue">Covariance Matrix and Optimized Portfolio Stability Issue</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shrinkage-methods-the-ledoit-wolf-approach">Shrinkage Methods: the Ledoit-Wolf Approach</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-the-shrinkage-target">Finding the Shrinkage Target</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-the-shrinkage-intensity">Finding the Shrinkage Intensity</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Project 1: Consistent Portfolio Decarbonization</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#oecm-sectors">OECM Sectors</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#primary-and-secondary-energy-sectors">Primary and Secondary Energy Sectors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#end-use-activities-sectors">End-Use Activities Sectors</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#your-turn">Your Turn!</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-system-consistent-decarbonization">Energy-System Consistent Decarbonization</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weights-constraint">Weights Constraint</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neutrality">Neutrality</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#your-turn">Your Turn!</a></li>
 </ul>
 </li>
 </ul>
+
             </nav>
         </div>
     </div>
@@ -307,294 +303,547 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="project-1-portfolio-optimization-in-practice">
-<h1>Project 1: Portfolio Optimization in Practice<a class="headerlink" href="#project-1-portfolio-optimization-in-practice" title="Permalink to this headline">#</a></h1>
-<p>In order to implement the Markowitz approach, the estimation of the covariance matrix of stock returns is required. The standard statistical approach is to retrieve the history of past stock returns and compute the sample covariance matrix <span class="math notranslate nohighlight">\(\hat{\Sigma}\)</span>.</p>
-<p>The sample covariance matrix can be computed as (Roncalli, 2013):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8da21669-8d4c-4779-b2dc-cfaa85c6bdd9">
-<span class="eqno">(1)<a class="headerlink" href="#equation-8da21669-8d4c-4779-b2dc-cfaa85c6bdd9" title="Permalink to this equation">#</a></span>\[\begin{equation}
-\hat{\Sigma} = \frac{1}{T}\sum^T_{t=1}(R_t - \bar{R})(R_t - \bar{R})^T
+  <section id="project-1-consistent-portfolio-decarbonization">
+<h1>Project 1: Consistent Portfolio Decarbonization<a class="headerlink" href="#project-1-consistent-portfolio-decarbonization" title="Permalink to this headline">#</a></h1>
+<p>In our first exposure to portfolio decarbonization, no other constraint than the one related to portfolio decarbonization was imposed.</p>
+</section>
+<section id="oecm-sectors">
+<h1>OECM Sectors<a class="headerlink" href="#oecm-sectors" title="Permalink to this headline">#</a></h1>
+<section id="primary-and-secondary-energy-sectors">
+<h2>Primary and Secondary Energy Sectors<a class="headerlink" href="#primary-and-secondary-energy-sectors" title="Permalink to this headline">#</a></h2>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>GICS</p></th>
+<th class="head"><p>Sector Name OECM</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>101010</p></td>
+<td><p>Energy Equipment &amp; Services</p></td>
+<td><p>Energy</p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p>10101010 Oil &amp; Gas Drilling</p></td>
+<td><p>Energy</p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p>10101020 Oil &amp; Gas Equipment &amp; Services</p></td>
+<td><p>Energy</p></td>
+</tr>
+<tr class="row-odd"><td><p>101020</p></td>
+<td><p>Oil, Gas &amp; Consumable Fuels</p></td>
+<td><p>Energy</p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p>10102010 Integrated Oil &amp; Gas</p></td>
+<td><p>Energy</p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p>10102020 Oil &amp; Gas Exploration &amp; Production</p></td>
+<td><p>Energy</p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p>10102030 Oil &amp; Gas Refining &amp; Marketing</p></td>
+<td><p>Energy</p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p>10102040 Oil &amp; Gas Storage &amp; Transportation</p></td>
+<td><p>Energy</p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p>10102050 Coal &amp; Consumable Fuels</p></td>
+<td><p>Energy</p></td>
+</tr>
+<tr class="row-odd"><td><p>5510 Electric Utilities</p></td>
+<td><p></p></td>
+<td><p>Utilities (Power &amp; Gas only)</p></td>
+</tr>
+<tr class="row-even"><td><p>5520 Gas Utilities</p></td>
+<td><p></p></td>
+<td><p>Utilities (Power &amp; Gas only)</p></td>
+</tr>
+<tr class="row-odd"><td><p>5530 Multi Utilities</p></td>
+<td><p></p></td>
+<td><p>Utilities (Power &amp; Gas only)</p></td>
+</tr>
+<tr class="row-even"><td><p>5550 Independent Power and Renewable Electricity Producers</p></td>
+<td><p></p></td>
+<td><p>Utilities (Power &amp; Gas only)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="end-use-activities-sectors">
+<h2>End-Use Activities Sectors<a class="headerlink" href="#end-use-activities-sectors" title="Permalink to this headline">#</a></h2>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>GICS</p></th>
+<th class="head"><p>Sector Name OECM</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>601010  Equity Real Estate Investment Trusts (REITs)</p></td>
+<td><p></p></td>
+<td><p>Buildings</p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p>60101010 Diversified REITs</p></td>
+<td><p>Buildings</p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p>60101020 Industrial REITs</p></td>
+<td><p>Buildings</p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p>60101030 Hotel &amp; Resort REITs</p></td>
+<td><p>Buildings</p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p>60101040 Office REITs</p></td>
+<td><p>Buildings</p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p>60101050 Health Care REITs</p></td>
+<td><p>Buildings</p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p>60101060 Residential REITs</p></td>
+<td><p>Buildings</p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p>60101070 Retail REITs</p></td>
+<td><p>Buildings</p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p>60101080 Specialized REITs</p></td>
+<td><p>Buildings</p></td>
+</tr>
+<tr class="row-odd"><td><p>601020 Real Estate Management &amp; Development</p></td>
+<td><p></p></td>
+<td><p>Buildings</p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p>60102010 Diversified Real Estate Activities</p></td>
+<td><p>Buildings</p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p>60102020 Real Estate Operating Companies</p></td>
+<td><p>Buildings</p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p>60102030 Real Estate Development</p></td>
+<td><p>Buildings</p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p>60102040 Real Estate Services</p></td>
+<td><p>Buildings</p></td>
+</tr>
+<tr class="row-even"><td><p>2030 Transportation</p></td>
+<td><p></p></td>
+<td><p>Transport</p></td>
+</tr>
+<tr class="row-odd"><td><p>203010 Air Freight &amp; Logistics</p></td>
+<td><p></p></td>
+<td><p>Aviation</p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p>20301010 Air Freight &amp; Logistics</p></td>
+<td><p>Aviation</p></td>
+</tr>
+<tr class="row-odd"><td><p>203020 Airlines</p></td>
+<td><p></p></td>
+<td><p>Aviation</p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p>20302010 Airlines</p></td>
+<td><p>Aviation</p></td>
+</tr>
+<tr class="row-odd"><td><p>203030 Marine</p></td>
+<td><p></p></td>
+<td><p>Shipping</p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p>20303010 Marine</p></td>
+<td><p>Shipping</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="energy-system-consistent-decarbonization">
+<h1>Energy-System Consistent Decarbonization<a class="headerlink" href="#energy-system-consistent-decarbonization" title="Permalink to this headline">#</a></h1>
+<p>For a consistent portfolio decarbonization, you thus need to make sure that decarbonization takes place both in the energy-supply system (primary and secondary energy activities) and in the end-use activities. In particular, portfolio decarbonization shouldn’t lead to a portfolio weights deviation towards end-use activities for example. Decarbonization should respect the energy-system constraint.</p>
+<p>In what follow, we will first see how to control potential weights deviation for the three stages of the energy-system with portfolio decarbonization. Then we will address full neutrality.
+We use Roncalli (2023) as a reference for implementing the constraints.</p>
+<section id="weights-constraint">
+<h2>Weights Constraint<a class="headerlink" href="#weights-constraint" title="Permalink to this headline">#</a></h2>
+<p>In order to limit the weights deviation for the energy-system, and limiting the responsibility bias, we can extend the framework by considering a weights constraint, similar to the sector constraint presented by Roncalli (2023):</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a2e66d9b-0ad6-471c-bfd4-3a7096ceab44">
+<span class="eqno">(1)<a class="headerlink" href="#equation-a2e66d9b-0ad6-471c-bfd4-3a7096ceab44" title="Permalink to this equation">#</a></span>\[\begin{equation}
+c^-_j \leq \sum_{i \in Class_j} x_i \leq c_j^+
 \end{equation}\]</div>
-<p>However, the sample covariance matrix is estimated with a lot of errors when the number of stocks <span class="math notranslate nohighlight">\(n\)</span> is larger than the historical return observations <span class="math notranslate nohighlight">\(T\)</span> (the condition <span class="math notranslate nohighlight">\(T &gt;&gt; n\)</span> is not verified). Using the sample covariance matrix as an input of the Markowitz framework can lead to a lack of robustness for the resulting portfolio.</p>
-<p>To overcome this issue, shrinkage methods of the covariance matrix are used in practice, in order to obtain a more reliable estimate of the covariance matrix to be used in the mean-variance framework. We will see how to apply the Ledoit-Wolf (2003b) <span id="id1">[<a class="reference internal" href="../references.html#id24" title="Olivier Ledoit and Michael Wolf. Honey, i shrunk the sample covariance matrix. UPF economics and business working paper, 2003.">LW03a</a>]</span> approach.</p>
-<p>For more details about practices of portfolio optimization, please refer to Roncalli (2013) and the part two of these <a class="reference external" href="http://www.thierry-roncalli.com/download/AM-Lecture1.pdf">slides</a>.</p>
-<section id="covariance-matrix-and-optimized-portfolio-stability-issue">
-<h2>Covariance Matrix and Optimized Portfolio Stability Issue<a class="headerlink" href="#covariance-matrix-and-optimized-portfolio-stability-issue" title="Permalink to this headline">#</a></h2>
-<p>We can illustate the stability issue resulting from the covariance matrix errors with an example from Roncalli (2013). We will generate two covariance matrices with different correlation (we assume the cross-correlation is equal to 0.8 in the first example, to 0.9 in the second example):</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.08</span><span class="p">,</span> <span class="mf">0.08</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">])</span>
-<span class="n">sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.21</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">])</span>
-<span class="n">rho_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">],</span>
-               <span class="p">[</span><span class="mf">0.8</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.8</span> <span class="p">],</span>
-               <span class="p">[</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]])</span>
-<span class="n">Sigma_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span> <span class="o">@</span> <span class="n">rho_A</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span>
-<span class="n">rho_B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">],</span>
-               <span class="p">[</span><span class="mf">0.9</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.9</span> <span class="p">],</span>
-               <span class="p">[</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]])</span>
-<span class="n">Sigma_B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span> <span class="o">@</span> <span class="n">rho_B</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Let’s now use the code for portfolio construction as before:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span> 
+<p>With <span class="math notranslate nohighlight">\(c_j\)</span> a <span class="math notranslate nohighlight">\(n \times 1\)</span> vector of energy-system class-mapping (ie. we have here only one class considered), with elements 0 or 1 if the stock <span class="math notranslate nohighlight">\(n\)</span> belongs to the class such as:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a5870aa6-4f1b-4f02-9b79-6a1713f43eca">
+<span class="eqno">(2)<a class="headerlink" href="#equation-a5870aa6-4f1b-4f02-9b79-6a1713f43eca" title="Permalink to this equation">#</a></span>\[\begin{equation}
+c_{i,j} = 𝟙\{i \in Class_j\}
+\end{equation}\]</div>
+<p>We note that:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-f4cfdaa3-9283-4580-bfba-c432575c1117">
+<span class="eqno">(3)<a class="headerlink" href="#equation-f4cfdaa3-9283-4580-bfba-c432575c1117" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\sum_{i \in Sector_j} x_i = c_j^T x
+\end{equation}\]</div>
+<p>We can then rewrite the class constraint constraint <span class="math notranslate nohighlight">\(c^-_j \leq \sum_{i \in Class_j} x_i \leq c_j^+\)</span> as (Roncalli, 2023):</p>
+<div class="amsmath math notranslate nohighlight" id="equation-3c486883-20cc-4597-a1c8-157d86cd2678">
+<span class="eqno">(4)<a class="headerlink" href="#equation-3c486883-20cc-4597-a1c8-157d86cd2678" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\begin{cases}
+  c^-_j \leq c_j^Tx \\
+  c_j^Tx \leq c^+_j
+\end{cases}
+\end{equation}\]</div>
+<p>Which we can reorder (such that the thresholds are on the right and the sector weights on the left) as:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-5aef82cf-b445-4e78-b2f0-1226a62da7fc">
+<span class="eqno">(5)<a class="headerlink" href="#equation-5aef82cf-b445-4e78-b2f0-1226a62da7fc" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\begin{cases}
+  - c_j^Tx \leq - c^-_j \\
+  c_j^Tx \leq c^+_j
+\end{cases}
+\end{equation}\]</div>
+<p>These last constraints can the be included into the QP inequality constraint <span class="math notranslate nohighlight">\(Gx \leq h\)</span> as:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a86f1b91-82a3-472e-b13e-7185b5f04a5b">
+<span class="eqno">(6)<a class="headerlink" href="#equation-a86f1b91-82a3-472e-b13e-7185b5f04a5b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+G = \begin{bmatrix}
+-c_j^T \\
+-c^T_j
+\end{bmatrix}
+\end{equation}\]</div>
+<p>with G is a <span class="math notranslate nohighlight">\(2 \times n\)</span> matrix,
+and:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-42582722-6e6f-4e87-9661-e6b0b256efa1">
+<span class="eqno">(7)<a class="headerlink" href="#equation-42582722-6e6f-4e87-9661-e6b0b256efa1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+h = \begin{bmatrix}
+-c_j^- \\
+c_j^+
+\end{bmatrix}
+\end{equation}\]</div>
+<p>with h is a <span class="math notranslate nohighlight">\(2 \times 1\)</span> vector.</p>
+<p>You can extend this approach with the three classes describing the energy-system.</p>
+<p>Let’s illustrate the concept by implementing an example in Python. First, let’s take the scripts we’ve used before to define a Carbon Portfolio:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="nd">@dataclass</span> 
-<span class="k">class</span> <span class="nc">Portfolio</span><span class="p">:</span>
-  <span class="sd">&quot;&quot;&quot;A simple dataclass storing the basics information of a porfolio and </span>
-<span class="sd">  implementing the methods for the two moments computation.</span>
+<span class="k">class</span> <span class="nc">CarbonPortfolio</span><span class="p">:</span>
+  <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  A class that implement supplementary information CI and new method get_waci,</span>
+<span class="sd">  to be used in the low-carbon strategy implementation.</span>
 <span class="sd">  &quot;&quot;&quot;</span>
   <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="c1"># Weights</span>
-  <span class="n">mu</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="c1"># Expected Returns</span>
+  <span class="n">CI</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="c1"># Carbon Intensities</span>
   <span class="n">Sigma</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span> <span class="c1"># Covariance Matrix</span>
 
-  <span class="k">def</span> <span class="nf">get_expected_returns</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">mu</span>
 
-  <span class="k">def</span> <span class="nf">get_variance</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span>
+  <span class="k">def</span> <span class="nf">get_waci</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">CI</span>
+</pre></div>
+</div>
+<p>Let’s make an example:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.23</span><span class="p">,</span>
+              <span class="mf">0.19</span><span class="p">,</span>
+              <span class="mf">0.17</span><span class="p">,</span>
+              <span class="mf">0.13</span><span class="p">,</span>
+              <span class="mf">0.09</span><span class="p">,</span>
+              <span class="mf">0.08</span><span class="p">,</span>
+              <span class="mf">0.06</span><span class="p">,</span>
+              <span class="mf">0.05</span><span class="p">])</span>
 
+<span class="n">CI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">125</span><span class="p">,</span>
+               <span class="mi">75</span><span class="p">,</span>
+               <span class="mi">254</span><span class="p">,</span>
+               <span class="mi">822</span><span class="p">,</span>
+               <span class="mi">109</span><span class="p">,</span>
+               <span class="mi">17</span><span class="p">,</span>
+               <span class="mi">341</span><span class="p">,</span>
+               <span class="mi">741</span><span class="p">])</span>
+
+<span class="n">betas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.30</span><span class="p">,</span>
+                  <span class="mf">1.80</span><span class="p">,</span>
+                  <span class="mf">0.85</span><span class="p">,</span>
+                  <span class="mf">0.83</span><span class="p">,</span>
+                  <span class="mf">1.47</span><span class="p">,</span>
+                  <span class="mf">0.94</span><span class="p">,</span>
+                  <span class="mf">1.67</span><span class="p">,</span>
+                  <span class="mf">1.08</span><span class="p">])</span>
+
+<span class="n">sigmas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.10</span><span class="p">,</span>
+                   <span class="mf">0.05</span><span class="p">,</span>
+                   <span class="mf">0.06</span><span class="p">,</span>
+                   <span class="mf">0.12</span><span class="p">,</span>
+                   <span class="mf">0.15</span><span class="p">,</span>
+                   <span class="mf">0.04</span><span class="p">,</span>
+                   <span class="mf">0.08</span><span class="p">,</span>
+                   <span class="mf">0.07</span><span class="p">])</span>
+
+<span class="n">Sigma</span> <span class="o">=</span> <span class="n">betas</span> <span class="o">@</span> <span class="n">betas</span><span class="o">.</span><span class="n">T</span> <span class="o">*</span> <span class="mf">0.18</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">sigmas</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We have three classes in our energy-system: <span class="math notranslate nohighlight">\(Class_{PE}\)</span> the primary energy class, <span class="math notranslate nohighlight">\(Class_{SE}\)</span> the secondary energy and <span class="math notranslate nohighlight">\(Class_{EU}\)</span> the end-use activities.</p>
+<p>We have:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-8d1fc58c-97d9-4c91-9ec1-6d23d27aeaab">
+<span class="eqno">(8)<a class="headerlink" href="#equation-8d1fc58c-97d9-4c91-9ec1-6d23d27aeaab" title="Permalink to this equation">#</a></span>\[\begin{equation}
+c_{PE}^T = 
+ \begin{bmatrix}
+1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0\\
+\end{bmatrix}
+\end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-c4dfb49d-af77-4fae-9842-70252a4b0d0e">
+<span class="eqno">(9)<a class="headerlink" href="#equation-c4dfb49d-af77-4fae-9842-70252a4b0d0e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+c_{SE}^T = 
+ \begin{bmatrix}
+0 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 0\\
+\end{bmatrix}
+\end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-686448b0-1dd4-486e-aa18-73d9eb277555">
+<span class="eqno">(10)<a class="headerlink" href="#equation-686448b0-1dd4-486e-aa18-73d9eb277555" title="Permalink to this equation">#</a></span>\[\begin{equation}
+c_{EU}^T = 
+ \begin{bmatrix}
+0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1\\
+\end{bmatrix}
+\end{equation}\]</div>
+<p>We can prepare the sector constraints specification in Python:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">s_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">s_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">s_j</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="o">-</span> <span class="n">s_1</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="o">-</span> <span class="n">s_1</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="o">-</span> <span class="n">s_2</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="o">-</span> <span class="n">s_2</span><span class="o">.</span><span class="n">T</span><span class="p">])</span> <span class="c1"># we stack the sectors vectors</span>
+</pre></div>
+</div>
+<p>To choose classes weights constraints, let’s first take a look at their relative weights in the initial benchmark:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">s_1</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">b</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">0.5700000000000001</span>
+</pre></div>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">s_2</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">b</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">0.43000000000000005</span>
+</pre></div>
+</div>
+<p>We can choose for example <span class="math notranslate nohighlight">\(s_1^+ = 0.65\)</span>, <span class="math notranslate nohighlight">\(s_1^- = 0.5\)</span> and <span class="math notranslate nohighlight">\(s_2^+ = 0.5\)</span> and <span class="math notranslate nohighlight">\(s_2^- = 0.4\)</span>.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">sectors_constraints</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.65</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">])</span> 
+</pre></div>
+</div>
+<p>We can now implement a low-carbon strategy with the threshold approach, while controlling for energy-system and responsibility consistency:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">LowCarbonStrategy</span><span class="p">:</span>
+  <span class="n">b</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="c1"># Benchmark Weights</span>
+  <span class="n">CI</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="c1"># Carbon Intensity</span>
+  <span class="n">Sigma</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span> <span class="c1"># Covariance Matrix</span>
+
+
+  <span class="k">def</span> <span class="nf">get_portfolio</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CarbonPortfolio</span><span class="p">:</span>
+    <span class="k">pass</span>
 
 <span class="kn">from</span> <span class="nn">qpsolvers</span> <span class="kn">import</span> <span class="n">solve_qp</span>
 
 <span class="nd">@dataclass</span>
-<span class="k">class</span> <span class="nc">MeanVariance</span><span class="p">:</span>
+<span class="k">class</span> <span class="nc">ThresholdApproach</span><span class="p">(</span><span class="n">LowCarbonStrategy</span><span class="p">):</span>
 
-  <span class="n">mu</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="c1"># Expected Returns</span>
-  <span class="n">Sigma</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span> <span class="c1"># Covariance Matrix</span>
-  
-  <span class="k">def</span> <span class="nf">get_portfolio</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gamma</span><span class="p">:</span><span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Portfolio</span><span class="p">:</span>
+  <span class="k">def</span> <span class="nf">get_portfolio</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reduction_rate</span><span class="p">:</span><span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CarbonPortfolio</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;QP Formulation&quot;&quot;&quot;</span>
-
     <span class="n">x_optim</span> <span class="o">=</span> <span class="n">solve_qp</span><span class="p">(</span><span class="n">P</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span><span class="p">,</span>
-              <span class="n">q</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">gamma</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="p">),</span>
-              <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="p">))</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="c1"># fully invested</span>
-              <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">]),</span> <span class="c1"># fully invested</span>
-              <span class="n">lb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="p">)),</span> <span class="c1"># long-only position</span>
-              <span class="n">ub</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="p">)),</span> <span class="c1"># long-only position</span>
+              <span class="n">q</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">),</span> 
+              <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">))</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> 
+              <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">]),</span>
+              <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">CI</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="c1"># resulting WACI</span>
+              <span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">reduction_rate</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">CI</span><span class="p">,</span> <span class="c1"># reduction</span>
+              <span class="n">lb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)),</span>
+              <span class="n">ub</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)),</span>
+              <span class="n">solver</span> <span class="o">=</span> <span class="s1">&#39;osqp&#39;</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">CarbonPortfolio</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x_optim</span><span class="p">,</span> 
+                        <span class="n">Sigma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span><span class="p">,</span> <span class="n">CI</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">CI</span><span class="p">)</span>
+    
+  <span class="k">def</span> <span class="nf">get_portfolio_with_sector_constraints</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reduction_rate</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">s_j</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="n">sector_constraints</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CarbonPortfolio</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;QP Formulation&quot;&quot;&quot;</span>
+    <span class="n">x_optim</span> <span class="o">=</span> <span class="n">solve_qp</span><span class="p">(</span><span class="n">P</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span><span class="p">,</span>
+              <span class="n">q</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">),</span> 
+              <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">))</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> 
+              <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">]),</span>
+              <span class="n">G</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">CI</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">s_j</span><span class="p">]),</span> <span class="c1"># nested G</span>
+              <span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">reduction_rate</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">CI</span><span class="p">,</span> <span class="n">sector_constraints</span><span class="p">]),</span> <span class="c1"># reduction + sector constraints</span>
+              <span class="n">lb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)),</span>
+              <span class="n">ub</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)),</span>
               <span class="n">solver</span> <span class="o">=</span> <span class="s1">&#39;osqp&#39;</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">Portfolio</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x_optim</span><span class="p">,</span> <span class="n">mu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="p">,</span> <span class="n">Sigma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span><span class="p">)</span>
-
-<span class="n">portfolio_A</span> <span class="o">=</span> <span class="n">MeanVariance</span><span class="p">(</span><span class="n">mu</span> <span class="o">=</span> <span class="n">mu</span><span class="p">,</span> <span class="n">Sigma</span> <span class="o">=</span> <span class="n">Sigma_A</span><span class="p">)</span>
-<span class="n">weights_A</span> <span class="o">=</span> <span class="n">portfolio_A</span><span class="o">.</span><span class="n">get_portfolio</span><span class="p">(</span><span class="n">gamma</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">x</span>
-
-<span class="n">portfolio_B</span> <span class="o">=</span> <span class="n">MeanVariance</span><span class="p">(</span><span class="n">mu</span> <span class="o">=</span> <span class="n">mu</span><span class="p">,</span> <span class="n">Sigma</span> <span class="o">=</span> <span class="n">Sigma_B</span><span class="p">)</span>
-<span class="n">weights_B</span> <span class="o">=</span> <span class="n">portfolio_B</span><span class="o">.</span><span class="n">get_portfolio</span><span class="p">(</span><span class="n">gamma</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">x</span>
-
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">width</span> <span class="o">=</span> <span class="mf">0.4</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">weights_A</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">weights_B</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="s2">&quot;B&quot;</span><span class="p">,</span><span class="s2">&quot;C&quot;</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;$x^*$&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s2">&quot;Sigma A&quot;</span><span class="p">,</span> <span class="s2">&quot;Sigma B&quot;</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">CarbonPortfolio</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x_optim</span><span class="p">,</span> 
+                           <span class="n">Sigma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span><span class="p">,</span> <span class="n">CI</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">CI</span><span class="p">)</span>
 </pre></div>
 </div>
-<figure class="align-default" id="impactcovmatrix">
-<img alt="others/impactcovmatrix.png" src="others/impactcovmatrix.png" />
-<figcaption>
-<p><span class="caption-text">Figure: Optimum weights with <span class="math notranslate nohighlight">\(\rho = 0.8\)</span> vs. <span class="math notranslate nohighlight">\(\rho = 0.9\)</span></span><a class="headerlink" href="#impactcovmatrix" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
-<p>We see that a slight difference in terms of cross-correlation leads to significantly different covariance matrices, and then to really different optimal weights!</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">low_carbon_portfolio</span> <span class="o">=</span> <span class="n">ThresholdApproach</span><span class="p">(</span><span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> 
+                                         <span class="n">CI</span> <span class="o">=</span> <span class="n">CI</span><span class="p">,</span>
+                                         <span class="n">Sigma</span> <span class="o">=</span> <span class="n">Sigma</span><span class="p">)</span>
+
+<span class="n">low_carbon_portfolio</span><span class="o">.</span><span class="n">get_portfolio_with_sector_constraints</span><span class="p">(</span><span class="n">reduction_rate</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+                                                           <span class="n">s_j</span> <span class="o">=</span> <span class="n">s_j</span><span class="p">,</span>
+                                                           <span class="n">sector_constraints</span> <span class="o">=</span> <span class="n">sectors_constraints</span><span class="p">)</span><span class="o">.</span><span class="n">x</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">array</span><span class="p">([</span> <span class="mf">2.36352155e-01</span><span class="p">,</span>  <span class="mf">2.53202952e-01</span><span class="p">,</span>  <span class="mf">1.19930045e-01</span><span class="p">,</span>  <span class="mf">4.29437030e-02</span><span class="p">,</span>
+        <span class="mf">9.41669784e-02</span><span class="p">,</span>  <span class="mf">2.47256857e-01</span><span class="p">,</span>  <span class="mf">6.14731882e-03</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.28467006e-08</span><span class="p">])</span>
+</pre></div>
+</div>
 </section>
-<section id="shrinkage-methods-the-ledoit-wolf-approach">
-<h2>Shrinkage Methods: the Ledoit-Wolf Approach<a class="headerlink" href="#shrinkage-methods-the-ledoit-wolf-approach" title="Permalink to this headline">#</a></h2>
-<p>In order to overcome unreliable sample covariance, shrinkage methods are used in practice for a better estimate of the covariance matrix.
-Shrinkage methods approaches modify the sample covariance matrix <span class="math notranslate nohighlight">\(\hat{\Sigma}\)</span> by a new estimate <span class="math notranslate nohighlight">\(\tilde{\Sigma}\)</span> in order to take into account uncertainties. <span class="math notranslate nohighlight">\(\tilde{\Sigma}\)</span> generally takes the form of a weighted sum of <span class="math notranslate nohighlight">\(\hat{\Sigma}\)</span> and a correction term.</p>
-<p>The Ledoit-Wolf approach (2003a) <span id="id2">[<a class="reference internal" href="../references.html#id25" title="Olivier Ledoit and Michael Wolf. Improved estimation of the covariance matrix of stock returns with an application to portfolio selection. Journal of empirical finance, 10(5):603–621, 2003.">LW03b</a>]</span> proposes to combine two estimators for the covariance matrix: <span class="math notranslate nohighlight">\(\hat{\Sigma}\)</span> and <span class="math notranslate nohighlight">\(\hat{\Phi}\)</span>.</p>
-<p><span class="math notranslate nohighlight">\(\hat{\Sigma}\)</span>, the sample covariance matrix is known to be unbiased but includes a lot of estimations errors where the number of observations periods is not significantly higher than the number of assets.</p>
-<p><span class="math notranslate nohighlight">\(\hat{\Phi}\)</span>, a structured estimator  (shrinkage target) converges quickly but is a biased estimator. Ledoit and Wolf  proposed to use either the single-factor matrix of Sharpe (2003a) or the constant correlation model (2003b) as the shrinkage target. Thereafter, we will use the second one.</p>
-<p>The Ledoit-Wolf approach combines both estimators to obtain a more efficient one, such as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2b84eca6-5b48-407b-865e-9af1852013c5">
-<span class="eqno">(2)<a class="headerlink" href="#equation-2b84eca6-5b48-407b-865e-9af1852013c5" title="Permalink to this equation">#</a></span>\[\begin{equation}
-\tilde{\Sigma}_{\delta} = \delta \hat{\Phi} + (1 - \delta) \hat{\Sigma}
+<section id="neutrality">
+<h2>Neutrality<a class="headerlink" href="#neutrality" title="Permalink to this headline">#</a></h2>
+<p>We can also impose tighter constraint regarding energy-system consistency and the responsibility, by imposing class neutrality of the portfolio.</p>
+<p>It means that:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-11f00da5-5c05-4ed1-9c8b-2669d313228c">
+<span class="eqno">(11)<a class="headerlink" href="#equation-11f00da5-5c05-4ed1-9c8b-2669d313228c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\sum_{i \in Class_j}x_i = \sum_{i \in Class_j}b_i
 \end{equation}\]</div>
-<p>With <span class="math notranslate nohighlight">\(\delta\)</span> the shrinkage intensity, between 0 and 1.</p>
-<p>The method involves two stages:</p>
-<ul class="simple">
-<li><p>determining the shrinkage target <span class="math notranslate nohighlight">\(\hat{\Phi}\)</span></p></li>
-<li><p>determining the shrinkage intensity <span class="math notranslate nohighlight">\(\delta\)</span></p></li>
-</ul>
-<section id="finding-the-shrinkage-target">
-<h3>Finding the Shrinkage Target<a class="headerlink" href="#finding-the-shrinkage-target" title="Permalink to this headline">#</a></h3>
-<p>As a first stage, we need to find the shrinkage target <span class="math notranslate nohighlight">\(\hat{\Phi}\)</span>. As we follow Ledoit and Wolf (2003b), <span class="math notranslate nohighlight">\(\hat{\Phi}\)</span> is the empirical covariance matrix with a constant correlation <span class="math notranslate nohighlight">\(\bar{\rho}\)</span>, with:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d1e3aa28-f0d1-4028-a87d-a29b29e74983">
-<span class="eqno">(3)<a class="headerlink" href="#equation-d1e3aa28-f0d1-4028-a87d-a29b29e74983" title="Permalink to this equation">#</a></span>\[\begin{equation}
-\hat{\Phi}_{i,i} = \hat{\Sigma}_{i,i} 
+<p>In the QP problem, this can be included in the <span class="math notranslate nohighlight">\(Ax = b\)</span> equality constraint. With 8 stocks and our three energy-system classes we have <span class="math notranslate nohighlight">\(c_{PE}\)</span>, <span class="math notranslate nohighlight">\(c_{SE}\)</span> and <span class="math notranslate nohighlight">\(c_{EU}\)</span>:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-77564201-73c8-41c9-be43-630d9386a305">
+<span class="eqno">(12)<a class="headerlink" href="#equation-77564201-73c8-41c9-be43-630d9386a305" title="Permalink to this equation">#</a></span>\[\begin{equation}
+A_{PE} = c_{PE}^T = 
+ \begin{bmatrix}
+1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0\\
+\end{bmatrix}
 \end{equation}\]</div>
-<p>and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9ac7bc2a-5b4a-42cd-86eb-6f3fa4408e82">
-<span class="eqno">(4)<a class="headerlink" href="#equation-9ac7bc2a-5b4a-42cd-86eb-6f3fa4408e82" title="Permalink to this equation">#</a></span>\[\begin{equation}
-\hat{\Phi}_{i,j} = \bar{\rho} \sqrt{\hat{\Sigma}_{i,i} \hat{\Sigma}_{j,j}} 
+<div class="amsmath math notranslate nohighlight" id="equation-b8ebc74a-58f8-4a77-9e2c-afbe24c6b4f3">
+<span class="eqno">(13)<a class="headerlink" href="#equation-b8ebc74a-58f8-4a77-9e2c-afbe24c6b4f3" title="Permalink to this equation">#</a></span>\[\begin{equation}
+A_{SE} = c_{SE}^T = 
+ \begin{bmatrix}
+0 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 0\\
+\end{bmatrix}
 \end{equation}\]</div>
-<p>We then need to determine <span class="math notranslate nohighlight">\(\bar{\rho}\)</span> the constant correlation.</p>
-<p>We have:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d0412022-07eb-49d7-87e0-24011c1406ff">
-<span class="eqno">(5)<a class="headerlink" href="#equation-d0412022-07eb-49d7-87e0-24011c1406ff" title="Permalink to this equation">#</a></span>\[\begin{equation}
-\bar{\rho} = \frac{2}{(N-1)N}\sum^{n-1}_{i=1} \sum^n_{j=i+1} \frac{\hat{\Sigma}_{i,j}}{\sqrt{\hat{\Sigma}_{i,i}\hat{\Sigma}_{jj}}}
+<div class="amsmath math notranslate nohighlight" id="equation-0dd1db5d-a2a4-452a-8393-2f9f3aa7157a">
+<span class="eqno">(14)<a class="headerlink" href="#equation-0dd1db5d-a2a4-452a-8393-2f9f3aa7157a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+A_{EU} = c_{EU}^T = 
+ \begin{bmatrix}
+0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1\\
+\end{bmatrix}
 \end{equation}\]</div>
-<p>Let’s implement these firsts elements in Python. The code below is directly inspired from <a class="reference external" href="https://github.com/WLM1ke/LedoitWolf">here</a>. Special thanks to its author.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span> 
+<p>Then:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-0f48e371-e055-4074-8649-318dd4d7b88f">
+<span class="eqno">(15)<a class="headerlink" href="#equation-0f48e371-e055-4074-8649-318dd4d7b88f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+A = \begin{bmatrix}
+A_{PE} \\
+A_{SE} \\
+A_{EU}
+\end{bmatrix}
+\end{equation}\]</div>
+<p>And <span class="math notranslate nohighlight">\(b_{PE} = c_{PE}^Tb\)</span>, <span class="math notranslate nohighlight">\(b_{SE} = c_{SE}^Tb\)</span> and <span class="math notranslate nohighlight">\(b_{EU} = c_{EU}^Tb\)</span> such that:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-6f096de4-386d-434d-8934-ec3849da35f9">
+<span class="eqno">(16)<a class="headerlink" href="#equation-6f096de4-386d-434d-8934-ec3849da35f9" title="Permalink to this equation">#</a></span>\[\begin{equation}
+b = \begin{bmatrix}
+b_{PE} \\
+b_{SE} \\
+b_{EU}
+\end{bmatrix}
+\end{equation}\]</div>
+<p>Again, we can start to implement the constraints specifications in Python:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">A_sectors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">s_1</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">s_2</span><span class="o">.</span><span class="n">T</span><span class="p">])</span>
 
-<span class="nd">@dataclass</span> 
-<span class="k">class</span> <span class="nc">LedoitWolf</span><span class="p">:</span>
-  <span class="n">R</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="c1"># returns of t observation of n stocks</span>
+<span class="n">b_1</span> <span class="o">=</span> <span class="n">s_1</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">b</span>
+<span class="n">b_2</span> <span class="o">=</span> <span class="n">s_2</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">b</span> 
+<span class="n">b_sectors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">b_1</span><span class="p">,</span> <span class="n">b_2</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Then, let’s create a new method integrating the energy-system neutrality constraint:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qpsolvers</span> <span class="kn">import</span> <span class="n">solve_qp</span>
 
-  <span class="k">def</span> <span class="nf">get_shrinkage</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
-    <span class="c1"># sample covariance</span>
-    <span class="n">t</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">R</span><span class="o">.</span><span class="n">shape</span>
-    <span class="n">R_bar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">R</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">keepdims</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
-    <span class="n">Sigma_hat</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">R</span> <span class="o">-</span> <span class="n">R_bar</span><span class="p">)</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">R</span> <span class="o">-</span> <span class="n">R_bar</span><span class="p">)</span> <span class="o">/</span> <span class="n">t</span>
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">ThresholdApproach</span><span class="p">(</span><span class="n">LowCarbonStrategy</span><span class="p">):</span>
 
-    <span class="c1"># rho_bar</span>
-    <span class="n">var</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">Sigma_hat</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">sqrt_var</span> <span class="o">=</span> <span class="n">var</span> <span class="o">**</span> <span class="mf">0.5</span> 
-    <span class="n">unit_cor_var</span> <span class="o">=</span> <span class="n">sqrt_var</span> <span class="o">@</span> <span class="n">sqrt_var</span><span class="o">.</span><span class="n">T</span>
-    <span class="n">rho_bar</span> <span class="o">=</span> <span class="p">((</span><span class="n">Sigma_hat</span> <span class="o">/</span> <span class="n">unit_cor_var</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">-</span> <span class="n">n</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+  <span class="k">def</span> <span class="nf">get_portfolio</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reduction_rate</span><span class="p">:</span><span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CarbonPortfolio</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;QP Formulation&quot;&quot;&quot;</span>
+    <span class="n">x_optim</span> <span class="o">=</span> <span class="n">solve_qp</span><span class="p">(</span><span class="n">P</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span><span class="p">,</span>
+              <span class="n">q</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">),</span> 
+              <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">))</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> 
+              <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">]),</span>
+              <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">CI</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="c1"># resulting WACI</span>
+              <span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">reduction_rate</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">CI</span><span class="p">,</span> <span class="c1"># reduction</span>
+              <span class="n">lb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)),</span>
+              <span class="n">ub</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)),</span>
+              <span class="n">solver</span> <span class="o">=</span> <span class="s1">&#39;osqp&#39;</span><span class="p">)</span>
     
-    <span class="c1"># shrinkage target </span>
-    <span class="n">shrinkage_target</span> <span class="o">=</span> <span class="n">rho_bar</span> <span class="o">*</span> <span class="n">unit_cor_var</span>
-    <span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">shrinkage_target</span><span class="p">,</span> <span class="n">var</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">rho_bar</span><span class="p">,</span> <span class="n">shrinkage_target</span>
-</pre></div>
-</div>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">R_example</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.0309</span><span class="p">,</span> <span class="mf">0.0056</span><span class="p">,</span> <span class="mf">0.0011</span><span class="p">],</span>
-     <span class="p">[</span><span class="mf">0.0056</span><span class="p">,</span> <span class="mf">0.0739</span><span class="p">,</span> <span class="mf">0.0148</span><span class="p">],</span> 
-     <span class="p">[</span><span class="mf">0.0011</span><span class="p">,</span> <span class="mf">0.0148</span><span class="p">,</span> <span class="mf">0.0489</span><span class="p">]])</span>
-
-<span class="n">test</span> <span class="o">=</span> <span class="n">LedoitWolf</span><span class="p">(</span><span class="n">R</span> <span class="o">=</span> <span class="n">R_example</span><span class="p">)</span>
-<span class="n">test</span><span class="o">.</span><span class="n">get_shrinkage</span><span class="p">()</span>
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">-</span><span class="mf">0.4713495148122541</span><span class="p">,</span>
- <span class="n">array</span><span class="p">([[</span> <span class="mf">0.00017204</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0001871</span> <span class="p">,</span> <span class="o">-</span><span class="mf">0.00012425</span><span class="p">],</span>
-        <span class="p">[</span><span class="o">-</span><span class="mf">0.0001871</span> <span class="p">,</span>  <span class="mf">0.00091582</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.00028668</span><span class="p">],</span>
-        <span class="p">[</span><span class="o">-</span><span class="mf">0.00012425</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.00028668</span><span class="p">,</span>  <span class="mf">0.00040393</span><span class="p">]]))</span>
-</pre></div>
-</div>
-</section>
-<section id="finding-the-shrinkage-intensity">
-<h3>Finding the Shrinkage Intensity<a class="headerlink" href="#finding-the-shrinkage-intensity" title="Permalink to this headline">#</a></h3>
-<p>Then, the problem is now to estimate the optimal value of <span class="math notranslate nohighlight">\(\delta\)</span>. Ledoit and Wolf consider the quadratic loss <span class="math notranslate nohighlight">\(L(\delta)\)</span> defined as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2e4be5ca-ae75-4097-a042-827953dc6142">
-<span class="eqno">(6)<a class="headerlink" href="#equation-2e4be5ca-ae75-4097-a042-827953dc6142" title="Permalink to this equation">#</a></span>\[\begin{equation}
-L(\delta) = ||\tilde{\Sigma}_{\delta}- \Sigma||^2
-\end{equation}\]</div>
-<p>That is, the norm of the difference between the shrinkage estimator <span class="math notranslate nohighlight">\(\tilde{\Sigma}_{\delta}\)</span>, with <span class="math notranslate nohighlight">\(\Sigma\)</span> the true covariance matrix.</p>
-<p>They show that the optimal shrinkage intensity <span class="math notranslate nohighlight">\(\delta\)</span>, solving the minimization problem <span class="math notranslate nohighlight">\(\delta^* = arg min \mathbb{E}[L(\delta)]\)</span> is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f7921153-7bcc-4217-a01b-6b02c0a27c7e">
-<span class="eqno">(7)<a class="headerlink" href="#equation-f7921153-7bcc-4217-a01b-6b02c0a27c7e" title="Permalink to this equation">#</a></span>\[\begin{equation}
-\delta^* = max(0, min(\frac{1}{T} \frac{\pi - \rho}{\gamma}, 1))
-\end{equation}\]</div>
-<p>Where:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-79ce46b7-24b6-439a-a0ca-60a0e6aad77a">
-<span class="eqno">(8)<a class="headerlink" href="#equation-79ce46b7-24b6-439a-a0ca-60a0e6aad77a" title="Permalink to this equation">#</a></span>\[\begin{equation}
-\pi = \sum_{i=1}^n \sum_{j=1}^n \pi_{i,j}
-\end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-ac16829f-72de-490c-87d8-1f7b1b44da83">
-<span class="eqno">(9)<a class="headerlink" href="#equation-ac16829f-72de-490c-87d8-1f7b1b44da83" title="Permalink to this equation">#</a></span>\[\begin{equation}
-\rho = \sum_{i = 1}^n \pi_{i,i} + \sum_{i=1}^n \sum_{j \neq i} \frac{\bar{\rho}}{2}(\sqrt{\frac{\hat{\Sigma}_{j,j}}{\hat{\Sigma}_{i,i}}} \eta_{i,j} + \sqrt{\frac{\hat{\Sigma}_{i,i}}{\hat{\Sigma}_{j,j}}} \eta_{j,i})
-\end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-f76db490-a35d-4d88-aa38-09e98d7df773">
-<span class="eqno">(10)<a class="headerlink" href="#equation-f76db490-a35d-4d88-aa38-09e98d7df773" title="Permalink to this equation">#</a></span>\[\begin{equation}
-\gamma = \sum^n_{i = 1} \sum^n_{j=1} (\hat{\Phi}_{i,j} - \hat{\Sigma}_{i,j})^2
-\end{equation}\]</div>
-<p>with:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2926f692-af3b-4047-8ceb-6f8c9869f941">
-<span class="eqno">(11)<a class="headerlink" href="#equation-2926f692-af3b-4047-8ceb-6f8c9869f941" title="Permalink to this equation">#</a></span>\[\begin{equation}
-\pi_{i,j} = \frac{1}{T} \sum^n_{t=1}((R_{i,t} - \bar{R}_i)(R_{j,t} - \bar{R}_j) - \hat{\Sigma}_{i,j})^2
-\end{equation}\]</div>
-<p>and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-53b05e75-b809-4eba-888a-21cfa9258128">
-<span class="eqno">(12)<a class="headerlink" href="#equation-53b05e75-b809-4eba-888a-21cfa9258128" title="Permalink to this equation">#</a></span>\[\begin{equation}
-\eta_{i,j} = \frac{1}{T} \sum^n_{t=1} ((R_{i,t} - \bar{R}_i)^2 - \hat{\Sigma}_{i,j})((R_{i,t} - \bar{R}_i)(R_{j,t} - \bar{R}_j) - \hat{\Sigma}_{i,j})
-\end{equation}\]</div>
-<p>Let’s implement the rest of the <code class="docutils literal notranslate"><span class="pre">get_shrinkage</span></code> method:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span> 
-
-<span class="nd">@dataclass</span> 
-<span class="k">class</span> <span class="nc">LedoitWolf</span><span class="p">:</span>
-  <span class="n">R</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="c1"># returns of t observation of n stocks</span>
-
-  <span class="k">def</span> <span class="nf">get_shrinkage</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
-    <span class="c1"># sample covariance</span>
-    <span class="n">t</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">R</span><span class="o">.</span><span class="n">shape</span>
-    <span class="n">R_bar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">R</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">keepdims</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
-    <span class="n">Sigma_hat</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">R</span> <span class="o">-</span> <span class="n">R_bar</span><span class="p">)</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">R</span> <span class="o">-</span> <span class="n">R_bar</span><span class="p">)</span> <span class="o">/</span> <span class="n">t</span>
-
-    <span class="c1"># rho_bar</span>
-    <span class="n">var</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">Sigma_hat</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">sqrt_var</span> <span class="o">=</span> <span class="n">var</span> <span class="o">**</span> <span class="mf">0.5</span> 
-    <span class="n">unit_cor_var</span> <span class="o">=</span> <span class="n">sqrt_var</span> <span class="o">@</span> <span class="n">sqrt_var</span><span class="o">.</span><span class="n">T</span>
-    <span class="n">rho_bar</span> <span class="o">=</span> <span class="p">((</span><span class="n">Sigma_hat</span> <span class="o">/</span> <span class="n">unit_cor_var</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">-</span> <span class="n">n</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">CarbonPortfolio</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x_optim</span><span class="p">,</span> 
+                        <span class="n">Sigma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span><span class="p">,</span> <span class="n">CI</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">CI</span><span class="p">)</span>
     
-    <span class="c1"># shrinkage target </span>
-    <span class="n">shrinkage_target</span> <span class="o">=</span> <span class="n">rho_bar</span> <span class="o">*</span> <span class="n">unit_cor_var</span>
-    <span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">shrinkage_target</span><span class="p">,</span> <span class="n">var</span><span class="p">)</span>
+  <span class="k">def</span> <span class="nf">get_portfolio_with_sector_constraints</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reduction_rate</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">s_j</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="n">sector_constraints</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CarbonPortfolio</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;QP Formulation&quot;&quot;&quot;</span>
+    <span class="n">x_optim</span> <span class="o">=</span> <span class="n">solve_qp</span><span class="p">(</span><span class="n">P</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span><span class="p">,</span>
+              <span class="n">q</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">),</span> 
+              <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">))</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> 
+              <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">]),</span>
+              <span class="n">G</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">CI</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">s_j</span><span class="p">]),</span> <span class="c1"># nested G</span>
+              <span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">reduction_rate</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">CI</span><span class="p">,</span> <span class="n">sector_constraints</span><span class="p">]),</span> <span class="c1"># reduction + sector constraints</span>
+              <span class="n">lb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)),</span>
+              <span class="n">ub</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)),</span>
+              <span class="n">solver</span> <span class="o">=</span> <span class="s1">&#39;osqp&#39;</span><span class="p">)</span>
 
-    <span class="c1"># pi</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">R</span> <span class="o">-</span> <span class="n">R_bar</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
-    <span class="n">pi_mat</span> <span class="o">=</span> <span class="p">((</span><span class="n">y</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">y</span><span class="p">)</span> <span class="o">/</span> <span class="n">t</span> <span class="o">-</span> <span class="n">Sigma_hat</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> 
-    <span class="n">pi</span> <span class="o">=</span> <span class="n">pi_mat</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-
-    <span class="c1"># rho </span>
-    <span class="n">eta_mat</span> <span class="o">=</span> <span class="p">(((</span><span class="bp">self</span><span class="o">.</span><span class="n">R</span> <span class="o">-</span> <span class="n">R_bar</span><span class="p">)</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">R</span> <span class="o">-</span> <span class="n">R_bar</span><span class="p">))</span> <span class="o">/</span> <span class="n">t</span> <span class="o">-</span> <span class="n">var</span> <span class="o">*</span> <span class="n">Sigma_hat</span>
-    <span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">eta_mat</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-    <span class="n">rho</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">pi_mat</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-        <span class="o">+</span> <span class="n">rho_bar</span> <span class="o">*</span> <span class="p">(</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">sqrt_var</span> <span class="o">@</span> <span class="n">sqrt_var</span><span class="o">.</span><span class="n">T</span> <span class="o">*</span> <span class="n">eta_mat</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-    <span class="p">)</span>
-
-    <span class="c1"># gamma </span>
-    <span class="n">gamma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">Sigma_hat</span> <span class="o">-</span> <span class="n">shrinkage_target</span><span class="p">,</span> <span class="s2">&quot;fro&quot;</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
-
-    <span class="c1"># shrinkage intensity</span>
-    <span class="n">shrinkage_intensity</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="n">pi</span> <span class="o">-</span> <span class="n">rho</span><span class="p">)</span> <span class="o">/</span> <span class="n">gamma</span> <span class="o">/</span> <span class="n">t</span><span class="p">))</span>
-
-    <span class="c1"># new sigma</span>
-    <span class="n">Sigma</span> <span class="o">=</span> <span class="n">shrinkage_intensity</span> <span class="o">*</span> <span class="n">shrinkage_target</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">shrinkage_intensity</span><span class="p">)</span> <span class="o">*</span> <span class="n">Sigma_hat</span>
-
-    <span class="k">return</span>  <span class="n">Sigma</span><span class="p">,</span> <span class="n">rho_bar</span><span class="p">,</span> <span class="n">shrinkage_intensity</span>
+    <span class="k">return</span> <span class="n">CarbonPortfolio</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x_optim</span><span class="p">,</span> 
+                           <span class="n">Sigma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span><span class="p">,</span> <span class="n">CI</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">CI</span><span class="p">)</span>
+    
+  <span class="k">def</span> <span class="nf">get_portfolio_with_sector_neutrality</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reduction_rate</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">A_sectors</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="n">b_sectors</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">):</span>
+      <span class="n">x_optim</span> <span class="o">=</span> <span class="n">solve_qp</span><span class="p">(</span><span class="n">P</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span><span class="p">,</span>
+            <span class="n">q</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">),</span> 
+            <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">))</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">A_sectors</span><span class="p">]),</span> 
+            <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="n">b_sectors</span><span class="p">]),</span>
+            <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">CI</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> 
+            <span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">reduction_rate</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">CI</span><span class="p">,</span> <span class="c1"># reduction rate</span>
+            <span class="n">lb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)),</span>
+            <span class="n">ub</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)),</span>
+            <span class="n">solver</span> <span class="o">=</span> <span class="s1">&#39;osqp&#39;</span><span class="p">)</span>
+      
+      <span class="k">return</span> <span class="n">CarbonPortfolio</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x_optim</span><span class="p">,</span> 
+                           <span class="n">Sigma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span><span class="p">,</span> <span class="n">CI</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">CI</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">test</span> <span class="o">=</span> <span class="n">LedoitWolf</span><span class="p">(</span><span class="n">R</span> <span class="o">=</span> <span class="n">R_example</span><span class="p">)</span>
-<span class="n">test</span><span class="o">.</span><span class="n">get_shrinkage</span><span class="p">()</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">low_carbon_portfolio</span> <span class="o">=</span> <span class="n">ThresholdApproach</span><span class="p">(</span><span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> 
+                                         <span class="n">CI</span> <span class="o">=</span> <span class="n">CI</span><span class="p">,</span>
+                                         <span class="n">Sigma</span> <span class="o">=</span> <span class="n">Sigma</span><span class="p">)</span>
+
+<span class="n">low_carbon_portfolio</span><span class="o">.</span><span class="n">get_portfolio_with_sector_neutrality</span><span class="p">(</span><span class="n">reduction_rate</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+                                                           <span class="n">A_sectors</span> <span class="o">=</span> <span class="n">A_sectors</span><span class="p">,</span>
+                                                           <span class="n">b_sectors</span> <span class="o">=</span> <span class="n">b_sectors</span><span class="p">)</span><span class="o">.</span><span class="n">x</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">array</span><span class="p">([[</span> <span class="mf">0.00017204</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0001871</span> <span class="p">,</span> <span class="o">-</span><span class="mf">0.00012425</span><span class="p">],</span>
-        <span class="p">[</span><span class="o">-</span><span class="mf">0.0001871</span> <span class="p">,</span>  <span class="mf">0.00091582</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.00028668</span><span class="p">],</span>
-        <span class="p">[</span><span class="o">-</span><span class="mf">0.00012425</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.00028668</span><span class="p">,</span>  <span class="mf">0.00040393</span><span class="p">]]),</span>
- <span class="o">-</span><span class="mf">0.4713495148122541</span><span class="p">,</span>
- <span class="mi">1</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">array</span><span class="p">([</span> <span class="mf">2.33515514e-01</span><span class="p">,</span>  <span class="mf">2.41846019e-01</span><span class="p">,</span>  <span class="mf">1.25623128e-01</span><span class="p">,</span>  <span class="mf">4.43874304e-02</span><span class="p">,</span>
+        <span class="mf">9.29058752e-02</span><span class="p">,</span>  <span class="mf">2.59989434e-01</span><span class="p">,</span>  <span class="mf">1.73260956e-03</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.53326324e-09</span><span class="p">])</span>
 </pre></div>
 </div>
-</section>
 </section>
 <section id="your-turn">
 <h2>Your Turn!<a class="headerlink" href="#your-turn" title="Permalink to this headline">#</a></h2>
-<p>In this part, you will be asked to build your first mean variance portfolio.</p>
-<p>First, download the set of data we will work with for the rest of this course:</p>
+<ol class="arabic simple">
+<li><p>First, download the set of data we will work with for the rest of this course:</p></li>
+</ol>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://github.com/shokru/carbon_emissions/blob/main/data_fin.xlsx?raw=true&#39;</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 </pre></div>
 </div>
-<section id="exercise-1">
-<h3>Exercise 1<a class="headerlink" href="#exercise-1" title="Permalink to this headline">#</a></h3>
-<ol class="arabic simple">
-<li><p>Compute the sample covariance matrix</p></li>
-<li><p>Compute the sample expected return</p></li>
-<li><p>Build a mean-variance portfolio, with <span class="math notranslate nohighlight">\(\gamma = 0.5\)</span></p></li>
+<ol class="arabic simple" start="2">
+<li><p>Using the data downloaded, compute the carbon intensity (emissions / market cap)</p></li>
+<li><p>Retrive the sector for each stock in the data. You can easily obtain it with:</p></li>
 </ol>
-</section>
-<section id="exercise-2">
-<h3>Exercise 2<a class="headerlink" href="#exercise-2" title="Permalink to this headline">#</a></h3>
-<p>Same as Exercise 1, but with an estimate of the covariance matrix with the Ledoit-Wolf shrinkage approach.</p>
-</section>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">yfinance</span> <span class="k">as</span> <span class="nn">yf</span>
+
+<span class="n">tickerdata</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">Ticker</span><span class="p">(</span><span class="s1">&#39;TSLA&#39;</span><span class="p">)</span> <span class="c1">#the tickersymbol for Tesla</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">tickerdata</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;sector&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Compute an initial capitalization-weighted benchmark weights vector <span class="math notranslate nohighlight">\(b\)</span> using the market capitalization value</p></li>
+<li><p>Implement a low-carbon strategy with the threshold approach and <span class="math notranslate nohighlight">\(\mathfrak{R} = 0.5\)</span></p></li>
+<li><p>Compare the sectors weights in <span class="math notranslate nohighlight">\(b\)</span> and <span class="math notranslate nohighlight">\(x^*\)</span></p></li>
+<li><p>Implement the same low-carbon strategy but with a sector constraint of your choice. Did you find a solution? Compare the TE between this constrained solution and the one without sector constraints.</p></li>
+</ol>
 </section>
 </section>
 
@@ -622,18 +871,20 @@ L(\delta) = ||\tilde{\Sigma}_{\delta}- \Sigma||^2
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#covariance-matrix-and-optimized-portfolio-stability-issue">Covariance Matrix and Optimized Portfolio Stability Issue</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shrinkage-methods-the-ledoit-wolf-approach">Shrinkage Methods: the Ledoit-Wolf Approach</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-the-shrinkage-target">Finding the Shrinkage Target</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-the-shrinkage-intensity">Finding the Shrinkage Intensity</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Project 1: Consistent Portfolio Decarbonization</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#oecm-sectors">OECM Sectors</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#primary-and-secondary-energy-sectors">Primary and Secondary Energy Sectors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#end-use-activities-sectors">End-Use Activities Sectors</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#your-turn">Your Turn!</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-system-consistent-decarbonization">Energy-System Consistent Decarbonization</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weights-constraint">Weights Constraint</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neutrality">Neutrality</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#your-turn">Your Turn!</a></li>
 </ul>
 </li>
 </ul>
+
   </nav></div>
 
 </div></div>

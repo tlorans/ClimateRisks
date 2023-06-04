@@ -48,7 +48,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Towards a Net Zero Strategy" href="net_zero.html" />
-    <link rel="prev" title="Cross-Sector Reponsibility for Emissions" href="emissions.html" />
+    <link rel="prev" title="Net Zero Investing with ChatGPT" href="../index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -127,19 +127,13 @@
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="intro.html">Part 0: Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="climaterisk.html">Economics and Physics of Climate Risk: The Tragedy of the Horizon</a></li>
-<li class="toctree-l1"><a class="reference internal" href="emissions.html">Cross-Sector Reponsibility for Emissions</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Portfolio Decarbonization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="net_zero.html">Towards a Net Zero Strategy</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../climate_investing/net_zero_investing.html">Part 1: Net Zero Investing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../climate_investing/net_zero_investing.html">Net Zero Investing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../climate_investing/portfolio_decarbonization_pathway.html">Portfolio Decarbonization Pathway</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../climate_investing/portfolio_alignment.html">Portfolio Alignment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../climate_investing/self_decarbonization.html">Net Zero Backtesting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../climate_investing/integratingtransition.html">Integrating the Transition Dimension</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../climate_data/climate_data.html">Part 2: Net Zero Metrics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../climate_data/carbon_budget.html">Carbon Budget, Target and Trend</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../climate_data/emissions_metrics.html">Duration, Gap and Slope</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 </ul>
 
@@ -289,7 +283,6 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#portfolio-optimization-in-the-context-of-a-benchmark">Portfolio Optimization in the Context of a Benchmark</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-decarbonization-optimization-problem">The Decarbonization Optimization Problem</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sector-consistent-decarbonization">Sector-Consistent Decarbonization</a></li>
 </ul>
             </nav>
         </div>
@@ -327,23 +320,23 @@ In such an increasing climate risk awaraness, climate investing grew up as a spe
 \end{equation*}\]</div>
 <p>Without any further constraint, the optimal solution <span class="math notranslate nohighlight">\(x^*\)</span> will be equal to the benchmark weights <span class="math notranslate nohighlight">\(b\)</span>. This is the case of a perfect replication strategy. An enhanced or tilted version will add further constraints, depending on the objective of the strategy (decarbonization for example). We have a few more steps to consider before finding our QP formulation parameters.</p>
 <p>First, let’s recall that:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-41f8740c-d597-417b-b3e3-d8d22ac5d061">
-<span class="eqno">(1)<a class="headerlink" href="#equation-41f8740c-d597-417b-b3e3-d8d22ac5d061" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-28a0c2f1-b12c-4007-8fa4-4456174170c8">
+<span class="eqno">(1)<a class="headerlink" href="#equation-28a0c2f1-b12c-4007-8fa4-4456174170c8" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sigma^2(x|b) = (x - b)^T \Sigma (x -b)
 \end{equation}\]</div>
 <p>and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a494bdc3-1a72-49de-9ead-f038231d9464">
-<span class="eqno">(2)<a class="headerlink" href="#equation-a494bdc3-1a72-49de-9ead-f038231d9464" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-22f4251e-584b-4304-b6ff-40e22e4a262f">
+<span class="eqno">(2)<a class="headerlink" href="#equation-22f4251e-584b-4304-b6ff-40e22e4a262f" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mu(x|b) = (x -b)^T \mu
 \end{equation}\]</div>
 <p>If we replace <span class="math notranslate nohighlight">\(\sigma^2(x|b)\)</span> and <span class="math notranslate nohighlight">\(\mu(x|b)\)</span> in our objective function, we get:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-43d6f6f8-fe79-436a-a1f7-9106fdc4f5c1">
-<span class="eqno">(3)<a class="headerlink" href="#equation-43d6f6f8-fe79-436a-a1f7-9106fdc4f5c1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ee35e079-0aad-490e-b41d-aaf03beb2173">
+<span class="eqno">(3)<a class="headerlink" href="#equation-ee35e079-0aad-490e-b41d-aaf03beb2173" title="Permalink to this equation">#</a></span>\[\begin{equation}
 * = \frac{1}{2}(x-b)^T \Sigma (x -b) - \gamma (x -b)^T \mu
 \end{equation}\]</div>
 <p>With further developments, you end up with the following QP objective function formulation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-65e7f7a4-53bf-4cc5-b1f3-72f32ca51958">
-<span class="eqno">(4)<a class="headerlink" href="#equation-65e7f7a4-53bf-4cc5-b1f3-72f32ca51958" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-64f6a4f5-ad11-46b1-8593-aff6513d9ab6">
+<span class="eqno">(4)<a class="headerlink" href="#equation-64f6a4f5-ad11-46b1-8593-aff6513d9ab6" title="Permalink to this equation">#</a></span>\[\begin{equation}
 * = \frac{1}{2} x^T \Sigma x - x^T(\gamma \mu + \Sigma b)
 \end{equation}\]</div>
 <p>We have exactly the same QP problem than with a long-only mean-variance portfolio, except that <span class="math notranslate nohighlight">\(q = -(\gamma \mu + \Sigma b)\)</span>.</p>
@@ -354,19 +347,19 @@ In such an increasing climate risk awaraness, climate investing grew up as a spe
 With the threshold approach, the objective is to minimize the tracking error with the benchmark while imposing a reduction <span class="math notranslate nohighlight">\(\mathfrak{R}\)</span> in terms of carbon intensity.</p>
 <p>In practice, implementing such approach involves the weighted-average carbon intensity (WACI) computation and the introduction of a new constraint in a portfolio optimization problem with the presence of a benchmark (Roncalli, 2013). In this part, we first define the WACI, and then introduce the threshold approach as an additional constraint to the portfolio optimization with a benchmark problem seen in the previous part.</p>
 <p>The weighted-average carbon intensity (WACI) of the benchmark is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-57085701-5a2e-4b04-85cf-47a646f04c82">
-<span class="eqno">(5)<a class="headerlink" href="#equation-57085701-5a2e-4b04-85cf-47a646f04c82" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ce5261e7-eef3-4055-8a84-4f602a5412be">
+<span class="eqno">(5)<a class="headerlink" href="#equation-ce5261e7-eef3-4055-8a84-4f602a5412be" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI(b) = b^T CI
 \end{equation}\]</div>
 <p>With <span class="math notranslate nohighlight">\(CI = (CI_1, ..., CI_n)\)</span> the vector of carbon intensities.</p>
 <p>The same is for the WACI of the portfolio:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3b774c83-5c36-432c-9d3e-a0145c87b08c">
-<span class="eqno">(6)<a class="headerlink" href="#equation-3b774c83-5c36-432c-9d3e-a0145c87b08c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-1085a371-ab99-4bec-a731-41ac340db2ad">
+<span class="eqno">(6)<a class="headerlink" href="#equation-1085a371-ab99-4bec-a731-41ac340db2ad" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI(x) = x^T CI
 \end{equation}\]</div>
 <p>The low-carbon strategy involves the reduction <span class="math notranslate nohighlight">\(\mathfrak{R}\)</span> of the portfolio’s carbon intensity <span class="math notranslate nohighlight">\(CI(x)\)</span> compared to the benchmark’s carbon intensity <span class="math notranslate nohighlight">\(CI(b)\)</span>. It can be viewed as the following constraint (Roncalli, 2023):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-bab6d96f-64b2-4ff1-839b-d0e269d3fcac">
-<span class="eqno">(7)<a class="headerlink" href="#equation-bab6d96f-64b2-4ff1-839b-d0e269d3fcac" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-50ab6c7b-725f-462e-a784-83f4e0f02761">
+<span class="eqno">(7)<a class="headerlink" href="#equation-50ab6c7b-725f-462e-a784-83f4e0f02761" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI(x) \leq (1 - \mathfrak{R})CI(b)
 \end{equation}\]</div>
 <p>The optimization problem becomes:</p>
@@ -411,91 +404,6 @@ CI(x) \leq (1 - \mathfrak{R})CI(b)
 </figcaption>
 </figure>
 </section>
-<section id="sector-consistent-decarbonization">
-<h2>Sector-Consistent Decarbonization<a class="headerlink" href="#sector-consistent-decarbonization" title="Permalink to this headline">#</a></h2>
-<p>In the previous sub-section, the portfolio decarbonization is conducted with other constraint than decreasing the portfolio’s WACI.</p>
-<p>However, we have seen in the previous part that a few sectors are responsible for most of energy-related emissions, that is a good first-order approximation of anthropogenic carbon emissions.</p>
-<p>A sector-consistent portfolio decarbonization should ensure that high-emitting stocks are excluded within each of these impactful sectors, rather than switching Utilities stocks for Information &amp; Technology ones for example.</p>
-<p>To do so, we can impose a sector neutrality (we follow Roncalli (2023) as a reference for sector neutrality in the optimization problem), by keeping the sectors weights the same as the initial benchmark.</p>
-<p>It means that:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0c02287e-277d-4c2d-87f4-d01709278199">
-<span class="eqno">(8)<a class="headerlink" href="#equation-0c02287e-277d-4c2d-87f4-d01709278199" title="Permalink to this equation">#</a></span>\[\begin{equation}
-\sum_{i \in Sector_j}x_i = \sum_{i \in Sector_j}b_i
-\end{equation}\]</div>
-<p>In the QP problem, this can be included in the <span class="math notranslate nohighlight">\(Ax = b\)</span> equality constraint. We have:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a98f48bd-7ae8-4412-9852-574a27c3ab98">
-<span class="eqno">(9)<a class="headerlink" href="#equation-a98f48bd-7ae8-4412-9852-574a27c3ab98" title="Permalink to this equation">#</a></span>\[\begin{equation}
-A_{Energy} = s_{Energy}^T
-\end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-d54b01a3-77e7-4bf4-bc94-9a17d540ab23">
-<span class="eqno">(10)<a class="headerlink" href="#equation-d54b01a3-77e7-4bf4-bc94-9a17d540ab23" title="Permalink to this equation">#</a></span>\[\begin{equation}
-A_{Utilities} = s_{Utilities}^T
-\end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-6f6939db-b324-4770-a068-fcb674a10836">
-<span class="eqno">(11)<a class="headerlink" href="#equation-6f6939db-b324-4770-a068-fcb674a10836" title="Permalink to this equation">#</a></span>\[\begin{equation}
-A_{Cement} = s_{Cement}^T
-\end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-919cd56e-6de2-46c1-b675-b679144e9d72">
-<span class="eqno">(12)<a class="headerlink" href="#equation-919cd56e-6de2-46c1-b675-b679144e9d72" title="Permalink to this equation">#</a></span>\[\begin{equation}
-A_{Steel} = s_{Steel}^T
-\end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-b636a876-b314-4b67-9a5d-3198de4d2736">
-<span class="eqno">(13)<a class="headerlink" href="#equation-b636a876-b314-4b67-9a5d-3198de4d2736" title="Permalink to this equation">#</a></span>\[\begin{equation}
-A_{Chemicals} = s_{Chemicals}^T
-\end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-4404764d-b066-4400-8b03-7310b436812a">
-<span class="eqno">(14)<a class="headerlink" href="#equation-4404764d-b066-4400-8b03-7310b436812a" title="Permalink to this equation">#</a></span>\[\begin{equation}
-A_{Textile \; \&amp; \; Leather} = s_{Textile \; \&amp; \; Leather}^T
-\end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-feb5731d-538e-44e9-a84f-a7a3f86a4801">
-<span class="eqno">(15)<a class="headerlink" href="#equation-feb5731d-538e-44e9-a84f-a7a3f86a4801" title="Permalink to this equation">#</a></span>\[\begin{equation}
-A_{Aluminium} = s_{Aluminium}^T
-\end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-bab60df5-7918-4477-b021-eed81c9b9abc">
-<span class="eqno">(16)<a class="headerlink" href="#equation-bab60df5-7918-4477-b021-eed81c9b9abc" title="Permalink to this equation">#</a></span>\[\begin{equation}
-A_{Food \; Processing} = s_{Food \; Processing}^T
-\end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-0815f38b-92d0-42e8-9582-6cede315e141">
-<span class="eqno">(17)<a class="headerlink" href="#equation-0815f38b-92d0-42e8-9582-6cede315e141" title="Permalink to this equation">#</a></span>\[\begin{equation}
-A_{Transport} = s_{Transport}^T
-\end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-ab420690-b570-4e8f-8bae-7fe1fdfb734d">
-<span class="eqno">(18)<a class="headerlink" href="#equation-ab420690-b570-4e8f-8bae-7fe1fdfb734d" title="Permalink to this equation">#</a></span>\[\begin{equation}
-A_{Others} = s_{Others}^T
-\end{equation}\]</div>
-<p>Then:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f859e245-fdba-4bb0-800f-c082840aeeac">
-<span class="eqno">(19)<a class="headerlink" href="#equation-f859e245-fdba-4bb0-800f-c082840aeeac" title="Permalink to this equation">#</a></span>\[\begin{equation}
-A = \begin{bmatrix}
-A_{Energy} + A_{Utilities} \\
-A_{Cement} \\
-A_{Steel} \\
-A_{Chemicals} \\
-A_{Textile \; \&amp; \; Leather} \\
-A_{Aluminium} \\
-A_{Buildings} \\
-A_{Food \; Processing} \\
-A_{Transport} \\
-A_{Others}
-\end{bmatrix}
-\end{equation}\]</div>
-<p>And <span class="math notranslate nohighlight">\(b_{Energy} = s_{Energy}^Tb\)</span>, <span class="math notranslate nohighlight">\(b_{Cement} = s_{Cement}^Tb\)</span>, <span class="math notranslate nohighlight">\(b_{Steel} = s_{Steel}^Tb\)</span>, and so on, such that:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4ec3e030-da62-464f-8c58-250d6997e5c0">
-<span class="eqno">(20)<a class="headerlink" href="#equation-4ec3e030-da62-464f-8c58-250d6997e5c0" title="Permalink to this equation">#</a></span>\[\begin{equation}
-b = \begin{bmatrix}
-b_{Energy} + b_{Utilities} \\
-b_{Cement} \\
-b_{Steel} \\
-b_{Chemicals} \\
-b_{Textile \; \&amp; \; Leather} \\
-b_{Aluminium} \\
-b_{Buildings} \\
-b_{Food \; Processing} \\
-b_{Transport} \\
-b_{Others}
-\end{bmatrix}
-\end{equation}\]</div>
-</section>
 </section>
 
 
@@ -508,12 +416,12 @@ b_{Others}
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="emissions.html"
+       href="../index.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Cross-Sector Reponsibility for Emissions</p>
+        <p class="prev-next-title">Net Zero Investing with ChatGPT</p>
       </div>
     </a>
     <a class="right-next"
@@ -542,7 +450,6 @@ b_{Others}
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#portfolio-optimization-in-the-context-of-a-benchmark">Portfolio Optimization in the Context of a Benchmark</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-decarbonization-optimization-problem">The Decarbonization Optimization Problem</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sector-consistent-decarbonization">Sector-Consistent Decarbonization</a></li>
 </ul>
   </nav></div>
 

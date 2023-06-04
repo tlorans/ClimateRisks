@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Climate Investing &#8212; Climate Risks in Finance 0.1 documentation</title>
+    <title>Net Zero Investing with ChatGPT &#8212; Climate Risks in Finance 0.1 documentation</title>
   
   
   
@@ -45,7 +45,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Part 0: Introduction" href="intro/intro.html" />
+    <link rel="next" title="Portfolio Decarbonization" href="intro/lowcarbon.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -124,19 +124,14 @@
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="intro/intro.html">Part 0: Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="intro/climaterisk.html">Economics and Physics of Climate Risk: The Tragedy of the Horizon</a></li>
-<li class="toctree-l1"><a class="reference internal" href="intro/emissions.html">Cross-Sector Reponsibility for Emissions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="intro/lowcarbon.html">Portfolio Decarbonization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="intro/net_zero.html">Towards a Net Zero Strategy</a></li>
-<li class="toctree-l1"><a class="reference internal" href="climate_investing/net_zero_investing.html">Part 1: Net Zero Investing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="climate_investing/net_zero_investing.html">Net Zero Investing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="climate_investing/portfolio_decarbonization_pathway.html">Portfolio Decarbonization Pathway</a></li>
 <li class="toctree-l1"><a class="reference internal" href="climate_investing/portfolio_alignment.html">Portfolio Alignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="climate_investing/project1.html">Project 1: Emissions Data Retrieval with ChatGPT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="climate_investing/self_decarbonization.html">Net Zero Backtesting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="climate_investing/integratingtransition.html">Integrating the Transition Dimension</a></li>
-<li class="toctree-l1"><a class="reference internal" href="climate_data/climate_data.html">Part 2: Net Zero Metrics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="climate_data/carbon_budget.html">Carbon Budget, Target and Trend</a></li>
-<li class="toctree-l1"><a class="reference internal" href="climate_data/emissions_metrics.html">Duration, Gap and Slope</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 </ul>
 
@@ -272,7 +267,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Climate Investing</h1>
+    <h1>Net Zero Investing with ChatGPT</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -286,84 +281,62 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="climate-investing">
-<h1>Climate Investing<a class="headerlink" href="#climate-investing" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="net-zero-investing-with-chatgpt">
+<h1>Net Zero Investing with ChatGPT<a class="headerlink" href="#net-zero-investing-with-chatgpt" title="Permalink to this headline">#</a></h1>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>This course is under heavy development</p>
 </div>
-<p>In this course, I propose a step-by-step implementation of a dynamic portfolio decarbonization strategy with Python, following the methodology proposed by Barahhou et al. (2022) <span id="id1">[<a class="reference internal" href="references.html#id16" title="Ines Barahhou, Mohamed Ben Slimane, Thierry Roncalli, and Noureddine Oulid Azouz. Net zero investment portfolios-part 1. the comprehensive integrated approach. The Comprehensive Integrated Approach (October 13, 2022), 2022.">BBSROA22</a>]</span>. Please follow along and try to implement the scripts on your side.</p>
+<p>In this course, I propose a step-by-step implementation of a net zero strategy with Python, following the methodology proposed by Barahhou et al. (2022) <span id="id1">[<a class="reference internal" href="references.html#id16" title="Ines Barahhou, Mohamed Ben Slimane, Thierry Roncalli, and Noureddine Oulid Azouz. Net zero investment portfolios-part 1. the comprehensive integrated approach. The Comprehensive Integrated Approach (October 13, 2022), 2022.">BBSROA22</a>]</span>, using ChatGPT for estimating the underlying data.</p>
+<p>Before starting this course, be sure to familiarize yourself with ChatGPT and the open-source development framework <code class="docutils literal notranslate"><span class="pre">LangChain</span></code> by following these excellent tutorials:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://learn.deeplearning.ai/chatgpt-prompt-eng">ChatGPT Prompt Engineering for Developers</a></p></li>
+<li><p><a class="reference external" href="https://learn.deeplearning.ai/chatgpt-building-system">Building Systems with the ChatGPT API</a></p></li>
+<li><p><a class="reference external" href="https://learn.deeplearning.ai/langchain">LangChain for LLM Application Development</a></p></li>
+</ol>
 <p>This course is calibrated as an introductory course (one-week duration).</p>
-<p>Most of the methodologies presented here are an adaption from Thierry Roncalli’s (2023)  <span id="id2">[<a class="reference internal" href="references.html#id2" title="Thierry Roncalli. Handbook of Sustainable Finance. SSRN, 2023.">Ron23</a>]</span> course and publications. The value added from this course is in the accompanying Python code only.</p>
-<p>If you want to get a deeper knowledge of some notions in this course, please refer to Thierry Roncalli’s course and / or publications.
+<p>The portfolio construction methodology presented here is a direct adaption from Thierry Roncalli’s (2023)  <span id="id2">[<a class="reference internal" href="references.html#id2" title="Thierry Roncalli. Handbook of Sustainable Finance. SSRN, 2023.">Ron23</a>]</span> course and publications. If you want to get a deeper knowledge of some notions in this course, please refer to Thierry Roncalli’s course and / or publications.
 Any error in this course is mine.</p>
 <p>Unless it is sourced, any opinion expressed in this course is my personnal opinion only.</p>
 <p>Data used for the projects come from <a class="reference external" href="https://github.com/shokru/carbon_emissions">Guillaume Coqueret’s github repository</a>.</p>
 <div class="toctree-wrapper compound">
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="intro/intro.html">Part 0: Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="intro/climaterisk.html">Economics and Physics of Climate Risk: The Tragedy of the Horizon</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="intro/climaterisk.html#economics-and-climate-risk">Economics and Climate Risk</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro/climaterisk.html#physical-risk-and-transition-risk">Physical Risk and Transition Risk</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro/climaterisk.html#global-warming">Global Warming</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="intro/emissions.html">Cross-Sector Reponsibility for Emissions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="intro/emissions.html#sources-of-emissions">Sources of Emissions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro/emissions.html#energy-system-and-cross-sector-responsibility">Energy System and Cross-Sector Responsibility</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="intro/lowcarbon.html">Portfolio Decarbonization</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="intro/lowcarbon.html#portfolio-optimization-in-the-context-of-a-benchmark">Portfolio Optimization in the Context of a Benchmark</a></li>
 <li class="toctree-l2"><a class="reference internal" href="intro/lowcarbon.html#the-decarbonization-optimization-problem">The Decarbonization Optimization Problem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro/lowcarbon.html#sector-consistent-decarbonization">Sector-Consistent Decarbonization</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="intro/net_zero.html">Towards a Net Zero Strategy</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="intro/net_zero.html#net-zero-emissions-scenario">Net Zero Emissions Scenario</a></li>
 <li class="toctree-l2"><a class="reference internal" href="intro/net_zero.html#decarbonization-pathway">Decarbonization Pathway</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro/net_zero.html#transition-to-a-low-carbon-economy">Transition to a Low-Carbon Economy</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="climate_investing/net_zero_investing.html">Part 1: Net Zero Investing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="climate_investing/net_zero_investing.html">Net Zero Investing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="climate_investing/portfolio_decarbonization_pathway.html">Portfolio Decarbonization Pathway</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="climate_investing/portfolio_decarbonization_pathway.html#carbon-emissions-and-carbon-intensity-pathway-relationship">Carbon Emissions and Carbon Intensity Pathway Relationship</a></li>
 <li class="toctree-l2"><a class="reference internal" href="climate_investing/portfolio_decarbonization_pathway.html#from-economic-to-financial-decarbonization-pathway">From Economic to Financial Decarbonization Pathway</a></li>
-<li class="toctree-l2"><a class="reference internal" href="climate_investing/portfolio_decarbonization_pathway.html#key-takeaways">Key Takeaways</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="climate_investing/portfolio_alignment.html">Portfolio Alignment</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="climate_investing/portfolio_alignment.html#a-dynamic-approach">A Dynamic Approach</a></li>
 <li class="toctree-l2"><a class="reference internal" href="climate_investing/portfolio_alignment.html#integrating-carbon-footprint-dynamics">Integrating Carbon Footprint Dynamics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="climate_investing/portfolio_alignment.html#sector-consistent-alignment">Sector-Consistent Alignment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="climate_investing/portfolio_alignment.html#key-takeaways">Key Takeaways</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="climate_investing/project1.html">Project 1: Emissions Data Retrieval with ChatGPT</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="climate_investing/project1.html#information-retrieval-with-the-react-framework">Information Retrieval with the ReAct Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="climate_investing/project1.html#emissions-extraction-with-chatgpt">Emissions Extraction with ChatGPT</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="climate_investing/self_decarbonization.html">Net Zero Backtesting</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="climate_investing/self_decarbonization.html#sequential-vs-self-decarbonization">Sequential vs. Self-Decarbonization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="climate_investing/self_decarbonization.html#the-self-decarbonization-ratio">The Self-Decarbonization Ratio</a></li>
-<li class="toctree-l2"><a class="reference internal" href="climate_investing/self_decarbonization.html#key-takeaways">Key Takeaways</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="climate_investing/integratingtransition.html">Integrating the Transition Dimension</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="climate_investing/integratingtransition.html#controlling-for-climate-impact-sectors">Controlling for Climate Impact Sectors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="climate_investing/integratingtransition.html#financing-the-transition">Financing the Transition</a></li>
 <li class="toctree-l2"><a class="reference internal" href="climate_investing/integratingtransition.html#controlling-for-green-intensity">Controlling for Green Intensity</a></li>
-<li class="toctree-l2"><a class="reference internal" href="climate_investing/integratingtransition.html#key-takeaways">Key Takeaways</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="climate_data/climate_data.html">Part 2: Net Zero Metrics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="climate_data/carbon_budget.html">Carbon Budget, Target and Trend</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="climate_data/carbon_budget.html#carbon-budget">Carbon Budget</a></li>
-<li class="toctree-l2"><a class="reference internal" href="climate_data/carbon_budget.html#carbon-reduction-targets">Carbon Reduction Targets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="climate_data/carbon_budget.html#carbon-trend">Carbon Trend</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="climate_data/emissions_metrics.html">Duration, Gap and Slope</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="climate_data/emissions_metrics.html#duration-how-many-time-to-attain-the-nze-scenario">Duration: How Many Time to Attain the NZE Scenario?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="climate_data/emissions_metrics.html#gap-how-far-the-trend-is-from-the-nze-scenario">Gap: How Far the Trend is From the NZE scenario?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="climate_data/emissions_metrics.html#slope-is-the-required-effort-to-attain-the-nze-scenario-sustainable">Slope: Is the Required Effort to Attain the NZE Scenario Sustainable?</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
@@ -381,11 +354,11 @@ Any error in this course is mine.</p>
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="right-next"
-       href="intro/intro.html"
+       href="intro/lowcarbon.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Part 0: Introduction</p>
+        <p class="prev-next-title">Portfolio Decarbonization</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

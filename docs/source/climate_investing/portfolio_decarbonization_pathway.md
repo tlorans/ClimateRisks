@@ -145,9 +145,3 @@ Figure: Financial decarbonization pathway $\mathfrak{R}_{CI}(2020,2050)$ from th
 ```
 
 We can see that the PAB financial decarbonization pathway is far more aggressive than the IEA-deduced pathway.
-
-## Key Takeaways
-
-- Portfolio decarbonization uses intensity decarbonization pathway (financial decarbonization pathway)
-
-- With assumption about $g_Y$ the growth of the normalization variable, we can deduce a financial decarbonization pathway from an economic (decarbonization pathway based on absolute emissions) one

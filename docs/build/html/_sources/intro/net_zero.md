@@ -7,7 +7,7 @@ In fact, we know that the objective of mitigation policies, if soundly implement
 
 While decarbonization focus on excluding high-emitters stocks from the portfolio, Barahhou et al. (2022) advocate for the integration of the transition dimension into a net zero strategy. 
 
-In this part, we will give a definition of a net zero emissions (NZE) scenario with the carbon budget constraint and study the relationship between a NZE scenario and a decarbonization pathway. These dynamic decarbonization reference are the very foundation of the need for a dynamic approach in portfolio decarbonization. We will finally address the need for a transition-aware strategy.
+In this part, we will give a definition of a net zero emissions (NZE) scenario with the carbon budget constraint and study the relationship between a NZE scenario and a decarbonization pathway. These dynamic decarbonization reference are the very foundation of the need for a dynamic approach in portfolio decarbonization. 
 
 ### Net Zero Emissions Scenario
 
@@ -66,20 +66,3 @@ name: reductionrate
 ---
 Figure: Decarbonization Pathway with $\Delta \mathfrak{R} = 0.07$ and $\mathfrak{R}^- = 0.30$
 ```
-
-### Transition to a Low-Carbon Economy
-
-As we have seen in the part regarding cross-sector responsibility, decarbonizing the economy (through the lens of the end-use activities) involves:
-- Decarbonizing the Utilities sector to decrease $SC_2^{End-Use}$
-- Decarbonizing the End-Use activities to decrease $SC_1^{End-Use}$ and $SC_3^{End-Use}$
-
-In fact, decarbonizing the Energy supply (Energy + Utilities sectors) means shifting the energy mix to renewables, that is transitioning towards "green" activities (solar pv, wind turbines, geothermal power, etc.). 
-
-```{figure} primary_energy.png
----
-name: primary_energy
----
-Figure: Primary energy sector-energy production under the OECM 1.5°C pathway, from Teske et al. (2022)
-```
-
-Those activities are expected to grow in the road towards a NZE scenario. This increasing share of green activities should be reflected into the net zero strategy.
