@@ -126,10 +126,12 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="intro/lowcarbon.html">Portfolio Decarbonization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="intro/net_zero.html">Towards a Net Zero Strategy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro/intro_langchain.html">Project 0: An Introduction to ChatGPT with LangChain</a></li>
 <li class="toctree-l1"><a class="reference internal" href="climate_investing/net_zero_investing.html">Net Zero Investing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="climate_investing/portfolio_decarbonization_pathway.html">Portfolio Decarbonization Pathway</a></li>
 <li class="toctree-l1"><a class="reference internal" href="climate_investing/portfolio_alignment.html">Portfolio Alignment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="climate_investing/project1.html">Project 1: Emissions Data Retrieval with ChatGPT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="climate_investing/project1_v2.html">Project 1: Reported Emissions Internet Retrieval with ChatGPT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="climate_investing/project_2.html">Project 2: Estimating Emissions with ChatGPT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="climate_investing/self_decarbonization.html">Net Zero Backtesting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="climate_investing/integratingtransition.html">Integrating the Transition Dimension</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
@@ -287,13 +289,7 @@ document.write(`
 <p class="admonition-title">Warning</p>
 <p>This course is under heavy development</p>
 </div>
-<p>In this course, I propose a step-by-step implementation of a net zero strategy with Python, following the methodology proposed by Barahhou et al. (2022) <span id="id1">[<a class="reference internal" href="references.html#id16" title="Ines Barahhou, Mohamed Ben Slimane, Thierry Roncalli, and Noureddine Oulid Azouz. Net zero investment portfolios-part 1. the comprehensive integrated approach. The Comprehensive Integrated Approach (October 13, 2022), 2022.">BBSROA22</a>]</span>, using ChatGPT for estimating the underlying data.</p>
-<p>Before starting this course, be sure to familiarize yourself with ChatGPT and the open-source development framework <code class="docutils literal notranslate"><span class="pre">LangChain</span></code> by following these excellent tutorials:</p>
-<ol class="arabic simple">
-<li><p><a class="reference external" href="https://learn.deeplearning.ai/chatgpt-prompt-eng">ChatGPT Prompt Engineering for Developers</a></p></li>
-<li><p><a class="reference external" href="https://learn.deeplearning.ai/chatgpt-building-system">Building Systems with the ChatGPT API</a></p></li>
-<li><p><a class="reference external" href="https://learn.deeplearning.ai/langchain">LangChain for LLM Application Development</a></p></li>
-</ol>
+<p>In this course, I propose a step-by-step implementation of a net zero strategy with Python, following the methodology proposed by Barahhou et al. (2022) <span id="id1">[<a class="reference internal" href="references.html#id16" title="Ines Barahhou, Mohamed Ben Slimane, Thierry Roncalli, and Noureddine Oulid Azouz. Net zero investment portfolios-part 1. the comprehensive integrated approach. The Comprehensive Integrated Approach (October 13, 2022), 2022.">BBSROA22</a>]</span>, using ChatGPT with the excellent development framework <code class="docutils literal notranslate"><span class="pre">LangChain</span></code> for estimating the underlying data.</p>
 <p>This course is calibrated as an introductory course (one-week duration).</p>
 <p>The portfolio construction methodology presented here is a direct adaption from Thierry Roncalli’s (2023)  <span id="id2">[<a class="reference internal" href="references.html#id2" title="Thierry Roncalli. Handbook of Sustainable Finance. SSRN, 2023.">Ron23</a>]</span> course and publications. If you want to get a deeper knowledge of some notions in this course, please refer to Thierry Roncalli’s course and / or publications.
 Any error in this course is mine.</p>
@@ -312,6 +308,13 @@ Any error in this course is mine.</p>
 <li class="toctree-l2"><a class="reference internal" href="intro/net_zero.html#decarbonization-pathway">Decarbonization Pathway</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="intro/intro_langchain.html">Project 0: An Introduction to ChatGPT with LangChain</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="intro/intro_langchain.html#langchain">LangChain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro/intro_langchain.html#first-prompts">First Prompts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro/intro_langchain.html#prompt-engineering-with-langchain">Prompt Engineering with LangChain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro/intro_langchain.html#memory">Memory</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="climate_investing/net_zero_investing.html">Net Zero Investing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="climate_investing/portfolio_decarbonization_pathway.html">Portfolio Decarbonization Pathway</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="climate_investing/portfolio_decarbonization_pathway.html#carbon-emissions-and-carbon-intensity-pathway-relationship">Carbon Emissions and Carbon Intensity Pathway Relationship</a></li>
@@ -323,9 +326,14 @@ Any error in this course is mine.</p>
 <li class="toctree-l2"><a class="reference internal" href="climate_investing/portfolio_alignment.html#integrating-carbon-footprint-dynamics">Integrating Carbon Footprint Dynamics</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="climate_investing/project1.html">Project 1: Emissions Data Retrieval with ChatGPT</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="climate_investing/project1.html#information-retrieval-with-the-react-framework">Information Retrieval with the ReAct Framework</a></li>
-<li class="toctree-l2"><a class="reference internal" href="climate_investing/project1.html#emissions-extraction-with-chatgpt">Emissions Extraction with ChatGPT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="climate_investing/project1_v2.html">Project 1: Reported Emissions Internet Retrieval with ChatGPT</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="climate_investing/project1_v2.html#conversational-agents">Conversational Agents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="climate_investing/project1_v2.html#agent-types">Agent Types</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="climate_investing/project_2.html">Project 2: Estimating Emissions with ChatGPT</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="climate_investing/project_2.html#custom-tools-for-chatgpt">Custom Tools for ChatGPT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="climate_investing/project_2.html#knowledge-bases">Knowledge Bases</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="climate_investing/self_decarbonization.html">Net Zero Backtesting</a><ul>

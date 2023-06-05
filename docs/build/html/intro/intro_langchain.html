@@ -1,0 +1,592 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Project 0: An Introduction to ChatGPT with LangChain &#8212; Climate Risks in Finance 0.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'intro/intro_langchain';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Net Zero Investing" href="../climate_investing/net_zero_investing.html" />
+    <link rel="prev" title="Towards a Net Zero Strategy" href="net_zero.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Climate Risks in Finance 0.1 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="lowcarbon.html">Portfolio Decarbonization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="net_zero.html">Towards a Net Zero Strategy</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Project 0: An Introduction to ChatGPT with LangChain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../climate_investing/net_zero_investing.html">Net Zero Investing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../climate_investing/portfolio_decarbonization_pathway.html">Portfolio Decarbonization Pathway</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../climate_investing/portfolio_alignment.html">Portfolio Alignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../climate_investing/project1_v2.html">Project 1: Reported Emissions Internet Retrieval with ChatGPT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../climate_investing/project_2.html">Project 2: Estimating Emissions with ChatGPT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../climate_investing/self_decarbonization.html">Net Zero Backtesting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../climate_investing/integratingtransition.html">Integrating the Transition Dimension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/intro/intro_langchain.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Project 0: An Introduction to ChatGPT with LangChain</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langchain">LangChain</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-prompts">First Prompts</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-questions">Multiple Questions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-engineering-with-langchain">Prompt Engineering with LangChain</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-engineering">Prompt Engineering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-templates">Prompt Templates</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#memory">Memory</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conversationchain">ConversationChain</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forms-of-conversational-memory">Forms of Conversational Memory</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conversationbuffermemory">ConversationBufferMemory</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conversationsummarymemory">ConversationSummaryMemory</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conversationbufferwindowmemory">ConversationBufferWindowMemory</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conversationsummarybuffermemory">ConversationSummaryBufferMemory</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#other-memory-types">Other Memory Types</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="project-0-an-introduction-to-chatgpt-with-langchain">
+<h1>Project 0: An Introduction to ChatGPT with LangChain<a class="headerlink" href="#project-0-an-introduction-to-chatgpt-with-langchain" title="Permalink to this headline">#</a></h1>
+<p>Large Language Models (LLMs) have enjoyed a growth in popularity since the release of OpenAI’s GPT-3 in 2020 (Brown et al., 2020 <span id="id1">[<a class="reference internal" href="../references.html#id37" title="Tom Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared D Kaplan, Prafulla Dhariwal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell, and others. Language models are few-shot learners. Advances in neural information processing systems, 33:1877–1901, 2020.">BMR+20</a>]</span>).</p>
+<p>After further impressive improvements in LLMs, those models gained the non-specialists when OpenAI released <code class="docutils literal notranslate"><span class="pre">ChatGPT</span></code>.</p>
+<p>At the same time, <code class="docutils literal notranslate"><span class="pre">LangChain</span></code> appeared. This open-source development framework has incredible features for building tools around LLMs.</p>
+<p>In this part, we are going to introduce this library and start with straightforward interactions with <code class="docutils literal notranslate"><span class="pre">ChatGPT</span></code>.</p>
+<section id="langchain">
+<h2>LangChain<a class="headerlink" href="#langchain" title="Permalink to this headline">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">LangChain</span></code> is a development framework built around LLMs. The core idea of the library is the chain of different components (modularity) to create advanced use cases with LLMs.</p>
+<p>Chains consists of multiple components from modules such as:</p>
+<ul class="simple">
+<li><p>Prompt templates</p></li>
+<li><p>LLMs</p></li>
+<li><p>Agents</p></li>
+<li><p>Memory</p></li>
+</ul>
+</section>
+<section id="first-prompts">
+<h2>First Prompts<a class="headerlink" href="#first-prompts" title="Permalink to this headline">#</a></h2>
+<p>We’ll strart with some basics behind prompt templates for <code class="docutils literal notranslate"><span class="pre">ChatGPT</span></code>.</p>
+<p>Prompts are often structured in different ways so that we can get different results.</p>
+<p>Let’s begin with a simple question-answering prompt template.</p>
+<p>We first need to install the <code class="docutils literal notranslate"><span class="pre">langchain</span></code> and <code class="docutils literal notranslate"><span class="pre">openai</span></code> libraries:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span>!pip install langchain
+!pip install openai
+</pre></div>
+</div>
+<p>We also need to load our API key:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;OPENAI_API_KEY&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">openai_api_key</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;key.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>From here, we can import the <code class="docutils literal notranslate"><span class="pre">ChatPromptTemplate</span></code> class and initialize a template like so:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.prompts</span> <span class="kn">import</span> <span class="n">ChatPromptTemplate</span>
+
+<span class="n">template</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Question: </span><span class="si">{question}</span><span class="s2"></span>
+<span class="s2">Answer: &quot;&quot;&quot;</span>
+
+<span class="n">prompt</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="o">.</span><span class="n">from_template</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
+
+<span class="n">question</span> <span class="o">=</span> <span class="s2">&quot;Which country emits the most GHG emissions?&quot;</span>
+</pre></div>
+</div>
+<p>Now, we can create our first <code class="docutils literal notranslate"><span class="pre">LLMChain</span></code> and obtain our first answer:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.chat_models</span> <span class="kn">import</span> <span class="n">ChatOpenAI</span>
+
+<span class="n">chat</span> <span class="o">=</span> <span class="n">ChatOpenAI</span><span class="p">(</span><span class="n">temperature</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+                  <span class="p">)</span>
+
+
+<span class="kn">from</span> <span class="nn">langchain</span> <span class="kn">import</span> <span class="n">LLMChain</span>
+
+<span class="n">llm_chain</span> <span class="o">=</span> <span class="n">LLMChain</span><span class="p">(</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="n">prompt</span><span class="p">,</span>
+    <span class="n">llm</span> <span class="o">=</span> <span class="n">chat</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">llm_chain</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">question</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>And the answer we get is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">As</span> <span class="n">an</span> <span class="n">AI</span> <span class="n">language</span> <span class="n">model</span><span class="p">,</span> <span class="n">I</span> <span class="n">do</span> <span class="ow">not</span> <span class="n">have</span> <span class="n">access</span> <span class="n">to</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">data</span><span class="o">.</span> <span class="n">However</span><span class="p">,</span> <span class="n">according</span> <span class="n">to</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">available</span> <span class="n">data</span> <span class="kn">from</span> <span class="mi">2019</span><span class="p">,</span> <span class="n">China</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">country</span> <span class="n">that</span> <span class="n">emits</span> <span class="n">the</span> <span class="n">most</span> <span class="n">greenhouse</span> <span class="n">gas</span> <span class="n">emissions</span><span class="p">,</span> <span class="n">followed</span> <span class="n">by</span> <span class="n">the</span> <span class="n">United</span> <span class="n">States</span> <span class="ow">and</span> <span class="n">India</span><span class="o">.</span>
+</pre></div>
+</div>
+<section id="multiple-questions">
+<h3>Multiple Questions<a class="headerlink" href="#multiple-questions" title="Permalink to this headline">#</a></h3>
+<p>If we want to ask multiple questions, there is two approaches:</p>
+<ol class="arabic simple">
+<li><p>Iterate through all questions using the <code class="docutils literal notranslate"><span class="pre">generate</span></code> method, answering them one at a time</p></li>
+<li><p>Place all questions into a single prompt.</p></li>
+</ol>
+<p>Let’s tests with the first option:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">qs</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s1">&#39;question&#39;</span><span class="p">:</span> <span class="s2">&quot;Which country emits the most GHG emissions?&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s1">&#39;question&#39;</span><span class="p">:</span> <span class="s2">&quot;What Scope 1, 2 and 3 emissions are?&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s1">&#39;question&#39;</span><span class="p">:</span> <span class="s2">&quot;What are Climate Risks?&quot;</span><span class="p">},</span>
+<span class="p">]</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">llm_chain</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">qs</span><span class="p">)</span>
+<span class="n">res</span>
+</pre></div>
+</div>
+<p>And we get:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">LLMResult</span><span class="p">(</span><span class="n">generations</span><span class="o">=</span><span class="p">[[</span><span class="n">ChatGeneration</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s1">&#39;As of 2021, China is the country that emits the most greenhouse gas (GHG) emissions, followed by the United States, India, Russia, and Japan.&#39;</span><span class="p">,</span> <span class="n">generation_info</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">AIMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="s1">&#39;As of 2021, China is the country that emits the most greenhouse gas (GHG) emissions, followed by the United States, India, Russia, and Japan.&#39;</span><span class="p">,</span> <span class="n">additional_kwargs</span><span class="o">=</span><span class="p">{},</span> <span class="n">example</span><span class="o">=</span><span class="kc">False</span><span class="p">))],</span> <span class="p">[</span><span class="n">ChatGeneration</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s1">&#39;Scope 1, 2, and 3 emissions are categories used to classify greenhouse gas emissions. </span><span class="se">\n\n</span><span class="s1">Scope 1 emissions refer to direct emissions from sources that are owned or controlled by the reporting entity, such as emissions from combustion of fossil fuels in boilers or vehicles.</span><span class="se">\n\n</span><span class="s1">Scope 2 emissions refer to indirect emissions from the consumption of purchased electricity, heat, or steam.</span><span class="se">\n\n</span><span class="s1">Scope 3 emissions refer to all other indirect emissions that occur in the value chain of the reporting entity, including emissions from the production of purchased goods and services, transportation of goods, and employee commuting.&#39;</span><span class="p">,</span> <span class="n">generation_info</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">AIMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="s1">&#39;Scope 1, 2, and 3 emissions are categories used to classify greenhouse gas emissions. </span><span class="se">\n\n</span><span class="s1">Scope 1 emissions refer to direct emissions from sources that are owned or controlled by the reporting entity, such as emissions from combustion of fossil fuels in boilers or vehicles.</span><span class="se">\n\n</span><span class="s1">Scope 2 emissions refer to indirect emissions from the consumption of purchased electricity, heat, or steam.</span><span class="se">\n\n</span><span class="s1">Scope 3 emissions refer to all other indirect emissions that occur in the value chain of the reporting entity, including emissions from the production of purchased goods and services, transportation of goods, and employee commuting.&#39;</span><span class="p">,</span> <span class="n">additional_kwargs</span><span class="o">=</span><span class="p">{},</span> <span class="n">example</span><span class="o">=</span><span class="kc">False</span><span class="p">))],</span> <span class="p">[</span><span class="n">ChatGeneration</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s1">&#39;Climate risks refer to the potential negative impacts of climate change on human and natural systems. These risks can include more frequent and severe weather events such as floods, droughts, and heatwaves, as well as rising sea levels, ocean acidification, and loss of biodiversity. Climate risks can also have economic and social impacts, such as reduced agricultural productivity, increased healthcare costs, and displacement of communities due to extreme weather events or sea level rise.&#39;</span><span class="p">,</span> <span class="n">generation_info</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">AIMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="s1">&#39;Climate risks refer to the potential negative impacts of climate change on human and natural systems. These risks can include more frequent and severe weather events such as floods, droughts, and heatwaves, as well as rising sea levels, ocean acidification, and loss of biodiversity. Climate risks can also have economic and social impacts, such as reduced agricultural productivity, increased healthcare costs, and displacement of communities due to extreme weather events or sea level rise.&#39;</span><span class="p">,</span> <span class="n">additional_kwargs</span><span class="o">=</span><span class="p">{},</span> <span class="n">example</span><span class="o">=</span><span class="kc">False</span><span class="p">))]],</span> <span class="n">llm_output</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;token_usage&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;prompt_tokens&#39;</span><span class="p">:</span> <span class="mi">67</span><span class="p">,</span> <span class="s1">&#39;completion_tokens&#39;</span><span class="p">:</span> <span class="mi">237</span><span class="p">,</span> <span class="s1">&#39;total_tokens&#39;</span><span class="p">:</span> <span class="mi">304</span><span class="p">},</span> <span class="s1">&#39;model_name&#39;</span><span class="p">:</span> <span class="s1">&#39;gpt-3.5-turbo&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>We can also test the option 2:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">multi_template</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Answer the following questions one at a time.</span>
+
+<span class="s2">Questions:</span>
+<span class="si">{questions}</span><span class="s2"></span>
+
+<span class="s2">Answers:</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">long_prompt</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="o">.</span><span class="n">from_template</span><span class="p">(</span><span class="n">multi_template</span><span class="p">)</span>
+
+<span class="n">llm_chain</span> <span class="o">=</span> <span class="n">LLMChain</span><span class="p">(</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="n">long_prompt</span><span class="p">,</span>
+    <span class="n">llm</span> <span class="o">=</span> <span class="n">chat</span>
+<span class="p">)</span>
+
+<span class="n">qs_str</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Which country emits the most GHG emissions?</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+    <span class="s2">&quot;What Scope 1, 2 and 3 emissions are?</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">+</span>
+     <span class="s2">&quot;What are Climate Risks?&quot;</span>
+<span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">llm_chain</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">qs_str</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>And the result is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>1. Which country emits the most GHG emissions?
+- According to recent data, China is currently the country that emits the most greenhouse gas (GHG) emissions, followed by the United States and India.
+
+2. What Scope 1, 2 and 3 emissions are?
+- Scope 1, 2 and 3 emissions are categories used to classify greenhouse gas (GHG) emissions. Scope 1 emissions refer to direct emissions from sources that are owned or controlled by a company, such as emissions from combustion of fossil fuels. Scope 2 emissions refer to indirect emissions from the generation of purchased electricity, heat or steam. Scope 3 emissions refer to all other indirect emissions that occur in a company&#39;s value chain, such as emissions from the production of purchased goods and services, employee commuting, and waste disposal.
+
+3. What are Climate Risks?
+- Climate risks refer to the potential negative impacts of climate change on human and natural systems. These risks can include more frequent and severe weather events, sea level rise, changes in precipitation patterns, and impacts on ecosystems and biodiversity. Climate risks can have significant economic, social and environmental consequences, and are a major concern for governments, businesses and communities around the world.
+</pre></div>
+</div>
+</section>
+</section>
+<section id="prompt-engineering-with-langchain">
+<h2>Prompt Engineering with LangChain<a class="headerlink" href="#prompt-engineering-with-langchain" title="Permalink to this headline">#</a></h2>
+<section id="prompt-engineering">
+<h3>Prompt Engineering<a class="headerlink" href="#prompt-engineering" title="Permalink to this headline">#</a></h3>
+</section>
+<section id="prompt-templates">
+<h3>Prompt Templates<a class="headerlink" href="#prompt-templates" title="Permalink to this headline">#</a></h3>
+</section>
+</section>
+<section id="memory">
+<h2>Memory<a class="headerlink" href="#memory" title="Permalink to this headline">#</a></h2>
+<section id="conversationchain">
+<h3>ConversationChain<a class="headerlink" href="#conversationchain" title="Permalink to this headline">#</a></h3>
+</section>
+<section id="forms-of-conversational-memory">
+<h3>Forms of Conversational Memory<a class="headerlink" href="#forms-of-conversational-memory" title="Permalink to this headline">#</a></h3>
+<section id="conversationbuffermemory">
+<h4>ConversationBufferMemory<a class="headerlink" href="#conversationbuffermemory" title="Permalink to this headline">#</a></h4>
+</section>
+<section id="conversationsummarymemory">
+<h4>ConversationSummaryMemory<a class="headerlink" href="#conversationsummarymemory" title="Permalink to this headline">#</a></h4>
+</section>
+<section id="conversationbufferwindowmemory">
+<h4>ConversationBufferWindowMemory<a class="headerlink" href="#conversationbufferwindowmemory" title="Permalink to this headline">#</a></h4>
+</section>
+<section id="conversationsummarybuffermemory">
+<h4>ConversationSummaryBufferMemory<a class="headerlink" href="#conversationsummarybuffermemory" title="Permalink to this headline">#</a></h4>
+</section>
+<section id="other-memory-types">
+<h4>Other Memory Types<a class="headerlink" href="#other-memory-types" title="Permalink to this headline">#</a></h4>
+</section>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="net_zero.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Towards a Net Zero Strategy</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../climate_investing/net_zero_investing.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Net Zero Investing</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langchain">LangChain</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-prompts">First Prompts</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-questions">Multiple Questions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-engineering-with-langchain">Prompt Engineering with LangChain</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-engineering">Prompt Engineering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-templates">Prompt Templates</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#memory">Memory</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conversationchain">ConversationChain</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forms-of-conversational-memory">Forms of Conversational Memory</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conversationbuffermemory">ConversationBufferMemory</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conversationsummarymemory">ConversationSummaryMemory</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conversationbufferwindowmemory">ConversationBufferWindowMemory</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conversationsummarybuffermemory">ConversationSummaryBufferMemory</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#other-memory-types">Other Memory Types</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            <div class="bd-footer-content__inner">
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Thomas Lorans
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022, Thomas Lorans.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div></div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
