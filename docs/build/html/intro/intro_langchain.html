@@ -299,14 +299,6 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#memory">Memory</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conversationchain">ConversationChain</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forms-of-conversational-memory">Forms of Conversational Memory</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conversationbuffermemory">ConversationBufferMemory</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conversationsummarymemory">ConversationSummaryMemory</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conversationbufferwindowmemory">ConversationBufferWindowMemory</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conversationsummarybuffermemory">ConversationSummaryBufferMemory</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#other-memory-types">Other Memory Types</a></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -635,31 +627,63 @@ The output should be a markdown code snippet formatted in the following schema, 
 <span class="nb">print</span><span class="p">(</span><span class="n">chain</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;What are the top 5 Oil producers countries?&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
+<p>And the asnwer is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">top</span> <span class="mi">5</span> <span class="n">oil</span><span class="o">-</span><span class="n">producing</span> <span class="n">countries</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">world</span> <span class="n">are</span><span class="p">:</span>
+
+<span class="mf">1.</span> <span class="n">United</span> <span class="n">States</span>
+<span class="mf">2.</span> <span class="n">Saudi</span> <span class="n">Arabia</span>
+<span class="mf">3.</span> <span class="n">Russia</span>
+<span class="mf">4.</span> <span class="n">Canada</span>
+<span class="mf">5.</span> <span class="n">China</span>
+</pre></div>
+</div>
 </section>
 </section>
 </section>
 <section id="memory">
 <h2>Memory<a class="headerlink" href="#memory" title="Permalink to this headline">#</a></h2>
+<p>Conversational memory is what allows a chatbot to response to multiple queries in a coherent conversation. Without it, every new query is treated as an independent input without considering past interactions.</p>
+<p>By default, LLMs are stateless. It means that each query is processed independently of other interactions.</p>
+<p>However, in many cases it can be interesting that LLMs remember previous interaction.</p>
+<p>In the <code class="docutils literal notranslate"><span class="pre">langchain</span></code> library, conversational memory is done through the use of <code class="docutils literal notranslate"><span class="pre">ConversationChain</span></code> classes.</p>
 <section id="conversationchain">
 <h3>ConversationChain<a class="headerlink" href="#conversationchain" title="Permalink to this headline">#</a></h3>
-</section>
-<section id="forms-of-conversational-memory">
-<h3>Forms of Conversational Memory<a class="headerlink" href="#forms-of-conversational-memory" title="Permalink to this headline">#</a></h3>
-<section id="conversationbuffermemory">
-<h4>ConversationBufferMemory<a class="headerlink" href="#conversationbuffermemory" title="Permalink to this headline">#</a></h4>
-</section>
-<section id="conversationsummarymemory">
-<h4>ConversationSummaryMemory<a class="headerlink" href="#conversationsummarymemory" title="Permalink to this headline">#</a></h4>
-</section>
-<section id="conversationbufferwindowmemory">
-<h4>ConversationBufferWindowMemory<a class="headerlink" href="#conversationbufferwindowmemory" title="Permalink to this headline">#</a></h4>
-</section>
-<section id="conversationsummarybuffermemory">
-<h4>ConversationSummaryBufferMemory<a class="headerlink" href="#conversationsummarybuffermemory" title="Permalink to this headline">#</a></h4>
-</section>
-<section id="other-memory-types">
-<h4>Other Memory Types<a class="headerlink" href="#other-memory-types" title="Permalink to this headline">#</a></h4>
-</section>
+<p>We can start by initializing the <code class="docutils literal notranslate"><span class="pre">ConversationChain</span></code>:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.chains</span> <span class="kn">import</span> <span class="n">ConversationChain</span>
+
+<span class="n">llm</span> <span class="o">=</span> <span class="n">ChatOpenAI</span><span class="p">(</span><span class="n">temperature</span> <span class="o">=</span> <span class="mf">0.</span><span class="p">)</span>
+
+<span class="n">conversation</span> <span class="o">=</span> <span class="n">ConversationChain</span><span class="p">(</span><span class="n">llm</span> <span class="o">=</span> <span class="n">llm</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We can see the prompt template used by the <code class="docutils literal notranslate"><span class="pre">ConversationChain</span></code>:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">conversation</span><span class="o">.</span><span class="n">prompt</span><span class="o">.</span><span class="n">template</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">following</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">friendly</span> <span class="n">conversation</span> <span class="n">between</span> <span class="n">a</span> <span class="n">human</span> <span class="ow">and</span> <span class="n">an</span> <span class="n">AI</span><span class="o">.</span> <span class="n">The</span> <span class="n">AI</span> <span class="ow">is</span> <span class="n">talkative</span> <span class="ow">and</span> <span class="n">provides</span> <span class="n">lots</span> <span class="n">of</span> <span class="n">specific</span> <span class="n">details</span> <span class="kn">from</span> <span class="nn">its</span> <span class="n">context</span><span class="o">.</span> <span class="n">If</span> <span class="n">the</span> <span class="n">AI</span> <span class="n">does</span> <span class="ow">not</span> <span class="n">know</span> <span class="n">the</span> <span class="n">answer</span> <span class="n">to</span> <span class="n">a</span> <span class="n">question</span><span class="p">,</span> <span class="n">it</span> <span class="n">truthfully</span> <span class="n">says</span> <span class="n">it</span> <span class="n">does</span> <span class="ow">not</span> <span class="n">know</span><span class="o">.</span>
+
+<span class="n">Current</span> <span class="n">conversation</span><span class="p">:</span>
+<span class="p">{</span><span class="n">history</span><span class="p">}</span>
+<span class="n">Human</span><span class="p">:</span> <span class="p">{</span><span class="nb">input</span><span class="p">}</span>
+<span class="n">AI</span><span class="p">:</span>
+</pre></div>
+</div>
+<p>Here the prompts tells to the model that it is a conversation between a user and an AI. We see two parameters: <code class="docutils literal notranslate"><span class="pre">{history}</span></code> and <code class="docutils literal notranslate"><span class="pre">{input}</span></code>.</p>
+<p>In the <code class="docutils literal notranslate"><span class="pre">{input}</span></code> will be placed the latest human query, while the <code class="docutils literal notranslate"><span class="pre">{history}</span></code> is where conversational memory is used.</p>
+<p>We can test it:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">conversation</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;My name is Thomas&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Hello Thomas! It&#39;s nice to meet you. Is there anything I can help you with today?
+</pre></div>
+</div>
+<p>Does it remembers my name?</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">conversation</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;What is my name?&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Your name is Thomas, as you just told me. Is there anything else you would like to know?
+</pre></div>
+</div>
 </section>
 </section>
 </section>
@@ -723,14 +747,6 @@ The output should be a markdown code snippet formatted in the following schema, 
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#memory">Memory</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conversationchain">ConversationChain</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forms-of-conversational-memory">Forms of Conversational Memory</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conversationbuffermemory">ConversationBufferMemory</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conversationsummarymemory">ConversationSummaryMemory</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conversationbufferwindowmemory">ConversationBufferWindowMemory</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conversationsummarybuffermemory">ConversationSummaryBufferMemory</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#other-memory-types">Other Memory Types</a></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>

@@ -364,24 +364,77 @@ chat_prompt = ChatPromptTemplate.from_messages([system_message_prompt, example_h
 chain = LLMChain(llm=chat, prompt=chat_prompt)
 # get a chat completion from the formatted messages
 print(chain.run("What are the top 5 Oil producers countries?"))
-
 ```
 
+And the asnwer is:
 
+```
+The top 5 oil-producing countries in the world are:
+
+1. United States
+2. Saudi Arabia
+3. Russia
+4. Canada
+5. China
+```
 
 ## Memory
 
+Conversational memory is what allows a chatbot to response to multiple queries in a coherent conversation. Without it, every new query is treated as an independent input without considering past interactions.
+
+By default, LLMs are stateless. It means that each query is processed independently of other interactions.
+
+However, in many cases it can be interesting that LLMs remember previous interaction. 
+
+In the `langchain` library, conversational memory is done through the use of `ConversationChain` classes.
+
 ### ConversationChain
 
-### Forms of Conversational Memory
+We can start by initializing the `ConversationChain`:
 
-#### ConversationBufferMemory
+```Python
+from langchain.chains import ConversationChain
 
+llm = ChatOpenAI(temperature = 0.)
 
-#### ConversationSummaryMemory
+conversation = ConversationChain(llm = llm)
+```
 
-#### ConversationBufferWindowMemory
+We can see the prompt template used by the `ConversationChain`:
 
-#### ConversationSummaryBufferMemory
+```Python
+print(conversation.prompt.template)
+```
 
-#### Other Memory Types
+```
+The following is a friendly conversation between a human and an AI. The AI is talkative and provides lots of specific details from its context. If the AI does not know the answer to a question, it truthfully says it does not know.
+
+Current conversation:
+{history}
+Human: {input}
+AI:
+```
+
+Here the prompts tells to the model that it is a conversation between a user and an AI. We see two parameters: `{history}` and `{input}`.
+
+In the `{input}` will be placed the latest human query, while the `{history}` is where conversational memory is used. 
+
+We can test it:
+
+```Python
+conversation.run("My name is Thomas")
+```
+
+```
+Hello Thomas! It's nice to meet you. Is there anything I can help you with today?
+```
+
+Does it remembers my name?
+
+```Python
+conversation.run("What is my name?")
+```
+
+```
+Your name is Thomas, as you just told me. Is there anything else you would like to know?
+```
