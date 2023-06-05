@@ -1,5 +1,6 @@
 # Project 2: ChatGPT as a Carbon Data Analyst
 
+In this project, we are investigating if we can directly use `ChatGPT` for simple calculation on a specific dataset, by using knowledge base and custom tools.
 
 ## Knowledge Bases
 
@@ -142,7 +143,6 @@ index.query(query)
 ```
  The oil & gas companies in the dataset are ExxonMobil and Chevron Corporation.
 ```
-
 ## Custom Tools for ChatGPT
 
 As we have seen in the previous projects, agents are a powerful approach to use LLMs. 
@@ -152,13 +152,60 @@ Agents allows us to give LLMs access to tools, and tools present an infinite num
 If the `langchain` library provides a selection of prebuilt tools, such as the ones we used in the previous project, we'll often find that we must modify existing tools or build entirely new ones.
 
 This is what we will explose in this section.
-### Building Tools
 
-Tools are in fact simple function that take input from an LLM and feed their output to an LLM.
+The best way to create tools that require multiple inputs is to use the `StructuredTool` class from `langchain`:
 
-#### Simple Calculator
+```Python
+from langchain.chat_models import ChatOpenAI
+from langchain.agents import initialize_agent, AgentType
 
-#### Tools with Multiple Parameters
+llm = ChatOpenAI(temperature=0)
 
+from langchain.tools import StructuredTool
+
+def multiplier(a: float, b: float) -> float:
+    """Multiply the provided floats."""
+    return a * b
+
+tool = StructuredTool.from_function(multiplier)
+```
+
+You need the type `STRUCTURED_CHAT_ZERO_SHOT_REACT_DESCRIPTION`:
+
+```Python
+
+agent_executor = initialize_agent([tool], 
+                                  llm, 
+                                  agent=AgentType.STRUCTURED_CHAT_ZERO_SHOT_REACT_DESCRIPTION, 
+                                  verbose=True)
+
+```
+
+Let's test it:
+
+```Python
+agent_executor.run("What is 3 times 4?")
+```
+
+We have:
+
+```
+> Entering new AgentExecutor chain...
+Action:
+{
+  "action": "multiplier",
+  "action_input": {
+    "a": 3,
+    "b": 4
+  }
+}
+
+Observation: 12.0
+```
 
 ## Exercise
+
+With the previous dataset, try to:
+
+1. Implement a tool that compute the WACI each year for the portfolio.
+2. Can you try to implement a portfolio decarbonization tool and asks `ChatGPT` to implement the strategy itself?
