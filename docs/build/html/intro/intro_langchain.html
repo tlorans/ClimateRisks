@@ -292,7 +292,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-templates">Prompt Templates</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-templates">Introduction to Templates</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#output-parsers">Output Parsers</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#few-shot-prompt-templates">Few Shot Prompt Templates</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#few-shot-prompt-learning">Few Shot Prompt Learning</a></li>
 </ul>
 </li>
 </ul>
@@ -582,15 +582,59 @@ The output should be a markdown code snippet formatted in the following schema, 
 </pre></div>
 </div>
 </section>
-<section id="few-shot-prompt-templates">
-<h4>Few Shot Prompt Templates<a class="headerlink" href="#few-shot-prompt-templates" title="Permalink to this headline">#</a></h4>
+<section id="few-shot-prompt-learning">
+<h4>Few Shot Prompt Learning<a class="headerlink" href="#few-shot-prompt-learning" title="Permalink to this headline">#</a></h4>
 <p>LLMs success comes from their ability to store knowledge within the model parameters, learned during model training.</p>
 <p>However, there are ways to pass more knowledge to an LLM:</p>
 <ol class="arabic simple">
 <li><p>Parametric knowledge: the knowledge mentioned above is anything that has been learned by the model during training time and stored within the model weights</p></li>
 <li><p>Source knowledge: any knowledge provided to the model at inference time via the prompt</p></li>
 </ol>
-<p>Few shot prompt template aims to add source knowledge to the prompt. The idea is to train the model on a few examples (few-shot learning).</p>
+<p>Few shot prompt learning aims to add source knowledge to the prompt. The idea is to train the model on a few examples (few-shot learning).</p>
+<p>With <code class="docutils literal notranslate"><span class="pre">ChatGPT</span></code>, this is mostly done by giving instructions via Human / AI interaction.</p>
+<p>Rather than starting directly with <code class="docutils literal notranslate"><span class="pre">ChartPromptTemplate</span></code>, we need to decompose our prompt template construction with:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">SystemMessagePromptTemplate</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AIMessagePromptTemplate</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">HumanMessagePromptTemplate</span></code></p></li>
+</ul>
+<p>It will generate:</p>
+<ul class="simple">
+<li><p>a <code class="docutils literal notranslate"><span class="pre">SystemMessage</span></code></p></li>
+<li><p>an <code class="docutils literal notranslate"><span class="pre">AIMessage</span></code></p></li>
+<li><p>a <code class="docutils literal notranslate"><span class="pre">HumanMessage</span></code></p></li>
+</ul>
+<p>These messages will be used to create the <code class="docutils literal notranslate"><span class="pre">ChatPromptTemplate</span></code> using this time the <code class="docutils literal notranslate"><span class="pre">from_messages</span></code> method.</p>
+<p>Let’s have an illustration:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.chat_models</span> <span class="kn">import</span> <span class="n">ChatOpenAI</span>
+<span class="kn">from</span> <span class="nn">langchain</span> <span class="kn">import</span> <span class="n">PromptTemplate</span><span class="p">,</span> <span class="n">LLMChain</span>
+<span class="kn">from</span> <span class="nn">langchain.prompts.chat</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">ChatPromptTemplate</span><span class="p">,</span>
+    <span class="n">SystemMessagePromptTemplate</span><span class="p">,</span>
+    <span class="n">AIMessagePromptTemplate</span><span class="p">,</span>
+    <span class="n">HumanMessagePromptTemplate</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">langchain.schema</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">AIMessage</span><span class="p">,</span>
+    <span class="n">HumanMessage</span><span class="p">,</span>
+    <span class="n">SystemMessage</span>
+<span class="p">)</span>
+
+<span class="n">template</span><span class="o">=</span><span class="s2">&quot;You are a helpful assistant that provides provides ranking of countries.&quot;</span>
+<span class="n">system_message_prompt</span> <span class="o">=</span> <span class="n">SystemMessagePromptTemplate</span><span class="o">.</span><span class="n">from_template</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
+<span class="n">example_human</span> <span class="o">=</span> <span class="n">HumanMessagePromptTemplate</span><span class="o">.</span><span class="n">from_template</span><span class="p">(</span><span class="s2">&quot;What are the </span><span class="se">\</span>
+<span class="s2">top 3 richest countries in the World by GNI per Capita?&quot;</span><span class="p">)</span>
+<span class="n">example_ai</span> <span class="o">=</span> <span class="n">AIMessagePromptTemplate</span><span class="o">.</span><span class="n">from_template</span><span class="p">(</span><span class="s2">&quot;1. Liechtenstein,</span><span class="se">\n\</span>
+<span class="s2">2. Switzerland</span><span class="se">\n\</span>
+<span class="s2">3. Luxembourg&quot;</span><span class="p">)</span>
+<span class="n">human_template</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">{text}</span><span class="s2">&quot;</span>
+<span class="n">human_message_prompt</span> <span class="o">=</span> <span class="n">HumanMessagePromptTemplate</span><span class="o">.</span><span class="n">from_template</span><span class="p">(</span><span class="n">human_template</span><span class="p">)</span>
+<span class="n">chat_prompt</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="o">.</span><span class="n">from_messages</span><span class="p">([</span><span class="n">system_message_prompt</span><span class="p">,</span> <span class="n">example_human</span><span class="p">,</span> <span class="n">example_ai</span><span class="p">,</span> <span class="n">human_message_prompt</span><span class="p">])</span>
+<span class="n">chain</span> <span class="o">=</span> <span class="n">LLMChain</span><span class="p">(</span><span class="n">llm</span><span class="o">=</span><span class="n">chat</span><span class="p">,</span> <span class="n">prompt</span><span class="o">=</span><span class="n">chat_prompt</span><span class="p">)</span>
+<span class="c1"># get a chat completion from the formatted messages</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">chain</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;What are the top 5 Oil producers countries?&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
 </section>
 </section>
 </section>
@@ -672,7 +716,7 @@ The output should be a markdown code snippet formatted in the following schema, 
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-templates">Prompt Templates</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-templates">Introduction to Templates</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#output-parsers">Output Parsers</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#few-shot-prompt-templates">Few Shot Prompt Templates</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#few-shot-prompt-learning">Few Shot Prompt Learning</a></li>
 </ul>
 </li>
 </ul>

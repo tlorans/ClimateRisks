@@ -307,8 +307,7 @@ print(output['answer'])
 ['China', 'United States', 'India', 'Russia', 'Japan']
 ```
 
-
-#### Few Shot Prompt Templates 
+#### Few Shot Prompt Learning 
 
 LLMs success comes from their ability to store knowledge within the model parameters, learned during model training. 
 
@@ -317,9 +316,56 @@ However, there are ways to pass more knowledge to an LLM:
 1. Parametric knowledge: the knowledge mentioned above is anything that has been learned by the model during training time and stored within the model weights
 2. Source knowledge: any knowledge provided to the model at inference time via the prompt
 
-Few shot prompt template aims to add source knowledge to the prompt. The idea is to train the model on a few examples (few-shot learning).
+Few shot prompt learning aims to add source knowledge to the prompt. The idea is to train the model on a few examples (few-shot learning).
 
+With `ChatGPT`, this is mostly done by giving instructions via Human / AI interaction.
 
+Rather than starting directly with `ChartPromptTemplate`, we need to decompose our prompt template construction with:
+
+- `SystemMessagePromptTemplate`
+- `AIMessagePromptTemplate`
+- `HumanMessagePromptTemplate`
+
+It will generate:
+
+- a `SystemMessage`
+- an `AIMessage`
+- a `HumanMessage`
+
+These messages will be used to create the `ChatPromptTemplate` using this time the `from_messages` method.
+
+Let's have an illustration:
+
+```Python
+from langchain.chat_models import ChatOpenAI
+from langchain import PromptTemplate, LLMChain
+from langchain.prompts.chat import (
+    ChatPromptTemplate,
+    SystemMessagePromptTemplate,
+    AIMessagePromptTemplate,
+    HumanMessagePromptTemplate,
+)
+from langchain.schema import (
+    AIMessage,
+    HumanMessage,
+    SystemMessage
+)
+
+template="You are a helpful assistant that provides provides ranking of countries."
+system_message_prompt = SystemMessagePromptTemplate.from_template(template)
+example_human = HumanMessagePromptTemplate.from_template("What are the \
+top 3 richest countries in the World by GNI per Capita?")
+example_ai = AIMessagePromptTemplate.from_template("1. Liechtenstein,\n\
+2. Switzerland\n\
+3. Luxembourg")
+human_template="{text}"
+human_message_prompt = HumanMessagePromptTemplate.from_template(human_template)
+chat_prompt = ChatPromptTemplate.from_messages([system_message_prompt, example_human, example_ai, human_message_prompt])
+chain = LLMChain(llm=chat, prompt=chat_prompt)
+# get a chat completion from the formatted messages
+print(chain.run("What are the top 5 Oil producers countries?"))
+
+```
 
 
 
