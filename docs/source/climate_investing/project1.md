@@ -1,46 +1,199 @@
-# Project 1: Emissions Data Retrieval with ChatGPT
+# Project 1: Emissions Data Search with ChatGPT
+
 
 Gathering data needed for portfolio decarbonization can be challenging for three reasons:
 - Emissions reporting is not well-standardized yet, and not freely available in a centralized platform
 - Data disclosed by companies can be misleading (especially for Scope 3)
 - A majority of companies still doesn't disclose any data about carbon emissions, or only disclose partial data (especially without Scope 3 reporting)
 
-In this part, we will test how ChatGPT can help in gathering emissions data.
 
+Let's test if we can use `ChatGPT` to find data about corporate emissions on internet.
 
-First, you need to make sure that both `openai` and `langchain` are installed:
+In the first part, we are going to introduce the concept of agents that can be useful to give `ChatGPT` access to latest news and external knowledge.
+
+## Agents
+
+If LLMs are powerful, they lack some particular abilities that a simple computer program can handle, such as logic, calculation or search.
+
+For example, `ChatGPT` can fails with math question such as $4.1^{2.1}$:
 
 ```Python
-!pip install openai
-!pip install langchain
+from langchain.prompts import ChatPromptTemplate
+
+
+template = """Question: {question}
+Answer: """
+
+prompt = ChatPromptTemplate.from_template(template)
+
+from langchain.prompts import ChatPromptTemplate
+
+
+template = """Question: {question}
+Answer: """
+
+prompt = ChatPromptTemplate.from_template(template)
+
+from langchain.chat_models import ChatOpenAI
+
+chat = ChatOpenAI(temperature = 0.0,
+                  )
+
+from langchain import LLMChain
+
+llm_chain = LLMChain(
+    prompt = prompt,
+    llm = chat
+)
+
+print(llm_chain.run("what is the answer to 4.1^2.1?"))
+```
+```
+Approximately 10.08.
 ```
 
-You need to declare your OpenAI API as an environment variable:
+While the answer should be approximately 19.357.
+
+Another issue with LLMs is that they don't have access to external information and need to rely on knowledge that was captured from its training data, which cuts off at a certain data.
+
+For example:
 
 ```Python
-import os
-os.environ["OPENAI_API_KEY"] = openai_api_key = open('key.txt','r').read()
+print(llm_chain.run("What are Tesla's revenue in 2022?"))
 ```
 
-## Information Retrieval with the ReAct Framework
+```
+As an AI language model, I do not have access to future information or predictions. Therefore, I cannot provide an accurate answer to this question.
+```
 
-Language models have demonstrated impressive capabilities across tasks in language understanding and abilities for reasoning (e.g. chain-of-thought prompting).
+A potential solution for these ploblems comes from agents. 
 
-In a seminal paper, Yao et al. (2022) {cite:p}`yao2022react` proposed a new paradigm combining reasoning and acting paradigms, on which large language models capabilities have been previously applied.
+Agents are enabling tools for LLMs. It can be a calculator or a search engine for example. 
 
-In this framework, actions lead to observation feedback from an external environment. Reasoning traces affect the internal state of the model by reasoning over the context and updating it with information to support future reasoning and acting.
+Using agents, an LLM can write and execute Python code, or search for information or query a SQL database.
+### Agents and Tools
 
-The `langchain` library uses this paradigm to allow ChatGPT interacting with its environment (eg. `tools`). 
+To use agents with `ChatGPT`, we need:
 
-We illustrate it with an information retrieval task with `duckduckgo-search`.
+- a tool to interact with
+- an agent to control the interaction
 
-You need first to install the `duckduckgo-search` package:
+Let's test it with the prebuilt `llm_math` tool to gives `ChatGPT` better math capabilities: 
+
+```Python
+from langchain.agents import load_tools, initialize_agent
+from langchain.agents import AgentType
+
+tools = load_tools(["llm-math"], llm=chat)
+
+agent= initialize_agent(
+    tools, 
+    chat, 
+    agent=AgentType.CHAT_ZERO_SHOT_REACT_DESCRIPTION,
+    handle_parsing_errors=True,
+    verbose = True)
+```
+
+```Python
+agent("What is the 25% of 300?")
+```
+
+```
+Question: What is the 25% of 300?
+Thought: I need to use a calculator to find the answer.
+Action:
+{
+  "action": "Calculator",
+  "action_input": "0.25*300"
+}
+
+Observation: Answer: 75.0
+Thought:The final answer is 75.0
+Final Answer: 75.0
+
+> Finished chain.
+{'input': 'What is the 25% of 300?', 'output': '75.0'}
+```
+
+But what if we decide to ask a non-math question?
+
+```Python
+agent("what is the capital of Norway?")
+```
+
+We run into an error. The reason is that even if he knows the answer, the agent keeps trying to use a tool. However, our agent contains only one tool: the calculator.
+
+We can fix this problem by giving our agent more tools! 
+## Custom Tools
+
+To fix the previous issue, we need to learn how to create custom tools.
+### Adding a General Purpose LLM Tool
+
+We can add a plain and simple `ChatGPT` tool:
+
+```Python
+from langchain.prompts import ChatPromptTemplate
+from langchain import LLMChain
+
+prompt = ChatPromptTemplate.from_template("{query}")
+
+llm_chain = LLMChain(
+    prompt = prompt,
+    llm = chat
+)
+
+chat_gpt_tool = Tool(
+    name='Language Model',
+    func= llm_chain.run,
+    description="use this tool for general purpose queries and logic"
+)
+tools.append(chat_gpt_tool)
+```
+
+Let's reinitialize our agent and ask again the same question:
+
+```Python
+
+agent= initialize_agent(
+    tools, 
+    chat, 
+    agent=AgentType.CHAT_ZERO_SHOT_REACT_DESCRIPTION,
+    handle_parsing_errors=True,
+    verbose = True)
+
+agent("what is the capital of Norway?")
+```
+We obtain:
+
+```
+> Entering new AgentExecutor chain...
+Thought: I'm not sure about the answer, I'll use the Language Model tool to find out.
+Action:
+
+{
+  "action": "Language Model",
+  "action_input": "What is the capital of Norway?"
+}
+
+Observation: The capital of Norway is Oslo.
+Thought:I have found the answer to the question.
+Final Answer: The capital of Norway is Oslo.
+
+> Finished chain.
+{'input': 'what is the capital of Norway?',
+ 'output': 'The capital of Norway is Oslo.'}
+```
+### Adding a Research Engine Tool
+
+To fix the issue regarding access to more recent data, we can give `ChatGPT` access to a web search engine tool!
+
+Let's install `duckduckgo-search`:
 
 ```Python
 !pip install duckduckgo-search
 ```
 
-Let's make a test with a simple search request:
+Let's test it:
 
 ```Python
 from langchain.tools import DuckDuckGoSearchRun
@@ -48,100 +201,59 @@ from langchain.tools import DuckDuckGoSearchRun
 search = DuckDuckGoSearchRun()
 search.run("Tesla stock price?")
 ```
-
-We obtain the following result:
+It gives us:
 
 ```
-Get the latest Tesla Inc (TSLA) real-time quote, historical performance, charts, and other financial information to help you make more informed trading and investment decisions. Quotes Summary May 26, 2023 6:00 am 8:00 am 10:00 am 12:00 pm 2:00 pm 4:00 pm 6:00 pm 182.5 185 187.5 190 192.5 195 197.5 200 Previous Close $184.47 Key Data Bid Price and Ask Price The bid &... $203.93USD 2.77 1.38% PRE MARKET 4:37 AM EDT 06/01/23 $203.20 -0.73 -0.36% PRE MARKET Vol 67,058 Volume 150,711,736 65 Day Avg Vol 133,130,503 1 Day Range 195.12 - 203.95 52 Week Range 101.81 -... Discover historical prices for TSLA stock on Yahoo Finance. View daily, weekly or monthly format back to when Tesla, Inc. stock was issued. ﻿ intraday 1w 1m 6m ytd 1y 3y 5y max Mountain-Chart Date Compare with Remove all Compare with up to 5 Stocks On Tuesday 05/30/2023 the closing price of the Tesla share was $201.16 on NAS....
+Get the latest Tesla Inc (TSLA) real-time quote, historical performance, charts, and other financial information to help you make more informed trading and investment decisions. Quotes Summary May 26, 2023 6:00 am 8:00 am 10:00 am 12:00 pm 2:00 pm 4:00 pm 6:00 pm 182.5 185 187.5 190 192.5 195 197.5 200 Previous Close $184.47 Key Data Bid Price and Ask Price The bid &... Discover historical prices for TSLA stock on Yahoo Finance. View daily, weekly or monthly format back to when Tesla, Inc. stock was issued. 1y 3y 5y max Mountain-Chart Date Compare with Compare with up to 5 Stocks On Friday morning 06/02/2023 the Tesla share started trading at the price of $210.00. Compared to the closing price... Tesla's $212 share price is its highest since mid-February—a massive boon for Musk and his fortune: The 51-year-old's $204 billion net worth is 19% higher than it was just a month ago,...
 ```
 
-Let's load all the modules needed and instantiate our endpoint with the ChatGPT API:
+We can build a new tool and add it to our list:
 
 ```Python
-from langchain.agents import load_tools
-from langchain.agents import initialize_agent
-from langchain.agents import AgentType
-from langchain.chat_models import ChatOpenAI
-
-llm = ChatOpenAI(temperature=0)
-```
-
-We now create the tool that ChatGPT will have access to:
-
-```Python
-from langchain.tools import BaseTool, StructuredTool, Tool, tool
-
-
 duckduckgo_tool = Tool(
     name='DuckDuckGo Search',
     func= search.run,
     description="Useful for when you need to do a search on the internet to find information that another tool can't find. be specific with your input."
 )
 
-tools = [
-    duckduckgo_tool
-]
+tools.append(duckduckgo_tool)
 ```
 
-We can now instantiate our `Agent` (ie. ChatGPT, with a specific ReAct prompt template):
+We can reinitialize our agent and to finally obtain last revenue figures for Tesla!
 
 ```Python
-from langchain.agents import initialize_agent
-
-zero_shot_agent = initialize_agent(
+agent= initialize_agent(
+    tools, 
+    chat, 
     agent=AgentType.CHAT_ZERO_SHOT_REACT_DESCRIPTION,
-    tools=tools, 
-    llm=llm,
-    verbose=True,
-    max_iterations=3,
     handle_parsing_errors=True,
-)
+    verbose = True)
+
+agent("What are Tesla's revenue in 2022?")
 ```
 
-Let's have a test:
+It gives:
 
-```Python
-zero_shot_agent.run("When was Barak Obama born?")
-```
-
-ChatGPT asks himself this question:
 ```
 > Entering new AgentExecutor chain...
-Question: When was Barak Obama born?
-Thought: I don't know the answer to this question off the top of my head, so I will need to use a search engine to find the answer.
-```
-
-The following action is decided:
-```
+Thought: I don't have this information readily available, I will need to search for it.
 Action:
 {
   "action": "DuckDuckGo Search",
-  "action_input": "Barack Obama birthdate"
+  "action_input": "Tesla revenue 2022"
 }
-```
 
-The following observation from the web search:
-```
-Observation: August 4, 1961 (age 61) Honolulu Hawaii Title / Office: presidency of the United States of America (2009-2017), United States United States Senate (2005-2008), United States ... (Show more) Political Affiliation: Democratic Party Awards And Honors: Barack Hussein Obama II (/ b ə ˈ r ɑː k h uː ˈ s eɪ n oʊ ˈ b ɑː m ə / bə-RAHK hoo-SAYN oh-BAH-mə; born August 4, 1961) is an American politician who served as the 44th president of the United States from 2009 to 2017. A member of the Democratic Party, he was the first African-American president of the United States. Obama previously served as a U.S. senator representing Illinois ... Barack Hussein Obama, the 44th and first African-American President of the United States, served from 2008 until 2016. is celebrating his 60th Birthday in 2021. ... Birth date: August 4, 1961. Age: 61. Zodiac Sign: Leo. Background. Barack Obama was the first African American president elected as the 44th president of the United States of ... Politics On Barack Obama's 61st Birthday, He Remembers His Late Mother — and Reveals New Project to Honor Her Former President Obama announced the Ann Dunham Water Garden in honor of his... August 4, 2022 at 2:09 PM · 3 min read. barack Obama in hawaii as a child. Courtesy The Obama Foundation From left: former President Barack Obama with his mother, Ann Dunham, in Hawaii in the '60s. Barack Obama is celebrating his 61st birthday by naming a new addition to the Obama Presidential Center in Chicago after his mother, Ann Dunham.
-```
+Observation: The automaker's full-year 2022 earnings statement, released at the close of market Wednesday, revealed it delivered 405,278 electric cars in the fourth quarter -- up from 343,830 deliveries in... AUSTIN, Texas, January 25, 2023 - Tesla has released its financial results for the fourth quarter and full year ended December 31, 2022 by posting an update on its Investor Relations website. Please visit https://ir.tesla.com to view the update. Tesla's revenue grew to nearly 81.5 billion U.S. dollars in the 2022 fiscal year, a 51 percent increase from the previous year. The United States is Tesla's largest sales market. Revenue... 540 Tesla published its financial results for the fourth quarter of 2022 on Wednesday afternoon. The company brought in $24.3 billion in revenue, a 37 percent increase on Q4 2021. Automotive... Sep 8, 2022,07:30am EDT Listen to article Share to Facebook Share to Twitter Share to Linkedin An aerial view of Tesla Shanghai Gigafactory. Getty Images Key takeaways: There's more to Tesla...
+Thought:The revenue for Tesla in 2022 was nearly 81.5 billion U.S. dollars, a 51 percent increase from the previous year. 
+Final Answer: Tesla's revenue in 2022 was nearly 81.5 billion U.S. dollars.
 
-And the thought is:
-
-```
-Thought:The answer to the question "When was Barack Obama born?" is August 4, 1961. 
-Final Answer: August 4, 1961.
-```
-
-The chain-of-thoughts if finished:
-
-```
 > Finished chain.
-August 4, 1961.
+{'input': "What are Tesla's revenue in 2022?",
+ 'output': "Tesla's revenue in 2022 was nearly 81.5 billion U.S. dollars."}
 ```
 
-## Emissions Extraction with ChatGPT
+## Exercise
 
-With the Information Retrieval with the ReAct tool, you know have a toolkit you to test to retrieve emisions with ChatGPT.
 
 Let's download a dataset with emissions for a handful of stocks:
 
@@ -192,5 +304,4 @@ set(data["Security"].tolist())
 ```
 
 Let's try to retrieve emissions data for those companies, and compare your results with the emissions in the dataset!
-
 

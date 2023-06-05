@@ -32,7 +32,7 @@ intro/intro_langchain
 climate_investing/net_zero_investing
 climate_investing/portfolio_decarbonization_pathway
 climate_investing/portfolio_alignment
-climate_investing/project1_v2
+climate_investing/project1
 climate_investing/project_2
 climate_investing/self_decarbonization
 climate_investing/integratingtransition

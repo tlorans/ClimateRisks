@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Project 1: Reported Emissions Internet Retrieval with ChatGPT &#8212; Climate Risks in Finance 0.1 documentation</title>
+    <title>Project 1: Emissions Data Search with ChatGPT &#8212; Climate Risks in Finance 0.1 documentation</title>
   
   
   
@@ -42,6 +42,8 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'climate_investing/project1_v2';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -131,7 +133,7 @@
 <li class="toctree-l1"><a class="reference internal" href="net_zero_investing.html">Net Zero Investing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="portfolio_decarbonization_pathway.html">Portfolio Decarbonization Pathway</a></li>
 <li class="toctree-l1"><a class="reference internal" href="portfolio_alignment.html">Portfolio Alignment</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Project 1: Reported Emissions Internet Retrieval with ChatGPT</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Project 1: Emissions Data Search with ChatGPT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="project_2.html">Project 2: Estimating Emissions with ChatGPT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="self_decarbonization.html">Net Zero Backtesting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="integratingtransition.html">Integrating the Transition Dimension</a></li>
@@ -272,7 +274,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Project 1: Reported Emissions Internet Retrieval with ChatGPT</h1>
+    <h1>Project 1: Emissions Data Search with ChatGPT</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -282,18 +284,16 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conversational-agents">Conversational Agents</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-agents">What Are Agents?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agents">Agents</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#agents-and-tools">Agents and Tools</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agent-types">Agent Types</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#zero-shot-react">Zero Shot ReAct</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conversational-react">Conversational ReAct</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#react-docstore">ReAct Docstore</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#self-ask-with-search">Self-Ask With Search</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-tools">Custom Tools</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-a-general-purpose-llm-tool">Adding a General Purpose LLM Tool</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-a-research-engine-tool">Adding a Research Engine Tool</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
 </ul>
             </nav>
         </div>
@@ -305,31 +305,276 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="project-1-reported-emissions-internet-retrieval-with-chatgpt">
-<h1>Project 1: Reported Emissions Internet Retrieval with ChatGPT<a class="headerlink" href="#project-1-reported-emissions-internet-retrieval-with-chatgpt" title="Permalink to this headline">#</a></h1>
-<section id="conversational-agents">
-<h2>Conversational Agents<a class="headerlink" href="#conversational-agents" title="Permalink to this headline">#</a></h2>
-<section id="what-are-agents">
-<h3>What Are Agents?<a class="headerlink" href="#what-are-agents" title="Permalink to this headline">#</a></h3>
-</section>
+  <section class="tex2jax_ignore mathjax_ignore" id="project-1-emissions-data-search-with-chatgpt">
+<h1>Project 1: Emissions Data Search with ChatGPT<a class="headerlink" href="#project-1-emissions-data-search-with-chatgpt" title="Permalink to this headline">#</a></h1>
+<p>Gathering data needed for portfolio decarbonization can be challenging for three reasons:</p>
+<ul class="simple">
+<li><p>Emissions reporting is not well-standardized yet, and not freely available in a centralized platform</p></li>
+<li><p>Data disclosed by companies can be misleading (especially for Scope 3)</p></li>
+<li><p>A majority of companies still doesn’t disclose any data about carbon emissions, or only disclose partial data (especially without Scope 3 reporting)</p></li>
+</ul>
+<p>Let’s test if we can use <code class="docutils literal notranslate"><span class="pre">ChatGPT</span></code> to find data about corporate emissions on internet.</p>
+<p>In the first part, we are going to introduce the concept of agents that can be useful to give <code class="docutils literal notranslate"><span class="pre">ChatGPT</span></code> access to latest news and external knowledge.</p>
+<section id="agents">
+<h2>Agents<a class="headerlink" href="#agents" title="Permalink to this headline">#</a></h2>
+<p>If LLMs are powerful, they lack some particular abilities that a simple computer program can handle, such as logic, calculation or search.</p>
+<p>For example, <code class="docutils literal notranslate"><span class="pre">ChatGPT</span></code> can fails with math question such as <span class="math notranslate nohighlight">\(4.1^{2.1}\)</span>:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.prompts</span> <span class="kn">import</span> <span class="n">ChatPromptTemplate</span>
+
+
+<span class="n">template</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Question: </span><span class="si">{question}</span><span class="s2"></span>
+<span class="s2">Answer: &quot;&quot;&quot;</span>
+
+<span class="n">prompt</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="o">.</span><span class="n">from_template</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">langchain.prompts</span> <span class="kn">import</span> <span class="n">ChatPromptTemplate</span>
+
+
+<span class="n">template</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Question: </span><span class="si">{question}</span><span class="s2"></span>
+<span class="s2">Answer: &quot;&quot;&quot;</span>
+
+<span class="n">prompt</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="o">.</span><span class="n">from_template</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">langchain.chat_models</span> <span class="kn">import</span> <span class="n">ChatOpenAI</span>
+
+<span class="n">chat</span> <span class="o">=</span> <span class="n">ChatOpenAI</span><span class="p">(</span><span class="n">temperature</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+                  <span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">langchain</span> <span class="kn">import</span> <span class="n">LLMChain</span>
+
+<span class="n">llm_chain</span> <span class="o">=</span> <span class="n">LLMChain</span><span class="p">(</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="n">prompt</span><span class="p">,</span>
+    <span class="n">llm</span> <span class="o">=</span> <span class="n">chat</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">llm_chain</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;what is the answer to 4.1^2.1?&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Approximately</span> <span class="mf">10.08</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>While the answer should be approximately 19.357.</p>
+<p>Another issue with LLMs is that they don’t have access to external information and need to rely on knowledge that was captured from its training data, which cuts off at a certain data.</p>
+<p>For example:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">llm_chain</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;What are Tesla&#39;s revenue in 2022?&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">As</span> <span class="n">an</span> <span class="n">AI</span> <span class="n">language</span> <span class="n">model</span><span class="p">,</span> <span class="n">I</span> <span class="n">do</span> <span class="ow">not</span> <span class="n">have</span> <span class="n">access</span> <span class="n">to</span> <span class="n">future</span> <span class="n">information</span> <span class="ow">or</span> <span class="n">predictions</span><span class="o">.</span> <span class="n">Therefore</span><span class="p">,</span> <span class="n">I</span> <span class="n">cannot</span> <span class="n">provide</span> <span class="n">an</span> <span class="n">accurate</span> <span class="n">answer</span> <span class="n">to</span> <span class="n">this</span> <span class="n">question</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>A potential solution for these ploblems comes from agents.</p>
+<p>Agents are enabling tools for LLMs. It can be a calculator or a search engine for example.</p>
+<p>Using agents, an LLM can write and execute Python code, or search for information or query a SQL database.</p>
 <section id="agents-and-tools">
 <h3>Agents and Tools<a class="headerlink" href="#agents-and-tools" title="Permalink to this headline">#</a></h3>
+<p>To use agents with <code class="docutils literal notranslate"><span class="pre">ChatGPT</span></code>, we need:</p>
+<ul class="simple">
+<li><p>a tool to interact with</p></li>
+<li><p>an agent to control the interaction</p></li>
+</ul>
+<p>Let’s test it with the prebuilt <code class="docutils literal notranslate"><span class="pre">llm_math</span></code> tool to gives <code class="docutils literal notranslate"><span class="pre">ChatGPT</span></code> better math capabilities:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.agents</span> <span class="kn">import</span> <span class="n">load_tools</span><span class="p">,</span> <span class="n">initialize_agent</span>
+<span class="kn">from</span> <span class="nn">langchain.agents</span> <span class="kn">import</span> <span class="n">AgentType</span>
+
+<span class="n">tools</span> <span class="o">=</span> <span class="n">load_tools</span><span class="p">([</span><span class="s2">&quot;llm-math&quot;</span><span class="p">],</span> <span class="n">llm</span><span class="o">=</span><span class="n">chat</span><span class="p">)</span>
+
+<span class="n">agent</span><span class="o">=</span> <span class="n">initialize_agent</span><span class="p">(</span>
+    <span class="n">tools</span><span class="p">,</span> 
+    <span class="n">chat</span><span class="p">,</span> 
+    <span class="n">agent</span><span class="o">=</span><span class="n">AgentType</span><span class="o">.</span><span class="n">CHAT_ZERO_SHOT_REACT_DESCRIPTION</span><span class="p">,</span>
+    <span class="n">handle_parsing_errors</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">agent</span><span class="p">(</span><span class="s2">&quot;What is the 25</span><span class="si">% o</span><span class="s2">f 300?&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Question: What is the 25% of 300?
+Thought: I need to use a calculator to find the answer.
+Action:
+{
+  &quot;action&quot;: &quot;Calculator&quot;,
+  &quot;action_input&quot;: &quot;0.25*300&quot;
+}
+
+Observation: Answer: 75.0
+Thought:The final answer is 75.0
+Final Answer: 75.0
+
+&gt; Finished chain.
+{&#39;input&#39;: &#39;What is the 25% of 300?&#39;, &#39;output&#39;: &#39;75.0&#39;}
+</pre></div>
+</div>
+<p>But what if we decide to ask a non-math question?</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">agent</span><span class="p">(</span><span class="s2">&quot;what is the capital of Norway?&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We run into an error. The reason is that even if he knows the answer, the agent keeps trying to use a tool. However, our agent contains only one tool: the calculator.</p>
+<p>We can fix this problem by giving our agent more tools!</p>
 </section>
 </section>
-<section id="agent-types">
-<h2>Agent Types<a class="headerlink" href="#agent-types" title="Permalink to this headline">#</a></h2>
-<section id="zero-shot-react">
-<h3>Zero Shot ReAct<a class="headerlink" href="#zero-shot-react" title="Permalink to this headline">#</a></h3>
+<section id="custom-tools">
+<h2>Custom Tools<a class="headerlink" href="#custom-tools" title="Permalink to this headline">#</a></h2>
+<p>To fix the previous issue, we need to learn how to create custom tools.</p>
+<section id="adding-a-general-purpose-llm-tool">
+<h3>Adding a General Purpose LLM Tool<a class="headerlink" href="#adding-a-general-purpose-llm-tool" title="Permalink to this headline">#</a></h3>
+<p>We can add a plain and simple <code class="docutils literal notranslate"><span class="pre">ChatGPT</span></code> tool:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.prompts</span> <span class="kn">import</span> <span class="n">ChatPromptTemplate</span>
+<span class="kn">from</span> <span class="nn">langchain</span> <span class="kn">import</span> <span class="n">LLMChain</span>
+
+<span class="n">prompt</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="o">.</span><span class="n">from_template</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{query}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">llm_chain</span> <span class="o">=</span> <span class="n">LLMChain</span><span class="p">(</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="n">prompt</span><span class="p">,</span>
+    <span class="n">llm</span> <span class="o">=</span> <span class="n">chat</span>
+<span class="p">)</span>
+
+<span class="n">chat_gpt_tool</span> <span class="o">=</span> <span class="n">Tool</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Language Model&#39;</span><span class="p">,</span>
+    <span class="n">func</span><span class="o">=</span> <span class="n">llm_chain</span><span class="o">.</span><span class="n">run</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;use this tool for general purpose queries and logic&quot;</span>
+<span class="p">)</span>
+<span class="n">tools</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">chat_gpt_tool</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s reinitialize our agent and ask again the same question:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">agent</span><span class="o">=</span> <span class="n">initialize_agent</span><span class="p">(</span>
+    <span class="n">tools</span><span class="p">,</span> 
+    <span class="n">chat</span><span class="p">,</span> 
+    <span class="n">agent</span><span class="o">=</span><span class="n">AgentType</span><span class="o">.</span><span class="n">CHAT_ZERO_SHOT_REACT_DESCRIPTION</span><span class="p">,</span>
+    <span class="n">handle_parsing_errors</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="n">agent</span><span class="p">(</span><span class="s2">&quot;what is the capital of Norway?&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We obtain:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">Entering</span> <span class="n">new</span> <span class="n">AgentExecutor</span> <span class="n">chain</span><span class="o">...</span>
+<span class="n">Thought</span><span class="p">:</span> <span class="n">I</span><span class="s1">&#39;m not sure about the answer, I&#39;</span><span class="n">ll</span> <span class="n">use</span> <span class="n">the</span> <span class="n">Language</span> <span class="n">Model</span> <span class="n">tool</span> <span class="n">to</span> <span class="n">find</span> <span class="n">out</span><span class="o">.</span>
+<span class="n">Action</span><span class="p">:</span>
+
+<span class="p">{</span>
+  <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;Language Model&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;action_input&quot;</span><span class="p">:</span> <span class="s2">&quot;What is the capital of Norway?&quot;</span>
+<span class="p">}</span>
+
+<span class="n">Observation</span><span class="p">:</span> <span class="n">The</span> <span class="n">capital</span> <span class="n">of</span> <span class="n">Norway</span> <span class="ow">is</span> <span class="n">Oslo</span><span class="o">.</span>
+<span class="n">Thought</span><span class="p">:</span><span class="n">I</span> <span class="n">have</span> <span class="n">found</span> <span class="n">the</span> <span class="n">answer</span> <span class="n">to</span> <span class="n">the</span> <span class="n">question</span><span class="o">.</span>
+<span class="n">Final</span> <span class="n">Answer</span><span class="p">:</span> <span class="n">The</span> <span class="n">capital</span> <span class="n">of</span> <span class="n">Norway</span> <span class="ow">is</span> <span class="n">Oslo</span><span class="o">.</span>
+
+<span class="o">&gt;</span> <span class="n">Finished</span> <span class="n">chain</span><span class="o">.</span>
+<span class="p">{</span><span class="s1">&#39;input&#39;</span><span class="p">:</span> <span class="s1">&#39;what is the capital of Norway?&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;output&#39;</span><span class="p">:</span> <span class="s1">&#39;The capital of Norway is Oslo.&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
 </section>
-<section id="conversational-react">
-<h3>Conversational ReAct<a class="headerlink" href="#conversational-react" title="Permalink to this headline">#</a></h3>
+<section id="adding-a-research-engine-tool">
+<h3>Adding a Research Engine Tool<a class="headerlink" href="#adding-a-research-engine-tool" title="Permalink to this headline">#</a></h3>
+<p>To fix the issue regarding access to more recent data, we can give <code class="docutils literal notranslate"><span class="pre">ChatGPT</span></code> access to a web search engine tool!</p>
+<p>Let’s install <code class="docutils literal notranslate"><span class="pre">duckduckgo-search</span></code>:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span>!pip install duckduckgo-search
+</pre></div>
+</div>
+<p>Let’s test it:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.tools</span> <span class="kn">import</span> <span class="n">DuckDuckGoSearchRun</span>
+
+<span class="n">search</span> <span class="o">=</span> <span class="n">DuckDuckGoSearchRun</span><span class="p">()</span>
+<span class="n">search</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;Tesla stock price?&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It gives us:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Get the latest Tesla Inc (TSLA) real-time quote, historical performance, charts, and other financial information to help you make more informed trading and investment decisions. Quotes Summary May 26, 2023 6:00 am 8:00 am 10:00 am 12:00 pm 2:00 pm 4:00 pm 6:00 pm 182.5 185 187.5 190 192.5 195 197.5 200 Previous Close $184.47 Key Data Bid Price and Ask Price The bid &amp;... Discover historical prices for TSLA stock on Yahoo Finance. View daily, weekly or monthly format back to when Tesla, Inc. stock was issued. 1y 3y 5y max Mountain-Chart Date Compare with Compare with up to 5 Stocks On Friday morning 06/02/2023 the Tesla share started trading at the price of $210.00. Compared to the closing price... Tesla&#39;s $212 share price is its highest since mid-February—a massive boon for Musk and his fortune: The 51-year-old&#39;s $204 billion net worth is 19% higher than it was just a month ago,...
+</pre></div>
+</div>
+<p>We can build a new tool and add it to our list:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">duckduckgo_tool</span> <span class="o">=</span> <span class="n">Tool</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;DuckDuckGo Search&#39;</span><span class="p">,</span>
+    <span class="n">func</span><span class="o">=</span> <span class="n">search</span><span class="o">.</span><span class="n">run</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Useful for when you need to do a search on the internet to find information that another tool can&#39;t find. be specific with your input.&quot;</span>
+<span class="p">)</span>
+
+<span class="n">tools</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">duckduckgo_tool</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We can reinitialize our agent and to finally obtain last revenue figures for Tesla!</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">agent</span><span class="o">=</span> <span class="n">initialize_agent</span><span class="p">(</span>
+    <span class="n">tools</span><span class="p">,</span> 
+    <span class="n">chat</span><span class="p">,</span> 
+    <span class="n">agent</span><span class="o">=</span><span class="n">AgentType</span><span class="o">.</span><span class="n">CHAT_ZERO_SHOT_REACT_DESCRIPTION</span><span class="p">,</span>
+    <span class="n">handle_parsing_errors</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="n">agent</span><span class="p">(</span><span class="s2">&quot;What are Tesla&#39;s revenue in 2022?&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It gives:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">Entering</span> <span class="n">new</span> <span class="n">AgentExecutor</span> <span class="n">chain</span><span class="o">...</span>
+<span class="n">Thought</span><span class="p">:</span> <span class="n">I</span> <span class="n">don</span><span class="s1">&#39;t have this information readily available, I will need to search for it.</span>
+<span class="n">Action</span><span class="p">:</span>
+<span class="p">{</span>
+  <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;DuckDuckGo Search&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;action_input&quot;</span><span class="p">:</span> <span class="s2">&quot;Tesla revenue 2022&quot;</span>
+<span class="p">}</span>
+
+<span class="n">Observation</span><span class="p">:</span> <span class="n">The</span> <span class="n">automaker</span><span class="s1">&#39;s full-year 2022 earnings statement, released at the close of market Wednesday, revealed it delivered 405,278 electric cars in the fourth quarter -- up from 343,830 deliveries in... AUSTIN, Texas, January 25, 2023 - Tesla has released its financial results for the fourth quarter and full year ended December 31, 2022 by posting an update on its Investor Relations website. Please visit https://ir.tesla.com to view the update. Tesla&#39;</span><span class="n">s</span> <span class="n">revenue</span> <span class="n">grew</span> <span class="n">to</span> <span class="n">nearly</span> <span class="mf">81.5</span> <span class="n">billion</span> <span class="n">U</span><span class="o">.</span><span class="n">S</span><span class="o">.</span> <span class="n">dollars</span> <span class="ow">in</span> <span class="n">the</span> <span class="mi">2022</span> <span class="n">fiscal</span> <span class="n">year</span><span class="p">,</span> <span class="n">a</span> <span class="mi">51</span> <span class="n">percent</span> <span class="n">increase</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">previous</span> <span class="n">year</span><span class="o">.</span> <span class="n">The</span> <span class="n">United</span> <span class="n">States</span> <span class="ow">is</span> <span class="n">Tesla</span><span class="s1">&#39;s largest sales market. Revenue... 540 Tesla published its financial results for the fourth quarter of 2022 on Wednesday afternoon. The company brought in $24.3 billion in revenue, a 37 percent increase on Q4 2021. Automotive... Sep 8, 2022,07:30am EDT Listen to article Share to Facebook Share to Twitter Share to Linkedin An aerial view of Tesla Shanghai Gigafactory. Getty Images Key takeaways: There&#39;</span><span class="n">s</span> <span class="n">more</span> <span class="n">to</span> <span class="n">Tesla</span><span class="o">...</span>
+<span class="n">Thought</span><span class="p">:</span><span class="n">The</span> <span class="n">revenue</span> <span class="k">for</span> <span class="n">Tesla</span> <span class="ow">in</span> <span class="mi">2022</span> <span class="n">was</span> <span class="n">nearly</span> <span class="mf">81.5</span> <span class="n">billion</span> <span class="n">U</span><span class="o">.</span><span class="n">S</span><span class="o">.</span> <span class="n">dollars</span><span class="p">,</span> <span class="n">a</span> <span class="mi">51</span> <span class="n">percent</span> <span class="n">increase</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">previous</span> <span class="n">year</span><span class="o">.</span> 
+<span class="n">Final</span> <span class="n">Answer</span><span class="p">:</span> <span class="n">Tesla</span><span class="s1">&#39;s revenue in 2022 was nearly 81.5 billion U.S. dollars.</span>
+
+<span class="o">&gt;</span> <span class="n">Finished</span> <span class="n">chain</span><span class="o">.</span>
+<span class="p">{</span><span class="s1">&#39;input&#39;</span><span class="p">:</span> <span class="s2">&quot;What are Tesla&#39;s revenue in 2022?&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;output&#39;</span><span class="p">:</span> <span class="s2">&quot;Tesla&#39;s revenue in 2022 was nearly 81.5 billion U.S. dollars.&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
 </section>
-<section id="react-docstore">
-<h3>ReAct Docstore<a class="headerlink" href="#react-docstore" title="Permalink to this headline">#</a></h3>
 </section>
-<section id="self-ask-with-search">
-<h3>Self-Ask With Search<a class="headerlink" href="#self-ask-with-search" title="Permalink to this headline">#</a></h3>
-</section>
+<section id="exercise">
+<h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">#</a></h2>
+<p>Let’s download a dataset with emissions for a handful of stocks:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://github.com/shokru/carbon_emissions/blob/main/data_fin.xlsx?raw=true&#39;</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Company&quot;</span><span class="p">:</span><span class="s2">&quot;Symbol&quot;</span><span class="p">},</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="n">payload</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_html</span><span class="p">(</span><span class="s1">&#39;https://en.wikipedia.org/wiki/List_of_S%26P_500_companies&#39;</span><span class="p">)</span>
+<span class="n">first_table</span> <span class="o">=</span> <span class="n">payload</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">first_table</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s2">&quot;Symbol&quot;</span><span class="p">,</span><span class="s2">&quot;Security&quot;</span><span class="p">,</span><span class="s2">&quot;GICS Sector&quot;</span><span class="p">,</span><span class="s2">&quot;GICS Sub-Industry&quot;</span><span class="p">]],</span> <span class="n">how</span> <span class="o">=</span> <span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">on</span> <span class="o">=</span> <span class="s2">&quot;Symbol&quot;</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;Security&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;AT&amp;T&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Apple Inc.&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Bank of America&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Boeing&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;CVS Health&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Chevron Corporation&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Cisco&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Citigroup&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Disney&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Dominion Energy&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;ExxonMobil&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Ford Motor Company&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;General Electric&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Home Depot (The)&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;IBM&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Intel&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;JPMorgan Chase&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Johnson &amp; Johnson&#39;</span><span class="p">,</span>
+ <span class="s2">&quot;Kellogg&#39;s&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;McKesson&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Merck &amp; Co.&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Microsoft&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Oracle Corporation&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Pfizer&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Procter &amp; Gamble&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;United Parcel Service&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;UnitedHealth Group&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Verizon&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Walmart&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Wells Fargo&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Let’s try to retrieve emissions data for those companies, and compare your results with the emissions in the dataset!</p>
 </section>
 </section>
 
@@ -375,18 +620,16 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conversational-agents">Conversational Agents</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-agents">What Are Agents?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agents">Agents</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#agents-and-tools">Agents and Tools</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agent-types">Agent Types</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#zero-shot-react">Zero Shot ReAct</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conversational-react">Conversational ReAct</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#react-docstore">ReAct Docstore</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#self-ask-with-search">Self-Ask With Search</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-tools">Custom Tools</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-a-general-purpose-llm-tool">Adding a General Purpose LLM Tool</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-a-research-engine-tool">Adding a Research Engine Tool</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
 </ul>
   </nav></div>
 
