@@ -142,11 +142,122 @@ And the result is:
 
 ## Prompt Engineering with LangChain
 
+In Natural Language Processing (NLP), we used to train different models for different tasks. 
 
+With the versatility of LLMs, this has changed. The time when we needed separate models for classification, named entity recognition (NER) or question-answering (QA) is over.
+
+With the introduction of transformers model and transfer learning, all that was needed to adapt a language model for different tasks was a few small layers at the end of the network (the head) and fine-tuning. 
+
+Today, even this approach is outdated. Rather than changing these last few model layers and go through a fine-tuning process, we can now prompt the model to do classification or QA.
+
+The `LangChain` library puts this prompt engineering at the center, and has built an entire set of objects for them. 
+
+In this section, we are going to focus on `ChatPromptTemplate` and how implementing them effectively.
 
 ### Prompt Engineering
 
+A prompt is typically composed of multiple parts:
+
+- Instructions: tell the model what to do, how to use external information and how to construct the output
+- External information: context as an additional source of knowledge for the model. It can be manually inserted or retrieved via an external database
+- User input or query: a query input by the human user
+- Output indicator: it is the beginning of the future generated text. If generating Python code for example, we can use `import` to indicate the model it must begin writing Python code
+
+Each component is usually placed in the prompt in that order.
+
+Let's test it:
+
+```Python
+prompt = """Answer the question based on the context below. If the
+question cannot be answered using the information provided answer
+with "I don't know".
+
+Context: Transitioning to a lower-carbon economy may entail extensive policy, legal, technology, and
+market changes to address mitigation and adaptation requirements related to climate change.
+Depending on the nature, speed, and focus of these changes, transition risks may pose varying
+levels of financial and reputational risk to organizations.
+
+Question: What market changes entailed by the transition towards a low-carbon economy?
+
+Answer: """
+
+template = ChatPromptTemplate.from_template(prompt)
+print(chat(template.format_messages()).content)
+```
+
+And the answer is:
+
+```
+The context mentions that transitioning to a lower-carbon economy may entail extensive market changes, but it does not provide specific details on what those changes may be. Therefore, the answer is "I don't know."
+```
+
+In reality, we don't want to hardcore the context and user question. We are going to use a template to generate it.
 ### Prompt Templates
+
+
+#### Introduction to Templates
+
+Prompt template classes in `LangChain` are built to make constructing prompts with dynamic inputs easier. 
+
+We can test this by adding a single dynamic input, the user query:
+
+```Python
+from langchain.prompts import ChatPromptTemplate
+
+template = """Answer the question based on the context below. If the
+question cannot be answered using the information provided answer
+with "I don't know".
+
+Context: Transitioning to a lower-carbon economy may entail extensive policy, legal, technology, and
+market changes to address mitigation and adaptation requirements related to climate change.
+Depending on the nature, speed, and focus of these changes, transition risks may pose varying
+levels of financial and reputational risk to organizations.
+
+Question: {query}
+
+Answer: """
+
+prompt_template = ChatPromptTemplate.from_template(template)
+```
+
+When we use the `format_messages` from our `ChatPromptTemplate`, we need to pass the query:
+
+```Python
+message = prompt_template.format_messages(query = "What are the market changes entailed by the transition towards a low-carbon economy?")
+print(message[0].content)
+```
+
+It gives:
+
+```
+Answer the question based on the context below. If the
+question cannot be answered using the information provided answer
+with "I don't know".
+
+Context: Transitioning to a lower-carbon economy may entail extensive policy, legal, technology, and
+market changes to address mitigation and adaptation requirements related to climate change.
+Depending on the nature, speed, and focus of these changes, transition risks may pose varying
+levels of financial and reputational risk to organizations.
+
+Question: What are the market changes entailed by the transition towards a low-carbon economy?
+
+Answer: 
+```
+#### Few Shot Prompt Templates 
+
+LLMs success comes from their ability to store knowledge within the model parameters, learned during model training. 
+
+However, there are ways to pass more knowledge to an LLM:
+
+1. Parametric knowledge: the knowledge mentioned above is anything that has been learned by the model during training time and stored within the model weights
+2. Source knowledge: any knowledge provided to the model at inference time via the prompt
+
+Few shot prompt template aims to add source knowledge to the prompt. The idea is to train the model on a few examples (few-shot learning).
+
+
+
+#### Output Parsers
+
 
 ## Memory
 

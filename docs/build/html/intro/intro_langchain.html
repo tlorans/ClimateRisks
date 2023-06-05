@@ -289,7 +289,12 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-engineering-with-langchain">Prompt Engineering with LangChain</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-engineering">Prompt Engineering</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-templates">Prompt Templates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-templates">Prompt Templates</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-templates">Introduction to Templates</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#few-shot-prompt-templates">Few Shot Prompt Templates</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#output-parsers">Output Parsers</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#memory">Memory</a><ul class="nav section-nav flex-column">
@@ -439,11 +444,104 @@ document.write(`
 </section>
 <section id="prompt-engineering-with-langchain">
 <h2>Prompt Engineering with LangChain<a class="headerlink" href="#prompt-engineering-with-langchain" title="Permalink to this headline">#</a></h2>
+<p>In Natural Language Processing (NLP), we used to train different models for different tasks.</p>
+<p>With the versatility of LLMs, this has changed. The time when we needed separate models for classification, named entity recognition (NER) or question-answering (QA) is over.</p>
+<p>With the introduction of transformers model and transfer learning, all that was needed to adapt a language model for different tasks was a few small layers at the end of the network (the head) and fine-tuning.</p>
+<p>Today, even this approach is outdated. Rather than changing these last few model layers and go through a fine-tuning process, we can now prompt the model to do classification or QA.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">LangChain</span></code> library puts this prompt engineering at the center, and has built an entire set of objects for them.</p>
+<p>In this section, we are going to focus on <code class="docutils literal notranslate"><span class="pre">ChatPromptTemplate</span></code> and how implementing them effectively.</p>
 <section id="prompt-engineering">
 <h3>Prompt Engineering<a class="headerlink" href="#prompt-engineering" title="Permalink to this headline">#</a></h3>
+<p>A prompt is typically composed of multiple parts:</p>
+<ul class="simple">
+<li><p>Instructions: tell the model what to do, how to use external information and how to construct the output</p></li>
+<li><p>External information: context as an additional source of knowledge for the model. It can be manually inserted or retrieved via an external database</p></li>
+<li><p>User input or query: a query input by the human user</p></li>
+<li><p>Output indicator: it is the beginning of the future generated text. If generating Python code for example, we can use <code class="docutils literal notranslate"><span class="pre">import</span></code> to indicate the model it must begin writing Python code</p></li>
+</ul>
+<p>Each component is usually placed in the prompt in that order.</p>
+<p>Let’s test it:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">prompt</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Answer the question based on the context below. If the</span>
+<span class="s2">question cannot be answered using the information provided answer</span>
+<span class="s2">with &quot;I don&#39;t know&quot;.</span>
+
+<span class="s2">Context: Transitioning to a lower-carbon economy may entail extensive policy, legal, technology, and</span>
+<span class="s2">market changes to address mitigation and adaptation requirements related to climate change.</span>
+<span class="s2">Depending on the nature, speed, and focus of these changes, transition risks may pose varying</span>
+<span class="s2">levels of financial and reputational risk to organizations.</span>
+
+<span class="s2">Question: What market changes entailed by the transition towards a low-carbon economy?</span>
+
+<span class="s2">Answer: &quot;&quot;&quot;</span>
+
+<span class="n">template</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="o">.</span><span class="n">from_template</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">chat</span><span class="p">(</span><span class="n">template</span><span class="o">.</span><span class="n">format_messages</span><span class="p">())</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And the answer is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">context</span> <span class="n">mentions</span> <span class="n">that</span> <span class="n">transitioning</span> <span class="n">to</span> <span class="n">a</span> <span class="n">lower</span><span class="o">-</span><span class="n">carbon</span> <span class="n">economy</span> <span class="n">may</span> <span class="n">entail</span> <span class="n">extensive</span> <span class="n">market</span> <span class="n">changes</span><span class="p">,</span> <span class="n">but</span> <span class="n">it</span> <span class="n">does</span> <span class="ow">not</span> <span class="n">provide</span> <span class="n">specific</span> <span class="n">details</span> <span class="n">on</span> <span class="n">what</span> <span class="n">those</span> <span class="n">changes</span> <span class="n">may</span> <span class="n">be</span><span class="o">.</span> <span class="n">Therefore</span><span class="p">,</span> <span class="n">the</span> <span class="n">answer</span> <span class="ow">is</span> <span class="s2">&quot;I don&#39;t know.&quot;</span>
+</pre></div>
+</div>
+<p>In reality, we don’t want to hardcore the context and user question. We are going to use a template to generate it.</p>
 </section>
 <section id="prompt-templates">
 <h3>Prompt Templates<a class="headerlink" href="#prompt-templates" title="Permalink to this headline">#</a></h3>
+<section id="introduction-to-templates">
+<h4>Introduction to Templates<a class="headerlink" href="#introduction-to-templates" title="Permalink to this headline">#</a></h4>
+<p>Prompt template classes in <code class="docutils literal notranslate"><span class="pre">LangChain</span></code> are built to make constructing prompts with dynamic inputs easier.</p>
+<p>We can test this by adding a single dynamic input, the user query:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.prompts</span> <span class="kn">import</span> <span class="n">ChatPromptTemplate</span>
+
+<span class="n">template</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Answer the question based on the context below. If the</span>
+<span class="s2">question cannot be answered using the information provided answer</span>
+<span class="s2">with &quot;I don&#39;t know&quot;.</span>
+
+<span class="s2">Context: Transitioning to a lower-carbon economy may entail extensive policy, legal, technology, and</span>
+<span class="s2">market changes to address mitigation and adaptation requirements related to climate change.</span>
+<span class="s2">Depending on the nature, speed, and focus of these changes, transition risks may pose varying</span>
+<span class="s2">levels of financial and reputational risk to organizations.</span>
+
+<span class="s2">Question: </span><span class="si">{query}</span><span class="s2"></span>
+
+<span class="s2">Answer: &quot;&quot;&quot;</span>
+
+<span class="n">prompt_template</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="o">.</span><span class="n">from_template</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>When we use the <code class="docutils literal notranslate"><span class="pre">format_messages</span></code> from our <code class="docutils literal notranslate"><span class="pre">ChatPromptTemplate</span></code>, we need to pass the query:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">message</span> <span class="o">=</span> <span class="n">prompt_template</span><span class="o">.</span><span class="n">format_messages</span><span class="p">(</span><span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;What are the market changes entailed by the transition towards a low-carbon economy?&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It gives:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Answer the question based on the context below. If the
+question cannot be answered using the information provided answer
+with &quot;I don&#39;t know&quot;.
+
+Context: Transitioning to a lower-carbon economy may entail extensive policy, legal, technology, and
+market changes to address mitigation and adaptation requirements related to climate change.
+Depending on the nature, speed, and focus of these changes, transition risks may pose varying
+levels of financial and reputational risk to organizations.
+
+Question: What are the market changes entailed by the transition towards a low-carbon economy?
+
+Answer: 
+</pre></div>
+</div>
+</section>
+<section id="few-shot-prompt-templates">
+<h4>Few Shot Prompt Templates<a class="headerlink" href="#few-shot-prompt-templates" title="Permalink to this headline">#</a></h4>
+<p>LLMs success comes from their ability to store knowledge within the model parameters, learned during model training.</p>
+<p>However, there are ways to pass more knowledge to an LLM:</p>
+<ol class="arabic simple">
+<li><p>Parametric knowledge: the knowledge mentioned above is anything that has been learned by the model during training time and stored within the model weights</p></li>
+<li><p>Source knowledge: any knowledge provided to the model at inference time via the prompt</p></li>
+</ol>
+<p>Few shot prompt template aims to add source knowledge to the prompt. The idea is to train the model on a few examples (few-shot learning).</p>
+</section>
+<section id="output-parsers">
+<h4>Output Parsers<a class="headerlink" href="#output-parsers" title="Permalink to this headline">#</a></h4>
+</section>
 </section>
 </section>
 <section id="memory">
@@ -521,7 +619,12 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-engineering-with-langchain">Prompt Engineering with LangChain</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-engineering">Prompt Engineering</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-templates">Prompt Templates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-templates">Prompt Templates</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-templates">Introduction to Templates</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#few-shot-prompt-templates">Few Shot Prompt Templates</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#output-parsers">Output Parsers</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#memory">Memory</a><ul class="nav section-nav flex-column">
