@@ -36,5 +36,6 @@ climate_investing/project1
 climate_investing/project_2
 climate_investing/self_decarbonization
 climate_investing/integratingtransition
+climate_investing/project3
 references
 ```
