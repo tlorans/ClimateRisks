@@ -10,8 +10,9 @@
 This course is under heavy development
 ```
 
-In this course, I propose a step-by-step implementation of a net zero strategy with Python, following the methodology proposed by Barahhou et al. (2022) {cite:p}`barahhou2022net`, using ChatGPT with the excellent development framework `LangChain` for estimating the underlying data.
+In this course, I propose a step-by-step implementation of a net zero strategy with Python, following the methodology proposed by Barahhou et al. (2022) {cite:p}`barahhou2022net`.
 
+In the projects, we investigate the use of `ChatGPT` with the development framework `LangChain`.
 
 This course is calibrated as an introductory course (one-week duration).
 

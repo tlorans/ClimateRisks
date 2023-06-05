@@ -1,5 +1,6 @@
 # Project 2: ChatGPT as a Carbon Data Analyst
 
+In this project, we are investigating if we can directly use `ChatGPT` for simple calculation on a specific dataset, by using knowledge base and custom tools.
 
 ## Knowledge Bases
 
