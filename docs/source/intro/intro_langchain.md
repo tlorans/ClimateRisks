@@ -243,6 +243,70 @@ Question: What are the market changes entailed by the transition towards a low-c
 
 Answer: 
 ```
+
+#### Output Parsers
+
+Answers from `ChatGPT` are obtained as string. However, we may want to obtain it in a more specific format for further treatments. 
+
+For example, you may want to obtain a Python list:
+
+```JSON
+{
+  "answer": ['China','United States']
+}
+```
+
+The `langchain` library proposes output parsers with the `ResponseSchema` and `StructuredOutputParser`. 
+
+
+First, we need to add format instructions to the prompt:
+
+```Python
+from langchain.output_parsers import ResponseSchema
+from langchain.output_parsers import StructuredOutputParser
+
+response_schemas = [
+    ResponseSchema(name="answer", description="answer to the user's question.\
+    output it as a comma separated Python list, such as ['country_1','country_2']"),
+]
+
+
+output_parser = StructuredOutputParser.from_response_schemas(response_schemas)
+format_instructions = output_parser.get_format_instructions()
+
+template_format = """{query}\n\
+
+{format_instructions}
+"""
+
+prompt = ChatPromptTemplate.from_template(template_format)
+messages = prompt.format_messages(query = "What are the top 5 countries that produce the most carbon dioxide?",
+                                format_instructions = format_instructions)
+print(messages[0].content)
+```
+
+```
+What are the top 5 countries that produce the most carbon dioxide?
+
+The output should be a markdown code snippet formatted in the following schema, including the leading and trailing "\`\`\`json" and "\`\`\`":
+
+{
+	"answer": string  // answer to the user's question.    output it as a comma separated Python list, such as ['country_1','country_2']
+}
+```
+
+Now we can use the output parser to get the Python list:
+
+```Python
+response = chat(messages)
+output = output_parser.parse(response.content)
+print(output['answer'])
+```
+
+```
+['China', 'United States', 'India', 'Russia', 'Japan']
+```
+
 #### Few Shot Prompt Templates 
 
 LLMs success comes from their ability to store knowledge within the model parameters, learned during model training. 
@@ -256,7 +320,6 @@ Few shot prompt template aims to add source knowledge to the prompt. The idea is
 
 
 
-#### Output Parsers
 
 
 ## Memory
