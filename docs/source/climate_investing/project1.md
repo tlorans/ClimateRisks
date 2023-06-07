@@ -220,24 +220,14 @@ The numerical information was successfully extracted!
 
 ## Exercise
 
+We now are going to test if `ChatGPT` can be of any use for emissions data retrieval.
 
-Let's download a dataset with emissions for a handful of stocks:
-
-```Python
-import pandas as pd
-url = 'https://github.com/shokru/carbon_emissions/blob/main/data_fin.xlsx?raw=true'
-data = pd.read_excel(url)
-data.rename(columns={"Company":"Symbol"}, inplace = True)
-
-payload=pd.read_html('https://en.wikipedia.org/wiki/List_of_S%26P_500_companies')
-first_table = payload[0]
-df = first_table
-data = data.merge(df[["Symbol","Security","GICS Sector","GICS Sub-Industry"]], how = "left", on = "Symbol")
-set(data["Security"].tolist())
+In this exercise, you need to:
+1. Adapt the previous prompt template for Scope 1 Emissions.
+2. Try your entire chain (search engine and extraction prompt) for a company of your choice
+3. Apply this process to the following companies (think about a Python function):
 ```
-
-```
-{'AT&T',
+'AT&T',
  'Apple Inc.',
  'Bank of America',
  'Boeing',
@@ -267,7 +257,6 @@ set(data["Security"].tolist())
  'Verizon',
  'Walmart',
  'Wells Fargo'}
-```
-
-Let's try to retrieve emissions data for those companies, and compare your results with the emissions in the dataset!
+ ```
+ 4. Did you found any issue apply this process to a list of companies? Please provide ideas about serialization (making the process work for multiple companies).
 

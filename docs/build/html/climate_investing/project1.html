@@ -490,20 +490,14 @@ Tesla&#39;s revenue for the 2022 fiscal year was nearly 81.5 billion U.S. dollar
 </section>
 <section id="exercise">
 <h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">#</a></h2>
-<p>Let’s download a dataset with emissions for a handful of stocks:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://github.com/shokru/carbon_emissions/blob/main/data_fin.xlsx?raw=true&#39;</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-<span class="n">data</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Company&quot;</span><span class="p">:</span><span class="s2">&quot;Symbol&quot;</span><span class="p">},</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
-
-<span class="n">payload</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_html</span><span class="p">(</span><span class="s1">&#39;https://en.wikipedia.org/wiki/List_of_S%26P_500_companies&#39;</span><span class="p">)</span>
-<span class="n">first_table</span> <span class="o">=</span> <span class="n">payload</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">first_table</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s2">&quot;Symbol&quot;</span><span class="p">,</span><span class="s2">&quot;Security&quot;</span><span class="p">,</span><span class="s2">&quot;GICS Sector&quot;</span><span class="p">,</span><span class="s2">&quot;GICS Sub-Industry&quot;</span><span class="p">]],</span> <span class="n">how</span> <span class="o">=</span> <span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">on</span> <span class="o">=</span> <span class="s2">&quot;Symbol&quot;</span><span class="p">)</span>
-<span class="nb">set</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;Security&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;AT&amp;T&#39;</span><span class="p">,</span>
+<p>We now are going to test if <code class="docutils literal notranslate"><span class="pre">ChatGPT</span></code> can be of any use for emissions data retrieval.</p>
+<p>In this exercise, you need to:</p>
+<ol class="arabic simple">
+<li><p>Adapt the previous prompt template for Scope 1 Emissions.</p></li>
+<li><p>Try your entire chain (search engine and extraction prompt) for a company of your choice</p></li>
+<li><p>Apply this process to the following companies (think about a Python function):</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;AT&amp;T&#39;</span><span class="p">,</span>
  <span class="s1">&#39;Apple Inc.&#39;</span><span class="p">,</span>
  <span class="s1">&#39;Bank of America&#39;</span><span class="p">,</span>
  <span class="s1">&#39;Boeing&#39;</span><span class="p">,</span>
@@ -535,7 +529,9 @@ Tesla&#39;s revenue for the 2022 fiscal year was nearly 81.5 billion U.S. dollar
  <span class="s1">&#39;Wells Fargo&#39;</span><span class="p">}</span>
 </pre></div>
 </div>
-<p>Let’s try to retrieve emissions data for those companies, and compare your results with the emissions in the dataset!</p>
+<ol class="arabic simple" start="4">
+<li><p>Did you found any issue apply this process to a list of companies? Please provide ideas about serialization (making the process work for multiple companies).</p></li>
+</ol>
 </section>
 </section>
 
