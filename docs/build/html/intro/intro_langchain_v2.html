@@ -1,0 +1,911 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Project 0: An Introduction to ChatGPT with LangChain &#8212; Climate Risks in Finance 0.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'intro/intro_langchain_v2';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Net Zero Investing" href="../climate_investing/net_zero_investing.html" />
+    <link rel="prev" title="Towards a Net Zero Strategy" href="net_zero.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Climate Risks in Finance 0.1 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="lowcarbon.html">Portfolio Decarbonization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="net_zero.html">Towards a Net Zero Strategy</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Project 0: An Introduction to ChatGPT with LangChain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../climate_investing/net_zero_investing.html">Net Zero Investing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../climate_investing/portfolio_decarbonization_pathway.html">Portfolio Decarbonization Pathway</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../climate_investing/portfolio_alignment.html">Portfolio Alignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../climate_investing/project1.html">Project 1: Emissions Data Search with ChatGPT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../climate_investing/project_2.html">Project 2: ChatGPT as a Carbon Data Analyst</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../climate_investing/self_decarbonization.html">Net Zero Backtesting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../climate_investing/integratingtransition.html">Integrating the Transition Dimension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/intro/intro_langchain_v2.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Project 0: An Introduction to ChatGPT with LangChain</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langchain">LangChain</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-template">Prompt Template</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-template-serializing-prompts">Prompt Template: Serializing Prompts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-example-inserting-context-to-chatgpt">Other Example: Inserting Context to ChatGPT</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-sequential-chain">Simple Sequential Chain</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solution">Solution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agent">Agent</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="project-0-an-introduction-to-chatgpt-with-langchain">
+<h1>Project 0: An Introduction to ChatGPT with LangChain<a class="headerlink" href="#project-0-an-introduction-to-chatgpt-with-langchain" title="Permalink to this headline">#</a></h1>
+<p>Large Language Models (LLMs) have enjoyed a growth in popularity since the release of OpenAI’s GPT-3 in 2020 (Brown et al., 2020 <span id="id1">[<a class="reference internal" href="../references.html#id37" title="Tom Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared D Kaplan, Prafulla Dhariwal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell, and others. Language models are few-shot learners. Advances in neural information processing systems, 33:1877–1901, 2020.">BMR+20</a>]</span>).</p>
+<p>After further impressive improvements in LLMs, those models gained the non-specialists when OpenAI released <code class="docutils literal notranslate"><span class="pre">ChatGPT</span></code>.</p>
+<p>At the same time, <code class="docutils literal notranslate"><span class="pre">LangChain</span></code> appeared. This open-source development framework has incredible features for building tools around LLMs.</p>
+<p>In this part, we are going to introduce this library and start with straightforward interactions with <code class="docutils literal notranslate"><span class="pre">ChatGPT</span></code>.</p>
+<section id="langchain">
+<h2>LangChain<a class="headerlink" href="#langchain" title="Permalink to this headline">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">LangChain</span></code> is a development framework built around LLMs. The core idea of the library is the chain of different components (modularity) to create advanced use cases with LLMs.</p>
+</section>
+<section id="prompt-template">
+<h2>Prompt Template<a class="headerlink" href="#prompt-template" title="Permalink to this headline">#</a></h2>
+<p>Let’s begin with a simple question-answering prompt template.</p>
+<p>We first need to install the <code class="docutils literal notranslate"><span class="pre">langchain</span></code> and <code class="docutils literal notranslate"><span class="pre">openai</span></code> libraries:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span>!pip install langchain
+!pip install openai
+</pre></div>
+</div>
+<p>We also need to load our API key:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;OPENAI_API_KEY&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">openai_api_key</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;key.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Let’s instantiate a <code class="docutils literal notranslate"><span class="pre">ChatOpenAI</span></code> object that will allow us to interact with <code class="docutils literal notranslate"><span class="pre">ChatGPT</span></code>:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.chat_models</span> <span class="kn">import</span> <span class="n">ChatOpenAI</span>
+
+<span class="n">chat</span> <span class="o">=</span> <span class="n">ChatOpenAI</span><span class="p">(</span><span class="n">temperature</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+                  <span class="p">)</span>
+</pre></div>
+</div>
+<p>From here, we can import the <code class="docutils literal notranslate"><span class="pre">ChatPromptTemplate</span></code> class and initialize a template like so:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.prompts</span> <span class="kn">import</span> <span class="n">ChatPromptTemplate</span>
+
+<span class="n">template</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Question: </span><span class="si">{query}</span><span class="s2"> </span><span class="se">\n</span><span class="s2"></span>
+<span class="s2">Answer: &quot;&quot;&quot;</span>
+
+<span class="n">prompt</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="o">.</span><span class="n">from_template</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">{query}</span></code> component makes our template ‘dynamic’. It means that you will be able to change the content of your message to <code class="docutils literal notranslate"><span class="pre">ChatGPT</span></code> by inserting whatever you want in place of <code class="docutils literal notranslate"><span class="pre">{query}</span></code>.</p>
+<p>To illustrate it, let’s store into a variable our future question:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">question</span> <span class="o">=</span> <span class="s2">&quot;What is 2+2?&quot;</span>
+</pre></div>
+</div>
+<p>Now, we can create our first <code class="docutils literal notranslate"><span class="pre">LLMChain</span></code> and obtain our first answer:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain</span> <span class="kn">import</span> <span class="n">LLMChain</span>
+
+<span class="n">llm_chain</span> <span class="o">=</span> <span class="n">LLMChain</span><span class="p">(</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="n">prompt</span><span class="p">,</span>
+    <span class="n">llm</span> <span class="o">=</span> <span class="n">chat</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">llm_chain</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">query</span> <span class="o">=</span> <span class="n">question</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Note that we assign to the query parameter the variable <code class="docutils literal notranslate"><span class="pre">question</span></code>.</p>
+<p>It will insert the question in place of the <code class="docutils literal notranslate"><span class="pre">{query}</span></code>.</p>
+<p>The answer we get is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">4</span>
+</pre></div>
+</div>
+</section>
+<section id="prompt-template-serializing-prompts">
+<h2>Prompt Template: Serializing Prompts<a class="headerlink" href="#prompt-template-serializing-prompts" title="Permalink to this headline">#</a></h2>
+<p>Having a prompt template with a dynamic variable where you can insert different inputs programatically is useful for serializing your request, that is using the same templace but with a list of different inputs.</p>
+<p>For example:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">questions</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">&quot;query&quot;</span><span class="p">:</span><span class="s2">&quot;What is 2+2?&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;query&quot;</span><span class="p">:</span><span class="s2">&quot;What is 3+3?&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;query&quot;</span><span class="p">:</span><span class="s2">&quot;What is 4+4?&quot;</span><span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>Here in <code class="docutils literal notranslate"><span class="pre">questions</span></code> we have a list of questions. We can use it as an input to our <code class="docutils literal notranslate"><span class="pre">LLMChain</span></code>:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">llm_chain</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">questions</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>And we obtain:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[{</span><span class="s1">&#39;answer&#39;</span><span class="p">:</span> <span class="s1">&#39;4&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;NUMBER&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;answer&#39;</span><span class="p">:</span> <span class="s1">&#39;6&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;NUMBER&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;answer&#39;</span><span class="p">:</span> <span class="s1">&#39;8&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;NUMBER&#39;</span><span class="p">}]</span>
+</pre></div>
+</div>
+</section>
+<section id="other-example-inserting-context-to-chatgpt">
+<h2>Other Example: Inserting Context to ChatGPT<a class="headerlink" href="#other-example-inserting-context-to-chatgpt" title="Permalink to this headline">#</a></h2>
+<p>Another use of dynamic input via prompt templating is to give different context to <code class="docutils literal notranslate"><span class="pre">ChatGPT</span></code>. For example:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">template</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Given the following context: </span><span class="si">{context}</span><span class="s2"> </span><span class="se">\n</span><span class="s2"></span>
+<span class="s2">Question: Who is Bob&#39;s wife? </span><span class="se">\n</span><span class="s2"></span>
+<span class="s2">Answer: &quot;&quot;&quot;</span>
+
+<span class="n">prompt</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="o">.</span><span class="n">from_template</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
+
+<span class="n">llm_chain</span> <span class="o">=</span> <span class="n">LLMChain</span><span class="p">(</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="n">prompt</span><span class="p">,</span>
+    <span class="n">llm</span> <span class="o">=</span> <span class="n">chat</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s run our <code class="docutils literal notranslate"><span class="pre">LLMChain</span></code> assigning a specific sentence stored in our variable <code class="docutils literal notranslate"><span class="pre">sentence</span></code>:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">sentence</span> <span class="o">=</span> <span class="s2">&quot;Bob is married with Mary&quot;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">llm_chain</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">context</span> <span class="o">=</span> <span class="n">sentence</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>We get:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Mary</span>
+</pre></div>
+</div>
+</section>
+<section id="simple-sequential-chain">
+<h2>Simple Sequential Chain<a class="headerlink" href="#simple-sequential-chain" title="Permalink to this headline">#</a></h2>
+<p>You may want to execute further requests to <code class="docutils literal notranslate"><span class="pre">ChatGPT</span></code>, that is a <code class="docutils literal notranslate"><span class="pre">LLMChain</span></code> with the input depending on the output from a previous <code class="docutils literal notranslate"><span class="pre">LLMChain</span></code>.</p>
+<p>Let’s have an example with a gift recommender, according to the age of a specific person. We have two steps:</p>
+<ol class="arabic simple">
+<li><p>Determining the age of the person.</p></li>
+<li><p>Given the age of the person, the recommender will give a list of potential gifts.</p></li>
+</ol>
+<p>Let’s implement the first stage:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">first_template</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Given the following context: </span><span class="si">{query}</span><span class="s2"> </span><span class="se">\n</span><span class="s2"></span>
+<span class="s2">Question: How old is John? </span><span class="se">\n</span><span class="s2"></span>
+<span class="s2">Answer: </span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">first_prompt</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="o">.</span><span class="n">from_template</span><span class="p">(</span><span class="n">first_template</span><span class="p">)</span>
+
+
+<span class="n">first_chain</span> <span class="o">=</span> <span class="n">LLMChain</span><span class="p">(</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="n">first_prompt</span><span class="p">,</span>
+    <span class="n">llm</span> <span class="o">=</span> <span class="n">chat</span>
+<span class="p">)</span>
+
+<span class="n">first_question</span> <span class="o">=</span> <span class="s2">&quot;John&#39;s age is half dad&#39;s age. Dad is 42 years old.&quot;</span>
+
+<span class="n">first_response</span> <span class="o">=</span> <span class="n">first_chain</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">query</span> <span class="o">=</span> <span class="n">question</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">first_response</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The answer is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">John</span> <span class="ow">is</span> <span class="mi">21</span> <span class="n">years</span> <span class="n">old</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>Please note that we have assigned the answer to the variable <code class="docutils literal notranslate"><span class="pre">first_response</span></code>.</p>
+<p>Let’s implement the second stage:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">second_template</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Given the following context:</span>
+<span class="s2">You are are a gift recommender. Given a person&#39;s age, </span><span class="se">\</span>
+<span class="s2">it is your job to suggest an approapriate gift for them. </span><span class="se">\n\</span>
+
+<span class="s2">Person Age: </span><span class="se">\n\</span>
+<span class="si">{input}</span><span class="s2"> </span><span class="se">\n\</span>
+<span class="s2">Suggest gift:</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">second_prompt</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="o">.</span><span class="n">from_template</span><span class="p">(</span><span class="n">second_template</span><span class="p">)</span>
+
+<span class="n">second_chain</span> <span class="o">=</span> <span class="n">LLMChain</span><span class="p">(</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="n">second_prompt</span><span class="p">,</span>
+    <span class="n">llm</span> <span class="o">=</span> <span class="n">chat</span>
+<span class="p">)</span>
+
+<span class="n">final_response</span> <span class="o">=</span> <span class="n">second_chain</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="nb">input</span> <span class="o">=</span> <span class="n">first_response</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">final_response</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Please note that we have used the output from the previous stage <code class="docutils literal notranslate"><span class="pre">first_response</span></code> as an input for the second stage.</p>
+<p>The answer is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="n">nice</span> <span class="n">watch</span> <span class="ow">or</span> <span class="n">a</span> <span class="n">gift</span> <span class="n">card</span> <span class="n">to</span> <span class="n">his</span> <span class="n">favorite</span> <span class="n">store</span> <span class="n">would</span> <span class="n">be</span> <span class="n">a</span> <span class="n">great</span> <span class="n">gift</span> <span class="k">for</span> <span class="n">John</span><span class="o">.</span> <span class="n">Alternatively</span><span class="p">,</span> <span class="n">you</span> <span class="n">could</span> <span class="n">consider</span> <span class="n">a</span> <span class="n">tech</span> <span class="n">gadget</span> <span class="ow">or</span> <span class="n">a</span> <span class="n">book</span> <span class="n">on</span> <span class="n">a</span> <span class="n">topic</span> <span class="n">he</span> <span class="ow">is</span> <span class="n">interested</span> <span class="ow">in</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>Rather than proceding step by step, we can make a use of a <code class="docutils literal notranslate"><span class="pre">SimpleSequentialChain</span></code>. It is built with the two <code class="docutils literal notranslate"><span class="pre">LLMChain</span></code> that we have created.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.chains</span> <span class="kn">import</span> <span class="n">SimpleSequentialChain</span>
+
+<span class="n">overall_chain</span> <span class="o">=</span> <span class="n">SimpleSequentialChain</span><span class="p">(</span>
+    <span class="n">chains</span> <span class="o">=</span> <span class="p">[</span><span class="n">first_chain</span><span class="p">,</span> <span class="n">second_chain</span><span class="p">],</span>
+    <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>And now we only need to give the input of the first stage to the overall process. It will understand automatically that it needs to use the output from the first stage as the input of the second stage:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">overall_chain</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;John&#39;s age is half dad&#39;s age. Dad is 42 years old.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And the output is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">Entering</span> <span class="n">new</span> <span class="n">SimpleSequentialChain</span> <span class="n">chain</span><span class="o">...</span>
+<span class="n">John</span> <span class="ow">is</span> <span class="mi">21</span> <span class="n">years</span> <span class="n">old</span><span class="o">.</span>
+<span class="n">For</span> <span class="n">John</span> <span class="n">who</span> <span class="ow">is</span> <span class="mi">21</span> <span class="n">years</span> <span class="n">old</span><span class="p">,</span> <span class="n">a</span> <span class="n">good</span> <span class="n">gift</span> <span class="n">suggestion</span> <span class="n">would</span> <span class="n">be</span> <span class="n">a</span> <span class="n">trendy</span> <span class="n">watch</span> <span class="ow">or</span> <span class="n">a</span> <span class="n">gift</span> <span class="n">card</span> <span class="n">to</span> <span class="n">his</span> <span class="n">favorite</span> <span class="n">clothing</span> <span class="n">store</span><span class="o">.</span> <span class="n">Alternatively</span><span class="p">,</span> <span class="n">you</span> <span class="n">could</span> <span class="n">consider</span> <span class="n">a</span> <span class="n">tech</span> <span class="n">gadget</span> <span class="n">such</span> <span class="k">as</span> <span class="n">a</span> <span class="n">wireless</span> <span class="n">speaker</span> <span class="ow">or</span> <span class="n">a</span> <span class="n">gaming</span> <span class="n">console</span><span class="o">.</span>
+
+<span class="o">&gt;</span> <span class="n">Finished</span> <span class="n">chain</span><span class="o">.</span>
+<span class="n">For</span> <span class="n">John</span> <span class="n">who</span> <span class="ow">is</span> <span class="mi">21</span> <span class="n">years</span> <span class="n">old</span><span class="p">,</span> <span class="n">a</span> <span class="n">good</span> <span class="n">gift</span> <span class="n">suggestion</span> <span class="n">would</span> <span class="n">be</span> <span class="n">a</span> <span class="n">trendy</span> <span class="n">watch</span> <span class="ow">or</span> <span class="n">a</span> <span class="n">gift</span> <span class="n">card</span> <span class="n">to</span> <span class="n">his</span> <span class="n">favorite</span> <span class="n">clothing</span> <span class="n">store</span><span class="o">.</span> <span class="n">Alternatively</span><span class="p">,</span> <span class="n">you</span> <span class="n">could</span> <span class="n">consider</span> <span class="n">a</span> <span class="n">tech</span> <span class="n">gadget</span> <span class="n">such</span> <span class="k">as</span> <span class="n">a</span> <span class="n">wireless</span> <span class="n">speaker</span> <span class="ow">or</span> <span class="n">a</span> <span class="n">gaming</span> <span class="n">console</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<section id="exercise">
+<h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">#</a></h2>
+<p>We are going to test if <code class="docutils literal notranslate"><span class="pre">ChatGPT</span></code> can be useful for information extraction (IE).</p>
+<p>Short answer: it is, as confirmed by Wei et al. (2023) <span id="id2">[<a class="reference internal" href="../references.html#id36" title="Xiang Wei, Xingyu Cui, Ning Cheng, Xiaobin Wang, Xin Zhang, Shen Huang, Pengjun Xie, Jinan Xu, Yufeng Chen, Meishan Zhang, and others. Zero-shot information extraction via chatting with chatgpt. arXiv preprint arXiv:2302.10205, 2023.">WCC+23</a>]</span> for zero-shot IE or Shi et al. (2023) <span id="id3">[<a class="reference internal" href="../references.html#id38" title="Yucheng Shi, Hehuan Ma, Wenliang Zhong, Gengchen Mai, Xiang Li, Tianming Liu, and Junzhou Huang. Chatgraph: interpretable text classification by converting chatgpt knowledge to graphs. arXiv preprint arXiv:2305.03513, 2023.">SMZ+23</a>]</span>.</p>
+<p>First, reinstantiate everything that we need for this exercise:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span>!pip install langchain
+!pip install openai
+</pre></div>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;OPENAI_API_KEY&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">openai_api_key</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;key.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="kn">from</span> <span class="nn">langchain.chat_models</span> <span class="kn">import</span> <span class="n">ChatOpenAI</span>
+
+<span class="n">chat</span> <span class="o">=</span> <span class="n">ChatOpenAI</span><span class="p">(</span><span class="n">temperature</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+                  <span class="p">)</span>
+</pre></div>
+</div>
+<p>We are going to extract information from Wikipedia, in the format of a knowledge graph.</p>
+<p>A knowledge graph is a representation of information (knowledge), such as the following:</p>
+<figure class="align-default" id="knowledgegraph">
+<img alt="../_images/knowledgegraph.png" src="../_images/knowledgegraph.png" />
+<figcaption>
+<p><span class="caption-text">Figure: Knowledge Graph sample, from WWWC (2014) <span id="id4">[]</span></span><a class="headerlink" href="#knowledgegraph" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>It requires to identify, in a triplet format:</p>
+<ul class="simple">
+<li><p>the head entity</p></li>
+<li><p>the relation</p></li>
+<li><p>the tail entity</p></li>
+</ul>
+<p>You need to install the <code class="docutils literal notranslate"><span class="pre">wikipedia</span></code> library:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span>!pip install wikipedia
+</pre></div>
+</div>
+<p>And you can retrieve information from Wikipedia:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.utilities</span> <span class="kn">import</span> <span class="n">WikipediaAPIWrapper</span>
+
+<span class="n">wikipedia</span> <span class="o">=</span> <span class="n">WikipediaAPIWrapper</span><span class="p">(</span><span class="n">top_k_results</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">wikipedia</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;Tesla, Inc.&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Page</span><span class="p">:</span> <span class="n">Tesla</span><span class="p">,</span> <span class="n">Inc</span><span class="o">.</span>
+<span class="n">Summary</span><span class="p">:</span> <span class="n">Tesla</span><span class="p">,</span> <span class="n">Inc</span><span class="o">.</span> <span class="p">(</span> <span class="n">TESS</span><span class="o">-</span><span class="n">lə</span> <span class="ow">or</span>  <span class="n">TEZ</span><span class="o">-</span><span class="n">lə</span><span class="p">)</span> <span class="ow">is</span> <span class="n">an</span> <span class="n">American</span> <span class="n">multinational</span> <span class="n">automotive</span> <span class="ow">and</span> <span class="n">clean</span> <span class="n">energy</span> <span class="n">company</span> <span class="n">headquartered</span> <span class="ow">in</span> <span class="n">Austin</span><span class="p">,</span> <span class="n">Texas</span><span class="o">.</span> <span class="n">Tesla</span> <span class="n">designs</span> <span class="ow">and</span> <span class="n">manufactures</span> <span class="n">electric</span> <span class="n">vehicles</span> <span class="p">(</span><span class="n">electric</span> <span class="n">cars</span> <span class="ow">and</span> <span class="n">trucks</span><span class="p">),</span> <span class="n">battery</span> <span class="n">energy</span> <span class="n">storage</span> <span class="kn">from</span> <span class="nn">home</span> <span class="n">to</span> <span class="n">grid</span><span class="o">-</span><span class="n">scale</span><span class="p">,</span> <span class="n">solar</span> <span class="n">panels</span> <span class="ow">and</span> <span class="n">solar</span> <span class="n">roof</span> <span class="n">tiles</span><span class="p">,</span> <span class="ow">and</span> <span class="n">related</span> <span class="n">products</span> <span class="ow">and</span> <span class="n">services</span><span class="o">.</span> <span class="n">Tesla</span> <span class="ow">is</span> <span class="n">one</span> <span class="n">of</span> <span class="n">the</span> <span class="n">world</span><span class="s1">&#39;s most valuable companies and, as of 2023, is the world&#39;</span><span class="n">s</span> <span class="n">most</span> <span class="n">valuable</span> <span class="n">automaker</span><span class="o">.</span> <span class="n">In</span> <span class="mi">2022</span><span class="p">,</span> <span class="n">the</span> <span class="n">company</span> <span class="n">had</span> <span class="n">the</span> <span class="n">most</span> <span class="n">worldwide</span> <span class="n">sales</span> <span class="n">of</span> <span class="n">battery</span> <span class="n">electric</span> <span class="n">vehicles</span><span class="p">,</span> <span class="n">capturing</span> <span class="mi">18</span><span class="o">%</span> <span class="n">of</span> <span class="n">the</span> <span class="n">market</span><span class="o">.</span> <span class="n">Through</span> <span class="n">its</span> <span class="n">subsidiary</span> <span class="n">Tesla</span> <span class="n">Energy</span><span class="p">,</span> <span class="n">the</span> <span class="n">company</span> <span class="n">develops</span> <span class="ow">and</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">major</span> <span class="n">installer</span> <span class="n">of</span> <span class="n">photovoltaic</span> <span class="n">systems</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">United</span> <span class="n">States</span><span class="o">.</span> <span class="n">Tesla</span> <span class="n">Energy</span> <span class="ow">is</span> <span class="n">also</span> <span class="n">one</span> <span class="n">of</span> <span class="n">the</span> <span class="n">largest</span> <span class="k">global</span> <span class="n">suppliers</span> <span class="n">of</span> <span class="n">battery</span> <span class="n">energy</span> <span class="n">storage</span> <span class="n">systems</span><span class="p">,</span> <span class="k">with</span> <span class="mf">6.5</span> <span class="n">gigawatt</span><span class="o">-</span><span class="n">hours</span> <span class="p">(</span><span class="n">GWh</span><span class="p">)</span> <span class="n">installed</span> <span class="ow">in</span> <span class="mf">2022.</span>
+<span class="n">Tesla</span> <span class="n">was</span> <span class="n">incorporated</span> <span class="ow">in</span> <span class="n">July</span> <span class="mi">2003</span> <span class="n">by</span> <span class="n">Martin</span> <span class="n">Eberhard</span> <span class="ow">and</span> <span class="n">Marc</span> <span class="n">Tarpenning</span> <span class="k">as</span> <span class="n">Tesla</span> <span class="n">Motors</span><span class="o">.</span> <span class="n">The</span> <span class="n">company</span><span class="s1">&#39;s name is a tribute to inventor and electrical engineer Nikola Tesla. In February 2004, via a $6.5 million investment, Elon Musk became the largest shareholder of the company. He has served as CEO since 2008. According to Musk, the purpose of Tesla is to help expedite the move to sustainable transport and energy, obtained through electric vehicles and solar power. Tesla began production of its first car model, the Roadster sports car, in 2008. This was followed by the Model S sedan in 2012, the Model X SUV in 2015, the Model 3 sedan in 2017, the Model Y crossover in 2020, and the Tesla Semi truck in 2022. The company plans production of the Cybertruck light-duty pickup truck in 2023. The Model 3 is the all-time bestselling plug-in electric car worldwide, and in June 2021 became the first electric car to sell 1 million units globally. Tesla&#39;</span><span class="n">s</span> <span class="mi">2022</span> <span class="n">full</span> <span class="n">year</span> <span class="n">deliveries</span> <span class="n">were</span> <span class="n">around</span> <span class="mf">1.31</span> <span class="n">million</span> <span class="n">vehicles</span><span class="p">,</span> <span class="n">a</span> <span class="mi">40</span><span class="o">%</span> <span class="n">increase</span> <span class="n">over</span> <span class="n">the</span> <span class="n">previous</span> <span class="n">year</span><span class="p">,</span> <span class="ow">and</span> <span class="n">cumulative</span> <span class="n">sales</span> <span class="n">totaled</span> <span class="mi">3</span> <span class="n">million</span> <span class="n">cars</span> <span class="k">as</span> <span class="n">of</span> <span class="n">August</span> <span class="mf">2022.</span> <span class="n">In</span> <span class="n">October</span> <span class="mi">2021</span><span class="p">,</span> <span class="n">Tesla</span><span class="s1">&#39;s market capitalization reached $1 trillion, the sixth company to do so in U.S. history.</span>
+<span class="n">Tesla</span> <span class="n">has</span> <span class="n">been</span> <span class="n">the</span> <span class="n">subject</span> <span class="n">of</span> <span class="n">several</span> <span class="n">lawsuits</span><span class="p">,</span> <span class="n">government</span> <span class="n">scrutiny</span><span class="p">,</span> <span class="n">journalistic</span> <span class="n">criticism</span><span class="p">,</span> <span class="ow">and</span> <span class="n">public</span> <span class="n">controversies</span> <span class="n">arising</span> <span class="kn">from</span> <span class="nn">statements</span> <span class="ow">and</span> <span class="n">acts</span> <span class="n">of</span> <span class="n">CEO</span> <span class="n">Elon</span> <span class="n">Musk</span> <span class="ow">and</span> <span class="kn">from</span> <span class="nn">allegations</span> <span class="n">of</span> <span class="n">whistleblower</span> <span class="n">retaliation</span><span class="p">,</span> <span class="n">worker</span> <span class="n">rights</span> <span class="n">violations</span><span class="p">,</span> <span class="ow">and</span> <span class="n">defects</span> <span class="k">with</span> <span class="n">their</span> <span class="n">products</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>In this exercise, your task is to implement knowledge graph extraction following Shi et al. (2023) two stages process:</p>
+<figure class="align-default" id="knowledgeextractor">
+<img alt="../_images/knowledgeextractor.png" src="../_images/knowledgeextractor.png" />
+<figcaption>
+<p><span class="caption-text">Figure: Two Stage Knowledge Graph Extraction, from Shi et al. (2023)</span><a class="headerlink" href="#knowledgeextractor" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The text refinement prompt to implement is the following:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Please generate a refined document of the following document. And please ensure that the refined document meets the following criteria:
+1. The refined document should be abstract and does not change any original meaning of the document.
+2. The refined document should retain all the important objects, concepts, and relationships between them.
+3. The refined document should only contain information that is from the document.
+4. The refined document should be readable and easy to understand without any abbreviations and misspellings.
+Here is the content: [x]
+</pre></div>
+</div>
+<p>The knowledge extraction prompt to implement is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>You are a knowledge graph extractor, and your task is to extract and return a knowledge graph from a given text.Let’s extract it step by step:
+(1). Identify the entities in the text. An entity can be a noun or a noun phrase that refers to a real-world object or an abstract concept. You can use a named entity recognition (NER) tool or a part-of-speech (POS) tagger to identify the entities.
+(2). Identify the relationships between the entities. A relationship can be a verb or a prepositional phrase that connects two entities. You can use dependency parsing
+to identify the relationships.
+(3). Summarize each entity and relation as short as possible and remove any stop words.
+(4). Only return the knowledge graph in the triplet format: (’head entity’, ’relation’, ’tail entity’).
+(5). Most importantly, if you cannot find any knowledge, please just output: &quot;None&quot;.
+Here is the content: [x]
+</pre></div>
+</div>
+<p>For example, the final output with Tesla is something as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s1">&#39;Tesla, Inc.&#39;</span><span class="p">,</span> <span class="s1">&#39;is&#39;</span><span class="p">,</span> <span class="s1">&#39;a multinational automotive and clean energy company&#39;</span><span class="p">)</span>
+<span class="p">(</span><span class="s1">&#39;Tesla, Inc.&#39;</span><span class="p">,</span> <span class="s1">&#39;designs and manufactures&#39;</span><span class="p">,</span> <span class="s1">&#39;electric vehicles, battery energy storage systems, solar panels, and related products and services&#39;</span><span class="p">)</span>
+<span class="p">(</span><span class="s1">&#39;Tesla, Inc.&#39;</span><span class="p">,</span> <span class="s1">&#39;recognized as&#39;</span><span class="p">,</span> <span class="s2">&quot;one of the world&#39;s most valuable companies and the world&#39;s most valuable automaker as of 2023&quot;</span><span class="p">)</span>
+<span class="p">(</span><span class="s1">&#39;Tesla, Inc.&#39;</span><span class="p">,</span> <span class="s1">&#39;captured&#39;</span><span class="p">,</span> <span class="s1">&#39;18</span><span class="si">% o</span><span class="s1">f the market for battery electric vehicles in 2022&#39;</span><span class="p">)</span>
+<span class="p">(</span><span class="s1">&#39;Tesla, Inc.&#39;</span><span class="p">,</span> <span class="s1">&#39;is&#39;</span><span class="p">,</span> <span class="s1">&#39;a major installer of photovoltaic systems in the United States&#39;</span><span class="p">)</span>
+<span class="p">(</span><span class="s1">&#39;Tesla Energy&#39;</span><span class="p">,</span> <span class="s1">&#39;is&#39;</span><span class="p">,</span> <span class="s1">&#39;one of the largest global suppliers of battery energy storage systems&#39;</span><span class="p">)</span>
+<span class="p">(</span><span class="s1">&#39;Tesla Energy&#39;</span><span class="p">,</span> <span class="s1">&#39;installed&#39;</span><span class="p">,</span> <span class="s1">&#39;6.5 gigawatt-hours in 2022&#39;</span><span class="p">)</span>
+<span class="p">(</span><span class="s1">&#39;Tesla&#39;</span><span class="p">,</span> <span class="s1">&#39;founded&#39;</span><span class="p">,</span> <span class="s1">&#39;in 2003 by Martin Eberhard and Marc Tarpenning as Tesla Motors&#39;</span><span class="p">)</span>
+<span class="p">(</span><span class="s1">&#39;Elon Musk&#39;</span><span class="p">,</span> <span class="s1">&#39;became&#39;</span><span class="p">,</span> <span class="s1">&#39;the largest shareholder of the company in 2004&#39;</span><span class="p">)</span>
+<span class="p">(</span><span class="s1">&#39;Elon Musk&#39;</span><span class="p">,</span> <span class="s1">&#39;has served as&#39;</span><span class="p">,</span> <span class="s1">&#39;CEO since 2008&#39;</span><span class="p">)</span>
+<span class="p">(</span><span class="s1">&#39;Tesla&#39;</span><span class="p">,</span> <span class="s1">&#39;produced&#39;</span><span class="p">,</span> <span class="s1">&#39;several car models, including the Roadster sports car, Model S sedan, Model X SUV, Model 3 sedan, Model Y crossover, and Tesla Semi truck&#39;</span><span class="p">)</span>
+<span class="p">(</span><span class="s1">&#39;Model 3&#39;</span><span class="p">,</span> <span class="s1">&#39;is&#39;</span><span class="p">,</span> <span class="s1">&#39;the all-time bestselling plug-in electric car worldwide and the first electric car to sell 1 million units globally&#39;</span><span class="p">)</span>
+<span class="p">(</span><span class="s1">&#39;Tesla&#39;</span><span class="p">,</span> <span class="s1">&#39;2022 full year deliveries were&#39;</span><span class="p">,</span> <span class="s1">&#39;around 1.31 million vehicles, a 40</span><span class="si">% i</span><span class="s1">ncrease over the previous year&#39;</span><span class="p">)</span>
+<span class="p">(</span><span class="s1">&#39;cumulative sales&#39;</span><span class="p">,</span> <span class="s1">&#39;totaled&#39;</span><span class="p">,</span> <span class="s1">&#39;3 million cars as of August 2022&#39;</span><span class="p">)</span>
+<span class="p">(</span><span class="s1">&#39;Tesla&#39;</span><span class="p">,</span> <span class="s1">&#39;market capitalization reached&#39;</span><span class="p">,</span> <span class="s1">&#39;$1 trillion in October 2021&#39;</span><span class="p">)</span>
+<span class="p">(</span><span class="s1">&#39;Tesla&#39;</span><span class="p">,</span> <span class="s1">&#39;faced&#39;</span><span class="p">,</span> <span class="s1">&#39;lawsuits, government scrutiny, journalistic criticism, and public controversies related to statements and acts of CEO Elon Musk, allegations of whistleblower retaliation, worker rights violations, and defects with their products&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="solution">
+<h2>Solution<a class="headerlink" href="#solution" title="Permalink to this headline">#</a></h2>
+<p>We need to create two prompts according to the prompt design given above. We have for the first prompt:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.prompts</span> <span class="kn">import</span> <span class="n">ChatPromptTemplate</span>
+
+
+<span class="n">first_template</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Please generate a refined document of the following document. </span><span class="se">\n\</span>
+<span class="s2">And please ensure that the refined document meets the following criteria: </span><span class="se">\n\</span>
+<span class="s2">1. The refined document should be abstract and does not change any original </span><span class="se">\</span>
+<span class="s2">meaning of the document. </span><span class="se">\n\</span>
+<span class="s2">2. The refined document should retain all the important objects, concepts, and </span><span class="se">\</span>
+<span class="s2">relationship between them. </span><span class="se">\n\</span>
+<span class="s2">3. The refined document should only contain information that is from </span><span class="se">\</span>
+<span class="s2">the document. </span><span class="se">\n\</span>
+<span class="s2">4. The refined document should be readable and easy to understand without any </span><span class="se">\</span>
+<span class="s2">abbrevations and misspellings. </span><span class="se">\n\</span>
+<span class="s2">Here is the content: </span><span class="si">{content}</span><span class="s2"></span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">first_prompt</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="o">.</span><span class="n">from_template</span><span class="p">(</span><span class="n">first_template</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We create the first chain:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.chains</span> <span class="kn">import</span> <span class="n">LLMChain</span>
+
+<span class="n">first_chain</span> <span class="o">=</span> <span class="n">LLMChain</span><span class="p">(</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="n">first_prompt</span><span class="p">,</span>
+    <span class="n">llm</span> <span class="o">=</span> <span class="n">chat</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>We create the second prompt and second <code class="docutils literal notranslate"><span class="pre">LLMChain</span></code>:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">second_template</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;You are a knowledge graph extractor, and your task is to extract</span><span class="se">\</span>
+<span class="s2">and return a knowledge graph from a given text. Let&#39;s extract it step by step:</span><span class="se">\n\</span>
+<span class="s2">(1). Identify the entities in the text. An entity can be a noun or noun phrase </span><span class="se">\</span>
+<span class="s2">that refers to a real-world object or an abstract concept. You can use a named entity</span><span class="se">\</span>
+<span class="s2">recognition (NER) tool or a part-of-speech (POS) tagger to identify the entities. </span><span class="se">\n\</span>
+<span class="s2">(2). Identify the relationships between the entities. A relationship can be a verb </span><span class="se">\</span>
+<span class="s2">or a prepositional phrase that connects two entities. You can use dependency parsing </span><span class="se">\</span>
+<span class="s2">to identify the relationships. </span><span class="se">\n\</span>
+<span class="s2">(3). Summarize each entity and relation as short as possible and remove any stop words. </span><span class="se">\n\</span>
+<span class="s2">(4). Only return the knowledge graph in the triplet format: (&#39;head entity&#39;, &#39;relation&#39;, &#39;tail entity&#39;). </span><span class="se">\n\</span>
+<span class="s2">(5). Most importantly, if you cannot find any knowledge, please just output: &quot;None&quot;. </span><span class="se">\n\</span>
+<span class="s2">Here is the content: </span><span class="si">{content}</span><span class="s2"> </span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="n">second_prompt</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="o">.</span><span class="n">from_template</span><span class="p">(</span><span class="n">second_template</span><span class="p">)</span>
+
+<span class="n">second_chain</span> <span class="o">=</span> <span class="n">LLMChain</span><span class="p">(</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="n">second_prompt</span><span class="p">,</span>
+    <span class="n">llm</span> <span class="o">=</span> <span class="n">chat</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>And now we can make use of <code class="docutils literal notranslate"><span class="pre">SimpleSequentialChain</span></code>:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.chains</span> <span class="kn">import</span> <span class="n">SimpleSequentialChain</span>
+
+<span class="n">overall_chain</span> <span class="o">=</span> <span class="n">SimpleSequentialChain</span><span class="p">(</span>
+    <span class="n">chains</span> <span class="o">=</span> <span class="p">[</span><span class="n">first_chain</span><span class="p">,</span> <span class="n">second_chain</span><span class="p">],</span>
+    <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s retrieve the page from Wikipedia:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.utilities</span> <span class="kn">import</span> <span class="n">WikipediaAPIWrapper</span>
+
+<span class="n">wikipedia</span> <span class="o">=</span> <span class="n">WikipediaAPIWrapper</span><span class="p">(</span><span class="n">top_k_results</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">wiki_pages</span> <span class="o">=</span> <span class="n">wikipedia</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;Tesla, Inc.&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Please note that we have stored the resulting page into the variable <code class="docutils literal notranslate"><span class="pre">wiki_pages</span></code>.</p>
+<p>We can now run the entire <code class="docutils literal notranslate"><span class="pre">SimpleSequentialChain</span></code>, by giving the <code class="docutils literal notranslate"><span class="pre">wiki_pages</span></code> as the initial input:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">overall_chain</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">wiki_pages</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And we get:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&gt; Entering new SimpleSequentialChain chain...
+Tesla, Inc. is a multinational automotive and clean energy company based in Austin, Texas. The company designs and manufactures electric vehicles, battery energy storage systems, solar panels, and related products and services. Tesla is the world&#39;s most valuable automaker and captured 18% of the battery electric vehicle market in 2022. The company&#39;s subsidiary, Tesla Energy, is a major installer of photovoltaic systems in the United States and one of the largest global suppliers of battery energy storage systems. 
+
+Tesla was founded in 2003 by Martin Eberhard and Marc Tarpenning and named after inventor Nikola Tesla. Elon Musk became the largest shareholder in 2004 and has served as CEO since 2008. The company&#39;s mission is to expedite the move to sustainable transport and energy through electric vehicles and solar power. Tesla has produced several car models, including the Roadster, Model S, Model X, Model 3, Model Y, and Tesla Semi. The Model 3 is the all-time bestselling plug-in electric car worldwide and the first electric car to sell 1 million units globally. 
+
+Tesla&#39;s 2022 full year deliveries were around 1.31 million vehicles, a 40% increase over the previous year, and cumulative sales totaled 3 million cars as of August 2022. In October 2021, Tesla&#39;s market capitalization reached $1 trillion, making it the sixth company in U.S. history to do so. However, the company has faced lawsuits, government scrutiny, journalistic criticism, and public controversies related to CEO Elon Musk&#39;s statements and actions, whistleblower retaliation, worker rights violations, and product defects.
+(&#39;Tesla, Inc.&#39;, &#39;is&#39;, &#39;multinational automotive and clean energy company&#39;)
+(&#39;Tesla, Inc.&#39;, &#39;based in&#39;, &#39;Austin, Texas&#39;)
+(&#39;company&#39;, &#39;designs and manufactures&#39;, &#39;electric vehicles, battery energy storage systems, solar panels, and related products and services&#39;)
+(&#39;Tesla&#39;, &#39;is&#39;, &quot;world&#39;s most valuable automaker&quot;)
+(&#39;Tesla&#39;, &#39;captured&#39;, &#39;18% of the battery electric vehicle market in 2022&#39;)
+(&#39;Tesla Energy&#39;, &#39;is&#39;, &#39;major installer of photovoltaic systems in the United States&#39;)
+(&#39;Tesla Energy&#39;, &#39;one of&#39;, &#39;largest global suppliers of battery energy storage systems&#39;)
+(&#39;Tesla&#39;, &#39;founded in&#39;, &#39;2003&#39;)
+(&#39;Tesla&#39;, &#39;named after&#39;, &#39;inventor Nikola Tesla&#39;)
+(&#39;Elon Musk&#39;, &#39;became&#39;, &#39;largest shareholder in 2004&#39;)
+(&#39;Elon Musk&#39;, &#39;has served as&#39;, &#39;CEO since 2008&#39;)
+(&#39;company&#39;, &#39;mission is to&#39;, &#39;expedite the move to sustainable transport and energy through electric vehicles and solar power&#39;)
+(&#39;Tesla&#39;, &#39;produced&#39;, &#39;several car models&#39;)
+(&#39;Roadster&#39;, &#39;is&#39;, &#39;car model&#39;)
+(&#39;Model S&#39;, &#39;is&#39;, &#39;car model&#39;)
+(&#39;Model X&#39;, &#39;is&#39;, &#39;car model&#39;)
+(&#39;Model 3&#39;, &#39;is&#39;, &#39;car model&#39;)
+(&#39;Model Y&#39;, &#39;is&#39;, &#39;car model&#39;)
+(&#39;Tesla Semi&#39;, &#39;is&#39;, &#39;car model&#39;)
+(&#39;Model 3&#39;, &#39;is&#39;, &#39;all-time bestselling plug-in electric car worldwide&#39;)
+(&#39;Model 3&#39;, &#39;first&#39;, &#39;electric car to sell 1 million units globally&#39;)
+(&#39;Tesla&#39;, &#39;2022 full year deliveries were&#39;, &#39;around 1.31 million vehicles&#39;)
+(&#39;Tesla&#39;, &#39;cumulative sales totaled&#39;, &#39;3 million cars as of August 2022&#39;)
+(&#39;Tesla&#39;, &#39;market capitalization reached&#39;, &#39;$1 trillion in October 2021&#39;)
+(&#39;Tesla&#39;, &#39;faced&#39;, &#39;lawsuits, government scrutiny, journalistic criticism, and public controversies related to CEO Elon Musk statements and actions, whistleblower retaliation, worker rights violations, and product defects&#39;)
+
+&gt; Finished chain.
+(\&#39;Tesla, Inc.\&#39;, \&#39;is\&#39;, \&#39;multinational automotive and clean energy company\&#39;)\n(\&#39;Tesla, Inc.\&#39;, \&#39;based in\&#39;, \&#39;Austin, Texas\&#39;)\n(\&#39;company\&#39;, \&#39;designs and manufactures\&#39;, \&#39;electric vehicles, battery energy storage systems, solar panels, and related products and services\&#39;)\n(\&#39;Tesla\&#39;, \&#39;is\&#39;, &quot;world\&#39;s most valuable automaker&quot;)\n(\&#39;Tesla\&#39;, \&#39;captured\&#39;, \&#39;18% of the battery electric vehicle market in 2022\&#39;)\n(\&#39;Tesla Energy\&#39;, \&#39;is\&#39;, \&#39;major installer of photovoltaic systems in the United States\&#39;)\n(\&#39;Tesla Energy\&#39;, \&#39;one of\&#39;, \&#39;largest global suppliers of battery energy storage systems\&#39;)\n(\&#39;Tesla\&#39;, \&#39;founded in\&#39;, \&#39;2003\&#39;)\n(\&#39;Tesla\&#39;, \&#39;named after\&#39;, \&#39;inventor Nikola Tesla\&#39;)\n(\&#39;Elon Musk\&#39;, \&#39;became\&#39;, \&#39;largest shareholder in 2004\&#39;)\n(\&#39;Elon Musk\&#39;, \&#39;has served as\&#39;, \&#39;CEO since 2008\&#39;)\n(\&#39;company\&#39;, \&#39;mission is to\&#39;, \&#39;expedite the move to sustainable transport and energy through electric vehicles and solar power\&#39;)\n(\&#39;Tesla\&#39;, \&#39;produced\&#39;, \&#39;several ca
+</pre></div>
+</div>
+</section>
+<section id="agent">
+<h2>Agent<a class="headerlink" href="#agent" title="Permalink to this headline">#</a></h2>
+<p>In fact, we can make the wikipedia content retrieval part of the <code class="docutils literal notranslate"><span class="pre">SimpleSequentialChain</span></code>. To do so, we need to use the concet of ‘agent’ and ‘tools’.</p>
+<p>We need to load some new classes and functions:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.agents</span> <span class="kn">import</span> <span class="n">initialize_agent</span> 
+<span class="kn">from</span> <span class="nn">langchain.agents</span> <span class="kn">import</span> <span class="n">AgentType</span>
+<span class="kn">from</span> <span class="nn">langchain.agents</span> <span class="kn">import</span> <span class="n">load_tools</span>
+
+<span class="n">chat</span> <span class="o">=</span> <span class="n">ChatOpenAI</span><span class="p">(</span><span class="n">temperature</span> <span class="o">=</span> <span class="mf">0.</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Wikipedia scrapper is part of the pre-built tools in <code class="docutils literal notranslate"><span class="pre">langchain</span></code>. We can declare a list of tools as such:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">tools</span> <span class="o">=</span> <span class="n">load_tools</span><span class="p">([</span><span class="s2">&quot;wikipedia&quot;</span><span class="p">],</span> <span class="n">llm</span> <span class="o">=</span> <span class="n">chat</span><span class="p">,</span> <span class="n">top_k_results</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We need to initialize our agent, specifying the list of tools:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">agent</span> <span class="o">=</span> <span class="n">initialize_agent</span><span class="p">(</span><span class="n">tools</span><span class="p">,</span>
+                         <span class="n">llm</span> <span class="o">=</span> <span class="n">chat</span><span class="p">,</span>
+                         <span class="n">agent</span> <span class="o">=</span> <span class="n">AgentType</span><span class="o">.</span><span class="n">CHAT_ZERO_SHOT_REACT_DESCRIPTION</span><span class="p">,</span>
+                        <span class="n">handle_parsing_errors</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                         <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span>
+                         <span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s try to see if <code class="docutils literal notranslate"><span class="pre">ChatGPT</span></code> can handle the use of the wikipedia tool:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">agent</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;Tesla, Inc.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It does:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&gt; Entering new AgentExecutor chain...
+Question: What is Tesla, Inc.?
+Thought: I should use Wikipedia to get information about Tesla, Inc.
+Action:
+{
+  &quot;action&quot;: &quot;Wikipedia&quot;,
+  &quot;action_input&quot;: &quot;Tesla, Inc.&quot;
+}
+
+Observation: Page: Tesla, Inc.
+Summary: Tesla, Inc. ( TESS-lə or  TEZ-lə) is an American multinational automotive and clean energy company headquartered in Austin, Texas. Tesla designs and manufactures electric vehicles (electric cars and trucks), battery energy storage from home to grid-scale, solar panels and solar roof tiles, and related products and services. Tesla is one of the world&#39;s most valuable companies and, as of 2023, is the world&#39;s most valuable automaker. In 2022, the company had the most worldwide sales of battery electric vehicles, capturing 18% of the market. Through its subsidiary Tesla Energy, the company develops and is a major installer of photovoltaic systems in the United States. Tesla Energy is also one of the largest global suppliers of battery energy storage systems, with 6.5 gigawatt-hours (GWh) installed in 2022.
+Tesla was incorporated in July 2003 by Martin Eberhard and Marc Tarpenning as Tesla Motors. The company&#39;s name is a tribute to inventor and electrical engineer Nikola Tesla. In February 2004, via a $6.5 million investment, Elon Musk became the largest shareholder of the company. He has served as CEO since 2008. According to Musk, the purpose of Tesla is to help expedite the move to sustainable transport and energy, obtained through electric vehicles and solar power. Tesla began production of its first car model, the Roadster sports car, in 2008. This was followed by the Model S sedan in 2012, the Model X SUV in 2015, the Model 3 sedan in 2017, the Model Y crossover in 2020, and the Tesla Semi truck in 2022. The company plans production of the Cybertruck light-duty pickup truck in 2023. The Model 3 is the all-time bestselling plug-in electric car worldwide, and in June 2021 became the first electric car to sell 1 million units globally. Tesla&#39;s 2022 full year deliveries were around 1.31 million vehicles, a 40% increase over the previous year, and cumulative sales totaled 3 million cars as of August 2022. In October 2021, Tesla&#39;s market capitalization reached $1 trillion, the sixth company to do so in U.S. history.
+Tesla has been the subject of several lawsuits, government scrutiny, journalistic criticism, and public controversies arising from statements and acts of CEO Elon Musk and from allegations of whistleblower retaliation, worker rights violations, and defects with their products.
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">agent</span></code> is a specific type of chain, and can thus be included in our <code class="docutils literal notranslate"><span class="pre">SimpleSequentialChain</span></code>:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">overall_chain</span> <span class="o">=</span> <span class="n">SimpleSequentialChain</span><span class="p">(</span>
+    <span class="n">chains</span> <span class="o">=</span> <span class="p">[</span><span class="n">agent</span><span class="p">,</span>
+              <span class="n">first_chain</span><span class="p">,</span>
+              <span class="n">second_chain</span><span class="p">],</span>
+    <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>We can thus run the entire process, starting from the Wikipedia research:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">overall_chain</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;Tesla, Inc.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And it handles the entire process by itself:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&gt; Entering new SimpleSequentialChain chain...
+
+
+&gt; Entering new AgentExecutor chain...
+Question: What is Tesla, Inc.?
+Thought: I should use Wikipedia to get information about Tesla, Inc.
+
+Action:
+
+{
+  &quot;action&quot;: &quot;Wikipedia&quot;,
+  &quot;action_input&quot;: &quot;Tesla, Inc.&quot;
+}
+
+
+Observation: Page: Tesla, Inc.
+Summary: Tesla, Inc. ( TESS-lə or  TEZ-lə) is an American multinational automotive and clean energy company headquartered in Austin, Texas. Tesla designs and manufactures electric vehicles (electric cars and trucks), battery energy storage from home to grid-scale, solar panels and solar roof tiles, and related products and services. Tesla is one of the world&#39;s most valuable companies and, as of 2023, is the world&#39;s most valuable automaker. In 2022, the company had the most worldwide sales of battery electric vehicles, capturing 18% of the market. Through its subsidiary Tesla Energy, the company develops and is a major installer of photovoltaic systems in the United States. Tesla Energy is also one of the largest global suppliers of battery energy storage systems, with 6.5 gigawatt-hours (GWh) installed in 2022.
+Tesla was incorporated in July 2003 by Martin Eberhard and Marc Tarpenning as Tesla Motors. The company&#39;s name is a tribute to inventor and electrical engineer Nikola Tesla. In February 2004, via a $6.5 million investment, Elon Musk became the largest shareholder of the company. He has served as CEO since 2008. According to Musk, the purpose of Tesla is to help expedite the move to sustainable transport and energy, obtained through electric vehicles and solar power. Tesla began production of its first car model, the Roadster sports car, in 2008. This was followed by the Model S sedan in 2012, the Model X SUV in 2015, the Model 3 sedan in 2017, the Model Y crossover in 2020, and the Tesla Semi truck in 2022. The company plans production of the Cybertruck light-duty pickup truck in 2023. The Model 3 is the all-time bestselling plug-in electric car worldwide, and in June 2021 became the first electric car to sell 1 million units globally. Tesla&#39;s 2022 full year deliveries were around 1.31 million vehicles, a 40% increase over the previous year, and cumulative sales totaled 3 million cars as of August 2022. In October 2021, Tesla&#39;s market capitalization reached $1 trillion, the sixth company to do so in U.S. history.
+Tesla has been the subject of several lawsuits, government scrutiny, journalistic criticism, and public controversies arising from statements and acts of CEO Elon Musk and from allegations of whistleblower retaliation, worker rights violations, and defects with their products.
+
+
+Thought:I have a good understanding of what Tesla, Inc. is and its history. 
+Final Answer: Tesla, Inc. is an American multinational automotive and clean energy company that designs and manufactures electric vehicles, battery energy storage, solar panels and solar roof tiles, and related products and services. It was incorporated in July 2003 by Martin Eberhard and Marc Tarpenning as Tesla Motors, and named after inventor and electrical engineer Nikola Tesla. Elon Musk became the largest shareholder of the company in February 2004 and has served as CEO since 2008. Tesla&#39;s purpose is to help expedite the move to sustainable transport and energy, obtained through electric vehicles and solar power. The company has produced several car models, including the Roadster, Model S, Model X, Model 3, Model Y, and Tesla Semi, and plans to produce the Cybertruck light-duty pickup truck in 2023. Tesla is also a major installer of photovoltaic systems in the United States and one of the largest global suppliers of battery energy storage systems. As of 2023, Tesla is the world&#39;s most valuable automaker and had the most worldwide sales of battery electric vehicles in 2022, capturing 18% of the market.
+
+&gt; Finished chain.
+Tesla, Inc. is an American multinational automotive and clean energy company that designs and manufactures electric vehicles, battery energy storage, solar panels and solar roof tiles, and related products and services. It was incorporated in July 2003 by Martin Eberhard and Marc Tarpenning as Tesla Motors, and named after inventor and electrical engineer Nikola Tesla. Elon Musk became the largest shareholder of the company in February 2004 and has served as CEO since 2008. Tesla&#39;s purpose is to help expedite the move to sustainable transport and energy, obtained through electric vehicles and solar power. The company has produced several car models, including the Roadster, Model S, Model X, Model 3, Model Y, and Tesla Semi, and plans to produce the Cybertruck light-duty pickup truck in 2023. Tesla is also a major installer of photovoltaic systems in the United States and one of the largest global suppliers of battery energy storage systems. As of 2023, Tesla is the world&#39;s most valuable automaker and had the most worldwide sales of battery electric vehicles in 2022, capturing 18% of the market.
+Tesla, Inc. is a multinational company that specializes in designing and manufacturing electric vehicles, battery energy storage, solar panels, solar roof tiles, and related products and services. The company was founded in July 2003 by Martin Eberhard and Marc Tarpenning as Tesla Motors, named after inventor and electrical engineer Nikola Tesla. Elon Musk became the largest shareholder in February 2004 and has been the CEO since 2008. Tesla&#39;s mission is to accelerate the transition to sustainable transport and energy through the use of electric vehicles and solar power. The company has produced several car models, including the Roadster, Model S, Model X, Model 3, Model Y, and Tesla Semi, and plans to release the Cybertruck light-duty pickup truck in 2023. Tesla is also a major installer of photovoltaic systems in the United States and one of the largest global suppliers of battery energy storage systems. As of 2023, Tesla is the world&#39;s most valuable automaker and had the highest worldwide sales of battery electric vehicles in 2022, accounting for 18% of the market.
+(&#39;Tesla, Inc.&#39;, &#39;is&#39;, &#39;a multinational company&#39;)
+(&#39;Tesla, Inc.&#39;, &#39;specializes in&#39;, &#39;designing and manufacturing electric vehicles, battery energy storage, solar panels, solar roof tiles, and related products and services&#39;)
+(&#39;Martin Eberhard and Marc Tarpenning&#39;, &#39;founded&#39;, &#39;Tesla Motors&#39;)
+(&#39;Tesla Motors&#39;, &#39;named after&#39;, &#39;Nikola Tesla&#39;)
+(&#39;Elon Musk&#39;, &#39;became&#39;, &#39;the largest shareholder&#39;)
+(&#39;Elon Musk&#39;, &#39;has been&#39;, &#39;the CEO since 2008&#39;)
+(&#39;Tesla&#39;, &#39;has produced&#39;, &#39;several car models including the Roadster, Model S, Model X, Model 3, Model Y, and Tesla Semi&#39;)
+(&#39;Tesla&#39;, &#39;plans to release&#39;, &#39;the Cybertruck light-duty pickup truck in 2023&#39;)
+(&#39;Tesla&#39;, &#39;is&#39;, &#39;also a major installer of photovoltaic systems in the United States&#39;)
+(&#39;Tesla&#39;, &#39;is&#39;, &#39;one of the largest global suppliers of battery energy storage systems&#39;)
+(&#39;Tesla&#39;, &#39;is&#39;, &quot;the world&#39;s most valuable automaker as of 2023&quot;)
+(&#39;Tesla&#39;, &#39;had&#39;, &#39;the highest worldwide sales of battery electric vehicles in 2022, accounting for 18% of the market&#39;)
+
+&gt; Finished chain.
+(\&#39;Tesla, Inc.\&#39;, \&#39;is\&#39;, \&#39;a multinational company\&#39;)\n(\&#39;Tesla, Inc.\&#39;, \&#39;specializes in\&#39;, \&#39;designing and manufacturing electric vehicles, battery energy storage, solar panels, solar roof tiles, and related products and services\&#39;)\n(\&#39;Martin Eberhard and Marc Tarpenning\&#39;, \&#39;founded\&#39;, \&#39;Tesla Motors\&#39;)\n(\&#39;Tesla Motors\&#39;, \&#39;named after\&#39;, \&#39;Nikola Tesla\&#39;)\n(\&#39;Elon Musk\&#39;, \&#39;became\&#39;, \&#39;the largest shareholder\&#39;)\n(\&#39;Elon Musk\&#39;, \&#39;has been\&#39;, \&#39;the CEO since 2008\&#39;)\n(\&#39;Tesla\&#39;, \&#39;has produced\&#39;, \&#39;several car models including the Roadster, Model S, Model X, Model 3, Model Y, and Tesla Semi\&#39;)\n(\&#39;Tesla\&#39;, \&#39;plans to release\&#39;, \&#39;the Cybertruck light-duty pickup truck in 2023\&#39;)\n(\&#39;Tesla\&#39;, \&#39;is\&#39;, \&#39;also a major installer of photovoltaic systems in the United States\&#39;)\n(\&#39;Tesla\&#39;, \&#39;is\&#39;, \&#39;one of the largest global suppliers of battery energy storage systems\&#39;)\n(\&#39;Tesla\&#39;, \&#39;is\&#39;, &quot;the world\&#39;s most valuable automaker as of 2023&quot;)\n(\&#39;Tesla\&#39;, \&#39;had\&#39;, \&#39;the highest worldwi
+</pre></div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="net_zero.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Towards a Net Zero Strategy</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../climate_investing/net_zero_investing.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Net Zero Investing</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langchain">LangChain</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-template">Prompt Template</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-template-serializing-prompts">Prompt Template: Serializing Prompts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-example-inserting-context-to-chatgpt">Other Example: Inserting Context to ChatGPT</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-sequential-chain">Simple Sequential Chain</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solution">Solution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agent">Agent</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            <div class="bd-footer-content__inner">
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Thomas Lorans
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022, Thomas Lorans.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div></div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

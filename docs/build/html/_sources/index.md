@@ -29,7 +29,7 @@ Data used for the projects come from [Guillaume Coqueret's github repository](ht
 
 intro/lowcarbon
 intro/net_zero
-intro/intro_langchain
+intro/intro_langchain_v2
 climate_investing/net_zero_investing
 climate_investing/portfolio_decarbonization_pathway
 climate_investing/portfolio_alignment
