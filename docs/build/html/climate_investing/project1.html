@@ -283,6 +283,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-tools">Custom Tools</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chatgpt-as-a-financial-information-extractor">ChatGPT as a Financial Information Extractor</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
 </ul>
             </nav>
@@ -412,6 +413,81 @@ Tesla&#39;s revenue in 2022 was nearly 81.5 billion U.S. dollars.
 </div>
 <p>Cool! We now have access to recent data!</p>
 </section>
+<section id="chatgpt-as-a-financial-information-extractor">
+<h2>ChatGPT as a Financial Information Extractor<a class="headerlink" href="#chatgpt-as-a-financial-information-extractor" title="Permalink to this headline">#</a></h2>
+<p>In the previous project, we’ve found that <code class="docutils literal notranslate"><span class="pre">ChatGPT</span></code> can be a useful tool as a zero-shot information extractor (Wei et al., 2023 and Shi et al., 2023).
+In fact, building on this finding, Yue et al. (2023) <span id="id1">[]</span> found that one can leverage on these zero-shot IE capacity for financial information extraction.</p>
+<p>To do so, we can make an adaptation of the numerical value extraction prompt proposed by Yue et al. (2023), such as:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.prompts</span> <span class="kn">import</span> <span class="n">ChatPromptTemplate</span>
+<span class="kn">from</span> <span class="nn">langchain.chains</span> <span class="kn">import</span> <span class="n">LLMChain</span>
+
+<span class="n">extraction_template</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Your task:</span><span class="se">\n\</span>
+<span class="s2">Find the value of revenue in the given content.</span><span class="se">\n\</span>
+<span class="s2">If you can&#39;t find the value, please output &quot;None&quot;.</span><span class="se">\n\</span>
+
+<span class="s2">Example 1:</span><span class="se">\n\</span>
+<span class="s2">The amount of Apple&#39;s annual revenue in 2021 was $365.817B.</span>
+<span class="s2">Result: 365.817</span>
+
+<span class="s2">Given content: </span><span class="si">{text}</span><span class="s2"></span>
+<span class="s2">Result:</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="n">extraction_prompt</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="o">.</span><span class="n">from_template</span><span class="p">(</span><span class="n">extraction_template</span><span class="p">)</span>
+
+<span class="n">extraction_chain</span> <span class="o">=</span> <span class="n">LLMChain</span><span class="p">(</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="n">extraction_prompt</span><span class="p">,</span>
+    <span class="n">llm</span> <span class="o">=</span> <span class="n">chat</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>As before, we can make use of the <code class="docutils literal notranslate"><span class="pre">SimpleSequentialChain</span></code>:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.chains</span> <span class="kn">import</span> <span class="n">SimpleSequentialChain</span>
+
+<span class="n">overall_chain</span> <span class="o">=</span> <span class="n">SimpleSequentialChain</span><span class="p">(</span><span class="n">chains</span> <span class="o">=</span> <span class="p">[</span><span class="n">agent</span><span class="p">,</span> <span class="n">extraction_chain</span><span class="p">],</span>
+                                      <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="n">overall_chain</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;What are Tesla&#39;s revenue in 2022?&quot;</span><span class="p">)</span>                                    
+</pre></div>
+</div>
+<p>And we get:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> Entering new SimpleSequentialChain chain...
+
+
+&gt; Entering new AgentExecutor chain...
+Thought: I need to search for Tesla&#39;s revenue for the year 2022, but it is not possible to know the revenue for a future year. I will search for Tesla&#39;s revenue for the latest year available and check if there are any predictions for 2022.
+
+Action:
+{
+  &quot;action&quot;: &quot;DuckDuckGo Search&quot;,
+  &quot;action_input&quot;: &quot;Tesla revenue latest year and predictions for 2022&quot;
+}
+
+Observation: Antuan Goodwin Jan. 25, 2023 4:52 p.m. PT 3 min read Enlarge Image The Model 3 and Model Y make up around 95% of the 1.31 million Teslas sold in 2022. Tesla finished 2022 on a tear, bolstered... That represents a 59 percent increase year over year compared to $2.8 billion in revenue in Q4 2021. It was also Tesla&#39;s third year ending in the black, with $14.1 billion in net income for 2022 ... Mar 17, 2023 Tesla&#39;s revenue grew to nearly 81.5 billion U.S. dollars in the 2022 fiscal year, a 51 percent increase from the previous year. The United States is Tesla&#39;s largest sales... For Q4 2022, the Wall Street consensus is a gain of $1.13 per share, while Estimize&#39;s prediction is higher with a profit of $1.19 per share. The estimates have a wide range this quarter because... Tesla is expected to report adjusted EPS of $1.19 for the fourth quarter of 2022, compared with $0.85 for the prior-year quarter. Revenue likely climbed about 38% to $24.4 billion. Tesla...
+Thought:Based on the search results, Tesla&#39;s revenue for the 2022 fiscal year was nearly 81.5 billion U.S. dollars, a 51 percent increase from the previous year. Additionally, the fourth quarter of 2022 saw a revenue of $24.4 billion and an adjusted EPS of $1.19. 
+
+Action:
+
+{
+  &quot;action&quot;: &quot;None&quot;,
+  &quot;action_input&quot;: &quot;&quot;
+}
+
+
+Observation: None is not a valid tool, try another one.
+Thought:I don&#39;t need to take any further action as I have already found the answer to the question.
+
+Final Answer: Tesla&#39;s revenue for the 2022 fiscal year was nearly 81.5 billion U.S. dollars, a 51 percent increase from the previous year.
+
+&gt; Finished chain.
+Tesla&#39;s revenue for the 2022 fiscal year was nearly 81.5 billion U.S. dollars, a 51 percent increase from the previous year.
+81.5
+
+&gt; Finished chain.
+81.5
+</pre></div>
+</div>
+<p>The numerical information was successfully extracted!</p>
+</section>
 <section id="exercise">
 <h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">#</a></h2>
 <p>Let’s download a dataset with emissions for a handful of stocks:</p>
@@ -506,6 +582,7 @@ Tesla&#39;s revenue in 2022 was nearly 81.5 billion U.S. dollars.
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-tools">Custom Tools</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chatgpt-as-a-financial-information-extractor">ChatGPT as a Financial Information Extractor</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
 </ul>
   </nav></div>

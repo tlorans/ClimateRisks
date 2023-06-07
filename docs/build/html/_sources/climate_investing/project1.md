@@ -138,6 +138,86 @@ Tesla's revenue in 2022 was nearly 81.5 billion U.S. dollars.
 
 Cool! We now have access to recent data!
 
+## ChatGPT as a Financial Information Extractor
+
+In the previous project, we've found that `ChatGPT` can be a useful tool as a zero-shot information extractor (Wei et al., 2023 and Shi et al., 2023). 
+In fact, building on this finding, Yue et al. (2023) {cite:p}`yue2023leveraging` found that one can leverage on these zero-shot IE capacity for financial information extraction. 
+
+To do so, we can make an adaptation of the numerical value extraction prompt proposed by Yue et al. (2023), such as:
+
+```Python
+from langchain.prompts import ChatPromptTemplate
+from langchain.chains import LLMChain
+
+extraction_template = """Your task:\n\
+Find the value of revenue in the given content.\n\
+If you can't find the value, please output "None".\n\
+
+Example 1:\n\
+The amount of Apple's annual revenue in 2021 was $365.817B.
+Result: 365.817
+
+Given content: {text}
+Result:
+"""
+extraction_prompt = ChatPromptTemplate.from_template(extraction_template)
+
+extraction_chain = LLMChain(
+    prompt = extraction_prompt,
+    llm = chat
+)
+```
+
+As before, we can make use of the `SimpleSequentialChain`:
+
+```Python
+from langchain.chains import SimpleSequentialChain
+
+overall_chain = SimpleSequentialChain(chains = [agent, extraction_chain],
+                                      verbose = True)
+
+overall_chain.run("What are Tesla's revenue in 2022?")                                    
+```
+
+And we get:
+```
+ Entering new SimpleSequentialChain chain...
+
+
+> Entering new AgentExecutor chain...
+Thought: I need to search for Tesla's revenue for the year 2022, but it is not possible to know the revenue for a future year. I will search for Tesla's revenue for the latest year available and check if there are any predictions for 2022.
+
+Action:
+{
+  "action": "DuckDuckGo Search",
+  "action_input": "Tesla revenue latest year and predictions for 2022"
+}
+
+Observation: Antuan Goodwin Jan. 25, 2023 4:52 p.m. PT 3 min read Enlarge Image The Model 3 and Model Y make up around 95% of the 1.31 million Teslas sold in 2022. Tesla finished 2022 on a tear, bolstered... That represents a 59 percent increase year over year compared to $2.8 billion in revenue in Q4 2021. It was also Tesla's third year ending in the black, with $14.1 billion in net income for 2022 ... Mar 17, 2023 Tesla's revenue grew to nearly 81.5 billion U.S. dollars in the 2022 fiscal year, a 51 percent increase from the previous year. The United States is Tesla's largest sales... For Q4 2022, the Wall Street consensus is a gain of $1.13 per share, while Estimize's prediction is higher with a profit of $1.19 per share. The estimates have a wide range this quarter because... Tesla is expected to report adjusted EPS of $1.19 for the fourth quarter of 2022, compared with $0.85 for the prior-year quarter. Revenue likely climbed about 38% to $24.4 billion. Tesla...
+Thought:Based on the search results, Tesla's revenue for the 2022 fiscal year was nearly 81.5 billion U.S. dollars, a 51 percent increase from the previous year. Additionally, the fourth quarter of 2022 saw a revenue of $24.4 billion and an adjusted EPS of $1.19. 
+
+Action:
+
+{
+  "action": "None",
+  "action_input": ""
+}
+
+
+Observation: None is not a valid tool, try another one.
+Thought:I don't need to take any further action as I have already found the answer to the question.
+
+Final Answer: Tesla's revenue for the 2022 fiscal year was nearly 81.5 billion U.S. dollars, a 51 percent increase from the previous year.
+
+> Finished chain.
+Tesla's revenue for the 2022 fiscal year was nearly 81.5 billion U.S. dollars, a 51 percent increase from the previous year.
+81.5
+
+> Finished chain.
+81.5
+```
+The numerical information was successfully extracted!
+
 ## Exercise
 
 
