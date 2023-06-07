@@ -438,3 +438,127 @@ conversation.run("What is my name?")
 ```
 Your name is Thomas, as you just told me. Is there anything else you would like to know?
 ```
+
+## Exercise
+
+We are going to test if `ChatGPT` can be useful for information extraction (IE). 
+
+Short answer: it is, as confirmed by Wei et al. (2023) {cite:p}`wei2023zero` for zero-shot IE or Shi et al. (2023) {cite:p}`shi2023chatgraph`.
+
+First, reinstantiate everything that we need for this exercise:
+
+```Python
+!pip install langchain
+!pip install openai
+```
+
+```Python
+
+import os
+os.environ["OPENAI_API_KEY"] = openai_api_key = open('key.txt','r').read()
+
+from langchain.chat_models import ChatOpenAI
+
+chat = ChatOpenAI(temperature = 0.0,
+                  )
+```
+
+We are going to extract information from Wikipedia, in the format of a knowledge graph. 
+
+A knowledge graph is a representation of information (knowledge), such as the following:
+
+```{figure} knowledgegraph.png
+---
+name: knowledgegraph
+---
+Figure: Knowledge Graph sample, from WWWC (2014) {cite:p}`world2014rdf`
+```
+
+It requires to identify, in a triplet format:
+- the head entity
+- the relation
+- the tail entity
+
+You need to install the `wikipedia` library:
+
+```Python
+!pip install wikipedia
+```
+
+And you can retrieve information from Wikipedia:
+
+```Python
+from langchain.utilities import WikipediaAPIWrapper
+
+wikipedia = WikipediaAPIWrapper()
+print(wikipedia.run('Tesla, Inc.'))
+```
+
+```
+Page: Tesla, Inc.
+Summary: Tesla, Inc. ( TESS-lə or  TEZ-lə) is an American multinational automotive and clean energy company headquartered in Austin, Texas. Tesla designs and manufactures electric vehicles (electric cars and trucks), battery energy storage from home to grid-scale, solar panels and solar roof tiles, and related products and services. Tesla is one of the world's most valuable companies and, as of 2023, is the world's most valuable automaker. In 2022, the company had the most worldwide sales of battery electric vehicles, capturing 18% of the market. Through its subsidiary Tesla Energy, the company develops and is a major installer of photovoltaic systems in the United States. Tesla Energy is also one of the largest global suppliers of battery energy storage systems, with 6.5 gigawatt-hours (GWh) installed in 2022.
+Tesla was incorporated in July 2003 by Martin Eberhard and Marc Tarpenning as Tesla Motors. The company's name is a tribute to inventor and electrical engineer Nikola Tesla. In February 2004, via a $6.5 million investment, Elon Musk became the largest shareholder of the company. He has served as CEO since 2008. According to Musk, the purpose of Tesla is to help expedite the move to sustainable transport and energy, obtained through electric vehicles and solar power. Tesla began production of its first car model, the Roadster sports car, in 2008. This was followed by the Model S sedan in 2012, the Model X SUV in 2015, the Model 3 sedan in 2017, the Model Y crossover in 2020, and the Tesla Semi truck in 2022. The company plans production of the Cybertruck light-duty pickup truck in 2023. The Model 3 is the all-time bestselling plug-in electric car worldwide, and in June 2021 became the first electric car to sell 1 million units globally. Tesla's 2022 full year deliveries were around 1.31 million vehicles, a 40% increase over the previous year, and cumulative sales totaled 3 million cars as of August 2022. In October 2021, Tesla's market capitalization reached $1 trillion, the sixth company to do so in U.S. history.
+Tesla has been the subject of several lawsuits, government scrutiny, journalistic criticism, and public controversies arising from statements and acts of CEO Elon Musk and from allegations of whistleblower retaliation, worker rights violations, and defects with their products.
+
+Page: History of Tesla, Inc.
+Summary: This is the corporate history of Tesla, Inc., an electric vehicle manufacturer and clean energy company founded in San Carlos, California in 2001 by American entrepreneurs Martin Eberhard and Marc Tarpenning. The company is named after Croatian-American inventor Nikola Tesla. Tesla is the world's leading electric vehicle manufacturer, and, as of the end of 2021, Tesla's cumulative global vehicle sales totaled 2.3 million units.
+
+
+
+Page: Tesla Cybertruck
+Summary: The Tesla Cybertruck is an upcoming battery electric light-duty truck announced by Tesla, Inc. in November 2019. Three models have been announced, with EPA range estimates of 400–800 kilometers (250–500 mi) and an estimated 0–100 km/h (0–62 mph) time of 2.9–6.5 seconds, depending on the model.The stated goal of Tesla in developing the Cybertruck is to provide a sustainable energy substitute for the roughly 6,500 fossil-fuel-powered trucks sold per day in the United States of America.The base price of the rear-wheel drive (RWD) model of the vehicle was announced to be US$39,900, with all-wheel drive (AWD) models starting at US$49,900. Production of the dual-motor AWD and tri-motor AWD Cybertruck were initially slated to begin in late 2021, with the RWD model release date in late 2022, but production dates were pushed back multiple times. As of July 2022, the start of limited production is estimated to start in mid-2023. As of January 2023, the start of mass production was estimated to be in 2024. However, as of February 2023, Elon Musk stated that the Cybertruck will be available later in 2023 with deliveries planned to begin
+```
+
+In this exercise, your task is to implement knowledge graph extraction following Shi et al. (2023) two stages process:
+
+
+```{figure} knowledgeextractor.png
+---
+name: knowledgeextractor
+---
+Figure: Two Stage Knowledge Graph Extraction, from Shi et al. (2023)
+```
+
+The text refinement prompt to implement is the following:
+
+```text
+Please generate a refined document of the following document. And please ensure that the refined document meets the following criteria:
+1. The refined document should be abstract and does not change any original meaning of the document.
+2. The refined document should retain all the important objects, concepts, and relationships between them.
+3. The refined document should only contain information that is from the document.
+4. The refined document should be readable and easy to understand without any abbreviations and misspellings.
+Here is the content: [x]
+```
+
+The knowledge extraction prompt to implement is:
+```
+You are a knowledge graph extractor, and your task is to extract and return a knowledge graph from a given text.Let’s extract it step by step:
+(1). Identify the entities in the text. An entity can be a noun or a noun phrase that refers to a real-world object or an abstract concept. You can use a named entity recognition (NER) tool or a part-of-speech (POS) tagger to identify the entities.
+(2). Identify the relationships between the entities. A relationship can be a verb or a prepositional phrase that connects two entities. You can use dependency parsing
+to identify the relationships.
+(3). Summarize each entity and relation as short as possible and remove any stop words.
+(4). Only return the knowledge graph in the triplet format: (’head entity’, ’relation’, ’tail entity’).
+(5). Most importantly, if you cannot find any knowledge, please just output: "None".
+Here is the content: [x]
+```
+
+For example, the final output with Tesla is something as:
+
+```
+('Tesla, Inc.', 'is', 'a multinational automotive and clean energy company')
+('Tesla, Inc.', 'designs and manufactures', 'electric vehicles, battery energy storage systems, solar panels, and related products and services')
+('Tesla, Inc.', 'recognized as', "one of the world's most valuable companies and the world's most valuable automaker as of 2023")
+('Tesla, Inc.', 'captured', '18% of the market for battery electric vehicles in 2022')
+('Tesla, Inc.', 'is', 'a major installer of photovoltaic systems in the United States')
+('Tesla Energy', 'is', 'one of the largest global suppliers of battery energy storage systems')
+('Tesla Energy', 'installed', '6.5 gigawatt-hours in 2022')
+('Tesla', 'founded', 'in 2003 by Martin Eberhard and Marc Tarpenning as Tesla Motors')
+('Elon Musk', 'became', 'the largest shareholder of the company in 2004')
+('Elon Musk', 'has served as', 'CEO since 2008')
+('Tesla', 'produced', 'several car models, including the Roadster sports car, Model S sedan, Model X SUV, Model 3 sedan, Model Y crossover, and Tesla Semi truck')
+('Model 3', 'is', 'the all-time bestselling plug-in electric car worldwide and the first electric car to sell 1 million units globally')
+('Tesla', '2022 full year deliveries were', 'around 1.31 million vehicles, a 40% increase over the previous year')
+('cumulative sales', 'totaled', '3 million cars as of August 2022')
+('Tesla', 'market capitalization reached', '$1 trillion in October 2021')
+('Tesla', 'faced', 'lawsuits, government scrutiny, journalistic criticism, and public controversies related to statements and acts of CEO Elon Musk, allegations of whistleblower retaliation, worker rights violations, and defects with their products')
+```

@@ -332,23 +332,23 @@ document.write(`
 \end{equation*}\]</div>
 <p>Without any further constraint, the optimal solution <span class="math notranslate nohighlight">\(x^*\)</span> will be equal to the benchmark weights <span class="math notranslate nohighlight">\(b\)</span>. This is the case of a perfect replication strategy. An enhanced or tilted version will add further constraints, depending on the objective of the strategy (decarbonization for example). We have a few more steps to consider before finding our QP formulation parameters.</p>
 <p>First, let’s recall that:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8b9aafe3-1f44-4f1e-af83-12bd1006aa2e">
-<span class="eqno">(1)<a class="headerlink" href="#equation-8b9aafe3-1f44-4f1e-af83-12bd1006aa2e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-13420507-e15a-4f93-af1b-3631439f78b3">
+<span class="eqno">(1)<a class="headerlink" href="#equation-13420507-e15a-4f93-af1b-3631439f78b3" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sigma^2(x|b) = (x - b)^T \Sigma (x -b)
 \end{equation}\]</div>
 <p>and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a43ba281-1ea6-4c84-97d4-4e1c11261d8d">
-<span class="eqno">(2)<a class="headerlink" href="#equation-a43ba281-1ea6-4c84-97d4-4e1c11261d8d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b3cb418a-15c0-4450-a975-653325b4adef">
+<span class="eqno">(2)<a class="headerlink" href="#equation-b3cb418a-15c0-4450-a975-653325b4adef" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mu(x|b) = (x -b)^T \mu
 \end{equation}\]</div>
 <p>If we replace <span class="math notranslate nohighlight">\(\sigma^2(x|b)\)</span> and <span class="math notranslate nohighlight">\(\mu(x|b)\)</span> in our objective function, we get:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9bbbe9ca-3237-4f9e-8c9c-37d99466fda0">
-<span class="eqno">(3)<a class="headerlink" href="#equation-9bbbe9ca-3237-4f9e-8c9c-37d99466fda0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-9953f1e9-26af-495c-b143-f1f7af2bab03">
+<span class="eqno">(3)<a class="headerlink" href="#equation-9953f1e9-26af-495c-b143-f1f7af2bab03" title="Permalink to this equation">#</a></span>\[\begin{equation}
 * = \frac{1}{2}(x-b)^T \Sigma (x -b) - \gamma (x -b)^T \mu
 \end{equation}\]</div>
 <p>With further developments, you end up with the following QP objective function formulation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ab1a08d8-fc48-4608-b8b3-e21c7bddd7db">
-<span class="eqno">(4)<a class="headerlink" href="#equation-ab1a08d8-fc48-4608-b8b3-e21c7bddd7db" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4f871104-9874-4b03-8e1f-4d448e24a125">
+<span class="eqno">(4)<a class="headerlink" href="#equation-4f871104-9874-4b03-8e1f-4d448e24a125" title="Permalink to this equation">#</a></span>\[\begin{equation}
 * = \frac{1}{2} x^T \Sigma x - x^T(\gamma \mu + \Sigma b)
 \end{equation}\]</div>
 <p>We have exactly the same QP problem than with a long-only mean-variance portfolio, except that <span class="math notranslate nohighlight">\(q = -(\gamma \mu + \Sigma b)\)</span>.</p>
@@ -396,14 +396,14 @@ document.write(`
 <section id="weighted-average-carbon-intensity">
 <h3>Weighted-Average Carbon Intensity<a class="headerlink" href="#weighted-average-carbon-intensity" title="Permalink to this headline">#</a></h3>
 <p>The weighted-average carbon intensity (WACI) of the benchmark is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-140768d6-45e8-4bbf-9cb8-13f93d7686e4">
-<span class="eqno">(5)<a class="headerlink" href="#equation-140768d6-45e8-4bbf-9cb8-13f93d7686e4" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-6a8df726-e3ee-4eff-8728-4a322ba4f5d8">
+<span class="eqno">(5)<a class="headerlink" href="#equation-6a8df726-e3ee-4eff-8728-4a322ba4f5d8" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI(b) = b^T CI
 \end{equation}\]</div>
 <p>With <span class="math notranslate nohighlight">\(CI = (CI_1, ..., CI_n)\)</span> the vector of carbon intensities.</p>
 <p>The same is for the WACI of the portfolio:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e9ca0ef0-913e-45a7-9cc7-3bc3f337f333">
-<span class="eqno">(6)<a class="headerlink" href="#equation-e9ca0ef0-913e-45a7-9cc7-3bc3f337f333" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f327dc6a-4212-436a-af7e-c477329d291e">
+<span class="eqno">(6)<a class="headerlink" href="#equation-f327dc6a-4212-436a-af7e-c477329d291e" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI(x) = x^T CI
 \end{equation}\]</div>
 <p>Let’s implement a <code class="docutils literal notranslate"><span class="pre">CarbonPortfolio</span></code> dataclass:</p>
@@ -428,8 +428,8 @@ CI(x) = x^T CI
 <section id="integrating-carbon-intensity-reduction-as-a-constraint">
 <h3>Integrating Carbon Intensity Reduction as a Constraint<a class="headerlink" href="#integrating-carbon-intensity-reduction-as-a-constraint" title="Permalink to this headline">#</a></h3>
 <p>The low-carbon strategy involves the reduction <span class="math notranslate nohighlight">\(\mathfrak{R}\)</span> of the portfolio’s carbon intensity <span class="math notranslate nohighlight">\(CI(x)\)</span> compared to the benchmark’s carbon intensity <span class="math notranslate nohighlight">\(CI(b)\)</span>. It can be viewed as the following constraint (Roncalli, 2023):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a5e8d011-b87e-4650-a899-1c3f27738b68">
-<span class="eqno">(7)<a class="headerlink" href="#equation-a5e8d011-b87e-4650-a899-1c3f27738b68" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-7c91f628-58bd-4075-b42b-d2328335b8c7">
+<span class="eqno">(7)<a class="headerlink" href="#equation-7c91f628-58bd-4075-b42b-d2328335b8c7" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI(x) \leq (1 - \mathfrak{R})CI(b)
 \end{equation}\]</div>
 <p>The optimization problem becomes:</p>
@@ -520,8 +520,8 @@ CI(x) \leq (1 - \mathfrak{R})CI(b)
 </div>
 <p>We can use the market one-factor model to estimate the covariance matrix, based on stocks betas <span class="math notranslate nohighlight">\(\beta\)</span>, idiosyncratic volatilities <span class="math notranslate nohighlight">\(\tilde{\sigma}\)</span>
 and market volatiltiy <span class="math notranslate nohighlight">\(\sigma_m\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d2fb379d-a61c-4935-bd4d-c95cdd547cb8">
-<span class="eqno">(8)<a class="headerlink" href="#equation-d2fb379d-a61c-4935-bd4d-c95cdd547cb8" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-74dc0ff9-adb0-49c8-a316-7b791813d2f7">
+<span class="eqno">(8)<a class="headerlink" href="#equation-74dc0ff9-adb0-49c8-a316-7b791813d2f7" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \Sigma = \beta \beta^T \sigma_m^2 + D
 \end{equation}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(D\)</span> is a diagonal matrix with <span class="math notranslate nohighlight">\(\tilde{\sigma}^2\)</span> on its diagonal.</p>
@@ -594,19 +594,19 @@ and market volatiltiy <span class="math notranslate nohighlight">\(\sigma_m\)</s
 <h2>Order-Statistic Approach<a class="headerlink" href="#order-statistic-approach" title="Permalink to this headline">#</a></h2>
 <p>Andersson et al. (2016) and Roncalli (2023) propose a second approach by eliminating the <span class="math notranslate nohighlight">\(m\)</span> worst performing issuers in terms of carbon intensity. The choice of the parameter <span class="math notranslate nohighlight">\(m\)</span> allows for a direct control of number of removed stocks.</p>
 <p>We note <span class="math notranslate nohighlight">\(CI_{i:n}\)</span> the order statistics of <span class="math notranslate nohighlight">\([CI_1, ..., CI_n]\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-72476bcc-94b9-4daf-8987-40614dbabe91">
-<span class="eqno">(9)<a class="headerlink" href="#equation-72476bcc-94b9-4daf-8987-40614dbabe91" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0b8c6a21-acb2-42e4-a449-b10678a52057">
+<span class="eqno">(9)<a class="headerlink" href="#equation-0b8c6a21-acb2-42e4-a449-b10678a52057" title="Permalink to this equation">#</a></span>\[\begin{equation}
 minCI_i = CI_{1:n} \leq ... \leq CI_{n:n} = max CI_i
 \end{equation}\]</div>
 <p>The carbon intensity bound <span class="math notranslate nohighlight">\(CI^{m,n}\)</span> is defined as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b9bb0323-e644-4bd1-a753-b078192cae46">
-<span class="eqno">(10)<a class="headerlink" href="#equation-b9bb0323-e644-4bd1-a753-b078192cae46" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8f850e44-5013-479d-8e66-ea016e282ce6">
+<span class="eqno">(10)<a class="headerlink" href="#equation-8f850e44-5013-479d-8e66-ea016e282ce6" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI^{m,n} = CI_{n-m+1:n}
 \end{equation}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(CI_{n-m+1:n}\)</span> is the <span class="math notranslate nohighlight">\((n-m+1)\)</span>-th order statistic of <span class="math notranslate nohighlight">\([CI_1, ..., CI_n]\)</span></p>
 <p>Eliminating the <span class="math notranslate nohighlight">\(m\)</span> worst performing assets is then equivalent to imposing the following constraint:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9eaaeb23-1486-4225-8c81-6fe4e7dbbc99">
-<span class="eqno">(11)<a class="headerlink" href="#equation-9eaaeb23-1486-4225-8c81-6fe4e7dbbc99" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-cb473352-4635-4be5-a80b-407107c9031c">
+<span class="eqno">(11)<a class="headerlink" href="#equation-cb473352-4635-4be5-a80b-407107c9031c" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI_i \geq CI^{m,n} → x_i = 0
 \end{equation}\]</div>
 <p>To implement this decarbonization strategy, the resulting weightings can be determined by:</p>
@@ -615,8 +615,8 @@ CI_i \geq CI^{m,n} → x_i = 0
 <li><p>reweighting the remaining stocks with a naïve approach</p></li>
 </ul>
 <p>Contrary to the threshold approach, the reduction rate <span class="math notranslate nohighlight">\(\mathfrak{R}\)</span> is not a parameter, but an output of the order-statistic approach. We thus need to define a function computing the resulting reduction rate compated to the benchmark, such as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d42545da-0876-461e-8e52-b067d8a2406b">
-<span class="eqno">(12)<a class="headerlink" href="#equation-d42545da-0876-461e-8e52-b067d8a2406b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-886cbbbe-7983-44f3-a559-4f32ae7e66c7">
+<span class="eqno">(12)<a class="headerlink" href="#equation-886cbbbe-7983-44f3-a559-4f32ae7e66c7" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathfrak{R}(x|b) = 1 - \frac{x^T \cdot CI}{b^T \cdot CI}
 \end{equation}\]</div>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_waci_reduction</span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
@@ -714,8 +714,8 @@ CI_i \geq CI^{m,n} → x_i = 0
 <section id="naive-re-weighting">
 <h3>Naive Re-weighting<a class="headerlink" href="#naive-re-weighting" title="Permalink to this headline">#</a></h3>
 <p>A “naive” solution consists in re-weighting the remaining stocks:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-bcb04acb-f43a-4d72-b14d-97ec4af4b3a4">
-<span class="eqno">(13)<a class="headerlink" href="#equation-bcb04acb-f43a-4d72-b14d-97ec4af4b3a4" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-77f2564c-5316-45f1-b739-fd1d2e8c5dde">
+<span class="eqno">(13)<a class="headerlink" href="#equation-77f2564c-5316-45f1-b739-fd1d2e8c5dde" title="Permalink to this equation">#</a></span>\[\begin{equation}
 x_i = \frac{𝟙\{CI_i &lt; CI^{m,n}\}b_i}{\sum^n_{k=1} 𝟙\{CI_k &lt; CI^{m,n}\}b_k}
 \end{equation}\]</div>
 <p>This new approach doesn’t rely on any optimization program. It’s quite easy to implement in Python:</p>
