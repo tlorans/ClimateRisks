@@ -236,7 +236,7 @@ First, reinstantiate everything that we need for this exercise:
 ```Python
 
 import os
-os.environ["OPENAI_API_KEY"] = openai_api_key = open('key.txt','r').read()
+os.environ["OPENAI_API_KEY"] = open('key.txt','r').read()
 
 from langchain.chat_models import ChatOpenAI
 
