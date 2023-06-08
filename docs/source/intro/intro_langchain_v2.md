@@ -79,9 +79,9 @@ The answer we get is:
 4
 ```
 
-## Prompt Template: Serializing Prompts
+## Prompt Template: Prompts at Scale
 
-Having a prompt template with a dynamic variable where you can insert different inputs programatically is useful for serializing your request, that is using the same templace but with a list of different inputs. 
+Having a prompt template with a dynamic variable where you can insert different inputs programatically is useful for prompting at scale, that is using the same templace but with a list of different inputs. 
 
 For example:
 ```Python
