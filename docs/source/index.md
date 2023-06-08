@@ -21,7 +21,7 @@ Any error in this course is mine.
 
 Unless it is sourced, any opinion expressed in this course is my personnal opinion only. 
 
-We investigate the use of `ChatGPT` for carbon emissions retrieval from the internet, carbon emissions and green revenues estimates. Those tasks involve Natural Language Processing (NLP) technics. 
+We investigate the use of `ChatGPT` for carbon emissions retrieval from the internet and carbon emissions estimates. Those tasks involve Natural Language Processing (NLP) technics. 
 
 Before transfer learning and Transformers models introduction, solving a specific NLP task required training a specific model dedicated to it.
 
