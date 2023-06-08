@@ -138,10 +138,53 @@ Tesla's revenue in 2022 was nearly 81.5 billion U.S. dollars.
 
 Cool! We now have access to recent data!
 
+
+## Reasoning and Acting
+
+At this stage, we need to take a step back regarding the output from the agent. We want to underline the fact that `ChatGPT` processed the web search by different steps:
+
+1. Thought
+```
+Thought: I need to search for Tesla's revenue for the year 2022, but it is not possible to know the revenue for a future year. I will search for Tesla's revenue for the latest year available and check if there are any predictions for 2022.
+```
+
+2. Action
+```
+Action:
+{
+  "action": "DuckDuckGo Search",
+  "action_input": "Tesla revenue latest year and predictions for 2022"
+}
+```
+
+3. Observation
+```
+Observation: Antuan Goodwin Jan. 25, 2023 4:52 p.m. PT 3 min read Enlarge Image The Model 3 and Model Y make up around 95% of the 1.31 million Teslas sold in 2022. Tesla finished 2022 on a tear, bolstered... Mar 17, 2023 Tesla's revenue grew to nearly 81.5 billion U.S. dollars in the 2022 fiscal year, a 51 percent increase from the previous year. The United States is Tesla's largest sales... For Q4 2022, the Wall Street consensus is a gain of $1.13 per share, while Estimize's prediction is higher with a profit of $1.19 per share. The estimates have a wide range this quarter because... That represents a 59 percent increase year over year compared to $2.8 billion in revenue in Q4 2021. It was also Tesla's third year ending in the black, with $14.1 billion in net income for 2022 ... Tesla ended 2021 with a net income of $5.51 billion (a 665% increase from 2020). Aside from the constant swirl of buzz that surrounds Tesla's founder, the recent stock split and Inflation...
+```
+
+4. New Thought
+```
+Thought:According to the search results, Tesla's revenue grew to nearly 81.5 billion U.S. dollars in the 2022 fiscal year, a 51 percent increase from the previous year. This is the latest information available and there are no predictions for 2022 revenue. 
+```
+
+5. Finished Chain
+```
+Final Answer: Tesla's revenue in 2022 was nearly 81.5 billion U.S. dollars.
+```
+
+What seems to be quite trivial is in fact impressive: the agent was able to reason about:
+- what tool to use depending on the user input (determining the action)
+- formulating the research query (formulating the `action_input`)
+- reasoning about the result of the search query, and if the result answers correctly the initial question from the user (Thought)
+
+To do so, it makes use of the ReAct (for Reasoning and Acting) framework developed by Yao et al. (2022) {cite:p}`yao2022react`, using specific prompt template under the hood.
+
+It makes information search particularly efficient, as `ChatGPT` is able to reason about the usefulness of a first search result and continue further if needed. It can also reason about looking for complementary information.
+
 ## ChatGPT as a Financial Information Extractor
 
 In the previous project, we've found that `ChatGPT` can be a useful tool as a zero-shot information extractor (Wei et al., 2023 and Shi et al., 2023). 
-In fact, building on this finding, Yue et al. (2023) {cite:p}`yue2023leveraging` found that one can leverage on these zero-shot IE capacity for financial information extraction. 
+In fact, building on this finding, Yue et al. (2023) {cite:p}`yue2023leveraging`  found that one can leverage on these zero-shot IE capacity for financial information extraction. 
 
 To do so, we can make an adaptation of the numerical value extraction prompt proposed by Yue et al. (2023), such as:
 
@@ -218,6 +261,7 @@ Tesla's revenue for the 2022 fiscal year was nearly 81.5 billion U.S. dollars, a
 ```
 The numerical information was successfully extracted!
 
+
 ## Exercise
 
 We now are going to test if `ChatGPT` can be of any use for emissions data retrieval.
@@ -227,7 +271,7 @@ In this exercise, you need to:
 2. Try your entire chain (search engine and extraction prompt) for a company of your choice
 3. Apply this process to the following companies (think about a Python function):
 ```
-'AT&T',
+{'AT&T',
  'Apple Inc.',
  'Bank of America',
  'Boeing',
@@ -258,5 +302,5 @@ In this exercise, you need to:
  'Walmart',
  'Wells Fargo'}
  ```
- 4. Did you found any issue apply this process to a list of companies? Please provide ideas about serialization (making the process work for multiple companies).
+ 4. Did you encountered any issue applying this process to a list of companies? Please provide ideas to make the process working for multiple companies.
 

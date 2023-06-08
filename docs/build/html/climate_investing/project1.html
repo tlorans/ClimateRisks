@@ -283,6 +283,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-tools">Custom Tools</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reasoning-and-acting">Reasoning and Acting</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chatgpt-as-a-financial-information-extractor">ChatGPT as a Financial Information Extractor</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
 </ul>
@@ -413,10 +414,56 @@ Tesla&#39;s revenue in 2022 was nearly 81.5 billion U.S. dollars.
 </div>
 <p>Cool! We now have access to recent data!</p>
 </section>
+<section id="reasoning-and-acting">
+<h2>Reasoning and Acting<a class="headerlink" href="#reasoning-and-acting" title="Permalink to this headline">#</a></h2>
+<p>At this stage, we need to take a step back regarding the output from the agent. We want to underline the fact that <code class="docutils literal notranslate"><span class="pre">ChatGPT</span></code> processed the web search by different steps:</p>
+<ol class="arabic simple">
+<li><p>Thought</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Thought</span><span class="p">:</span> <span class="n">I</span> <span class="n">need</span> <span class="n">to</span> <span class="n">search</span> <span class="k">for</span> <span class="n">Tesla</span><span class="s1">&#39;s revenue for the year 2022, but it is not possible to know the revenue for a future year. I will search for Tesla&#39;</span><span class="n">s</span> <span class="n">revenue</span> <span class="k">for</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">year</span> <span class="n">available</span> <span class="ow">and</span> <span class="n">check</span> <span class="k">if</span> <span class="n">there</span> <span class="n">are</span> <span class="nb">any</span> <span class="n">predictions</span> <span class="k">for</span> <span class="mf">2022.</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Action</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Action</span><span class="p">:</span>
+<span class="p">{</span>
+  <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;DuckDuckGo Search&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;action_input&quot;</span><span class="p">:</span> <span class="s2">&quot;Tesla revenue latest year and predictions for 2022&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Observation</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Observation: Antuan Goodwin Jan. 25, 2023 4:52 p.m. PT 3 min read Enlarge Image The Model 3 and Model Y make up around 95% of the 1.31 million Teslas sold in 2022. Tesla finished 2022 on a tear, bolstered... Mar 17, 2023 Tesla&#39;s revenue grew to nearly 81.5 billion U.S. dollars in the 2022 fiscal year, a 51 percent increase from the previous year. The United States is Tesla&#39;s largest sales... For Q4 2022, the Wall Street consensus is a gain of $1.13 per share, while Estimize&#39;s prediction is higher with a profit of $1.19 per share. The estimates have a wide range this quarter because... That represents a 59 percent increase year over year compared to $2.8 billion in revenue in Q4 2021. It was also Tesla&#39;s third year ending in the black, with $14.1 billion in net income for 2022 ... Tesla ended 2021 with a net income of $5.51 billion (a 665% increase from 2020). Aside from the constant swirl of buzz that surrounds Tesla&#39;s founder, the recent stock split and Inflation...
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>New Thought</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Thought</span><span class="p">:</span><span class="n">According</span> <span class="n">to</span> <span class="n">the</span> <span class="n">search</span> <span class="n">results</span><span class="p">,</span> <span class="n">Tesla</span><span class="s1">&#39;s revenue grew to nearly 81.5 billion U.S. dollars in the 2022 fiscal year, a 51 percent increase from the previous year. This is the latest information available and there are no predictions for 2022 revenue. </span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="5">
+<li><p>Finished Chain</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Final</span> <span class="n">Answer</span><span class="p">:</span> <span class="n">Tesla</span><span class="s1">&#39;s revenue in 2022 was nearly 81.5 billion U.S. dollars.</span>
+</pre></div>
+</div>
+<p>What seems to be quite trivial is in fact impressive: the agent was able to reason about:</p>
+<ul class="simple">
+<li><p>what tool to use depending on the user input (determining the action)</p></li>
+<li><p>formulating the research query (formulating the <code class="docutils literal notranslate"><span class="pre">action_input</span></code>)</p></li>
+<li><p>reasoning about the result of the search query, and if the result answers correctly the initial question from the user (Thought)</p></li>
+</ul>
+<p>To do so, it makes use of the ReAct (for Reasoning and Acting) framework developed by Yao et al. (2022) <span id="id1">[<a class="reference internal" href="../references.html#id39" title="Shunyu Yao, Jeffrey Zhao, Dian Yu, Nan Du, Izhak Shafran, Karthik Narasimhan, and Yuan Cao. React: synergizing reasoning and acting in language models. arXiv preprint arXiv:2210.03629, 2022.">YZY+22</a>]</span>, using specific prompt template under the hood.</p>
+<p>It makes information search particularly efficient, as <code class="docutils literal notranslate"><span class="pre">ChatGPT</span></code> is able to reason about the usefulness of a first search result and continue further if needed. It can also reason about looking for complementary information.</p>
+</section>
 <section id="chatgpt-as-a-financial-information-extractor">
 <h2>ChatGPT as a Financial Information Extractor<a class="headerlink" href="#chatgpt-as-a-financial-information-extractor" title="Permalink to this headline">#</a></h2>
 <p>In the previous project, we’ve found that <code class="docutils literal notranslate"><span class="pre">ChatGPT</span></code> can be a useful tool as a zero-shot information extractor (Wei et al., 2023 and Shi et al., 2023).
-In fact, building on this finding, Yue et al. (2023) <span id="id1">[]</span> found that one can leverage on these zero-shot IE capacity for financial information extraction.</p>
+In fact, building on this finding, Yue et al. (2023) <span id="id2">[]</span>  found that one can leverage on these zero-shot IE capacity for financial information extraction.</p>
 <p>To do so, we can make an adaptation of the numerical value extraction prompt proposed by Yue et al. (2023), such as:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.prompts</span> <span class="kn">import</span> <span class="n">ChatPromptTemplate</span>
 <span class="kn">from</span> <span class="nn">langchain.chains</span> <span class="kn">import</span> <span class="n">LLMChain</span>
@@ -497,7 +544,7 @@ Tesla&#39;s revenue for the 2022 fiscal year was nearly 81.5 billion U.S. dollar
 <li><p>Try your entire chain (search engine and extraction prompt) for a company of your choice</p></li>
 <li><p>Apply this process to the following companies (think about a Python function):</p></li>
 </ol>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;AT&amp;T&#39;</span><span class="p">,</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;AT&amp;T&#39;</span><span class="p">,</span>
  <span class="s1">&#39;Apple Inc.&#39;</span><span class="p">,</span>
  <span class="s1">&#39;Bank of America&#39;</span><span class="p">,</span>
  <span class="s1">&#39;Boeing&#39;</span><span class="p">,</span>
@@ -530,7 +577,7 @@ Tesla&#39;s revenue for the 2022 fiscal year was nearly 81.5 billion U.S. dollar
 </pre></div>
 </div>
 <ol class="arabic simple" start="4">
-<li><p>Did you found any issue apply this process to a list of companies? Please provide ideas about serialization (making the process work for multiple companies).</p></li>
+<li><p>Did you encountered any issue applying this process to a list of companies? Please provide ideas to make the process working for multiple companies.</p></li>
 </ol>
 </section>
 </section>
@@ -578,6 +625,7 @@ Tesla&#39;s revenue for the 2022 fiscal year was nearly 81.5 billion U.S. dollar
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-tools">Custom Tools</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reasoning-and-acting">Reasoning and Acting</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chatgpt-as-a-financial-information-extractor">ChatGPT as a Financial Information Extractor</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
 </ul>

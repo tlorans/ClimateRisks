@@ -21,7 +21,6 @@ Any error in this course is mine.
 
 Unless it is sourced, any opinion expressed in this course is my personnal opinion only. 
 
-Data used for the projects come from [Guillaume Coqueret's github repository](https://github.com/shokru/carbon_emissions).
 
 ```{toctree}
 :caption: 'Contents:'
