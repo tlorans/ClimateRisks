@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Project 0: An Introduction to ChatGPT with LangChain &#8212; Climate Risks in Finance 0.1 documentation</title>
+    <title>Project 0: Information Extraction with ChatGPT &#8212; Climate Risks in Finance 0.1 documentation</title>
   
   
   
@@ -127,7 +127,7 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="lowcarbon.html">Portfolio Decarbonization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="net_zero.html">Towards a Net Zero Strategy</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Project 0: An Introduction to ChatGPT with LangChain</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Project 0: Information Extraction with ChatGPT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../climate_investing/net_zero_investing.html">Net Zero Investing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../climate_investing/portfolio_decarbonization_pathway.html">Portfolio Decarbonization Pathway</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../climate_investing/portfolio_alignment.html">Portfolio Alignment</a></li>
@@ -272,7 +272,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Project 0: An Introduction to ChatGPT with LangChain</h1>
+    <h1>Project 0: Information Extraction with ChatGPT</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -282,11 +282,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langchain">LangChain</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-template">Prompt Template</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-template-prompts-at-scale">Prompt Template: Prompts at Scale</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-example-inserting-context-to-chatgpt">Other Example: Inserting Context to ChatGPT</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-sequential-chain">Simple Sequential Chain</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langchain">LangChain</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-template">Prompt Template</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-template-prompts-at-scale">Prompt Template: Prompts at Scale</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-example-inserting-context-to-chatgpt">Other Example: Inserting Context to ChatGPT</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-sequential-chain">Simple Sequential Chain</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solution">Solution</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agent">Agent</a></li>
@@ -301,18 +303,16 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="project-0-an-introduction-to-chatgpt-with-langchain">
-<h1>Project 0: An Introduction to ChatGPT with LangChain<a class="headerlink" href="#project-0-an-introduction-to-chatgpt-with-langchain" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="project-0-information-extraction-with-chatgpt">
+<h1>Project 0: Information Extraction with ChatGPT<a class="headerlink" href="#project-0-information-extraction-with-chatgpt" title="Permalink to this headline">#</a></h1>
 <p>Large Language Models (LLMs) have enjoyed a growth in popularity since the release of OpenAI’s GPT-3 in 2020 (Brown et al., 2020 <span id="id1">[<a class="reference internal" href="../references.html#id37" title="Tom Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared D Kaplan, Prafulla Dhariwal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell, and others. Language models are few-shot learners. Advances in neural information processing systems, 33:1877–1901, 2020.">BMR+20</a>]</span>).</p>
 <p>After further impressive improvements in LLMs, those models gained the non-specialists when OpenAI released <code class="docutils literal notranslate"><span class="pre">ChatGPT</span></code>.</p>
-<p>At the same time, <code class="docutils literal notranslate"><span class="pre">LangChain</span></code> appeared. This open-source development framework has incredible features for building tools around LLMs.</p>
-<p>In this part, we are going to introduce this library and start with straightforward interactions with <code class="docutils literal notranslate"><span class="pre">ChatGPT</span></code>.</p>
+<p>In this part, we investigate the use of <code class="docutils literal notranslate"><span class="pre">ChatGPT</span></code> for zero-shot information extraction. We begin by introducing the <code class="docutils literal notranslate"><span class="pre">LangChain</span></code> development framework, then we will use <code class="docutils literal notranslate"><span class="pre">ChatGPT</span></code> as a knowledge graph extractor.</p>
 <section id="langchain">
 <h2>LangChain<a class="headerlink" href="#langchain" title="Permalink to this headline">#</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">LangChain</span></code> is a development framework built around LLMs. The core idea of the library is the chain of different components (modularity) to create advanced use cases with LLMs.</p>
-</section>
 <section id="prompt-template">
-<h2>Prompt Template<a class="headerlink" href="#prompt-template" title="Permalink to this headline">#</a></h2>
+<h3>Prompt Template<a class="headerlink" href="#prompt-template" title="Permalink to this headline">#</a></h3>
 <p>Let’s begin with a simple question-answering prompt template.</p>
 <p>We first need to install the <code class="docutils literal notranslate"><span class="pre">langchain</span></code> and <code class="docutils literal notranslate"><span class="pre">openai</span></code> libraries:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span>!pip install langchain
@@ -364,7 +364,7 @@ document.write(`
 </div>
 </section>
 <section id="prompt-template-prompts-at-scale">
-<h2>Prompt Template: Prompts at Scale<a class="headerlink" href="#prompt-template-prompts-at-scale" title="Permalink to this headline">#</a></h2>
+<h3>Prompt Template: Prompts at Scale<a class="headerlink" href="#prompt-template-prompts-at-scale" title="Permalink to this headline">#</a></h3>
 <p>Having a prompt template with a dynamic variable where you can insert different inputs programatically is useful for prompting at scale, that is using the same templace but with a list of different inputs.</p>
 <p>For example:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">questions</span> <span class="o">=</span> <span class="p">[</span>
@@ -384,7 +384,7 @@ document.write(`
 </div>
 </section>
 <section id="other-example-inserting-context-to-chatgpt">
-<h2>Other Example: Inserting Context to ChatGPT<a class="headerlink" href="#other-example-inserting-context-to-chatgpt" title="Permalink to this headline">#</a></h2>
+<h3>Other Example: Inserting Context to ChatGPT<a class="headerlink" href="#other-example-inserting-context-to-chatgpt" title="Permalink to this headline">#</a></h3>
 <p>Another use of dynamic input via prompt templating is to give different context to <code class="docutils literal notranslate"><span class="pre">ChatGPT</span></code>. For example:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">template</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">Given the following context: </span><span class="si">{context}</span><span class="s2"> </span><span class="se">\n</span><span class="s2"></span>
@@ -411,7 +411,7 @@ document.write(`
 </div>
 </section>
 <section id="simple-sequential-chain">
-<h2>Simple Sequential Chain<a class="headerlink" href="#simple-sequential-chain" title="Permalink to this headline">#</a></h2>
+<h3>Simple Sequential Chain<a class="headerlink" href="#simple-sequential-chain" title="Permalink to this headline">#</a></h3>
 <p>You may want to execute further requests to <code class="docutils literal notranslate"><span class="pre">ChatGPT</span></code>, that is a <code class="docutils literal notranslate"><span class="pre">LLMChain</span></code> with the input depending on the output from a previous <code class="docutils literal notranslate"><span class="pre">LLMChain</span></code>.</p>
 <p>Let’s have an example with a gift recommender, according to the age of a specific person. We have two steps:</p>
 <ol class="arabic simple">
@@ -491,6 +491,7 @@ document.write(`
 <span class="n">For</span> <span class="n">John</span> <span class="n">who</span> <span class="ow">is</span> <span class="mi">21</span> <span class="n">years</span> <span class="n">old</span><span class="p">,</span> <span class="n">a</span> <span class="n">good</span> <span class="n">gift</span> <span class="n">suggestion</span> <span class="n">would</span> <span class="n">be</span> <span class="n">a</span> <span class="n">trendy</span> <span class="n">watch</span> <span class="ow">or</span> <span class="n">a</span> <span class="n">gift</span> <span class="n">card</span> <span class="n">to</span> <span class="n">his</span> <span class="n">favorite</span> <span class="n">clothing</span> <span class="n">store</span><span class="o">.</span> <span class="n">Alternatively</span><span class="p">,</span> <span class="n">you</span> <span class="n">could</span> <span class="n">consider</span> <span class="n">a</span> <span class="n">tech</span> <span class="n">gadget</span> <span class="n">such</span> <span class="k">as</span> <span class="n">a</span> <span class="n">wireless</span> <span class="n">speaker</span> <span class="ow">or</span> <span class="n">a</span> <span class="n">gaming</span> <span class="n">console</span><span class="o">.</span>
 </pre></div>
 </div>
+</section>
 </section>
 <section id="exercise">
 <h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">#</a></h2>
@@ -847,11 +848,13 @@ Tesla, Inc. is a multinational company that specializes in designing and manufac
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langchain">LangChain</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-template">Prompt Template</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-template-prompts-at-scale">Prompt Template: Prompts at Scale</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-example-inserting-context-to-chatgpt">Other Example: Inserting Context to ChatGPT</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-sequential-chain">Simple Sequential Chain</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langchain">LangChain</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-template">Prompt Template</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-template-prompts-at-scale">Prompt Template: Prompts at Scale</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-example-inserting-context-to-chatgpt">Other Example: Inserting Context to ChatGPT</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-sequential-chain">Simple Sequential Chain</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solution">Solution</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agent">Agent</a></li>

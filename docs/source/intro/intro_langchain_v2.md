@@ -1,18 +1,15 @@
-# Project 0: An Introduction to ChatGPT with LangChain
+# Project 0: Information Extraction with ChatGPT
 
 Large Language Models (LLMs) have enjoyed a growth in popularity since the release of OpenAI's GPT-3 in 2020 (Brown et al., 2020 {cite:p}`brown2020language`).
 
 After further impressive improvements in LLMs, those models gained the non-specialists when OpenAI released `ChatGPT`.
 
-At the same time, `LangChain` appeared. This open-source development framework has incredible features for building tools around LLMs. 
-
-In this part, we are going to introduce this library and start with straightforward interactions with `ChatGPT`.
-
+In this part, we investigate the use of `ChatGPT` for zero-shot information extraction. We begin by introducing the `LangChain` development framework, then we will use `ChatGPT` as a knowledge graph extractor.
 ## LangChain
 
 `LangChain` is a development framework built around LLMs. The core idea of the library is the chain of different components (modularity) to create advanced use cases with LLMs. 
 
-## Prompt Template
+### Prompt Template
 
 Let's begin with a simple question-answering prompt template.
 
@@ -79,7 +76,7 @@ The answer we get is:
 4
 ```
 
-## Prompt Template: Prompts at Scale
+### Prompt Template: Prompts at Scale
 
 Having a prompt template with a dynamic variable where you can insert different inputs programatically is useful for prompting at scale, that is using the same templace but with a list of different inputs. 
 
@@ -103,7 +100,7 @@ And we obtain:
 [{'answer': '4', 'type': 'NUMBER'}, {'answer': '6', 'type': 'NUMBER'}, {'answer': '8', 'type': 'NUMBER'}]
 ```
 
-## Other Example: Inserting Context to ChatGPT
+### Other Example: Inserting Context to ChatGPT
 
 Another use of dynamic input via prompt templating is to give different context to `ChatGPT`. For example:
 
@@ -133,7 +130,7 @@ We get:
 Mary
 ```
 
-## Simple Sequential Chain
+### Simple Sequential Chain
 
 You may want to execute further requests to `ChatGPT`, that is a `LLMChain` with the input depending on the output from a previous `LLMChain`.
 
