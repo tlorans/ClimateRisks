@@ -1,6 +1,6 @@
-# Project 2: ChatGPT as a Carbon Data Analyst
+# Project 2: Estimating Emissions with ChatGPT
 
-In this project, we are investigating if we can directly use `ChatGPT` for simple calculation on a specific dataset, by using knowledge base and custom tools.
+In this project, we are investigating if we can directly use `ChatGPT` for simple estimate of Scope 1 emissions.
 
 ## Knowledge Bases
 
@@ -9,126 +9,54 @@ As we have seen in the previous project, LLMs have a problem about recent data, 
 It creates problems for any use case that relies on up-to-date information or a specific dataset.
 
 The first challenge is to add this dataset to the LLM. To do so, we can use retrieval augmentation. This approach allows us to retrieve relevant information from an external knowledge based an give that information to our LLM. 
-### Getting Data for our Knowledge Base
 
-Let's retrieve our emissions datase:
+First, we need to make sure our libraries are installed and the API key loaded:
 
 ```Python
-import pandas as pd
-url = 'https://github.com/shokru/carbon_emissions/blob/main/data_fin.xlsx?raw=true'
-data = pd.read_excel(url)
-data.rename(columns={"Company":"Symbol"}, inplace = True)
-payload=pd.read_html('https://en.wikipedia.org/wiki/List_of_S%26P_500_companies')
-first_table = payload[0]
-df = first_table
-data = data.merge(df[["Symbol","Security","GICS Sector","GICS Sub-Industry"]], how = "left", on = "Symbol")
-data.to_csv('emissions_data.csv', index = None)
+!pip install openai
+!pip install langchain
+
+import os
+os.environ["OPENAI_API_KEY"] = open('key.txt','r').read()
+```
+## Getting Data for our Knowledge Base
+
+Let's retrieve a CSV file and save it in our working path directory:
+
+```Python
+url = "https://github.com/tlorans/ClimateRisks/blob/main/DEXUSEU.csv?raw=true"
+
+import pandas as pd 
+data = pd.read_csv(url)
+data.rename(columns = {"DEXUSEU":"Exchange Rate Dollar to Euro"}, inplace = True)
+data.to_csv("exchange_rate.csv", index = None)
 ```
 
 We can use the `CSVLoader` from `langchain` to load the documents:
 
 ```Python
 from langchain.document_loaders import CSVLoader
-file = 'emissions_data.csv'
-loader = CSVLoader(file_path=file)
 
-documents = loader.load()
-documents[0]
+file = "exchange_rate.csv"
+loader = CSVLoader(file_path = file)
+data = loader.load()
+print(data[0])
 ```
 It creates one document per row of the CSV file:
 
 ```
-Document(page_content='Symbol: AAPL\nDate: 2005-12-30\nPrice: 2.205\nMkt_cap: 60586.5831\nEnergy_consumption: \nGHG_scope_3: \nGHG_total: \nReturn: 1.232609\nYear: 2005\nSecurity: Apple Inc.\nGICS Sector: Information Technology\nGICS Sub-Industry: Technology Hardware, Storage & Peripherals', metadata={'source': 'emissions_data.csv', 'row': 0})
+page_content='DATE: 2018-06-04\nExchange Rate Dollar to Euro: 1.1696' metadata={'source': 'exchange_rate.csv', 'row': 0}
 ```
-### Creating Embeddings
+### Creating Knowledge Base with Embeddings
 
-To be retrieved according to a specific query, each document is transformed into a numerical representation (embeddings), such as:
-
-```Python
-from langchain.embeddings import OpenAIEmbeddings
-
-embeddings = OpenAIEmbeddings()
-embed = embeddings.embed_query("Exxon emissions in 2012")
-len(embed)
-```
-It is a vector of sizes:
-```
-1536
-```
-
-We now need to install `docarray` and `tiktoken`:
+We need to install other libraries:
 
 ```Python
 !pip install docarray
 !pip install tiktoken
 ```
 
-### Vector Base
-
-We can now tranform our CSV document into a vector base :
-
-```Python
-from langchain.vectorstores import DocArrayInMemorySearch
-
-db = DocArrayInMemorySearch.from_documents(
-    documents, 
-    embeddings
-)
-```
-
-### Similarity Search 
-
-Information retrieval is based on the embeddings of the query and the vector base, with similarity search:
-
-```Python
-query = "What are the oil & gas companies in the dataset"
-
-docs = db.similarity_search(query)
-
-docs[0]
-```
-
-It will returns rows that seem to corresponds to the query:
-
-```
-Document(page_content='Symbol: XOM\nDate: 2005-12-31\nPrice: 33.2424\nMkt_cap: 349511.9557\nEnergy_consumption: 418950.0\nGHG_scope_3: \nGHG_total: \nReturn: 0.117643\nYear: 2005\nSecurity: ExxonMobil\nGICS Sector: Energy\nGICS Sub-Industry: Integrated Oil & Gas', metadata={'source': 'emissions_data.csv', 'row': 473})
-```
-### Generative Question Answering
-
-We can now expose our knowledge base as a retriever interface and pass it to `ChatGPT` with the `RetrievalQA` chain:
-
-```Python
-from langchain.chains import RetrievalQA
-
-retriever = db.as_retriever()
-
-qa_stuff = RetrievalQA.from_chain_type(
-    llm=chat, 
-    chain_type="stuff", 
-    retriever=retriever, 
-    verbose=True
-)
-```
-
-We can test it:
-
-```Python
-response = qa_stuff.run(query)
-print(response)
-```
-
-It gives:
-
-```
-> Entering new RetrievalQA chain...
-
-> Finished chain.
-The oil & gas companies in the dataset are ExxonMobil (XOM) and Chevron Corporation (CVX).
-```
-
-### VectorstoreIndexCreator
-
-The `VectorstoreIndexCreator` is a wrapper around all this logic in the `langchain` library, and allows you to do all of this in a few lines of codes:
+We can now create our knowledge base:
 
 ```Python
 from langchain.indexes import VectorstoreIndexCreator
@@ -137,75 +65,176 @@ from langchain.vectorstores import DocArrayInMemorySearch
 index = VectorstoreIndexCreator(
     vectorstore_cls=DocArrayInMemorySearch
 ).from_loaders([loader])
-
-index.query(query)
 ```
-```
- The oil & gas companies in the dataset are ExxonMobil and Chevron Corporation.
-```
-## Custom Tools for ChatGPT
 
-As we have seen in the previous projects, agents are a powerful approach to use LLMs. 
-
-Agents allows us to give LLMs access to tools, and tools present an infinite number of possibilities. 
-
-If the `langchain` library provides a selection of prebuilt tools, such as the ones we used in the previous project, we'll often find that we must modify existing tools or build entirely new ones.
-
-This is what we will explose in this section.
-
-The best way to create tools that require multiple inputs is to use the `StructuredTool` class from `langchain`:
+And let's test a query:
 
 ```Python
+index.query("What is the last exchange rate? Gives the date")
+```
+
+It gives:
+
+```
+ The last exchange rate is 1.0979 on 2022-03-14.
+```
+
+What happened here? 
+
+The class we've instantiated has transformed each row of our CSV file into a numeric vector representation, with the use of an embedding model.
+
+```{figure} numeric_transform.png
+---
+name: numeric_transform
+---
+Figure: Embedding Model and Vector Representation, from the LangChain AI Handbook, Pinecone
+```
+
+Once all our CSV elements are transformed into a numerical vector, and stored as a Vectorbase, our query is also transformed into a numerical vector and the most similar elements into our CSV file are returned, based on the calculation of the distance between embeddings in vector space (with cosine similarity for example).
+
+```{figure} similarity.png
+---
+name: similarity
+---
+Figure: Similarity for Knowledge Base Element Retrieval, from the LangChain AI Handbook, Pinecone
+```
+
+### Knowledge Base as a Tool
+
+We can now give access to this tool to `ChatGPT`:
+
+```Python
+from langchain.tools import Tool
+
+knowledge_tool = Tool(
+    name = "FX Rate",
+    func = index.query,
+    description = "Useful for when you need to search for the exchange rate. Provides your input as a search query."
+)
+```
+
+```Python
+from langchain.agents import AgentType
+from langchain.agents import load_tools, initialize_agent
 from langchain.chat_models import ChatOpenAI
-from langchain.agents import initialize_agent, AgentType
 
-llm = ChatOpenAI(temperature=0)
+chat = ChatOpenAI(temperature = 0.)
 
-from langchain.tools import StructuredTool
 
-def multiplier(a: float, b: float) -> float:
-    """Multiply the provided floats."""
-    return a * b
+tools = [knowledge_tool]
 
-tool = StructuredTool.from_function(multiplier)
+agent = initialize_agent(
+    tools,
+    chat,
+    agent = AgentType.CHAT_ZERO_SHOT_REACT_DESCRIPTION,
+    handle_parsing_errors = True,
+    verbose = True
+)
+
+agent.run("What was the exchange rate in April 2022?")
 ```
-
-You need the type `STRUCTURED_CHAT_ZERO_SHOT_REACT_DESCRIPTION`:
-
-```Python
-
-agent_executor = initialize_agent([tool], 
-                                  llm, 
-                                  agent=AgentType.STRUCTURED_CHAT_ZERO_SHOT_REACT_DESCRIPTION, 
-                                  verbose=True)
-
-```
-
-Let's test it:
-
-```Python
-agent_executor.run("What is 3 times 4?")
-```
-
-We have:
+And `ChatGPT` understands the need to use this tool:
 
 ```
 > Entering new AgentExecutor chain...
+Question: What was the exchange rate in April 2022?
+Thought: I need to use the FX Rate tool to get the exchange rate for April 2022.
 Action:
 {
-  "action": "multiplier",
-  "action_input": {
-    "a": 3,
-    "b": 4
-  }
+  "action": "FX Rate",
+  "action_input": "exchange rate April 2022"
 }
 
-Observation: 12.0
+Observation:  The exchange rate for the US Dollar to the Euro in April 2022 ranged from 1.079 to 1.1043.
+Thought:I have found the exchange rate range for the US Dollar to the Euro in April 2022. 
+Final Answer: The exchange rate for the US Dollar to the Euro in April 2022 ranged from 1.079 to 1.1043.
+
+> Finished chain.
+The exchange rate for the US Dollar to the Euro in April 2022 ranged from 1.079 to 1.1043.
 ```
 
-## Exercise
+### Interactions with Other Tools
 
-With the previous dataset, try to:
+We can now give to `ChatGPT` a task to test its capacity for using tools in interaction. 
 
-1. Implement a tool that compute the WACI each year for the portfolio.
-2. Can you try to implement a portfolio decarbonization tool and asks `ChatGPT` to implement the strategy itself?
+Let's ask for:
+1. Finding Tesla's Revenue in 2022
+2. Finding the FX rate in December 2022
+3. Convert Tesla's Revenue into Euro.
+
+```Python
+!pip install duckduckgo-search
+```
+
+```Python
+tools = load_tools(["llm-math"], llm = chat)
+
+from langchain.tools import DuckDuckGoSearchRun
+search = DuckDuckGoSearchRun()
+
+duckduckgo_tool = Tool(
+    name = 'DuckDuckGo Search',
+    func = search.run,
+    description = "Useful for when you need to do a search on the internet to find information that another tool can't find. be specific with your input."
+)
+
+tools.append(knowledge_tool)
+tools.append(duckduckgo_tool)
+
+agent = initialize_agent(
+    tools,
+    chat,
+    agent = AgentType.CHAT_ZERO_SHOT_REACT_DESCRIPTION,
+    handle_parsing_errors = True,
+    verbose = True
+)
+```
+
+```Python
+query = """Process as follow:\n\
+1. Search for Tesla's revenue in 2022. \n\
+2. Find the exchange rate in December 2022. \n\
+3. Multiply Tesla's revenue in 2022 with the exchange rate. \n\
+"""
+agent.run(query)
+```
+
+And we get:
+
+```
+> Entering new AgentExecutor chain...
+Thought: I need to find Tesla's revenue in 2022. I'm not sure where to find this information.
+Action:
+
+{
+  "action": "DuckDuckGo Search",
+  "action_input": "Tesla revenue 2022"
+}
+
+
+Observation: The automaker's full-year 2022 earnings statement, released at the close of market Wednesday, revealed it delivered 405,278 electric cars in the fourth quarter -- up from 343,830 deliveries in... AUSTIN, Texas, January 25, 2023 - Tesla has released its financial results for the fourth quarter and full year ended December 31, 2022 by posting an update on its Investor Relations website. Please visit https://ir.tesla.com to view the update. Tesla's revenue grew to nearly 81.5 billion U.S. dollars in the 2022 fiscal year, a 51 percent increase from the previous year. The United States is Tesla's largest sales market. Revenue... 540 Tesla published its financial results for the fourth quarter of 2022 on Wednesday afternoon. The company brought in $24.3 billion in revenue, a 37 percent increase on Q4 2021. Automotive... Sep 8, 2022,07:30am EDT Listen to article Share to Facebook Share to Twitter Share to Linkedin An aerial view of Tesla Shanghai Gigafactory. Getty Images Key takeaways: There's more to Tesla...
+Thought:I need to find the exchange rate for December 2022. I'm not sure where to find this information.
+Action:
+
+{
+  "action": "FX Rate",
+  "action_input": "Exchange rate December 2022"
+}
+
+
+Observation:  The exchange rate for December 2022 was between 1.0588 and 1.0622.
+Thought:Now I need to multiply Tesla's revenue in 2022 with the exchange rate for December 2022 to get the revenue in another currency.
+Action:
+{
+  "action": "Calculator",
+  "action_input": "81500000000 * 1.0605"
+}
+
+
+Observation: Answer: 86430750000.0
+Thought:I now know the final answer.
+Final Answer: Tesla's revenue in December 2022, converted to the exchange rate of 1.0605, is $86,430,750,000.
+
+> Finished chain.
+Tesla's revenue in December 2022, converted to the exchange rate of 1.0605, is $86,430,750,000.
+```
