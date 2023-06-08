@@ -1,8 +1,6 @@
 # Project 2: Estimating Emissions with ChatGPT
 
-In this project, we are investigating if we can directly use `ChatGPT` for simple estimate of Scope 1 emissions.
-
-## Knowledge Bases
+In this project, we are investigating if we can directly use `ChatGPT` for simple estimate of Scope 3 upstream emissions.
 
 As we have seen in the previous project, LLMs have a problem about recent data, as they have no idea about recent events. 
 
@@ -47,7 +45,7 @@ It creates one document per row of the CSV file:
 ```
 page_content='DATE: 2018-06-04\nExchange Rate Dollar to Euro: 1.1696' metadata={'source': 'exchange_rate.csv', 'row': 0}
 ```
-### Creating Knowledge Base with Embeddings
+## Creating Knowledge Base with Embeddings
 
 We need to install other libraries:
 
@@ -99,7 +97,7 @@ name: similarity
 Figure: Similarity for Knowledge Base Element Retrieval, from the LangChain AI Handbook, Pinecone
 ```
 
-### Knowledge Base as a Tool
+## Knowledge Base as a Tool
 
 We can now give access to this tool to `ChatGPT`:
 
@@ -153,7 +151,7 @@ Final Answer: The exchange rate for the US Dollar to the Euro in April 2022 rang
 The exchange rate for the US Dollar to the Euro in April 2022 ranged from 1.079 to 1.1043.
 ```
 
-### Interactions with Other Tools
+## Interacting with Other Tools
 
 We can now give to `ChatGPT` a task to test its capacity for using tools in interaction. 
 
@@ -237,4 +235,76 @@ Final Answer: Tesla's revenue in December 2022, converted to the exchange rate o
 
 > Finished chain.
 Tesla's revenue in December 2022, converted to the exchange rate of 1.0605, is $86,430,750,000.
+```
+
+## Exercise
+
+We are going to use the Supply Chain Greenhouse Gas Emissions Factors by NAICS-6 from the United States Environmental Protection Agency as a source for our knowledge base.
+
+Let's download it and put it into our working path directory:
+
+```Python
+emissions.to_csv("emissions_factors.csv", index = None)
+
+file = "emissions_factors.csv"
+loader = CSVLoader(file_path = file)
+data = loader.load()
+
+index = VectorstoreIndexCreator(
+    vectorstore_cls=DocArrayInMemorySearch
+).from_loaders([loader])
+```
+
+Let's have a test:
+
+```Python
+index.query("What is the emission factor with margins for automobile industry?")
+```
+
+And we get:
+
+```
+ The emission factor with margins for the automobile industry is 0.279 kg CO2e/2021 USD, purchaser price.
+```
+
+What you need for this exercise is:
+1. Determine the main activity of a company.
+2. Find the revenue for this company.
+3. Apply the corresponding emission factor.
+
+You need to do it with a chained approach. You want the output to be expressed in million tons of CO2eq. You want the final output to be only the numerical value. You may need to use specific prompts to check for the formating component. You may need to use agent.
+
+Once you've achieved to do it for one company, scale your process to obtain an estimate for the following list of companies:
+
+```
+{'AT&T',
+ 'Apple Inc.',
+ 'Bank of America',
+ 'Boeing',
+ 'CVS Health',
+ 'Chevron Corporation',
+ 'Cisco',
+ 'Citigroup',
+ 'Disney',
+ 'Dominion Energy',
+ 'ExxonMobil',
+ 'Ford Motor Company',
+ 'General Electric',
+ 'Home Depot (The)',
+ 'IBM',
+ 'Intel',
+ 'JPMorgan Chase',
+ 'Johnson & Johnson',
+ "Kellogg's",
+ 'McKesson',
+ 'Merck & Co.',
+ 'Microsoft',
+ 'Oracle Corporation',
+ 'Pfizer',
+ 'Procter & Gamble',
+ 'United Parcel Service',
+ 'UnitedHealth Group',
+ 'Verizon',
+ 'Walmart',
+ 'Wells Fargo'}
 ```

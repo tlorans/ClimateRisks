@@ -282,13 +282,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#knowledge-bases">Knowledge Bases</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-data-for-our-knowledge-base">Getting Data for our Knowledge Base</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-knowledge-base-with-embeddings">Creating Knowledge Base with Embeddings</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#knowledge-base-as-a-tool">Knowledge Base as a Tool</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interactions-with-other-tools">Interactions with Other Tools</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-data-for-our-knowledge-base">Getting Data for our Knowledge Base</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-knowledge-base-with-embeddings">Creating Knowledge Base with Embeddings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#knowledge-base-as-a-tool">Knowledge Base as a Tool</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interacting-with-other-tools">Interacting with Other Tools</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
 </ul>
             </nav>
         </div>
@@ -302,9 +300,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="project-2-estimating-emissions-with-chatgpt">
 <h1>Project 2: Estimating Emissions with ChatGPT<a class="headerlink" href="#project-2-estimating-emissions-with-chatgpt" title="Permalink to this headline">#</a></h1>
-<p>In this project, we are investigating if we can directly use <code class="docutils literal notranslate"><span class="pre">ChatGPT</span></code> for simple estimate of Scope 1 emissions.</p>
-<section id="knowledge-bases">
-<h2>Knowledge Bases<a class="headerlink" href="#knowledge-bases" title="Permalink to this headline">#</a></h2>
+<p>In this project, we are investigating if we can directly use <code class="docutils literal notranslate"><span class="pre">ChatGPT</span></code> for simple estimate of Scope 3 upstream emissions.</p>
 <p>As we have seen in the previous project, LLMs have a problem about recent data, as they have no idea about recent events.</p>
 <p>It creates problems for any use case that relies on up-to-date information or a specific dataset.</p>
 <p>The first challenge is to add this dataset to the LLM. To do so, we can use retrieval augmentation. This approach allows us to retrieve relevant information from an external knowledge based an give that information to our LLM.</p>
@@ -316,7 +312,6 @@ import os
 os.environ[&quot;OPENAI_API_KEY&quot;] = open(&#39;key.txt&#39;,&#39;r&#39;).read()
 </pre></div>
 </div>
-</section>
 <section id="getting-data-for-our-knowledge-base">
 <h2>Getting Data for our Knowledge Base<a class="headerlink" href="#getting-data-for-our-knowledge-base" title="Permalink to this headline">#</a></h2>
 <p>Let’s retrieve a CSV file and save it in our working path directory:</p>
@@ -341,8 +336,9 @@ os.environ[&quot;OPENAI_API_KEY&quot;] = open(&#39;key.txt&#39;,&#39;r&#39;).rea
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">page_content</span><span class="o">=</span><span class="s1">&#39;DATE: 2018-06-04</span><span class="se">\n</span><span class="s1">Exchange Rate Dollar to Euro: 1.1696&#39;</span> <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;source&#39;</span><span class="p">:</span> <span class="s1">&#39;exchange_rate.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;row&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
 </pre></div>
 </div>
+</section>
 <section id="creating-knowledge-base-with-embeddings">
-<h3>Creating Knowledge Base with Embeddings<a class="headerlink" href="#creating-knowledge-base-with-embeddings" title="Permalink to this headline">#</a></h3>
+<h2>Creating Knowledge Base with Embeddings<a class="headerlink" href="#creating-knowledge-base-with-embeddings" title="Permalink to this headline">#</a></h2>
 <p>We need to install other libraries:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span>!pip install docarray
 !pip install tiktoken
@@ -382,7 +378,7 @@ os.environ[&quot;OPENAI_API_KEY&quot;] = open(&#39;key.txt&#39;,&#39;r&#39;).rea
 </figure>
 </section>
 <section id="knowledge-base-as-a-tool">
-<h3>Knowledge Base as a Tool<a class="headerlink" href="#knowledge-base-as-a-tool" title="Permalink to this headline">#</a></h3>
+<h2>Knowledge Base as a Tool<a class="headerlink" href="#knowledge-base-as-a-tool" title="Permalink to this headline">#</a></h2>
 <p>We can now give access to this tool to <code class="docutils literal notranslate"><span class="pre">ChatGPT</span></code>:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.tools</span> <span class="kn">import</span> <span class="n">Tool</span>
 
@@ -432,8 +428,8 @@ The exchange rate for the US Dollar to the Euro in April 2022 ranged from 1.079 
 </pre></div>
 </div>
 </section>
-<section id="interactions-with-other-tools">
-<h3>Interactions with Other Tools<a class="headerlink" href="#interactions-with-other-tools" title="Permalink to this headline">#</a></h3>
+<section id="interacting-with-other-tools">
+<h2>Interacting with Other Tools<a class="headerlink" href="#interacting-with-other-tools" title="Permalink to this headline">#</a></h2>
 <p>We can now give to <code class="docutils literal notranslate"><span class="pre">ChatGPT</span></code> a task to test its capacity for using tools in interaction.</p>
 <p>Let’s ask for:</p>
 <ol class="arabic simple">
@@ -514,6 +510,69 @@ The exchange rate for the US Dollar to the Euro in April 2022 ranged from 1.079 
 </pre></div>
 </div>
 </section>
+<section id="exercise">
+<h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">#</a></h2>
+<p>We are going to use the Supply Chain Greenhouse Gas Emissions Factors by NAICS-6 from the United States Environmental Protection Agency as a source for our knowledge base.</p>
+<p>Let’s download it and put it into our working path directory:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">emissions</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;emissions_factors.csv&quot;</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
+
+<span class="n">file</span> <span class="o">=</span> <span class="s2">&quot;emissions_factors.csv&quot;</span>
+<span class="n">loader</span> <span class="o">=</span> <span class="n">CSVLoader</span><span class="p">(</span><span class="n">file_path</span> <span class="o">=</span> <span class="n">file</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+
+<span class="n">index</span> <span class="o">=</span> <span class="n">VectorstoreIndexCreator</span><span class="p">(</span>
+    <span class="n">vectorstore_cls</span><span class="o">=</span><span class="n">DocArrayInMemorySearch</span>
+<span class="p">)</span><span class="o">.</span><span class="n">from_loaders</span><span class="p">([</span><span class="n">loader</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Let’s have a test:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">index</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;What is the emission factor with margins for automobile industry?&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And we get:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="n">The</span> <span class="n">emission</span> <span class="n">factor</span> <span class="k">with</span> <span class="n">margins</span> <span class="k">for</span> <span class="n">the</span> <span class="n">automobile</span> <span class="n">industry</span> <span class="ow">is</span> <span class="mf">0.279</span> <span class="n">kg</span> <span class="n">CO2e</span><span class="o">/</span><span class="mi">2021</span> <span class="n">USD</span><span class="p">,</span> <span class="n">purchaser</span> <span class="n">price</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>What you need for this exercise is:</p>
+<ol class="arabic simple">
+<li><p>Determine the main activity of a company.</p></li>
+<li><p>Find the revenue for this company.</p></li>
+<li><p>Apply the corresponding emission factor.</p></li>
+</ol>
+<p>You need to do it with a chained approach. You want the output to be expressed in million tons of CO2eq. You want the final output to be only the numerical value. You may need to use specific prompts to check for the formating component. You may need to use agent.</p>
+<p>Once you’ve achieved to do it for one company, scale your process to obtain an estimate for the following list of companies:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;AT&amp;T&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Apple Inc.&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Bank of America&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Boeing&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;CVS Health&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Chevron Corporation&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Cisco&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Citigroup&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Disney&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Dominion Energy&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;ExxonMobil&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Ford Motor Company&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;General Electric&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Home Depot (The)&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;IBM&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Intel&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;JPMorgan Chase&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Johnson &amp; Johnson&#39;</span><span class="p">,</span>
+ <span class="s2">&quot;Kellogg&#39;s&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;McKesson&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Merck &amp; Co.&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Microsoft&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Oracle Corporation&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Pfizer&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Procter &amp; Gamble&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;United Parcel Service&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;UnitedHealth Group&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Verizon&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Walmart&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Wells Fargo&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
 </section>
 </section>
 
@@ -559,13 +618,11 @@ The exchange rate for the US Dollar to the Euro in April 2022 ranged from 1.079 
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#knowledge-bases">Knowledge Bases</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-data-for-our-knowledge-base">Getting Data for our Knowledge Base</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-knowledge-base-with-embeddings">Creating Knowledge Base with Embeddings</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#knowledge-base-as-a-tool">Knowledge Base as a Tool</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interactions-with-other-tools">Interactions with Other Tools</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-data-for-our-knowledge-base">Getting Data for our Knowledge Base</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-knowledge-base-with-embeddings">Creating Knowledge Base with Embeddings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#knowledge-base-as-a-tool">Knowledge Base as a Tool</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interacting-with-other-tools">Interacting with Other Tools</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
 </ul>
   </nav></div>
 
