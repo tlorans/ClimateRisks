@@ -127,9 +127,12 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../intro/lowcarbon.html">Portfolio Decarbonization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro/net_zero.html">Towards a Net Zero Strategy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/intro_langchain_v2.html">Project 0: An Introduction to ChatGPT with LangChain</a></li>
 <li class="toctree-l1"><a class="reference internal" href="net_zero_investing.html">Net Zero Investing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="portfolio_decarbonization_pathway.html">Portfolio Decarbonization Pathway</a></li>
 <li class="toctree-l1"><a class="reference internal" href="portfolio_alignment.html">Portfolio Alignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="project1.html">Project 1: Emissions Data Search with ChatGPT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="project_2.html">Project 2: ChatGPT as a Carbon Data Analyst</a></li>
 <li class="toctree-l1"><a class="reference internal" href="self_decarbonization.html">Net Zero Backtesting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="integratingtransition.html">Integrating the Transition Dimension</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
@@ -311,34 +314,34 @@ document.write(`
 <section id="carbon-emissions-and-carbon-intensity-pathway-relationship">
 <h3>Carbon Emissions and Carbon Intensity Pathway Relationship<a class="headerlink" href="#carbon-emissions-and-carbon-intensity-pathway-relationship" title="Permalink to this headline">#</a></h3>
 <p>Let’s recall that the carbon intensity <span class="math notranslate nohighlight">\(CI(t)\)</span> is defined as the ratio between the carbon emissions <span class="math notranslate nohighlight">\(CE(t)\)</span> and a normalization variable <span class="math notranslate nohighlight">\(Y(t)\)</span> (a physical or monetary value):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4f53749c-bc05-4997-89e4-6a348813450d">
-<span class="eqno">(1)<a class="headerlink" href="#equation-4f53749c-bc05-4997-89e4-6a348813450d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-9cb0abe6-29b2-4fd3-b5cd-3cc8686c54df">
+<span class="eqno">(1)<a class="headerlink" href="#equation-9cb0abe6-29b2-4fd3-b5cd-3cc8686c54df" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI(t) = \frac{CE(t)}{Y(t)}
 \end{equation}\]</div>
 <p>If <span class="math notranslate nohighlight">\(\mathfrak{R}_{CI}(t_0)\)</span> and <span class="math notranslate nohighlight">\(\mathfrak{R}_{CE}(t,t_0)\)</span> are the reduction rates of carbon intensity and emissions between the base date <span class="math notranslate nohighlight">\(t_0\)</span> and <span class="math notranslate nohighlight">\(t\)</span>, we have the following relationship (Barahhou et al., 2022):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-83c29518-82f6-4394-a6cc-3e7df68d9099">
-<span class="eqno">(2)<a class="headerlink" href="#equation-83c29518-82f6-4394-a6cc-3e7df68d9099" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-43f6ea83-cfcc-4f33-94e1-5bed8231a88b">
+<span class="eqno">(2)<a class="headerlink" href="#equation-43f6ea83-cfcc-4f33-94e1-5bed8231a88b" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathfrak{R}_{CI}(t_0,t) = \frac{g_Y(t_0,t) + \mathfrak{R}_{CE}(t_0,t)}{1 + g_Y(t_0,t)}
 \end{equation}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(g_Y(t_0,t)\)</span> is the growth rate of the normalization variable. As we assume that <span class="math notranslate nohighlight">\(g_Y(t_0,t) \geq 0\)</span> and <span class="math notranslate nohighlight">\(0 \leq \mathfrak{R}_{CE}(t_0,t) \leq 1\)</span>, we have the property that the reduction rate of the carbon intensity is always greater than the reduction rate of the carbon emissions:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e889a049-df40-4afa-9a53-fa202773c015">
-<span class="eqno">(3)<a class="headerlink" href="#equation-e889a049-df40-4afa-9a53-fa202773c015" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-03724c2d-f64f-4f03-8ab8-213c39506897">
+<span class="eqno">(3)<a class="headerlink" href="#equation-03724c2d-f64f-4f03-8ab8-213c39506897" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathfrak{R}_{CI}(t_0,t) \geq \mathfrak{R}_{CE}(t_0,t)
 \end{equation}\]</div>
 <p>The emissions decarbonization pathway <span class="math notranslate nohighlight">\(\mathfrak{R}_{CE}(t_0,t)\)</span> is called the economic decarbonization pathway, while the intensity decarbonization pathway <span class="math notranslate nohighlight">\(\mathfrak{R}_{CI}(t_0,t)\)</span> is called the financial decarbonization pathway.</p>
 <p>We can simplify the financial / economic pathway relationship by considering both the annual growth rate of normalization variable <span class="math notranslate nohighlight">\(g_{Y}\)</span> and the annual reduction rate of carbon emissions <span class="math notranslate nohighlight">\(\Delta \mathfrak{R}_{CE}\)</span> as constant. We then have the compound growth rate of the normalization variable:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8398f2b7-9a3c-464f-a4b1-a52610483dde">
-<span class="eqno">(4)<a class="headerlink" href="#equation-8398f2b7-9a3c-464f-a4b1-a52610483dde" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-572c5fe6-b018-454e-825e-b06f113e06f1">
+<span class="eqno">(4)<a class="headerlink" href="#equation-572c5fe6-b018-454e-825e-b06f113e06f1" title="Permalink to this equation">#</a></span>\[\begin{equation}
 g_Y(t_0,t) = (1 + g_Y)^{t-t_0} - 1
 \end{equation}\]</div>
 <p>And the carbon reduction rate as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-57c08e20-b57f-41d5-9001-ad9287f8c417">
-<span class="eqno">(5)<a class="headerlink" href="#equation-57c08e20-b57f-41d5-9001-ad9287f8c417" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-220690e4-a07a-4c8d-917a-15922d0a33fe">
+<span class="eqno">(5)<a class="headerlink" href="#equation-220690e4-a07a-4c8d-917a-15922d0a33fe" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathfrak{R}_{CE}(t_0,t) = 1 - (1 - \Delta \mathfrak{R}_{CE})^{t - t_0}
 \end{equation}\]</div>
 <p>Then, the relationship between the financial and the economic decarbonization pathway becomes (Barahhou et al., 2022):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-83806f1a-42a3-46e1-b2de-afeb63daccd3">
-<span class="eqno">(6)<a class="headerlink" href="#equation-83806f1a-42a3-46e1-b2de-afeb63daccd3" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-022c3d06-2c30-40d1-99db-215dc2972724">
+<span class="eqno">(6)<a class="headerlink" href="#equation-022c3d06-2c30-40d1-99db-215dc2972724" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathfrak{R}_{CI}(t_0,t) = 1 - (1 - \frac{(g_Y + \Delta \mathfrak{R}_{CE})}{1 + g_Y})^{t - t_0}
 \end{equation}\]</div>
 <p>We can create a new dataclass <code class="docutils literal notranslate"><span class="pre">FinancialDecarbonizationPathway</span></code>:</p>
@@ -395,8 +398,8 @@ g_Y(t_0,t) = (1 + g_Y)^{t-t_0} - 1
 </tbody>
 </table>
 <p>We linearly interpolate carbon emissions from this scenario and then obtain the corresponding decarbonization pathway <span class="math notranslate nohighlight">\(\mathfrak{R}_{CE}(t_0,t)\)</span> with the carbon emissions scenario:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-92a53a16-cfe8-47f8-a259-b69e5109189d">
-<span class="eqno">(7)<a class="headerlink" href="#equation-92a53a16-cfe8-47f8-a259-b69e5109189d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-9b518b81-3788-4bc8-a10f-c55f8f393f60">
+<span class="eqno">(7)<a class="headerlink" href="#equation-9b518b81-3788-4bc8-a10f-c55f8f393f60" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathfrak{R}_{CE}(t_0,t) = 1 - \frac{CE(t)}{CE(t_0)}
 \end{equation}\]</div>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -415,8 +418,8 @@ g_Y(t_0,t) = (1 + g_Y)^{t-t_0} - 1
 </pre></div>
 </div>
 <p>With <span class="math notranslate nohighlight">\(\mathfrak{R}_{CE}(t_0,t)\)</span>, we can estimate the financial decarbonization pathway for different values of the constant growth rate <span class="math notranslate nohighlight">\(g_Y\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-498a62a8-ed69-45b0-8079-1816f3376480">
-<span class="eqno">(8)<a class="headerlink" href="#equation-498a62a8-ed69-45b0-8079-1816f3376480" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b69f2233-58de-4a0c-818e-6aa77194cd6b">
+<span class="eqno">(8)<a class="headerlink" href="#equation-b69f2233-58de-4a0c-818e-6aa77194cd6b" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathfrak{R}_{CI}(t_0,t) = \frac{g_Y(t_0,t) + \mathfrak{R}_{CE}(t_0,t)}{1 + g_Y(t_0,t)}
 \end{equation}\]</div>
 <p>with <span class="math notranslate nohighlight">\(g_Y(t_0,t) = (1 + g_Y)^{t-t_0} - 1\)</span>.</p>
@@ -433,8 +436,8 @@ The PAB’s intensity decarbonization is stated as:</p>
 <li><p>A minimum carbon intensity reduction <span class="math notranslate nohighlight">\(\mathfrak{R}_{CI}^-\)</span> at 50% compared to the invetable universe.</p></li>
 </ol>
 <p>This financial decarbonization pathway is thus:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1df6b684-4ab8-4b05-956a-032012639587">
-<span class="eqno">(9)<a class="headerlink" href="#equation-1df6b684-4ab8-4b05-956a-032012639587" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-1c44e8a7-044d-46d0-9984-0af9caa55974">
+<span class="eqno">(9)<a class="headerlink" href="#equation-1c44e8a7-044d-46d0-9984-0af9caa55974" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathfrak{R}_{CI}(t_0, t) = 1 - (1 - 7\%)^{t-t_0}(1 - 50\%)
 \end{equation}\]</div>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">pab_reduction_rate</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mf">0.07</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">full_years</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">full_years</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">full_years</span><span class="p">))]</span>
@@ -473,8 +476,8 @@ The PAB’s intensity decarbonization is stated as:</p>
 <h3>A Dynamic Approach<a class="headerlink" href="#a-dynamic-approach" title="Permalink to this headline">#</a></h3>
 <p>Let’s introduce the portfolio alignment strategy, that changes the nature of the portfolio decarbonization strategy.</p>
 <p>At date <span class="math notranslate nohighlight">\(t\)</span>, the portfolio alignment imposes the following inequality constraint for the portfolio <span class="math notranslate nohighlight">\(x(t)\)</span> (Barahhou et al. (2022)):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ef4ecc15-ae75-4e60-8000-28583b2c7c3d">
-<span class="eqno">(10)<a class="headerlink" href="#equation-ef4ecc15-ae75-4e60-8000-28583b2c7c3d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ff4abaff-ada8-4c7d-880e-6ce661dd7c3f">
+<span class="eqno">(10)<a class="headerlink" href="#equation-ff4abaff-ada8-4c7d-880e-6ce661dd7c3f" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI(x(t)) \leq (1 - \mathfrak{R}_{CI}(t_0,t))CI(b(t_0))
 \end{equation}\]</div>
 <p>The base year <span class="math notranslate nohighlight">\(t_0\)</span> thus defines the reference level of the carbon intensity, as the reference level is <span class="math notranslate nohighlight">\(CI(b(t_0))\)</span> and not <span class="math notranslate nohighlight">\(CI(b(t))\)</span>. This is a first important difference compared to the static strategy proposed by Andersson et al. (2016).</p>
@@ -524,16 +527,16 @@ b_{Buildings \; Efficiency}(t_0)
 \end{aligned}
 \end{equation*}\]</div>
 <p>In this problem, finding <span class="math notranslate nohighlight">\(x^*(t)\)</span> at time <span class="math notranslate nohighlight">\(t\)</span> requires to know the covariance matrix <span class="math notranslate nohighlight">\(\Sigma(t)\)</span>, the carbon intensities <span class="math notranslate nohighlight">\(CI(t)\)</span> and the investable universe <span class="math notranslate nohighlight">\(b(t)\)</span>. However, in the current year <span class="math notranslate nohighlight">\(t_1\)</span> the observations are only available for <span class="math notranslate nohighlight">\(t_0\)</span> and <span class="math notranslate nohighlight">\(t_1\)</span>. We can however do the exercise by assuming that the world does not change. In this case, we can assume that the covariance matrix, the carbon intensities and the investable universe remain constant, such as (Barahhou et al., 2022):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-570e32d0-a91d-4c76-8852-85153ac09a32">
-<span class="eqno">(11)<a class="headerlink" href="#equation-570e32d0-a91d-4c76-8852-85153ac09a32" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a2cd8bbc-76a5-4bde-8f86-ef175a09cf02">
+<span class="eqno">(11)<a class="headerlink" href="#equation-a2cd8bbc-76a5-4bde-8f86-ef175a09cf02" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \Sigma(t) = \Sigma(t_0)
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-f56b312e-62fc-4df4-8c6f-11bfdfe7eb99">
-<span class="eqno">(12)<a class="headerlink" href="#equation-f56b312e-62fc-4df4-8c6f-11bfdfe7eb99" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0b29c7ad-5878-416c-853f-bb15a402fef6">
+<span class="eqno">(12)<a class="headerlink" href="#equation-0b29c7ad-5878-416c-853f-bb15a402fef6" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI(t) = CI(t_0)
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-f01e35b4-58bc-4216-9a78-677baf794c88">
-<span class="eqno">(13)<a class="headerlink" href="#equation-f01e35b4-58bc-4216-9a78-677baf794c88" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a395be22-8563-42d5-9e4f-0713a7c919ee">
+<span class="eqno">(13)<a class="headerlink" href="#equation-a395be22-8563-42d5-9e4f-0713a7c919ee" title="Permalink to this equation">#</a></span>\[\begin{equation}
 b(t) = b(t_0)
 \end{equation}\]</div>
 <p>Thus, we have the following QP parameters:</p>
@@ -688,34 +691,34 @@ b(t) = b(t_0)
 <p>In this section, we consider the decarbonization path of the issuers, as in Le Guenedal and Roncalli (2022) and Barahhou et al. (2022). This approach should help in finding optimal solutions and smoothing the expected future tracking error from the benchmark.</p>
 <p>In order to have an idea of the potential issuers carbon footprint dynamics, we can exploit the historical trajectory of the past carbon emissions. We can follow Le Guenedal et al. (2022) and estimate the associated linear trend model and project the future carbon emissions by assuming that the issuer will do the same efforts in the future than in the past.</p>
 <p>Le Guenedal et al. (2022) define the carbon trend by considering the following linear constant trend model:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ec209dde-f7ba-4f07-9cb0-f39c5c5d2e26">
-<span class="eqno">(14)<a class="headerlink" href="#equation-ec209dde-f7ba-4f07-9cb0-f39c5c5d2e26" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0ca3f52d-68a7-43c8-86e9-b604ebedf5b6">
+<span class="eqno">(14)<a class="headerlink" href="#equation-0ca3f52d-68a7-43c8-86e9-b604ebedf5b6" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CE(t) = \beta_0 + \beta_1 \cdot t + u(t)
 \end{equation}\]</div>
 <p>The parameters <span class="math notranslate nohighlight">\(\beta_0\)</span> and <span class="math notranslate nohighlight">\(\beta_1\)</span> can be estimated with the least squares methods on a sample of observations.</p>
 <p>The projected carbon trajectory is then given by:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-48c6fa4b-fe2c-40ef-a9da-59f8c7f9569a">
-<span class="eqno">(15)<a class="headerlink" href="#equation-48c6fa4b-fe2c-40ef-a9da-59f8c7f9569a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e205efb5-964e-4d93-8927-e6522357287d">
+<span class="eqno">(15)<a class="headerlink" href="#equation-e205efb5-964e-4d93-8927-e6522357287d" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CE^{Trend}(t) = \hat{CE}(t) = \hat{\beta_0} + \hat{\beta_1}t
 \end{equation}\]</div>
 <p>The underlying idea heare is to extrapolate the past trajectory. However, we need to reformulate our previous model. Indeed, it is not easy to interpret as <span class="math notranslate nohighlight">\(\hat{\beta_0} = \hat{CE(0)}\)</span> when <span class="math notranslate nohighlight">\(t = 0\)</span>. We can add a base year <span class="math notranslate nohighlight">\(t_0\)</span>, that converts our model to:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2b883f47-e8e0-47e8-82a5-ab5856a1415a">
-<span class="eqno">(16)<a class="headerlink" href="#equation-2b883f47-e8e0-47e8-82a5-ab5856a1415a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d27c3035-a78e-49fc-a751-e0e59a805a4d">
+<span class="eqno">(16)<a class="headerlink" href="#equation-d27c3035-a78e-49fc-a751-e0e59a805a4d" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CE(t) = \beta'_0 + \beta'_1(t - t_0) + u(t)
 \end{equation}\]</div>
 <p>And the carbon trajectory is now given by:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-26b82ac4-9418-4e8d-aedf-34315a2d9cf6">
-<span class="eqno">(17)<a class="headerlink" href="#equation-26b82ac4-9418-4e8d-aedf-34315a2d9cf6" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0487a62a-5f29-4e36-a542-e9fcdc49be14">
+<span class="eqno">(17)<a class="headerlink" href="#equation-0487a62a-5f29-4e36-a542-e9fcdc49be14" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CE^{Trend}(t) = \hat{\beta'_0} + \hat{\beta'_1}(t - t_0)
 \end{equation}\]</div>
 <p>This change is just a matter of facilitating the interpretration. Indeed, the two models are equivalent and give the same value <span class="math notranslate nohighlight">\(\hat{CE}(t)\)</span> with:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-fcaa2b9f-d7f7-4727-ac4e-cc42e5d2dcf4">
-<span class="eqno">(18)<a class="headerlink" href="#equation-fcaa2b9f-d7f7-4727-ac4e-cc42e5d2dcf4" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-af145ac2-d65a-4747-b5e7-4e95c5d761c3">
+<span class="eqno">(18)<a class="headerlink" href="#equation-af145ac2-d65a-4747-b5e7-4e95c5d761c3" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \beta^{'}_0 = \beta_0 + \beta_1 t_0
 \end{equation}\]</div>
 <p>and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4cf1b064-7c0f-4260-a9bf-ab687e1c1e39">
-<span class="eqno">(19)<a class="headerlink" href="#equation-4cf1b064-7c0f-4260-a9bf-ab687e1c1e39" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ef44f62a-5999-4f4f-b024-7cec0389b744">
+<span class="eqno">(19)<a class="headerlink" href="#equation-ef44f62a-5999-4f4f-b024-7cec0389b744" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \beta^{'}_1 = \beta_1
 \end{equation}\]</div>
 <p>The only change resulting from the new formulation is that now <span class="math notranslate nohighlight">\(\hat{\beta}'_0 = \hat{CE}(t_0)\)</span></p>
@@ -781,41 +784,41 @@ The optimization problem is the same as the previous optimization problem except
 <p>On the other side, Teske et al. (2022) have provided GICS-level decarbonization pathways.</p>
 <p>In what follows, we show how to perform portfolio alignment at sector level.</p>
 <p>We now assume that we want to reduce the carbon footprint at the sector level. In this case, we can denote by <span class="math notranslate nohighlight">\(CI(x; Sector_j)\)</span> the carbon intensity of the <span class="math notranslate nohighlight">\(j^{th}\)</span> sector, with (Roncalli, 2023):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f8ae0382-20db-4ccd-bd35-cd45e0762aa7">
-<span class="eqno">(20)<a class="headerlink" href="#equation-f8ae0382-20db-4ccd-bd35-cd45e0762aa7" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0c8a60fd-899a-4f71-bf56-0fe45fba6444">
+<span class="eqno">(20)<a class="headerlink" href="#equation-0c8a60fd-899a-4f71-bf56-0fe45fba6444" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI(x;Sector_j) = \sum_{i \in Sector_j} \tilde{x_i} CI_i
 \end{equation}\]</div>
 <p>With <span class="math notranslate nohighlight">\(\tilde{x}_i\)</span> the normalized weight in the sector bucket, such as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-71c25477-9807-44f5-a07f-febec58804dd">
-<span class="eqno">(21)<a class="headerlink" href="#equation-71c25477-9807-44f5-a07f-febec58804dd" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-30c4c8bb-213a-447c-abea-b2783e8f06c6">
+<span class="eqno">(21)<a class="headerlink" href="#equation-30c4c8bb-213a-447c-abea-b2783e8f06c6" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \tilde{x}_i = \frac{x_i}{\sum_{k \in Sector_j}x_k}
 \end{equation}\]</div>
 <p>Equivalently:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-111d944f-290b-43b0-ae3d-e4b44340c25f">
-<span class="eqno">(22)<a class="headerlink" href="#equation-111d944f-290b-43b0-ae3d-e4b44340c25f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-54405312-6b1e-4025-9871-761d0e119793">
+<span class="eqno">(22)<a class="headerlink" href="#equation-54405312-6b1e-4025-9871-761d0e119793" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI(x;Sector_j) = \frac{(s_j \circ CI)^T x}{s^T_j x}
 \end{equation}\]</div>
 <p>With <span class="math notranslate nohighlight">\(a \circ b\)</span> is the Hadamard product (element-wise product): <span class="math notranslate nohighlight">\((a \circ b)_i = a_ib_i\)</span>.</p>
 <p>Imposing a portfolio alignment at the sector level is equivalent to modify the constraint to become:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2dea9c12-a33d-45d6-8d31-bfd4b02293fc">
-<span class="eqno">(23)<a class="headerlink" href="#equation-2dea9c12-a33d-45d6-8d31-bfd4b02293fc" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e182b4d8-512a-4287-ae76-1633f5327d3f">
+<span class="eqno">(23)<a class="headerlink" href="#equation-e182b4d8-512a-4287-ae76-1633f5327d3f" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI(x(t); Sector_j) \leq (1 - \mathfrak{R}_{CI}(t_0,t;Sector_j))CI(b(t_0;Sector_j))
 \end{equation}\]</div>
 <p>In order to find the QP form to integrate into our problem, we need a few transformations (because we need to find the form <span class="math notranslate nohighlight">\(G^Tx \leq h\)</span>):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4fb3596d-ab13-4655-92de-4cadad41753b">
-<span class="eqno">(24)<a class="headerlink" href="#equation-4fb3596d-ab13-4655-92de-4cadad41753b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-660fd268-d41a-4f4a-94b1-eeb117114bed">
+<span class="eqno">(24)<a class="headerlink" href="#equation-660fd268-d41a-4f4a-94b1-eeb117114bed" title="Permalink to this equation">#</a></span>\[\begin{equation}
 (*) ↔ CI(x(t); Sector_j) \leq (1 - \mathfrak{R}_{CI}(t_0,t;Sector_j))CI(b(t_0;Sector_j))
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-d4d73860-ccb4-461f-ab63-5e19a80a01df">
-<span class="eqno">(25)<a class="headerlink" href="#equation-d4d73860-ccb4-461f-ab63-5e19a80a01df" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-79a19f75-0f85-4380-8cb0-f2cd069f9476">
+<span class="eqno">(25)<a class="headerlink" href="#equation-79a19f75-0f85-4380-8cb0-f2cd069f9476" title="Permalink to this equation">#</a></span>\[\begin{equation}
 ↔ (s_j \circ CI)^T x \leq (1 - \mathfrak{R}_{CI}(t_0,t;Sector_j))CI(b(t_0;Sector_j))(s_j^T x)
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-58e2073f-6db9-46b6-9731-25014364a0fe">
-<span class="eqno">(26)<a class="headerlink" href="#equation-58e2073f-6db9-46b6-9731-25014364a0fe" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-af0ec535-fbac-46de-bc25-f83771d96887">
+<span class="eqno">(26)<a class="headerlink" href="#equation-af0ec535-fbac-46de-bc25-f83771d96887" title="Permalink to this equation">#</a></span>\[\begin{equation}
 ↔ ((s_j \circ CI) - (1 - \mathfrak{R}_{CI}(t_0,t;Sector_j))CI(b(t_0;Sector_j)) s_j)^T x \leq 0
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-3b3c3425-0387-48f2-b5e0-53a0e531d401">
-<span class="eqno">(27)<a class="headerlink" href="#equation-3b3c3425-0387-48f2-b5e0-53a0e531d401" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c16cda5b-295a-420d-92b2-9425d08c23d2">
+<span class="eqno">(27)<a class="headerlink" href="#equation-c16cda5b-295a-420d-92b2-9425d08c23d2" title="Permalink to this equation">#</a></span>\[\begin{equation}
 ↔ (s_j \circ (CI - (1 - \mathfrak{R}_{CI}(t_0,t;Sector_j))CI(b(t_0;Sector_j))^T x \leq 0
 \end{equation}\]</div>
 <p>We thus have:</p>

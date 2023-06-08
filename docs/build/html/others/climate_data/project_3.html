@@ -127,9 +127,12 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../intro/lowcarbon.html">Portfolio Decarbonization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../intro/net_zero.html">Towards a Net Zero Strategy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../intro/intro_langchain_v2.html">Project 0: An Introduction to ChatGPT with LangChain</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../climate_investing/net_zero_investing.html">Net Zero Investing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../climate_investing/portfolio_decarbonization_pathway.html">Portfolio Decarbonization Pathway</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../climate_investing/portfolio_alignment.html">Portfolio Alignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../climate_investing/project1.html">Project 1: Emissions Data Search with ChatGPT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../climate_investing/project_2.html">Project 2: ChatGPT as a Carbon Data Analyst</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../climate_investing/self_decarbonization.html">Net Zero Backtesting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../climate_investing/integratingtransition.html">Integrating the Transition Dimension</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../references.html">References</a></li>
@@ -303,8 +306,8 @@ document.write(`
 <section id="scoring">
 <h3>Scoring<a class="headerlink" href="#scoring" title="Permalink to this headline">#</a></h3>
 <p>The scoring approach is such as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b12ae38c-61fd-426d-93ea-019d3c19934d">
-<span class="eqno">(1)<a class="headerlink" href="#equation-b12ae38c-61fd-426d-93ea-019d3c19934d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8a3eb53f-e63e-439b-bd06-4ef53098a19b">
+<span class="eqno">(1)<a class="headerlink" href="#equation-8a3eb53f-e63e-439b-bd06-4ef53098a19b" title="Permalink to this equation">#</a></span>\[\begin{equation}
 g_{i,j}(t) = G_{i,j}(t) - \bar{G}_j(t)
 \end{equation}\]</div>
 <p>with <span class="math notranslate nohighlight">\(\bar{G}(t)\)</span> the market capitalization weighted average of <span class="math notranslate nohighlight">\(G_i(t)\)</span> accross all issuers <span class="math notranslate nohighlight">\(i\)</span> for the metric <span class="math notranslate nohighlight">\(j\)</span>. Because we substract <span class="math notranslate nohighlight">\(\bar{G}_{i,j}(t)\)</span>, <span class="math notranslate nohighlight">\(g_{i,j}(t)\)</span> measures the issuer’s greeness relative to the market portfolio, as in Pastor et al. (2021).</p>
@@ -313,13 +316,13 @@ g_{i,j}(t) = G_{i,j}(t) - \bar{G}_j(t)
 <section id="finding-the-optimal-combination-of-metrics">
 <h2>Finding the Optimal Combination of Metrics<a class="headerlink" href="#finding-the-optimal-combination-of-metrics" title="Permalink to this headline">#</a></h2>
 <p>We are interested in long-only portfolio, so we need to keep only positive weights and rescale it such that the sum is equal to one:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1332a114-ba2d-4318-af1e-10c017c8b89e">
-<span class="eqno">(2)<a class="headerlink" href="#equation-1332a114-ba2d-4318-af1e-10c017c8b89e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0a914d46-cede-4035-aab3-5c2e189e2b59">
+<span class="eqno">(2)<a class="headerlink" href="#equation-0a914d46-cede-4035-aab3-5c2e189e2b59" title="Permalink to this equation">#</a></span>\[\begin{equation}
 v_i(t) = \frac{g_i(t)}{\sum_{i=1}^n g_i(t)}
 \end{equation}\]</div>
 <p>Finally, the weight of the portfolio will be defined as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8e23460b-030b-4067-b4c8-8a7b33cf804d">
-<span class="eqno">(3)<a class="headerlink" href="#equation-8e23460b-030b-4067-b4c8-8a7b33cf804d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-df64c6d0-3bf8-47af-8f4a-7444be5b89c2">
+<span class="eqno">(3)<a class="headerlink" href="#equation-df64c6d0-3bf8-47af-8f4a-7444be5b89c2" title="Permalink to this equation">#</a></span>\[\begin{equation}
 x_i(t) = \Pi_{j = 1}^kv_{i,j}^{\theta_j}(t)
 \end{equation}\]</div>
 <p>The parameters to determine are <span class="math notranslate nohighlight">\(\theta_j\)</span>, the relative importance of each metric we are using to define issuer’s greeness.</p>

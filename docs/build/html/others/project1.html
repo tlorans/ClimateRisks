@@ -127,9 +127,12 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../intro/lowcarbon.html">Portfolio Decarbonization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro/net_zero.html">Towards a Net Zero Strategy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/intro_langchain_v2.html">Project 0: An Introduction to ChatGPT with LangChain</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../climate_investing/net_zero_investing.html">Net Zero Investing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../climate_investing/portfolio_decarbonization_pathway.html">Portfolio Decarbonization Pathway</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../climate_investing/portfolio_alignment.html">Portfolio Alignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../climate_investing/project1.html">Project 1: Emissions Data Search with ChatGPT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../climate_investing/project_2.html">Project 2: ChatGPT as a Carbon Data Analyst</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../climate_investing/self_decarbonization.html">Net Zero Backtesting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../climate_investing/integratingtransition.html">Integrating the Transition Dimension</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
@@ -480,39 +483,39 @@ We use Roncalli (2023) as a reference for implementing the constraints.</p>
 <section id="weights-constraint">
 <h2>Weights Constraint<a class="headerlink" href="#weights-constraint" title="Permalink to this headline">#</a></h2>
 <p>In order to limit the weights deviation for the energy-system, and limiting the responsibility bias, we can extend the framework by considering a weights constraint, similar to the sector constraint presented by Roncalli (2023):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a2e66d9b-0ad6-471c-bfd4-3a7096ceab44">
-<span class="eqno">(1)<a class="headerlink" href="#equation-a2e66d9b-0ad6-471c-bfd4-3a7096ceab44" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4f7fdc10-1f42-4528-bf62-6595b9586c0d">
+<span class="eqno">(1)<a class="headerlink" href="#equation-4f7fdc10-1f42-4528-bf62-6595b9586c0d" title="Permalink to this equation">#</a></span>\[\begin{equation}
 c^-_j \leq \sum_{i \in Class_j} x_i \leq c_j^+
 \end{equation}\]</div>
 <p>With <span class="math notranslate nohighlight">\(c_j\)</span> a <span class="math notranslate nohighlight">\(n \times 1\)</span> vector of energy-system class-mapping (ie. we have here only one class considered), with elements 0 or 1 if the stock <span class="math notranslate nohighlight">\(n\)</span> belongs to the class such as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a5870aa6-4f1b-4f02-9b79-6a1713f43eca">
-<span class="eqno">(2)<a class="headerlink" href="#equation-a5870aa6-4f1b-4f02-9b79-6a1713f43eca" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-1ce331fe-9726-4270-bb17-0a1f8b231779">
+<span class="eqno">(2)<a class="headerlink" href="#equation-1ce331fe-9726-4270-bb17-0a1f8b231779" title="Permalink to this equation">#</a></span>\[\begin{equation}
 c_{i,j} = 𝟙\{i \in Class_j\}
 \end{equation}\]</div>
 <p>We note that:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f4cfdaa3-9283-4580-bfba-c432575c1117">
-<span class="eqno">(3)<a class="headerlink" href="#equation-f4cfdaa3-9283-4580-bfba-c432575c1117" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-6dc9fb92-9a33-4edf-941f-9c7ed85ba6fb">
+<span class="eqno">(3)<a class="headerlink" href="#equation-6dc9fb92-9a33-4edf-941f-9c7ed85ba6fb" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sum_{i \in Sector_j} x_i = c_j^T x
 \end{equation}\]</div>
 <p>We can then rewrite the class constraint constraint <span class="math notranslate nohighlight">\(c^-_j \leq \sum_{i \in Class_j} x_i \leq c_j^+\)</span> as (Roncalli, 2023):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3c486883-20cc-4597-a1c8-157d86cd2678">
-<span class="eqno">(4)<a class="headerlink" href="#equation-3c486883-20cc-4597-a1c8-157d86cd2678" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8707a182-0c00-46f2-a0cf-ff97b57ab91b">
+<span class="eqno">(4)<a class="headerlink" href="#equation-8707a182-0c00-46f2-a0cf-ff97b57ab91b" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \begin{cases}
   c^-_j \leq c_j^Tx \\
   c_j^Tx \leq c^+_j
 \end{cases}
 \end{equation}\]</div>
 <p>Which we can reorder (such that the thresholds are on the right and the sector weights on the left) as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5aef82cf-b445-4e78-b2f0-1226a62da7fc">
-<span class="eqno">(5)<a class="headerlink" href="#equation-5aef82cf-b445-4e78-b2f0-1226a62da7fc" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-090b988b-875a-499b-87c0-3037df949c88">
+<span class="eqno">(5)<a class="headerlink" href="#equation-090b988b-875a-499b-87c0-3037df949c88" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \begin{cases}
   - c_j^Tx \leq - c^-_j \\
   c_j^Tx \leq c^+_j
 \end{cases}
 \end{equation}\]</div>
 <p>These last constraints can the be included into the QP inequality constraint <span class="math notranslate nohighlight">\(Gx \leq h\)</span> as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a86f1b91-82a3-472e-b13e-7185b5f04a5b">
-<span class="eqno">(6)<a class="headerlink" href="#equation-a86f1b91-82a3-472e-b13e-7185b5f04a5b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-47f5b2a0-a1f6-4e01-804d-54d68553edaf">
+<span class="eqno">(6)<a class="headerlink" href="#equation-47f5b2a0-a1f6-4e01-804d-54d68553edaf" title="Permalink to this equation">#</a></span>\[\begin{equation}
 G = \begin{bmatrix}
 -c_j^T \\
 -c^T_j
@@ -520,8 +523,8 @@ G = \begin{bmatrix}
 \end{equation}\]</div>
 <p>with G is a <span class="math notranslate nohighlight">\(2 \times n\)</span> matrix,
 and:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-42582722-6e6f-4e87-9661-e6b0b256efa1">
-<span class="eqno">(7)<a class="headerlink" href="#equation-42582722-6e6f-4e87-9661-e6b0b256efa1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a6ddf20c-4986-4aa0-85bd-764ac48b0372">
+<span class="eqno">(7)<a class="headerlink" href="#equation-a6ddf20c-4986-4aa0-85bd-764ac48b0372" title="Permalink to this equation">#</a></span>\[\begin{equation}
 h = \begin{bmatrix}
 -c_j^- \\
 c_j^+
@@ -590,22 +593,22 @@ c_j^+
 </div>
 <p>We have three classes in our energy-system: <span class="math notranslate nohighlight">\(Class_{PE}\)</span> the primary energy class, <span class="math notranslate nohighlight">\(Class_{SE}\)</span> the secondary energy and <span class="math notranslate nohighlight">\(Class_{EU}\)</span> the end-use activities.</p>
 <p>We have:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8d1fc58c-97d9-4c91-9ec1-6d23d27aeaab">
-<span class="eqno">(8)<a class="headerlink" href="#equation-8d1fc58c-97d9-4c91-9ec1-6d23d27aeaab" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a79ed90e-2dc9-4d23-9b6e-ade6247733d1">
+<span class="eqno">(8)<a class="headerlink" href="#equation-a79ed90e-2dc9-4d23-9b6e-ade6247733d1" title="Permalink to this equation">#</a></span>\[\begin{equation}
 c_{PE}^T = 
  \begin{bmatrix}
 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0\\
 \end{bmatrix}
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-c4dfb49d-af77-4fae-9842-70252a4b0d0e">
-<span class="eqno">(9)<a class="headerlink" href="#equation-c4dfb49d-af77-4fae-9842-70252a4b0d0e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-92115bdc-24f5-4074-886a-4b2dd3aa2676">
+<span class="eqno">(9)<a class="headerlink" href="#equation-92115bdc-24f5-4074-886a-4b2dd3aa2676" title="Permalink to this equation">#</a></span>\[\begin{equation}
 c_{SE}^T = 
  \begin{bmatrix}
 0 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 0\\
 \end{bmatrix}
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-686448b0-1dd4-486e-aa18-73d9eb277555">
-<span class="eqno">(10)<a class="headerlink" href="#equation-686448b0-1dd4-486e-aa18-73d9eb277555" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c8e352c5-efd5-4f1f-a6a5-edfb8710c39c">
+<span class="eqno">(10)<a class="headerlink" href="#equation-c8e352c5-efd5-4f1f-a6a5-edfb8710c39c" title="Permalink to this equation">#</a></span>\[\begin{equation}
 c_{EU}^T = 
  \begin{bmatrix}
 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1\\
@@ -701,35 +704,35 @@ c_{EU}^T =
 <h2>Neutrality<a class="headerlink" href="#neutrality" title="Permalink to this headline">#</a></h2>
 <p>We can also impose tighter constraint regarding energy-system consistency and the responsibility, by imposing class neutrality of the portfolio.</p>
 <p>It means that:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-11f00da5-5c05-4ed1-9c8b-2669d313228c">
-<span class="eqno">(11)<a class="headerlink" href="#equation-11f00da5-5c05-4ed1-9c8b-2669d313228c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8a24ae46-2213-42f1-a31b-28bd424febe8">
+<span class="eqno">(11)<a class="headerlink" href="#equation-8a24ae46-2213-42f1-a31b-28bd424febe8" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sum_{i \in Class_j}x_i = \sum_{i \in Class_j}b_i
 \end{equation}\]</div>
 <p>In the QP problem, this can be included in the <span class="math notranslate nohighlight">\(Ax = b\)</span> equality constraint. With 8 stocks and our three energy-system classes we have <span class="math notranslate nohighlight">\(c_{PE}\)</span>, <span class="math notranslate nohighlight">\(c_{SE}\)</span> and <span class="math notranslate nohighlight">\(c_{EU}\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-77564201-73c8-41c9-be43-630d9386a305">
-<span class="eqno">(12)<a class="headerlink" href="#equation-77564201-73c8-41c9-be43-630d9386a305" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-69bdcc58-b8d5-431b-8ace-4ceca7670072">
+<span class="eqno">(12)<a class="headerlink" href="#equation-69bdcc58-b8d5-431b-8ace-4ceca7670072" title="Permalink to this equation">#</a></span>\[\begin{equation}
 A_{PE} = c_{PE}^T = 
  \begin{bmatrix}
 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0\\
 \end{bmatrix}
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-b8ebc74a-58f8-4a77-9e2c-afbe24c6b4f3">
-<span class="eqno">(13)<a class="headerlink" href="#equation-b8ebc74a-58f8-4a77-9e2c-afbe24c6b4f3" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-efdbf4cc-d1de-42b8-aa28-47837cf648c7">
+<span class="eqno">(13)<a class="headerlink" href="#equation-efdbf4cc-d1de-42b8-aa28-47837cf648c7" title="Permalink to this equation">#</a></span>\[\begin{equation}
 A_{SE} = c_{SE}^T = 
  \begin{bmatrix}
 0 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 0\\
 \end{bmatrix}
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-0dd1db5d-a2a4-452a-8393-2f9f3aa7157a">
-<span class="eqno">(14)<a class="headerlink" href="#equation-0dd1db5d-a2a4-452a-8393-2f9f3aa7157a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-29846d90-fe22-470f-859c-193448d468df">
+<span class="eqno">(14)<a class="headerlink" href="#equation-29846d90-fe22-470f-859c-193448d468df" title="Permalink to this equation">#</a></span>\[\begin{equation}
 A_{EU} = c_{EU}^T = 
  \begin{bmatrix}
 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1\\
 \end{bmatrix}
 \end{equation}\]</div>
 <p>Then:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0f48e371-e055-4074-8649-318dd4d7b88f">
-<span class="eqno">(15)<a class="headerlink" href="#equation-0f48e371-e055-4074-8649-318dd4d7b88f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ccd19266-0a09-4211-9b97-0cff588d0d66">
+<span class="eqno">(15)<a class="headerlink" href="#equation-ccd19266-0a09-4211-9b97-0cff588d0d66" title="Permalink to this equation">#</a></span>\[\begin{equation}
 A = \begin{bmatrix}
 A_{PE} \\
 A_{SE} \\
@@ -737,8 +740,8 @@ A_{EU}
 \end{bmatrix}
 \end{equation}\]</div>
 <p>And <span class="math notranslate nohighlight">\(b_{PE} = c_{PE}^Tb\)</span>, <span class="math notranslate nohighlight">\(b_{SE} = c_{SE}^Tb\)</span> and <span class="math notranslate nohighlight">\(b_{EU} = c_{EU}^Tb\)</span> such that:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6f096de4-386d-434d-8934-ec3849da35f9">
-<span class="eqno">(16)<a class="headerlink" href="#equation-6f096de4-386d-434d-8934-ec3849da35f9" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-08aead8a-485c-40c9-aecb-a9e525ef0852">
+<span class="eqno">(16)<a class="headerlink" href="#equation-08aead8a-485c-40c9-aecb-a9e525ef0852" title="Permalink to this equation">#</a></span>\[\begin{equation}
 b = \begin{bmatrix}
 b_{PE} \\
 b_{SE} \\

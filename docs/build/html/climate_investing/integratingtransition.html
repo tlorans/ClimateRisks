@@ -129,10 +129,12 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../intro/lowcarbon.html">Portfolio Decarbonization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro/net_zero.html">Towards a Net Zero Strategy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/intro_langchain_v2.html">Project 0: An Introduction to ChatGPT with LangChain</a></li>
 <li class="toctree-l1"><a class="reference internal" href="net_zero_investing.html">Net Zero Investing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="portfolio_decarbonization_pathway.html">Portfolio Decarbonization Pathway</a></li>
 <li class="toctree-l1"><a class="reference internal" href="portfolio_alignment.html">Portfolio Alignment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="project1.html">Project 1: Emissions Data Retrieval with ChatGPT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="project1.html">Project 1: Emissions Data Search with ChatGPT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="project_2.html">Project 2: ChatGPT as a Carbon Data Analyst</a></li>
 <li class="toctree-l1"><a class="reference internal" href="self_decarbonization.html">Net Zero Backtesting</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Integrating the Transition Dimension</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
@@ -321,8 +323,8 @@ document.write(`
 <li><p>L. Real Estate Activities</p></li>
 </ul>
 <p>We have <span class="math notranslate nohighlight">\(CIS_{High}(x) = \sum_{i \in CIS_{High}}x_i\)</span> the HCIS weight of the portfolio <span class="math notranslate nohighlight">\(x\)</span>. At each rebalancing date <span class="math notranslate nohighlight">\(t\)</span>, we must verify that:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-27aaedcd-4f86-48e0-97c9-7bf062230f7a">
-<span class="eqno">(1)<a class="headerlink" href="#equation-27aaedcd-4f86-48e0-97c9-7bf062230f7a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-2d6816ca-d1b8-4535-bd33-2298f07f62d7">
+<span class="eqno">(1)<a class="headerlink" href="#equation-2d6816ca-d1b8-4535-bd33-2298f07f62d7" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CIS_{High}(x(t)) \geq  CIS_{High}(b(t))
 \end{equation}\]</div>
 <p>The PAB’s optimization problem becomes (Le Guenedal and Roncalli, 2022):</p>
@@ -339,16 +341,16 @@ CIS_{High}(x(t)) \geq  CIS_{High}(b(t))
 \end{aligned}
 \end{equation*}\]</div>
 <p>Regarding the QP parameters, the last two constraints can be casted into <span class="math notranslate nohighlight">\(Gx \leq h\)</span> with:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-44669848-cec7-4921-b368-19199725cc97">
-<span class="eqno">(2)<a class="headerlink" href="#equation-44669848-cec7-4921-b368-19199725cc97" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-11a53bf2-1ad8-4020-b6bd-3d86e87b07ca">
+<span class="eqno">(2)<a class="headerlink" href="#equation-11a53bf2-1ad8-4020-b6bd-3d86e87b07ca" title="Permalink to this equation">#</a></span>\[\begin{equation}
 G = \begin{bmatrix}
 CI^T \\
 - CIS_{High}^T
 \end{bmatrix}
 \end{equation}\]</div>
 <p>and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-fdde3e68-b9b6-47d0-a9a0-0bb4b86b2d8a">
-<span class="eqno">(3)<a class="headerlink" href="#equation-fdde3e68-b9b6-47d0-a9a0-0bb4b86b2d8a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0e8372b2-9e14-4e3b-b8da-a785b9f1f4f2">
+<span class="eqno">(3)<a class="headerlink" href="#equation-0e8372b2-9e14-4e3b-b8da-a785b9f1f4f2" title="Permalink to this equation">#</a></span>\[\begin{equation}
 h = \begin{bmatrix}
 (1 - \mathfrak{R}_{CI}(t_0,t))CI (b(t_0)) \\
 - CIS_{High}(b(t))
@@ -360,14 +362,14 @@ h = \begin{bmatrix}
 <p>If the idea behing the concept of HCIS in the PAB approach was to ensure that the resulting portfolio promotes activities contributing to the low-carbon transition, the constraint applied at the portfolio level has many drawbacks. Indeed, the constraint tends to encourages substitutions between sectors or industries and not substitutions between issuers within a same sector. As stated by Barahhou et al. (2022), the trade-off is not between green electricity and brown electricity for example, but between electricity generation and health care equipment. This approach doesn’t contribute to financing the transition, which is an objective of a net zero portfolio. To assess if a portfolio is really contributing to the low-carbon transition, Barahhou et al. (2022) propose a green intensity measure.</p>
 <p>A green intensity measure starts with a green taxonomy. The most famous example is the European green taxonomy. Developed by the TEG (2020 <span id="id3">[<a class="reference internal" href="../references.html#id21">oSF20</a>]</span>), the EU green taxonomy defines economic activities which make a contribution to environmental objectives while do no significant harm to the other environmental objectives (DNSH constraint) and comply with minimum social safeguards (MS constraint). Other taxonomies exist, such as the climate solutions listed by the Project Drawdown (2017 <span id="id4">[<a class="reference internal" href="../references.html#id22" title="Paul Hawken. Drawdown: The most comprehensive plan ever proposed to reverse global warming. Penguin, 2017.">Haw17</a>]</span>) for each important sectors. Proprietary taxonomies from data vendors can also be used.</p>
 <p>A bottom-up approach to measure the green intensity of a portfolio starts with the green revenue share at the issuer level:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3aad2026-5ad3-4ec8-b405-7447599a3694">
-<span class="eqno">(4)<a class="headerlink" href="#equation-3aad2026-5ad3-4ec8-b405-7447599a3694" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-abf836a5-1a32-4d0c-a573-722279b5faef">
+<span class="eqno">(4)<a class="headerlink" href="#equation-abf836a5-1a32-4d0c-a573-722279b5faef" title="Permalink to this equation">#</a></span>\[\begin{equation}
 GI_i = \frac{GR_i}{TR_i}
 \end{equation}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(GR_i\)</span> and <span class="math notranslate nohighlight">\(TR_i\)</span> are respectively the green revenues and the total turnover of the issuer <span class="math notranslate nohighlight">\(i\)</span>.</p>
 <p>The green intensity of the portfolio is then:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-640c182f-e7d7-4394-9b7a-082a50917351">
-<span class="eqno">(5)<a class="headerlink" href="#equation-640c182f-e7d7-4394-9b7a-082a50917351" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-589f6a97-511d-444c-ab9f-20e887e71043">
+<span class="eqno">(5)<a class="headerlink" href="#equation-589f6a97-511d-444c-ab9f-20e887e71043" title="Permalink to this equation">#</a></span>\[\begin{equation}
 GI(x) = \sum^n_{i=1}x_i \cdot GI_i
 \end{equation}\]</div>
 </section>

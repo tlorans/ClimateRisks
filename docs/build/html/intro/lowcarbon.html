@@ -129,9 +129,12 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Portfolio Decarbonization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="net_zero.html">Towards a Net Zero Strategy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_langchain_v2.html">Project 0: An Introduction to ChatGPT with LangChain</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../climate_investing/net_zero_investing.html">Net Zero Investing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../climate_investing/portfolio_decarbonization_pathway.html">Portfolio Decarbonization Pathway</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../climate_investing/portfolio_alignment.html">Portfolio Alignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../climate_investing/project1.html">Project 1: Emissions Data Search with ChatGPT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../climate_investing/project_2.html">Project 2: ChatGPT as a Carbon Data Analyst</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../climate_investing/self_decarbonization.html">Net Zero Backtesting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../climate_investing/integratingtransition.html">Integrating the Transition Dimension</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
@@ -320,23 +323,23 @@ In such an increasing climate risk awaraness, climate investing grew up as a spe
 \end{equation*}\]</div>
 <p>Without any further constraint, the optimal solution <span class="math notranslate nohighlight">\(x^*\)</span> will be equal to the benchmark weights <span class="math notranslate nohighlight">\(b\)</span>. This is the case of a perfect replication strategy. An enhanced or tilted version will add further constraints, depending on the objective of the strategy (decarbonization for example). We have a few more steps to consider before finding our QP formulation parameters.</p>
 <p>First, let’s recall that:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-28a0c2f1-b12c-4007-8fa4-4456174170c8">
-<span class="eqno">(1)<a class="headerlink" href="#equation-28a0c2f1-b12c-4007-8fa4-4456174170c8" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b4f568e2-208b-46f6-9f13-1781c684fefd">
+<span class="eqno">(1)<a class="headerlink" href="#equation-b4f568e2-208b-46f6-9f13-1781c684fefd" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sigma^2(x|b) = (x - b)^T \Sigma (x -b)
 \end{equation}\]</div>
 <p>and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-22f4251e-584b-4304-b6ff-40e22e4a262f">
-<span class="eqno">(2)<a class="headerlink" href="#equation-22f4251e-584b-4304-b6ff-40e22e4a262f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-cb4c5f0e-13ac-4e0e-8401-191beabd369f">
+<span class="eqno">(2)<a class="headerlink" href="#equation-cb4c5f0e-13ac-4e0e-8401-191beabd369f" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mu(x|b) = (x -b)^T \mu
 \end{equation}\]</div>
 <p>If we replace <span class="math notranslate nohighlight">\(\sigma^2(x|b)\)</span> and <span class="math notranslate nohighlight">\(\mu(x|b)\)</span> in our objective function, we get:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ee35e079-0aad-490e-b41d-aaf03beb2173">
-<span class="eqno">(3)<a class="headerlink" href="#equation-ee35e079-0aad-490e-b41d-aaf03beb2173" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-35b11c2b-2e1e-4204-adfd-9b86157af2d7">
+<span class="eqno">(3)<a class="headerlink" href="#equation-35b11c2b-2e1e-4204-adfd-9b86157af2d7" title="Permalink to this equation">#</a></span>\[\begin{equation}
 * = \frac{1}{2}(x-b)^T \Sigma (x -b) - \gamma (x -b)^T \mu
 \end{equation}\]</div>
 <p>With further developments, you end up with the following QP objective function formulation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-64f6a4f5-ad11-46b1-8593-aff6513d9ab6">
-<span class="eqno">(4)<a class="headerlink" href="#equation-64f6a4f5-ad11-46b1-8593-aff6513d9ab6" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f649066b-ca2e-4c75-96ec-5f7f7dd6fa81">
+<span class="eqno">(4)<a class="headerlink" href="#equation-f649066b-ca2e-4c75-96ec-5f7f7dd6fa81" title="Permalink to this equation">#</a></span>\[\begin{equation}
 * = \frac{1}{2} x^T \Sigma x - x^T(\gamma \mu + \Sigma b)
 \end{equation}\]</div>
 <p>We have exactly the same QP problem than with a long-only mean-variance portfolio, except that <span class="math notranslate nohighlight">\(q = -(\gamma \mu + \Sigma b)\)</span>.</p>
@@ -347,19 +350,19 @@ In such an increasing climate risk awaraness, climate investing grew up as a spe
 With the threshold approach, the objective is to minimize the tracking error with the benchmark while imposing a reduction <span class="math notranslate nohighlight">\(\mathfrak{R}\)</span> in terms of carbon intensity.</p>
 <p>In practice, implementing such approach involves the weighted-average carbon intensity (WACI) computation and the introduction of a new constraint in a portfolio optimization problem with the presence of a benchmark (Roncalli, 2013). In this part, we first define the WACI, and then introduce the threshold approach as an additional constraint to the portfolio optimization with a benchmark problem seen in the previous part.</p>
 <p>The weighted-average carbon intensity (WACI) of the benchmark is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ce5261e7-eef3-4055-8a84-4f602a5412be">
-<span class="eqno">(5)<a class="headerlink" href="#equation-ce5261e7-eef3-4055-8a84-4f602a5412be" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-42bbb966-4c44-4a53-a8f6-fb3bcb5b03bd">
+<span class="eqno">(5)<a class="headerlink" href="#equation-42bbb966-4c44-4a53-a8f6-fb3bcb5b03bd" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI(b) = b^T CI
 \end{equation}\]</div>
 <p>With <span class="math notranslate nohighlight">\(CI = (CI_1, ..., CI_n)\)</span> the vector of carbon intensities.</p>
 <p>The same is for the WACI of the portfolio:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1085a371-ab99-4bec-a731-41ac340db2ad">
-<span class="eqno">(6)<a class="headerlink" href="#equation-1085a371-ab99-4bec-a731-41ac340db2ad" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ff2f05c7-df8a-4cfe-beb9-b5e38e0cab46">
+<span class="eqno">(6)<a class="headerlink" href="#equation-ff2f05c7-df8a-4cfe-beb9-b5e38e0cab46" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI(x) = x^T CI
 \end{equation}\]</div>
 <p>The low-carbon strategy involves the reduction <span class="math notranslate nohighlight">\(\mathfrak{R}\)</span> of the portfolio’s carbon intensity <span class="math notranslate nohighlight">\(CI(x)\)</span> compared to the benchmark’s carbon intensity <span class="math notranslate nohighlight">\(CI(b)\)</span>. It can be viewed as the following constraint (Roncalli, 2023):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-50ab6c7b-725f-462e-a784-83f4e0f02761">
-<span class="eqno">(7)<a class="headerlink" href="#equation-50ab6c7b-725f-462e-a784-83f4e0f02761" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c5a08bbf-6969-4756-9557-a27baa302248">
+<span class="eqno">(7)<a class="headerlink" href="#equation-c5a08bbf-6969-4756-9557-a27baa302248" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CI(x) \leq (1 - \mathfrak{R})CI(b)
 \end{equation}\]</div>
 <p>The optimization problem becomes:</p>
