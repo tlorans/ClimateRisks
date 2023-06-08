@@ -24,7 +24,7 @@ We also need to load our API key:
 
 ```Python
 import os
-os.environ["OPENAI_API_KEY"] = openai_api_key = open('key.txt','r').read()
+os.environ["OPENAI_API_KEY"] = open('key.txt','r').read()
 ```
 
 Let's instantiate a `ChatOpenAI` object that will allow us to interact with `ChatGPT`:

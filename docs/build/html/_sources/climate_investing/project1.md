@@ -19,7 +19,7 @@ Before starting the project, please make sure that libraries are installed and y
 ```
 ```Python
 import os
-os.environ["OPENAI_API_KEY"] = openai_api_key = open('key.txt','r').read()
+os.environ["OPENAI_API_KEY"] = open('key.txt','r').read()
 ```
 
 You will also need to instantiate your access to `ChatGPT`:
