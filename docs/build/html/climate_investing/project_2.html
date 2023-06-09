@@ -300,8 +300,8 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="project-2-estimating-emissions-with-chatgpt">
 <h1>Project 2: Estimating Emissions with ChatGPT<a class="headerlink" href="#project-2-estimating-emissions-with-chatgpt" title="Permalink to this headline">#</a></h1>
-<p>In this project, we are investigating if we can directly use <code class="docutils literal notranslate"><span class="pre">ChatGPT</span></code> for simple estimate of Scope 3 upstream emissions.</p>
-<p>As we have seen in the previous project, LLMs have a problem about recent data, as they have no idea about recent events.</p>
+<p>In this project, we are investigating if we can directly use <code class="docutils literal notranslate"><span class="pre">ChatGPT</span></code> for simple estimate of Scope 3 upstream emissions (supply chain emissions).</p>
+<p>As we have seen in the previous project, LLMs have a problem about recent events or specific domain knowledge</p>
 <p>It creates problems for any use case that relies on up-to-date information or a specific dataset.</p>
 <p>The first challenge is to add this dataset to the LLM. To do so, we can use retrieval augmentation. This approach allows us to retrieve relevant information from an external knowledge based an give that information to our LLM.</p>
 <p>First, we need to make sure our libraries are installed and the API key loaded:</p>
@@ -362,14 +362,14 @@ os.environ[&quot;OPENAI_API_KEY&quot;] = open(&#39;key.txt&#39;,&#39;r&#39;).rea
 </pre></div>
 </div>
 <p>What happened here?</p>
-<p>The class we’ve instantiated has transformed each row of our CSV file into a numeric vector representation, with the use of an embedding model.</p>
+<p>The object we’ve instantiated has transformed each row of our CSV file into a numeric vector representation, with the use of an embedding model.</p>
 <figure class="align-default" id="numeric-transform">
 <img alt="../_images/numeric_transform.png" src="../_images/numeric_transform.png" />
 <figcaption>
 <p><span class="caption-text">Figure: Embedding Model and Vector Representation, from the LangChain AI Handbook, Pinecone</span><a class="headerlink" href="#numeric-transform" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Once all our CSV elements are transformed into a numerical vector, and stored as a Vectorbase, our query is also transformed into a numerical vector and the most similar elements into our CSV file are returned, based on the calculation of the distance between embeddings in vector space (with cosine similarity for example).</p>
+<p>Once all our CSV elements are transformed into a numerical vector, and stored as a Vector base, our query is also transformed into a numerical vector and the most similar elements into our CSV file are returned, based on the calculation of the distance between embeddings in vector space (with cosine similarity for example).</p>
 <figure class="align-default" id="similarity">
 <img alt="../_images/similarity.png" src="../_images/similarity.png" />
 <figcaption>

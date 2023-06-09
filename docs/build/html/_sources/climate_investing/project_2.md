@@ -1,8 +1,8 @@
 # Project 2: Estimating Emissions with ChatGPT
 
-In this project, we are investigating if we can directly use `ChatGPT` for simple estimate of Scope 3 upstream emissions.
+In this project, we are investigating if we can directly use `ChatGPT` for simple estimate of Scope 3 upstream emissions (supply chain emissions).
 
-As we have seen in the previous project, LLMs have a problem about recent data, as they have no idea about recent events. 
+As we have seen in the previous project, LLMs have a problem about recent events or specific domain knowledge 
 
 It creates problems for any use case that relies on up-to-date information or a specific dataset.
 
@@ -79,7 +79,7 @@ It gives:
 
 What happened here? 
 
-The class we've instantiated has transformed each row of our CSV file into a numeric vector representation, with the use of an embedding model.
+The object we've instantiated has transformed each row of our CSV file into a numeric vector representation, with the use of an embedding model.
 
 ```{figure} numeric_transform.png
 ---
@@ -88,7 +88,7 @@ name: numeric_transform
 Figure: Embedding Model and Vector Representation, from the LangChain AI Handbook, Pinecone
 ```
 
-Once all our CSV elements are transformed into a numerical vector, and stored as a Vectorbase, our query is also transformed into a numerical vector and the most similar elements into our CSV file are returned, based on the calculation of the distance between embeddings in vector space (with cosine similarity for example).
+Once all our CSV elements are transformed into a numerical vector, and stored as a Vector base, our query is also transformed into a numerical vector and the most similar elements into our CSV file are returned, based on the calculation of the distance between embeddings in vector space (with cosine similarity for example).
 
 ```{figure} similarity.png
 ---
