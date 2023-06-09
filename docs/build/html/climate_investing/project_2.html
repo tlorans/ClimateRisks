@@ -287,6 +287,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#knowledge-base-as-a-tool">Knowledge Base as a Tool</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interacting-with-other-tools">Interacting with Other Tools</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solution">Solution</a></li>
 </ul>
             </nav>
         </div>
@@ -514,7 +515,12 @@ The exchange rate for the US Dollar to the Euro in April 2022 ranged from 1.079 
 <h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">#</a></h2>
 <p>We are going to use the Supply Chain Greenhouse Gas Emissions Factors by NAICS-6 from the United States Environmental Protection Agency as a source for our knowledge base.</p>
 <p>Let’s download it and put it into our working path directory:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">emissions</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;emissions_factors.csv&quot;</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;	https://pasteur.epa.gov/uploads/10.23719/1528686/SupplyChainGHGEmissionFactors_v1.2_NAICS_CO2e_USD2021.csv&quot;</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">emissions</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+<span class="n">emissions</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;emissions_factors.csv&quot;</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
 
 <span class="n">file</span> <span class="o">=</span> <span class="s2">&quot;emissions_factors.csv&quot;</span>
 <span class="n">loader</span> <span class="o">=</span> <span class="n">CSVLoader</span><span class="p">(</span><span class="n">file_path</span> <span class="o">=</span> <span class="n">file</span><span class="p">)</span>
@@ -539,38 +545,123 @@ The exchange rate for the US Dollar to the Euro in April 2022 ranged from 1.079 
 <li><p>Find the revenue for this company.</p></li>
 <li><p>Apply the corresponding emission factor.</p></li>
 </ol>
-<p>You need to do it with a chained approach. You want the output to be expressed in million tons of CO2eq. You want the final output to be only the numerical value. You may need to use specific prompts to check for the formating component. You may need to use agent.</p>
-<p>Once you’ve achieved to do it for one company, scale your process to obtain an estimate for the following list of companies:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;AT&amp;T&#39;</span><span class="p">,</span>
- <span class="s1">&#39;Apple Inc.&#39;</span><span class="p">,</span>
- <span class="s1">&#39;Bank of America&#39;</span><span class="p">,</span>
- <span class="s1">&#39;Boeing&#39;</span><span class="p">,</span>
- <span class="s1">&#39;CVS Health&#39;</span><span class="p">,</span>
- <span class="s1">&#39;Chevron Corporation&#39;</span><span class="p">,</span>
- <span class="s1">&#39;Cisco&#39;</span><span class="p">,</span>
- <span class="s1">&#39;Citigroup&#39;</span><span class="p">,</span>
- <span class="s1">&#39;Disney&#39;</span><span class="p">,</span>
- <span class="s1">&#39;Dominion Energy&#39;</span><span class="p">,</span>
- <span class="s1">&#39;ExxonMobil&#39;</span><span class="p">,</span>
- <span class="s1">&#39;Ford Motor Company&#39;</span><span class="p">,</span>
- <span class="s1">&#39;General Electric&#39;</span><span class="p">,</span>
- <span class="s1">&#39;Home Depot (The)&#39;</span><span class="p">,</span>
- <span class="s1">&#39;IBM&#39;</span><span class="p">,</span>
- <span class="s1">&#39;Intel&#39;</span><span class="p">,</span>
- <span class="s1">&#39;JPMorgan Chase&#39;</span><span class="p">,</span>
- <span class="s1">&#39;Johnson &amp; Johnson&#39;</span><span class="p">,</span>
- <span class="s2">&quot;Kellogg&#39;s&quot;</span><span class="p">,</span>
- <span class="s1">&#39;McKesson&#39;</span><span class="p">,</span>
- <span class="s1">&#39;Merck &amp; Co.&#39;</span><span class="p">,</span>
- <span class="s1">&#39;Microsoft&#39;</span><span class="p">,</span>
- <span class="s1">&#39;Oracle Corporation&#39;</span><span class="p">,</span>
- <span class="s1">&#39;Pfizer&#39;</span><span class="p">,</span>
- <span class="s1">&#39;Procter &amp; Gamble&#39;</span><span class="p">,</span>
- <span class="s1">&#39;United Parcel Service&#39;</span><span class="p">,</span>
- <span class="s1">&#39;UnitedHealth Group&#39;</span><span class="p">,</span>
- <span class="s1">&#39;Verizon&#39;</span><span class="p">,</span>
- <span class="s1">&#39;Walmart&#39;</span><span class="p">,</span>
- <span class="s1">&#39;Wells Fargo&#39;</span><span class="p">}</span>
+</section>
+<section id="solution">
+<h2>Solution<a class="headerlink" href="#solution" title="Permalink to this headline">#</a></h2>
+<p>The solution is the similar to what we’ve done with the exchange rate stuff.</p>
+<p>Let’s first ensure that all libraries needed are installed:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span>!pip install openai
+!pip install langchain
+!pip install docarray
+!pip install tiktoken
+!pip install duckduckgo-search
+</pre></div>
+</div>
+<p>You need to load your OpenAI API key:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;OPENAI_API_KEY&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;key.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>We will use the emissions factors knowledge base as a tool:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.tools</span> <span class="kn">import</span> <span class="n">Tool</span>
+
+<span class="n">knowledge_tool</span> <span class="o">=</span> <span class="n">Tool</span><span class="p">(</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Supply Chain Emissions Factors&quot;</span><span class="p">,</span>
+    <span class="n">func</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">query</span><span class="p">,</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;Useful for when you need to find the emissions supply-chain for a specific industry. You want to return the emissions factors from the </span><span class="se">\</span>
+<span class="s2">    most related industry.&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>We give access to internet to <code class="docutils literal notranslate"><span class="pre">ChatGPT</span></code>:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.tools</span> <span class="kn">import</span> <span class="n">DuckDuckGoSearchRun</span>
+<span class="n">search</span> <span class="o">=</span> <span class="n">DuckDuckGoSearchRun</span><span class="p">()</span>
+
+<span class="n">duckduckgo_tool</span> <span class="o">=</span> <span class="n">Tool</span><span class="p">(</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;DuckDuckGo Search&#39;</span><span class="p">,</span>
+    <span class="n">func</span> <span class="o">=</span> <span class="n">search</span><span class="o">.</span><span class="n">run</span><span class="p">,</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;Useful for when you need to do a search on the internet to find information that another tool can&#39;t find. be specific with your input.&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Because <code class="docutils literal notranslate"><span class="pre">ChatGPT</span></code> can be bad at maths, we give him access to <code class="docutils literal notranslate"><span class="pre">llm-math</span></code>, a calculator tool, and instantiate our agent:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.agents</span> <span class="kn">import</span> <span class="n">AgentType</span>
+<span class="kn">from</span> <span class="nn">langchain.agents</span> <span class="kn">import</span> <span class="n">load_tools</span><span class="p">,</span> <span class="n">initialize_agent</span>
+<span class="kn">from</span> <span class="nn">langchain.chat_models</span> <span class="kn">import</span> <span class="n">ChatOpenAI</span>
+
+<span class="n">chat</span> <span class="o">=</span> <span class="n">ChatOpenAI</span><span class="p">(</span><span class="n">temperature</span> <span class="o">=</span> <span class="mf">0.</span><span class="p">)</span>
+<span class="n">tools</span> <span class="o">=</span> <span class="n">load_tools</span><span class="p">([</span><span class="s2">&quot;llm-math&quot;</span><span class="p">],</span> <span class="n">llm</span> <span class="o">=</span> <span class="n">chat</span><span class="p">)</span>
+
+<span class="n">tools</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">knowledge_tool</span><span class="p">)</span>
+<span class="n">tools</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">duckduckgo_tool</span><span class="p">)</span>
+
+<span class="n">agent</span> <span class="o">=</span> <span class="n">initialize_agent</span><span class="p">(</span>
+    <span class="n">tools</span><span class="p">,</span>
+    <span class="n">chat</span><span class="p">,</span>
+    <span class="n">agent</span> <span class="o">=</span> <span class="n">AgentType</span><span class="o">.</span><span class="n">CHAT_ZERO_SHOT_REACT_DESCRIPTION</span><span class="p">,</span>
+    <span class="n">handle_parsing_errors</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>We can now test the entire process:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">agent</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;Please follow the following process: </span><span class="se">\n\</span>
+<span class="s2">1. Find Tesla&#39;s main activity and last available revenue.</span><span class="se">\n\</span>
+<span class="s2">2. Find the emissions factor with margin corresponding to Tesla&#39;s activity</span><span class="se">\n\</span>
+<span class="s2">3. Multiply the emissions factor with the revenue</span><span class="se">\n\</span>
+<span class="s2">Result:</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And we have:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&gt; Entering new AgentExecutor chain...
+Question: What is Tesla&#39;s carbon footprint based on their revenue and industry?
+Thought: I need to find Tesla&#39;s main activity and last available revenue to determine the emissions factor with margin corresponding to their activity.
+Action:
+{
+  &quot;action&quot;: &quot;DuckDuckGo Search&quot;,
+  &quot;action_input&quot;: &quot;Tesla main activity and last available revenue&quot;
+}
+
+Observation: Tesla&#39;s revenue 2008-2022 Published by Mathilde Carlier , Mar 17, 2023 Tesla&#39;s revenue grew to nearly 81.5 billion U.S. dollars in the 2022 fiscal year, a 51 percent increase from the... Car Industry Tesla Reports Record Revenue for 2022, With 1.31 Million EVs Sold Tesla sold more cars and made more money than ever, despite its average transaction price falling. The automaker... Tesla ended 2021 with a net income of $5.51 billion (a 665% increase from 2020). Aside from the constant swirl of buzz that surrounds Tesla&#39;s founder, the recent stock split and Inflation... Mar 17, 2023 Revenue generated by Tesla increased to around 81.5 billion U.S. dollars in the 2022 fiscal year, with the United States spearheading demand. The U.S. generated about 40.6 billion... As much as 44.5% of Tesla&#39;s revenue was generated within the U.S. during FY 2021, up 57.6% compared to FY 2020. Revenue from China more than doubled over the year and now accounts for about...
+
+Thought:Now that I have found Tesla&#39;s revenue, I need to find the emissions factor with margin corresponding to their activity.
+Action:
+
+{
+  &quot;action&quot;: &quot;Supply Chain Emissions Factors&quot;,
+  &quot;action_input&quot;: &quot;Electric vehicle manufacturing&quot;
+}
+
+
+Observation:  Electric vehicle manufacturing is not listed in the given context.
+Thought:I need to find the closest industry to Tesla&#39;s main activity that has emissions factors available.
+Action:
+
+{
+  &quot;action&quot;: &quot;Supply Chain Emissions Factors&quot;,
+  &quot;action_input&quot;: &quot;Automobile manufacturing&quot;
+}
+
+
+
+Observation:  The supply chain emission factors with margins for automobile manufacturing (NAICS Code: 336111) is 0.279 kg CO2e/2021 USD, purchaser price.
+Thought:Now that I have the emissions factor with margin for automobile manufacturing, I need to multiply it with Tesla&#39;s revenue to get their carbon footprint.
+Action:
+
+{
+  &quot;action&quot;: &quot;Calculator&quot;,
+  &quot;action_input&quot;: &quot;81.5 billion * 0.279 kg CO2e/2021 USD&quot;
+}
+
+
+
+Observation: Answer: 11251113.310242455
+Thought:The carbon footprint of Tesla based on their revenue and industry is 11,251,113.31 kg CO2e.
+Final Answer: The carbon footprint of Tesla based on their revenue and industry is 11,251,113.31 kg CO2e.
+
+&gt; Finished chain.
+The carbon footprint of Tesla based on their revenue and industry is 11,251,113.31 kg CO2e.
 </pre></div>
 </div>
 </section>
@@ -623,6 +714,7 @@ The exchange rate for the US Dollar to the Euro in April 2022 ranged from 1.079 
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#knowledge-base-as-a-tool">Knowledge Base as a Tool</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interacting-with-other-tools">Interacting with Other Tools</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solution">Solution</a></li>
 </ul>
   </nav></div>
 
