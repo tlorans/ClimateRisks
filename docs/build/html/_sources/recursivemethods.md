@@ -5,7 +5,7 @@ We will follow the same systematic approach:
 1. Define the value function based on the economic environment
 2. Use recursive methods to determine the Euler equations of our system
 
-## Deterministic Case
+## Deterministic Robison Crusoe
 
 ### The Value Function
 
@@ -116,9 +116,105 @@ bellman = smp.Eq(v, u + beta * v_prime)
 $v{\left({K}_{t} \right)} = \beta v{\left(\left(1 - \delta\right) {K}_{t} + f{\left({K}_{t} \right)} - {C}_{t} \right)} + u{\left({C}_{t} \right)}$
 
 
+### Euler Equation
+
+The process is always the same:
+1. Find the First Order Conditions (FOC) by taking the derivative of the value function with repect to the control variables
+2. Find the Benveniste-Scheinkman (BS) Conditions by setting the the derivative of the value function with respect to the state variables
+3. With the BS and the FOC, find an expression for the unknown derivative, that is the derivative of the value function with respect to the future state
+4. Plus this expression into the the FOC to find the Euler equation.
+
+We first need a little workaround for working with the unknown derivative of the value function with respect to future capital stock for replacement purposes:
+
+```Python
+def get_unknown_derivative(v_prime, state_variable, index_time, transition_equation):
+  xi = smp.symbols('xi_1')
+  unknown = smp.Subs(smp.Derivative(v_prime.subs(transition_equation.rhs, xi), xi), xi , transition_equation.rhs)
+  better_printing = smp.diff(v, state_variable[index_time]) # to go to the format we would like
+  better_printing = better_printing.subs(index_time, index_time + 1) # iterate forward to get the format we want
+  return smp.Eq(better_printing, unknown)
+```
+
+Let's apply it:
+
+```Python
+unknown_derivative = get_unknown_derivative(v_prime, K, t, transition_equation)
+```
+
+$\frac{\partial}{\partial {K}_{t + 1}} v{\left({K}_{t + 1} \right)} = \left. \frac{d}{d \xi_{1}} v{\left(\xi_{1} \right)} \right|_{\substack{ \xi_{1}=\left(1 - \delta\right) {K}_{t} + f{\left({K}_{t} \right)} - {C}_{t} }}
+$
+
+#### First-Order Conditions
+
+We have only one control variable here, thus only one FOC. We have the following function to help us:
+
+```Python
+def get_FOC(bellman, control_variable, index_time, utility_function, unknown_derivative):
+  FOC = smp.Eq(smp.diff(bellman.rhs, control_variable[index_time]), 0)
+  FOC = FOC.replace(unknown_derivative.rhs, unknown_derivative.lhs)
+  return smp.Eq(smp.diff(utility_function, control_variable[t]), smp.solve(FOC, smp.diff(utility_function, control_variable[t]))[0])
+```
+
+Let's apply it:
+
+```Python
+FOC = get_FOC(bellman, C, t, u, unknown_derivative)
+```
+$\frac{\partial}{\partial {C}_{t}} u{\left({C}_{t} \right)} = \beta \frac{\partial}{\partial {K}_{t + 1}} v{\left({K}_{t + 1} \right)}
+$
+
+#### Benveniste-Sheinkman Conditions
+
+We define the following function for finding the BS condition:
+
+```Python
+def get_BS(bellman, v, state_variable, index_time, unknown_derivative, FOC):
+  # first need to reexpress FOC, if not we can have SymPy issue
+  FOC = smp.Eq(unknown_derivative.lhs, smp.solve(FOC, unknown_derivative.lhs)[0])
+  BS = smp.Eq(smp.diff(v, state_variable[index_time]), smp.diff(bellman.rhs, state_variable[index_time]))
+  BS = BS.replace(unknown_derivative.rhs, unknown_derivative.lhs)
+  BS = BS.subs(FOC.lhs, FOC.rhs)
+  return BS.subs(index_time, index_time + 1)
+```
+
+We know can find the expression for the unknown derivative:
+
+```Python
+BS = get_BS(bellman, v, K, t, unknown_derivative, FOC)
+```
+
+$\frac{\partial}{\partial {K}_{t + 1}} v{\left({K}_{t + 1} \right)} = \left(- \delta + \frac{\partial}{\partial {K}_{t + 1}} f{\left({K}_{t + 1} \right)} + 1\right) \frac{\partial}{\partial {C}_{t + 1}} u{\left({C}_{t + 1} \right)}
+$
+
+#### Euler Equation
+
+And we can finally plug it back to the FOC to obtain the Euler Equation:
+
+```Python
+Euler = FOC.subs(BS.lhs, BS.rhs)
+```
+
+$\frac{\partial}{\partial {C}_{t}} u{\left({C}_{t} \right)} = \beta \left(- \delta + \frac{\partial}{\partial {K}_{t + 1}} f{\left({K}_{t + 1} \right)} + 1\right) \frac{\partial}{\partial {C}_{t + 1}} u{\left({C}_{t + 1} \right)}
+$
+
+## Lucas Tree
+
+### The Value Function
+
+#### Economic Environment
+
+##### Time Series Macro Dynamics
+
+##### Represenative Consumer Preferences
+
+##### States and Controls
 
 ### Euler Equation
 
-## Stochastic Case
+#### First Order Conditions
 
-## Lucas Tree
+#### Benveniste-Scheinkman Conditions
+
+#### Euler Equation
+
+## Consumption CAPM

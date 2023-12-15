@@ -279,7 +279,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deterministic-case">Deterministic Case</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deterministic-robison-crusoe">Deterministic Robison Crusoe</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-value-function">The Value Function</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#economic-environment">Economic Environment</a><ul class="nav section-nav flex-column">
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series-macro-dynamics">Time Series Macro Dynamics</a></li>
@@ -289,11 +289,33 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#states-and-controls">States and Controls</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#euler-equation">Euler Equation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#euler-equation">Euler Equation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#first-order-conditions">First-Order Conditions</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#benveniste-sheinkman-conditions">Benveniste-Sheinkman Conditions</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Euler Equation</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stochastic-case">Stochastic Case</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lucas-tree">Lucas Tree</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lucas-tree">Lucas Tree</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">The Value Function</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Economic Environment</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Time Series Macro Dynamics</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#represenative-consumer-preferences">Represenative Consumer Preferences</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">States and Controls</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Euler Equation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">First Order Conditions</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#benveniste-scheinkman-conditions">Benveniste-Scheinkman Conditions</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Euler Equation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consumption-capm">Consumption CAPM</a></li>
 </ul>
             </nav>
         </div>
@@ -312,8 +334,8 @@ document.write(`
 <li><p>Define the value function based on the economic environment</p></li>
 <li><p>Use recursive methods to determine the Euler equations of our system</p></li>
 </ol>
-<section id="deterministic-case">
-<h2>Deterministic Case<a class="headerlink" href="#deterministic-case" title="Permalink to this headline">#</a></h2>
+<section id="deterministic-robison-crusoe">
+<h2>Deterministic Robison Crusoe<a class="headerlink" href="#deterministic-robison-crusoe" title="Permalink to this headline">#</a></h2>
 <section id="the-value-function">
 <h3>The Value Function<a class="headerlink" href="#the-value-function" title="Permalink to this headline">#</a></h3>
 <section id="economic-environment">
@@ -402,13 +424,106 @@ document.write(`
 </section>
 <section id="euler-equation">
 <h3>Euler Equation<a class="headerlink" href="#euler-equation" title="Permalink to this headline">#</a></h3>
+<p>The process is always the same:</p>
+<ol class="arabic simple">
+<li><p>Find the First Order Conditions (FOC) by taking the derivative of the value function with repect to the control variables</p></li>
+<li><p>Find the Benveniste-Scheinkman (BS) Conditions by setting the the derivative of the value function with respect to the state variables</p></li>
+<li><p>With the BS and the FOC, find an expression for the unknown derivative, that is the derivative of the value function with respect to the future state</p></li>
+<li><p>Plus this expression into the the FOC to find the Euler equation.</p></li>
+</ol>
+<p>We first need a little workaround for working with the unknown derivative of the value function with respect to future capital stock for replacement purposes:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_unknown_derivative</span><span class="p">(</span><span class="n">v_prime</span><span class="p">,</span> <span class="n">state_variable</span><span class="p">,</span> <span class="n">index_time</span><span class="p">,</span> <span class="n">transition_equation</span><span class="p">):</span>
+  <span class="n">xi</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;xi_1&#39;</span><span class="p">)</span>
+  <span class="n">unknown</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Subs</span><span class="p">(</span><span class="n">smp</span><span class="o">.</span><span class="n">Derivative</span><span class="p">(</span><span class="n">v_prime</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">transition_equation</span><span class="o">.</span><span class="n">rhs</span><span class="p">,</span> <span class="n">xi</span><span class="p">),</span> <span class="n">xi</span><span class="p">),</span> <span class="n">xi</span> <span class="p">,</span> <span class="n">transition_equation</span><span class="o">.</span><span class="n">rhs</span><span class="p">)</span>
+  <span class="n">better_printing</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">state_variable</span><span class="p">[</span><span class="n">index_time</span><span class="p">])</span> <span class="c1"># to go to the format we would like</span>
+  <span class="n">better_printing</span> <span class="o">=</span> <span class="n">better_printing</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">index_time</span><span class="p">,</span> <span class="n">index_time</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="c1"># iterate forward to get the format we want</span>
+  <span class="k">return</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">better_printing</span><span class="p">,</span> <span class="n">unknown</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s apply it:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">unknown_derivative</span> <span class="o">=</span> <span class="n">get_unknown_derivative</span><span class="p">(</span><span class="n">v_prime</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">transition_equation</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(\frac{\partial}{\partial {K}_{t + 1}} v{\left({K}_{t + 1} \right)} = \left. \frac{d}{d \xi_{1}} v{\left(\xi_{1} \right)} \right|_{\substack{ \xi_{1}=\left(1 - \delta\right) {K}_{t} + f{\left({K}_{t} \right)} - {C}_{t} }}
+\)</span></p>
+<section id="first-order-conditions">
+<h4>First-Order Conditions<a class="headerlink" href="#first-order-conditions" title="Permalink to this headline">#</a></h4>
+<p>We have only one control variable here, thus only one FOC. We have the following function to help us:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_FOC</span><span class="p">(</span><span class="n">bellman</span><span class="p">,</span> <span class="n">control_variable</span><span class="p">,</span> <span class="n">index_time</span><span class="p">,</span> <span class="n">utility_function</span><span class="p">,</span> <span class="n">unknown_derivative</span><span class="p">):</span>
+  <span class="n">FOC</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">smp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">bellman</span><span class="o">.</span><span class="n">rhs</span><span class="p">,</span> <span class="n">control_variable</span><span class="p">[</span><span class="n">index_time</span><span class="p">]),</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="n">FOC</span> <span class="o">=</span> <span class="n">FOC</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">unknown_derivative</span><span class="o">.</span><span class="n">rhs</span><span class="p">,</span> <span class="n">unknown_derivative</span><span class="o">.</span><span class="n">lhs</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">smp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">utility_function</span><span class="p">,</span> <span class="n">control_variable</span><span class="p">[</span><span class="n">t</span><span class="p">]),</span> <span class="n">smp</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">FOC</span><span class="p">,</span> <span class="n">smp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">utility_function</span><span class="p">,</span> <span class="n">control_variable</span><span class="p">[</span><span class="n">t</span><span class="p">]))[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Let’s apply it:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">FOC</span> <span class="o">=</span> <span class="n">get_FOC</span><span class="p">(</span><span class="n">bellman</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">unknown_derivative</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(\frac{\partial}{\partial {C}_{t}} u{\left({C}_{t} \right)} = \beta \frac{\partial}{\partial {K}_{t + 1}} v{\left({K}_{t + 1} \right)}
+\)</span></p>
+</section>
+<section id="benveniste-sheinkman-conditions">
+<h4>Benveniste-Sheinkman Conditions<a class="headerlink" href="#benveniste-sheinkman-conditions" title="Permalink to this headline">#</a></h4>
+<p>We define the following function for finding the BS condition:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_BS</span><span class="p">(</span><span class="n">bellman</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">state_variable</span><span class="p">,</span> <span class="n">index_time</span><span class="p">,</span> <span class="n">unknown_derivative</span><span class="p">,</span> <span class="n">FOC</span><span class="p">):</span>
+  <span class="c1"># first need to reexpress FOC, if not we can have SymPy issue</span>
+  <span class="n">FOC</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">unknown_derivative</span><span class="o">.</span><span class="n">lhs</span><span class="p">,</span> <span class="n">smp</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">FOC</span><span class="p">,</span> <span class="n">unknown_derivative</span><span class="o">.</span><span class="n">lhs</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+  <span class="n">BS</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">smp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">state_variable</span><span class="p">[</span><span class="n">index_time</span><span class="p">]),</span> <span class="n">smp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">bellman</span><span class="o">.</span><span class="n">rhs</span><span class="p">,</span> <span class="n">state_variable</span><span class="p">[</span><span class="n">index_time</span><span class="p">]))</span>
+  <span class="n">BS</span> <span class="o">=</span> <span class="n">BS</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">unknown_derivative</span><span class="o">.</span><span class="n">rhs</span><span class="p">,</span> <span class="n">unknown_derivative</span><span class="o">.</span><span class="n">lhs</span><span class="p">)</span>
+  <span class="n">BS</span> <span class="o">=</span> <span class="n">BS</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">FOC</span><span class="o">.</span><span class="n">lhs</span><span class="p">,</span> <span class="n">FOC</span><span class="o">.</span><span class="n">rhs</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">BS</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">index_time</span><span class="p">,</span> <span class="n">index_time</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We know can find the expression for the unknown derivative:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">BS</span> <span class="o">=</span> <span class="n">get_BS</span><span class="p">(</span><span class="n">bellman</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">unknown_derivative</span><span class="p">,</span> <span class="n">FOC</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(\frac{\partial}{\partial {K}_{t + 1}} v{\left({K}_{t + 1} \right)} = \left(- \delta + \frac{\partial}{\partial {K}_{t + 1}} f{\left({K}_{t + 1} \right)} + 1\right) \frac{\partial}{\partial {C}_{t + 1}} u{\left({C}_{t + 1} \right)}
+\)</span></p>
+</section>
+<section id="id1">
+<h4>Euler Equation<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h4>
+<p>And we can finally plug it back to the FOC to obtain the Euler Equation:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">Euler</span> <span class="o">=</span> <span class="n">FOC</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">BS</span><span class="o">.</span><span class="n">lhs</span><span class="p">,</span> <span class="n">BS</span><span class="o">.</span><span class="n">rhs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(\frac{\partial}{\partial {C}_{t}} u{\left({C}_{t} \right)} = \beta \left(- \delta + \frac{\partial}{\partial {K}_{t + 1}} f{\left({K}_{t + 1} \right)} + 1\right) \frac{\partial}{\partial {C}_{t + 1}} u{\left({C}_{t + 1} \right)}
+\)</span></p>
 </section>
 </section>
-<section id="stochastic-case">
-<h2>Stochastic Case<a class="headerlink" href="#stochastic-case" title="Permalink to this headline">#</a></h2>
 </section>
 <section id="lucas-tree">
 <h2>Lucas Tree<a class="headerlink" href="#lucas-tree" title="Permalink to this headline">#</a></h2>
+<section id="id2">
+<h3>The Value Function<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
+<section id="id3">
+<h4>Economic Environment<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h4>
+<section id="id4">
+<h5>Time Series Macro Dynamics<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h5>
+</section>
+<section id="represenative-consumer-preferences">
+<h5>Represenative Consumer Preferences<a class="headerlink" href="#represenative-consumer-preferences" title="Permalink to this headline">#</a></h5>
+</section>
+<section id="id5">
+<h5>States and Controls<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h5>
+</section>
+</section>
+</section>
+<section id="id6">
+<h3>Euler Equation<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
+<section id="id7">
+<h4>First Order Conditions<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h4>
+</section>
+<section id="benveniste-scheinkman-conditions">
+<h4>Benveniste-Scheinkman Conditions<a class="headerlink" href="#benveniste-scheinkman-conditions" title="Permalink to this headline">#</a></h4>
+</section>
+<section id="id8">
+<h4>Euler Equation<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h4>
+</section>
+</section>
+</section>
+<section id="consumption-capm">
+<h2>Consumption CAPM<a class="headerlink" href="#consumption-capm" title="Permalink to this headline">#</a></h2>
 </section>
 </section>
 
@@ -454,7 +569,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deterministic-case">Deterministic Case</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deterministic-robison-crusoe">Deterministic Robison Crusoe</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-value-function">The Value Function</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#economic-environment">Economic Environment</a><ul class="nav section-nav flex-column">
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series-macro-dynamics">Time Series Macro Dynamics</a></li>
@@ -464,11 +579,33 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#states-and-controls">States and Controls</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#euler-equation">Euler Equation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#euler-equation">Euler Equation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#first-order-conditions">First-Order Conditions</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#benveniste-sheinkman-conditions">Benveniste-Sheinkman Conditions</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Euler Equation</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stochastic-case">Stochastic Case</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lucas-tree">Lucas Tree</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lucas-tree">Lucas Tree</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">The Value Function</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Economic Environment</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Time Series Macro Dynamics</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#represenative-consumer-preferences">Represenative Consumer Preferences</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">States and Controls</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Euler Equation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">First Order Conditions</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#benveniste-scheinkman-conditions">Benveniste-Scheinkman Conditions</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Euler Equation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consumption-capm">Consumption CAPM</a></li>
 </ul>
   </nav></div>
 
