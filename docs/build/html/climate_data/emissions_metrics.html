@@ -47,7 +47,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'climate_data/emissions_metrics';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Transition Metrics" href="green_taxonomy.html" />
+    <link rel="next" title="References" href="../references.html" />
     <link rel="prev" title="The Basics of Carbon Metrics: Carbon Budget, Target and Trend" href="carbon_budget.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
@@ -130,13 +130,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction: Climate Risk &amp; Equity Investing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../climate_investing/climateinvesting.html">Part 1: Climate Investing in Equity Markets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../climate_investing/portfolio_decarbonization.html">Portfolio Decarbonization as a Climate Risk Hedging Strategy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../climate_investing/project1.html">Project 1: Sector Constraints in Portfolio Decarbonization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../climate_investing/portfolio_alignment.html">Portfolio Alignment with a Decarbonization Pathway</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../climate_investing/project2.html">Project 2: Portfolio Alignment and Sectors Decarbonization Pathways</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../climate_investing/self_decarbonization.html">Portfolio Self-Decarbonization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../climate_investing/transition.html">Integrating the Transition Dimension</a></li>
 <li class="toctree-l1"><a class="reference internal" href="climate_data.html">Part 2: Advanced Metrics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="carbon_budget.html">The Basics of Carbon Metrics: Carbon Budget, Target and Trend</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Advanced Carbon Metrics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="green_taxonomy.html">Transition Metrics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 </ul>
 
@@ -317,8 +318,8 @@ document.write(`
 <h2>Static Measures: Duration, Gap, Slope and Budget<a class="headerlink" href="#static-measures-duration-gap-slope-and-budget" title="Permalink to this headline">#</a></h2>
 <p>Let’s consider a static approach, where <span class="math notranslate nohighlight">\(t^*\)</span> is the target horizon. We can denote <span class="math notranslate nohighlight">\(CE_i^{NZE}(t^*)\)</span> as the net zero emissions scenario for issuer <span class="math notranslate nohighlight">\(i\)</span>, with <span class="math notranslate nohighlight">\(t_0\)</span> the current date.</p>
 <p>We can compute <span class="math notranslate nohighlight">\(CE^{NZE}_i(t^*)\)</span> by using the issuer’s targets or using a consensus scenario:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5bb4a5b3-c87b-4fbe-ab57-415768e51439">
-<span class="eqno">(1)<a class="headerlink" href="#equation-5bb4a5b3-c87b-4fbe-ab57-415768e51439" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d4ff7470-725a-4ae7-8189-68f26e9ed058">
+<span class="eqno">(1)<a class="headerlink" href="#equation-d4ff7470-725a-4ae7-8189-68f26e9ed058" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CE^{NZE}_i(t^*) = (1 - \mathfrak{R}^*(t_0,t^*)) \cdot CE_i(t_0)
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\mathfrak{R}^*(t_0,t^*)\)</span> is the carbon reduction between <span class="math notranslate nohighlight">\(t_0\)</span> and <span class="math notranslate nohighlight">\(t^*\)</span> expected for this issuer. For example, it can be equal to the expected reduction for the sector of the issuer in order to achieve an NZE scenario.</p>
@@ -348,8 +349,8 @@ CE^{NZE}_i(t^*) = (1 - \mathfrak{R}^*(t_0,t^*)) \cdot CE_i(t_0)
 </tbody>
 </table>
 <p>We can obtain the corresponding reduction pathway <span class="math notranslate nohighlight">\(\mathfrak{R}^*(t_0,t^*)\)</span> with linearly interpolated  carbon emissions from this scenario:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-61ab64d7-40d0-4b25-8f65-d2c8d6a16b3a">
-<span class="eqno">(2)<a class="headerlink" href="#equation-61ab64d7-40d0-4b25-8f65-d2c8d6a16b3a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-5e1f740e-f821-41fd-b6f9-f7e9599b9a31">
+<span class="eqno">(2)<a class="headerlink" href="#equation-5e1f740e-f821-41fd-b6f9-f7e9599b9a31" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathfrak{R}^*(t_0,t^*) = 1 - \frac{CE^{NZE}(t)}{CE^{NZE}(t_0)}
 \end{equation}\]</div>
 <p>In Python we have:</p>
@@ -409,23 +410,23 @@ CE^{NZE}_i(t^*) = (1 - \mathfrak{R}^*(t_0,t^*)) \cdot CE_i(t_0)
 <section id="duration">
 <h3>Duration<a class="headerlink" href="#duration" title="Permalink to this headline">#</a></h3>
 <p>Using the generic notation <span class="math notranslate nohighlight">\(\hat{CE}_i(t)\)</span> to name either <span class="math notranslate nohighlight">\(CE^{Target}_i(t)\)</span> or <span class="math notranslate nohighlight">\(CE^{Trend}_i(t)\)</span>, we define the time to reach the NZE scenario (or duration) as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7e8c693b-7490-4639-a5c0-9503175ec07d">
-<span class="eqno">(3)<a class="headerlink" href="#equation-7e8c693b-7490-4639-a5c0-9503175ec07d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e132f781-4426-4f88-8d3f-90cc64f066c7">
+<span class="eqno">(3)<a class="headerlink" href="#equation-e132f781-4426-4f88-8d3f-90cc64f066c7" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \tau_i = \{inf \; t: \hat{CE}_i(t) \leq CE^{NZE}_i(t^*)\}
 \end{equation}\]</div>
 <p>If <span class="math notranslate nohighlight">\(\hat{CE}_i(t) = CE^{Target}_i(t)\)</span>, we have the NZE duration <span class="math notranslate nohighlight">\(\tau_i^{Target}\)</span>. It measures if the carbon targets announced by the company are in line with the NZE scenario <span class="math notranslate nohighlight">\(CE^{NZE}_i(t^*)\)</span>.</p>
 <p>If <span class="math notranslate nohighlight">\(\hat{CE}_i(t) = CE_i^{Trend}(t)\)</span>, we have the NZE duration <span class="math notranslate nohighlight">\(\tau^{Trend}_i\)</span>. It measures if the issuer’s track record is in line with its targets or the NZE scenario.</p>
 <p>Recalling that :</p>
-<div class="amsmath math notranslate nohighlight" id="equation-93542bba-4cd7-484e-99d4-fd62c3d130b4">
-<span class="eqno">(4)<a class="headerlink" href="#equation-93542bba-4cd7-484e-99d4-fd62c3d130b4" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b5b21dba-983f-4d2a-a26f-111196a24b0e">
+<span class="eqno">(4)<a class="headerlink" href="#equation-b5b21dba-983f-4d2a-a26f-111196a24b0e" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CE_i^{Trend}(t) = \hat{\beta}_{i,0} + \hat{\beta}_{i,1}(t)
 \end{equation}\]</div>
 <p>We have two cases:</p>
 <ol class="arabic simple">
 <li><p>The slope <span class="math notranslate nohighlight">\(\hat{\beta}_{i,1}\)</span> is positive: <span class="math notranslate nohighlight">\(CE^{Trend}_i(t)\)</span> is an increasing function. In that case, there is a solution only if the current carbon emissions <span class="math notranslate nohighlight">\(CE_i(t_0)\)</span> are less than the NZE scenario:</p></li>
 </ol>
-<div class="amsmath math notranslate nohighlight" id="equation-d96029bb-0274-4b34-a66e-00b49e783269">
-<span class="eqno">(5)<a class="headerlink" href="#equation-d96029bb-0274-4b34-a66e-00b49e783269" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-477b31ce-dbde-471f-b93b-4b441419bbf5">
+<span class="eqno">(5)<a class="headerlink" href="#equation-477b31ce-dbde-471f-b93b-4b441419bbf5" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \tau_i^{Trend} = 
 \begin{cases}
   t_0 &amp; \text{if $CE_i(t_0) \leq CE^{NZE}_i(t)$} \\
@@ -435,26 +436,26 @@ CE_i^{Trend}(t) = \hat{\beta}_{i,0} + \hat{\beta}_{i,1}(t)
 <ol class="arabic simple" start="2">
 <li><p>The slope <span class="math notranslate nohighlight">\(\hat{\beta}_{i,1}\)</span> is negative: <span class="math notranslate nohighlight">\(CE_i^{Trend}(t)\)</span> is a decreasing function and we have:</p></li>
 </ol>
-<div class="amsmath math notranslate nohighlight" id="equation-cf29fc23-9e8c-45eb-8271-5232e798bb31">
-<span class="eqno">(6)<a class="headerlink" href="#equation-cf29fc23-9e8c-45eb-8271-5232e798bb31" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-9861cd40-1f73-4415-a2a9-7e61e26572c0">
+<span class="eqno">(6)<a class="headerlink" href="#equation-9861cd40-1f73-4415-a2a9-7e61e26572c0" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CE_i^{Trend}(t) \leq CE^{NZE}_i(t^*) \Leftrightarrow \hat{\beta}_{i,0} + \hat{\beta}_{i,1}t \leq CE^{NZE}_i(t^*)
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-0875cb2e-9d79-4f80-908e-7d73fd5a7843">
-<span class="eqno">(7)<a class="headerlink" href="#equation-0875cb2e-9d79-4f80-908e-7d73fd5a7843" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-327eeef1-3d0c-4581-ae43-122233b8f4a2">
+<span class="eqno">(7)<a class="headerlink" href="#equation-327eeef1-3d0c-4581-ae43-122233b8f4a2" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \Leftrightarrow t \geq \frac{CE^{NZE}_i(t) - \hat{\beta}_{i,0}}{\hat{\beta}_{i,1}}
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-9a69e0a8-23a2-4d91-b52f-22864a9be1d3">
-<span class="eqno">(8)<a class="headerlink" href="#equation-9a69e0a8-23a2-4d91-b52f-22864a9be1d3" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-bc000f0e-76b3-4700-b171-4561c9253f21">
+<span class="eqno">(8)<a class="headerlink" href="#equation-bc000f0e-76b3-4700-b171-4561c9253f21" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \Leftrightarrow t \geq t_0 + \frac{CE^{NZE}_i(t^*) - (\hat{\beta}_{i,0}+\hat{\beta}_{i,1}{t_0})}{\hat{\beta}_{i,1}}
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-e1740a55-35de-4759-9f26-82a411f3dc35">
-<span class="eqno">(9)<a class="headerlink" href="#equation-e1740a55-35de-4759-9f26-82a411f3dc35" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-6e61d213-eacd-4b11-bb9f-24f9f578d878">
+<span class="eqno">(9)<a class="headerlink" href="#equation-6e61d213-eacd-4b11-bb9f-24f9f578d878" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \Leftrightarrow t \geq t_0 + \frac{CE^{NZE}_i(t^*) - \hat{\beta}^{'}_{i,0}}{\hat{\beta}_{i,1}}
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\hat{\beta}^{'}_{i,0} = \hat{\beta}_{i,0} + \hat{\beta}_{i,1}t_0\)</span> is the intercept of the trend model when we use <span class="math notranslate nohighlight">\(t_0\)</span> as the pivot date.
 We then have:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d772e89d-9623-4213-8e20-17de4efce74e">
-<span class="eqno">(10)<a class="headerlink" href="#equation-d772e89d-9623-4213-8e20-17de4efce74e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b8d29156-d33d-40bd-a537-19f0726646d1">
+<span class="eqno">(10)<a class="headerlink" href="#equation-b8d29156-d33d-40bd-a537-19f0726646d1" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \tau^{Trend}_i = t_0 + (\frac{CE^{NZE}_i(t^*) - \hat{\beta}^{'}_{i,0}}{\hat{\beta}_{i,1}})
 \end{equation}\]</div>
 <p>Let’s consider the following example from Le Guenedal et al. (2022):</p>
@@ -486,22 +487,22 @@ We then have:</p>
 </tbody>
 </table>
 <p>Let’s compute <span class="math notranslate nohighlight">\(CE_i^{Trend}\)</span> with <span class="math notranslate nohighlight">\(\hat{\beta}_{i,0} = 3637.73\)</span> and <span class="math notranslate nohighlight">\(\hat{\beta}_{i,1} = - 1.7832\)</span>, we have:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-18466747-3669-4e62-a970-05b523fe4597">
-<span class="eqno">(11)<a class="headerlink" href="#equation-18466747-3669-4e62-a970-05b523fe4597" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4c510a0c-68fc-4e3c-88ab-bf7a8198d904">
+<span class="eqno">(11)<a class="headerlink" href="#equation-4c510a0c-68fc-4e3c-88ab-bf7a8198d904" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CE_i^{Trend}(t) = 3637.73 - 1.7832 \cdot t
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-0c92b50c-719e-4a0f-a0a4-d5a53c4dcbde">
-<span class="eqno">(12)<a class="headerlink" href="#equation-0c92b50c-719e-4a0f-a0a4-d5a53c4dcbde" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-89577641-abaa-436c-b86c-4963806e934c">
+<span class="eqno">(12)<a class="headerlink" href="#equation-89577641-abaa-436c-b86c-4963806e934c" title="Permalink to this equation">#</a></span>\[\begin{equation}
 = 35.67 - 1.7832 \cdot ( t - 2020)
 \end{equation}\]</div>
 <p>We can also rescale the trend such that <span class="math notranslate nohighlight">\(CE^{Trend}_i(2020) = CE_i(2020)\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9c197b3a-c7bb-4c79-91cf-9c66d629bfe3">
-<span class="eqno">(13)<a class="headerlink" href="#equation-9c197b3a-c7bb-4c79-91cf-9c66d629bfe3" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f15afe58-259a-4782-a75e-fc1dbd79b0bf">
+<span class="eqno">(13)<a class="headerlink" href="#equation-f15afe58-259a-4782-a75e-fc1dbd79b0bf" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CE^{Trend}_i(t) = 39.91 - 1.7832 \cdot (t - 2020)
 \end{equation}\]</div>
 <p>We assume that the NZE scenario for 2030 is a reduction of carbon emissions by 30%:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-77375d48-963d-401e-b7ca-e2c3956d0151">
-<span class="eqno">(14)<a class="headerlink" href="#equation-77375d48-963d-401e-b7ca-e2c3956d0151" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0dcae66c-a1fa-4ef5-ab3d-955208f9f982">
+<span class="eqno">(14)<a class="headerlink" href="#equation-0dcae66c-a1fa-4ef5-ab3d-955208f9f982" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CE^{NZE}_i(2030) = 39.91 \times (1 - 30\%) = 27.94
 \end{equation}\]</div>
 <p>Let’s plot it in Python to have a sense of the duration concept:</p>
@@ -545,18 +546,18 @@ CE^{NZE}_i(2030) = 39.91 \times (1 - 30\%) = 27.94
 <section id="gap">
 <h3>Gap<a class="headerlink" href="#gap" title="Permalink to this headline">#</a></h3>
 <p>The gap measure corresponds to the expected distance between the estimated carbon emissions and the NZE scenario:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-cf4f52fa-afd0-4fd6-b6bc-41597a096092">
-<span class="eqno">(15)<a class="headerlink" href="#equation-cf4f52fa-afd0-4fd6-b6bc-41597a096092" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-76f75031-2c9b-4c9c-8ae0-9cd71c179ed2">
+<span class="eqno">(15)<a class="headerlink" href="#equation-76f75031-2c9b-4c9c-8ae0-9cd71c179ed2" title="Permalink to this equation">#</a></span>\[\begin{equation}
 Gap_i(t^*) = \hat{CE}_i(t^*) - CE^{NZE}_i(t^*)
 \end{equation}\]</div>
 <p>Again, we can use the target scenario:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-50a506d3-eac0-4132-abb2-f3596b2f611b">
-<span class="eqno">(16)<a class="headerlink" href="#equation-50a506d3-eac0-4132-abb2-f3596b2f611b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-61a415c4-fe6a-46ed-92bc-2106bfc8f9b6">
+<span class="eqno">(16)<a class="headerlink" href="#equation-61a415c4-fe6a-46ed-92bc-2106bfc8f9b6" title="Permalink to this equation">#</a></span>\[\begin{equation}
 Gap_i^{Target}(t^*) = CE_i^{Target}(t^*) - CE^{NZE}_i(t^*)
 \end{equation}\]</div>
 <p>or the trend model:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-64fb5d40-61b2-49dd-b031-ff0c9afbbacc">
-<span class="eqno">(17)<a class="headerlink" href="#equation-64fb5d40-61b2-49dd-b031-ff0c9afbbacc" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-42f95aa1-3d5c-4847-bead-44123c1945c6">
+<span class="eqno">(17)<a class="headerlink" href="#equation-42f95aa1-3d5c-4847-bead-44123c1945c6" title="Permalink to this equation">#</a></span>\[\begin{equation}
 Gap^{Trend}_i(t^*) = CE^{Trend}_i(t^*) - CE^{NZE}_i(t^*)
 \end{equation}\]</div>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example page 14</span>
@@ -566,33 +567,33 @@ Gap^{Trend}_i(t^*) = CE^{Trend}_i(t^*) - CE^{NZE}_i(t^*)
 <section id="slope">
 <h3>Slope<a class="headerlink" href="#slope" title="Permalink to this headline">#</a></h3>
 <p>The slope corresponds to the value of <span class="math notranslate nohighlight">\(\hat{\beta}_{i,1}\)</span> such that the gap is closed, meaning that <span class="math notranslate nohighlight">\(Gap_i^{Trend}(t^*) = 0\)</span>. We then have:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-06a9ce9a-5b56-4d09-b0ae-4d3327f7caaf">
-<span class="eqno">(18)<a class="headerlink" href="#equation-06a9ce9a-5b56-4d09-b0ae-4d3327f7caaf" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4cecc75a-eceb-4aa3-a484-e9a1a817b6bd">
+<span class="eqno">(18)<a class="headerlink" href="#equation-4cecc75a-eceb-4aa3-a484-e9a1a817b6bd" title="Permalink to this equation">#</a></span>\[\begin{equation}
 Gap^{Trend}_i(t^*) = 0 \Leftrightarrow
 \hat{\beta}_{i,0} + \hat{\beta}_{i,1}t^* - CE^{NZE}_i(t^*) = 0
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-fa797328-fe03-4eba-b899-1ed4800a8414">
-<span class="eqno">(19)<a class="headerlink" href="#equation-fa797328-fe03-4eba-b899-1ed4800a8414" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c26101e5-2b5b-427f-afca-697ac9425a9d">
+<span class="eqno">(19)<a class="headerlink" href="#equation-c26101e5-2b5b-427f-afca-697ac9425a9d" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \Leftrightarrow \hat{\beta}_{i,1} = \frac{CE^{NZE}_i(t^*) - \hat{\beta}_{i,0}}{t^*}
 \end{equation}\]</div>
 <p>However, <span class="math notranslate nohighlight">\(\hat{\beta}_{i,1}\)</span> depends on the intercept of the trend model in the previous equation. We need further transformations. We assume that <span class="math notranslate nohighlight">\(\hat{CE}_i(t_0) = CE_i(t_0)\)</span> and we use the current date <span class="math notranslate nohighlight">\(t_0\)</span> as the pivot date. We then have:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a98f2eec-49ab-4740-ad67-0e04606ef9a1">
-<span class="eqno">(20)<a class="headerlink" href="#equation-a98f2eec-49ab-4740-ad67-0e04606ef9a1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a05b725c-5b58-44f4-baf8-1716c4f9b82f">
+<span class="eqno">(20)<a class="headerlink" href="#equation-a05b725c-5b58-44f4-baf8-1716c4f9b82f" title="Permalink to this equation">#</a></span>\[\begin{equation}
 Gap_i^{Trend}(t^*) = 0 \Leftrightarrow \hat{\beta}^{'}_{i,0} + \hat{\beta}_{i,1}(t^* - t_0) - CE^{NZE}_i(t^*) = 0
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-5ac92f06-8115-452b-935a-91d851cf4e5d">
-<span class="eqno">(21)<a class="headerlink" href="#equation-5ac92f06-8115-452b-935a-91d851cf4e5d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-9bfbdcda-2b6f-48a7-9c2f-9664983abdde">
+<span class="eqno">(21)<a class="headerlink" href="#equation-9bfbdcda-2b6f-48a7-9c2f-9664983abdde" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \Leftrightarrow \hat{\beta}_{i,1} = \frac{CE^{NZE}_i(t^*) - CE_i(t_0)}{t^* - t_0}
 \end{equation}\]</div>
 <p>Because we have <span class="math notranslate nohighlight">\(\hat{\beta}^{'}_{i,0} = \hat{CE}_i(t_0)\)</span> and <span class="math notranslate nohighlight">\(\hat{CE}_i(t_0) = CE_i(t_0)\)</span>, we can deduce that the slope to close the gap is equal to:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f7be6425-05ce-4f1e-9246-2698ebc76a23">
-<span class="eqno">(22)<a class="headerlink" href="#equation-f7be6425-05ce-4f1e-9246-2698ebc76a23" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-60fcbe97-e455-473c-a46d-6d2c6a76a1ec">
+<span class="eqno">(22)<a class="headerlink" href="#equation-60fcbe97-e455-473c-a46d-6d2c6a76a1ec" title="Permalink to this equation">#</a></span>\[\begin{equation}
 Slope_i(t^*) = \frac{CE^{NZE}_i(t^*) - CE_i(t_0)}{t^* - t_0}
 \end{equation}\]</div>
 <p>We can expect the slope to be generally negative because the gap is negative if the NZE scenario has not already been reached. The slope is a decreasing function of the gap: the higher the gap, the steeper the slope.</p>
 <p>Finally, we can normalize this slope metric using the current slope <span class="math notranslate nohighlight">\(\hat{\beta}_{i,1}\)</span> of the trend model, in order to obtain the slope multiplier:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c47ad1dd-b85c-49fd-8257-fa31b9a851d6">
-<span class="eqno">(23)<a class="headerlink" href="#equation-c47ad1dd-b85c-49fd-8257-fa31b9a851d6" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-cdb34c95-31c7-402d-82b1-a0eb0408732d">
+<span class="eqno">(23)<a class="headerlink" href="#equation-cdb34c95-31c7-402d-82b1-a0eb0408732d" title="Permalink to this equation">#</a></span>\[\begin{equation}
 m_i^{Slope} = \frac{Slope_i(t^*)}{\hat{\beta}_{i,1}}
 \end{equation}\]</div>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example 5 from page 15</span>
@@ -602,8 +603,8 @@ m_i^{Slope} = \frac{Slope_i(t^*)}{\hat{\beta}_{i,1}}
 <section id="budget">
 <h3>Budget<a class="headerlink" href="#budget" title="Permalink to this headline">#</a></h3>
 <p>The budget metric corresponds to the carbon budget between the date <span class="math notranslate nohighlight">\(t_0\)</span> and the NZE date <span class="math notranslate nohighlight">\(t^*\)</span>, such as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8b340a20-8f07-4b4f-bc3d-5ffa25b5d492">
-<span class="eqno">(24)<a class="headerlink" href="#equation-8b340a20-8f07-4b4f-bc3d-5ffa25b5d492" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-3abc80ee-57ed-4a16-a891-3fbe5b7499ad">
+<span class="eqno">(24)<a class="headerlink" href="#equation-3abc80ee-57ed-4a16-a891-3fbe5b7499ad" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CB_i(t_0, t^*) = \int^{t^*}_{t_0}(\hat{CE}_i(s) - CE^{NZE}_i(t^*))ds
 \end{equation}\]</div>
 <p>As before, we can compute the budget metric either with respect to the target trajectory or the trend.</p>
@@ -618,62 +619,62 @@ CB_i(t_0, t^*) = \int^{t^*}_{t_0}(\hat{CE}_i(s) - CE^{NZE}_i(t^*))ds
 <section id="time-contribution">
 <h3>Time Contribution<a class="headerlink" href="#time-contribution" title="Permalink to this headline">#</a></h3>
 <p>We consider <span class="math notranslate nohighlight">\(t_1 &gt; t_0\)</span> a future reporting date. We have:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a887ecf7-1115-4019-9bb3-7c18f46bdab6">
-<span class="eqno">(25)<a class="headerlink" href="#equation-a887ecf7-1115-4019-9bb3-7c18f46bdab6" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-09c9195e-d40c-4bdc-af3f-c81c715149bc">
+<span class="eqno">(25)<a class="headerlink" href="#equation-09c9195e-d40c-4bdc-af3f-c81c715149bc" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CB_i(t_0, t^*) = \int^{t_1}_{t_0}(\hat{CE}_i(s) - CE^{NZE}_i(t^*))ds + 
 \int^{t^*}_{t_1}(\hat{CE}_i(s) - CE^{NZE}_i(t^*))ds 
 \end{equation}\]</div>
 <p>When the current date becomes <span class="math notranslate nohighlight">\(t_1\)</span>, we have:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-cd239472-aa7f-460b-a8d4-6d8014d20371">
-<span class="eqno">(26)<a class="headerlink" href="#equation-cd239472-aa7f-460b-a8d4-6d8014d20371" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-51d56408-b251-408d-97ed-aa1dc49da60a">
+<span class="eqno">(26)<a class="headerlink" href="#equation-51d56408-b251-408d-97ed-aa1dc49da60a" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CB_i(t_0,t^*) = CB_i(t_0,t_1) + CB_i(t_1,t^*)
 \end{equation}\]</div>
 <p>where the first component <span class="math notranslate nohighlight">\(CB_i(t_0,t_1)\)</span> corresponds to the observed / realized carbon emissions and the component <span class="math notranslate nohighlight">\(CB_i(t_1, t^*)\)</span> corresponds to the estimated future carbon emissions. This last component corresponds to the mathematical expectation of future carbon emissions.
 Having a new reported value <span class="math notranslate nohighlight">\(CE_i(t_1)\)</span> of carbon emissions can change the expectations:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-73f577f9-d28d-4463-b39d-7fdcacbc7ef0">
-<span class="eqno">(27)<a class="headerlink" href="#equation-73f577f9-d28d-4463-b39d-7fdcacbc7ef0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-1a2fcab9-d418-486d-9d5b-1a6a40e8b07b">
+<span class="eqno">(27)<a class="headerlink" href="#equation-1a2fcab9-d418-486d-9d5b-1a6a40e8b07b" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathbb{E}[CE_i(t)|F_{t_0}] \neq \mathbb{E}[CE_i(t)|F_{t_1}]
 \end{equation}\]</div>
 <p>for <span class="math notranslate nohighlight">\(t \geq t_1\)</span>.</p>
 <p>For example, <span class="math notranslate nohighlight">\(CE_i(t_1)\)</span> can change the carbon trend <span class="math notranslate nohighlight">\(CE_i^{Trend}(t)\)</span> because of the next estimated intercept or slope. Or the issuer can announce new carbon targets at ime <span class="math notranslate nohighlight">\(t_1\)</span> and the estimates <span class="math notranslate nohighlight">\(CE_i^{Target}(t)\)</span> will be different.</p>
 <p>To perform the corresponding dynamic analysis, <span class="math notranslate nohighlight">\(CB_i(t_0, t_1, t^*)\)</span> is defined as the carbon budget between the starting date <span class="math notranslate nohighlight">\(t_0\)</span> and the target date <span class="math notranslate nohighlight">\(t^*\)</span>, which is evaluated at the current date <span class="math notranslate nohighlight">\(t_1\)</span>.</p>
 <p>We rewrite the previous decomposition of the carbon budget as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-14963dd1-b047-4960-8d8b-8c84afd31f04">
-<span class="eqno">(28)<a class="headerlink" href="#equation-14963dd1-b047-4960-8d8b-8c84afd31f04" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-efce143a-8691-4bc6-8a37-b74723e578c4">
+<span class="eqno">(28)<a class="headerlink" href="#equation-efce143a-8691-4bc6-8a37-b74723e578c4" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CB_i(t_0,t,t^*) = CB_i(t_0,t_1,t_1) + CB_i(t_1,t_1,t^*)
 \end{equation}\]</div>
 <p>Le Guenedal et al. (2022) defines the contribution <span class="math notranslate nohighlight">\(TC_i(t1 |t_0, t^*)\)</span> of the new information observed at the date <span class="math notranslate nohighlight">\(t_1\)</span>, satisfying:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ab294f98-88e7-467e-b382-f88710c8a1a9">
-<span class="eqno">(29)<a class="headerlink" href="#equation-ab294f98-88e7-467e-b382-f88710c8a1a9" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-6e571318-5708-46e5-babc-e95494d38c58">
+<span class="eqno">(29)<a class="headerlink" href="#equation-6e571318-5708-46e5-babc-e95494d38c58" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CB_i(t_0, t_1, t^*) = CB_i(t_0,t_0,t^*) + TC_i(t_1 | t_0, t^*)
 \end{equation}\]</div>
 <p>If we have <span class="math notranslate nohighlight">\(TC_i(t_1 |t_0, t^*) \leq 0\)</span>, the new information allows the carbon budget to be reduced. If <span class="math notranslate nohighlight">\(TC_i(t_1 |t_0, t^*) &gt; 0\)</span>, it has a positive contribution and increases the carbon budget. It is called the time contribution of year <span class="math notranslate nohighlight">\(t_1\)</span>.</p>
 <p>We have:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-420cc4bd-0dd1-41ab-af1c-9fd120f32166">
-<span class="eqno">(30)<a class="headerlink" href="#equation-420cc4bd-0dd1-41ab-af1c-9fd120f32166" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-5b45a8e2-5560-4739-b48d-6b89f88ef1fd">
+<span class="eqno">(30)<a class="headerlink" href="#equation-5b45a8e2-5560-4739-b48d-6b89f88ef1fd" title="Permalink to this equation">#</a></span>\[\begin{equation}
 TC_i(t_1 | t_0, t^*) = CB_i(t_0,t_1, t^*) - CB_i(t_0,t_0,t^*)
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-bee182ad-73e3-43bf-8de6-eddafd130f8f">
-<span class="eqno">(31)<a class="headerlink" href="#equation-bee182ad-73e3-43bf-8de6-eddafd130f8f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ea029f28-0b2c-48d0-9436-3e6eb71272b6">
+<span class="eqno">(31)<a class="headerlink" href="#equation-ea029f28-0b2c-48d0-9436-3e6eb71272b6" title="Permalink to this equation">#</a></span>\[\begin{equation}
 = \int^{t^*}_{t_0}(\mathbb{E}[CE_i(s)|F_{t_1}] - CE^{NZE}_i(t^*))ds - \int^{t^*}_{t_0}(\mathbb{E}[CE_i(s)|F_{t_0}] - CE^{NZE}_i(t^*))ds
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-c05d9ec4-856a-4910-bfb2-16ab4e5696ab">
-<span class="eqno">(32)<a class="headerlink" href="#equation-c05d9ec4-856a-4910-bfb2-16ab4e5696ab" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-55590810-2725-412e-9495-3d9e2216daef">
+<span class="eqno">(32)<a class="headerlink" href="#equation-55590810-2725-412e-9495-3d9e2216daef" title="Permalink to this equation">#</a></span>\[\begin{equation}
 = \int^{t^*}_{t_0}(\mathbb{E}[CE_i(s) |F_{t_1}] - \mathbb{E}[CE_i(s)|F_{t_0}])ds
 \end{equation}\]</div>
 <p>The time contribution is then made up of two components:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a9bd9736-1827-4d59-a746-c24529cdad0f">
-<span class="eqno">(33)<a class="headerlink" href="#equation-a9bd9736-1827-4d59-a746-c24529cdad0f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-093c5202-a61d-4bda-8427-b756e2f8960c">
+<span class="eqno">(33)<a class="headerlink" href="#equation-093c5202-a61d-4bda-8427-b756e2f8960c" title="Permalink to this equation">#</a></span>\[\begin{equation}
 TC_i(t_1 |t_0, t^*) = TC^{error}_i(t_1 |t_0, t^*) + TC_i^{revision}(t_1 |t_0, t^*)
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(TC^{error}_i(t_1 |t_0, t^*)\)</span> measures the forecast error between the observed trajectory and the estimate produced at time <span class="math notranslate nohighlight">\(t_0\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-18e55b2f-a38a-4c82-b0d7-52aa73a72461">
-<span class="eqno">(34)<a class="headerlink" href="#equation-18e55b2f-a38a-4c82-b0d7-52aa73a72461" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e83089b6-29e7-45af-8cb2-c2d3a07f42db">
+<span class="eqno">(34)<a class="headerlink" href="#equation-e83089b6-29e7-45af-8cb2-c2d3a07f42db" title="Permalink to this equation">#</a></span>\[\begin{equation}
 TC_i^{error}(t_1 | t_0, t^*) = \int^{t_1}_{t_0}(CE_i(s) - \mathbb{E}[CE_i(s)|F_{t_0}])ds
 \end{equation}\]</div>
 <p>and <span class="math notranslate nohighlight">\(TC^{revision}_i(t_1 |t_0, t^*)\)</span> corresponds to the forecast revision:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6c0317f2-fb2c-4c35-8108-38c13d484a0e">
-<span class="eqno">(35)<a class="headerlink" href="#equation-6c0317f2-fb2c-4c35-8108-38c13d484a0e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0ac523f0-17fd-4159-9daf-d3bd78ad0988">
+<span class="eqno">(35)<a class="headerlink" href="#equation-0ac523f0-17fd-4159-9daf-d3bd78ad0988" title="Permalink to this equation">#</a></span>\[\begin{equation}
 TC_i^{revision}(t_1 | t_0, t^*) = \int^{t^*}_{t_1}(\mathbb{E}[CE_i(s) |F_{t_1}] - \mathbb{E}[CE_i(s)|F_{t_0}])ds
 \end{equation}\]</div>
 <p>By construction:</p>
@@ -682,21 +683,21 @@ TC_i^{revision}(t_1 | t_0, t^*) = \int^{t^*}_{t_1}(\mathbb{E}[CE_i(s) |F_{t_1}] 
 <li><p><span class="math notranslate nohighlight">\(TC^{error}_i(t^*|t_0,t^*) = TC_i(t^* |t_0, t^*)\)</span> and <span class="math notranslate nohighlight">\(TC^{revision}_i(t^* |t_0,t^*) = 0\)</span> at the target date <span class="math notranslate nohighlight">\(t^*\)</span></p></li>
 </ul>
 <p>Finally, we can normalize the previous quantities by current carbon emissions and the corresponding time period:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f072b1fd-ecfd-476a-8052-e2490e72c7c9">
-<span class="eqno">(36)<a class="headerlink" href="#equation-f072b1fd-ecfd-476a-8052-e2490e72c7c9" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a08c4c99-3382-4e71-9c25-f46b1b45a812">
+<span class="eqno">(36)<a class="headerlink" href="#equation-a08c4c99-3382-4e71-9c25-f46b1b45a812" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \bar{TC}_i(t_1 |t_0, t^*) = \frac{TC_i(t_1|t_0,t^*)}{(t^* - t_0) \cdot CE_i(t_0)}
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-8ada053b-c526-4319-9345-c5e852223ebf">
-<span class="eqno">(37)<a class="headerlink" href="#equation-8ada053b-c526-4319-9345-c5e852223ebf" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4217b0a9-ee0c-47a4-9639-332c17cd9cd9">
+<span class="eqno">(37)<a class="headerlink" href="#equation-4217b0a9-ee0c-47a4-9639-332c17cd9cd9" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \bar{TC}^{error}_i(t_1 |t_0, t^*) = \frac{TC^{error}_i(t_1 |t_0, t^*)}{(t_1 - t_0) \cdot CE_i(t_0)}
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-8e1eede0-f41e-462b-9584-7e6be988cbb1">
-<span class="eqno">(38)<a class="headerlink" href="#equation-8e1eede0-f41e-462b-9584-7e6be988cbb1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-850ecf37-47f0-4ec7-9fee-bbbb598d3fba">
+<span class="eqno">(38)<a class="headerlink" href="#equation-850ecf37-47f0-4ec7-9fee-bbbb598d3fba" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \bar{TC}^{revision}_i(t_1 |t_0, t^*) = \frac{TC^{revision}_i(t_1 |t_0, t^*)}{(t^*-t_1) _cdot CE_i(t_0)}
 \end{equation}\]</div>
 <p>And we have the following breakdown:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-92d2ab7f-aa2e-4117-b152-66134a3ad6a9">
-<span class="eqno">(39)<a class="headerlink" href="#equation-92d2ab7f-aa2e-4117-b152-66134a3ad6a9" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c98b2de3-140e-4cab-9cfb-fe3eef74cd11">
+<span class="eqno">(39)<a class="headerlink" href="#equation-c98b2de3-140e-4cab-9cfb-fe3eef74cd11" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \bar{TC}_i(t_1 | t_0, t^*) = \omega_0 \cdot \bar{TC}^{error}_i(t_1 |t_0, t^*) + \omega_1 \cdot \bar{TC}^{revision}_i (t_1 |t_0, t^*)
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\omega_0 = \frac{t_1 - t_0}{t^* - t_0}\)</span> and <span class="math notranslate nohighlight">\(\omega_1 = \frac{t^* - t_1}{t^* - t_0}\)</span>.</p>
@@ -718,18 +719,18 @@ TC_i^{revision}(t_1 | t_0, t^*) = \int^{t^*}_{t_1}(\mathbb{E}[CE_i(s) |F_{t_1}] 
 <p>In the previous sections, we’ve seen the importance of the slope change <span class="math notranslate nohighlight">\(\Delta \hat{\beta}_{i,1}(t_1,t_2) = \hat{\beta}_{i,1}(t_2) - \hat{\beta}_{i,1}(t_1)\)</span> between the dates <span class="math notranslate nohighlight">\(t_1\)</span> and <span class="math notranslate nohighlight">\(t_2\)</span>.</p>
 <p>In this section, we cover the velocity indicator proposed by Le Guenedal et al. (2022), analyzing the slope change.</p>
 <p>Le Guenedal et al. (2022) define the velocity metric <span class="math notranslate nohighlight">\(v_i(t_1,t_2)\)</span> as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-50d121d3-374f-49ed-8c78-22df8ac7d696">
-<span class="eqno">(40)<a class="headerlink" href="#equation-50d121d3-374f-49ed-8c78-22df8ac7d696" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-abaad1df-241f-4025-a65d-dd86eb9726b3">
+<span class="eqno">(40)<a class="headerlink" href="#equation-abaad1df-241f-4025-a65d-dd86eb9726b3" title="Permalink to this equation">#</a></span>\[\begin{equation}
 v_i(t_1,t_2) := \frac{\Delta \hat{\beta}_{i,1}(t_1, t_2)}{t_2 - t_1}
 \end{equation}\]</div>
 <p>It is expressed in MtCO2e. Le Guenedal et al. (2022) also define the <span class="math notranslate nohighlight">\(h\)</span>-step velocity as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3aa6a967-af08-4e8a-89e2-d4ad46258468">
-<span class="eqno">(41)<a class="headerlink" href="#equation-3aa6a967-af08-4e8a-89e2-d4ad46258468" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0a8a6f46-00ed-48af-8e5b-bf6c8b709556">
+<span class="eqno">(41)<a class="headerlink" href="#equation-0a8a6f46-00ed-48af-8e5b-bf6c8b709556" title="Permalink to this equation">#</a></span>\[\begin{equation}
 v_i^{(h)}(t) = v_i(t-h,t)
 \end{equation}\]</div>
 <p>For example, the one-step velocity measures the change of the slope by adding a new observation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-dd4be324-1ac1-47c8-89db-e39afa9abce6">
-<span class="eqno">(42)<a class="headerlink" href="#equation-dd4be324-1ac1-47c8-89db-e39afa9abce6" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d1898c41-5a01-4517-90be-4c8f094d2c84">
+<span class="eqno">(42)<a class="headerlink" href="#equation-d1898c41-5a01-4517-90be-4c8f094d2c84" title="Permalink to this equation">#</a></span>\[\begin{equation}
 v_i^{(1)}(t) = \hat{\beta}_{i,1}(t) - \hat{\beta}_{i,1}(t - 1)
 \end{equation}\]</div>
 <p>The velocity measures the unit variation of the trend slope. If a net zero emissions commitment implies a negative trend <span class="math notranslate nohighlight">\(\hat{\beta}_{i,1}(t) &lt; 0\)</span>, it can take many years for a company to change the sign of the trend slope in case of bad track record.</p>
@@ -739,37 +740,37 @@ v_i^{(1)}(t) = \hat{\beta}_{i,1}(t) - \hat{\beta}_{i,1}(t - 1)
 </div>
 <p>Based on this definition of the velocity metric, Le Guenedal et al. (2022) proposed a zero-velocity scenario.</p>
 <p>It starts from the fact that:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1f784661-4075-4ff4-a305-aed2f8b9f779">
-<span class="eqno">(43)<a class="headerlink" href="#equation-1f784661-4075-4ff4-a305-aed2f8b9f779" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-814bb1ab-b96a-4563-b3e2-a9cea6214d8f">
+<span class="eqno">(43)<a class="headerlink" href="#equation-814bb1ab-b96a-4563-b3e2-a9cea6214d8f" title="Permalink to this equation">#</a></span>\[\begin{equation}
 v_i^{(1)}(t+1) = \hat{\beta}_{i,1}(t+1) - \hat{\beta}_{i,1}(t)
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-ada561eb-4598-4dd1-a25a-a84d383afb20">
-<span class="eqno">(44)<a class="headerlink" href="#equation-ada561eb-4598-4dd1-a25a-a84d383afb20" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-426364fd-7085-4bb4-a6f0-d55c73db959e">
+<span class="eqno">(44)<a class="headerlink" href="#equation-426364fd-7085-4bb4-a6f0-d55c73db959e" title="Permalink to this equation">#</a></span>\[\begin{equation}
 = \phi(n)(12(n+2) \cdot \hat{CE}_i(t) - 18(n+1) \cdot \tilde{CE}_i(t) + 6(n - 1) \cdot CE_i(t+1))
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(n\)</span> is the number of available observations until the date <span class="math notranslate nohighlight">\(t\)</span>, and:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e3d8c7b2-95ad-42fa-91b3-79b1be0bcbce">
-<span class="eqno">(45)<a class="headerlink" href="#equation-e3d8c7b2-95ad-42fa-91b3-79b1be0bcbce" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e175e8bd-9d9c-4d4a-a83d-d9594731776d">
+<span class="eqno">(45)<a class="headerlink" href="#equation-e175e8bd-9d9c-4d4a-a83d-d9594731776d" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \phi(n) = \frac{1}{(n-1)(n+1)(n+2)}
 \end{equation}\]</div>
 <p>We thus have:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6fbbfbc2-03fd-4cf5-bd57-82865f6c649e">
-<span class="eqno">(46)<a class="headerlink" href="#equation-6fbbfbc2-03fd-4cf5-bd57-82865f6c649e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-7ceb9c43-a33b-49d8-b501-24caf5e209fc">
+<span class="eqno">(46)<a class="headerlink" href="#equation-7ceb9c43-a33b-49d8-b501-24caf5e209fc" title="Permalink to this equation">#</a></span>\[\begin{equation}
 v^{(1)}_i(t+1) \leq 0 \Leftrightarrow CE_i(t+1) \leq ZV_i^{1}(t+1)
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(ZV_i^{1}(t+1)\)</span> corresponds to the value of carbon emissions to obtain a zero velocity. It is computed as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ed689b6f-2e9e-4e99-b506-12ffe5310e8c">
-<span class="eqno">(47)<a class="headerlink" href="#equation-ed689b6f-2e9e-4e99-b506-12ffe5310e8c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-3f16cd7d-ef67-47ca-ac53-3853d6490082">
+<span class="eqno">(47)<a class="headerlink" href="#equation-3f16cd7d-ef67-47ca-ac53-3853d6490082" title="Permalink to this equation">#</a></span>\[\begin{equation}
 ZV_i^{(1)}(t+1) = \frac{18(n+1) \cdot \tilde{CE}_i(t) - 12(n + 2) \cdot \bar{CE}_i(t)}{6(n-1)}
 \end{equation}\]</div>
 <p>In the case where <span class="math notranslate nohighlight">\(CE_i(s) = CE_i\)</span> for all <span class="math notranslate nohighlight">\(s \leq t\)</span>, we have:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-def2cffd-2792-479e-8a75-b90d71ff88b7">
-<span class="eqno">(48)<a class="headerlink" href="#equation-def2cffd-2792-479e-8a75-b90d71ff88b7" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-cadcc4a6-c351-45dd-9c3b-9560cfecc5c3">
+<span class="eqno">(48)<a class="headerlink" href="#equation-cadcc4a6-c351-45dd-9c3b-9560cfecc5c3" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \tilde{CE}_i(t) = \bar{CE}_i(t) = CE_i
 \end{equation}\]</div>
 <p>and:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9482e27c-fbe4-4b56-beb5-bf86a9784014">
-<span class="eqno">(49)<a class="headerlink" href="#equation-9482e27c-fbe4-4b56-beb5-bf86a9784014" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-cf117ab3-3f6b-4a0a-b956-08274bf09d1d">
+<span class="eqno">(49)<a class="headerlink" href="#equation-cf117ab3-3f6b-4a0a-b956-08274bf09d1d" title="Permalink to this equation">#</a></span>\[\begin{equation}
 ZV_i^{(1)}(t+1) = CE_i
 \end{equation}\]</div>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Table 13 page 22</span>
@@ -782,33 +783,33 @@ ZV_i^{(1)}(t+1) = CE_i
 <p>To recall, the gap is the expected distance between the estimated carbon emissions and the NZE scenario. The burn-out scenario is then the value of the carbon emissions next year such that the gap is equal to zero, such as the NZE scenario will be achieved on average.</p>
 <p>We have <span class="math notranslate nohighlight">\(\mathfrak{R}^{Target}_i(t+1, t^*)\)</span> the reduction rate between the date <span class="math notranslate nohighlight">\(t+1\)</span> and the NZE date <span class="math notranslate nohighlight">\(t^*\)</span> when considering the issuer’s carbon targets.</p>
 <p>We have:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-21b7c2f5-8ec2-4515-ac6b-06f30cd056a2">
-<span class="eqno">(50)<a class="headerlink" href="#equation-21b7c2f5-8ec2-4515-ac6b-06f30cd056a2" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ba24587a-105c-40b9-9423-c002d1a135fc">
+<span class="eqno">(50)<a class="headerlink" href="#equation-ba24587a-105c-40b9-9423-c002d1a135fc" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \hat{CE}_i(t^*) = (1 - \mathfrak{R}^{Target}_i(t+1, t^*)) \cdot CE_i(t+1)
 \end{equation}\]</div>
 <p>The burn-out scenario satisfies the equation <span class="math notranslate nohighlight">\(\hat{CE}_i(t^*) = CE^{NZE}_i(t^*)\)</span>, then <span class="math notranslate nohighlight">\(BO^{Target}_i(t+1, CE^{NZE}_i(t^*))\)</span> the burn-out scenario is defined as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0a41eca6-17e2-42ad-89f3-a8c68d7753d3">
-<span class="eqno">(51)<a class="headerlink" href="#equation-0a41eca6-17e2-42ad-89f3-a8c68d7753d3" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f7db12b1-5aba-4265-8a02-db9558b4dc62">
+<span class="eqno">(51)<a class="headerlink" href="#equation-f7db12b1-5aba-4265-8a02-db9558b4dc62" title="Permalink to this equation">#</a></span>\[\begin{equation}
 BO^{Target}_i(t+1, CE^{NZE}_i(t^*)) = \frac{CE^{NZE}_i(t^*)}{1 - \mathfrak{R}^{Target}_i(t+1, t^*)}
 \end{equation}\]</div>
 <p>Considering the linear trend model, we have:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-847f10f2-09b0-41a2-bf1b-ace361973497">
-<span class="eqno">(52)<a class="headerlink" href="#equation-847f10f2-09b0-41a2-bf1b-ace361973497" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-566a5c98-5163-4e32-b88f-4aab810aff02">
+<span class="eqno">(52)<a class="headerlink" href="#equation-566a5c98-5163-4e32-b88f-4aab810aff02" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \hat{CE}_i(t^*) = \hat{\beta}_{i,0}(t+1) + \hat{\beta}_{i,1}(t+1) \cdot t^*
 \end{equation}\]</div>
 <p>where:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0980a085-62de-407b-a69f-ce4715053eff">
-<span class="eqno">(53)<a class="headerlink" href="#equation-0980a085-62de-407b-a69f-ce4715053eff" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-94f64b41-0b3f-41c5-ae6e-e10345dde985">
+<span class="eqno">(53)<a class="headerlink" href="#equation-94f64b41-0b3f-41c5-ae6e-e10345dde985" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \hat{\beta}_{i,0}(t+1) = \hat{\beta}_{i,0}(t) + \Delta \hat{\beta}_{i,0}(t, t+1)
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-e5a0d78a-ba78-48e3-8542-575bcaae7537">
-<span class="eqno">(54)<a class="headerlink" href="#equation-e5a0d78a-ba78-48e3-8542-575bcaae7537" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d4ab1a5c-3165-4945-a6b2-16ef5132d723">
+<span class="eqno">(54)<a class="headerlink" href="#equation-d4ab1a5c-3165-4945-a6b2-16ef5132d723" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \hat{\beta}_{i,1}(t+1) = \hat{\beta}_{i,1}(t) + \Delta \hat{\beta}_{i,1}(t,t+1)
 \end{equation}\]</div>
 <p>and where <span class="math notranslate nohighlight">\(\Delta \hat{\beta}_{i,0}(t,t+1)\)</span> and <span class="math notranslate nohighlight">\(\Delta \hat{\beta}_{i,1}(t,t+1)\)</span> are the variations of the intercept and the slope due to new carbon emissions <span class="math notranslate nohighlight">\(CE_i(t+1)\)</span>.</p>
 <p>We finally have:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5411e02e-32ae-4b7f-8686-f5e0f15ed3cd">
-<span class="eqno">(55)<a class="headerlink" href="#equation-5411e02e-32ae-4b7f-8686-f5e0f15ed3cd" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-5e3797ab-80d6-4a4b-9b7a-30689b172f75">
+<span class="eqno">(55)<a class="headerlink" href="#equation-5e3797ab-80d6-4a4b-9b7a-30689b172f75" title="Permalink to this equation">#</a></span>\[\begin{equation}
 BO^{Trend}_i(t+1, CE^{NZE}_i(t^*)) = 
 \{CE_i(t+1):\hat{\beta}_{i,0}(t+1) + \hat{\beta}_{i,1}(t+1) \cdot t^* = CE^{NZE}_i(t^*)\}
 \end{equation}\]</div>
@@ -838,11 +839,11 @@ BO^{Trend}_i(t+1, CE^{NZE}_i(t^*)) =
       </div>
     </a>
     <a class="right-next"
-       href="green_taxonomy.html"
+       href="../references.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Transition Metrics</p>
+        <p class="prev-next-title">References</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
