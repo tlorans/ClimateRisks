@@ -5,7 +5,7 @@ We will follow the same systematic approach:
 1. Define the value function based on the economic environment
 2. Use recursive methods to determine the Euler equations of our system
 
-## Robison Crusoe Economy
+## Neoclassical Growth Model
 
 ### The Value Function
 

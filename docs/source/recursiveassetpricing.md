@@ -1,7 +1,7 @@
 # Recursive Methods for Asset Pricing
 
 
-## Lucas Tree
+## Lucas Asset Pricing
 
 ### The Value Function
 
