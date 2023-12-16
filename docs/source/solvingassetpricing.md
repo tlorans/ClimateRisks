@@ -1,1 +1,1 @@
-# Solving for the Dynamics of Asset Pricing
+# Dynamics for the Long Run Risks Model

@@ -1,4 +1,4 @@
-# Recursive Methods for RBC Models
+# Neoclassical Growth Model
 
 We will follow the same systematic approach:
 

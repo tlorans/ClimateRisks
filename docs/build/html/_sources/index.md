@@ -3,7 +3,7 @@
 % You can adapt this file completely to your liking, but it should at least
 % contain the root `toctree` directive.
 
-# ESG Risk Factor
+# Dynamic Asset Pricing Equilibrium with SymPy
 
 
 ```{warning}
@@ -14,16 +14,19 @@ This course is under heavy development
 :caption: 'Contents:'
 :maxdepth: 2
 
-dynamicesgequilibrium
-recursivemethods
-recursiveassetpricing
-equilibriumconditionsesg
+dynamicequilibrium
+basicsrecursivemethods
+neoclassicalgrowth
+longrunrisks
+basicsloglinearization
 loglinearization
 loglinearizationassetpricing
-loglinearizedESG
+basicsdynamics
 solvingdynamic
 solvingassetpricing
-esgfactor
+empirics
 statespace
+estimatingneoclassicalgrowth
+estimatinglongrunrisks
 references
 ```

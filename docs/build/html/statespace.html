@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>RBC Models as State Space Model &#8212; Climate Risks in Finance 0.1 documentation</title>
+    <title>Basics Intuitions for the Hybrid Model &#8212; Climate Risks in Finance 0.1 documentation</title>
   
   
   
@@ -45,6 +45,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'statespace';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="References" href="references.html" />
+    <link rel="prev" title="Part 2: Empirics" href="empirics.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -122,15 +124,17 @@
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="dynamicesgequilibrium.html">Part 1: Dynamic ESG Equilibrium</a></li>
-<li class="toctree-l1"><a class="reference internal" href="recursivemethods.html">Recursive Methods for RBC Models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="recursiveassetpricing.html">Recursive Methods for Asset Pricing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="equilibriumconditionsesg.html">Dynamic ESG Equilibrium Conditions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="loglinearization.html">Log-Linearization Technics for RBC</a></li>
-<li class="toctree-l1"><a class="reference internal" href="loglinearizationassetpricing.html">Log-Linearization for Asset Pricing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="loglinearizedESG.html">Log-Linearized ESG Model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="esgfactor.html">Part 2: Estimating ESG Risk Factor</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="basicsrecursivemethods.html">Basics Intuition for the Recursive Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="neoclassicalgrowth.html">Neoclassical Growth Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="longrunrisks.html">Long Run Risks Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basicsloglinearization.html">Basics Intuitions for Log Linearization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="loglinearization.html">Log-Linearized Neoclassical Growth Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="loglinearizationassetpricing.html">Log-Linearized Long Run Risks Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solvingdynamic.html">Dynamics for the Neoclassical Growth Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solvingassetpricing.html">Dynamics for the Long Run Risks Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="empirics.html">Part 2: Empirics</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Basics Intuitions for the Hybrid Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 </ul>
 
@@ -268,7 +272,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>RBC Models as State Space Model</h1>
+    <h1>Basics Intuitions for the Hybrid Model</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -279,6 +283,8 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-space">State Space</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kalman-filter">Kalman Filter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-likelihood">Maximum Likelihood</a></li>
 </ul>
             </nav>
         </div>
@@ -290,10 +296,16 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="rbc-models-as-state-space-model">
-<h1>RBC Models as State Space Model<a class="headerlink" href="#rbc-models-as-state-space-model" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="basics-intuitions-for-the-hybrid-model">
+<h1>Basics Intuitions for the Hybrid Model<a class="headerlink" href="#basics-intuitions-for-the-hybrid-model" title="Permalink to this headline">#</a></h1>
 <section id="state-space">
 <h2>State Space<a class="headerlink" href="#state-space" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="kalman-filter">
+<h2>Kalman Filter<a class="headerlink" href="#kalman-filter" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="maximum-likelihood">
+<h2>Maximum Likelihood<a class="headerlink" href="#maximum-likelihood" title="Permalink to this headline">#</a></h2>
 </section>
 </section>
 
@@ -306,6 +318,24 @@ document.write(`
                 <footer class="bd-footer-article">
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="empirics.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Part 2: Empirics</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="references.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">References</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -322,6 +352,8 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-space">State Space</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kalman-filter">Kalman Filter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-likelihood">Maximum Likelihood</a></li>
 </ul>
   </nav></div>
 

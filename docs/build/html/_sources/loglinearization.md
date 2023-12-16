@@ -1,5 +1,3 @@
-# Log-Linearization Technics for RBC
+# Log-Linearized Neoclassical Growth Model
 
-## Uhlig's Method
 
-## Log-Linearized Hansen Model

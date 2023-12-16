@@ -1,1 +1,0 @@
-# Log-Linearized ESG Model

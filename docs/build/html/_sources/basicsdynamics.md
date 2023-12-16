@@ -1,0 +1,1 @@
+# Basics Intuition for Solving for Dynamics

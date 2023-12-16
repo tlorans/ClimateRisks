@@ -125,17 +125,19 @@
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="dynamicesgequilibrium.html">Part 1: Dynamic ESG Equilibrium</a></li>
-<li class="toctree-l1"><a class="reference internal" href="recursivemethods.html">Recursive Methods for RBC Models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="recursiveassetpricing.html">Recursive Methods for Asset Pricing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="equilibriumconditionsesg.html">Dynamic ESG Equilibrium Conditions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="loglinearization.html">Log-Linearization Technics for RBC</a></li>
-<li class="toctree-l1"><a class="reference internal" href="loglinearizationassetpricing.html">Log-Linearization for Asset Pricing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="loglinearizedESG.html">Log-Linearized ESG Model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="solvingdynamic.html">Solving for the Dynamics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="solvingassetpricing.html">Solving for the Dynamics of Asset Pricing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="esgfactor.html">Part 2: Estimating ESG Risk Factor</a></li>
-<li class="toctree-l1"><a class="reference internal" href="statespace.html">RBC Models as State Space Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basicsrecursivemethods.html">Basics Intuition for the Recursive Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="neoclassicalgrowth.html">Neoclassical Growth Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="longrunrisks.html">Long Run Risks Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basicsloglinearization.html">Basics Intuitions for Log Linearization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="loglinearization.html">Log-Linearized Neoclassical Growth Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="loglinearizationassetpricing.html">Log-Linearized Long Run Risks Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basicsdynamics.html">Basics Intuition for Solving for Dynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solvingdynamic.html">Dynamics for the Neoclassical Growth Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solvingassetpricing.html">Dynamics for the Long Run Risks Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="empirics.html">Part 2: Empirics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statespace.html">Basics Intuitions for the Hybrid Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="estimatingneoclassicalgrowth.html">Hybrid Neoclassical Growth Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="estimatinglongrunrisks.html">Hybrid Long Run Risks Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 </ul>
 
@@ -315,18 +317,18 @@ document.write(`
 <section id="economics-and-climate-risk">
 <h3>Economics and Climate Risk<a class="headerlink" href="#economics-and-climate-risk" title="Permalink to this headline">#</a></h3>
 <p>We start with the economics settings of the DICE 2013 model (Nordhaus and Sztorc, 2013). The gross production <span class="math notranslate nohighlight">\(Y(t)\)</span> is given by a standard Cobb-Douglas function:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4518244f-58fb-4c79-8e16-e45e38867f1b">
-<span class="eqno">(1)<a class="headerlink" href="#equation-4518244f-58fb-4c79-8e16-e45e38867f1b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-315b1bb8-1d91-421b-9c06-b2f964e98db5">
+<span class="eqno">(1)<a class="headerlink" href="#equation-315b1bb8-1d91-421b-9c06-b2f964e98db5" title="Permalink to this equation">#</a></span>\[\begin{equation}
 Y(t) = A(t)K(t)^{\gamma}L(t)^{1 - \gamma}
 \end{equation}\]</div>
 <p>with <span class="math notranslate nohighlight">\(A(t)\)</span> the total productivity factor (or technological progress), <span class="math notranslate nohighlight">\(K(t)\)</span> the capital input, <span class="math notranslate nohighlight">\(L(t)\)</span> the labor input and <span class="math notranslate nohighlight">\(\gamma \in ]0,1[\)</span> measures the elasticity of the capital factor:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0a7d9387-7d5d-4059-9161-c72af48b6876">
-<span class="eqno">(2)<a class="headerlink" href="#equation-0a7d9387-7d5d-4059-9161-c72af48b6876" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d534e29c-9b6a-48a3-82ac-86080eca5295">
+<span class="eqno">(2)<a class="headerlink" href="#equation-d534e29c-9b6a-48a3-82ac-86080eca5295" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \gamma = \frac{\partial ln Y(t)}{\partial ln K (t)} = \frac{\partial Y(t)}{\partial K(t)} \frac{K(t)}{Y(t)}
 \end{equation}\]</div>
 <p>In the Integrated Assessment Models (IAMs), we have a distinction between the production <span class="math notranslate nohighlight">\(Y(t)\)</span> and net output <span class="math notranslate nohighlight">\(Q(t)\)</span> because climate risk generate losses:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ad516958-3ae8-4f9e-aa14-436b7a415fa4">
-<span class="eqno">(3)<a class="headerlink" href="#equation-ad516958-3ae8-4f9e-aa14-436b7a415fa4" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a92b020e-ee86-4238-9a82-1206c9aa0623">
+<span class="eqno">(3)<a class="headerlink" href="#equation-a92b020e-ee86-4238-9a82-1206c9aa0623" title="Permalink to this equation">#</a></span>\[\begin{equation}
 Q(t) = \Omega_{climate}(t)Y(t) \leq Y(t)
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\Omega_{climate}(t) \in ]0,1[\)</span> is the loss percentage of the production.</p>
@@ -335,21 +337,21 @@ Q(t) = \Omega_{climate}(t)Y(t) \leq Y(t)
 <section id="physical-risk-and-transition-risk">
 <h3>Physical Risk and Transition Risk<a class="headerlink" href="#physical-risk-and-transition-risk" title="Permalink to this headline">#</a></h3>
 <p>We’ve seen that the net output is reduced because of climate change. We have:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-fcfe2348-c23f-468f-a819-2e5aa8371327">
-<span class="eqno">(4)<a class="headerlink" href="#equation-fcfe2348-c23f-468f-a819-2e5aa8371327" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-9f67be55-33a0-4a3f-a742-301f77b7a843">
+<span class="eqno">(4)<a class="headerlink" href="#equation-9f67be55-33a0-4a3f-a742-301f77b7a843" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \Omega_{climate}(t) = \Omega_D(t)\Omega_{\Lambda}(t) = \frac{1}{1 + D(t)}(1 - \Lambda(t))
 \end{equation}\]</div>
 <p>with <span class="math notranslate nohighlight">\(D(t) \geq 0\)</span> corresponds to the damage function (physical risk) and <span class="math notranslate nohighlight">\(\Lambda(t) \geq 0\)</span> is the mitigation or abatement cost (transition risk).</p>
 <p>The costs <span class="math notranslate nohighlight">\(D(t)\)</span> or physical risk result from natural disasters and climatic events (wildfires, floods, storms, etc.). The costs <span class="math notranslate nohighlight">\(\Lambda(t)\)</span> come from reducing GHG emissions and policiy for financing the transition to a low-carbon economy.</p>
 <p>Nordhaus and Sztorc (2013) assume that <span class="math notranslate nohighlight">\(D(t)\)</span> is a function of the atmospheric temperature <span class="math notranslate nohighlight">\(T_{AT}(t)\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-29bee193-f3df-4199-9ea5-ce8322a7d6db">
-<span class="eqno">(5)<a class="headerlink" href="#equation-29bee193-f3df-4199-9ea5-ce8322a7d6db" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-33f4bc72-17dd-4da7-b0d5-1f39b3345b76">
+<span class="eqno">(5)<a class="headerlink" href="#equation-33f4bc72-17dd-4da7-b0d5-1f39b3345b76" title="Permalink to this equation">#</a></span>\[\begin{equation}
 D(t) = \psi_1 T_{AT}(t) + \psi_2 T_{AT}(t)^2
 \end{equation}\]</div>
 <p>with <span class="math notranslate nohighlight">\(\psi_1 \geq 0\)</span> and <span class="math notranslate nohighlight">\(\psi_2 \geq 0\)</span> are two exogenous parameters. <span class="math notranslate nohighlight">\(T_{AT}(t)\)</span> corresponds to the global mean surface tempature increase in °C from 1900.
 We then have the fraction of net output lost because of global warming defined as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5fa1357a-e687-4eaf-af3f-97f79a74eb1e">
-<span class="eqno">(6)<a class="headerlink" href="#equation-5fa1357a-e687-4eaf-af3f-97f79a74eb1e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e12de594-5875-4b6e-9ae5-49279e958905">
+<span class="eqno">(6)<a class="headerlink" href="#equation-e12de594-5875-4b6e-9ae5-49279e958905" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathfrak{L}_D(t) = 1 - \Omega_D(t) = 1 - (1 + D(t))^{-1} 
 \end{equation}\]</div>
 <p>Various implementations of the damage function have been proposed in the literature, such as:</p>
@@ -366,8 +368,8 @@ We then have the fraction of net output lost because of global warming defined a
 </figcaption>
 </figure>
 <p>The abatement cost function depends on the control variable <span class="math notranslate nohighlight">\(\mu(t)\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ec4c7dfe-c252-4b5f-a0c2-c509647e7d67">
-<span class="eqno">(7)<a class="headerlink" href="#equation-ec4c7dfe-c252-4b5f-a0c2-c509647e7d67" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8e3258cd-bdd1-4cc2-b1a8-95ee2c1ea5d5">
+<span class="eqno">(7)<a class="headerlink" href="#equation-8e3258cd-bdd1-4cc2-b1a8-95ee2c1ea5d5" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \Lambda(t) = \theta_1(t)\mu(t)^{\theta_2}
 \end{equation}\]</div>
 <p>with <span class="math notranslate nohighlight">\(\theta_1 \geq 0\)</span> and <span class="math notranslate nohighlight">\(\theta_2 \geq 0\)</span> are two parameters, and <span class="math notranslate nohighlight">\(\mu(t) \in ]0,1[\)</span> the emission-control rate.</p>
@@ -379,8 +381,8 @@ We then have the fraction of net output lost because of global warming defined a
 </figcaption>
 </figure>
 <p>We finally have the global impact of climate change as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c651d391-efe5-4178-b6d9-15864a019349">
-<span class="eqno">(8)<a class="headerlink" href="#equation-c651d391-efe5-4178-b6d9-15864a019349" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e1accf36-a9b4-4574-aba5-420ea2085c53">
+<span class="eqno">(8)<a class="headerlink" href="#equation-e1accf36-a9b4-4574-aba5-420ea2085c53" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \Omega_{climate}(t) = \frac{1 - \theta_1(t)\mu(t)^{\theta_2}}{1 + \psi_1 T_{AT}(t) + \psi_2 T_{AT}(t)^2}
 \end{equation}\]</div>
 </section>
@@ -388,17 +390,17 @@ We then have the fraction of net output lost because of global warming defined a
 <h3>Global Warming<a class="headerlink" href="#global-warming" title="Permalink to this headline">#</a></h3>
 <p>Let’s now have a basic view of the physics of the DICE model, in order to have a sense of mechanisms behind the global warming.</p>
 <p>The GHG emissions <span class="math notranslate nohighlight">\(CE(t)\)</span> depends on the production <span class="math notranslate nohighlight">\(Y(t)\)</span> and the land use emissions <span class="math notranslate nohighlight">\(CE_{Land}(t)\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-04383c45-0d1b-4151-9600-e53496380115">
-<span class="eqno">(9)<a class="headerlink" href="#equation-04383c45-0d1b-4151-9600-e53496380115" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d478b2cb-a0bb-4281-b160-98e35778fb9f">
+<span class="eqno">(9)<a class="headerlink" href="#equation-d478b2cb-a0bb-4281-b160-98e35778fb9f" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CE(t) = CE_{Industry}(t) + CE_{Land}(t)
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-fbc26dba-13bf-433e-a5f2-5fc489b32e87">
-<span class="eqno">(10)<a class="headerlink" href="#equation-fbc26dba-13bf-433e-a5f2-5fc489b32e87" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-eaa52966-e7f5-40ec-b6f4-c3e84e239ec4">
+<span class="eqno">(10)<a class="headerlink" href="#equation-eaa52966-e7f5-40ec-b6f4-c3e84e239ec4" title="Permalink to this equation">#</a></span>\[\begin{equation}
 = (1 - \mu(t))\sigma(t)Y(t) + CE_{Land}(t)
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\sigma(t)\)</span> is the impact of the production on GHG emissions, <span class="math notranslate nohighlight">\(CE_{Industry}(t)\)</span> corresponds to the anthropogeneic emissions due to industrial activities, and the dynamic of <span class="math notranslate nohighlight">\(CE_{Land}(t)\)</span> is described as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-439d0510-d8af-4c5c-9d17-caa5fd9bce83">
-<span class="eqno">(11)<a class="headerlink" href="#equation-439d0510-d8af-4c5c-9d17-caa5fd9bce83" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-1c2d24cb-f1e0-4dbf-a099-1e0a9d1a1b24">
+<span class="eqno">(11)<a class="headerlink" href="#equation-1c2d24cb-f1e0-4dbf-a099-1e0a9d1a1b24" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CE_{Land}(t) = (1 - \delta_{Land})CE_{Land}(t-1)
 \end{equation}\]</div>
 <p>with <span class="math notranslate nohighlight">\(\delta_{Land}\)</span> a parameter.</p>
@@ -410,8 +412,8 @@ CE_{Land}(t) = (1 - \delta_{Land})CE_{Land}(t-1)
 </ol>
 <p>In the DICE model, <span class="math notranslate nohighlight">\(\mu(t)\)</span> is an endogenous variable and can be viewed as an effort rate that the economy must bear to limit global warming.</p>
 <p><span class="math notranslate nohighlight">\(\sigma(t)\)</span> measures the relationshp between the carbon emissions due to anthropogenic activities and the gross output in the absence of mitigation policies (<span class="math notranslate nohighlight">\(\mu(t) = 0\)</span>):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-bf57345a-61d2-4e1d-b135-91c4e9fdf05a">
-<span class="eqno">(12)<a class="headerlink" href="#equation-bf57345a-61d2-4e1d-b135-91c4e9fdf05a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e0fc3056-9a93-4858-8f68-80e1cec86ad5">
+<span class="eqno">(12)<a class="headerlink" href="#equation-e0fc3056-9a93-4858-8f68-80e1cec86ad5" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sigma(t) = \frac{CE_{Industry}(t)}{Y(t)}
 \end{equation}\]</div>
 <p>It can be interpreted as the carbon intensity of the economy.</p>
@@ -422,22 +424,22 @@ CE_{Land}(t) = (1 - \delta_{Land})CE_{Land}(t-1)
 <li><p>the deep (or lower) ocean <span class="math notranslate nohighlight">\(LO\)</span></p></li>
 </ul>
 <p>Nordhaus and Sztorc (2013) assume the following dynamics of carbon concentrations:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-268992d7-fd63-424f-8c63-6db06e8e7145">
-<span class="eqno">(13)<a class="headerlink" href="#equation-268992d7-fd63-424f-8c63-6db06e8e7145" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f153488d-e68a-483c-831d-81aad1171af4">
+<span class="eqno">(13)<a class="headerlink" href="#equation-f153488d-e68a-483c-831d-81aad1171af4" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CC_{AT}(t) = \phi_{1,1}CC_{AT}(t-1) + \phi_{1,2}CC_{UP}(t-1) + \phi_1CE(t)
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-ab4deee0-2abe-45e0-9983-804d6766c01b">
-<span class="eqno">(14)<a class="headerlink" href="#equation-ab4deee0-2abe-45e0-9983-804d6766c01b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-2c8511d4-950a-4c76-b1ab-01a26a18002b">
+<span class="eqno">(14)<a class="headerlink" href="#equation-2c8511d4-950a-4c76-b1ab-01a26a18002b" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CC_{UP}(t) = \phi_{2,1}CC_{AT}(t-1)+\phi_{2,2}CC_{UP}(t-1) + \phi_{2,3}CC_{LO}(t-1)
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-e80b9463-9f41-448c-ac84-52788b188c55">
-<span class="eqno">(15)<a class="headerlink" href="#equation-e80b9463-9f41-448c-ac84-52788b188c55" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-fea528af-5beb-4b0e-b2c0-49c40afb8f63">
+<span class="eqno">(15)<a class="headerlink" href="#equation-fea528af-5beb-4b0e-b2c0-49c40afb8f63" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CC_{LO}(t) = \phi_{3,2}CC_{UP}(t-1) + \phi_{3,3}CC_{LO}(t-1)
 \end{equation}\]</div>
 <p>with <span class="math notranslate nohighlight">\(\phi_{i,j}\)</span> the flow parameters between carbon-sink reservoirs, and <span class="math notranslate nohighlight">\(\phi_1\)</span> the mass percentage of carbon in CO2.</p>
 <p>Let’s define <span class="math notranslate nohighlight">\(CC\)</span> as the vector of the three-reservoir layers:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-80970032-65b9-47de-be02-1376de447629">
-<span class="eqno">(16)<a class="headerlink" href="#equation-80970032-65b9-47de-be02-1376de447629" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0d51e8ea-75c4-4668-a3a5-c28561c5c47c">
+<span class="eqno">(16)<a class="headerlink" href="#equation-0d51e8ea-75c4-4668-a3a5-c28561c5c47c" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CC = \begin{bmatrix}
 CC_{AT} \\
 CC_{UP} \\
@@ -445,13 +447,13 @@ CC_{LO}
 \end{bmatrix}
 \end{equation}\]</div>
 <p>We then have the dynamics of <span class="math notranslate nohighlight">\(CC\)</span> as a vector autoregressive process:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-561f810a-b3b4-46ec-94d1-80997b1b92c8">
-<span class="eqno">(17)<a class="headerlink" href="#equation-561f810a-b3b4-46ec-94d1-80997b1b92c8" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-92e35d31-8370-44f5-b641-014364fc7d0b">
+<span class="eqno">(17)<a class="headerlink" href="#equation-92e35d31-8370-44f5-b641-014364fc7d0b" title="Permalink to this equation">#</a></span>\[\begin{equation}
 CC(t) = \Phi_{CC}CC(t-1) + B_{CC}CE(t)
 \end{equation}\]</div>
 <p>with:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-daab8d4b-6186-4a42-af5f-c3fc134e315c">
-<span class="eqno">(18)<a class="headerlink" href="#equation-daab8d4b-6186-4a42-af5f-c3fc134e315c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-1f3f3047-16e9-4034-9b71-db3366220c60">
+<span class="eqno">(18)<a class="headerlink" href="#equation-1f3f3047-16e9-4034-9b71-db3366220c60" title="Permalink to this equation">#</a></span>\[\begin{equation}
 B_{CC} = \begin{bmatrix}
 \phi_1 \\
 0 \\
@@ -459,8 +461,8 @@ B_{CC} = \begin{bmatrix}
 \end{bmatrix}
 \end{equation}\]</div>
 <p>and:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-bd25baca-2995-4354-b42d-cccd6d5e2de7">
-<span class="eqno">(19)<a class="headerlink" href="#equation-bd25baca-2995-4354-b42d-cccd6d5e2de7" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-3ce40480-ea3a-4a08-8611-3a865b664934">
+<span class="eqno">(19)<a class="headerlink" href="#equation-3ce40480-ea3a-4a08-8611-3a865b664934" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \Phi_{CC} = \begin{bmatrix}
 \phi_{1,1} &amp; \phi_{1,2} &amp; 0 \\
 \phi_{2,1} &amp; \phi_{2,2} &amp; \phi_{3,2} \\
@@ -468,18 +470,18 @@ B_{CC} = \begin{bmatrix}
 \end{bmatrix}
 \end{equation}\]</div>
 <p>We can now link accumulated carbon emissions in the atmosphere and global warming at the earth’s surface through increases in radiative forcing:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f66c8c59-7622-4a75-89f5-88c6a2266343">
-<span class="eqno">(20)<a class="headerlink" href="#equation-f66c8c59-7622-4a75-89f5-88c6a2266343" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-3318e618-1ed9-4095-a15c-e11f61d23552">
+<span class="eqno">(20)<a class="headerlink" href="#equation-3318e618-1ed9-4095-a15c-e11f61d23552" title="Permalink to this equation">#</a></span>\[\begin{equation}
 F_{RAD}(t) = \frac{\eta}{ln2}ln(\frac{CC_{AT}(t)}{CC_{AT}(1750)}) + F_{EX}(t)
 \end{equation}\]</div>
 <p>with <span class="math notranslate nohighlight">\(F_{RAD}(t)\)</span> the change in total radiative forcing of GHG emissions since 1750, <span class="math notranslate nohighlight">\(\eta\)</span> the temperature forcing parameter and <span class="math notranslate nohighlight">\(F_{EX}(t)\)</span> an exogenous forcing.</p>
 <p>We finally achieve to obtain the climate system for temperatures from the DICE 2013 model as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4bb1135c-9c61-4915-b4c4-b34139dc0848">
-<span class="eqno">(21)<a class="headerlink" href="#equation-4bb1135c-9c61-4915-b4c4-b34139dc0848" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-fe2c7a1a-0b06-4e24-916b-638979ca34ae">
+<span class="eqno">(21)<a class="headerlink" href="#equation-fe2c7a1a-0b06-4e24-916b-638979ca34ae" title="Permalink to this equation">#</a></span>\[\begin{equation}
 T_{AT}(t) = T_{AT}(t-1) + \xi_1(F_{RAD}(t) - \xi_2 T_{AT}(t-1) - \xi_3(T_{AT}(t-1) - T_{LO}(t-1)))
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-84173958-84e1-4456-b97d-93a8859255e0">
-<span class="eqno">(22)<a class="headerlink" href="#equation-84173958-84e1-4456-b97d-93a8859255e0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0aee80cb-23bf-43e6-a50d-2e197feaac1e">
+<span class="eqno">(22)<a class="headerlink" href="#equation-0aee80cb-23bf-43e6-a50d-2e197feaac1e" title="Permalink to this equation">#</a></span>\[\begin{equation}
 T_{LO}(t) = T_{LO}(t-1) + \xi_4(T_{AT}(t-1) - T_{LO}(t-1))
 \end{equation}\]</div>
 <p>with <span class="math notranslate nohighlight">\(T_{AT}(t)\)</span> the mean surface temperature, <span class="math notranslate nohighlight">\(T_{LO}(t)\)</span> the temperature of the deep ocean, <span class="math notranslate nohighlight">\(\xi_1\)</span> the speed of adjustment parameter for the atmospheric temperature, <span class="math notranslate nohighlight">\(\xi_2\)</span> the ratio of increased forcing from CO2 doubling to the climate sensitivity, <span class="math notranslate nohighlight">\(\xi_3\)</span> the heat loss coefficient from atmosphere to oceans and <span class="math notranslate nohighlight">\(\xi_4\)</span> the heat gain coefficient by deep oceans.</p>
@@ -541,8 +543,8 @@ a sword of Damocles over the high emitters stocks, that can potentially happen a
 </table>
 <p>Where the classification is based on the terciles of the aggregating score and the median market capitalization.</p>
 <p>Finally, the return of the BMG factor is computed as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c1adc923-990c-48e9-aff6-1e045c5fcc1d">
-<span class="eqno">(23)<a class="headerlink" href="#equation-c1adc923-990c-48e9-aff6-1e045c5fcc1d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-2040c80f-a3c4-4591-a46a-bf6e8517194a">
+<span class="eqno">(23)<a class="headerlink" href="#equation-2040c80f-a3c4-4591-a46a-bf6e8517194a" title="Permalink to this equation">#</a></span>\[\begin{equation}
 F_{BMG}(t) = \frac{1}{2}(SB(t)+BB(t)) - \frac{1}{2} (SG(t) + BG(t))
 \end{equation}\]</div>
 <p>Let’s have a look at the resulting BMG factor:</p>
@@ -583,8 +585,8 @@ The empirical framework for testing this is the following:</p>
 <p>To assess whether climate concerns shocks <span class="math notranslate nohighlight">\(C(t)\)</span> can explain green assets outperformance, Pastor et al. (2022) propose to build a counterfactual returns.</p>
 <p>The approach relies on the problem of inferring an asset’s expected return <span class="math notranslate nohighlight">\(\mu = \mathbb{E}[r(t)]\)</span>. The most common approach is to use the asset’s sample average return, <span class="math notranslate nohighlight">\(\bar{r}\)</span>, as an estimate of <span class="math notranslate nohighlight">\(\mu\)</span>.</p>
 <p>Pastor et al. (2022) propose another approach, introducing the additional information from climate shocks. We can estimate the following regression:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-bdae445f-455c-4afa-9636-039f15e7289e">
-<span class="eqno">(24)<a class="headerlink" href="#equation-bdae445f-455c-4afa-9636-039f15e7289e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-dbcdbff9-5d12-4ce0-ac64-3b663a4744be">
+<span class="eqno">(24)<a class="headerlink" href="#equation-dbcdbff9-5d12-4ce0-ac64-3b663a4744be" title="Permalink to this equation">#</a></span>\[\begin{equation}
 R_{GMB}(t) = \alpha + \beta C(t) + u(t)
 \end{equation}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(\alpha = \mu\)</span> because <span class="math notranslate nohighlight">\(C(t)\)</span> has zero mean ex ante and <span class="math notranslate nohighlight">\(R(t)\)</span> is the monthly return of the Green-Minus-Brown portfolio.</p>

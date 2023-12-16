@@ -1,2 +1,0 @@
-# Dynamic ESG Equilibrium Conditions
-

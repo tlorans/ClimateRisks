@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>ESG Risk Factor &#8212; Climate Risks in Finance 0.1 documentation</title>
+    <title>Dynamic Asset Pricing Equilibrium with SymPy &#8212; Climate Risks in Finance 0.1 documentation</title>
   
   
   
@@ -45,7 +45,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Part 1: Dynamic ESG Equilibrium" href="dynamicesgequilibrium.html" />
+    <link rel="next" title="Basics Intuition for the Recursive Methods" href="basicsrecursivemethods.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -124,17 +124,19 @@
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="dynamicesgequilibrium.html">Part 1: Dynamic ESG Equilibrium</a></li>
-<li class="toctree-l1"><a class="reference internal" href="recursivemethods.html">Recursive Methods for RBC Models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="recursiveassetpricing.html">Recursive Methods for Asset Pricing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="equilibriumconditionsesg.html">Dynamic ESG Equilibrium Conditions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="loglinearization.html">Log-Linearization Technics for RBC</a></li>
-<li class="toctree-l1"><a class="reference internal" href="loglinearizationassetpricing.html">Log-Linearization for Asset Pricing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="loglinearizedESG.html">Log-Linearized ESG Model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="solvingdynamic.html">Solving for the Dynamics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="solvingassetpricing.html">Solving for the Dynamics of Asset Pricing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="esgfactor.html">Part 2: Estimating ESG Risk Factor</a></li>
-<li class="toctree-l1"><a class="reference internal" href="statespace.html">RBC Models as State Space Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basicsrecursivemethods.html">Basics Intuition for the Recursive Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="neoclassicalgrowth.html">Neoclassical Growth Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="longrunrisks.html">Long Run Risks Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basicsloglinearization.html">Basics Intuitions for Log Linearization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="loglinearization.html">Log-Linearized Neoclassical Growth Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="loglinearizationassetpricing.html">Log-Linearized Long Run Risks Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basicsdynamics.html">Basics Intuition for Solving for Dynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solvingdynamic.html">Dynamics for the Neoclassical Growth Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solvingassetpricing.html">Dynamics for the Long Run Risks Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="empirics.html">Part 2: Empirics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statespace.html">Basics Intuitions for the Hybrid Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="estimatingneoclassicalgrowth.html">Hybrid Neoclassical Growth Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="estimatinglongrunrisks.html">Hybrid Long Run Risks Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 </ul>
 
@@ -270,7 +272,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>ESG Risk Factor</h1>
+    <h1>Dynamic Asset Pricing Equilibrium with SymPy</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -284,8 +286,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="esg-risk-factor">
-<h1>ESG Risk Factor<a class="headerlink" href="#esg-risk-factor" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="dynamic-asset-pricing-equilibrium-with-sympy">
+<h1>Dynamic Asset Pricing Equilibrium with SymPy<a class="headerlink" href="#dynamic-asset-pricing-equilibrium-with-sympy" title="Permalink to this headline">#</a></h1>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>This course is under heavy development</p>
@@ -293,43 +295,39 @@ document.write(`
 <div class="toctree-wrapper compound">
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="dynamicesgequilibrium.html">Part 1: Dynamic ESG Equilibrium</a></li>
-<li class="toctree-l1"><a class="reference internal" href="recursivemethods.html">Recursive Methods for RBC Models</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="recursivemethods.html#the-value-function">The Value Function</a></li>
-<li class="toctree-l2"><a class="reference internal" href="recursivemethods.html#euler-equation">Euler Equation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="recursivemethods.html#equilibrium-conditions">Equilibrium Conditions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="recursivemethods.html#steady-state">Steady-State</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basicsrecursivemethods.html">Basics Intuition for the Recursive Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="neoclassicalgrowth.html">Neoclassical Growth Model</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="neoclassicalgrowth.html#the-value-function">The Value Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="neoclassicalgrowth.html#euler-equation">Euler Equation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="neoclassicalgrowth.html#equilibrium-conditions">Equilibrium Conditions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="neoclassicalgrowth.html#steady-state">Steady-State</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="recursiveassetpricing.html">Recursive Methods for Asset Pricing</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="recursiveassetpricing.html#lucas-asset-pricing">Lucas Asset Pricing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="recursiveassetpricing.html#consumption-capm">Consumption CAPM</a></li>
-<li class="toctree-l2"><a class="reference internal" href="recursiveassetpricing.html#recursive-preferences">Recursive Preferences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="longrunrisks.html">Long Run Risks Model</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="longrunrisks.html#lucas-asset-pricing">Lucas Asset Pricing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="longrunrisks.html#consumption-capm">Consumption CAPM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="longrunrisks.html#recursive-preferences">Recursive Preferences</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="equilibriumconditionsesg.html">Dynamic ESG Equilibrium Conditions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="loglinearization.html">Log-Linearization Technics for RBC</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="loglinearization.html#uhlig-s-method">Uhlig’s Method</a></li>
-<li class="toctree-l2"><a class="reference internal" href="loglinearization.html#log-linearized-hansen-model">Log-Linearized Hansen Model</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="loglinearizationassetpricing.html">Log-Linearization for Asset Pricing</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="basicsloglinearization.html">Basics Intuitions for Log Linearization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="loglinearization.html">Log-Linearized Neoclassical Growth Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="loglinearizationassetpricing.html">Log-Linearized Long Run Risks Model</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="loglinearizationassetpricing.html#issues-with-log-linearization-for-asset-pricing">Issues with Log Linearization for Asset Pricing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="loglinearizationassetpricing.html#campbell-and-schiller-approach">Campbell and Schiller Approach</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="loglinearizedESG.html">Log-Linearized ESG Model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="solvingdynamic.html">Solving for the Dynamics</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="solvingdynamic.html#the-method-of-undetermined-coefficients">The Method of Undetermined Coefficients</a></li>
-<li class="toctree-l2"><a class="reference internal" href="solvingdynamic.html#solving-the-hansen-model">Solving the Hansen Model</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="solvingassetpricing.html">Solving for the Dynamics of Asset Pricing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="esgfactor.html">Part 2: Estimating ESG Risk Factor</a></li>
-<li class="toctree-l1"><a class="reference internal" href="statespace.html">RBC Models as State Space Model</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="basicsdynamics.html">Basics Intuition for Solving for Dynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solvingdynamic.html">Dynamics for the Neoclassical Growth Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solvingassetpricing.html">Dynamics for the Long Run Risks Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="empirics.html">Part 2: Empirics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statespace.html">Basics Intuitions for the Hybrid Model</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="statespace.html#state-space">State Space</a></li>
+<li class="toctree-l2"><a class="reference internal" href="statespace.html#kalman-filter">Kalman Filter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="statespace.html#maximum-likelihood">Maximum Likelihood</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="estimatingneoclassicalgrowth.html">Hybrid Neoclassical Growth Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="estimatinglongrunrisks.html">Hybrid Long Run Risks Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 </ul>
 </div>
@@ -345,11 +343,11 @@ document.write(`
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="right-next"
-       href="dynamicesgequilibrium.html"
+       href="basicsrecursivemethods.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Part 1: Dynamic ESG Equilibrium</p>
+        <p class="prev-next-title">Basics Intuition for the Recursive Methods</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

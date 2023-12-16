@@ -1,5 +1,4 @@
-# Recursive Methods for Asset Pricing
-
+# Long Run Risks Model
 
 ## Lucas Asset Pricing
 

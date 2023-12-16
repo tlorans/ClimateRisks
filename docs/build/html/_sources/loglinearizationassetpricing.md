@@ -1,4 +1,4 @@
-# Log-Linearization for Asset Pricing 
+# Log-Linearized Long Run Risks Model
 
 ## Issues with Log Linearization for Asset Pricing
 
