@@ -1,5 +1,5 @@
-# Log Linearization Techniques
+# Log-Linearization Technics for RBC
 
-## Log Linearization
+## Uhlig's Method
 
-## Method of Undetermined Coefficients
+## Log-Linearized Hansen Model
