@@ -5,15 +5,14 @@ We will follow the same systematic approach:
 1. Define the value function based on the economic environment
 2. Use recursive methods to determine the Euler equations of our system
 
-## Neoclassical Growth Model
 
-### The Value Function
+## The Value Function
 
-#### Economic Environment
+### Economic Environment
 
 We start with the definition of the variables and parameters.
 
-##### Time Series Macro Dynamics
+#### Time Series Macro Dynamics
 
 We work in discrete time, with $t$ the unit of time: 
 
@@ -64,7 +63,7 @@ production_function = smp.Eq(Y[t], f)
 
 ${Y}_{t} = f{\left({K}_{t} \right)}$
 
-##### Representative Consumer Preferences
+#### Representative Consumer Preferences
 
 The representative consumer / producer derives utility from consumption:
 
@@ -74,7 +73,7 @@ u = smp.Function('u')(C[t]) # utility function
 
 $u{\left({C}_{t} \right)}$
 
-#### States and Controls
+### States and Controls
 
 The consumer gives some value to the initial capital stock $K_t$:
 
@@ -116,7 +115,7 @@ bellman = smp.Eq(v, u + beta * v_prime)
 $v{\left({K}_{t} \right)} = \beta v{\left(\left(1 - \delta\right) {K}_{t} + f{\left({K}_{t} \right)} - {C}_{t} \right)} + u{\left({C}_{t} \right)}$
 
 
-### Euler Equation
+## Euler Equation
 
 The process is always the same:
 1. Find the First Order Conditions (FOC) by taking the derivative of the value function with repect to the control variables
@@ -144,7 +143,7 @@ unknown_derivative = get_unknown_derivative(v_prime, K, t, transition_equation)
 $\frac{\partial}{\partial {K}_{t + 1}} v{\left({K}_{t + 1} \right)} = \left. \frac{d}{d \xi_{1}} v{\left(\xi_{1} \right)} \right|_{\substack{ \xi_{1}=\left(1 - \delta\right) {K}_{t} + f{\left({K}_{t} \right)} - {C}_{t} }}
 $
 
-#### First-Order Conditions
+### First-Order Conditions
 
 We have only one control variable here, thus only one FOC. We have the following function to help us:
 
@@ -163,7 +162,7 @@ FOC = get_FOC(bellman, C, t, u, unknown_derivative)
 $\frac{\partial}{\partial {C}_{t}} u{\left({C}_{t} \right)} = \beta \frac{\partial}{\partial {K}_{t + 1}} v{\left({K}_{t + 1} \right)}
 $
 
-#### Benveniste-Sheinkman Conditions
+### Benveniste-Sheinkman Conditions
 
 We define the following function for finding the BS condition:
 
@@ -186,7 +185,7 @@ BS = get_BS(bellman, v, K, t, unknown_derivative, FOC)
 $\frac{\partial}{\partial {K}_{t + 1}} v{\left({K}_{t + 1} \right)} = \left(- \delta + \frac{\partial}{\partial {K}_{t + 1}} f{\left({K}_{t + 1} \right)} + 1\right) \frac{\partial}{\partial {C}_{t + 1}} u{\left({C}_{t + 1} \right)}
 $
 
-#### Euler Equation
+### Euler Equation
 
 And we can finally plug it back to the FOC to obtain the Euler Equation:
 
@@ -197,5 +196,6 @@ Euler = FOC.subs(BS.lhs, BS.rhs)
 $\frac{\partial}{\partial {C}_{t}} u{\left({C}_{t} \right)} = \beta \left(- \delta + \frac{\partial}{\partial {K}_{t + 1}} f{\left({K}_{t + 1} \right)} + 1\right) \frac{\partial}{\partial {C}_{t + 1}} u{\left({C}_{t + 1} \right)}
 $
 
-## Basic Hansen Model
+## Equilibrium Conditions
 
+## Steady-State
