@@ -42,6 +42,8 @@
     <script src="_static/doctools.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'basicsrecursivemethods';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -128,9 +130,6 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Basics Intuition for the Recursive Methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="neoclassicalgrowth.html">Neoclassical Growth Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="longrunrisks.html">Long Run Risks Model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="basicsloglinearization.html">Basics Intuitions for Log Linearization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="loglinearization.html">Log-Linearized Neoclassical Growth Model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="loglinearizationassetpricing.html">Log-Linearized Long Run Risks Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="basicsdynamics.html">Basics Intuition for Solving for Dynamics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="solvingdynamic.html">Dynamics for the Neoclassical Growth Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="solvingassetpricing.html">Dynamics for the Long Run Risks Model</a></li>
@@ -286,6 +285,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-value-function">The Value Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-vs-control-variables">State vs. Control Variables</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-problem-with-the-first-order-condition-the-unknown-derivative">The Problem with the First Order Condition: the Unknown Derivative</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-an-expression-for-the-unknown-derivative-with-the-benveniste-scheinkman-condition">Finding an Expression for the Unknown Derivative with the Benveniste-Scheinkman Condition</a></li>
 </ul>
@@ -305,6 +305,41 @@ document.write(`
 <p>We start with a brief overview of what is a value function and the recursive formulation of a social planner.</p>
 <section id="the-value-function">
 <h2>The Value Function<a class="headerlink" href="#the-value-function" title="Permalink to this headline">#</a></h2>
+<p>Let’s say our consumer begin with some value for capital stock <span class="math notranslate nohighlight">\(K_t\)</span>:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">smp</span>
+
+<span class="n">K</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;K&#39;</span><span class="p">)</span> <span class="c1"># capital stock</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="bp">cls</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Idx</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And we give some value to current capital stock <span class="math notranslate nohighlight">\(v(K_t)\)</span> but also future capital stock:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">v_prime</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="s1">&#39;v&#39;</span><span class="p">)(</span><span class="n">K</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="c1"># future</span>
+</pre></div>
+</div>
+<p>In <span class="math notranslate nohighlight">\(v(K_t)\)</span> and <span class="math notranslate nohighlight">\(v(K_{t+1})\)</span>, you notice that the function itself is not time-subscripted. Because we work in infinite time periods, in both cases we are facing the same remaining “future”, so both functions are in fact a unique time-invariant function <span class="math notranslate nohighlight">\(v(.)\)</span>.</p>
+<p>Now comes the question how to put some “value” to capital stock? The consumer doesn’t directly derived utility from capital stock, but from consumption of the output produced using capital stock:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">C</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">)</span> <span class="c1"># consumption</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">smp</span><span class="o">.</span><span class="n">latex</span><span class="p">(</span><span class="n">C</span><span class="p">[</span><span class="n">t</span><span class="p">]))</span>
+<span class="n">u</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="s1">&#39;u&#39;</span><span class="p">)(</span><span class="n">C</span><span class="p">[</span><span class="n">t</span><span class="p">])</span> <span class="c1"># utility function</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">smp</span><span class="o">.</span><span class="n">latex</span><span class="p">(</span><span class="n">u</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\({C}_{t}\)</span>,
+<span class="math notranslate nohighlight">\(u{\left({C}_{t} \right)}\)</span></p>
+<p>Before stating the final form of the value function, let’s create a discounting factor <span class="math notranslate nohighlight">\(\beta\)</span> to make value of current capital stock and future capital stock comparable:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">beta</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;beta&#39;</span><span class="p">)</span> <span class="c1"># discount factor</span>
+</pre></div>
+</div>
+<p>All right. Now, we can state our value function of current capital stock as a function of utility derived from consumption and discounted value of future capital stock:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">value_function</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">u</span> <span class="o">+</span> <span class="n">beta</span> <span class="o">*</span> <span class="n">v_prime</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">smp</span><span class="o">.</span><span class="n">latex</span><span class="p">(</span><span class="n">value_function</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(v{\left({K}_{t} \right)} = \beta v{\left({K}_{t + 1} \right)} + u{\left({C}_{t} \right)}\)</span></p>
+</section>
+<section id="state-vs-control-variables">
+<h2>State vs. Control Variables<a class="headerlink" href="#state-vs-control-variables" title="Permalink to this headline">#</a></h2>
 </section>
 <section id="the-problem-with-the-first-order-condition-the-unknown-derivative">
 <h2>The Problem with the First Order Condition: the Unknown Derivative<a class="headerlink" href="#the-problem-with-the-first-order-condition-the-unknown-derivative" title="Permalink to this headline">#</a></h2>
@@ -357,6 +392,7 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-value-function">The Value Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-vs-control-variables">State vs. Control Variables</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-problem-with-the-first-order-condition-the-unknown-derivative">The Problem with the First Order Condition: the Unknown Derivative</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-an-expression-for-the-unknown-derivative-with-the-benveniste-scheinkman-condition">Finding an Expression for the Unknown Derivative with the Benveniste-Scheinkman Condition</a></li>
 </ul>
