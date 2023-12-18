@@ -1,6 +1,6 @@
-# Equilibrium Conditions Long Run Risks Model
+# Consumption-Based Capital Asset Pricing Model: Equilibrium Conditions
 
-## Lucas Asset Pricing
+## The Genesis with the Lucas Tree Model
 
 ### The Value Function
 
@@ -94,6 +94,12 @@ Euler = FOC.subs(BS.lhs, BS.rhs)
 Euler.simplify()
 ```
 
-## Consumption CAPM
+## Returns As Equilibrium Conditions
 
-## Recursive Preferences
+## The Value Function
+
+## Euler Equation
+
+## Equilibrium Conditions
+
+## Steady-State
