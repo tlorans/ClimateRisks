@@ -1,4 +1,4 @@
-# Long Run Risks Model
+# Equilibrium Conditions Long Run Risks Model
 
 ## Lucas Asset Pricing
 

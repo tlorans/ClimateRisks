@@ -1,4 +1,4 @@
-# Neoclassical Growth Model
+# Equilibrium Conditions for the Neoclassical Growth Model
 
 We will follow the same systematic approach:
 

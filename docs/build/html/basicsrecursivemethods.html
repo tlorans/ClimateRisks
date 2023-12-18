@@ -47,7 +47,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'basicsrecursivemethods';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Neoclassical Growth Model" href="neoclassicalgrowth.html" />
+    <link rel="next" title="Equilibrium Conditions for the Neoclassical Growth Model" href="neoclassicalgrowth.html" />
     <link rel="prev" title="Dynamic Asset Pricing Equilibrium with SymPy" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
@@ -128,8 +128,8 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Basics Intuition for the Recursive Methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="neoclassicalgrowth.html">Neoclassical Growth Model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="longrunrisks.html">Long Run Risks Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="neoclassicalgrowth.html">Equilibrium Conditions for the Neoclassical Growth Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="longrunrisks.html">Equilibrium Conditions Long Run Risks Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="basicsdynamics.html">Basics Intuition for Solving for Dynamics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="solvingdynamic.html">Dynamics for the Neoclassical Growth Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="solvingassetpricing.html">Dynamics for the Long Run Risks Model</a></li>
@@ -305,7 +305,7 @@ document.write(`
 <p>We start with a brief overview of what is a value function and the recursive formulation of a social planner.</p>
 <section id="the-value-function">
 <h2>The Value Function<a class="headerlink" href="#the-value-function" title="Permalink to this headline">#</a></h2>
-<p>Let’s say our consumer begin with some value for capital stock <span class="math notranslate nohighlight">\(K_t\)</span>:</p>
+<p>Let’s say our consumer begin with a capital stock <span class="math notranslate nohighlight">\(K_t\)</span>:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">smp</span>
 
 <span class="n">K</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;K&#39;</span><span class="p">)</span> <span class="c1"># capital stock</span>
@@ -327,7 +327,12 @@ document.write(`
 </div>
 <p><span class="math notranslate nohighlight">\({C}_{t}\)</span>,
 <span class="math notranslate nohighlight">\(u{\left({C}_{t} \right)}\)</span></p>
-<p>Before stating the final form of the value function, let’s create a discounting factor <span class="math notranslate nohighlight">\(\beta\)</span> to make value of current capital stock and future capital stock comparable:</p>
+<p>And the production function is:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="s1">&#39;f&#39;</span><span class="p">)(</span><span class="n">K</span><span class="p">[</span><span class="n">t</span><span class="p">])</span> <span class="c1"># production function</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(f{\left({K}_{t} \right)}\)</span></p>
+<p>Before writing the value function, let’s create a discounting factor <span class="math notranslate nohighlight">\(\beta\)</span> to make value of current capital stock and future capital stock comparable:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">beta</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;beta&#39;</span><span class="p">)</span> <span class="c1"># discount factor</span>
 </pre></div>
 </div>
@@ -340,9 +345,28 @@ document.write(`
 </section>
 <section id="state-vs-control-variables">
 <h2>State vs. Control Variables<a class="headerlink" href="#state-vs-control-variables" title="Permalink to this headline">#</a></h2>
+<p>Future capital stock <span class="math notranslate nohighlight">\(K_{t+1}\)</span> must be constructed (or saved) from output today (<span class="math notranslate nohighlight">\(f(K_t)\)</span>). We have the following difference equation or transition function:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">transition_equation</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">K</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">f</span> <span class="o">-</span> <span class="n">C</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\({K}_{t + 1} = f{\left({K}_{t} \right)} - {C}_{t}\)</span></p>
+<p>So, let’s recall that <span class="math notranslate nohighlight">\(K_t\)</span> is given, this is our state variable to which we attribute some value <span class="math notranslate nohighlight">\(v(K_t)\)</span>. What is the variable the consumer controls in this problem?</p>
+<p>Well, the consumer can define the level of consumption <span class="math notranslate nohighlight">\(C_t\)</span>. Due to the transition equation defined before, we know that <span class="math notranslate nohighlight">\(K_{t+1}\)</span> depends on the level of consumption choosen today <span class="math notranslate nohighlight">\(C_t\)</span>.</p>
+<p>We can therefore rewrite our value function to replace <span class="math notranslate nohighlight">\(K_{t+1}\)</span> by the transition equation with our control variable:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">v_prime</span> <span class="o">=</span> <span class="n">v_prime</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">transition_equation</span><span class="o">.</span><span class="n">lhs</span><span class="p">,</span> <span class="n">transition_equation</span><span class="o">.</span><span class="n">rhs</span><span class="p">)</span>
+<span class="n">value_function</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">u</span> <span class="o">+</span> <span class="n">beta</span> <span class="o">*</span> <span class="n">v_prime</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(v{\left({K}_{t} \right)} = \beta v{\left(f{\left({K}_{t} \right)} - {C}_{t} \right)} + u{\left({C}_{t} \right)}\)</span></p>
+<p>The main point here is that once you’ve defined your control variable (you could have choosen <span class="math notranslate nohighlight">\(K_{t+1}\)</span> instead of <span class="math notranslate nohighlight">\(C_t\)</span> as your control variable), you must try to make it appear in most places of your value function.</p>
 </section>
 <section id="the-problem-with-the-first-order-condition-the-unknown-derivative">
 <h2>The Problem with the First Order Condition: the Unknown Derivative<a class="headerlink" href="#the-problem-with-the-first-order-condition-the-unknown-derivative" title="Permalink to this headline">#</a></h2>
+<p>Let’s take the first derivative of our value function with respect to our control variable <span class="math notranslate nohighlight">\(C_t\)</span> and set it to zero:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">FOC</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">smp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">value_function</span><span class="o">.</span><span class="n">rhs</span><span class="p">,</span> <span class="n">C</span><span class="p">[</span><span class="n">t</span><span class="p">]),</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\( -\beta \left. \frac{d}{d \xi_{1}} v{\left(\xi_{1} \right)} \right|_{\substack{ \xi_{1}=f{\left({K}_{t} \right)} - {C}_{t} }} + \frac{\partial}{\partial {C}_{t}} u{\left({C}_{t} \right)} = 0\)</span></p>
 </section>
 <section id="finding-an-expression-for-the-unknown-derivative-with-the-benveniste-scheinkman-condition">
 <h2>Finding an Expression for the Unknown Derivative with the Benveniste-Scheinkman Condition<a class="headerlink" href="#finding-an-expression-for-the-unknown-derivative-with-the-benveniste-scheinkman-condition" title="Permalink to this headline">#</a></h2>
@@ -372,7 +396,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Neoclassical Growth Model</p>
+        <p class="prev-next-title">Equilibrium Conditions for the Neoclassical Growth Model</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
