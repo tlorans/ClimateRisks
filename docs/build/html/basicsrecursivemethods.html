@@ -288,6 +288,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-vs-control-variables">State vs. Control Variables</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-problem-with-the-first-order-condition-the-unknown-derivative">The Problem with the First Order Condition: the Unknown Derivative</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-an-expression-for-the-unknown-derivative-with-the-benveniste-scheinkman-condition">Finding an Expression for the Unknown Derivative with the Benveniste-Scheinkman Condition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-euler-equation">The Euler Equation</a></li>
 </ul>
             </nav>
         </div>
@@ -302,6 +303,7 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="basics-intuition-for-the-recursive-methods">
 <h1>Basics Intuition for the Recursive Methods<a class="headerlink" href="#basics-intuition-for-the-recursive-methods" title="Permalink to this headline">#</a></h1>
 <p>The objective of this part is to give you the basics ideas behind the Recursive methods we will use in the next parts.</p>
+<p>I advise you to take a look at <a class="reference external" href="https://www.hetwebsite.net/het/fonseca/notes/fonseca_bellman.pdf">this excellent note from G.Fonseca</a>.</p>
 <p>We start with a brief overview of what is a value function and the recursive formulation of a social planner.</p>
 <section id="the-value-function">
 <h2>The Value Function<a class="headerlink" href="#the-value-function" title="Permalink to this headline">#</a></h2>
@@ -359,6 +361,7 @@ document.write(`
 </div>
 <p><span class="math notranslate nohighlight">\(v{\left({K}_{t} \right)} = \beta v{\left(f{\left({K}_{t} \right)} - {C}_{t} \right)} + u{\left({C}_{t} \right)}\)</span></p>
 <p>The main point here is that once you’ve defined your control variable (you could have choosen <span class="math notranslate nohighlight">\(K_{t+1}\)</span> instead of <span class="math notranslate nohighlight">\(C_t\)</span> as your control variable), you must try to make it appear in most places of your value function.</p>
+<p>The value function we have defined is not the objective by itself: we want to find a policy function <span class="math notranslate nohighlight">\(K_t = h(C_t)\)</span>.</p>
 </section>
 <section id="the-problem-with-the-first-order-condition-the-unknown-derivative">
 <h2>The Problem with the First Order Condition: the Unknown Derivative<a class="headerlink" href="#the-problem-with-the-first-order-condition-the-unknown-derivative" title="Permalink to this headline">#</a></h2>
@@ -367,9 +370,104 @@ document.write(`
 </pre></div>
 </div>
 <p><span class="math notranslate nohighlight">\( -\beta \left. \frac{d}{d \xi_{1}} v{\left(\xi_{1} \right)} \right|_{\substack{ \xi_{1}=f{\left({K}_{t} \right)} - {C}_{t} }} + \frac{\partial}{\partial {C}_{t}} u{\left({C}_{t} \right)} = 0\)</span></p>
+<p>The problem we face here is that we don’t know what the derivative of the value for future capital stock with respect to future capital stock is, because we don’t know what our value function is!</p>
+<p>Indeed, the chain rule gives <span class="math notranslate nohighlight">\(\frac{\partial}{\partial K_{t+1}} v{\left({K}_{t+1} \right)}\frac{\partial}{\partial C_{t}} {K}_{t+1}\)</span>.</p>
+<p>We know what <span class="math notranslate nohighlight">\(\frac{\partial}{\partial C_{t}} {K}_{t+1}\)</span> gives thanks to the transition equation:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">smp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">transition_equation</span><span class="o">.</span><span class="n">rhs</span><span class="p">,</span> <span class="n">C</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(-1\)</span></p>
+<p>But we don’t know what <span class="math notranslate nohighlight">\(\frac{\partial}{\partial K_{t+1}} v{\left({K}_{t+1} \right)}\)</span> is.</p>
+<p>Let’s define two functions to deal with this first step:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_unknown_derivative</span><span class="p">(</span><span class="n">value_function</span><span class="p">,</span> <span class="n">value_function_next_period</span><span class="p">,</span> <span class="n">state_variable</span><span class="p">,</span> <span class="n">index_time</span><span class="p">,</span> <span class="n">transition_equation</span><span class="p">):</span>
+  <span class="n">xi</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;xi_1&#39;</span><span class="p">)</span>
+  <span class="c1"># we have v&#39;(K[t+1]()) in the deriv dV/dC, we have generally dV/dC = dU/dC (we know) + dV&#39;/dK[t+1] * dKt+1/dC</span>
+  <span class="c1"># We generally know dKt+1/dC (at least we have refomulated Kt+1 such as C appear)</span>
+  <span class="c1"># we don&#39;t know dV&#39;/dK[+1]</span>
+  <span class="n">unknown</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Subs</span><span class="p">(</span><span class="n">smp</span><span class="o">.</span><span class="n">Derivative</span><span class="p">(</span><span class="n">value_function_next_period</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">transition_equation</span><span class="o">.</span><span class="n">rhs</span><span class="p">,</span> <span class="n">xi</span><span class="p">),</span> <span class="n">xi</span><span class="p">),</span> <span class="n">xi</span> <span class="p">,</span> <span class="n">transition_equation</span><span class="o">.</span><span class="n">rhs</span><span class="p">)</span>
+  <span class="n">better_printing</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">value_function</span><span class="p">,</span> <span class="n">state_variable</span><span class="p">[</span><span class="n">index_time</span><span class="p">])</span> <span class="c1"># to go to the format we would like</span>
+  <span class="c1"># format better what we don&#39;t know: dV/dKt+1 in the chain rule</span>
+  <span class="n">better_printing</span> <span class="o">=</span> <span class="n">better_printing</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">index_time</span><span class="p">,</span> <span class="n">index_time</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="c1"># iterate forward to get the format we want</span>
+  <span class="k">return</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">better_printing</span><span class="p">,</span> <span class="n">unknown</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">get_FOC</span><span class="p">(</span><span class="n">bellman</span><span class="p">,</span> <span class="n">control_variable</span><span class="p">,</span> <span class="n">index_time</span><span class="p">,</span> <span class="n">utility_function</span><span class="p">,</span> <span class="n">unknown_derivative</span><span class="p">):</span>
+  <span class="c1"># take the first derivative of the bellman for the control variable and set it to 0</span>
+  <span class="n">FOC</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">smp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">bellman</span><span class="o">.</span><span class="n">rhs</span><span class="p">,</span> <span class="n">control_variable</span><span class="p">[</span><span class="n">index_time</span><span class="p">]),</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="c1"># replace the format for the unknown derivative for a better one</span>
+  <span class="n">FOC</span> <span class="o">=</span> <span class="n">FOC</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">unknown_derivative</span><span class="o">.</span><span class="n">rhs</span><span class="p">,</span> <span class="n">unknown_derivative</span><span class="o">.</span><span class="n">lhs</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">smp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">utility_function</span><span class="p">,</span> <span class="n">control_variable</span><span class="p">[</span><span class="n">t</span><span class="p">]),</span> <span class="n">smp</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">FOC</span><span class="p">,</span> <span class="n">smp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">utility_function</span><span class="p">,</span> <span class="n">control_variable</span><span class="p">[</span><span class="n">t</span><span class="p">]))[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>We use the first function as a workaround to get a better expression for manipulation purposes:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">unknown_derivative</span> <span class="o">=</span> <span class="n">get_unknown_derivative</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">v_prime</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">transition_equation</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(\frac{\partial}{\partial {K}_{t + 1}} v{\left({K}_{t + 1} \right)} = \left. \frac{d}{d \xi_{1}} v{\left(\xi_{1} \right)} \right|_{\substack{ \xi_{1}=f{\left({K}_{t} \right)} - {C}_{t} }}\)</span></p>
+<p>And the second to get the FOC:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">FOC</span> <span class="o">=</span> <span class="n">get_FOC</span><span class="p">(</span><span class="n">value_function</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">unknown_derivative</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(\frac{\partial}{\partial {C}_{t}} u{\left({C}_{t} \right)} = \beta \frac{\partial}{\partial {K}_{t + 1}} v{\left({K}_{t + 1} \right)}\)</span></p>
 </section>
 <section id="finding-an-expression-for-the-unknown-derivative-with-the-benveniste-scheinkman-condition">
 <h2>Finding an Expression for the Unknown Derivative with the Benveniste-Scheinkman Condition<a class="headerlink" href="#finding-an-expression-for-the-unknown-derivative-with-the-benveniste-scheinkman-condition" title="Permalink to this headline">#</a></h2>
+<p>Hopefully, we can find an expression for the unknown derivative thanks to the Benveniste-Scheinkman (BS) Condition, such that we can have a final equilibrium condition that doesn’t refer to the value function itself.</p>
+<p>The process is the following:</p>
+<ol class="arabic simple">
+<li><p>Take the derivative of the value function with respect to your state variable <span class="math notranslate nohighlight">\(K_t\)</span></p></li>
+</ol>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">BS</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">smp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">K</span><span class="p">[</span><span class="n">t</span><span class="p">]),</span> <span class="n">smp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">value_function</span><span class="o">.</span><span class="n">rhs</span><span class="p">,</span> <span class="n">K</span><span class="p">[</span><span class="n">t</span><span class="p">]))</span>
+<span class="n">BS</span> <span class="o">=</span> <span class="n">BS</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">unknown_derivative</span><span class="o">.</span><span class="n">rhs</span><span class="p">,</span> <span class="n">unknown_derivative</span><span class="o">.</span><span class="n">lhs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(\frac{\partial}{\partial {K}_{t}} v{\left({K}_{t} \right)} = \beta \frac{\partial}{\partial {K}_{t}} f{\left({K}_{t} \right)} \frac{\partial}{\partial {K}_{t + 1}} v{\left({K}_{t + 1} \right)}\)</span></p>
+<ol class="arabic simple" start="2">
+<li><p>Use the previous result of the FOC in order to get an expression for the unknown derivative:</p></li>
+</ol>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">re_express_FOC</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">unknown_derivative</span><span class="o">.</span><span class="n">lhs</span><span class="p">,</span> <span class="n">smp</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">FOC</span><span class="p">,</span> <span class="n">unknown_derivative</span><span class="o">.</span><span class="n">lhs</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(\frac{\partial}{\partial {K}_{t + 1}} v{\left({K}_{t + 1} \right)} = \frac{\frac{\partial}{\partial {C}_{t}} u{\left({C}_{t} \right)}}{\beta}\)</span></p>
+<ol class="arabic simple" start="3">
+<li><p>Plug it into the BS condition:</p></li>
+</ol>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">BS</span> <span class="o">=</span> <span class="n">BS</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">re_express_FOC</span><span class="o">.</span><span class="n">lhs</span><span class="p">,</span> <span class="n">re_express_FOC</span><span class="o">.</span><span class="n">rhs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(\frac{\partial}{\partial {K}_{t}} v{\left({K}_{t} \right)} = \frac{\partial}{\partial {K}_{t}} f{\left({K}_{t} \right)} \frac{\partial}{\partial {C}_{t}} u{\left({C}_{t} \right)}\)</span></p>
+<ol class="arabic simple" start="4">
+<li><p>Iterate forward:</p></li>
+</ol>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">BS</span> <span class="o">=</span> <span class="n">BS</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(\frac{\partial}{\partial {K}_{t + 1}} v{\left({K}_{t + 1} \right)} = \frac{\partial}{\partial {K}_{t + 1}} f{\left({K}_{t + 1} \right)} \frac{\partial}{\partial {C}_{t + 1}} u{\left({C}_{t + 1} \right)}\)</span></p>
+<p>Now we have an expression to replace the derivative of the value function into the FOC.</p>
+<p>Let’s define a function to produce all theses preceding steps:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_BS</span><span class="p">(</span><span class="n">bellman</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">state_variable</span><span class="p">,</span> <span class="n">index_time</span><span class="p">,</span> <span class="n">unknown_derivative</span><span class="p">,</span> <span class="n">FOC</span><span class="p">):</span>
+  <span class="c1"># first need to reexpress FOC, if not we can have SymPy issue</span>
+  <span class="n">FOC</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">unknown_derivative</span><span class="o">.</span><span class="n">lhs</span><span class="p">,</span> <span class="n">smp</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">FOC</span><span class="p">,</span> <span class="n">unknown_derivative</span><span class="o">.</span><span class="n">lhs</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+  <span class="c1"># we want to find an expression for dV/dKt+1</span>
+  <span class="n">BS</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">smp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">state_variable</span><span class="p">[</span><span class="n">index_time</span><span class="p">]),</span> <span class="n">smp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">bellman</span><span class="o">.</span><span class="n">rhs</span><span class="p">,</span> <span class="n">state_variable</span><span class="p">[</span><span class="n">index_time</span><span class="p">]))</span>
+  <span class="n">BS</span> <span class="o">=</span> <span class="n">BS</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">unknown_derivative</span><span class="o">.</span><span class="n">rhs</span><span class="p">,</span> <span class="n">unknown_derivative</span><span class="o">.</span><span class="n">lhs</span><span class="p">)</span>
+  <span class="n">BS</span> <span class="o">=</span> <span class="n">BS</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">FOC</span><span class="o">.</span><span class="n">lhs</span><span class="p">,</span> <span class="n">FOC</span><span class="o">.</span><span class="n">rhs</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">BS</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">index_time</span><span class="p">,</span> <span class="n">index_time</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And use it to get the expression we want in one line:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">BS</span> <span class="o">=</span> <span class="n">get_BS</span><span class="p">(</span><span class="n">value_function</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">unknown_derivative</span><span class="p">,</span> <span class="n">FOC</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(\frac{\partial}{\partial {K}_{t + 1}} v{\left({K}_{t + 1} \right)} = \frac{\partial}{\partial {K}_{t + 1}} f{\left({K}_{t + 1} \right)} \frac{\partial}{\partial {C}_{t + 1}} u{\left({C}_{t + 1} \right)}\)</span></p>
+</section>
+<section id="the-euler-equation">
+<h2>The Euler Equation<a class="headerlink" href="#the-euler-equation" title="Permalink to this headline">#</a></h2>
+<p>The final stage is to find the Euler Equation. We find it by plugging the expression we’ve obtained from the BS condition into the initial FOC:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">euler_equation</span> <span class="o">=</span> <span class="n">FOC</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">BS</span><span class="o">.</span><span class="n">lhs</span><span class="p">,</span> <span class="n">BS</span><span class="o">.</span><span class="n">rhs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(\frac{\partial}{\partial {C}_{t}} u{\left({C}_{t} \right)} = \beta \frac{\partial}{\partial {K}_{t + 1}} f{\left({K}_{t + 1} \right)} \frac{\partial}{\partial {C}_{t + 1}} u{\left({C}_{t + 1} \right)}\)</span></p>
+<p>And we’re done! The Euler Equation and the transition equation gives you the equilibrium conditions of this model.</p>
 </section>
 </section>
 
@@ -419,6 +517,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-vs-control-variables">State vs. Control Variables</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-problem-with-the-first-order-condition-the-unknown-derivative">The Problem with the First Order Condition: the Unknown Derivative</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-an-expression-for-the-unknown-derivative-with-the-benveniste-scheinkman-condition">Finding an Expression for the Unknown Derivative with the Benveniste-Scheinkman Condition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-euler-equation">The Euler Equation</a></li>
 </ul>
   </nav></div>
 
