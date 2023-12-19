@@ -1,6 +1,6 @@
-# Basics Intuition for the Recursive Methods
+# Basics Intuition for Characterizing the Equilibrium Conditions
 
-The objective of this part is to give you the basics ideas behind the Recursive methods we will use in the next parts.
+The objective of this part is to give you the basics ideas behind the the process of finding equilibrium conditions of your model.
 
 I advise you to take a look at [this excellent note from G.Fonseca](https://www.hetwebsite.net/het/fonseca/notes/fonseca_bellman.pdf).
 
@@ -84,7 +84,7 @@ The main point here is that once you've defined your control variable (you could
 
 The value function we have defined is not the objective by itself: we want to find a policy function $K_t = h(C_t)$.
 
-## The Problem with the First Order Condition: the Unknown Derivative
+## First Order Conditions
 
 Let's take the first derivative of our value function with respect to our control variable $C_t$ and set it to zero:
 
@@ -147,7 +147,9 @@ FOC = get_FOC(value_function, C, t, u, unknown_derivative)
 
 $\frac{\partial}{\partial {C}_{t}} u{\left({C}_{t} \right)} = \beta \frac{\partial}{\partial {K}_{t + 1}} v{\left({K}_{t + 1} \right)}$
 
-## Finding an Expression for the Unknown Derivative with the Benveniste-Scheinkman Condition
+Please note that in case of multiple control variables, you will end up with as much first order conditions.
+
+## Benveniste-Scheinkman Conditions
 
 Hopefully, we can find an expression for the unknown derivative thanks to the Benveniste-Scheinkman (BS) Condition, such that we can have a final equilibrium condition that doesn't refer to the value function itself.
 
@@ -208,7 +210,9 @@ BS = get_BS(value_function, v, K, t, unknown_derivative, FOC)
 
 $\frac{\partial}{\partial {K}_{t + 1}} v{\left({K}_{t + 1} \right)} = \frac{\partial}{\partial {K}_{t + 1}} f{\left({K}_{t + 1} \right)} \frac{\partial}{\partial {C}_{t + 1}} u{\left({C}_{t + 1} \right)}$
 
-## The Euler Equation
+In case of multiple non-stochastic state variables, you will end up with multiple BS conditions (ie. one expression per unknown derivative of the value function with each state variable).
+
+## Euler Equations
 
 The final stage is to find the Euler Equation. We find it by plugging the expression we've obtained from the BS condition into the initial FOC:
 
@@ -219,3 +223,5 @@ euler_equation = FOC.subs(BS.lhs, BS.rhs)
 $\frac{\partial}{\partial {C}_{t}} u{\left({C}_{t} \right)} = \beta \frac{\partial}{\partial {K}_{t + 1}} f{\left({K}_{t + 1} \right)} \frac{\partial}{\partial {C}_{t + 1}} u{\left({C}_{t + 1} \right)}$
 
 And we're done! The Euler Equation and the transition equation gives you the equilibrium conditions of this model.
+
+In case of multiple control variables, you will end up with multiple Euler equations (one equation per control variable).

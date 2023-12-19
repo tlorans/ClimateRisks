@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Basics Intuition for the Recursive Methods &#8212; Climate Risks in Finance 0.1 documentation</title>
+    <title>Basics Intuition for Characterizing the Equilibrium Conditions &#8212; Climate Risks in Finance 0.1 documentation</title>
   
   
   
@@ -128,7 +128,7 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="dynamicequilibrium.html">Part 1: Dynamic Equilibrium</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Basics Intuition for the Recursive Methods</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Basics Intuition for Characterizing the Equilibrium Conditions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="neoclassicalgrowth.html">Neoclassical Growth Model: Equilibrium Conditions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="longrunrisks.html">Consumption-Based Capital Asset Pricing Model: Equilibrium Conditions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="basicsdynamics.html">Basics Intuition for Solving for Dynamics</a></li>
@@ -275,7 +275,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Basics Intuition for the Recursive Methods</h1>
+    <h1>Basics Intuition for Characterizing the Equilibrium Conditions</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -287,9 +287,9 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-value-function">The Value Function</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-vs-control-variables">State vs. Control Variables</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-problem-with-the-first-order-condition-the-unknown-derivative">The Problem with the First Order Condition: the Unknown Derivative</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-an-expression-for-the-unknown-derivative-with-the-benveniste-scheinkman-condition">Finding an Expression for the Unknown Derivative with the Benveniste-Scheinkman Condition</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-euler-equation">The Euler Equation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-order-conditions">First Order Conditions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benveniste-scheinkman-conditions">Benveniste-Scheinkman Conditions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euler-equations">Euler Equations</a></li>
 </ul>
             </nav>
         </div>
@@ -301,9 +301,9 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="basics-intuition-for-the-recursive-methods">
-<h1>Basics Intuition for the Recursive Methods<a class="headerlink" href="#basics-intuition-for-the-recursive-methods" title="Permalink to this headline">#</a></h1>
-<p>The objective of this part is to give you the basics ideas behind the Recursive methods we will use in the next parts.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="basics-intuition-for-characterizing-the-equilibrium-conditions">
+<h1>Basics Intuition for Characterizing the Equilibrium Conditions<a class="headerlink" href="#basics-intuition-for-characterizing-the-equilibrium-conditions" title="Permalink to this headline">#</a></h1>
+<p>The objective of this part is to give you the basics ideas behind the the process of finding equilibrium conditions of your model.</p>
 <p>I advise you to take a look at <a class="reference external" href="https://www.hetwebsite.net/het/fonseca/notes/fonseca_bellman.pdf">this excellent note from G.Fonseca</a>.</p>
 <p>We start with a brief overview of what is a value function and the recursive formulation of a social planner.</p>
 <section id="the-value-function">
@@ -364,8 +364,8 @@ document.write(`
 <p>The main point here is that once you’ve defined your control variable (you could have choosen <span class="math notranslate nohighlight">\(K_{t+1}\)</span> instead of <span class="math notranslate nohighlight">\(C_t\)</span> as your control variable), you must try to make it appear in most places of your value function.</p>
 <p>The value function we have defined is not the objective by itself: we want to find a policy function <span class="math notranslate nohighlight">\(K_t = h(C_t)\)</span>.</p>
 </section>
-<section id="the-problem-with-the-first-order-condition-the-unknown-derivative">
-<h2>The Problem with the First Order Condition: the Unknown Derivative<a class="headerlink" href="#the-problem-with-the-first-order-condition-the-unknown-derivative" title="Permalink to this headline">#</a></h2>
+<section id="first-order-conditions">
+<h2>First Order Conditions<a class="headerlink" href="#first-order-conditions" title="Permalink to this headline">#</a></h2>
 <p>Let’s take the first derivative of our value function with respect to our control variable <span class="math notranslate nohighlight">\(C_t\)</span> and set it to zero:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">FOC</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">smp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">value_function</span><span class="o">.</span><span class="n">rhs</span><span class="p">,</span> <span class="n">C</span><span class="p">[</span><span class="n">t</span><span class="p">]),</span> <span class="mi">0</span><span class="p">)</span>
 </pre></div>
@@ -409,9 +409,10 @@ document.write(`
 </pre></div>
 </div>
 <p><span class="math notranslate nohighlight">\(\frac{\partial}{\partial {C}_{t}} u{\left({C}_{t} \right)} = \beta \frac{\partial}{\partial {K}_{t + 1}} v{\left({K}_{t + 1} \right)}\)</span></p>
+<p>Please note that in case of multiple control variables, you will end up with as much first order conditions.</p>
 </section>
-<section id="finding-an-expression-for-the-unknown-derivative-with-the-benveniste-scheinkman-condition">
-<h2>Finding an Expression for the Unknown Derivative with the Benveniste-Scheinkman Condition<a class="headerlink" href="#finding-an-expression-for-the-unknown-derivative-with-the-benveniste-scheinkman-condition" title="Permalink to this headline">#</a></h2>
+<section id="benveniste-scheinkman-conditions">
+<h2>Benveniste-Scheinkman Conditions<a class="headerlink" href="#benveniste-scheinkman-conditions" title="Permalink to this headline">#</a></h2>
 <p>Hopefully, we can find an expression for the unknown derivative thanks to the Benveniste-Scheinkman (BS) Condition, such that we can have a final equilibrium condition that doesn’t refer to the value function itself.</p>
 <p>The process is the following:</p>
 <ol class="arabic simple">
@@ -460,15 +461,17 @@ document.write(`
 </pre></div>
 </div>
 <p><span class="math notranslate nohighlight">\(\frac{\partial}{\partial {K}_{t + 1}} v{\left({K}_{t + 1} \right)} = \frac{\partial}{\partial {K}_{t + 1}} f{\left({K}_{t + 1} \right)} \frac{\partial}{\partial {C}_{t + 1}} u{\left({C}_{t + 1} \right)}\)</span></p>
+<p>In case of multiple non-stochastic state variables, you will end up with multiple BS conditions (ie. one expression per unknown derivative of the value function with each state variable).</p>
 </section>
-<section id="the-euler-equation">
-<h2>The Euler Equation<a class="headerlink" href="#the-euler-equation" title="Permalink to this headline">#</a></h2>
+<section id="euler-equations">
+<h2>Euler Equations<a class="headerlink" href="#euler-equations" title="Permalink to this headline">#</a></h2>
 <p>The final stage is to find the Euler Equation. We find it by plugging the expression we’ve obtained from the BS condition into the initial FOC:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">euler_equation</span> <span class="o">=</span> <span class="n">FOC</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">BS</span><span class="o">.</span><span class="n">lhs</span><span class="p">,</span> <span class="n">BS</span><span class="o">.</span><span class="n">rhs</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="math notranslate nohighlight">\(\frac{\partial}{\partial {C}_{t}} u{\left({C}_{t} \right)} = \beta \frac{\partial}{\partial {K}_{t + 1}} f{\left({K}_{t + 1} \right)} \frac{\partial}{\partial {C}_{t + 1}} u{\left({C}_{t + 1} \right)}\)</span></p>
 <p>And we’re done! The Euler Equation and the transition equation gives you the equilibrium conditions of this model.</p>
+<p>In case of multiple control variables, you will end up with multiple Euler equations (one equation per control variable).</p>
 </section>
 </section>
 
@@ -516,9 +519,9 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-value-function">The Value Function</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-vs-control-variables">State vs. Control Variables</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-problem-with-the-first-order-condition-the-unknown-derivative">The Problem with the First Order Condition: the Unknown Derivative</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-an-expression-for-the-unknown-derivative-with-the-benveniste-scheinkman-condition">Finding an Expression for the Unknown Derivative with the Benveniste-Scheinkman Condition</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-euler-equation">The Euler Equation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-order-conditions">First Order Conditions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benveniste-scheinkman-conditions">Benveniste-Scheinkman Conditions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euler-equations">Euler Equations</a></li>
 </ul>
   </nav></div>
 
