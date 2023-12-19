@@ -394,7 +394,7 @@ document.write(`
 </pre></div>
 </div>
 <p><span class="math notranslate nohighlight">\(v{\left({K}_{t - 1},{Z}_{t} \right)}\)</span></p>
-<p>Here we denote a bit from what you have seen in the previous part, naming the state variable being denoted as the current capital stock <span class="math notranslate nohighlight">\(K_t\)</span> (and you will see this approach in other places). We follow the approach from Uhlig that seems more logical to us: <span class="math notranslate nohighlight">\(K_{t-1}\)</span> is the state variable that is inherited.</p>
+<p>Here we change a bit from what you have seen in the previous part, the state variable being denoted as the previous capital stock <span class="math notranslate nohighlight">\(K_{t-1}\)</span> rather than current capital stock as in the previous part <span class="math notranslate nohighlight">\(K_t\)</span>. We follow the approach from Uhlig that seems more logical to us: <span class="math notranslate nohighlight">\(K_{t-1}\)</span> is the state variable that is inherited.</p>
 <p>At each period <span class="math notranslate nohighlight">\(t\)</span>, the consumer can choose to adjust the consumption level <span class="math notranslate nohighlight">\(C_t\)</span>. Having the choice about the consumption level implies that it can also control the current level of capital stock <span class="math notranslate nohighlight">\(K_{t}\)</span>. So theoretically, the control variable could either be the consumption level or the capital stock. Here, we will focus on choosing as control variables the ones that directly appear in the utility function.</p>
 <p>The future value of capital stock is thus:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">v_prime</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="s1">&#39;v&#39;</span><span class="p">)(</span><span class="n">K</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">Z</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
@@ -458,13 +458,13 @@ document.write(`
 </section>
 <section id="id1">
 <h3>Euler Equation<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
-<p>And we can finally plug it back to the FOC to obtain the Euler Equation and simplify the expression:</p>
+<p>And we can finally plug it back to the FOC to obtain the Euler Equation:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">euler_equation</span> <span class="o">=</span> <span class="n">FOC</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">BS</span><span class="o">.</span><span class="n">lhs</span><span class="p">,</span> <span class="n">BS</span><span class="o">.</span><span class="n">rhs</span><span class="p">)</span>
-<span class="n">euler_equation</span> <span class="o">=</span> <span class="n">euler_equation</span><span class="o">.</span><span class="n">simplify</span><span class="p">()</span>
 </pre></div>
 </div>
-<p><span class="math notranslate nohighlight">\(\frac{\partial}{\partial {C}_{t}} u{\left({C}_{t} \right)} = \beta \left(- \delta + \frac{\partial}{\partial {K}_{t + 1}} f{\left({K}_{t + 1} \right)} + 1\right) \frac{\partial}{\partial {C}_{t + 1}} u{\left({C}_{t + 1} \right)}
+<p><span class="math notranslate nohighlight">\(\frac{1}{{C}_{t}} = \frac{\beta \left(\frac{\alpha {K}_{t}^{\alpha} {Z}_{t + 1}}{{K}_{t}} - \delta + 1\right)}{{C}_{t + 1}}
 \)</span></p>
+<p>Again, please note that we should have an expectation operator in our Euler Equation.</p>
 </section>
 </section>
 <section id="equilibrium-conditions">

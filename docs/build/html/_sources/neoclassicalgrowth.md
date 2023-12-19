@@ -100,7 +100,7 @@ v = smp.Function('v')(K[t-1], Z[t])
 
 $v{\left({K}_{t - 1},{Z}_{t} \right)}$
 
-Here we denote a bit from what you have seen in the previous part, naming the state variable being denoted as the current capital stock $K_t$ (and you will see this approach in other places). We follow the approach from Uhlig that seems more logical to us: $K_{t-1}$ is the state variable that is inherited. 
+Here we change a bit from what you have seen in the previous part, the state variable being denoted as the previous capital stock $K_{t-1}$ rather than current capital stock as in the previous part $K_t$. We follow the approach from Uhlig that seems more logical to us: $K_{t-1}$ is the state variable that is inherited. 
 
 At each period $t$, the consumer can choose to adjust the consumption level $C_t$. Having the choice about the consumption level implies that it can also control the current level of capital stock $K_{t}$. So theoretically, the control variable could either be the consumption level or the capital stock. Here, we will focus on choosing as control variables the ones that directly appear in the utility function.
 
@@ -185,15 +185,16 @@ $
 
 ### Euler Equation
 
-And we can finally plug it back to the FOC to obtain the Euler Equation and simplify the expression:
+And we can finally plug it back to the FOC to obtain the Euler Equation:
 
 ```Python
 euler_equation = FOC.subs(BS.lhs, BS.rhs)
-euler_equation = euler_equation.simplify()
 ```
 
-$\frac{\partial}{\partial {C}_{t}} u{\left({C}_{t} \right)} = \beta \left(- \delta + \frac{\partial}{\partial {K}_{t + 1}} f{\left({K}_{t + 1} \right)} + 1\right) \frac{\partial}{\partial {C}_{t + 1}} u{\left({C}_{t + 1} \right)}
+$\frac{1}{{C}_{t}} = \frac{\beta \left(\frac{\alpha {K}_{t}^{\alpha} {Z}_{t + 1}}{{K}_{t}} - \delta + 1\right)}{{C}_{t + 1}}
 $
+
+Again, please note that we should have an expectation operator in our Euler Equation.
 
 ## Equilibrium Conditions
 
