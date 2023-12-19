@@ -48,7 +48,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Consumption-Based Capital Asset Pricing Model: Equilibrium Conditions" href="longrunrisks.html" />
-    <link rel="prev" title="Basics Intuition for the Recursive Methods" href="basicsrecursivemethods.html" />
+    <link rel="prev" title="Basics Intuition for Characterizing the Equilibrium Conditions" href="basicsrecursivemethods.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -128,7 +128,7 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="dynamicequilibrium.html">Part 1: Dynamic Equilibrium</a></li>
-<li class="toctree-l1"><a class="reference internal" href="basicsrecursivemethods.html">Basics Intuition for the Recursive Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basicsrecursivemethods.html">Basics Intuition for Characterizing the Equilibrium Conditions</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Neoclassical Growth Model: Equilibrium Conditions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="longrunrisks.html">Consumption-Based Capital Asset Pricing Model: Equilibrium Conditions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="basicsdynamics.html">Basics Intuition for Solving for Dynamics</a></li>
@@ -333,39 +333,33 @@ document.write(`
 </pre></div>
 </div>
 <p>We have the following variables:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">K</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;K&#39;</span><span class="p">)</span> <span class="c1"># capital</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
 <span class="n">Y</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">)</span> <span class="c1"># output</span>
 <span class="n">C</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">)</span> <span class="c1"># consumption</span>
-<span class="n">I</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;I&#39;</span><span class="p">)</span> <span class="c1"># investment</span>
+<span class="n">K</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;K&#39;</span><span class="p">)</span> <span class="c1"># Capital</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">)</span> <span class="c1"># total factor productivity</span>
+<span class="n">I</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;I&#39;</span><span class="p">)</span> <span class="c1"># Investment</span>
+<span class="n">epsilon</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;epsilon&#39;</span><span class="p">)</span> <span class="c1"># TFP shock</span>
 </pre></div>
 </div>
-<p><span class="math notranslate nohighlight">\({K}_{t}\)</span>,
-<span class="math notranslate nohighlight">\({Y}_{t}\)</span>,
-<span class="math notranslate nohighlight">\({C}_{t}\)</span>,
-<span class="math notranslate nohighlight">\({I}_{t}\)</span></p>
 <p>And the following parameters:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">delta</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;delta&#39;</span><span class="p">)</span>
-<span class="n">beta</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;beta&#39;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">alpha</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;alpha&#39;</span><span class="p">)</span> <span class="c1"># capital share</span>
+<span class="n">beta</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;beta&#39;</span><span class="p">)</span> <span class="c1"># discount factor</span>
+<span class="n">delta</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;delta&#39;</span><span class="p">)</span> <span class="c1"># capital depreciation rate</span>
 </pre></div>
 </div>
-<p><span class="math notranslate nohighlight">\(\delta\)</span>,
-<span class="math notranslate nohighlight">\(\beta\)</span></p>
-<p>The dynamic of the capital stock is defined by the following transition equation:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">transition_equation</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">K</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">delta</span><span class="p">)</span> <span class="o">*</span> <span class="n">K</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">+</span> <span class="n">I</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
+<p>The production function is the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">production_function</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">Y</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">Z</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">*</span> <span class="n">K</span><span class="p">[</span><span class="n">t</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="n">alpha</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">delta</span><span class="p">)</span><span class="o">*</span><span class="n">K</span><span class="p">[</span><span class="n">t</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
-<p><span class="math notranslate nohighlight">\({K}_{t + 1} = \left(1 - \delta\right) {K}_{t} + {I}_{t}\)</span></p>
 <p>The resource constraint is:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">resource_constraint</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">Y</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">C</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">+</span> <span class="n">I</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">resource_constraint</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">C</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">+</span> <span class="n">K</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">Y</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
 </pre></div>
 </div>
-<p><span class="math notranslate nohighlight">\({Y}_{t} = {C}_{t} + {I}_{t}\)</span></p>
-<p>And we have the production function:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="s1">&#39;f&#39;</span><span class="p">)(</span><span class="n">K</span><span class="p">[</span><span class="n">t</span><span class="p">])</span> <span class="c1"># Prod</span>
-<span class="n">production_function</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">Y</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">f</span><span class="p">)</span>
+<p>And we have a technology shock describing the evolution of the total factor productivity (TFP):</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">TFP_equation</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">Z</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">smp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">epsilon</span><span class="p">[</span><span class="n">t</span><span class="p">]))</span>
 </pre></div>
 </div>
-<p><span class="math notranslate nohighlight">\({Y}_{t} = f{\left({K}_{t} \right)}\)</span></p>
 </section>
 <section id="representative-consumer-preferences">
 <h4>Representative Consumer Preferences<a class="headerlink" href="#representative-consumer-preferences" title="Permalink to this headline">#</a></h4>
@@ -374,36 +368,37 @@ document.write(`
 </pre></div>
 </div>
 <p><span class="math notranslate nohighlight">\(u{\left({C}_{t} \right)}\)</span></p>
+<p>Here we will give a functional form to the utility function: a logarithmic utility function:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">utility_function</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">smp</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">C</span><span class="p">[</span><span class="n">t</span><span class="p">]))</span>
+</pre></div>
+</div>
 </section>
 </section>
 <section id="states-and-controls">
 <h3>States and Controls<a class="headerlink" href="#states-and-controls" title="Permalink to this headline">#</a></h3>
-<p>The consumer gives some value to the initial capital stock <span class="math notranslate nohighlight">\(K_t\)</span>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">v</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="s1">&#39;v&#39;</span><span class="p">)(</span><span class="n">K</span><span class="p">[</span><span class="n">t</span><span class="p">])</span> <span class="c1"># value function</span>
+<p>The consumer gives some value to the initial capital stock <span class="math notranslate nohighlight">\(K_{t-1}\)</span>, conditional on the stochastic TFP process <span class="math notranslate nohighlight">\(Z_t\)</span>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">v</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="s1">&#39;v&#39;</span><span class="p">)(</span><span class="n">K</span><span class="p">[</span><span class="n">t</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">Z</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
 </pre></div>
 </div>
-<p><span class="math notranslate nohighlight">\(v{\left({K}_{t} \right)}\)</span></p>
-<p>It is a state variable as it is inherited from the previous period (refer to the transition equation).</p>
-<p>At each period <span class="math notranslate nohighlight">\(t\)</span>, the consumer can choose to adjust the consumption level <span class="math notranslate nohighlight">\(C_t\)</span>. Having the choice about the consumption level implies that it can also control the future level of capital stock <span class="math notranslate nohighlight">\(K_{t+1}\)</span>. So theoretically, the control variable could either be the consumption level or the future capital stock. Here, we will focus on choosing as control variables the ones that directly appear in the utility function.</p>
+<p>Here we denote a bit from what you have seen in the previous part, naming the state variable being denoted as the current capital stock <span class="math notranslate nohighlight">\(K_t\)</span> (and you will see this approach in other places). We follow the approach from Uhlig that seems more logical to us: <span class="math notranslate nohighlight">\(K_{t-1}\)</span> is the state variable that is inherited.</p>
+<p>At each period <span class="math notranslate nohighlight">\(t\)</span>, the consumer can choose to adjust the consumption level <span class="math notranslate nohighlight">\(C_t\)</span>. Having the choice about the consumption level implies that it can also control the current level of capital stock <span class="math notranslate nohighlight">\(K_{t}\)</span>. So theoretically, the control variable could either be the consumption level or the capital stock. Here, we will focus on choosing as control variables the ones that directly appear in the utility function.</p>
 <p>The future value of capital stock is thus:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">v_prime</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="s1">&#39;v&#39;</span><span class="p">)(</span><span class="n">K</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">v_prime</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="s1">&#39;v&#39;</span><span class="p">)(</span><span class="n">K</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">Z</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
-<p><span class="math notranslate nohighlight">\(v{\left({K}_{t + 1} \right)}\)</span></p>
-<p>However, we want to make appears our control variable <span class="math notranslate nohighlight">\(C_t\)</span> as much as possible in our value function. We can therefore use the time series macro dynamic definitions for reexpressing the state variable <span class="math notranslate nohighlight">\(K_{t+1}\)</span> with the control variable <span class="math notranslate nohighlight">\(C_{t}\)</span>:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">investment_equation</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">I</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">smp</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">resource_constraint</span><span class="p">,</span> <span class="n">I</span><span class="p">[</span><span class="n">t</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">investment_equation</span> <span class="o">=</span> <span class="n">investment_equation</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">production_function</span><span class="o">.</span><span class="n">lhs</span><span class="p">,</span> <span class="n">production_function</span><span class="o">.</span><span class="n">rhs</span><span class="p">)</span>
-<span class="n">transition_equation</span> <span class="o">=</span> <span class="n">transition_equation</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">investment_equation</span><span class="o">.</span><span class="n">lhs</span><span class="p">,</span> <span class="n">investment_equation</span><span class="o">.</span><span class="n">rhs</span><span class="p">)</span>
-
-<span class="n">v_prime</span> <span class="o">=</span> <span class="n">v_prime</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">transition_equation</span><span class="o">.</span><span class="n">lhs</span><span class="p">,</span> <span class="n">transition_equation</span><span class="o">.</span><span class="n">rhs</span><span class="p">)</span>
+<p>However, we want to make appears our control variable <span class="math notranslate nohighlight">\(C_t\)</span> as much as possible in our value function. We can therefore use the time series macro dynamic definitions for reexpressing the state variable <span class="math notranslate nohighlight">\(K_{t}\)</span> with the control variable <span class="math notranslate nohighlight">\(C_{t}\)</span>, by finding the transition equation (the equation expressing the dynamic of the capital stock):</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">transition_equation</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">K</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">smp</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">resource_constraint</span><span class="p">,</span> <span class="n">K</span><span class="p">[</span><span class="n">t</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">transition_equation</span> <span class="o">=</span> <span class="n">transition_equation</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">production_function</span><span class="o">.</span><span class="n">lhs</span><span class="p">,</span> <span class="n">production_function</span><span class="o">.</span><span class="n">rhs</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><span class="math notranslate nohighlight">\(v{\left(\left(1 - \delta\right) {K}_{t} + f{\left({K}_{t} \right)} - {C}_{t} \right)}\)</span></p>
+<p>So we can reexpress:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">v_prime</span> <span class="o">=</span> <span class="n">v_prime</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">transition_equation</span><span class="o">.</span><span class="n">lhs</span><span class="p">,</span> <span class="n">transition_equation</span><span class="o">.</span><span class="n">rhs</span><span class="p">)</span>
+</pre></div>
+</div>
 <p>We therefore can state our final version of the Bellman equation:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">bellman</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">u</span> <span class="o">+</span> <span class="n">beta</span> <span class="o">*</span> <span class="n">v_prime</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">bellman</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">utility_function</span><span class="o">.</span><span class="n">rhs</span> <span class="o">+</span> <span class="n">beta</span> <span class="o">*</span> <span class="n">v_prime</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><span class="math notranslate nohighlight">\(v{\left({K}_{t} \right)} = \beta v{\left(\left(1 - \delta\right) {K}_{t} + f{\left({K}_{t} \right)} - {C}_{t} \right)} + u{\left({C}_{t} \right)}\)</span></p>
 </section>
 </section>
 <section id="euler-equation">
@@ -498,7 +493,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Basics Intuition for the Recursive Methods</p>
+        <p class="prev-next-title">Basics Intuition for Characterizing the Equilibrium Conditions</p>
       </div>
     </a>
     <a class="right-next"

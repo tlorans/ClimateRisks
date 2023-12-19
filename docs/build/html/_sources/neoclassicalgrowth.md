@@ -23,45 +23,39 @@ t = smp.symbols('t', cls = smp.Idx)
 
 We have the following variables:
 ```
-K = smp.IndexedBase('K') # capital
+
 Y = smp.IndexedBase('Y') # output
 C = smp.IndexedBase('C') # consumption
-I = smp.IndexedBase('I') # investment
+K = smp.IndexedBase('K') # Capital
+Z = smp.IndexedBase('Z') # total factor productivity
+I = smp.IndexedBase('I') # Investment
+epsilon = smp.IndexedBase('epsilon') # TFP shock
 ```
-${K}_{t}$,
-${Y}_{t}$,
-${C}_{t}$,
-${I}_{t}$
 
 And the following parameters:
 ```
-delta = smp.symbols('delta')
-beta = smp.symbols('beta')
+alpha = smp.symbols('alpha') # capital share
+beta = smp.symbols('beta') # discount factor
+delta = smp.symbols('delta') # capital depreciation rate
 ```
-$\delta$,
-$\beta$
 
-The dynamic of the capital stock is defined by the following transition equation:
+
+The production function is the following:
 
 ```
-transition_equation = smp.Eq(K[t+1], (1 - delta) * K[t] + I[t])
+production_function = smp.Eq(Y[t], Z[t] * K[t-1]**alpha + (1 - delta)*K[t-1])
 ```
-${K}_{t + 1} = \left(1 - \delta\right) {K}_{t} + {I}_{t}$
 
 The resource constraint is:
 ```Python
-resource_constraint = smp.Eq(Y[t], C[t] + I[t])
+resource_constraint = smp.Eq(C[t] + K[t], Y[t])
 ```
-${Y}_{t} = {C}_{t} + {I}_{t}$
 
-And we have the production function:
+And we have a technology shock describing the evolution of the total factor productivity (TFP):
 
 ```Python
-f = smp.Function('f')(K[t]) # Prod
-production_function = smp.Eq(Y[t], f)
+TFP_equation = smp.Eq(Z[t], smp.exp(epsilon[t]))
 ```
-
-${Y}_{t} = f{\left({K}_{t} \right)}$
 
 #### Representative Consumer Preferences
 
@@ -73,47 +67,48 @@ u = smp.Function('u')(C[t]) # utility function
 
 $u{\left({C}_{t} \right)}$
 
+Here we will give a functional form to the utility function: a logarithmic utility function:
+
+```Python
+utility_function = smp.Eq(u, smp.log(C[t]))
+```
+
 ### States and Controls
 
-The consumer gives some value to the initial capital stock $K_t$:
+The consumer gives some value to the initial capital stock $K_{t-1}$, conditional on the stochastic TFP process $Z_t$:
 
 ```
-v = smp.Function('v')(K[t]) # value function
+v = smp.Function('v')(K[t-1], Z[t])
 ```
 
-$v{\left({K}_{t} \right)}$
+Here we denote a bit from what you have seen in the previous part, naming the state variable being denoted as the current capital stock $K_t$ (and you will see this approach in other places). We follow the approach from Uhlig that seems more logical to us: $K_{t-1}$ is the state variable that is inherited. 
 
-It is a state variable as it is inherited from the previous period (refer to the transition equation). 
-
-At each period $t$, the consumer can choose to adjust the consumption level $C_t$. Having the choice about the consumption level implies that it can also control the future level of capital stock $K_{t+1}$. So theoretically, the control variable could either be the consumption level or the future capital stock. Here, we will focus on choosing as control variables the ones that directly appear in the utility function.
+At each period $t$, the consumer can choose to adjust the consumption level $C_t$. Having the choice about the consumption level implies that it can also control the current level of capital stock $K_{t}$. So theoretically, the control variable could either be the consumption level or the capital stock. Here, we will focus on choosing as control variables the ones that directly appear in the utility function.
 
 The future value of capital stock is thus:
 
 ```Python
-v_prime = smp.Function('v')(K[t+1])
+v_prime = smp.Function('v')(K[t], Z[t+1])
 ```
-$v{\left({K}_{t + 1} \right)}$
 
-However, we want to make appears our control variable $C_t$ as much as possible in our value function. We can therefore use the time series macro dynamic definitions for reexpressing the state variable $K_{t+1}$ with the control variable $C_{t}$:
+However, we want to make appears our control variable $C_t$ as much as possible in our value function. We can therefore use the time series macro dynamic definitions for reexpressing the state variable $K_{t}$ with the control variable $C_{t}$, by finding the transition equation (the equation expressing the dynamic of the capital stock):
 
 ```Python
-investment_equation = smp.Eq(I[t], smp.solve(resource_constraint, I[t])[0])
-investment_equation = investment_equation.subs(production_function.lhs, production_function.rhs)
-transition_equation = transition_equation.subs(investment_equation.lhs, investment_equation.rhs)
-
-v_prime = v_prime.subs(transition_equation.lhs, transition_equation.rhs)
+transition_equation = smp.Eq(K[t], smp.solve(resource_constraint, K[t])[0])
+transition_equation = transition_equation.subs(production_function.lhs, production_function.rhs)
 ```
 
-$v{\left(\left(1 - \delta\right) {K}_{t} + f{\left({K}_{t} \right)} - {C}_{t} \right)}$
+So we can reexpress:
+
+```Python
+v_prime = v_prime.subs(transition_equation.lhs, transition_equation.rhs)
+```
 
 We therefore can state our final version of the Bellman equation:
 
 ```Python
-bellman = smp.Eq(v, u + beta * v_prime)
+bellman = smp.Eq(v, utility_function.rhs + beta * v_prime)
 ```
-
-$v{\left({K}_{t} \right)} = \beta v{\left(\left(1 - \delta\right) {K}_{t} + f{\left({K}_{t} \right)} - {C}_{t} \right)} + u{\left({C}_{t} \right)}$
-
 
 ## Euler Equation
 
