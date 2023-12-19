@@ -1,0 +1,587 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Hansen’s RBC Model: Equilibrium Conditions &#8212; Climate Risks in Finance 0.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'rbcequilibrium';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Basics Intuition for Solving for Dynamics" href="basicsdynamics.html" />
+    <link rel="prev" title="Basics Intuition for Characterizing the Equilibrium Conditions" href="basicsrecursivemethods.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Climate Risks in Finance 0.1 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="dynamicequilibrium.html">Part 1: Dynamic Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basicsrecursivemethods.html">Basics Intuition for Characterizing the Equilibrium Conditions</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Hansen’s RBC Model: Equilibrium Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basicsdynamics.html">Basics Intuition for Solving for Dynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solvingrbc.html">Hansen’s RBC Dynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="empirics.html">Part 2: Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statespace.html">Basics Intuitions for Parameters Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="estimatingrbc.html">Hansen’s RBC Parameters Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/rbcequilibrium.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Hansen’s RBC Model: Equilibrium Conditions</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-value-function">The Value Function</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#economic-environment">Economic Environment</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series-macro-dynamics">Time Series Macro Dynamics</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#representative-consumer-preferences">Representative Consumer Preferences</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#states-and-controls">States and Controls</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euler-equation">Euler Equation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#first-order-conditions">First-Order Conditions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#benveniste-sheinkman-conditions">Benveniste-Sheinkman Conditions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Euler Equation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equilibrium-conditions">Equilibrium Conditions</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="hansen-s-rbc-model-equilibrium-conditions">
+<h1>Hansen’s RBC Model: Equilibrium Conditions<a class="headerlink" href="#hansen-s-rbc-model-equilibrium-conditions" title="Permalink to this headline">#</a></h1>
+<p>We will follow the same systematic approach:</p>
+<ol class="arabic simple">
+<li><p>Define the value function based on the economic environment</p></li>
+<li><p>Use recursive methods to determine the Euler equations of our system</p></li>
+</ol>
+<section id="the-value-function">
+<h2>The Value Function<a class="headerlink" href="#the-value-function" title="Permalink to this headline">#</a></h2>
+<section id="economic-environment">
+<h3>Economic Environment<a class="headerlink" href="#economic-environment" title="Permalink to this headline">#</a></h3>
+<p>We start with the definition of the variables and parameters.</p>
+<section id="time-series-macro-dynamics">
+<h4>Time Series Macro Dynamics<a class="headerlink" href="#time-series-macro-dynamics" title="Permalink to this headline">#</a></h4>
+<p>We work in discrete time, with <span class="math notranslate nohighlight">\(t\)</span> the unit of time:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">smp</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="bp">cls</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Idx</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We have the following variables:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">)</span> <span class="c1"># output</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">)</span> <span class="c1"># consumption</span>
+<span class="n">K</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;K&#39;</span><span class="p">)</span> <span class="c1"># Capital</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">)</span> <span class="c1"># total factor productivity</span>
+<span class="n">I</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;I&#39;</span><span class="p">)</span> <span class="c1"># Investment</span>
+<span class="n">epsilon</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;epsilon&#39;</span><span class="p">)</span> <span class="c1"># TFP shock</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\({Y}_{t}\)</span>,
+<span class="math notranslate nohighlight">\({C}_{t}\)</span>,
+<span class="math notranslate nohighlight">\({K}_{t}\)</span>,
+<span class="math notranslate nohighlight">\({I}_{t}\)</span>,
+<span class="math notranslate nohighlight">\({Z}_{t}\)</span>,
+<span class="math notranslate nohighlight">\({\epsilon}_{t}\)</span></p>
+<p>And the following parameters:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">alpha</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;alpha&#39;</span><span class="p">)</span> <span class="c1"># capital share</span>
+<span class="n">beta</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;beta&#39;</span><span class="p">)</span> <span class="c1"># discount factor</span>
+<span class="n">delta</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;delta&#39;</span><span class="p">)</span> <span class="c1"># capital depreciation rate</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(\alpha\)</span>,
+<span class="math notranslate nohighlight">\(\beta\)</span>,
+<span class="math notranslate nohighlight">\(\delta\)</span></p>
+<p>The production function is the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">production_function</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">Y</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">Z</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">*</span> <span class="n">K</span><span class="p">[</span><span class="n">t</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="n">alpha</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">delta</span><span class="p">)</span><span class="o">*</span><span class="n">K</span><span class="p">[</span><span class="n">t</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\({Y}_{t} = \left(1 - \delta\right) {K}_{t - 1} + {K}_{t - 1}^{\alpha} {Z}_{t}\)</span></p>
+<p>The resource constraint is:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">resource_constraint</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">C</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">+</span> <span class="n">K</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">Y</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\({C}_{t} + {K}_{t} = {Y}_{t}\)</span></p>
+<p>And we have a technology shock describing the evolution of the total factor productivity (TFP):</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">TFP_equation</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">Z</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">smp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">epsilon</span><span class="p">[</span><span class="n">t</span><span class="p">]))</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\({Z}_{t} = e^{{\epsilon}_{t}}\)</span></p>
+</section>
+<section id="representative-consumer-preferences">
+<h4>Representative Consumer Preferences<a class="headerlink" href="#representative-consumer-preferences" title="Permalink to this headline">#</a></h4>
+<p>The representative consumer / producer derives utility from consumption:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="s1">&#39;u&#39;</span><span class="p">)(</span><span class="n">C</span><span class="p">[</span><span class="n">t</span><span class="p">])</span> <span class="c1"># utility function</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(u{\left({C}_{t} \right)}\)</span></p>
+<p>Here we will give a functional form to the utility function: a logarithmic utility function:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">utility_function</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">smp</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">C</span><span class="p">[</span><span class="n">t</span><span class="p">]))</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(u{\left({C}_{t} \right)} = \log{\left({C}_{t} \right)}\)</span></p>
+</section>
+</section>
+<section id="states-and-controls">
+<h3>States and Controls<a class="headerlink" href="#states-and-controls" title="Permalink to this headline">#</a></h3>
+<p>The consumer gives some value to the initial capital stock <span class="math notranslate nohighlight">\(K_{t-1}\)</span>, conditional on the stochastic TFP process <span class="math notranslate nohighlight">\(Z_t\)</span>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">v</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="s1">&#39;v&#39;</span><span class="p">)(</span><span class="n">K</span><span class="p">[</span><span class="n">t</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">Z</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(v{\left({K}_{t - 1},{Z}_{t} \right)}\)</span></p>
+<p>Here we change a bit from what you have seen in the previous part, the state variable being denoted as the previous capital stock <span class="math notranslate nohighlight">\(K_{t-1}\)</span> rather than current capital stock as in the previous part <span class="math notranslate nohighlight">\(K_t\)</span>. We follow the approach from Uhlig that seems more logical to us: <span class="math notranslate nohighlight">\(K_{t-1}\)</span> is the state variable that is inherited.</p>
+<p>At each period <span class="math notranslate nohighlight">\(t\)</span>, the consumer can choose to adjust the consumption level <span class="math notranslate nohighlight">\(C_t\)</span>. Having the choice about the consumption level implies that it can also control the current level of capital stock <span class="math notranslate nohighlight">\(K_{t}\)</span>. So theoretically, the control variable could either be the consumption level or the capital stock. Here, we will focus on choosing as control variables the ones that directly appear in the utility function.</p>
+<p>The future value of capital stock is thus:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">v_prime</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="s1">&#39;v&#39;</span><span class="p">)(</span><span class="n">K</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">Z</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(v{\left({K}_{t},{Z}_{t + 1} \right)}\)</span></p>
+<p>However, we want to make appears our control variable <span class="math notranslate nohighlight">\(C_t\)</span> as much as possible in our value function. We can therefore use the time series macro dynamic definitions for reexpressing the state variable <span class="math notranslate nohighlight">\(K_{t}\)</span> with the control variable <span class="math notranslate nohighlight">\(C_{t}\)</span>, by finding the transition equation (the equation expressing the dynamic of the capital stock):</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">transition_equation</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">K</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">smp</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">resource_constraint</span><span class="p">,</span> <span class="n">K</span><span class="p">[</span><span class="n">t</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">transition_equation</span> <span class="o">=</span> <span class="n">transition_equation</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">production_function</span><span class="o">.</span><span class="n">lhs</span><span class="p">,</span> <span class="n">production_function</span><span class="o">.</span><span class="n">rhs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\({K}_{t} = - {C}_{t} + {Y}_{t} \\\)</span></p>
+<p><span class="math notranslate nohighlight">\({K}_{t} = \left(1 - \delta\right) {K}_{t - 1} - {C}_{t} + {K}_{t - 1}^{\alpha} {Z}_{t}\)</span></p>
+<p>So we can reexpress:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">v_prime</span> <span class="o">=</span> <span class="n">v_prime</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">transition_equation</span><span class="o">.</span><span class="n">lhs</span><span class="p">,</span> <span class="n">transition_equation</span><span class="o">.</span><span class="n">rhs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(v{\left(\left(1 - \delta\right) {K}_{t - 1} - {C}_{t} + {K}_{t - 1}^{\alpha} {Z}_{t},{Z}_{t + 1} \right)}\)</span></p>
+<p>We therefore can state our final version of the Bellman equation:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">bellman</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">utility_function</span><span class="o">.</span><span class="n">rhs</span> <span class="o">+</span> <span class="n">beta</span> <span class="o">*</span> <span class="n">v_prime</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(v{\left({K}_{t - 1},{Z}_{t} \right)} = \beta v{\left(\left(1 - \delta\right) {K}_{t - 1} - {C}_{t} + {K}_{t - 1}^{\alpha} {Z}_{t},{Z}_{t + 1} \right)} + \log{\left({C}_{t} \right)}\)</span></p>
+<p>Please note that we should have an expectation operator associated with the value of future state variables, as we have a stochastic shock on total factor productivity. Our Bellman Equation should be:</p>
+<p><span class="math notranslate nohighlight">\(v{\left({K}_{t - 1},{Z}_{t} \right)} = \beta \mathbb{E} [v{\left(\left(1 - \delta\right) {K}_{t - 1} - {C}_{t} + {K}_{t - 1}^{\alpha} {Z}_{t},{Z}_{t + 1} \right)}] + \log{\left({C}_{t} \right)}\)</span></p>
+<p>For ease of programming (I didn’t managed yet to work properly with the expectation operator in SymPy), we will program without the expectation operator. But please add it mentally into the results.</p>
+</section>
+</section>
+<section id="euler-equation">
+<h2>Euler Equation<a class="headerlink" href="#euler-equation" title="Permalink to this headline">#</a></h2>
+<p>The process is always the same:</p>
+<ol class="arabic simple">
+<li><p>Find the First Order Conditions (FOC) by taking the derivative of the value function with repect to the control variables</p></li>
+<li><p>Find the Benveniste-Scheinkman (BS) Conditions by setting the the derivative of the value function with respect to the state variables</p></li>
+<li><p>With the BS and the FOC, find an expression for the unknown derivatives, that is the derivative of the value function with respect to the future state variables</p></li>
+<li><p>Plug the resulting expressions into the initial FOCs in order to find the proper forms of the FOCs, namely the Euler Equations.</p></li>
+</ol>
+<p>As explained in the basics, we first need to apply our little workaround function in order to find a better representation of the unknown derivative:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">unknown_derivative</span> <span class="o">=</span> <span class="n">get_unknown_derivative</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">v_prime</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">t</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">transition_equation</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(\frac{\partial}{\partial {K}_{t}} v{\left({K}_{t},{Z}_{t + 1} \right)} = \left. \frac{\partial}{\partial \xi_{1}} v{\left(\xi_{1},{Z}_{t + 1} \right)} \right|_{\substack{ \xi_{1}=\left(1 - \delta\right) {K}_{t - 1} - {C}_{t} + {K}_{t - 1}^{\alpha} {Z}_{t} }}
+\)</span></p>
+<section id="first-order-conditions">
+<h3>First-Order Conditions<a class="headerlink" href="#first-order-conditions" title="Permalink to this headline">#</a></h3>
+<p>We have only one control variable here, thus only one FOC. We have the function defined in the previous part to help us:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">FOC</span> <span class="o">=</span> <span class="n">get_FOC</span><span class="p">(</span><span class="n">bellman</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">utility_function</span><span class="o">.</span><span class="n">rhs</span><span class="p">,</span> <span class="n">unknown_derivative</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(\frac{1}{{C}_{t}} = \beta \frac{\partial}{\partial {K}_{t}} v{\left({K}_{t},{Z}_{t + 1} \right)}
+\)</span></p>
+</section>
+<section id="benveniste-sheinkman-conditions">
+<h3>Benveniste-Sheinkman Conditions<a class="headerlink" href="#benveniste-sheinkman-conditions" title="Permalink to this headline">#</a></h3>
+<p>We have the previously defined function to help us to find the expression for the unknown derivative:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">BS</span> <span class="o">=</span> <span class="n">get_BS</span><span class="p">(</span><span class="n">bellman</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">t</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">unknown_derivative</span><span class="p">,</span> <span class="n">FOC</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(\frac{\partial}{\partial {K}_{t}} v{\left({K}_{t},{Z}_{t + 1} \right)} = \frac{\frac{\alpha {K}_{t}^{\alpha} {Z}_{t + 1}}{{K}_{t}} - \delta + 1}{{C}_{t + 1}}
+\)</span></p>
+</section>
+<section id="id1">
+<h3>Euler Equation<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
+<p>And we can finally plug it back to the FOC to obtain the Euler Equation:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">euler_equation</span> <span class="o">=</span> <span class="n">FOC</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">BS</span><span class="o">.</span><span class="n">lhs</span><span class="p">,</span> <span class="n">BS</span><span class="o">.</span><span class="n">rhs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(\frac{1}{{C}_{t}} = \frac{\beta \left(\frac{\alpha {K}_{t}^{\alpha} {Z}_{t + 1}}{{K}_{t}} - \delta + 1\right)}{{C}_{t + 1}}
+\)</span></p>
+<p>Again, please note that we should have an expectation operator in our Euler Equation.</p>
+</section>
+</section>
+<section id="equilibrium-conditions">
+<h2>Equilibrium Conditions<a class="headerlink" href="#equilibrium-conditions" title="Permalink to this headline">#</a></h2>
+<p>The Equilibrium Conditions of your model are composed by the Euler Equation and the time series macro dynamics of your system. As we have reexpressed the resource constraint and the production function into a transition equation, the transition equation and the total factor productivity equation will represents the time series macro dynamics:</p>
+<p><span class="math notranslate nohighlight">\(\frac{1}{{C}_{t}} = \mathbb{E}[\frac{\beta \left(\frac{\alpha {K}_{t}^{\alpha} {Z}_{t + 1}}{{K}_{t}} - \delta + 1\right)}{{C}_{t + 1}}] \\\)</span></p>
+<p><span class="math notranslate nohighlight">\({K}_{t} = \left(1 - \delta\right) {K}_{t - 1} - {C}_{t} + {K}_{t - 1}^{\alpha} {Z}_{t} \\\)</span></p>
+<p><span class="math notranslate nohighlight">\({Z}_{t} = e^{{\epsilon}_{t}}\)</span></p>
+<p>This is a Non-Linear Rational Expectation Model.</p>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="basicsrecursivemethods.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Basics Intuition for Characterizing the Equilibrium Conditions</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="basicsdynamics.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Basics Intuition for Solving for Dynamics</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-value-function">The Value Function</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#economic-environment">Economic Environment</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series-macro-dynamics">Time Series Macro Dynamics</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#representative-consumer-preferences">Representative Consumer Preferences</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#states-and-controls">States and Controls</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euler-equation">Euler Equation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#first-order-conditions">First-Order Conditions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#benveniste-sheinkman-conditions">Benveniste-Sheinkman Conditions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Euler Equation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equilibrium-conditions">Equilibrium Conditions</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            <div class="bd-footer-content__inner">
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Thomas Lorans
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022, Thomas Lorans.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div></div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

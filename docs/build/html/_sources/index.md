@@ -16,17 +16,12 @@ This course is under heavy development
 
 dynamicequilibrium
 basicsrecursivemethods
-neoclassicalgrowth
-longrunrisks
+rbcequilibrium
 basicsloglinearization
-loglinearization
-loglinearizationassetpricing
 basicsdynamics
-solvingdynamic
-solvingassetpricing
+solvingrbc
 empirics
 statespace
-estimatingneoclassicalgrowth
-estimatinglongrunrisks
+estimatingrbc
 references
 ```

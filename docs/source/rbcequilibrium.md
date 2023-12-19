@@ -1,4 +1,4 @@
-# Neoclassical Growth Model: Equilibrium Conditions
+# Hansen's RBC Model: Equilibrium Conditions
 
 We will follow the same systematic approach:
 

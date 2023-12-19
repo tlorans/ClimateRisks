@@ -228,4 +228,6 @@ In case of multiple control variables, you will end up with multiple Euler equat
 
 The Euler Equation and your economic environment gives you the equilibrium conditions of this model. We already have rewritten the resource constraint and the production function to express the transition equation. So our system can be summarized by the Euler Equation and the transition equation:
 
+$\frac{\partial}{\partial {C}_{t}} u{\left({C}_{t} \right)} = \beta \frac{\partial}{\partial {K}_{t + 1}} f{\left({K}_{t + 1} \right)} \frac{\partial}{\partial {C}_{t + 1}} u{\left({C}_{t + 1} \right)}$
 
+${K}_{t + 1} = f{\left({K}_{t} \right)} - {C}_{t}$

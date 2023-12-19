@@ -1,1 +1,0 @@
-# Neoclassical Growth Model Parameters Estimation
