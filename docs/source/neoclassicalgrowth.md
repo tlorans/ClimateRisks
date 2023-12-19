@@ -153,77 +153,46 @@ The process is always the same:
 3. With the BS and the FOC, find an expression for the unknown derivatives, that is the derivative of the value function with respect to the future state variables
 4. Plug the resulting expressions into the initial FOCs in order to find the proper forms of the FOCs, namely the Euler Equations.
 
-We first need a little workaround for working with the unknown derivative of the value function with respect to future capital stock for replacement purposes:
+As explained in the basics, we first need to apply our little workaround function in order to find a better representation of the unknown derivative:
 
 ```Python
-def get_unknown_derivative(v_prime, state_variable, index_time, transition_equation):
-  xi = smp.symbols('xi_1')
-  unknown = smp.Subs(smp.Derivative(v_prime.subs(transition_equation.rhs, xi), xi), xi , transition_equation.rhs)
-  better_printing = smp.diff(v, state_variable[index_time]) # to go to the format we would like
-  better_printing = better_printing.subs(index_time, index_time + 1) # iterate forward to get the format we want
-  return smp.Eq(better_printing, unknown)
+unknown_derivative = get_unknown_derivative(v, v_prime, K, t - 1, transition_equation)
 ```
 
-Let's apply it:
-
-```Python
-unknown_derivative = get_unknown_derivative(v_prime, K, t, transition_equation)
-```
-
-$\frac{\partial}{\partial {K}_{t + 1}} v{\left({K}_{t + 1} \right)} = \left. \frac{d}{d \xi_{1}} v{\left(\xi_{1} \right)} \right|_{\substack{ \xi_{1}=\left(1 - \delta\right) {K}_{t} + f{\left({K}_{t} \right)} - {C}_{t} }}
+$\frac{\partial}{\partial {K}_{t}} v{\left({K}_{t},{Z}_{t + 1} \right)} = \left. \frac{\partial}{\partial \xi_{1}} v{\left(\xi_{1},{Z}_{t + 1} \right)} \right|_{\substack{ \xi_{1}=\left(1 - \delta\right) {K}_{t - 1} - {C}_{t} + {K}_{t - 1}^{\alpha} {Z}_{t} }}
 $
 
 ### First-Order Conditions
 
-We have only one control variable here, thus only one FOC. We have the following function to help us:
+We have only one control variable here, thus only one FOC. We have the function defined in the previous part to help us:
 
 ```Python
-def get_FOC(bellman, control_variable, index_time, utility_function, unknown_derivative):
-  FOC = smp.Eq(smp.diff(bellman.rhs, control_variable[index_time]), 0)
-  FOC = FOC.replace(unknown_derivative.rhs, unknown_derivative.lhs)
-  return smp.Eq(smp.diff(utility_function, control_variable[t]), smp.solve(FOC, smp.diff(utility_function, control_variable[t]))[0])
+FOC = get_FOC(bellman, C, t, utility_function.rhs, unknown_derivative)
 ```
-
-Let's apply it:
-
-```Python
-FOC = get_FOC(bellman, C, t, u, unknown_derivative)
-```
-$\frac{\partial}{\partial {C}_{t}} u{\left({C}_{t} \right)} = \beta \frac{\partial}{\partial {K}_{t + 1}} v{\left({K}_{t + 1} \right)}
+$\frac{1}{{C}_{t}} = \beta \frac{\partial}{\partial {K}_{t}} v{\left({K}_{t},{Z}_{t + 1} \right)}
 $
 
 ### Benveniste-Sheinkman Conditions
 
-We define the following function for finding the BS condition:
+We have the previously defined function to help us to find the expression for the unknown derivative:
 
 ```Python
-def get_BS(bellman, v, state_variable, index_time, unknown_derivative, FOC):
-  # first need to reexpress FOC, if not we can have SymPy issue
-  FOC = smp.Eq(unknown_derivative.lhs, smp.solve(FOC, unknown_derivative.lhs)[0])
-  BS = smp.Eq(smp.diff(v, state_variable[index_time]), smp.diff(bellman.rhs, state_variable[index_time]))
-  BS = BS.replace(unknown_derivative.rhs, unknown_derivative.lhs)
-  BS = BS.subs(FOC.lhs, FOC.rhs)
-  return BS.subs(index_time, index_time + 1)
+BS = get_BS(bellman, v, K, t - 1, unknown_derivative, FOC)
 ```
 
-We know can find the expression for the unknown derivative:
-
-```Python
-BS = get_BS(bellman, v, K, t, unknown_derivative, FOC)
-```
-
-$\frac{\partial}{\partial {K}_{t + 1}} v{\left({K}_{t + 1} \right)} = \left(- \delta + \frac{\partial}{\partial {K}_{t + 1}} f{\left({K}_{t + 1} \right)} + 1\right) \frac{\partial}{\partial {C}_{t + 1}} u{\left({C}_{t + 1} \right)}
+$\frac{\partial}{\partial {K}_{t}} v{\left({K}_{t},{Z}_{t + 1} \right)} = \frac{\frac{\alpha {K}_{t}^{\alpha} {Z}_{t + 1}}{{K}_{t}} - \delta + 1}{{C}_{t + 1}}
 $
 
 ### Euler Equation
 
-And we can finally plug it back to the FOC to obtain the Euler Equation:
+And we can finally plug it back to the FOC to obtain the Euler Equation and simplify the expression:
 
 ```Python
-Euler = FOC.subs(BS.lhs, BS.rhs)
+euler_equation = FOC.subs(BS.lhs, BS.rhs)
+euler_equation = euler_equation.simplify()
 ```
 
-$\frac{\partial}{\partial {C}_{t}} u{\left({C}_{t} \right)} = \beta \left(- \delta + \frac{\partial}{\partial {K}_{t + 1}} f{\left({K}_{t + 1} \right)} + 1\right) \frac{\partial}{\partial {C}_{t + 1}} u{\left({C}_{t + 1} \right)}
+$\frac{1}{{C}_{t}} = \frac{\beta \left(\alpha {K}_{t}^{\alpha} {Z}_{t + 1} + \left(1 - \delta\right) {K}_{t}\right)}{{C}_{t + 1} {K}_{t}}
 $
 
 ## Equilibrium Conditions
