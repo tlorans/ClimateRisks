@@ -1,4 +1,4 @@
-# Basics Intuitions for the Hybrid Model
+# Basics Intuitions for Parameters Estimation
 
 ## State Space
 

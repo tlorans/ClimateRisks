@@ -1,1 +1,1 @@
-# Hybrid Neoclassical Growth Model
+# Neoclassical Growth Model Parameters Estimation

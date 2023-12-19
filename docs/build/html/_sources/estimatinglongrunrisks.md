@@ -1,1 +1,1 @@
-# Hybrid Long Run Risks Model
+# Long Run Risks Model Parameters Estimation
