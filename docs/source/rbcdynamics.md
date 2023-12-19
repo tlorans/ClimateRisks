@@ -2,6 +2,6 @@
 
 ## Log-Linearized Hansen's RBC Model
 
-## Solution for the Log-Linearized Hansen's RBC Model
+## Hansen's RBC Model Undetermined Coefficients
 
 

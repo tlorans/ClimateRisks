@@ -14,14 +14,13 @@ This course is under heavy development
 :caption: 'Contents:'
 :maxdepth: 2
 
-dynamicequilibrium
+
 basicsrecursivemethods
 rbcequilibrium
 basicsloglinearization
 basicsdynamics
-solvingrbc
-empirics
-statespace
+rbcdynamics
+rbcsolutionscalibrated
 estimatingrbc
 references
 ```
