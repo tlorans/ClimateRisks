@@ -134,10 +134,10 @@
 <li class="toctree-l1"><a class="reference internal" href="basicsdynamics.html">Basics Intuition for Solving for Dynamics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="solvingdynamic.html">Neoclassical Growth Model Dynamics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="solvingassetpricing.html">Consumption-Based Capital Asset Pricing Model Dynamics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="empirics.html">Part 2: Empirics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="statespace.html">Basics Intuitions for the Hybrid Model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="estimatingneoclassicalgrowth.html">Hybrid Neoclassical Growth Model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="estimatinglongrunrisks.html">Hybrid Long Run Risks Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="empirics.html">Part 2: Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statespace.html">Basics Intuitions for Parameters Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="estimatingneoclassicalgrowth.html">Neoclassical Growth Model Parameters Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="estimatinglongrunrisks.html">Long Run Risks Model Parameters Estimation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 </ul>
 
@@ -342,24 +342,36 @@ document.write(`
 <span class="n">epsilon</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;epsilon&#39;</span><span class="p">)</span> <span class="c1"># TFP shock</span>
 </pre></div>
 </div>
+<p><span class="math notranslate nohighlight">\({Y}_{t}\)</span>,
+<span class="math notranslate nohighlight">\({C}_{t}\)</span>,
+<span class="math notranslate nohighlight">\({K}_{t}\)</span>,
+<span class="math notranslate nohighlight">\({I}_{t}\)</span>,
+<span class="math notranslate nohighlight">\({Z}_{t}\)</span>,
+<span class="math notranslate nohighlight">\({\epsilon}_{t}\)</span></p>
 <p>And the following parameters:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">alpha</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;alpha&#39;</span><span class="p">)</span> <span class="c1"># capital share</span>
 <span class="n">beta</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;beta&#39;</span><span class="p">)</span> <span class="c1"># discount factor</span>
 <span class="n">delta</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;delta&#39;</span><span class="p">)</span> <span class="c1"># capital depreciation rate</span>
 </pre></div>
 </div>
+<p><span class="math notranslate nohighlight">\(\alpha\)</span>,
+<span class="math notranslate nohighlight">\(\beta\)</span>,
+<span class="math notranslate nohighlight">\(\delta\)</span></p>
 <p>The production function is the following:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">production_function</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">Y</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">Z</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">*</span> <span class="n">K</span><span class="p">[</span><span class="n">t</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="n">alpha</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">delta</span><span class="p">)</span><span class="o">*</span><span class="n">K</span><span class="p">[</span><span class="n">t</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
+<p><span class="math notranslate nohighlight">\({Y}_{t} = \left(1 - \delta\right) {K}_{t - 1} + {K}_{t - 1}^{\alpha} {Z}_{t}\)</span></p>
 <p>The resource constraint is:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">resource_constraint</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">C</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">+</span> <span class="n">K</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">Y</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
 </pre></div>
 </div>
+<p><span class="math notranslate nohighlight">\({C}_{t} + {K}_{t} = {Y}_{t}\)</span></p>
 <p>And we have a technology shock describing the evolution of the total factor productivity (TFP):</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">TFP_equation</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">Z</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">smp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">epsilon</span><span class="p">[</span><span class="n">t</span><span class="p">]))</span>
 </pre></div>
 </div>
+<p><span class="math notranslate nohighlight">\({Z}_{t} = e^{{\epsilon}_{t}}\)</span></p>
 </section>
 <section id="representative-consumer-preferences">
 <h4>Representative Consumer Preferences<a class="headerlink" href="#representative-consumer-preferences" title="Permalink to this headline">#</a></h4>
@@ -372,6 +384,7 @@ document.write(`
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">utility_function</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">smp</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">C</span><span class="p">[</span><span class="n">t</span><span class="p">]))</span>
 </pre></div>
 </div>
+<p><span class="math notranslate nohighlight">\(u{\left({C}_{t} \right)} = \log{\left({C}_{t} \right)}\)</span></p>
 </section>
 </section>
 <section id="states-and-controls">
@@ -380,25 +393,34 @@ document.write(`
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">v</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="s1">&#39;v&#39;</span><span class="p">)(</span><span class="n">K</span><span class="p">[</span><span class="n">t</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">Z</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
 </pre></div>
 </div>
+<p><span class="math notranslate nohighlight">\(v{\left({K}_{t - 1},{Z}_{t} \right)}\)</span></p>
 <p>Here we denote a bit from what you have seen in the previous part, naming the state variable being denoted as the current capital stock <span class="math notranslate nohighlight">\(K_t\)</span> (and you will see this approach in other places). We follow the approach from Uhlig that seems more logical to us: <span class="math notranslate nohighlight">\(K_{t-1}\)</span> is the state variable that is inherited.</p>
 <p>At each period <span class="math notranslate nohighlight">\(t\)</span>, the consumer can choose to adjust the consumption level <span class="math notranslate nohighlight">\(C_t\)</span>. Having the choice about the consumption level implies that it can also control the current level of capital stock <span class="math notranslate nohighlight">\(K_{t}\)</span>. So theoretically, the control variable could either be the consumption level or the capital stock. Here, we will focus on choosing as control variables the ones that directly appear in the utility function.</p>
 <p>The future value of capital stock is thus:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">v_prime</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="s1">&#39;v&#39;</span><span class="p">)(</span><span class="n">K</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">Z</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
+<p><span class="math notranslate nohighlight">\(v{\left({K}_{t},{Z}_{t + 1} \right)}\)</span></p>
 <p>However, we want to make appears our control variable <span class="math notranslate nohighlight">\(C_t\)</span> as much as possible in our value function. We can therefore use the time series macro dynamic definitions for reexpressing the state variable <span class="math notranslate nohighlight">\(K_{t}\)</span> with the control variable <span class="math notranslate nohighlight">\(C_{t}\)</span>, by finding the transition equation (the equation expressing the dynamic of the capital stock):</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">transition_equation</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">K</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">smp</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">resource_constraint</span><span class="p">,</span> <span class="n">K</span><span class="p">[</span><span class="n">t</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>
 <span class="n">transition_equation</span> <span class="o">=</span> <span class="n">transition_equation</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">production_function</span><span class="o">.</span><span class="n">lhs</span><span class="p">,</span> <span class="n">production_function</span><span class="o">.</span><span class="n">rhs</span><span class="p">)</span>
 </pre></div>
 </div>
+<p><span class="math notranslate nohighlight">\({K}_{t} = - {C}_{t} + {Y}_{t} \\\)</span></p>
+<p><span class="math notranslate nohighlight">\({K}_{t} = \left(1 - \delta\right) {K}_{t - 1} - {C}_{t} + {K}_{t - 1}^{\alpha} {Z}_{t}\)</span></p>
 <p>So we can reexpress:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">v_prime</span> <span class="o">=</span> <span class="n">v_prime</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">transition_equation</span><span class="o">.</span><span class="n">lhs</span><span class="p">,</span> <span class="n">transition_equation</span><span class="o">.</span><span class="n">rhs</span><span class="p">)</span>
 </pre></div>
 </div>
+<p><span class="math notranslate nohighlight">\(v{\left(\left(1 - \delta\right) {K}_{t - 1} - {C}_{t} + {K}_{t - 1}^{\alpha} {Z}_{t},{Z}_{t + 1} \right)}\)</span></p>
 <p>We therefore can state our final version of the Bellman equation:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">bellman</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">utility_function</span><span class="o">.</span><span class="n">rhs</span> <span class="o">+</span> <span class="n">beta</span> <span class="o">*</span> <span class="n">v_prime</span><span class="p">)</span>
 </pre></div>
 </div>
+<p><span class="math notranslate nohighlight">\(v{\left({K}_{t - 1},{Z}_{t} \right)} = \beta v{\left(\left(1 - \delta\right) {K}_{t - 1} - {C}_{t} + {K}_{t - 1}^{\alpha} {Z}_{t},{Z}_{t + 1} \right)} + \log{\left({C}_{t} \right)}\)</span></p>
+<p>Please note that we should have an expectation operator associated with the value of future state variables, as we have a stochastic shock on total factor productivity. Our Bellman Equation should be:</p>
+<p><span class="math notranslate nohighlight">\(v{\left({K}_{t - 1},{Z}_{t} \right)} = \beta \mathbb{E} [v{\left(\left(1 - \delta\right) {K}_{t - 1} - {C}_{t} + {K}_{t - 1}^{\alpha} {Z}_{t},{Z}_{t + 1} \right)}] + \log{\left({C}_{t} \right)}\)</span></p>
+<p>For ease of programming (I didn’t managed yet to work properly with the expectation operator in SymPy), we will program without the expectation operator. But please add it mentally into the results.</p>
 </section>
 </section>
 <section id="euler-equation">
@@ -407,8 +429,8 @@ document.write(`
 <ol class="arabic simple">
 <li><p>Find the First Order Conditions (FOC) by taking the derivative of the value function with repect to the control variables</p></li>
 <li><p>Find the Benveniste-Scheinkman (BS) Conditions by setting the the derivative of the value function with respect to the state variables</p></li>
-<li><p>With the BS and the FOC, find an expression for the unknown derivative, that is the derivative of the value function with respect to the future state</p></li>
-<li><p>Plus this expression into the the FOC to find the Euler equation.</p></li>
+<li><p>With the BS and the FOC, find an expression for the unknown derivatives, that is the derivative of the value function with respect to the future state variables</p></li>
+<li><p>Plug the resulting expressions into the initial FOCs in order to find the proper forms of the FOCs, namely the Euler Equations.</p></li>
 </ol>
 <p>We first need a little workaround for working with the unknown derivative of the value function with respect to future capital stock for replacement purposes:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_unknown_derivative</span><span class="p">(</span><span class="n">v_prime</span><span class="p">,</span> <span class="n">state_variable</span><span class="p">,</span> <span class="n">index_time</span><span class="p">,</span> <span class="n">transition_equation</span><span class="p">):</span>
