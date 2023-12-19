@@ -94,7 +94,7 @@ An equation of this form is known as a Bellman equation. Writing out the problem
 
 However, this simplification comes at a cost. The problem is now one where both the time $t$ one-period problem $u(f(k_t) - k_{t+1} + (1 - \delta)k_t)$ and the discounted value function evaluated at $k_{t+1}$, $\beta V(k_{t+1})$ are included. The complication is that the value of the function $V(k_{t+1})$ evaluated at $k_{t+1}$ is not known. If it where known, then the value of the function $V(k_t)$ would also be known as it is the same function. We will illustrate this issue and how to overcome it in the next subsection.
 
-### First-Order Condition
+### Equilibrium Conditions
 
 We assume that the value function $V(.)$ exists and has a first derivative. We can then proceed by taking the derivative of $V(k_t)$ with respect to our control variable $k_{t+1}$.
 
@@ -163,7 +163,20 @@ which can be reexpressed as:
 \frac{u'(c_t)}{u'(c_{t+1})} = \beta (f'(k_{t+1})+ (1 - \delta))
 \end{equation}
 
-### Equilibrium Conditions
+The equilibrium conditions of the Robinson Crusoe Economy are thus this Euler equation and the budget constraints:
+
+\begin{equation}
+\frac{u'(c_t)}{u'(c_{t+1})} = \beta (f'(k_{t+1})+ (1 - \delta))
+\end{equation}
+
+\begin{equation}
+k_{t+1} = (1 - \delta) k_t + i_t
+\end{equation}
+
+\begin{equation}
+y_t = f(k_t) = c_t + i_t
+\end{equation}
+
 
 ## Robinson Crusoe with Variable Labor
 
