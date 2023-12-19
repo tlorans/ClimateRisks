@@ -198,4 +198,10 @@ Again, please note that we should have an expectation operator in our Euler Equa
 
 ## Equilibrium Conditions
 
-## Steady-State
+The Equilibrium Conditions of your model are composed by the Euler Equation and the time series macro dynamics of your system. As we have reexpressed the resource constraint and the production function into a transition equation, the transition equation and the total factor productivity equation will represents the time series macro dynamics:
+
+$\frac{1}{{C}_{t}} = \mathbb{E}[\frac{\beta \left(\frac{\alpha {K}_{t}^{\alpha} {Z}_{t + 1}}{{K}_{t}} - \delta + 1\right)}{{C}_{t + 1}}] \\$
+
+${K}_{t} = \left(1 - \delta\right) {K}_{t - 1} - {C}_{t} + {K}_{t - 1}^{\alpha} {Z}_{t} \\$
+
+${Z}_{t} = e^{{\epsilon}_{t}}$
