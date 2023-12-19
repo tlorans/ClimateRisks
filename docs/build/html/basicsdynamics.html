@@ -42,6 +42,8 @@
     <script src="_static/doctools.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'basicsdynamics';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -126,16 +128,16 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="dynamicequilibrium.html">Part 1: Dynamic Equilibrium</a></li>
-<li class="toctree-l1"><a class="reference internal" href="basicsrecursivemethods.html">Basics Intuition for the Recursive Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basicsrecursivemethods.html">Basics Intuition for Characterizing the Equilibrium Conditions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="neoclassicalgrowth.html">Neoclassical Growth Model: Equilibrium Conditions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="longrunrisks.html">Consumption-Based Capital Asset Pricing Model: Equilibrium Conditions</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Basics Intuition for Solving for Dynamics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="solvingdynamic.html">Neoclassical Growth Model Dynamics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="solvingassetpricing.html">Consumption-Based Capital Asset Pricing Model Dynamics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="empirics.html">Part 2: Empirics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="statespace.html">Basics Intuitions for the Hybrid Model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="estimatingneoclassicalgrowth.html">Hybrid Neoclassical Growth Model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="estimatinglongrunrisks.html">Hybrid Long Run Risks Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="empirics.html">Part 2: Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statespace.html">Basics Intuitions for Parameters Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="estimatingneoclassicalgrowth.html">Neoclassical Growth Model Parameters Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="estimatinglongrunrisks.html">Long Run Risks Model Parameters Estimation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 </ul>
 
@@ -283,8 +285,16 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-need-for-log-linearization">The Need For Log-Linearization</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-method-of-undetermined-coefficients">The Method of Undetermined Coefficients</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-need-for-log-linearization">The Need For Log-Linearization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#steady-state">Steady-State</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#log-linearization-around-the-steady-state">Log-Linearization Around the Steady-State</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-method-of-undetermined-coefficients">The Method of Undetermined Coefficients</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conjecturing-a-linear-recursive-law-of-motion">Conjecturing a Linear Recursive Law of Motion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-for-the-undetermined-coefficients-of-the-linear-recursive-law-of-motion">Solving for the Undetermined Coefficients of the Linear Recursive Law of Motion</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -300,9 +310,25 @@ document.write(`
 <h1>Basics Intuition for Solving for Dynamics<a class="headerlink" href="#basics-intuition-for-solving-for-dynamics" title="Permalink to this headline">#</a></h1>
 <section id="the-need-for-log-linearization">
 <h2>The Need For Log-Linearization<a class="headerlink" href="#the-need-for-log-linearization" title="Permalink to this headline">#</a></h2>
+<p>Equilibrium Conditions from the previous part form a nonlinear rational expectations models. However, we only have methods for solving linear rational expectations models.</p>
+<p>To solve our system, we therefore need to linearize it. We do so by applying the method of log-linearization around the the steady-state.</p>
+<section id="steady-state">
+<h3>Steady-State<a class="headerlink" href="#steady-state" title="Permalink to this headline">#</a></h3>
+</section>
+<section id="log-linearization-around-the-steady-state">
+<h3>Log-Linearization Around the Steady-State<a class="headerlink" href="#log-linearization-around-the-steady-state" title="Permalink to this headline">#</a></h3>
+</section>
 </section>
 <section id="the-method-of-undetermined-coefficients">
 <h2>The Method of Undetermined Coefficients<a class="headerlink" href="#the-method-of-undetermined-coefficients" title="Permalink to this headline">#</a></h2>
+<section id="conjecturing-a-linear-recursive-law-of-motion">
+<h3>Conjecturing a Linear Recursive Law of Motion<a class="headerlink" href="#conjecturing-a-linear-recursive-law-of-motion" title="Permalink to this headline">#</a></h3>
+<p>What is given in our system is the state variables at time <span class="math notranslate nohighlight">\(t\)</span>. We need to find the value of the endogeneous variables in our model.</p>
+<p>We can conjecture a linear recursive law of motion.</p>
+</section>
+<section id="solving-for-the-undetermined-coefficients-of-the-linear-recursive-law-of-motion">
+<h3>Solving for the Undetermined Coefficients of the Linear Recursive Law of Motion<a class="headerlink" href="#solving-for-the-undetermined-coefficients-of-the-linear-recursive-law-of-motion" title="Permalink to this headline">#</a></h3>
+</section>
 </section>
 </section>
 
@@ -348,8 +374,16 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-need-for-log-linearization">The Need For Log-Linearization</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-method-of-undetermined-coefficients">The Method of Undetermined Coefficients</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-need-for-log-linearization">The Need For Log-Linearization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#steady-state">Steady-State</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#log-linearization-around-the-steady-state">Log-Linearization Around the Steady-State</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-method-of-undetermined-coefficients">The Method of Undetermined Coefficients</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conjecturing-a-linear-recursive-law-of-motion">Conjecturing a Linear Recursive Law of Motion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-for-the-undetermined-coefficients-of-the-linear-recursive-law-of-motion">Solving for the Undetermined Coefficients of the Linear Recursive Law of Motion</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

@@ -205,3 +205,5 @@ $\frac{1}{{C}_{t}} = \mathbb{E}[\frac{\beta \left(\frac{\alpha {K}_{t}^{\alpha} 
 ${K}_{t} = \left(1 - \delta\right) {K}_{t - 1} - {C}_{t} + {K}_{t - 1}^{\alpha} {Z}_{t} \\$
 
 ${Z}_{t} = e^{{\epsilon}_{t}}$
+
+This is a Non-Linear Rational Expectation Model.
