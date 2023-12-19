@@ -1,4 +1,4 @@
-# Consumption-Based Capital Asset Pricing: Equilibrium Conditions
+# Consumption-Based Capital Asset Pricing Model: Equilibrium Conditions
 
 ## The Genesis with the Lucas Tree Model
 
