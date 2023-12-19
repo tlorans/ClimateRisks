@@ -214,7 +214,7 @@ In case of multiple non-stochastic state variables, you will end up with multipl
 
 ## Euler Equations
 
-The final stage is to find the Euler Equation. We find it by plugging the expression we've obtained from the BS condition into the initial FOC:
+The final stage is to find the Euler Equation (the name of the final form for our FOCs). We find it by plugging the expression we've obtained from the BS condition into the initial FOC:
 
 ```Python
 euler_equation = FOC.subs(BS.lhs, BS.rhs)
