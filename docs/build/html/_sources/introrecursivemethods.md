@@ -4,7 +4,7 @@ The objective of this part is to give you the basics ideas behind the the proces
 
 I advise you to take a look at [this excellent note from G.Fonseca](https://www.hetwebsite.net/het/fonseca/notes/fonseca_bellman.pdf).
 
-This is a short version of McCandless (2008 {cite:p}`mccandless2008abcs`) examples for Recursive Deterministic Models. 
+This is a short version of McCandless (2008 {cite:p}`mccandless2008abcs`) examples for Recursive Deterministic and Stochastic Models Chapters. 
 
 ## Robison Crusoe Economy
 
@@ -232,14 +232,130 @@ One of the important tricks of working with the Bellman equation is to write out
 
 In the previous example, the envelope theorem was convenient because the derivative of the value function $V(k_{t+1})$ with respect to the state variable $k_t$ was equal to $0$, such that we ended up with an envelope theorem condition that gave us an expression to be plugged in the initial first-order condition.
 
-
-
 ## Robinson Crusoe with Variable Labor
+
+It might be useful to show that recursive methods can be applied to the Robison Crusoe economy, where labor is variable input.
+
+The utility function of Robinson is now:
+
+\begin{equation}
+\sum^{\infty}_{t=0}\beta^iu(c_{t+i}, h_{t+i})
+\end{equation}
+
+which is maximized subject to the constraint:
+
+\begin{equation}
+k_{t+1} = (1 - \delta)k_t + i_t
+\end{equation}
+
+\begin{equation}
+y_t = f(k_t, h_t) \geq c_t + i_t
+\end{equation}
+
+\begin{equation}
+h_t \leq 1
+\end{equation}
 
 ### The Value Function
 
-### Optimizing
+We choose $h_t$ and $k_{t+1}$ as our control variables. The problem can be written as the Bellman equation:
+
+\begin{equation}
+V(k_t) = \max_{h_t, k_{t+1}}[u(f(k_t, h_t) + (1 - \delta)k_t - k_{t+1}, h_t) + \beta V(k_{t+1})]
+\end{equation}
+
+Here we know that the envelope theorem condition has a simple representation because the derivative of $V(k_{t+1})$ with respect to the state variable $k_t$ will be equal to zero.
 
 ### Equilibrium Conditions
+
+There are now two first-order conditions since there are two controls, $h_t$ and $k_{t+1}$:
+
+```Python
+import sympy as smp
+
+t = smp.symbols('t', cls = smp.Idx)
+
+K = smp.IndexedBase('k')
+C = smp.IndexedBase('c')
+H = smp.IndexedBase('h')
+I = smp.IndexedBase('i')
+
+delta = smp.symbols('delta')
+beta = smp.symbols('beta')
+
+f = smp.Function('f')(K[t], H[t])
+u = smp.Function('u')(C[t], H[t])
+resource_constraint = smp.Eq(f, I[t] + C[t])
+transition_equation = smp.Eq(K[t+1], (1 - delta) * K[t] + I[t])
+
+V = smp.Function('V')
+
+# reexpress C_t to make appear the control variable Kt+1
+resource_constraint = smp.Eq(C[t], smp.solve(resource_constraint, C[t])[0])
+transition_equation = smp.Eq(I[t], smp.solve(transition_equation, I[t])[0])
+resource_constraint = resource_constraint.subs(transition_equation.lhs, transition_equation.rhs)
+bellman = smp.Eq(V(K[t]), u.subs(resource_constraint.lhs, resource_constraint.rhs) + beta * V(K[t+1]))
+
+
+FOC_1 = smp.Eq(smp.diff(bellman.rhs, K[t+1]),0).subs(resource_constraint.rhs, resource_constraint.lhs).simplify()
+FOC_2 = smp.Eq(smp.diff(bellman.rhs, H[t]), 0).subs(resource_constraint.rhs, resource_constraint.lhs).simplify()
+```
+The FOC for $k_{t+1}$:
+
+$\beta \frac{\partial}{\partial {k}_{t + 1}} V{\left({k}_{t + 1} \right)} - \frac{\partial}{\partial {c}_{t}} u{\left({c}_{t},{h}_{t} \right)} = 0
+$ 
+
+The FOC for $h_t$:
+
+$\frac{\partial}{\partial {h}_{t}} f{\left({k}_{t},{h}_{t} \right)} \frac{\partial}{\partial {c}_{t}} u{\left({c}_{t},{h}_{t} \right)} + \frac{\partial}{\partial {h}_{t}} u{\left({c}_{t},{h}_{t} \right)} = 0
+$
+
+The derivative of the value function only appear in the FOC for $k_{t+1}$. Thus we will only need the envelope condition in order to find the Euler Equation for $k_{t+1}$. The Euler Equation for $h_t$ has directly been found with the FOC, which can be reexpressed as:
+
+\begin{equation}
+\frac{u_h(c_t, h_t)}{u_c(c_t, h_t)} = - f_h(k_t, h_t)
+\end{equation}
+
+We find the envelope condition:
+
+```Python
+BS_K = smp.Eq(smp.diff(V(K[t]), K[t]), smp.diff(bellman.rhs, K[t])).subs(resource_constraint.rhs, resource_constraint.lhs).subs(t, t+1).simplify()
+```
+
+$\frac{\partial}{\partial {k}_{t + 1}} V{\left({k}_{t + 1} \right)} = \left(- \delta + \frac{\partial}{\partial {k}_{t + 1}} f{\left({k}_{t + 1},{h}_{t + 1} \right)} + 1\right) \frac{\partial}{\partial {c}_{t + 1}} u{\left({c}_{t + 1},{h}_{t + 1} \right)}$
+
+We can plug it into the FOC for $k_{t+1}$ in order to get the Euler Equation:
+
+```Python
+Euler_1 = FOC_1.subs(BS_K.lhs, BS_K.rhs)
+```
+
+$\beta \left(- \delta + \frac{\partial}{\partial {k}_{t + 1}} f{\left({k}_{t + 1},{h}_{t + 1} \right)} + 1\right) \frac{\partial}{\partial {c}_{t + 1}} u{\left({c}_{t + 1},{h}_{t + 1} \right)} - \frac{\partial}{\partial {c}_{t}} u{\left({c}_{t},{h}_{t} \right)} = 0$
+
+Which can be reexpressed:
+
+\begin{equation}
+\frac{u_c(c_t, h_t)}{u_c(c_{t+1}, h_{t+1})} = \beta (f_k(k_{t+1}, h_{t+1})+ (1 - \delta))
+\end{equation}
+
+
+The equilibrium conditions of the Robinson Crusoe Economy are thus these Euler equations and the budget constraints:
+
+
+\begin{equation}
+\frac{u_h(c_t, h_t)}{u_c(c_t, h_t)} = - f_h(k_t, h_t)
+\end{equation}
+
+\begin{equation}
+\frac{u_c(c_t, h_t)}{u_c(c_{t+1}, h_{t+1})} = \beta (f_k(k_{t+1}, h_{t+1})+ (1 - \delta))
+\end{equation}
+
+\begin{equation}
+k_{t+1} = (1 - \delta) k_t + i_t
+\end{equation}
+
+\begin{equation}
+y_t = f(k_t, h_t) = c_t + i_t
+\end{equation}
 
 ## Stochastic Case
