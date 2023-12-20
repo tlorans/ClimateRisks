@@ -42,10 +42,12 @@
     <script src="_static/doctools.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'part3toassetpricing';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="References" href="references.html" />
+    <link rel="next" title="Part 4: ESG Dynamic Equilibrium" href="part4esgdynamicequilibrium.html" />
     <link rel="prev" title="Estimating Hansen’s RBC Model" href="estimatingrbc.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
@@ -125,13 +127,16 @@
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="part1modellertoolkit.html">Part 1: Modeller Toolkit</a></li>
 <li class="toctree-l1"><a class="reference internal" href="introrecursivemethods.html">Basics Intuition for Characterizing the Equilibrium Conditions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="introdynamics.html">Basics Intuition for Solving for Dynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introestimation.html">Basics Intuition for Model Estimation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="part2fromrbc.html">Part 2. From RBC Models…</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rbcequilibrium.html">Hansen’s RBC Model: Equilibrium Conditions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rbcdynamics.html">Hansen’s RBC Dynamics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="estimatingrbc.html">Estimating Hansen’s RBC Model</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Part 3: … to Asset Pricing Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="part4esgdynamicequilibrium.html">Part 4: ESG Dynamic Equilibrium</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 </ul>
 
@@ -256,7 +261,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -272,6 +279,31 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-genesis-with-the-lucas-tree-model">The Genesis with the Lucas Tree Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-value-function">The Value Function</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#economic-environment">Economic Environment</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series-macro-dynamics">Time Series Macro Dynamics</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#representative-consumer-preferences">Representative Consumer Preferences</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#states-and-controls">States and Controls</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#euler-equation">Euler Equation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#first-order-conditions">First Order Conditions</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#benveniste-scheinkman-conditions">Benveniste-Scheinkman Conditions</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Euler Equation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -283,6 +315,88 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="part-3-to-asset-pricing-models">
 <h1>Part 3: … to Asset Pricing Models<a class="headerlink" href="#part-3-to-asset-pricing-models" title="Permalink to this headline">#</a></h1>
+<section id="the-genesis-with-the-lucas-tree-model">
+<h2>The Genesis with the Lucas Tree Model<a class="headerlink" href="#the-genesis-with-the-lucas-tree-model" title="Permalink to this headline">#</a></h2>
+<section id="the-value-function">
+<h3>The Value Function<a class="headerlink" href="#the-value-function" title="Permalink to this headline">#</a></h3>
+<section id="economic-environment">
+<h4>Economic Environment<a class="headerlink" href="#economic-environment" title="Permalink to this headline">#</a></h4>
+<section id="time-series-macro-dynamics">
+<h5>Time Series Macro Dynamics<a class="headerlink" href="#time-series-macro-dynamics" title="Permalink to this headline">#</a></h5>
+<p>We start with the following variables:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">C</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">)</span> <span class="c1"># conso, control variable</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">)</span> <span class="c1"># assets</span>
+<span class="n">D</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">)</span> <span class="c1"># Dividends</span>
+<span class="n">P</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;P&#39;</span><span class="p">)</span> <span class="c1"># Price</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="bp">cls</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Idx</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And the discounting factor:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">beta</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;beta&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We have the following resource constraint and transition function:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">resource_constraint</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">Z</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">P</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">+</span> <span class="n">C</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">Z</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">*</span> <span class="n">D</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">+</span> <span class="n">Z</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">*</span> <span class="n">P</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
+<span class="n">transition_function</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">Z</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">smp</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">resource_constraint</span><span class="p">,</span> <span class="n">Z</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="representative-consumer-preferences">
+<h5>Representative Consumer Preferences<a class="headerlink" href="#representative-consumer-preferences" title="Permalink to this headline">#</a></h5>
+<p>We have the following utility function:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="s1">&#39;u&#39;</span><span class="p">)(</span><span class="n">C</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="states-and-controls">
+<h5>States and Controls<a class="headerlink" href="#states-and-controls" title="Permalink to this headline">#</a></h5>
+<p>We choose <span class="math notranslate nohighlight">\(C_t\)</span> as our control variable. Thus <span class="math notranslate nohighlight">\(Z_t\)</span> and <span class="math notranslate nohighlight">\(Z_{t+1}\)</span> are our states variables.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">v</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="s1">&#39;v&#39;</span><span class="p">)(</span><span class="n">Z</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
+<span class="n">v_prime</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="s1">&#39;v&#39;</span><span class="p">)(</span><span class="n">Z</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>We want to reexpress <span class="math notranslate nohighlight">\(Z_{t+1}\)</span> to make our control variable appear:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">v_prime</span> <span class="o">=</span> <span class="n">v_prime</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">transition_function</span><span class="o">.</span><span class="n">lhs</span><span class="p">,</span> <span class="n">transition_function</span><span class="o">.</span><span class="n">rhs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We can finally state our Bellman equation:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">bellman</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">u</span> <span class="o">+</span> <span class="n">beta</span> <span class="o">*</span> <span class="n">v_prime</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="euler-equation">
+<h3>Euler Equation<a class="headerlink" href="#euler-equation" title="Permalink to this headline">#</a></h3>
+<p>Before starting, we find our unknown derivative:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">unknown</span> <span class="o">=</span> <span class="n">get_unknown_derivative</span><span class="p">(</span><span class="n">v_prime</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">transition_function</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="first-order-conditions">
+<h4>First Order Conditions<a class="headerlink" href="#first-order-conditions" title="Permalink to this headline">#</a></h4>
+<p>We get our FOC:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">FOC</span> <span class="o">=</span> <span class="n">get_FOC</span><span class="p">(</span><span class="n">bellman</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">unknown</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="benveniste-scheinkman-conditions">
+<h4>Benveniste-Scheinkman Conditions<a class="headerlink" href="#benveniste-scheinkman-conditions" title="Permalink to this headline">#</a></h4>
+<p>We get the BS:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">BS</span> <span class="o">=</span> <span class="n">get_BS</span><span class="p">(</span><span class="n">bellman</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">unknown</span><span class="p">,</span> <span class="n">FOC</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id1">
+<h4>Euler Equation<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h4>
+<p>And finally the Euler:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">Euler</span> <span class="o">=</span> <span class="n">FOC</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">BS</span><span class="o">.</span><span class="n">lhs</span><span class="p">,</span> <span class="n">BS</span><span class="o">.</span><span class="n">rhs</span><span class="p">)</span>
+<span class="n">Euler</span><span class="o">.</span><span class="n">simplify</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
 </section>
 
 
@@ -304,11 +418,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="references.html"
+       href="part4esgdynamicequilibrium.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">References</p>
+        <p class="prev-next-title">Part 4: ESG Dynamic Equilibrium</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -318,6 +432,37 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-genesis-with-the-lucas-tree-model">The Genesis with the Lucas Tree Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-value-function">The Value Function</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#economic-environment">Economic Environment</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series-macro-dynamics">Time Series Macro Dynamics</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#representative-consumer-preferences">Representative Consumer Preferences</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#states-and-controls">States and Controls</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#euler-equation">Euler Equation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#first-order-conditions">First Order Conditions</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#benveniste-scheinkman-conditions">Benveniste-Scheinkman Conditions</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Euler Equation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

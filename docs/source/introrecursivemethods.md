@@ -177,6 +177,7 @@ k_{t+1} = (1 - \delta) k_t + i_t
 y_t = f(k_t) = c_t + i_t
 \end{equation}
 
+## The Art of Choosing the Control Variables
 
 ## Robinson Crusoe with Variable Labor
 
@@ -185,3 +186,5 @@ y_t = f(k_t) = c_t + i_t
 ### Optimizing
 
 ### Equilibrium Conditions
+
+## Stochastic Case
