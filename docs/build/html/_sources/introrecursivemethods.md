@@ -1,4 +1,4 @@
-# Basics Intuition for Characterizing the Equilibrium Conditions
+# Characterizing the Equilibrium Conditions
 
 The objective of this part is to give you the basics ideas behind the the process of finding equilibrium conditions of your model.
 
@@ -359,3 +359,23 @@ y_t = f(k_t, h_t) = c_t + i_t
 \end{equation}
 
 ## Stochastic Case
+
+Up to this point, our models have been deterministic. The values of all of the parameters of the models and the form of the functions are known with certinty. Given some initial condition, these economies follow a prescribed path.
+
+Models are approximations of reality and being approximations are at least partially false. The predictions that a model makes, even a very good and very complete model, will not coincide with what occurs. This failure of models to predict perfectly comes from two potential sources.
+
+One source of this failure to predict perfectly is that these are variables that are not included in the model but that impact on the values of the variables included. Our simple model of a deterministic Robison Crusoe economy tells us how the decisions about how much to save and how much to work affect the amount of output in the economy but does not account for how the economy responds to external shocks. Under this logic, if a model were sufficiently rich, it would be able to predict future outcomes with very great accuracy. However, our capacity to collect information and to construct, to test and to solve models is limited.
+
+Since we know we can't include everything in a model, one way to handle that which we cannot include is to allow the model to be stochastic. We simply let some part of the model, the value of some parameters in each period, for example, be determined by "nature", where nature embodies everything that is not in our model.
+
+A second source may be that the universe is simply naturally stochastic and there are things that we cannot predic with absolute certainty even if we have full information about the current state of the universe.
+
+Whatever its source, for an economist it is convenient to assume that the world is stochastic and that the way the randomness intrudes in our models can be described by probabilities. Adding a little randomness goes a long way in helping the predictions of our models better match the data that we observe.
+
+### Probability 
+
+### A Simple Stochastic Growth Model
+
+### The Value Function
+
+### Equilibrium Conditions

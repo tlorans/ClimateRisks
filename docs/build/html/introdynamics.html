@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Basics Intuition for Solving for Dynamics &#8212; Climate Risks in Finance 0.1 documentation</title>
+    <title>Solving for Dynamics &#8212; Climate Risks in Finance 0.1 documentation</title>
   
   
   
@@ -47,6 +47,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'introdynamics';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Basics Intuition for State Space Methods" href="introstatespacemethods.html" />
+    <link rel="prev" title="Basics Intuition for Characterizing the Equilibrium Conditions" href="introrecursivemethods.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -124,11 +126,18 @@
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="basicsrecursivemethods.html">Basics Intuition for Characterizing the Equilibrium Conditions</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="part1modellertoolkit.html">Part 1: Modeller Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introrecursivemethods.html">Basics Intuition for Characterizing the Equilibrium Conditions</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Solving for Dynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introstatespacemethods.html">Basics Intuition for State Space Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introestimation.html">Basics Intuition for Model Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="part2fromrbc.html">Part 2. From RBC Models…</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rbcequilibrium.html">Hansen’s RBC Model: Equilibrium Conditions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rbcdynamics.html">Hansen’s RBC Dynamics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="estimatingrbc.html">Estimating Hansen’s RBC Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="part3toassetpricing.html">Part 3: … to Asset Pricing Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="part4esgdynamicequilibrium.html">Part 4: ESG Dynamic Equilibrium</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 </ul>
 
@@ -266,7 +275,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Basics Intuition for Solving for Dynamics</h1>
+    <h1>Solving for Dynamics</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -276,11 +285,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-need-for-log-linearization">The Need For Log-Linearization</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#steady-state">Steady-State</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#log-linearization-around-the-steady-state">Log-Linearization Around the Steady-State</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uhlig-s-method-of-log-linearization">Uhlig’s Method of Log Linearization</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-method-of-undetermined-coefficients">The Method of Undetermined Coefficients</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conjecturing-a-linear-recursive-law-of-motion">Conjecturing a Linear Recursive Law of Motion</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-for-the-undetermined-coefficients-of-the-linear-recursive-law-of-motion">Solving for the Undetermined Coefficients of the Linear Recursive Law of Motion</a></li>
@@ -297,18 +302,10 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="basics-intuition-for-solving-for-dynamics">
-<h1>Basics Intuition for Solving for Dynamics<a class="headerlink" href="#basics-intuition-for-solving-for-dynamics" title="Permalink to this headline">#</a></h1>
-<section id="the-need-for-log-linearization">
-<h2>The Need For Log-Linearization<a class="headerlink" href="#the-need-for-log-linearization" title="Permalink to this headline">#</a></h2>
-<p>Equilibrium Conditions from the previous part form a nonlinear rational expectations models. However, we only have methods for solving linear rational expectations models.</p>
-<p>To solve our system, we therefore need to linearize it. We do so by applying the method of log-linearization around the the steady-state.</p>
-<section id="steady-state">
-<h3>Steady-State<a class="headerlink" href="#steady-state" title="Permalink to this headline">#</a></h3>
-</section>
-<section id="log-linearization-around-the-steady-state">
-<h3>Log-Linearization Around the Steady-State<a class="headerlink" href="#log-linearization-around-the-steady-state" title="Permalink to this headline">#</a></h3>
-</section>
+  <section class="tex2jax_ignore mathjax_ignore" id="solving-for-dynamics">
+<h1>Solving for Dynamics<a class="headerlink" href="#solving-for-dynamics" title="Permalink to this headline">#</a></h1>
+<section id="uhlig-s-method-of-log-linearization">
+<h2>Uhlig’s Method of Log Linearization<a class="headerlink" href="#uhlig-s-method-of-log-linearization" title="Permalink to this headline">#</a></h2>
 </section>
 <section id="the-method-of-undetermined-coefficients">
 <h2>The Method of Undetermined Coefficients<a class="headerlink" href="#the-method-of-undetermined-coefficients" title="Permalink to this headline">#</a></h2>
@@ -332,6 +329,24 @@ document.write(`
                 <footer class="bd-footer-article">
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="introrecursivemethods.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Basics Intuition for Characterizing the Equilibrium Conditions</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="introstatespacemethods.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Basics Intuition for State Space Methods</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -347,11 +362,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-need-for-log-linearization">The Need For Log-Linearization</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#steady-state">Steady-State</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#log-linearization-around-the-steady-state">Log-Linearization Around the Steady-State</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uhlig-s-method-of-log-linearization">Uhlig’s Method of Log Linearization</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-method-of-undetermined-coefficients">The Method of Undetermined Coefficients</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conjecturing-a-linear-recursive-law-of-motion">Conjecturing a Linear Recursive Law of Motion</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-for-the-undetermined-coefficients-of-the-linear-recursive-law-of-motion">Solving for the Undetermined Coefficients of the Linear Recursive Law of Motion</a></li>
