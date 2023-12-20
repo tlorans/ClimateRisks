@@ -374,6 +374,39 @@ Whatever its source, for an economist it is convenient to assume that the world 
 
 ### Probability 
 
+Before discussing models with stochastic shocks, it is worth taking some time to briefly define exactly what is meant by probability and by a probability space. A probability space $(\Omega, \mathcal{F}, P)$ is comprised of three elements:
+- $\Omega$ a set that contains all the states of nature that might occur;
+- $\mathcal{F}$ a collection of subset of $\Omega$, where each subset is called an event;
+- $P$ a probability measure over $\mathcal{F}$
+
+First, consider what this means when $\Omega$ is a finite set of possible states of nature. For example, it might contain just two possible values for technology, $A_1$ and $A_2$. Then a natural way to define $\mathcal{F}$ is with four elements:
+- the empty set $[]$
+- $A_1$
+- $A_2$
+- the set $[A_1, A_2]$
+
+A probability measure for these four sets is:
+- $0$ for the empty set
+- some value $0 \leq p_1 \leq 1$ for $A_1$
+- $p_2 = 1 - p_1$ for $A_2$
+- $1$ for the set $[A_1, A_2]$
+
+This says that either $A_1$ or $A_2$ will occur and, for a large enough sample, $A_1$ will occur with frequency $p_1$. For larger finite sets of possible states of nature, the structure is the same, but there are simply more elements to $\mathcal{F}$.
+
+If $\Omega$ were comprised of three elements, $A_1 = 0.9$, $A_2 = 1.05$ and $A_3 = 1.10$, then, in addition to the sets given above, $\mathcal{F}$ would include:
+- $A_3$
+- $[A_1, A_3]$
+- $[A_2, A_3]$
+- $[A_1, A_2, A_3]$
+
+The event $[A_2, A_3]$ contains all possible technology levels greater than 1 and occurs with probability $p_2 + p_3$.
+
+It may seem like one goes to too much trouble with defining $\mathcal{F}$, the set of subsets of $\Omega$, and then probabilities over this subset. In the finite case, with independent underlying events, one can frequently simply define the probability measure over the elements of $\Omega$. Each underlying event has its probability, and the probability of any subset of these events is found by summing the probabilities of the events that make up the subsets.
+
+When the set of possible states of nature is continuous, then the definition is more useful. Consider a growth model where technology, $A_t$, can take on any value in the set $[0.9, 1.2]$, the closed continuous set of values between $0.9$ and $1.2$, that includes the end points. Suppose that the probability distribution is uniform, so that, in some sense, any value is equally as likely as any other inside the set. In this case, the probability that ins some given period $t$, $A_t = 1.15565$ for example, is zero. With a uniform distribution, or any continuous distribution, for that matter, the probability that technology has any specific value in any specific period is always zero.
+
+It is in this case that defining subsets of $[0.9, 1.2]$ becomes useful. Imagine that we want to know the probability that technology will have a value in period $t$ between $0.97$ and $1.03$. Since this is a uniform distribution, this probability can be calculated as $(1.03 - 0.97)/(1.2 - 0.9) = 0.2$ or 20%. Although the probability of any one value occuring for $A_t$ is always zero in this example, for any positive range of values, one can usually find a positive probability. Therefore, by defining probabilities over subsets of the states of nature, the definition encompasses situations with a continuous range of possible states of nature.
+
 ### A Simple Stochastic Growth Model
 
 ### The Value Function
