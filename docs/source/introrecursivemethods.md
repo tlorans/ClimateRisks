@@ -1,4 +1,4 @@
-# Characterizing the Equilibrium Conditions
+# Recursive Methods
 
 The objective of this part is to give you the basics ideas behind the the process of finding equilibrium conditions of your model.
 
