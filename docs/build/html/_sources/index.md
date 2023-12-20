@@ -18,6 +18,7 @@ This course is under heavy development
 part1modellertoolkit
 introrecursivemethods
 introdynamics
+introstatespacemethods
 introestimation
 part2fromrbc
 rbcequilibrium
