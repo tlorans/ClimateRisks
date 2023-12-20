@@ -1,4 +1,4 @@
-# Hansen's RBC Solutions with Estimated Parameters
+# Estimating Hansen's RBC Model
 
 ## Estimation
 
