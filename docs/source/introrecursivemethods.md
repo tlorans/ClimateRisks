@@ -409,6 +409,109 @@ It is in this case that defining subsets of $[0.9, 1.2]$ becomes useful. Imagine
 
 ### A Simple Stochastic Growth Model
 
+Let's now imagine that the economy is much like the infinite horizon Robinson Crusoe model execpt that the production function in period $t$ is:
+
+\begin{equation}
+y_t = A^t f(k_t)
+\end{equation}
+
+where the production function $f(k_t)$ is an increasing concave function of the capital stock (assuming that a constant 1 unit of labor is supplied) and $A^t$ can take on two values (two states of nature) where the level of technology given by:
+
+\begin{equation}
+A^t = \begin{cases}
+    A_1 & \text{with probability } p_1\\
+    A_2              & \text{with probability } p_2
+\end{cases}
+\end{equation}
+
+We asume that $A_1$ and $A_2$ are the only values that technology can take, so $p_1 + p_2 = 1$. The realization of $A_i$ in any period is independent of the realizations that occured in the past and those that will occur in the future. The probabilities $p_1$ and $p_2$ should be interpreted to mean that as the sample size increases, the fraction of period in which we observe $A_1$ goes to $p_1$ and the fraction of periods in which we observe $A_2$ gos to $p_2$. TO put some order on things, we assume that $A_1 > A_2$, or that the technology is more productive in state 1 than it is in state 2. As this model is written, there is no technological growth.
+
+There are two kinds of periods, one where, with the same capital, output is greater than the other. One can think of a farming economy where state 1, in which the technology has the value $A_1$, is when good weather occurs and state 2, with the technology of value 2, is when bad weather occurs.
+
+The rest of the model is similar to earlier growth models. The capital stock grows by the equation:
+
+\begin{equation}
+k_{t+1} = A^t f(k_t) + (1-\delta) k_t - c_t
+\end{equation}
+
+At time 0, Robinson Crusoe wants to maximize an expected dicounted utility function of the form:
+
+\begin{equation}
+E_0 \sum^{\infty}_{t=0} \beta^t u (c_t)
+\end{equation}
+
+The choice of consumption in each period will depend on both the capital stock of that period and the realization of technology in that period. Since future realizations of technology are not known, it is not possible to choose a complete consumption path. In fact, future consumption plans are represented by a kind of tree. Given some initial capital $k_0$, in period 0 there are two possible technology levels that could occur and two different amount of production, represented by the ordered pair $[A_1f(k_0), A_2f(k_0)]$, with probabilities $[p_1, p_2]$. 
+
+Depending on which state occurs in period 0, Robinson Crusoe will choose some time 1 capital stocks of $[k^1_1, k^2_1]$. In period 1, production will be one of these four possibilities, $[A_1f(k_1^1), A_2f(k^1_1), A_1f(k_1^2), A_2f(k^2_1)]$, with probabilities $[p_1p_1, p_1p_2, p_2p_1, p_2p_2]$. 
+
+In this way, the number of possible consumption doubles in each period. If we cannot know which path will occur, one can find the probability of each path. In the next subsection, we'll see how this affect the way to define the value function.
+
 ### The Value Function
+
+Suppose that one can write the value of the maximum expected discounted utility given an initial capital stock of $k_0$, when the time $0$ realization of technology is $A_1$, as:
+
+\begin{equation}
+V(k_0, A_1) = \max_{${c_t}^{\infty}_{t=0}$} E_0 \sum^{\infty}_{t = 0} \beta^t u (c_t)
+\end{equation}
+
+Subsect to the budget constraint for $t=0$:
+
+\begin{equation}
+k_1 = A_1 f(k_0) + ( 1 - \delta)k_0 - c_0
+\end{equation}
+
+and those for $t \geq 1$:
+
+\begin{equation}
+k_{t+1} = A^tf(k_t) + ( 1 - \delta)k_t - c_t
+\end{equation}
+
+And the independent realizations of $A^t = [A_1, A_2]$ with probabilities $[p_1, p_2]$. One can write an almos identifcal expression for $V(k_0, A_2)$, the maximum expected discounted utility for the same initial capital stock when the time 0 realization of technology is $A_2$, by replacing $A_1$ by $A_2$ in the budget constraint.
+
+Notice that the value of expected utility is a function of two state variables, the amount of capital that is available in the period and the realization of the technology shock in that period. The expression can be written recursively as:
+
+\begin{equation}
+V(k_0, A^0) = \max_{c_0}[u(c_0) + \beta E_0 V(k_1, A^1)]
+\end{equation}
+
+subject to the budget constraint:
+
+\begin{equation}
+k_1 = A^0 f(k_0) + (1 - \delta)k_0 - c_0
+\end{equation}
+
+Here is the subtle change in how the value function is written: it is now written as a function of the time 0 realization of the technology shock. As this function is written, $k_0$ and $A^0$ are the state variables and $c_0$ is the control variable. The second part of the value function is written with the expectation term because given a choice for $c_0$, it will have a value of $V(k_1, A_1)$ with probability $p_1$ and a value of $V(k_1, A_2)$ with probability $p_2$.
+
+For any particular choice $\hat{k_1}$ of the time 1 capital stock, the expectations expression is equal to:
+
+\begin{equation}
+E_0V(\hat{k_1}, A^1) = p_1 V (\hat{k_1}, A_1) + p_2 V(\hat{k_1}, A_2)
+\end{equation}
+
+For any time period $t$, the problem can be written as:
+
+\begin{equation}
+V(k_t, A^t) = \max_{c_t}[u(c_t) + \beta E_t V(k_{t+1, A^{t+1}})]
+\end{equation}
+
+subject to the budget constraint:
+
+\begin{equation}
+k_{t+1} = A^t f(k_t) + (1 - \delta) k_t - c_t
+\end{equation}
+
+Or, with $k_{t+1}$ as the control variable:
+
+\begin{equation}
+V(k_t, A^t) = \max_{k_{t+1}}[u(A^t f(k_t) + (1 - \delta) k_t - k_{t+1}) + \beta E_t V(k_{t+1}, A^{t+1})]
+\end{equation}
+
+The solution to the stochastic recursive problem finds a function that gives the values of the control variables that maximizes the value function over the domain of the state variables. The solution function is called a plan and is written:
+
+\begin{equation}
+k_{t+1} = H(k_t, A^t)
+\end{equation}
+
+This plan gives the optimizing choice of the control variables in every period as a function of the regular state variables and of the states of nature.
 
 ### Equilibrium Conditions

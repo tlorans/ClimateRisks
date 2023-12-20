@@ -4,7 +4,7 @@
 % You can adapt this file completely to your liking, but it should at least
 % contain the root `toctree` directive.
 
-# ESG Risk Modelling with Python
+# ESG Risk Factor Modelling with Python
 
 
 ```{warning}
@@ -13,7 +13,7 @@ This course is under heavy development
 
 ```{toctree}
 :caption: 'Contents:'
-:maxdepth: 2
+:maxdepth: 1
 
 part1modellertoolkit
 introrecursivemethods

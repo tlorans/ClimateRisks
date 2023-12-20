@@ -130,8 +130,8 @@
 <li class="toctree-l1"><a class="reference internal" href="part1modellertoolkit.html">Part 1: Modeller Toolkit</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Characterizing the Equilibrium Conditions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="introdynamics.html">Solving for Dynamics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="introstatespacemethods.html">Basics Intuition for State Space Methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="introestimation.html">Basics Intuition for Model Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introstatespacemethods.html">State Space Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introestimation.html">Model Estimation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="part2fromrbc.html">Part 2. From RBC Models…</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rbcequilibrium.html">Hansen’s RBC Model: Equilibrium Conditions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rbcdynamics.html">Hansen’s RBC Dynamics</a></li>
@@ -326,34 +326,34 @@ document.write(`
 <p>Usually, for a growth model, the capital stock that we inherit from the past is considered a state variable.</p>
 <p>The control variables in period <span class="math notranslate nohighlight">\(t\)</span> are those variables whose values individuals explicitly choose in that period with the goal of maximizing some objective function. We generally have the choice about which variables will be states and control variables.</p>
 <p>Let’s consider the simple version of a Robinson Crusoe Economy (that is a representative agent that is both the producer and the consumer). The objective function of Robison Crusoei is to maximize the discounted lifetime utility of consumption:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2d88fc1a-58ee-4d22-a0f1-e455ae0ee107">
-<span class="eqno">(1)<a class="headerlink" href="#equation-2d88fc1a-58ee-4d22-a0f1-e455ae0ee107" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e3e55e8c-80e0-4eec-aa2b-9cdf5009baf0">
+<span class="eqno">(1)<a class="headerlink" href="#equation-e3e55e8c-80e0-4eec-aa2b-9cdf5009baf0" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \begin{aligned}
 \max &amp; \sum^{\infty}_{i=0}\beta^i u(c_{t+i})\\
 \end{aligned}
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\beta\)</span> is a discount factor, <span class="math notranslate nohighlight">\(u(.)\)</span> is the utility function and <span class="math notranslate nohighlight">\(c_{t}\)</span> is the consumption level.</p>
 <p>Robinson is subject to the budget constraints:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6968dda6-5347-43e6-8384-30fd1187041f">
-<span class="eqno">(2)<a class="headerlink" href="#equation-6968dda6-5347-43e6-8384-30fd1187041f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-939df1a7-517c-4ab1-b011-fe12f22ead12">
+<span class="eqno">(2)<a class="headerlink" href="#equation-939df1a7-517c-4ab1-b011-fe12f22ead12" title="Permalink to this equation">#</a></span>\[\begin{equation}
 k_{t+1} = (1 - \delta) k_t + i_t
 \end{equation}\]</div>
 <p>And:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-eae6773b-03b1-4c51-aaf7-fed07a67132d">
-<span class="eqno">(3)<a class="headerlink" href="#equation-eae6773b-03b1-4c51-aaf7-fed07a67132d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-563876c7-5b0e-4b7b-9fbd-5b0fc6f32501">
+<span class="eqno">(3)<a class="headerlink" href="#equation-563876c7-5b0e-4b7b-9fbd-5b0fc6f32501" title="Permalink to this equation">#</a></span>\[\begin{equation}
 y_t = f(k_t) = c_t + i_t
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(k_{t}\)</span> is the stock of capital, <span class="math notranslate nohighlight">\(i_t\)</span> the amount of investment, <span class="math notranslate nohighlight">\(delta\)</span> the capital depreciation rate, <span class="math notranslate nohighlight">\(y_t\)</span> the output, <span class="math notranslate nohighlight">\(f()\)</span> a production function.</p>
 <p>In this model, the capital stock inherited from period <span class="math notranslate nohighlight">\(t-1\)</span>, <span class="math notranslate nohighlight">\(k_t\)</span>, is a state variable. It is predetermined and known.</p>
 <p>However, there is a number of options of choosing a control variable. One option could be for Robinson Crusoe to choose the consumption <span class="math notranslate nohighlight">\(c_t\)</span>, that appears directly in the objective function. Once consumption in period <span class="math notranslate nohighlight">\(t\)</span> is determined, the second budget constraint determines the investment <span class="math notranslate nohighlight">\(i_t\)</span>, and the first budget constraint then determines the capital stock that will be available in the next period <span class="math notranslate nohighlight">\(t_{t+1}\)</span>. In this case, consumption is the control variable.</p>
 <p>An alternative is for Robinson Crusoe to choose the amount of capital that will be available in next period, <span class="math notranslate nohighlight">\(k_{t+1}\)</span>. In that case, we could combine both budget constraints as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7d73e091-7fd2-4d55-8741-7b00159b6fe9">
-<span class="eqno">(4)<a class="headerlink" href="#equation-7d73e091-7fd2-4d55-8741-7b00159b6fe9" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-1c6cf28d-bd16-47cc-a302-19b87bda2460">
+<span class="eqno">(4)<a class="headerlink" href="#equation-1c6cf28d-bd16-47cc-a302-19b87bda2460" title="Permalink to this equation">#</a></span>\[\begin{equation}
 c_t = f(k_t) + (1 - \delta)k_t - k_{t-1}
 \end{equation}\]</div>
 <p>After substitution, the objective function is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ea6954b3-54ea-4984-8e54-db4dd85d7965">
-<span class="eqno">(5)<a class="headerlink" href="#equation-ea6954b3-54ea-4984-8e54-db4dd85d7965" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b9742939-7215-4805-a357-fcefe9924e04">
+<span class="eqno">(5)<a class="headerlink" href="#equation-b9742939-7215-4805-a357-fcefe9924e04" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \begin{aligned}
 \max &amp; \sum^{\infty}_{i=0}\beta^i u(f(k_{t+i}) + (1 - \delta)k_{t+i} - k_{t + i-1})\\
 \end{aligned}
@@ -361,25 +361,25 @@ c_t = f(k_t) + (1 - \delta)k_t - k_{t-1}
 <section id="the-value-function">
 <h3>The Value Function<a class="headerlink" href="#the-value-function" title="Permalink to this headline">#</a></h3>
 <p>Assume we can calculate the value of the discounted value of utility that an agent receive when that agent is maximizing the infinite horizon objective function subject to the budget constraints. In our case with fixed labor supply, this value is clearly a function of the initial per worker capital stock <span class="math notranslate nohighlight">\(k_t\)</span>. As shown previously, we can write out a version of this problem where Robinson is using the capital stock to be carried over to the next period <span class="math notranslate nohighlight">\(k_{t+1}\)</span>, as the control variable. For that example, the value of utility is equal to:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-145c1d32-e1d7-4569-9db3-821c1cbd8b70">
-<span class="eqno">(6)<a class="headerlink" href="#equation-145c1d32-e1d7-4569-9db3-821c1cbd8b70" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b13bc9aa-743e-40f2-9e7d-7d025255661d">
+<span class="eqno">(6)<a class="headerlink" href="#equation-b13bc9aa-743e-40f2-9e7d-7d025255661d" title="Permalink to this equation">#</a></span>\[\begin{equation}
 V(k_t) = \max_{\{k_s\}^{\infty}_{s = t+1}} \sum^{\infty}_{i=0} \beta^i u(f(k_{t+i})-k_{t+1+i} + (1 - \delta)k_{t+i})
 \end{equation}\]</div>
 <p>where we denote the value of the discounted utility by <span class="math notranslate nohighlight">\(V(k_t)\)</span>, to stress that it is a function of the value of the initial capital stock <span class="math notranslate nohighlight">\(k_t\)</span>. For any value of <span class="math notranslate nohighlight">\(k_t\)</span>, limited to the approapriate domain, the value of the value function <span class="math notranslate nohighlight">\(V(k_t)\)</span>, is the discounted value of utility when the maximization problem has been solved and when <span class="math notranslate nohighlight">\(k_t\)</span> was the initial capital stock.</p>
 <p>Since <span class="math notranslate nohighlight">\(V(k_t)\)</span> is a function, its value can be found for any permitted value of <span class="math notranslate nohighlight">\(k_t\)</span>. In particular, the value of the function can be found for the value of <span class="math notranslate nohighlight">\(k_{t+1}\)</span> that was chosen in period <span class="math notranslate nohighlight">\(t\)</span>. This is possible because the economy is recursive: in period <span class="math notranslate nohighlight">\(t+1\)</span>, the value of <span class="math notranslate nohighlight">\(k_{t+1}\)</span> is given (it is a state variable) and the problem to be solved is simply the maximization of utility beginning in period <span class="math notranslate nohighlight">\(t+1\)</span>. The maximization problem can be written as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-36efb769-54c6-42fd-86c1-f905b25fc23b">
-<span class="eqno">(7)<a class="headerlink" href="#equation-36efb769-54c6-42fd-86c1-f905b25fc23b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e2eca5df-060a-4549-94d7-f7e77a6f1c8a">
+<span class="eqno">(7)<a class="headerlink" href="#equation-e2eca5df-060a-4549-94d7-f7e77a6f1c8a" title="Permalink to this equation">#</a></span>\[\begin{equation}
 V(k_{t+1}) = \max_{\{k_s\}^{\infty}_{s = t+2}} \sum^{\infty}_{i=0} \beta^i u(f(k_{t+1+i})-k_{t+2+i} + (1 - \delta)k_{t+1+i})
 \end{equation}\]</div>
 <p>and its value, <span class="math notranslate nohighlight">\(V(k_{t+1})\)</span>, is a function of the stock of capital per worker at time <span class="math notranslate nohighlight">\(t+1\)</span>.</p>
 <p>By separating the period <span class="math notranslate nohighlight">\(t\)</span> problem from that of future periods, we can rewrite the value function <span class="math notranslate nohighlight">\(V(k_t)\)</span> as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-aa3ae845-34d7-4714-ad09-0382bd8ee729">
-<span class="eqno">(8)<a class="headerlink" href="#equation-aa3ae845-34d7-4714-ad09-0382bd8ee729" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-9346d1ac-fdad-4136-96f6-9a6de256b478">
+<span class="eqno">(8)<a class="headerlink" href="#equation-9346d1ac-fdad-4136-96f6-9a6de256b478" title="Permalink to this equation">#</a></span>\[\begin{equation}
 V(k_t) = \max_{k_{t+1}}[u(f(k_t) - k_{t+1} + (1 - \delta)k_t) + \max_{\{k_s\}^{\infty}_{s = t+2}} \sum^{\infty}_{i=0} \beta^i u(f(k_{t+1+i})-k_{t+2+i} + (1 - \delta)k_{t+1+i})]
 \end{equation}\]</div>
 <p>The summation in the last part of this equation is simply the value function <span class="math notranslate nohighlight">\(V(k_{t+1})\)</span>. We can thus make the substition and write:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-324e2fe4-dcb8-4533-8aa0-376167fc9824">
-<span class="eqno">(9)<a class="headerlink" href="#equation-324e2fe4-dcb8-4533-8aa0-376167fc9824" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-6bb5fffe-28ef-4f9b-84c4-b596b4aa0e8c">
+<span class="eqno">(9)<a class="headerlink" href="#equation-6bb5fffe-28ef-4f9b-84c4-b596b4aa0e8c" title="Permalink to this equation">#</a></span>\[\begin{equation}
 V(k_t) = \max_{k_{t+1}}[u(f(k_t) - k_{t+1} + (1 - \delta)k_t) + \beta V(k_{t+1})]
 \end{equation}\]</div>
 <p>An equation of this form is known as a Bellman equation. Writing out the problem recursively makes it conceptually simpler. The value of the choice variable <span class="math notranslate nohighlight">\(k_{t+1}\)</span> is being chosen to maximize an objective function of only a single period. The problem is reduced from one of infinite dimension to one of only one dimension.</p>
@@ -438,21 +438,21 @@ V(k_t) = \max_{k_{t+1}}[u(f(k_t) - k_{t+1} + (1 - \delta)k_t) + \beta V(k_{t+1})
 </div>
 <p><span class="math notranslate nohighlight">\(\beta \left(- \delta + \frac{\partial}{\partial {k}_{t + 1}} f{\left({k}_{t + 1} \right)} + 1\right) \frac{\partial}{\partial {c}_{t + 1}} u{\left({c}_{t + 1} \right)} - \frac{\partial}{\partial {c}_{t}} u{\left({c}_{t} \right)} = 0\)</span></p>
 <p>which can be reexpressed as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e8f594f1-e605-45a4-a24c-08acbd6daedf">
-<span class="eqno">(10)<a class="headerlink" href="#equation-e8f594f1-e605-45a4-a24c-08acbd6daedf" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-56543105-c7d0-49c8-ab69-4c331621f23c">
+<span class="eqno">(10)<a class="headerlink" href="#equation-56543105-c7d0-49c8-ab69-4c331621f23c" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \frac{u'(c_t)}{u'(c_{t+1})} = \beta (f'(k_{t+1})+ (1 - \delta))
 \end{equation}\]</div>
 <p>The equilibrium conditions of the Robinson Crusoe Economy are thus this Euler equation and the budget constraints:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a25e8c7b-db72-41f7-86fa-7d48ca4e9707">
-<span class="eqno">(11)<a class="headerlink" href="#equation-a25e8c7b-db72-41f7-86fa-7d48ca4e9707" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b4529caa-d266-45cc-aaa8-36bf3dd74037">
+<span class="eqno">(11)<a class="headerlink" href="#equation-b4529caa-d266-45cc-aaa8-36bf3dd74037" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \frac{u'(c_t)}{u'(c_{t+1})} = \beta (f'(k_{t+1})+ (1 - \delta))
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-f2daf9b8-b5d6-4c08-8b9a-0e8678e64fca">
-<span class="eqno">(12)<a class="headerlink" href="#equation-f2daf9b8-b5d6-4c08-8b9a-0e8678e64fca" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4dd0cec5-668c-4eb2-9b38-3ab8bb3858ce">
+<span class="eqno">(12)<a class="headerlink" href="#equation-4dd0cec5-668c-4eb2-9b38-3ab8bb3858ce" title="Permalink to this equation">#</a></span>\[\begin{equation}
 k_{t+1} = (1 - \delta) k_t + i_t
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-e23bbf91-6d1f-4774-93c8-fe92a332e862">
-<span class="eqno">(13)<a class="headerlink" href="#equation-e23bbf91-6d1f-4774-93c8-fe92a332e862" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-3027bbd6-3377-498a-9950-e3de5136dd81">
+<span class="eqno">(13)<a class="headerlink" href="#equation-3027bbd6-3377-498a-9950-e3de5136dd81" title="Permalink to this equation">#</a></span>\[\begin{equation}
 y_t = f(k_t) = c_t + i_t
 \end{equation}\]</div>
 </section>
@@ -505,28 +505,28 @@ y_t = f(k_t) = c_t + i_t
 <h2>Robinson Crusoe with Variable Labor<a class="headerlink" href="#robinson-crusoe-with-variable-labor" title="Permalink to this headline">#</a></h2>
 <p>It might be useful to show that recursive methods can be applied to the Robison Crusoe economy, where labor is variable input.</p>
 <p>The utility function of Robinson is now:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f953bb97-c21e-4483-8015-fbaf327e0cb5">
-<span class="eqno">(14)<a class="headerlink" href="#equation-f953bb97-c21e-4483-8015-fbaf327e0cb5" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-fb9a477d-e41f-4d54-9ebf-cd32ca01de2d">
+<span class="eqno">(14)<a class="headerlink" href="#equation-fb9a477d-e41f-4d54-9ebf-cd32ca01de2d" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sum^{\infty}_{t=0}\beta^iu(c_{t+i}, h_{t+i})
 \end{equation}\]</div>
 <p>which is maximized subject to the constraint:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2fd641e4-10cd-4622-a445-2d73fda3ca47">
-<span class="eqno">(15)<a class="headerlink" href="#equation-2fd641e4-10cd-4622-a445-2d73fda3ca47" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-69cc1ef9-4b70-4347-9766-8e4e1ce9b59d">
+<span class="eqno">(15)<a class="headerlink" href="#equation-69cc1ef9-4b70-4347-9766-8e4e1ce9b59d" title="Permalink to this equation">#</a></span>\[\begin{equation}
 k_{t+1} = (1 - \delta)k_t + i_t
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-e88907c5-fd44-4815-a00d-4087bbb655be">
-<span class="eqno">(16)<a class="headerlink" href="#equation-e88907c5-fd44-4815-a00d-4087bbb655be" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0e3392a5-443d-4456-a072-2f41fcd5d819">
+<span class="eqno">(16)<a class="headerlink" href="#equation-0e3392a5-443d-4456-a072-2f41fcd5d819" title="Permalink to this equation">#</a></span>\[\begin{equation}
 y_t = f(k_t, h_t) \geq c_t + i_t
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-358df11a-3970-49bc-bf98-8a1b1184b787">
-<span class="eqno">(17)<a class="headerlink" href="#equation-358df11a-3970-49bc-bf98-8a1b1184b787" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4c6d067a-031d-45c7-ab21-f5920f9b5a1e">
+<span class="eqno">(17)<a class="headerlink" href="#equation-4c6d067a-031d-45c7-ab21-f5920f9b5a1e" title="Permalink to this equation">#</a></span>\[\begin{equation}
 h_t \leq 1
 \end{equation}\]</div>
 <section id="id4">
 <h3>The Value Function<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
 <p>We choose <span class="math notranslate nohighlight">\(h_t\)</span> and <span class="math notranslate nohighlight">\(k_{t+1}\)</span> as our control variables. The problem can be written as the Bellman equation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0b81af41-25f9-4658-911a-be4a8b307566">
-<span class="eqno">(18)<a class="headerlink" href="#equation-0b81af41-25f9-4658-911a-be4a8b307566" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-510ddb7c-d18d-496e-912d-cddb204ae549">
+<span class="eqno">(18)<a class="headerlink" href="#equation-510ddb7c-d18d-496e-912d-cddb204ae549" title="Permalink to this equation">#</a></span>\[\begin{equation}
 V(k_t) = \max_{h_t, k_{t+1}}[u(f(k_t, h_t) + (1 - \delta)k_t - k_{t+1}, h_t) + \beta V(k_{t+1})]
 \end{equation}\]</div>
 <p>Here we know that the envelope theorem condition has a simple representation because the derivative of <span class="math notranslate nohighlight">\(V(k_{t+1})\)</span> with respect to the state variable <span class="math notranslate nohighlight">\(k_t\)</span> will be equal to zero.</p>
@@ -571,8 +571,8 @@ V(k_t) = \max_{h_t, k_{t+1}}[u(f(k_t, h_t) + (1 - \delta)k_t - k_{t+1}, h_t) + \
 <p><span class="math notranslate nohighlight">\(\frac{\partial}{\partial {h}_{t}} f{\left({k}_{t},{h}_{t} \right)} \frac{\partial}{\partial {c}_{t}} u{\left({c}_{t},{h}_{t} \right)} + \frac{\partial}{\partial {h}_{t}} u{\left({c}_{t},{h}_{t} \right)} = 0
 \)</span></p>
 <p>The derivative of the value function only appear in the FOC for <span class="math notranslate nohighlight">\(k_{t+1}\)</span>. Thus we will only need the envelope condition in order to find the Euler Equation for <span class="math notranslate nohighlight">\(k_{t+1}\)</span>. The Euler Equation for <span class="math notranslate nohighlight">\(h_t\)</span> has directly been found with the FOC, which can be reexpressed as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d8b4440c-d87f-4103-9ae9-b509f2113cf2">
-<span class="eqno">(19)<a class="headerlink" href="#equation-d8b4440c-d87f-4103-9ae9-b509f2113cf2" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-223e2b3d-3a85-4103-85fd-d268be3e6abb">
+<span class="eqno">(19)<a class="headerlink" href="#equation-223e2b3d-3a85-4103-85fd-d268be3e6abb" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \frac{u_h(c_t, h_t)}{u_c(c_t, h_t)} = - f_h(k_t, h_t)
 \end{equation}\]</div>
 <p>We find the envelope condition:</p>
@@ -586,25 +586,25 @@ V(k_t) = \max_{h_t, k_{t+1}}[u(f(k_t, h_t) + (1 - \delta)k_t - k_{t+1}, h_t) + \
 </div>
 <p><span class="math notranslate nohighlight">\(\beta \left(- \delta + \frac{\partial}{\partial {k}_{t + 1}} f{\left({k}_{t + 1},{h}_{t + 1} \right)} + 1\right) \frac{\partial}{\partial {c}_{t + 1}} u{\left({c}_{t + 1},{h}_{t + 1} \right)} - \frac{\partial}{\partial {c}_{t}} u{\left({c}_{t},{h}_{t} \right)} = 0\)</span></p>
 <p>Which can be reexpressed:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b4a43e44-30fe-4ab5-89dc-bd1ad6b40f18">
-<span class="eqno">(20)<a class="headerlink" href="#equation-b4a43e44-30fe-4ab5-89dc-bd1ad6b40f18" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-bfd9e332-4d3d-47f4-9e75-b16f5f1e4c95">
+<span class="eqno">(20)<a class="headerlink" href="#equation-bfd9e332-4d3d-47f4-9e75-b16f5f1e4c95" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \frac{u_c(c_t, h_t)}{u_c(c_{t+1}, h_{t+1})} = \beta (f_k(k_{t+1}, h_{t+1})+ (1 - \delta))
 \end{equation}\]</div>
 <p>The equilibrium conditions of the Robinson Crusoe Economy are thus these Euler equations and the budget constraints:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-46bf8b57-8d7d-4cfb-886f-a4b4a39905a1">
-<span class="eqno">(21)<a class="headerlink" href="#equation-46bf8b57-8d7d-4cfb-886f-a4b4a39905a1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-1aa40fbd-e813-4362-8ab0-316ffb3ac821">
+<span class="eqno">(21)<a class="headerlink" href="#equation-1aa40fbd-e813-4362-8ab0-316ffb3ac821" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \frac{u_h(c_t, h_t)}{u_c(c_t, h_t)} = - f_h(k_t, h_t)
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-9e98dd9a-de66-4f16-970a-268734228f3f">
-<span class="eqno">(22)<a class="headerlink" href="#equation-9e98dd9a-de66-4f16-970a-268734228f3f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-712cbf1c-0873-4b60-983f-8c0d2aeebf79">
+<span class="eqno">(22)<a class="headerlink" href="#equation-712cbf1c-0873-4b60-983f-8c0d2aeebf79" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \frac{u_c(c_t, h_t)}{u_c(c_{t+1}, h_{t+1})} = \beta (f_k(k_{t+1}, h_{t+1})+ (1 - \delta))
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-cb6ddcdb-76ac-4c10-9e09-e2c92289821b">
-<span class="eqno">(23)<a class="headerlink" href="#equation-cb6ddcdb-76ac-4c10-9e09-e2c92289821b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-12e71818-00f4-49b3-9b17-429a5b5c2a02">
+<span class="eqno">(23)<a class="headerlink" href="#equation-12e71818-00f4-49b3-9b17-429a5b5c2a02" title="Permalink to this equation">#</a></span>\[\begin{equation}
 k_{t+1} = (1 - \delta) k_t + i_t
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-69d8b721-f4e5-4b62-aa31-d17af0ce5431">
-<span class="eqno">(24)<a class="headerlink" href="#equation-69d8b721-f4e5-4b62-aa31-d17af0ce5431" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e9a49b4c-3218-4ae2-a30e-955fc0ec2d7f">
+<span class="eqno">(24)<a class="headerlink" href="#equation-e9a49b4c-3218-4ae2-a30e-955fc0ec2d7f" title="Permalink to this equation">#</a></span>\[\begin{equation}
 y_t = f(k_t, h_t) = c_t + i_t
 \end{equation}\]</div>
 </section>
@@ -654,9 +654,90 @@ y_t = f(k_t, h_t) = c_t + i_t
 </section>
 <section id="a-simple-stochastic-growth-model">
 <h3>A Simple Stochastic Growth Model<a class="headerlink" href="#a-simple-stochastic-growth-model" title="Permalink to this headline">#</a></h3>
+<p>Let’s now imagine that the economy is much like the infinite horizon Robinson Crusoe model execpt that the production function in period <span class="math notranslate nohighlight">\(t\)</span> is:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-5e48d99f-8f2f-4028-9a1d-4eb1bb73ecbd">
+<span class="eqno">(25)<a class="headerlink" href="#equation-5e48d99f-8f2f-4028-9a1d-4eb1bb73ecbd" title="Permalink to this equation">#</a></span>\[\begin{equation}
+y_t = A^t f(k_t)
+\end{equation}\]</div>
+<p>where the production function <span class="math notranslate nohighlight">\(f(k_t)\)</span> is an increasing concave function of the capital stock (assuming that a constant 1 unit of labor is supplied) and <span class="math notranslate nohighlight">\(A^t\)</span> can take on two values (two states of nature) where the level of technology given by:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-294f8e96-1a76-45e6-8033-e64e2572e678">
+<span class="eqno">(26)<a class="headerlink" href="#equation-294f8e96-1a76-45e6-8033-e64e2572e678" title="Permalink to this equation">#</a></span>\[\begin{equation}
+A^t = \begin{cases}
+    A_1 &amp; \text{with probability } p_1\\
+    A_2              &amp; \text{with probability } p_2
+\end{cases}
+\end{equation}\]</div>
+<p>We asume that <span class="math notranslate nohighlight">\(A_1\)</span> and <span class="math notranslate nohighlight">\(A_2\)</span> are the only values that technology can take, so <span class="math notranslate nohighlight">\(p_1 + p_2 = 1\)</span>. The realization of <span class="math notranslate nohighlight">\(A_i\)</span> in any period is independent of the realizations that occured in the past and those that will occur in the future. The probabilities <span class="math notranslate nohighlight">\(p_1\)</span> and <span class="math notranslate nohighlight">\(p_2\)</span> should be interpreted to mean that as the sample size increases, the fraction of period in which we observe <span class="math notranslate nohighlight">\(A_1\)</span> goes to <span class="math notranslate nohighlight">\(p_1\)</span> and the fraction of periods in which we observe <span class="math notranslate nohighlight">\(A_2\)</span> gos to <span class="math notranslate nohighlight">\(p_2\)</span>. TO put some order on things, we assume that <span class="math notranslate nohighlight">\(A_1 &gt; A_2\)</span>, or that the technology is more productive in state 1 than it is in state 2. As this model is written, there is no technological growth.</p>
+<p>There are two kinds of periods, one where, with the same capital, output is greater than the other. One can think of a farming economy where state 1, in which the technology has the value <span class="math notranslate nohighlight">\(A_1\)</span>, is when good weather occurs and state 2, with the technology of value 2, is when bad weather occurs.</p>
+<p>The rest of the model is similar to earlier growth models. The capital stock grows by the equation:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-948dd2a1-e18b-4780-a06e-0ebbc6601177">
+<span class="eqno">(27)<a class="headerlink" href="#equation-948dd2a1-e18b-4780-a06e-0ebbc6601177" title="Permalink to this equation">#</a></span>\[\begin{equation}
+k_{t+1} = A^t f(k_t) + (1-\delta) k_t - c_t
+\end{equation}\]</div>
+<p>At time 0, Robinson Crusoe wants to maximize an expected dicounted utility function of the form:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-505eaafb-011a-40dc-89b3-978ebee49c83">
+<span class="eqno">(28)<a class="headerlink" href="#equation-505eaafb-011a-40dc-89b3-978ebee49c83" title="Permalink to this equation">#</a></span>\[\begin{equation}
+E_0 \sum^{\infty}_{t=0} \beta^t u (c_t)
+\end{equation}\]</div>
+<p>The choice of consumption in each period will depend on both the capital stock of that period and the realization of technology in that period. Since future realizations of technology are not known, it is not possible to choose a complete consumption path. In fact, future consumption plans are represented by a kind of tree. Given some initial capital <span class="math notranslate nohighlight">\(k_0\)</span>, in period 0 there are two possible technology levels that could occur and two different amount of production, represented by the ordered pair <span class="math notranslate nohighlight">\([A_1f(k_0), A_2f(k_0)]\)</span>, with probabilities <span class="math notranslate nohighlight">\([p_1, p_2]\)</span>.</p>
+<p>Depending on which state occurs in period 0, Robinson Crusoe will choose some time 1 capital stocks of <span class="math notranslate nohighlight">\([k^1_1, k^2_1]\)</span>. In period 1, production will be one of these four possibilities, <span class="math notranslate nohighlight">\([A_1f(k_1^1), A_2f(k^1_1), A_1f(k_1^2), A_2f(k^2_1)]\)</span>, with probabilities <span class="math notranslate nohighlight">\([p_1p_1, p_1p_2, p_2p_1, p_2p_2]\)</span>.</p>
+<p>In this way, the number of possible consumption doubles in each period. If we cannot know which path will occur, one can find the probability of each path. In the next subsection, we’ll see how this affect the way to define the value function.</p>
 </section>
 <section id="id6">
 <h3>The Value Function<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
+<p>Suppose that one can write the value of the maximum expected discounted utility given an initial capital stock of <span class="math notranslate nohighlight">\(k_0\)</span>, when the time <span class="math notranslate nohighlight">\(0\)</span> realization of technology is <span class="math notranslate nohighlight">\(A_1\)</span>, as:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-76cae67d-6cf2-4188-9422-8f3638eaf134">
+<span class="eqno">(29)<a class="headerlink" href="#equation-76cae67d-6cf2-4188-9422-8f3638eaf134" title="Permalink to this equation">#</a></span>\[\begin{equation}
+V(k_0, A_1) = \max_{${c_t}^{\infty}_{t=0}$} E_0 \sum^{\infty}_{t = 0} \beta^t u (c_t)
+\end{equation}\]</div>
+<p>Subsect to the budget constraint for <span class="math notranslate nohighlight">\(t=0\)</span>:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-961a1659-3b19-4b2d-bdf6-f551d0fc721f">
+<span class="eqno">(30)<a class="headerlink" href="#equation-961a1659-3b19-4b2d-bdf6-f551d0fc721f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+k_1 = A_1 f(k_0) + ( 1 - \delta)k_0 - c_0
+\end{equation}\]</div>
+<p>and those for <span class="math notranslate nohighlight">\(t \geq 1\)</span>:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a00c0967-f088-4ca3-b1e7-06bc1cc623d6">
+<span class="eqno">(31)<a class="headerlink" href="#equation-a00c0967-f088-4ca3-b1e7-06bc1cc623d6" title="Permalink to this equation">#</a></span>\[\begin{equation}
+k_{t+1} = A^tf(k_t) + ( 1 - \delta)k_t - c_t
+\end{equation}\]</div>
+<p>And the independent realizations of <span class="math notranslate nohighlight">\(A^t = [A_1, A_2]\)</span> with probabilities <span class="math notranslate nohighlight">\([p_1, p_2]\)</span>. One can write an almos identifcal expression for <span class="math notranslate nohighlight">\(V(k_0, A_2)\)</span>, the maximum expected discounted utility for the same initial capital stock when the time 0 realization of technology is <span class="math notranslate nohighlight">\(A_2\)</span>, by replacing <span class="math notranslate nohighlight">\(A_1\)</span> by <span class="math notranslate nohighlight">\(A_2\)</span> in the budget constraint.</p>
+<p>Notice that the value of expected utility is a function of two state variables, the amount of capital that is available in the period and the realization of the technology shock in that period. The expression can be written recursively as:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a004c167-dea4-49a2-b825-aa3541f84342">
+<span class="eqno">(32)<a class="headerlink" href="#equation-a004c167-dea4-49a2-b825-aa3541f84342" title="Permalink to this equation">#</a></span>\[\begin{equation}
+V(k_0, A^0) = \max_{c_0}[u(c_0) + \beta E_0 V(k_1, A^1)]
+\end{equation}\]</div>
+<p>subject to the budget constraint:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-df302c58-cafd-4034-a49d-803aafa8d43b">
+<span class="eqno">(33)<a class="headerlink" href="#equation-df302c58-cafd-4034-a49d-803aafa8d43b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+k_1 = A^0 f(k_0) + (1 - \delta)k_0 - c_0
+\end{equation}\]</div>
+<p>Here is the subtle change in how the value function is written: it is now written as a function of the time 0 realization of the technology shock. As this function is written, <span class="math notranslate nohighlight">\(k_0\)</span> and <span class="math notranslate nohighlight">\(A^0\)</span> are the state variables and <span class="math notranslate nohighlight">\(c_0\)</span> is the control variable. The second part of the value function is written with the expectation term because given a choice for <span class="math notranslate nohighlight">\(c_0\)</span>, it will have a value of <span class="math notranslate nohighlight">\(V(k_1, A_1)\)</span> with probability <span class="math notranslate nohighlight">\(p_1\)</span> and a value of <span class="math notranslate nohighlight">\(V(k_1, A_2)\)</span> with probability <span class="math notranslate nohighlight">\(p_2\)</span>.</p>
+<p>For any particular choice <span class="math notranslate nohighlight">\(\hat{k_1}\)</span> of the time 1 capital stock, the expectations expression is equal to:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-815e915d-cd91-4157-80aa-1bf2bd1e5b94">
+<span class="eqno">(34)<a class="headerlink" href="#equation-815e915d-cd91-4157-80aa-1bf2bd1e5b94" title="Permalink to this equation">#</a></span>\[\begin{equation}
+E_0V(\hat{k_1}, A^1) = p_1 V (\hat{k_1}, A_1) + p_2 V(\hat{k_1}, A_2)
+\end{equation}\]</div>
+<p>For any time period <span class="math notranslate nohighlight">\(t\)</span>, the problem can be written as:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-45e4c0c9-0a9f-4632-9748-7603251f682e">
+<span class="eqno">(35)<a class="headerlink" href="#equation-45e4c0c9-0a9f-4632-9748-7603251f682e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+V(k_t, A^t) = \max_{c_t}[u(c_t) + \beta E_t V(k_{t+1, A^{t+1}})]
+\end{equation}\]</div>
+<p>subject to the budget constraint:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-7511c3e1-bd59-4edb-ab39-e785c23bdbb4">
+<span class="eqno">(36)<a class="headerlink" href="#equation-7511c3e1-bd59-4edb-ab39-e785c23bdbb4" title="Permalink to this equation">#</a></span>\[\begin{equation}
+k_{t+1} = A^t f(k_t) + (1 - \delta) k_t - c_t
+\end{equation}\]</div>
+<p>Or, with <span class="math notranslate nohighlight">\(k_{t+1}\)</span> as the control variable:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-4b7fbb4e-8028-454f-a41c-87f8bee31af8">
+<span class="eqno">(37)<a class="headerlink" href="#equation-4b7fbb4e-8028-454f-a41c-87f8bee31af8" title="Permalink to this equation">#</a></span>\[\begin{equation}
+V(k_t, A^t) = \max_{k_{t+1}}[u(A^t f(k_t) + (1 - \delta) k_t - k_{t+1}) + \beta E_t V(k_{t+1}, A^{t+1})]
+\end{equation}\]</div>
+<p>The solution to the stochastic recursive problem finds a function that gives the values of the control variables that maximizes the value function over the domain of the state variables. The solution function is called a plan and is written:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-faa876e1-9704-437e-bb75-d669a3689c17">
+<span class="eqno">(38)<a class="headerlink" href="#equation-faa876e1-9704-437e-bb75-d669a3689c17" title="Permalink to this equation">#</a></span>\[\begin{equation}
+k_{t+1} = H(k_t, A^t)
+\end{equation}\]</div>
+<p>This plan gives the optimizing choice of the control variables in every period as a function of the regular state variables and of the states of nature.</p>
 </section>
 <section id="id7">
 <h3>Equilibrium Conditions<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
