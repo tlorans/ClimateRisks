@@ -179,6 +179,61 @@ y_t = f(k_t) = c_t + i_t
 
 ## The Art of Choosing the Control Variables
 
+Our Robinson Crusoe economy could have been written with a different choice for the control variable. Let's keep in the state variabe to be the stock of capital $k_t$. But now let's try to choose the time $t$ consumption to be the control variable. In that case, we need to redefine the objective function and the budget constraints.
+
+```Python
+import sympy as smp
+
+t = smp.symbols('t', cls = smp.Idx)
+
+K = smp.IndexedBase('k')
+C = smp.IndexedBase('c')
+I = smp.IndexedBase('i')
+
+delta  =smp.symbols('delta')
+beta = smp.symbols('beta')
+
+f = smp.Function('f')(K[t])
+
+# budget constraint
+resource_constraint = smp.Eq(f, C[t] + I[t])
+transition_equation = smp.Eq(K[t+1], (1 - delta)*K[t] + I[t])
+
+u = smp.Function('u')(C[t])
+
+V = smp.Function('V')
+
+# we now want to express budget constraint with our control variable inside
+resource_constraint = smp.Eq(I[t], smp.solve(resource_constraint, I[t])[0])
+transition_equation = transition_equation.subs(resource_constraint.lhs, resource_constraint.rhs)
+```
+
+${k}_{t + 1} = \left(1 - \delta\right) {k}_{t} + f{\left({k}_{t} \right)} - {c}_{t}$
+
+Writing out the model, we have the Bellman equation:
+
+```Python
+bellman = smp.Eq(V(K[t]), u + beta * V(transition_equation.rhs))
+```
+
+$V{\left({k}_{t} \right)} = \beta V{\left(\left(1 - \delta\right) {k}_{t} + f{\left({k}_{t} \right)} - {c}_{t} \right)} + u{\left({c}_{t} \right)}$
+
+This version is less convenient than the previous version when we try to write out the condition from the Benveniste-Scheinkman envelope theorem. Indeed, if we write out the envelope theorem condition we get:
+
+```Python
+BS = smp.Eq(smp.diff(V(K[t]), K[t]), smp.diff(bellman.rhs, K[t]))
+```
+
+$\frac{\partial}{\partial {k}_{t}} V{\left({k}_{t} \right)} = \beta \left(- \delta + \frac{\partial}{\partial {k}_{t}} f{\left({k}_{t} \right)} + 1\right) \left. \frac{d}{d \xi_{1}} V{\left(\xi_{1} \right)} \right|_{\substack{ \xi_{1}=\left(1 - \delta\right) {k}_{t} + f{\left({k}_{t} \right)} - {c}_{t} }}$
+
+And we have the derivative of the value function in terms of the derivative of the value function and some other terms, which is no improvement.
+
+One of the important tricks of working with the Bellman equation is to write out the objective function and the budget constraint so one gets a convenient version of the envelope theorem, that is a version that is not expressed in terms of the derivative of the value function. 
+
+In the previous example, the envelope theorem was convenient because the derivative of the value function $V(k_{t+1})$ with respect to the state variable $k_t$ was equal to $0$, such that we ended up with an envelope theorem condition that gave us an expression to be plugged in the initial first-order condition.
+
+
+
 ## Robinson Crusoe with Variable Labor
 
 ### The Value Function
