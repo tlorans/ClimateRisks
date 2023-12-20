@@ -1,4 +1,4 @@
-# Basics Intuition for State Space Methods
+# State Space Methods
 
 ## Local Level Model
 

@@ -1,3 +1,3 @@
-# Basics Intuition for Model Estimation
+# Model Estimation
 
-## Dynamic Equilibrium Model are State Space Model
+## Dynamic Equilibrium Model are State Space Models
