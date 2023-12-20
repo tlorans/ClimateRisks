@@ -515,3 +515,80 @@ k_{t+1} = H(k_t, A^t)
 This plan gives the optimizing choice of the control variables in every period as a function of the regular state variables and of the states of nature.
 
 ### Equilibrium Conditions
+
+We can proceed as in the deterministic case:
+
+```Python
+import sympy as smp
+
+t = smp.symbols('t', cls = smp.Idx)
+
+K = smp.IndexedBase('k')
+C = smp.IndexedBase('c')
+I = smp.IndexedBase('i')
+E = smp.IndexedBase('E')
+A = smp.IndexedBase('A')
+
+beta = smp.symbols('beta')
+delta = smp.symbols('delta')
+
+f = smp.Function('f')(K[t])
+resource_constraint = smp.Eq(A[t]*f, C[t] + I[t])
+transition_equation = smp.Eq(K[t+1], (1 - delta)*K[t] + I[t])
+
+u = smp.Function('u')(C[t])
+V = smp.Function('V')
+
+# reformulate transition equation to reexpress as C_t
+resource_constraint = smp.Eq(I[t], smp.solve(resource_constraint, I[t])[0])
+transition_equation = transition_equation.subs(resource_constraint.lhs, resource_constraint.rhs) 
+transition_equation = smp.Eq(C[t], smp.solve(transition_equation, C[t])[0])
+
+# bellman
+bellman = smp.Eq(V(K[t], A[t]), u.subs(transition_equation.lhs, transition_equation.rhs) + beta * E[t] * V(K[t+1], A[t+1]))
+```
+
+Taking the first-order condition of $k_{t+1}$:
+
+```Python
+FOC = smp.Eq(smp.diff(bellman.rhs, K[t+1]), 0).subs(transition_equation.rhs, transition_equation.lhs).simplify()
+```
+
+$\beta \frac{\partial}{\partial {k}_{t + 1}} V{\left({k}_{t + 1},{A}_{t + 1} \right)} {E}_{t} - \frac{\partial}{\partial {c}_{t}} u{\left({c}_{t} \right)} = 0$
+
+The envelope theorem gives a convenient expression:
+
+```Python
+BS = smp.Eq(smp.diff(V(K[t], A[t]), K[t]), smp.diff(bellman.rhs, K[t])).subs(transition_equation.rhs, transition_equation.lhs).simplify().subs(t, t+1)
+```
+
+$\frac{\partial}{\partial {k}_{t + 1}} V{\left({k}_{t + 1},{A}_{t + 1} \right)} = \left(- \delta + \frac{\partial}{\partial {k}_{t + 1}} f{\left({k}_{t + 1} \right)} {A}_{t + 1} + 1\right) \frac{\partial}{\partial {c}_{t + 1}} u{\left({c}_{t + 1} \right)}$
+
+And we can plug it into the initial FOC to get the Euler:
+
+```Python
+Euler = FOC.subs(BS.lhs, BS.rhs)
+```
+
+$\beta \left(- \delta + \frac{\partial}{\partial {k}_{t + 1}} f{\left({k}_{t + 1} \right)} {A}_{t + 1} + 1\right) \frac{\partial}{\partial {c}_{t + 1}} u{\left({c}_{t + 1} \right)} {E}_{t} - \frac{\partial}{\partial {c}_{t}} u{\left({c}_{t} \right)} = 0$
+
+Which can be reexpressed as:
+
+\begin{equation}
+\frac{u'(c_t)}{u'(c_{t+1})} = \beta \mathbb{E}[A_{t+1}f'(k_{t+1}) + (1 - \delta)]
+\end{equation}
+
+The equilibrium conditions of the Stochastic Robinson Crusoe Economy are thus the Euler equation and the budget constraints:
+
+
+\begin{equation}
+\frac{u'(c_t)}{u'(c_{t+1})} = \beta \mathbb{E}[A_{t+1}f'(k_{t+1}) + (1 - \delta)]
+\end{equation}
+
+\begin{equation}
+k_{t+1} = (1 - \delta) k_t + i_t
+\end{equation}
+
+\begin{equation}
+y_t = A_tf(k_t) = c_t + i_t
+\end{equation}
