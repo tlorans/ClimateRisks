@@ -135,4 +135,4 @@ The Euler equation is also saying that the agents will find it optimal to decrea
 
 ## Consumption CAPM
 
-## Equity Premium Puzzle
+## Equity Premium Puzzle and Time Non-Separable Utility Functions

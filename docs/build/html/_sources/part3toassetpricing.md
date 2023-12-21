@@ -129,8 +129,10 @@ Which can be reexpressed as:
 p_tu'(c_t) = \beta \mathbb{E}_t[(p_{t+1}+d_{t+1})u'(c_{t+1})]
 \end{equation}
 
-The Euler equation has an intuitive interpretation. The left
+The Euler equation has an intuitive interpretation. The left-hand side gives the marginal utility (loss) to giving up a small amount of consumption, and using it to buy some of the asset at price $p_t$. The right-hand side gives the discounted expected marginal utility (gain) at date $t+1$ from having an increased amount of the asset: part of the utility gain comes from the expected resale value of the additional amount of the asset and part of it comes from the dividend which this additional amount of the asset brings. Thus, the Euler equation is simply saying that given prices $p_t$ and dividends $d_t$, agents will find it optimal to increase their demand of the asset if the expected future gains to doing so (ie. the RHS) are greater than the costs (ie. the LHS).
+The Euler equation is also saying that the agents will find it optimal to decrease their demand of the assets whenever the costs in utility terms to buying an additional amount of the asset (i.e. the LHS) are greater than the expected future gains (the RHS). Taken together, that means that if agents are just indifferent between increasing and decreasing the amount of the asset which they demand, then they are already demanding the optimal amount of the asset.
+
 
 ## Consumption CAPM
 
-## Equity Premium Puzzle
+## Equity Premium Puzzle and Time Non-Separable Utility Functions
