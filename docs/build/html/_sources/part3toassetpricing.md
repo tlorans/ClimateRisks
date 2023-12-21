@@ -52,4 +52,12 @@ subject to the budget constraint:
 z_{t+1}p_t + c_t \leq z_td_t +z_tp_t
 \end{equation}
 
-## Time-Nonseparable Utility Function
+and market clearing conditions:
+
+\begin{equation}
+c_t = d_t
+\end{equation}
+
+This representative agent's problem can again being treated as a problem of dynamic optimization. We usu
+
+## Consumption CAPM
