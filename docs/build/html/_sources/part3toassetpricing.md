@@ -72,7 +72,7 @@ Reexpressing the budget constraint and making the substitution we have:
 V(z_{t},d_{t}) = \max_{z_{t+1}}[u(d_tz_t - p_tz_{t+1}+p_tz_t) + \beta \mathbb{E}[V(z_{t+1}, d_{t+1})]]
 \end{equation}
 
-## Equilibrium Conditions
+## Euler Equation
 
 We can state our problem in Python as before:
 
@@ -85,7 +85,6 @@ Z = smp.IndexedBase('z') # Shares
 P = smp.IndexedBase('p') # price of shares
 C = smp.IndexedBase('c') # consumption
 D = smp.IndexedBase('d') # dividends
-E = smp.IndexedBase('E') # expectation operator
 
 beta = smp.symbols('beta')
 
@@ -95,9 +94,7 @@ u = smp.Function('u')(C[t]) # utility function
 
 V = smp.Function('V')
 
-bellman = smp.Eq(V(Z[t], D[t]), u + beta * E[t] * V(Z[t+1], D[t+1]))
-resource_constraint = smp.Eq(C[t], smp.solve(resource_constraint, C[t])[0])
-bellman = bellman.subs(resource_constraint.lhs, resource_constraint.rhs)
+bellman = smp.Eq(V(Z[t], D[t]), u + beta * V(Z[t+1], D[t+1]))
 ```
 
 We take the first-order condition with respect to our control variable $z_{t+1}$
@@ -105,7 +102,7 @@ We take the first-order condition with respect to our control variable $z_{t+1}$
 ```Python
 FOC = smp.Eq(smp.diff(bellman.rhs, Z[t+1]),0).subs(resource_constraint.rhs, resource_constraint.lhs).simplify()
 ```
-$\beta \frac{\partial}{\partial {z}_{t + 1}} V{\left({z}_{t + 1},{d}_{t + 1} \right)} {E}_{t} - \frac{\partial}{\partial {c}_{t}} u{\left({c}_{t} \right)} {p}_{t} = 0$
+$\beta \frac{\partial}{\partial {z}_{t + 1}} V{\left({z}_{t + 1},{d}_{t + 1} \right)} - \frac{\partial}{\partial {c}_{t}} u{\left({c}_{t} \right)} {p}_{t} = 0$
 
 As we have taken care of the choice of our control variable, the Benveniste-Scheinkman condition gives a convenient expression:
 
@@ -119,11 +116,13 @@ We can plug it into the initial FOC to obtain the Euler equation:
 
 ```Python
 Euler = FOC.subs(BS.lhs, BS.rhs)
+
 ```
 
-$\beta \left({d}_{t + 1} + {p}_{t + 1}\right) \frac{\partial}{\partial {c}_{t + 1}} u{\left({c}_{t + 1} \right)} {E}_{t} - \frac{\partial}{\partial {c}_{t}} u{\left({c}_{t} \right)} {p}_{t} = 0$
+$\frac{\partial}{\partial {c}_{t}} u{\left({c}_{t} \right)} {p}_{t} = \beta \left({d}_{t + 1} + {p}_{t + 1}\right) \frac{\partial}{\partial {c}_{t + 1}} u{\left({c}_{t + 1} \right)}
+$
 
-Which can be reexpressed as:
+Again, please note that we should have an expectation operator:
 
 \begin{equation}
 p_tu'(c_t) = \beta \mathbb{E}_t[(p_{t+1}+d_{t+1})u'(c_{t+1})]
@@ -132,22 +131,85 @@ p_tu'(c_t) = \beta \mathbb{E}_t[(p_{t+1}+d_{t+1})u'(c_{t+1})]
 The Euler equation has an intuitive interpretation. The left-hand side gives the marginal utility (loss) to giving up a small amount of consumption, and using it to buy some of the asset at price $p_t$. The right-hand side gives the discounted expected marginal utility (gain) at date $t+1$ from having an increased amount of the asset: part of the utility gain comes from the expected resale value of the additional amount of the asset and part of it comes from the dividend which this additional amount of the asset brings. Thus, the Euler equation is simply saying that given prices $p_t$ and dividends $d_t$, agents will find it optimal to increase their demand of the asset if the expected future gains to doing so (ie. the RHS) are greater than the costs (ie. the LHS).
 The Euler equation is also saying that the agents will find it optimal to decrease their demand of the assets whenever the costs in utility terms to buying an additional amount of the asset (i.e. the LHS) are greater than the expected future gains (the RHS). Taken together, that means that if agents are just indifferent between increasing and decreasing the amount of the asset which they demand, then they are already demanding the optimal amount of the asset.
 
-## Consumption CAPM
+## Asset Pricing
 
 We can use the resulting Euler equation of our model to determines the amount by which the risky asset's expected return exceeds that of risk-free asset.
+
+We can again reexpress the Euler:
+
+```Python
+Euler = smp.Eq(1, smp.solve(Euler, 1)[0])
+```
+$1 = \frac{\beta \left({d}_{t + 1} + {p}_{t + 1}\right) \frac{\partial}{\partial {c}_{t + 1}} u{\left({c}_{t + 1} \right)}}{\frac{\partial}{\partial {c}_{t}} u{\left({c}_{t} \right)} {p}_{t}}$
 
 Let's define for secturity $j$:
 
 \begin{equation}
-1 + r_{j,t+1} = \frac{p_{j,t+1} +d_{j,t+1}}{p_{j,t}}
+r_{j,t+1} = \frac{p_{j,t+1} +d_{j,t+1}}{p_{j,t}}
 \end{equation}
 
-We can rewrite the Euler equation as:
+And the stochastic discount factor (SDF):
 
 \begin{equation}
-1 = \beta \mathbb{E}_t[\frac{u'(c_{t+1})}{u'(c_t)}(1 + r_{j,t+1})]
+M_t = \beta \frac{u'(c_{t+1})}{u'(c_t)}
+\end{equation}
+
+We finally recall the formula:
+
+\begin{equation}
+Cov[A,B] = \mathbb{E}[AB] - \mathbb{E}[A]\mathbb{E}[B]
 \end{equation}
 
 
+We reformulate our Euler equation accordingly in Python:
+```Python
+import sympy as smp
+from sympy import stats as stats
 
-## Equity Premium Puzzle
+#Create variables as random symbols:
+M = stats.rv.RandomSymbol('M') # SDF
+R = stats.rv.RandomSymbol('R') # risky assets
+R_0 = smp.symbols('R_f') # risk free
+
+identity = smp.Eq(stats.Covariance(M,R),stats.Covariance(M,R).rewrite(stats.Expectation))
+
+SDF = smp.Eq(M, beta * (smp.diff(u, C[t]).subs(t, t+1) / smp.diff(u,C[t])))
+risk_price = smp.Eq(R, (P[t+1] + D[t+1]) / P[t])
+Euler = Euler.subs(SDF.rhs, SDF.lhs).subs(risk_price.rhs, risk_price.lhs)
+# we need a trick to introduce Expectation operator
+Euler = Euler.subs(M*R, stats.Expectation(M*R))
+```
+$1 = \operatorname{E}\left[M R\right]$
+
+Future price of risk-free asset is defined as:
+
+\begin{equation}
+r_{f,t} = \frac{1}{p_{0,t}}
+\end{equation}
+
+Then:
+
+```Python
+risk_free_euler = Euler.subs(R, R_0)
+risk_free_euler = risk_free_euler.expand()
+risk_free_euler = smp.Eq(R_0, smp.solve(risk_free_euler, R_0)[0])
+```
+
+$R_{f} = \operatorname{E}\left[M\right]^{-1}$
+
+And for the risky assets we have:
+
+```Python
+identity = smp.Eq(Euler.rhs, smp.solve(identity, Euler.rhs)[0])
+risky_euler = Euler.subs(identity.lhs, identity.rhs)
+risky_euler = smp.Eq(risky_euler.lhs * risk_free_euler.rhs, risky_euler.rhs * risk_free_euler.rhs)
+
+risky_euler = smp.Eq(stats.Expectation(R) - risk_free_euler.rhs, smp.solve(risky_euler, stats.Expectation(R))[0] - risk_free_euler.rhs)
+
+risky_euler = risky_euler.subs(risk_free_euler.rhs, risk_free_euler.lhs)
+```
+
+$- R_{f} + \operatorname{E}\left[R\right] = - R_{f} \operatorname{Cov}\left(M, R\right)
+$
+
+Assets which have high returns when consumption is already high and marginal utility is low (and which have comparatively low returns when consumption is low and marginal utility is high) also have a high overall expected return: investors need to be compensated extra for holding an assets which doe not pay that much when they really need it.

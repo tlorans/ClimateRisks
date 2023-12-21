@@ -131,7 +131,6 @@
 <li class="toctree-l1"><a class="reference internal" href="introrecursivemethods.html">Recursive Methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="introdynamics.html">Solving for Dynamics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="introstatespacemethods.html">State Space Methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="introestimation.html">Model Estimation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="part2fromrbc.html">Part 2. From RBC Models…</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rbcequilibrium.html">Hansen’s RBC Model: Equilibrium Conditions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rbcdynamics.html">Hansen’s RBC Dynamics</a></li>
@@ -287,9 +286,8 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lucas-tree-model">Lucas Tree Model</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#value-function">Value Function</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equilibrium-conditions">Equilibrium Conditions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consumption-capm">Consumption CAPM</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equity-premium-puzzle">Equity Premium Puzzle</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euler-equation">Euler Equation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asset-pricing">Asset Pricing</a></li>
 </ul>
             </nav>
         </div>
@@ -319,51 +317,51 @@ document.write(`
 <p>Due to the assumption that all agents are identical with respecto to both preferences and enowments, we can work with a representative agent. The agents’ economic activity in each period consists of trading shares, where a share represents a claim to the future stream of dividends.</p>
 <p>We let <span class="math notranslate nohighlight">\(p_{i,t}\)</span> be the price of tree <span class="math notranslate nohighlight">\(i\)</span> in period <span class="math notranslate nohighlight">\(t\)</span> (i.e., of a claim to the entire income stream <span class="math notranslate nohighlight">\(\{d_{i,t+\tau}\}^{\infty}_{\tau = 0}\)</span>), measured in terms of the consumption commodity, and <span class="math notranslate nohighlight">\(z_{i,t}\)</span> the quantity of tree <span class="math notranslate nohighlight">\(i\)</span> that the agent holds between <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(t+1\)</span>.</p>
 <p>Our aim is to find <span class="math notranslate nohighlight">\(p_{i,t}\)</span> as a function of the stochastic payofss, <span class="math notranslate nohighlight">\(\{d_{i,t+\tau}\}^{\infty}_{\tau = 0}\)</span>. Stated formally, the representative consume chooses <span class="math notranslate nohighlight">\(\{z_{1,t}, z_{2,t},...,z_{N,t};c_t\}^{\infty}_{t=0}\)</span> to maximize:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f84df2af-9df6-49e5-a3fc-e9755969bf87">
-<span class="eqno">(1)<a class="headerlink" href="#equation-f84df2af-9df6-49e5-a3fc-e9755969bf87" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f4cf38f8-fff2-4f6b-ae48-31cef5442173">
+<span class="eqno">(1)<a class="headerlink" href="#equation-f4cf38f8-fff2-4f6b-ae48-31cef5442173" title="Permalink to this equation">#</a></span>\[\begin{equation}
 E_t \sum^{\infty}_{s = t} \beta^{s-t}u(c_s)
 \end{equation}\]</div>
 <p>subjet to the budget constraint:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0ca856f7-8558-4fd7-81af-bde1a4f009d2">
-<span class="eqno">(2)<a class="headerlink" href="#equation-0ca856f7-8558-4fd7-81af-bde1a4f009d2" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d880671a-6958-42e9-95d1-1e86a6758ea6">
+<span class="eqno">(2)<a class="headerlink" href="#equation-d880671a-6958-42e9-95d1-1e86a6758ea6" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sum^{N}_{i=0}z_{i,t+1}p_{i,t} + c_t \leq \sum^{N}_{i=0}z_{i,t}d_{i,t}+\sum^{N}_{i=0}z_{i,t}p_{i,t}
 \end{equation}\]</div>
 <p>The budget constraint has the following interpretation: the ownership of share <span class="math notranslate nohighlight">\(i\)</span> at the beginning of period <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(z_{i,t}\)</span>, entitles the owner to receive dividend <span class="math notranslate nohighlight">\(d_{i,t}\)</span> in period <span class="math notranslate nohighlight">\(t\)</span> and to have the right to sell the ree at price <span class="math notranslate nohighlight">\(p_{i,t}\)</span> in period <span class="math notranslate nohighlight">\(t\)</span>. Thus, the agent’s source of funds in period <span class="math notranslate nohighlight">\(t\)</span> are given by the sum of shares that the agent holds times their respective dividents <span class="math notranslate nohighlight">\(\sum^{N}_{i=0}z_{i,t}d_{i,t}\)</span>, plus the revenue of the sale of the shares at the prevailing prices <span class="math notranslate nohighlight">\(\sum^{N}_{i=0}z_{i,t}p_{i,t}\)</span>.
 On the left hand side of the inequality we have got the agent’s use of funds, saying that the proceedings are either consumed or spent for the number of shares the agent wants to hold in period <span class="math notranslate nohighlight">\(t+1\)</span>.</p>
 <p>For a market equilibrium, the quantities of each tree demanded must equal to the given supply, that is, the number of shares for each tree must sump up to one. Since there is only one agent, equilibrium implies that <span class="math notranslate nohighlight">\(z_{i,t} = 1\)</span> for all <span class="math notranslate nohighlight">\(i,t\)</span>. In other words, there is no other agent in the economy with whom to trade. From the budget constraint, this implies that consumption of the representative agent must equal to output, which is the sum of dividends.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-201f46a1-f848-4266-9ac7-0813a32b86b4">
-<span class="eqno">(3)<a class="headerlink" href="#equation-201f46a1-f848-4266-9ac7-0813a32b86b4" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-48d26bda-fde8-418e-bbb7-63290bccb083">
+<span class="eqno">(3)<a class="headerlink" href="#equation-48d26bda-fde8-418e-bbb7-63290bccb083" title="Permalink to this equation">#</a></span>\[\begin{equation}
 c_t \leq \sum^N_{i=0}d_{i,t}
 \end{equation}\]</div>
 <p>We can assume that there is only one tree. Thus, the representative agent maximizes:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3ba74caf-1f13-4bb6-be9d-1912823ffbf1">
-<span class="eqno">(4)<a class="headerlink" href="#equation-3ba74caf-1f13-4bb6-be9d-1912823ffbf1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0fb87d01-57aa-4e9b-ab7d-fe3fbc7a3fc9">
+<span class="eqno">(4)<a class="headerlink" href="#equation-0fb87d01-57aa-4e9b-ab7d-fe3fbc7a3fc9" title="Permalink to this equation">#</a></span>\[\begin{equation}
 E_t \sum^{\infty}_{s=t}\beta^{s-t}u(c_s)
 \end{equation}\]</div>
 <p>subject to the budget constraint:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b1d2a0a5-90fc-466a-a66f-9b983590976b">
-<span class="eqno">(5)<a class="headerlink" href="#equation-b1d2a0a5-90fc-466a-a66f-9b983590976b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-10be3aa1-e85c-4e6a-948d-9f386b52ed0a">
+<span class="eqno">(5)<a class="headerlink" href="#equation-10be3aa1-e85c-4e6a-948d-9f386b52ed0a" title="Permalink to this equation">#</a></span>\[\begin{equation}
 z_{t+1}p_t + c_t \leq z_td_t +z_tp_t
 \end{equation}\]</div>
 <p>and market clearing conditions:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-38daa830-6c33-4ddd-b1ee-2cba03e0be1b">
-<span class="eqno">(6)<a class="headerlink" href="#equation-38daa830-6c33-4ddd-b1ee-2cba03e0be1b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-9241ac26-159c-4d04-b2ab-4e69862941b8">
+<span class="eqno">(6)<a class="headerlink" href="#equation-9241ac26-159c-4d04-b2ab-4e69862941b8" title="Permalink to this equation">#</a></span>\[\begin{equation}
 c_t = d_t
 \end{equation}\]</div>
 <p>This representative agent’s problem can again being treated as a problem of dynamic optimization.</p>
 <p>With <span class="math notranslate nohighlight">\(z_{t+1}\)</span> as our control variables and <span class="math notranslate nohighlight">\(z_t\)</span> and <span class="math notranslate nohighlight">\(d_t\)</span> as our states variables, the Bellman equatoin can be written as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f8c879d6-b102-494c-b191-4b5a14942493">
-<span class="eqno">(7)<a class="headerlink" href="#equation-f8c879d6-b102-494c-b191-4b5a14942493" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-34c025c1-41be-453a-91fc-92d2fddbb46a">
+<span class="eqno">(7)<a class="headerlink" href="#equation-34c025c1-41be-453a-91fc-92d2fddbb46a" title="Permalink to this equation">#</a></span>\[\begin{equation}
 V(z_{t},d_{t}) = \max_{z_{t+1}}[u(c_t) + \beta \mathbb{E}[V(z_{t+1}, d_{t+1})]]
 \end{equation}\]</div>
 <p>Reexpressing the budget constraint and making the substitution we have:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-514f9b9b-ff5b-49b7-9cca-e1318b26857d">
-<span class="eqno">(8)<a class="headerlink" href="#equation-514f9b9b-ff5b-49b7-9cca-e1318b26857d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-1ff2e6ba-3712-4aa8-bcbc-bfe1980cd9ba">
+<span class="eqno">(8)<a class="headerlink" href="#equation-1ff2e6ba-3712-4aa8-bcbc-bfe1980cd9ba" title="Permalink to this equation">#</a></span>\[\begin{equation}
 V(z_{t},d_{t}) = \max_{z_{t+1}}[u(d_tz_t - p_tz_{t+1}+p_tz_t) + \beta \mathbb{E}[V(z_{t+1}, d_{t+1})]]
 \end{equation}\]</div>
 </section>
-<section id="equilibrium-conditions">
-<h2>Equilibrium Conditions<a class="headerlink" href="#equilibrium-conditions" title="Permalink to this headline">#</a></h2>
+<section id="euler-equation">
+<h2>Euler Equation<a class="headerlink" href="#euler-equation" title="Permalink to this headline">#</a></h2>
 <p>We can state our problem in Python as before:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">smp</span>
 
@@ -373,7 +371,6 @@ V(z_{t},d_{t}) = \max_{z_{t+1}}[u(d_tz_t - p_tz_{t+1}+p_tz_t) + \beta \mathbb{E}
 <span class="n">P</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span> <span class="c1"># price of shares</span>
 <span class="n">C</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">)</span> <span class="c1"># consumption</span>
 <span class="n">D</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;d&#39;</span><span class="p">)</span> <span class="c1"># dividends</span>
-<span class="n">E</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;E&#39;</span><span class="p">)</span> <span class="c1"># expectation operator</span>
 
 <span class="n">beta</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;beta&#39;</span><span class="p">)</span>
 
@@ -383,16 +380,14 @@ V(z_{t},d_{t}) = \max_{z_{t+1}}[u(d_tz_t - p_tz_{t+1}+p_tz_t) + \beta \mathbb{E}
 
 <span class="n">V</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="s1">&#39;V&#39;</span><span class="p">)</span>
 
-<span class="n">bellman</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">V</span><span class="p">(</span><span class="n">Z</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">D</span><span class="p">[</span><span class="n">t</span><span class="p">]),</span> <span class="n">u</span> <span class="o">+</span> <span class="n">beta</span> <span class="o">*</span> <span class="n">E</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">*</span> <span class="n">V</span><span class="p">(</span><span class="n">Z</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">D</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">]))</span>
-<span class="n">resource_constraint</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">C</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">smp</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">resource_constraint</span><span class="p">,</span> <span class="n">C</span><span class="p">[</span><span class="n">t</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">bellman</span> <span class="o">=</span> <span class="n">bellman</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">resource_constraint</span><span class="o">.</span><span class="n">lhs</span><span class="p">,</span> <span class="n">resource_constraint</span><span class="o">.</span><span class="n">rhs</span><span class="p">)</span>
+<span class="n">bellman</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">V</span><span class="p">(</span><span class="n">Z</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">D</span><span class="p">[</span><span class="n">t</span><span class="p">]),</span> <span class="n">u</span> <span class="o">+</span> <span class="n">beta</span> <span class="o">*</span> <span class="n">V</span><span class="p">(</span><span class="n">Z</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">D</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">]))</span>
 </pre></div>
 </div>
 <p>We take the first-order condition with respect to our control variable <span class="math notranslate nohighlight">\(z_{t+1}\)</span></p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">FOC</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">smp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">bellman</span><span class="o">.</span><span class="n">rhs</span><span class="p">,</span> <span class="n">Z</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">]),</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">resource_constraint</span><span class="o">.</span><span class="n">rhs</span><span class="p">,</span> <span class="n">resource_constraint</span><span class="o">.</span><span class="n">lhs</span><span class="p">)</span><span class="o">.</span><span class="n">simplify</span><span class="p">()</span>
 </pre></div>
 </div>
-<p><span class="math notranslate nohighlight">\(\beta \frac{\partial}{\partial {z}_{t + 1}} V{\left({z}_{t + 1},{d}_{t + 1} \right)} {E}_{t} - \frac{\partial}{\partial {c}_{t}} u{\left({c}_{t} \right)} {p}_{t} = 0\)</span></p>
+<p><span class="math notranslate nohighlight">\(\beta \frac{\partial}{\partial {z}_{t + 1}} V{\left({z}_{t + 1},{d}_{t + 1} \right)} - \frac{\partial}{\partial {c}_{t}} u{\left({c}_{t} \right)} {p}_{t} = 0\)</span></p>
 <p>As we have taken care of the choice of our control variable, the Benveniste-Scheinkman condition gives a convenient expression:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">BS</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">smp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">V</span><span class="p">(</span><span class="n">Z</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">D</span><span class="p">[</span><span class="n">t</span><span class="p">]),</span> <span class="n">Z</span><span class="p">[</span><span class="n">t</span><span class="p">]),</span> <span class="n">smp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">bellman</span><span class="o">.</span><span class="n">rhs</span><span class="p">,</span> <span class="n">Z</span><span class="p">[</span><span class="n">t</span><span class="p">]))</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">resource_constraint</span><span class="o">.</span><span class="n">rhs</span><span class="p">,</span> <span class="n">resource_constraint</span><span class="o">.</span><span class="n">lhs</span><span class="p">)</span><span class="o">.</span><span class="n">simplify</span><span class="p">()</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
@@ -402,31 +397,83 @@ V(z_{t},d_{t}) = \max_{z_{t+1}}[u(d_tz_t - p_tz_{t+1}+p_tz_t) + \beta \mathbb{E}
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">Euler</span> <span class="o">=</span> <span class="n">FOC</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">BS</span><span class="o">.</span><span class="n">lhs</span><span class="p">,</span> <span class="n">BS</span><span class="o">.</span><span class="n">rhs</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><span class="math notranslate nohighlight">\(\beta \left({d}_{t + 1} + {p}_{t + 1}\right) \frac{\partial}{\partial {c}_{t + 1}} u{\left({c}_{t + 1} \right)} {E}_{t} - \frac{\partial}{\partial {c}_{t}} u{\left({c}_{t} \right)} {p}_{t} = 0\)</span></p>
-<p>Which can be reexpressed as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8295612e-0e18-46ee-868e-aef044080166">
-<span class="eqno">(9)<a class="headerlink" href="#equation-8295612e-0e18-46ee-868e-aef044080166" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<p><span class="math notranslate nohighlight">\(\frac{\partial}{\partial {c}_{t}} u{\left({c}_{t} \right)} {p}_{t} = \beta \left({d}_{t + 1} + {p}_{t + 1}\right) \frac{\partial}{\partial {c}_{t + 1}} u{\left({c}_{t + 1} \right)}
+\)</span></p>
+<p>Again, please note that we should have an expectation operator:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-939ad2f5-d0c2-4965-be0b-a23773674028">
+<span class="eqno">(9)<a class="headerlink" href="#equation-939ad2f5-d0c2-4965-be0b-a23773674028" title="Permalink to this equation">#</a></span>\[\begin{equation}
 p_tu'(c_t) = \beta \mathbb{E}_t[(p_{t+1}+d_{t+1})u'(c_{t+1})]
 \end{equation}\]</div>
 <p>The Euler equation has an intuitive interpretation. The left-hand side gives the marginal utility (loss) to giving up a small amount of consumption, and using it to buy some of the asset at price <span class="math notranslate nohighlight">\(p_t\)</span>. The right-hand side gives the discounted expected marginal utility (gain) at date <span class="math notranslate nohighlight">\(t+1\)</span> from having an increased amount of the asset: part of the utility gain comes from the expected resale value of the additional amount of the asset and part of it comes from the dividend which this additional amount of the asset brings. Thus, the Euler equation is simply saying that given prices <span class="math notranslate nohighlight">\(p_t\)</span> and dividends <span class="math notranslate nohighlight">\(d_t\)</span>, agents will find it optimal to increase their demand of the asset if the expected future gains to doing so (ie. the RHS) are greater than the costs (ie. the LHS).
 The Euler equation is also saying that the agents will find it optimal to decrease their demand of the assets whenever the costs in utility terms to buying an additional amount of the asset (i.e. the LHS) are greater than the expected future gains (the RHS). Taken together, that means that if agents are just indifferent between increasing and decreasing the amount of the asset which they demand, then they are already demanding the optimal amount of the asset.</p>
 </section>
-<section id="consumption-capm">
-<h2>Consumption CAPM<a class="headerlink" href="#consumption-capm" title="Permalink to this headline">#</a></h2>
+<section id="asset-pricing">
+<h2>Asset Pricing<a class="headerlink" href="#asset-pricing" title="Permalink to this headline">#</a></h2>
 <p>We can use the resulting Euler equation of our model to determines the amount by which the risky asset’s expected return exceeds that of risk-free asset.</p>
+<p>We can again reexpress the Euler:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">Euler</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">smp</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">Euler</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(1 = \frac{\beta \left({d}_{t + 1} + {p}_{t + 1}\right) \frac{\partial}{\partial {c}_{t + 1}} u{\left({c}_{t + 1} \right)}}{\frac{\partial}{\partial {c}_{t}} u{\left({c}_{t} \right)} {p}_{t}}\)</span></p>
 <p>Let’s define for secturity <span class="math notranslate nohighlight">\(j\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d3741ad7-96e5-41cb-a4ef-6f40c206a78f">
-<span class="eqno">(10)<a class="headerlink" href="#equation-d3741ad7-96e5-41cb-a4ef-6f40c206a78f" title="Permalink to this equation">#</a></span>\[\begin{equation}
-1 + r_{j,t+1} = \frac{p_{j,t+1} +d_{j,t+1}}{p_{j,t}}
+<div class="amsmath math notranslate nohighlight" id="equation-2598049d-efc1-4061-93f2-ac398a60ce37">
+<span class="eqno">(10)<a class="headerlink" href="#equation-2598049d-efc1-4061-93f2-ac398a60ce37" title="Permalink to this equation">#</a></span>\[\begin{equation}
+r_{j,t+1} = \frac{p_{j,t+1} +d_{j,t+1}}{p_{j,t}}
 \end{equation}\]</div>
-<p>We can rewrite the Euler equation as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b7d77776-35c3-4142-930e-9febae1e8460">
-<span class="eqno">(11)<a class="headerlink" href="#equation-b7d77776-35c3-4142-930e-9febae1e8460" title="Permalink to this equation">#</a></span>\[\begin{equation}
-1 = \beta \mathbb{E}_t[\frac{u'(c_{t+1})}{u'(c_t)}(1 + r_{j,t+1})]
+<p>And the stochastic discount factor (SDF):</p>
+<div class="amsmath math notranslate nohighlight" id="equation-26184caa-266d-4e71-88da-7d1ac46fd4be">
+<span class="eqno">(11)<a class="headerlink" href="#equation-26184caa-266d-4e71-88da-7d1ac46fd4be" title="Permalink to this equation">#</a></span>\[\begin{equation}
+M_t = \beta \frac{u'(c_{t+1})}{u'(c_t)}
 \end{equation}\]</div>
-</section>
-<section id="equity-premium-puzzle">
-<h2>Equity Premium Puzzle<a class="headerlink" href="#equity-premium-puzzle" title="Permalink to this headline">#</a></h2>
+<p>We finally recall the formula:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-5be541a6-a3d3-44e7-acef-47acbdb1c88a">
+<span class="eqno">(12)<a class="headerlink" href="#equation-5be541a6-a3d3-44e7-acef-47acbdb1c88a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+Cov[A,B] = \mathbb{E}[AB] - \mathbb{E}[A]\mathbb{E}[B]
+\end{equation}\]</div>
+<p>We reformulate our Euler equation accordingly in Python:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">smp</span>
+<span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">stats</span> <span class="k">as</span> <span class="n">stats</span>
+
+<span class="c1">#Create variables as random symbols:</span>
+<span class="n">M</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">rv</span><span class="o">.</span><span class="n">RandomSymbol</span><span class="p">(</span><span class="s1">&#39;M&#39;</span><span class="p">)</span> <span class="c1"># SDF</span>
+<span class="n">R</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">rv</span><span class="o">.</span><span class="n">RandomSymbol</span><span class="p">(</span><span class="s1">&#39;R&#39;</span><span class="p">)</span> <span class="c1"># risky assets</span>
+<span class="n">R_0</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;R_f&#39;</span><span class="p">)</span> <span class="c1"># risk free</span>
+
+<span class="n">identity</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">Covariance</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="n">R</span><span class="p">),</span><span class="n">stats</span><span class="o">.</span><span class="n">Covariance</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="n">R</span><span class="p">)</span><span class="o">.</span><span class="n">rewrite</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">Expectation</span><span class="p">))</span>
+
+<span class="n">SDF</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">beta</span> <span class="o">*</span> <span class="p">(</span><span class="n">smp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">C</span><span class="p">[</span><span class="n">t</span><span class="p">])</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">smp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">C</span><span class="p">[</span><span class="n">t</span><span class="p">])))</span>
+<span class="n">risk_price</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="p">(</span><span class="n">P</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">D</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="n">P</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
+<span class="n">Euler</span> <span class="o">=</span> <span class="n">Euler</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">SDF</span><span class="o">.</span><span class="n">rhs</span><span class="p">,</span> <span class="n">SDF</span><span class="o">.</span><span class="n">lhs</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">risk_price</span><span class="o">.</span><span class="n">rhs</span><span class="p">,</span> <span class="n">risk_price</span><span class="o">.</span><span class="n">lhs</span><span class="p">)</span>
+<span class="c1"># we need a trick to introduce Expectation operator</span>
+<span class="n">Euler</span> <span class="o">=</span> <span class="n">Euler</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">M</span><span class="o">*</span><span class="n">R</span><span class="p">,</span> <span class="n">stats</span><span class="o">.</span><span class="n">Expectation</span><span class="p">(</span><span class="n">M</span><span class="o">*</span><span class="n">R</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(1 = \operatorname{E}\left[M R\right]\)</span></p>
+<p>Future price of risk-free asset is defined as:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a654302e-764d-45a8-a748-7d5a85ef923d">
+<span class="eqno">(13)<a class="headerlink" href="#equation-a654302e-764d-45a8-a748-7d5a85ef923d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+r_{f,t} = \frac{1}{p_{0,t}}
+\end{equation}\]</div>
+<p>Then:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">risk_free_euler</span> <span class="o">=</span> <span class="n">Euler</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">R_0</span><span class="p">)</span>
+<span class="n">risk_free_euler</span> <span class="o">=</span> <span class="n">risk_free_euler</span><span class="o">.</span><span class="n">expand</span><span class="p">()</span>
+<span class="n">risk_free_euler</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">R_0</span><span class="p">,</span> <span class="n">smp</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">risk_free_euler</span><span class="p">,</span> <span class="n">R_0</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(R_{f} = \operatorname{E}\left[M\right]^{-1}\)</span></p>
+<p>And for the risky assets we have:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">identity</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">Euler</span><span class="o">.</span><span class="n">rhs</span><span class="p">,</span> <span class="n">smp</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">identity</span><span class="p">,</span> <span class="n">Euler</span><span class="o">.</span><span class="n">rhs</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">risky_euler</span> <span class="o">=</span> <span class="n">Euler</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">identity</span><span class="o">.</span><span class="n">lhs</span><span class="p">,</span> <span class="n">identity</span><span class="o">.</span><span class="n">rhs</span><span class="p">)</span>
+<span class="n">risky_euler</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">risky_euler</span><span class="o">.</span><span class="n">lhs</span> <span class="o">*</span> <span class="n">risk_free_euler</span><span class="o">.</span><span class="n">rhs</span><span class="p">,</span> <span class="n">risky_euler</span><span class="o">.</span><span class="n">rhs</span> <span class="o">*</span> <span class="n">risk_free_euler</span><span class="o">.</span><span class="n">rhs</span><span class="p">)</span>
+
+<span class="n">risky_euler</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">Expectation</span><span class="p">(</span><span class="n">R</span><span class="p">)</span> <span class="o">-</span> <span class="n">risk_free_euler</span><span class="o">.</span><span class="n">rhs</span><span class="p">,</span> <span class="n">smp</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">risky_euler</span><span class="p">,</span> <span class="n">stats</span><span class="o">.</span><span class="n">Expectation</span><span class="p">(</span><span class="n">R</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">risk_free_euler</span><span class="o">.</span><span class="n">rhs</span><span class="p">)</span>
+
+<span class="n">risky_euler</span> <span class="o">=</span> <span class="n">risky_euler</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">risk_free_euler</span><span class="o">.</span><span class="n">rhs</span><span class="p">,</span> <span class="n">risk_free_euler</span><span class="o">.</span><span class="n">lhs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(- R_{f} + \operatorname{E}\left[R\right] = - R_{f} \operatorname{Cov}\left(M, R\right)
+\)</span></p>
+<p>Assets which have high returns when consumption is already high and marginal utility is low (and which have comparatively low returns when consumption is low and marginal utility is high) also have a high overall expected return: investors need to be compensated extra for holding an assets which doe not pay that much when they really need it.</p>
 </section>
 </section>
 
@@ -474,9 +521,8 @@ The Euler equation is also saying that the agents will find it optimal to decrea
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lucas-tree-model">Lucas Tree Model</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#value-function">Value Function</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equilibrium-conditions">Equilibrium Conditions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consumption-capm">Consumption CAPM</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equity-premium-puzzle">Equity Premium Puzzle</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euler-equation">Euler Equation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asset-pricing">Asset Pricing</a></li>
 </ul>
   </nav></div>
 

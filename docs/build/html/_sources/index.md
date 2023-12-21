@@ -19,7 +19,6 @@ part1modellertoolkit
 introrecursivemethods
 introdynamics
 introstatespacemethods
-introestimation
 part2fromrbc
 rbcequilibrium
 rbcdynamics
