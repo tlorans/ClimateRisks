@@ -36,4 +36,10 @@ x_{t+1} = \rho x_t + \phi_e \sigma_t e_{t+1}
 
 Where $\Delta c_{t+1}$ is the growth rate of log consumption. The conditional expectation of consumption growth is given by $\mu_c + x_t$ where $x_t$ is a small but persistent component that captures long-run risks in consumption growth. The parameter $\rho$ determines the persistence in the condtional mean of consumption growth. There is a common time-varying volatility in consumption, which leads to time-varying risk premia. The unconditional variance of consumption is $\bar{\sigma}^2$ and $\nu$ governs the persistence of the volatility process.
 
+With $W_{t+1}$ as our control variable and $W_t$ and $\sigma_t$ the state variables:
+
+\begin{equation}
+V(W_t, \sigma_t) = \max_{W_{t+1}} [(1 - \delta)C_t^{\frac{1 - \gamma}{\theta}} + \delta(\mathbb{E}_t[V(W_{t+1}, \sigma_{t+1})^{1 - \gamma}])^{\frac{1}{\theta}}]^{\frac{\theta}{1 - \gamma}}
+\end{equation}
+
 ## Equilibrium Conditions
