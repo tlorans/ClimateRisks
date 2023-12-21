@@ -451,7 +451,7 @@ In this way, the number of possible consumption doubles in each period. If we ca
 Suppose that one can write the value of the maximum expected discounted utility given an initial capital stock of $k_0$, when the time $0$ realization of technology is $A_1$, as:
 
 \begin{equation}
-V(k_0, A_1) = \max_{${c_t}^{\infty}_{t=0}$} E_0 \sum^{\infty}_{t = 0} \beta^t u (c_t)
+V(k_0, A_1) = \max_{${{c_t}}$^{\infty}_{t=0}} E_0 \sum^{\infty}_{t = 0} \beta^t u (c_t)
 \end{equation}
 
 Subsect to the budget constraint for $t=0$:
@@ -491,7 +491,7 @@ E_0V(\hat{k_1}, A^1) = p_1 V (\hat{k_1}, A_1) + p_2 V(\hat{k_1}, A_2)
 For any time period $t$, the problem can be written as:
 
 \begin{equation}
-V(k_t, A^t) = \max_{c_t}[u(c_t) + \beta E_t V(k_{t+1, A^{t+1}})]
+V(k_t, A^t) = \max_{c_t}[u(c_t) + \beta E_t V(k_{t+1}, A^{t+1})]
 \end{equation}
 
 subject to the budget constraint:

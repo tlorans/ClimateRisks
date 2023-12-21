@@ -47,7 +47,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'part3toassetpricing';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Part 4: ESG Dynamic Equilibrium" href="part4esgdynamicequilibrium.html" />
+    <link rel="next" title="Long-Run Risk Model: Equilibrium Conditions" href="lrrequilibrium.html" />
     <link rel="prev" title="Estimating Hansen’s RBC Model" href="estimatingrbc.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
@@ -128,15 +128,16 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="part1modellertoolkit.html">Part 1: Modeller Toolkit</a></li>
-<li class="toctree-l1"><a class="reference internal" href="introrecursivemethods.html">Basics Intuition for Characterizing the Equilibrium Conditions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="introdynamics.html">Basics Intuition for Solving for Dynamics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="introestimation.html">Basics Intuition for Model Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introrecursivemethods.html">Recursive Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introdynamics.html">Solving for Dynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introstatespacemethods.html">State Space Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introestimation.html">Model Estimation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="part2fromrbc.html">Part 2. From RBC Models…</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rbcequilibrium.html">Hansen’s RBC Model: Equilibrium Conditions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rbcdynamics.html">Hansen’s RBC Dynamics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="estimatingrbc.html">Estimating Hansen’s RBC Model</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Part 3: … to Asset Pricing Models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="part4esgdynamicequilibrium.html">Part 4: ESG Dynamic Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lrrequilibrium.html">Long-Run Risk Model: Equilibrium Conditions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 </ul>
 
@@ -284,24 +285,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-genesis-with-the-lucas-tree-model">The Genesis with the Lucas Tree Model</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-value-function">The Value Function</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#economic-environment">Economic Environment</a><ul class="nav section-nav flex-column">
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series-macro-dynamics">Time Series Macro Dynamics</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#representative-consumer-preferences">Representative Consumer Preferences</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#states-and-controls">States and Controls</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#euler-equation">Euler Equation</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#first-order-conditions">First Order Conditions</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#benveniste-scheinkman-conditions">Benveniste-Scheinkman Conditions</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Euler Equation</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lucas-tree-model">Lucas Tree Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#value-function">Value Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-nonseparable-utility-function">Time-Nonseparable Utility Function</a></li>
 </ul>
             </nav>
         </div>
@@ -315,87 +301,51 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="part-3-to-asset-pricing-models">
 <h1>Part 3: … to Asset Pricing Models<a class="headerlink" href="#part-3-to-asset-pricing-models" title="Permalink to this headline">#</a></h1>
-<section id="the-genesis-with-the-lucas-tree-model">
-<h2>The Genesis with the Lucas Tree Model<a class="headerlink" href="#the-genesis-with-the-lucas-tree-model" title="Permalink to this headline">#</a></h2>
-<section id="the-value-function">
-<h3>The Value Function<a class="headerlink" href="#the-value-function" title="Permalink to this headline">#</a></h3>
-<section id="economic-environment">
-<h4>Economic Environment<a class="headerlink" href="#economic-environment" title="Permalink to this headline">#</a></h4>
-<section id="time-series-macro-dynamics">
-<h5>Time Series Macro Dynamics<a class="headerlink" href="#time-series-macro-dynamics" title="Permalink to this headline">#</a></h5>
-<p>We start with the following variables:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">C</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">)</span> <span class="c1"># conso, control variable</span>
-<span class="n">Z</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">)</span> <span class="c1"># assets</span>
-<span class="n">D</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">)</span> <span class="c1"># Dividends</span>
-<span class="n">P</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;P&#39;</span><span class="p">)</span> <span class="c1"># Price</span>
-
-<span class="n">t</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="bp">cls</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Idx</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>And the discounting factor:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">beta</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;beta&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>We have the following resource constraint and transition function:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">resource_constraint</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">Z</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">P</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">+</span> <span class="n">C</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">Z</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">*</span> <span class="n">D</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">+</span> <span class="n">Z</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">*</span> <span class="n">P</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
-<span class="n">transition_function</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">Z</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">smp</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">resource_constraint</span><span class="p">,</span> <span class="n">Z</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>
-</pre></div>
-</div>
+<p>While the previous part aim was to solve a consumption - physical assets allocation optimal path problem, one can use the same dynamic stochastic general equilibrium problem to focus on consumption - financial assets allocation optimal path. A special case is the Lucas Tree Model (Lucas, 1978 <span id="id1">[<a class="reference internal" href="references.html#id5" title="Robert E Lucas Jr. Asset prices in an exchange economy. Econometrica: journal of the Econometric Society, pages 1429–1445, 1978.">LJ78</a>]</span>).</p>
+<section id="lucas-tree-model">
+<h2>Lucas Tree Model<a class="headerlink" href="#lucas-tree-model" title="Permalink to this headline">#</a></h2>
+<p>This is a special case of the infinite horizon, pure exchange economy with stochastic endowments. The model economy is given as follows:</p>
+<ul class="simple">
+<li><p>There is a large number of identical, infinitely lived agents each of whom maximizes lifetime expected utility</p></li>
+<li><p>There is an equal number of trees, <span class="math notranslate nohighlight">\(i = 1, ..., N\)</span>. Each agent starts life at time zero with one three. These trees are the only assets in the economy.</p></li>
+<li><p>At the beginning of period <span class="math notranslate nohighlight">\(t\)</span>, each tree <span class="math notranslate nohighlight">\(i\)</span> yields a stochastic divident (or fruit) in the amount <span class="math notranslate nohighlight">\(d_{i,t}\)</span> to its owner. The distribution of <span class="math notranslate nohighlight">\(d_{i,t}\)</span> is identical for all trees. The process is known by the agents and the fruit is not storable.</p></li>
+<li><p>The market in the ownership of trees is perfectly competitive. In the equilibrium, asset prices clear the market. That is, total stock positions of all agents are equal to the aggregate number of shares.</p></li>
+</ul>
 </section>
-<section id="representative-consumer-preferences">
-<h5>Representative Consumer Preferences<a class="headerlink" href="#representative-consumer-preferences" title="Permalink to this headline">#</a></h5>
-<p>We have the following utility function:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="s1">&#39;u&#39;</span><span class="p">)(</span><span class="n">C</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
-</pre></div>
-</div>
+<section id="value-function">
+<h2>Value Function<a class="headerlink" href="#value-function" title="Permalink to this headline">#</a></h2>
+<p>Due to the assumption that all agents are identical with respecto to both preferences and enowments, we can work with a representative agent. The agents’ economic activity in each period consists of trading shares, where a share represents a claim to the future stream of dividends.</p>
+<p>We let <span class="math notranslate nohighlight">\(p_{i,t}\)</span> be the price of tree <span class="math notranslate nohighlight">\(i\)</span> in period <span class="math notranslate nohighlight">\(t\)</span> (i.e., of a claim to the entire income stream <span class="math notranslate nohighlight">\(\{d_{i,t+\tau}\}^{\infty}_{\tau = 0}\)</span>), measured in terms of the consumption commodity, and <span class="math notranslate nohighlight">\(z_{i,t}\)</span> the quantity of tree <span class="math notranslate nohighlight">\(i\)</span> that the agent holds between <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(t+1\)</span>.</p>
+<p>Our aim is to find <span class="math notranslate nohighlight">\(p_{i,t}\)</span> as a function of the stochastic payofss, <span class="math notranslate nohighlight">\(\{d_{i,t+\tau}\}^{\infty}_{\tau = 0}\)</span>. Stated formally, the representative consume chooses <span class="math notranslate nohighlight">\(\{z_{1,t}, z_{2,t},...,z_{N,t};c_t\}^{\infty}_{t=0}\)</span> to maximize:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-d2c9738d-4ff0-4ef5-8964-6e9e4bb98d14">
+<span class="eqno">(1)<a class="headerlink" href="#equation-d2c9738d-4ff0-4ef5-8964-6e9e4bb98d14" title="Permalink to this equation">#</a></span>\[\begin{equation}
+E_t \sum^{\infty}_{s = t} \beta^{s-t}u(c_s)
+\end{equation}\]</div>
+<p>subjet to the budget constraint:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-11842948-504b-4935-9503-0faaa565ac9a">
+<span class="eqno">(2)<a class="headerlink" href="#equation-11842948-504b-4935-9503-0faaa565ac9a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\sum^{N}_{i=0}z_{i,t+1}p_{i,t} + c_t \leq \sum^{N}_{i=0}z_{i,t}d_{i,t}+\sum^{N}_{i=0}z_{i,t}p_{i,t}
+\end{equation}\]</div>
+<p>The budget constraint has the following interpretation: the ownership of share <span class="math notranslate nohighlight">\(i\)</span> at the beginning of period <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(z_{i,t}\)</span>, entitles the owner to receive dividend <span class="math notranslate nohighlight">\(d_{i,t}\)</span> in period <span class="math notranslate nohighlight">\(t\)</span> and to have the right to sell the ree at price <span class="math notranslate nohighlight">\(p_{i,t}\)</span> in period <span class="math notranslate nohighlight">\(t\)</span>. Thus, the agent’s source of funds in period <span class="math notranslate nohighlight">\(t\)</span> are given by the sum of shares that the agent holds times their respective dividents <span class="math notranslate nohighlight">\(\sum^{N}_{i=0}z_{i,t}d_{i,t}\)</span>, plus the revenue of the sale of the shares at the prevailing prices <span class="math notranslate nohighlight">\(\sum^{N}_{i=0}z_{i,t}p_{i,t}\)</span>.
+On the left hand side of the inequality we have got the agent’s use of funds, saying that the proceedings are either consumed or spent for the number of shares the agent wants to hold in period <span class="math notranslate nohighlight">\(t+1\)</span>.</p>
+<p>For a market equilibrium, the quantities of each tree demanded must equal to the given supply, that is, the number of shares for each tree must sump up to one. Since there is only one agent, equilibrium implies that <span class="math notranslate nohighlight">\(z_{i,t} = 1\)</span> for all <span class="math notranslate nohighlight">\(i,t\)</span>. In other words, there is no other agent in the economy with whom to trade. From the budget constraint, this implies that consumption of the representative agent must equal to output, which is the sum of dividends.</p>
+<div class="amsmath math notranslate nohighlight" id="equation-f2651f31-cd11-475e-8f5f-ebd0c1b7b78d">
+<span class="eqno">(3)<a class="headerlink" href="#equation-f2651f31-cd11-475e-8f5f-ebd0c1b7b78d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+c_t \leq \sum^N_{i=0}d_{i,t}
+\end{equation}\]</div>
+<p>We can assume that there is only one tree. Thus, the representative agent choose <span class="math notranslate nohighlight">\(\{z_t, c_t\}^{\infty}_{t=0}\)</span> to maximize:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-0383dad2-9a22-421a-8473-13c49013a642">
+<span class="eqno">(4)<a class="headerlink" href="#equation-0383dad2-9a22-421a-8473-13c49013a642" title="Permalink to this equation">#</a></span>\[\begin{equation}
+E_t \sum^{\infty}_{s=t}\beta^{s-t}u(c_s)
+\end{equation}\]</div>
+<p>subject to the budget constraint:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-f6610516-9943-41f2-a6a5-094c1ea3c7f4">
+<span class="eqno">(5)<a class="headerlink" href="#equation-f6610516-9943-41f2-a6a5-094c1ea3c7f4" title="Permalink to this equation">#</a></span>\[\begin{equation}
+z_{t+1}p_t + c_t \leq z_td_t +z_tp_t
+\end{equation}\]</div>
 </section>
-<section id="states-and-controls">
-<h5>States and Controls<a class="headerlink" href="#states-and-controls" title="Permalink to this headline">#</a></h5>
-<p>We choose <span class="math notranslate nohighlight">\(C_t\)</span> as our control variable. Thus <span class="math notranslate nohighlight">\(Z_t\)</span> and <span class="math notranslate nohighlight">\(Z_{t+1}\)</span> are our states variables.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">v</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="s1">&#39;v&#39;</span><span class="p">)(</span><span class="n">Z</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
-<span class="n">v_prime</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="s1">&#39;v&#39;</span><span class="p">)(</span><span class="n">Z</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
-</pre></div>
-</div>
-<p>We want to reexpress <span class="math notranslate nohighlight">\(Z_{t+1}\)</span> to make our control variable appear:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">v_prime</span> <span class="o">=</span> <span class="n">v_prime</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">transition_function</span><span class="o">.</span><span class="n">lhs</span><span class="p">,</span> <span class="n">transition_function</span><span class="o">.</span><span class="n">rhs</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>We can finally state our Bellman equation:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">bellman</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">u</span> <span class="o">+</span> <span class="n">beta</span> <span class="o">*</span> <span class="n">v_prime</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-</section>
-</section>
-<section id="euler-equation">
-<h3>Euler Equation<a class="headerlink" href="#euler-equation" title="Permalink to this headline">#</a></h3>
-<p>Before starting, we find our unknown derivative:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">unknown</span> <span class="o">=</span> <span class="n">get_unknown_derivative</span><span class="p">(</span><span class="n">v_prime</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">transition_function</span><span class="p">)</span>
-</pre></div>
-</div>
-<section id="first-order-conditions">
-<h4>First Order Conditions<a class="headerlink" href="#first-order-conditions" title="Permalink to this headline">#</a></h4>
-<p>We get our FOC:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">FOC</span> <span class="o">=</span> <span class="n">get_FOC</span><span class="p">(</span><span class="n">bellman</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">unknown</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="benveniste-scheinkman-conditions">
-<h4>Benveniste-Scheinkman Conditions<a class="headerlink" href="#benveniste-scheinkman-conditions" title="Permalink to this headline">#</a></h4>
-<p>We get the BS:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">BS</span> <span class="o">=</span> <span class="n">get_BS</span><span class="p">(</span><span class="n">bellman</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">unknown</span><span class="p">,</span> <span class="n">FOC</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="id1">
-<h4>Euler Equation<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h4>
-<p>And finally the Euler:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">Euler</span> <span class="o">=</span> <span class="n">FOC</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">BS</span><span class="o">.</span><span class="n">lhs</span><span class="p">,</span> <span class="n">BS</span><span class="o">.</span><span class="n">rhs</span><span class="p">)</span>
-<span class="n">Euler</span><span class="o">.</span><span class="n">simplify</span><span class="p">()</span>
-</pre></div>
-</div>
-</section>
-</section>
+<section id="time-nonseparable-utility-function">
+<h2>Time-Nonseparable Utility Function<a class="headerlink" href="#time-nonseparable-utility-function" title="Permalink to this headline">#</a></h2>
 </section>
 </section>
 
@@ -418,11 +368,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="part4esgdynamicequilibrium.html"
+       href="lrrequilibrium.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Part 4: ESG Dynamic Equilibrium</p>
+        <p class="prev-next-title">Long-Run Risk Model: Equilibrium Conditions</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -441,24 +391,9 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-genesis-with-the-lucas-tree-model">The Genesis with the Lucas Tree Model</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-value-function">The Value Function</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#economic-environment">Economic Environment</a><ul class="nav section-nav flex-column">
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series-macro-dynamics">Time Series Macro Dynamics</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#representative-consumer-preferences">Representative Consumer Preferences</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#states-and-controls">States and Controls</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#euler-equation">Euler Equation</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#first-order-conditions">First Order Conditions</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#benveniste-scheinkman-conditions">Benveniste-Scheinkman Conditions</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Euler Equation</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lucas-tree-model">Lucas Tree Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#value-function">Value Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-nonseparable-utility-function">Time-Nonseparable Utility Function</a></li>
 </ul>
   </nav></div>
 

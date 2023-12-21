@@ -25,6 +25,6 @@ rbcequilibrium
 rbcdynamics
 estimatingrbc
 part3toassetpricing
-part4esgdynamicequilibrium
+lrrequilibrium
 references
 ```
