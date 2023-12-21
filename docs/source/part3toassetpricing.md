@@ -40,7 +40,7 @@ For a market equilibrium, the quantities of each tree demanded must equal to the
 c_t \leq \sum^N_{i=0}d_{i,t}
 \end{equation}
 
-We can assume that there is only one tree. Thus, the representative agent choose $\{z_t, c_t\}^{\infty}_{t=0}$ to maximize:
+We can assume that there is only one tree. Thus, the representative agent maximizes:
 
 \begin{equation}
 E_t \sum^{\infty}_{s=t}\beta^{s-t}u(c_s)
@@ -58,6 +58,81 @@ and market clearing conditions:
 c_t = d_t
 \end{equation}
 
-This representative agent's problem can again being treated as a problem of dynamic optimization. We usu
+This representative agent's problem can again being treated as a problem of dynamic optimization. 
+
+With $z_{t+1}$ as our control variables and $z_t$ and $d_t$ as our states variables, the Bellman equatoin can be written as:
+
+\begin{equation}
+V(z_{t},d_{t}) = \max_{z_{t+1}}[u(c_t) + \beta \mathbb{E}[V(z_{t+1}, d_{t+1})]]
+\end{equation}
+
+Reexpressing the budget constraint and making the substitution we have:
+
+\begin{equation}
+V(z_{t},d_{t}) = \max_{z_{t+1}}[u(d_tz_t - p_tz_{t+1}+p_tz_t) + \beta \mathbb{E}[V(z_{t+1}, d_{t+1})]]
+\end{equation}
+
+## Equilibrium Conditions
+
+We can state our problem in Python as before:
+
+```Python
+import sympy as smp
+
+t = smp.symbols('t', cls = smp.Idx)
+
+Z = smp.IndexedBase('z') # Shares
+P = smp.IndexedBase('p') # price of shares
+C = smp.IndexedBase('c') # consumption
+D = smp.IndexedBase('d') # dividends
+E = smp.IndexedBase('E') # expectation operator
+
+beta = smp.symbols('beta')
+
+resource_constraint = smp.Eq(Z[t+1]*P[t] + C[t], Z[t]*D[t] + Z[t]*P[t])
+
+u = smp.Function('u')(C[t]) # utility function
+
+V = smp.Function('V')
+
+bellman = smp.Eq(V(Z[t], D[t]), u + beta * E[t] * V(Z[t+1], D[t+1]))
+resource_constraint = smp.Eq(C[t], smp.solve(resource_constraint, C[t])[0])
+bellman = bellman.subs(resource_constraint.lhs, resource_constraint.rhs)
+```
+
+We take the first-order condition with respect to our control variable $z_{t+1}$
+
+```Python
+FOC = smp.Eq(smp.diff(bellman.rhs, Z[t+1]),0).subs(resource_constraint.rhs, resource_constraint.lhs).simplify()
+```
+$\beta \frac{\partial}{\partial {z}_{t + 1}} V{\left({z}_{t + 1},{d}_{t + 1} \right)} {E}_{t} - \frac{\partial}{\partial {c}_{t}} u{\left({c}_{t} \right)} {p}_{t} = 0$
+
+As we have taken care of the choice of our control variable, the Benveniste-Scheinkman condition gives a convenient expression:
+
+```Python
+BS = smp.Eq(smp.diff(V(Z[t], D[t]), Z[t]), smp.diff(bellman.rhs, Z[t])).subs(resource_constraint.rhs, resource_constraint.lhs).simplify().subs(t, t+1)
+```
+
+$\frac{\partial}{\partial {z}_{t + 1}} V{\left({z}_{t + 1},{d}_{t + 1} \right)} = \left({d}_{t + 1} + {p}_{t + 1}\right) \frac{\partial}{\partial {c}_{t + 1}} u{\left({c}_{t + 1} \right)}$
+
+We can plug it into the initial FOC to obtain the Euler equation:
+
+```Python
+Euler = FOC.subs(BS.lhs, BS.rhs)
+```
+
+$\beta \left({d}_{t + 1} + {p}_{t + 1}\right) \frac{\partial}{\partial {c}_{t + 1}} u{\left({c}_{t + 1} \right)} {E}_{t} - \frac{\partial}{\partial {c}_{t}} u{\left({c}_{t} \right)} {p}_{t} = 0$
+
+Which can be reexpressed as:
+
+\begin{equation}
+p_tu'(c_t) = \beta \mathbb{E}_t[(p_{t+1}+d_{t+1})u'(c_{t+1})]
+\end{equation}
+
+The Euler equation has an intuitive interpretation. The left-hand side gives the marginal utility (loss) to giving up a small amount of consumption, and using it to buy some of the asset at price $p_t$. The right-hand side gives the discounted expected marginal utility (gain) at date $t+1$ from having an increased amount of the asset: part of the utility gain comes from the expected resale value of the additional amount of the asset and part of it comes from the dividend which this additional amount of the asset brings. Thus, the Euler equation is simply saying that given prices $p_t$ and dividends $d_t$, agents will find it optimal to increase their demand of the asset if the expected future gains to doing so (ie. the RHS) are greater than the costs (ie. the LHS).
+The Euler equation is also saying that the agents will find it optimal to decrease their demand of the assets whenever the costs in utility terms to buying an additional amount of the asset (i.e. the LHS) are greater than the expected future gains (the RHS). Taken together, that means that if agents are just indifferent between increasing and decreasing the amount of the asset which they demand, then they are already demanding the optimal amount of the asset.
+
 
 ## Consumption CAPM
+
+## Equity Premium Puzzle
