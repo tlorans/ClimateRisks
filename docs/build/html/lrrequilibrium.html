@@ -42,9 +42,13 @@
     <script src="_static/doctools.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'lrrequilibrium';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="References" href="references.html" />
+    <link rel="prev" title="Part 3: … to Asset Pricing Models" href="part3toassetpricing.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -122,18 +126,17 @@
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="part1modellertoolkit.html">Part 1: Modeller Toolkit</a></li>
 <li class="toctree-l1"><a class="reference internal" href="introrecursivemethods.html">Recursive Methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="introdynamics.html">Solving for Dynamics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="introstatespacemethods.html">State Space Methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="introestimation.html">Model Estimation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="part2fromrbc.html">Part 2. From RBC Models…</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rbcequilibrium.html">Hansen’s RBC Model: Equilibrium Conditions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rbcdynamics.html">Hansen’s RBC Dynamics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="estimatingrbc.html">Estimating Hansen’s RBC Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="part3toassetpricing.html">Part 3: … to Asset Pricing Models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="part4esgdynamicequilibrium.html">Part 4: ESG Dynamic Equilibrium</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Long-Run Risk Model: Equilibrium Conditions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 </ul>
 
@@ -296,8 +299,35 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="long-run-risk-model-equilibrium-conditions">
 <h1>Long-Run Risk Model: Equilibrium Conditions<a class="headerlink" href="#long-run-risk-model-equilibrium-conditions" title="Permalink to this headline">#</a></h1>
+<p>The Long-Run Risk Model (LLRM) introduced by Bansal and Yaron (2004 <span id="id1">[<a class="reference internal" href="references.html#id6" title="Ravi Bansal and Amir Yaron. Risks for the long run: a potential resolution of asset pricing puzzles. The journal of Finance, 59(4):1481–1509, 2004.">BY04</a>]</span>) is one of the main theoretical pillars in financial macroeconomics. In its original version, the LRRM reconciles several key asset pricing phenomena in a unified framework by combining recursive preferences à la Epstein and Zin (1989 <span id="id2">[<a class="reference internal" href="references.html#id7" title="Larry G Epstein and Stanley E Zin. Substitution, risk aversion, and the temporal behavior of consumption and asset returns: an empirical analysis. Journal of political Economy, 99(2):263–286, 1991.">EZ91</a>]</span>) with a model of aggregate consumption growth that exhibits predictable low-frequency movements and time-varying volatility.</p>
 <section id="the-value-function">
 <h2>The Value Function<a class="headerlink" href="#the-value-function" title="Permalink to this headline">#</a></h2>
+<p>The previous models were based on time-separable utility. An alternative approach is to assume time-nonseparable utility.</p>
+<p>The representative agent in LRRM has Epstein and Zin (1989) type preferences, which allow for a separation of risk aversion and the elastricity of intertemporal substitution. Specifically, the agent maximizes her life-time utility, defined as:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-0325a8ff-173a-4dbc-a160-4c03a3660ed9">
+<span class="eqno">(1)<a class="headerlink" href="#equation-0325a8ff-173a-4dbc-a160-4c03a3660ed9" title="Permalink to this equation">#</a></span>\[\begin{equation}
+V_t = [(1 - \delta)C_t^{\frac{1 - \gamma}{\theta}} + \delta(\mathbb{E}_t[V_{t+1}^{1 - \gamma}])^{\frac{1}{\theta}}]^{\frac{\theta}{1 - \gamma}}
+\end{equation}\]</div>
+<p>where <span class="math notranslate nohighlight">\(C_t\)</span> is consumption at time <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(0 &lt; \delta &lt; 1\)</span> reflects the agent’s time preferences, <span class="math notranslate nohighlight">\(\gamma\)</span> is the coefficient of risk aversion, <span class="math notranslate nohighlight">\(\theta = \frac{1 - \gamma}{1 - \frac{1}{\psi}}\)</span> and <span class="math notranslate nohighlight">\(\psi\)</span> is the elastici of intertemporal substitution (IES). Utility maximization is subject to the budget constraint:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-0cb8cb84-c900-46fa-b160-b845c8da125b">
+<span class="eqno">(2)<a class="headerlink" href="#equation-0cb8cb84-c900-46fa-b160-b845c8da125b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+W_{t+1} = (W_t - C_t)R_{c,t+1}
+\end{equation}\]</div>
+<p>where <span class="math notranslate nohighlight">\(W_t\)</span> is the wealth of the agent and <span class="math notranslate nohighlight">\(R_{c,t}\)</span> is the return on all invested wealth.</p>
+<p>Consumption growth has the following dynamics:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-203148e1-76b7-4afe-8d9a-af2ca197ac7a">
+<span class="eqno">(3)<a class="headerlink" href="#equation-203148e1-76b7-4afe-8d9a-af2ca197ac7a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\Delta c_{t+1} = \mu_c + x_t + \sigma_t \eta_{t+1}
+\end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-da6c4bb3-a3d5-41bb-809b-58eb3df3f325">
+<span class="eqno">(4)<a class="headerlink" href="#equation-da6c4bb3-a3d5-41bb-809b-58eb3df3f325" title="Permalink to this equation">#</a></span>\[\begin{equation}
+x_{t+1} = \rho x_t + \phi_e \sigma_t e_{t+1}
+\end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-6b166769-f0dc-4603-a38b-3de37fcd38ba">
+<span class="eqno">(5)<a class="headerlink" href="#equation-6b166769-f0dc-4603-a38b-3de37fcd38ba" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\sigma^2_{t+1} = \bar{\sigma}^2 + \nu(\sigma^2_t - \bar{\sigma}^2) + \sigma_w w_{t+1}
+\end{equation}\]</div>
+<p>Where <span class="math notranslate nohighlight">\(\Delta c_{t+1}\)</span> is the growth rate of log consumption. The conditional expectation of consumption growth is given by <span class="math notranslate nohighlight">\(\mu_c + x_t\)</span> where <span class="math notranslate nohighlight">\(x_t\)</span> is a small but persistent component that captures long-run risks in consumption growth. The parameter <span class="math notranslate nohighlight">\(\rho\)</span> determines the persistence in the condtional mean of consumption growth. There is a common time-varying volatility in consumption, which leads to time-varying risk premia. The unconditional variance of consumption is <span class="math notranslate nohighlight">\(\bar{\sigma}^2\)</span> and <span class="math notranslate nohighlight">\(\nu\)</span> governs the persistence of the volatility process.</p>
 </section>
 <section id="equilibrium-conditions">
 <h2>Equilibrium Conditions<a class="headerlink" href="#equilibrium-conditions" title="Permalink to this headline">#</a></h2>
@@ -313,6 +343,24 @@ document.write(`
                 <footer class="bd-footer-article">
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="part3toassetpricing.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Part 3: … to Asset Pricing Models</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="references.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">References</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
