@@ -19,11 +19,9 @@ part1modellertoolkit
 introrecursivemethods
 introdynamics
 introstatespacemethods
-part2fromrbc
-rbcequilibrium
-rbcdynamics
-estimatingrbc
-part3toassetpricing
-lrrequilibrium
+part2assetpricing
+equitypremium
+recursivepreferences
+longrunrisks
 references
 ```

@@ -1,4 +1,4 @@
-# Part 3: ... to Asset Pricing Models
+# Part 2: Dynamic Asset Pricing
 
 While the previous part aim was to solve a consumption - physical assets allocation optimal path problem, one can use the same dynamic stochastic general equilibrium problem to focus on consumption - financial assets allocation optimal path. A special case is the Lucas Tree Model (Lucas, 1978 {cite:p}`lucas1978asset`).
 

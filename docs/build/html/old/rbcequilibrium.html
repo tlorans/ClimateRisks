@@ -1,0 +1,532 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Hansen’s RBC Model: Equilibrium Conditions &#8212; Climate Risks in Finance 0.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'old/rbcequilibrium';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Climate Risks in Finance 0.1 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../part1modellertoolkit.html">Part 1: Modeller Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introrecursivemethods.html">Recursive Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introdynamics.html">Solving for Dynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introstatespacemethods.html">State Space Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../part3toassetpricing.html">Part 3: … to Asset Pricing Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lrrequilibrium.html">Long-Run Risk Model: Equilibrium Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/old/rbcequilibrium.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Hansen’s RBC Model: Equilibrium Conditions</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-value-function">The Value Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equilibrium-conditions">Equilibrium Conditions</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="hansen-s-rbc-model-equilibrium-conditions">
+<h1>Hansen’s RBC Model: Equilibrium Conditions<a class="headerlink" href="#hansen-s-rbc-model-equilibrium-conditions" title="Permalink to this headline">#</a></h1>
+<p>The objective is to apply the recursive methods to characterize the equilibrium conditions of the basic Hansen’s RBC model.</p>
+<p>This part is inspired by the McCandless (2008 <span id="id1">[<a class="reference internal" href="../references.html#id2" title="George McCandless. The ABCs of RBCs: An introduction to dynamic macroeconomic models. Harvard University Press, 2008.">McC08</a>]</span>) chapter 6.</p>
+<section id="the-value-function">
+<h2>The Value Function<a class="headerlink" href="#the-value-function" title="Permalink to this headline">#</a></h2>
+<p>In a Robinson Crusoe type economy, the one agent maximizes the discounted utility function:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-512fba04-8a7c-43e1-8716-1b4727251d5a">
+<span class="eqno">(1)<a class="headerlink" href="#equation-512fba04-8a7c-43e1-8716-1b4727251d5a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\max \sum^{\infty}_{t=0}\beta^t u(c_t, l_t)
+\end{equation}\]</div>
+<p>where <span class="math notranslate nohighlight">\(c_t\)</span> is time <span class="math notranslate nohighlight">\(t\)</span> consumption, and <span class="math notranslate nohighlight">\(l_t\)</span> is time <span class="math notranslate nohighlight">\(t\)</span> leisure, where <span class="math notranslate nohighlight">\(l = 1 - h_t\)</span> and <span class="math notranslate nohighlight">\(h_t\)</span> is time <span class="math notranslate nohighlight">\(t\)</span> labor.</p>
+<p>The specific utility function that we use is:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-c3aff69f-8ba7-4515-a87e-f65d3d27ad4f">
+<span class="eqno">(2)<a class="headerlink" href="#equation-c3aff69f-8ba7-4515-a87e-f65d3d27ad4f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+u(c_t, 1 - h_t) = \ln c_t + A ln ( 1 - h_t)
+\end{equation}\]</div>
+<p>with <span class="math notranslate nohighlight">\( A &gt; 0\)</span>. The production function is Cobb-Douglas with a stochastic technology:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-0ed5584f-5579-43cb-b5fd-71b95266a512">
+<span class="eqno">(3)<a class="headerlink" href="#equation-0ed5584f-5579-43cb-b5fd-71b95266a512" title="Permalink to this equation">#</a></span>\[\begin{equation}
+f(\lambda_t, k_t, h_t) = \lambda_t k_t^{\theta}h_t^{1 - \theta}
+\end{equation}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\lambda_t\)</span> is a random technology variable that follows the process:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-062b2e2e-be5f-48a3-84b3-0f1daeab2bfd">
+<span class="eqno">(4)<a class="headerlink" href="#equation-062b2e2e-be5f-48a3-84b3-0f1daeab2bfd" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\lambda_{t+1} = \gamma \lambda_t + \epsilon_{t+1}
+\end{equation}\]</div>
+<p>for <span class="math notranslate nohighlight">\(0 &lt; \gamma &lt; 1\)</span>. The <span class="math notranslate nohighlight">\(\epsilon_t\)</span> shocks are identically and independently distributed, are positive, bounded above, and have a mean of <span class="math notranslate nohighlight">\(1 - \gamma\)</span>. These assumptions imply that the mean of <span class="math notranslate nohighlight">\(\lambda_t\)</span> is 1 and that output cannot go ne gative. Capital accumulation follows the process:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-f0860afc-9d7d-4165-8aa4-980cd50f03ea">
+<span class="eqno">(5)<a class="headerlink" href="#equation-f0860afc-9d7d-4165-8aa4-980cd50f03ea" title="Permalink to this equation">#</a></span>\[\begin{equation}
+k_{t+1} = (1 - \delta) k_t + i_t
+\end{equation}\]</div>
+<p>and the feasability constraint is:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-d280e531-f4c4-4536-8bf9-1d51a0e4f519">
+<span class="eqno">(6)<a class="headerlink" href="#equation-d280e531-f4c4-4536-8bf9-1d51a0e4f519" title="Permalink to this equation">#</a></span>\[\begin{equation}
+f(\lambda_t, k_t, h_t) \geq c_t + i_t
+\end{equation}\]</div>
+<p>for every period <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<p>The model can be written as a Bellman equation of the form:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-61bffd6d-ef33-4a8e-9a35-e708b63f88a8">
+<span class="eqno">(7)<a class="headerlink" href="#equation-61bffd6d-ef33-4a8e-9a35-e708b63f88a8" title="Permalink to this equation">#</a></span>\[\begin{equation}
+V(k_t, \lambda_t) = \max_{c_t, h_t}[\ln c_t + A \ln(1 - h_t) + \beta \mathbb{E_t}[V(k_{t+1}, \lambda_{t+1})| \lambda_t]]
+\end{equation}\]</div>
+<p>subject to:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-4e06212a-8d97-4213-b8a6-0d62d31e8c40">
+<span class="eqno">(8)<a class="headerlink" href="#equation-4e06212a-8d97-4213-b8a6-0d62d31e8c40" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\lambda_t k_t^{\theta}h_t^{1-\theta} \geq c_t + i_t
+\end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-d70accb3-7501-442a-a94e-3112a8962840">
+<span class="eqno">(9)<a class="headerlink" href="#equation-d70accb3-7501-442a-a94e-3112a8962840" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\lambda_{t+1} = \gamma \lambda_t + \epsilon_{t+1}
+\end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-623c4829-72b4-4455-8c13-b5ae1fc93280">
+<span class="eqno">(10)<a class="headerlink" href="#equation-623c4829-72b4-4455-8c13-b5ae1fc93280" title="Permalink to this equation">#</a></span>\[\begin{equation}
+k_{t+1} = (1 - \delta)k_t + i_t
+\end{equation}\]</div>
+<p>The expectations operator in the value function, <span class="math notranslate nohighlight">\(\mathbb{E_t}[V(k_{t+1}, \lambda_{t+1})|\lambda_t]\)</span> indicates that expectations are conditional on te realization of <span class="math notranslate nohighlight">\(\lambda_t\)</span>, a fact that comes from the stochastic process for technology. With substitution, the Bellman becomes:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-429128dc-d417-41a5-846a-9081ece90ff8">
+<span class="eqno">(11)<a class="headerlink" href="#equation-429128dc-d417-41a5-846a-9081ece90ff8" title="Permalink to this equation">#</a></span>\[\begin{equation}
+V(k_t, \lambda_t) = \max_{k_{t+1}, h_t}[\ln(\lambda_tk_t^{\theta}h_t^{1-\theta} + (1 - \delta)k_t - k_{t+1}) + A \ln(1 - h_t) + \beta \mathbb{E_t}[V(k_{t+1}, \lambda_{t+1})|\lambda_t]]
+\end{equation}\]</div>
+<p>with <span class="math notranslate nohighlight">\(k_{t+1}\)</span> and <span class="math notranslate nohighlight">\(h_t\)</span> as the control variables.</p>
+</section>
+<section id="equilibrium-conditions">
+<h2>Equilibrium Conditions<a class="headerlink" href="#equilibrium-conditions" title="Permalink to this headline">#</a></h2>
+<p>Let’s prepare the Bellman equation in Python:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">smp</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="bp">cls</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Idx</span><span class="p">)</span>
+
+<span class="n">K</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">)</span>
+<span class="n">L</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;l&#39;</span><span class="p">)</span>
+<span class="n">H</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;h&#39;</span><span class="p">)</span>
+<span class="n">I</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">)</span>
+<span class="n">Techno</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;lambda&#39;</span><span class="p">)</span>
+<span class="n">epsilon</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;epsilon&#39;</span><span class="p">)</span>
+<span class="n">E</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;E&#39;</span><span class="p">)</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">)</span>
+<span class="n">beta</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;beta&#39;</span><span class="p">)</span>
+<span class="n">theta</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;theta&#39;</span><span class="p">)</span>
+<span class="n">gamma</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;gamma&#39;</span><span class="p">)</span>
+<span class="n">delta</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;delta&#39;</span><span class="p">)</span>
+
+<span class="n">V</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="s1">&#39;V&#39;</span><span class="p">)</span>
+<span class="n">u</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="s1">&#39;u&#39;</span><span class="p">)(</span><span class="n">C</span><span class="p">[</span><span class="n">t</span><span class="p">],</span><span class="mi">1</span><span class="o">-</span><span class="n">H</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
+<span class="n">utility_function</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">smp</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">C</span><span class="p">[</span><span class="n">t</span><span class="p">])</span> <span class="o">+</span> <span class="n">A</span> <span class="o">*</span> <span class="n">smp</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">H</span><span class="p">[</span><span class="n">t</span><span class="p">]))</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="s1">&#39;f&#39;</span><span class="p">)(</span><span class="n">Techno</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">K</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">H</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
+<span class="n">production_function</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">Techno</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">*</span> <span class="n">K</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">**</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span><span class="o">*</span><span class="n">H</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">theta</span><span class="p">))</span>
+<span class="n">techno_process</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">Techno</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">Techno</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">+</span> <span class="n">epsilon</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">transition_equation</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">K</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">delta</span><span class="p">)</span><span class="o">*</span><span class="n">K</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">+</span> <span class="n">I</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
+<span class="n">resource_constraint</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">C</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">+</span> <span class="n">I</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
+
+<span class="c1"># as before, we want to express C[t] in the utility function interms of our control variable Kt+1</span>
+<span class="n">resource_constraint</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">I</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">smp</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">resource_constraint</span><span class="p">,</span> <span class="n">I</span><span class="p">[</span><span class="n">t</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">transition_equation</span> <span class="o">=</span> <span class="n">transition_equation</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">resource_constraint</span><span class="o">.</span><span class="n">lhs</span><span class="p">,</span> <span class="n">resource_constraint</span><span class="o">.</span><span class="n">rhs</span><span class="p">)</span>
+<span class="n">transition_equation</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">C</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">smp</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">transition_equation</span><span class="p">,</span> <span class="n">C</span><span class="p">[</span><span class="n">t</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">transition_equation</span> <span class="o">=</span> <span class="n">transition_equation</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">production_function</span><span class="o">.</span><span class="n">lhs</span><span class="p">,</span> <span class="n">production_function</span><span class="o">.</span><span class="n">rhs</span><span class="p">)</span>
+
+<span class="n">bellman</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">V</span><span class="p">(</span><span class="n">K</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">Techno</span><span class="p">[</span><span class="n">t</span><span class="p">]),</span> <span class="n">utility_function</span><span class="o">.</span><span class="n">rhs</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">transition_equation</span><span class="o">.</span><span class="n">lhs</span><span class="p">,</span> <span class="n">transition_equation</span><span class="o">.</span><span class="n">rhs</span><span class="p">)</span> <span class="o">+</span> <span class="n">beta</span> <span class="o">*</span> <span class="n">E</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">*</span> <span class="n">V</span><span class="p">(</span><span class="n">K</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">Techno</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">]))</span>
+</pre></div>
+</div>
+<p>The first order conditions are:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">FOC_1</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">smp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">bellman</span><span class="o">.</span><span class="n">rhs</span><span class="p">,</span> <span class="n">K</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">]),</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(\beta \frac{\partial}{\partial {k}_{t + 1}} V{\left({k}_{t + 1},{\lambda}_{t + 1} \right)} {E}_{t} - \frac{1}{- \delta {k}_{t} + {h}_{t}^{1 - \theta} {k}_{t}^{\theta} {\lambda}_{t} - {k}_{t + 1} + {k}_{t}} = 0\)</span></p>
+<p>and:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">FOC_2</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">smp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">bellman</span><span class="o">.</span><span class="n">rhs</span><span class="p">,</span> <span class="n">H</span><span class="p">[</span><span class="n">t</span><span class="p">]),</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(- \frac{A}{1 - {h}_{t}} + \frac{\left(1 - \theta\right) {h}_{t}^{1 - \theta} {k}_{t}^{\theta} {\lambda}_{t}}{\left(- \delta {k}_{t} + {h}_{t}^{1 - \theta} {k}_{t}^{\theta} {\lambda}_{t} - {k}_{t + 1} + {k}_{t}\right) {h}_{t}} = 0\)</span></p>
+<p>The Benveniste-Scheinkman envelope theorem condition is:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">BS</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">smp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">V</span><span class="p">(</span><span class="n">K</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">Techno</span><span class="p">[</span><span class="n">t</span><span class="p">]),</span> <span class="n">K</span><span class="p">[</span><span class="n">t</span><span class="p">]),</span> <span class="n">smp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">bellman</span><span class="o">.</span><span class="n">rhs</span><span class="p">,</span> <span class="n">K</span><span class="p">[</span><span class="n">t</span><span class="p">]))</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(\frac{\partial}{\partial {k}_{t + 1}} V{\left({k}_{t + 1},{\lambda}_{t + 1} \right)} = \frac{- \delta + \frac{\theta {h}_{t + 1}^{1 - \theta} {k}_{t + 1}^{\theta} {\lambda}_{t + 1}}{{k}_{t + 1}} + 1}{- \delta {k}_{t + 1} + {h}_{t + 1}^{1 - \theta} {k}_{t + 1}^{\theta} {\lambda}_{t + 1} + {k}_{t + 1} - {k}_{t + 2}}\)</span></p>
+<p>The first-order conditions can thus be written as:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">Euler_1</span> <span class="o">=</span> <span class="n">FOC_1</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">BS</span><span class="o">.</span><span class="n">lhs</span><span class="p">,</span> <span class="n">BS</span><span class="o">.</span><span class="n">rhs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(\frac{\beta \left(- \delta + \frac{\theta {h}_{t + 1}^{1 - \theta} {k}_{t + 1}^{\theta} {\lambda}_{t + 1}}{{k}_{t + 1}} + 1\right) {E}_{t}}{- \delta {k}_{t + 1} + {h}_{t + 1}^{1 - \theta} {k}_{t + 1}^{\theta} {\lambda}_{t + 1} + {k}_{t + 1} - {k}_{t + 2}} - \frac{1}{- \delta {k}_{t} + {h}_{t}^{1 - \theta} {k}_{t}^{\theta} {\lambda}_{t} - {k}_{t + 1} + {k}_{t}} = 0\)</span></p>
+<p>and:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">Euler_2</span> <span class="o">=</span> <span class="n">FOC_2</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(- \frac{A}{1 - {h}_{t}} + \frac{\left(1 - \theta\right) {h}_{t}^{1 - \theta} {k}_{t}^{\theta} {\lambda}_{t}}{\left(- \delta {k}_{t} + {h}_{t}^{1 - \theta} {k}_{t}^{\theta} {\lambda}_{t} - {k}_{t + 1} + {k}_{t}\right) {h}_{t}} = 0
+\)</span></p>
+<p>We can use some definition to simplify these Euler equations:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">transition_equation_forward</span> <span class="o">=</span> <span class="n">transition_equation</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">R</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">returns_capital</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">theta</span> <span class="o">*</span> <span class="n">Techno</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">*</span> <span class="n">K</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">**</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span><span class="o">*</span> <span class="n">H</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">theta</span><span class="p">)</span> <span class="o">/</span> <span class="n">K</span><span class="p">[</span><span class="n">t</span><span class="p">])</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\({c}_{t + 1} = - \delta {k}_{t + 1} + {h}_{t + 1}^{1 - \theta} {k}_{t + 1}^{\theta} {\lambda}_{t + 1} + {k}_{t + 1} - {k}_{t + 2}\)</span> <br />
+<span class="math notranslate nohighlight">\({r}_{t + 1} = \frac{\theta {h}_{t + 1}^{1 - \theta} {k}_{t + 1}^{\theta} {\lambda}_{t + 1}}{{k}_{t + 1}}\)</span></p>
+<p>which help us to obtain:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">Euler_1</span> <span class="o">=</span> <span class="n">Euler_1</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">transition_equation</span><span class="o">.</span><span class="n">rhs</span><span class="p">,</span> <span class="n">transition_equation</span><span class="o">.</span><span class="n">lhs</span><span class="p">)</span>
+<span class="n">Euler_1</span> <span class="o">=</span> <span class="n">Euler_1</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">transition_equation_forward</span><span class="o">.</span><span class="n">rhs</span><span class="p">,</span> <span class="n">transition_equation_forward</span><span class="o">.</span><span class="n">lhs</span><span class="p">)</span>
+<span class="n">Euler_1</span> <span class="o">=</span> <span class="n">Euler_1</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">returns_capital</span><span class="o">.</span><span class="n">rhs</span><span class="p">,</span> <span class="n">returns_capital</span><span class="o">.</span><span class="n">lhs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(\frac{\beta \left(- \delta + {r}_{t + 1} + 1\right) {E}_{t}}{{c}_{t + 1}} - \frac{1}{{c}_{t}} = 0\)</span></p>
+<p>In addition, we can use:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">W</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+<span class="n">wage_rate</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">W</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">theta</span><span class="p">)</span> <span class="o">*</span> <span class="n">Techno</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">*</span> <span class="n">K</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">**</span><span class="n">theta</span><span class="o">*</span><span class="n">H</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">theta</span><span class="p">)</span><span class="o">/</span><span class="n">H</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\({w}_{t} = \frac{\left(1 - \theta\right) {h}_{t}^{1 - \theta} {k}_{t}^{\theta} {\lambda}_{t}}{{h}_{t}}\)</span></p>
+<p>In order to obtain:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">Euler_2</span> <span class="o">=</span> <span class="n">Euler_2</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">transition_equation</span><span class="o">.</span><span class="n">rhs</span><span class="p">,</span> <span class="n">transition_equation</span><span class="o">.</span><span class="n">lhs</span><span class="p">)</span>
+<span class="n">Euler_2</span> <span class="o">=</span> <span class="n">Euler_2</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">wage_rate</span><span class="o">.</span><span class="n">rhs</span><span class="p">,</span> <span class="n">wage_rate</span><span class="o">.</span><span class="n">lhs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(- \frac{A}{1 - {h}_{t}} + \frac{{w}_{t}}{{c}_{t}} = 0\)</span></p>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-value-function">The Value Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equilibrium-conditions">Equilibrium Conditions</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            <div class="bd-footer-content__inner">
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Thomas Lorans
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022, Thomas Lorans.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div></div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
