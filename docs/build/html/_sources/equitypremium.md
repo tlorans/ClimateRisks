@@ -28,15 +28,13 @@ BASED ON CRRA, Euler Equation with gross rate of consumption within
 
 USE ch12slides
 
-## Method of Undetermined Coefficients
+## Method of Undetermined Coefficients and Log-Normality
 
 From slide 75 ch12slides
 
 In general the Euler equation has a mathematical sructure similar to that of a differential equation.
 
 With CRRA utility and iid consumption growth, we can use method of undetermined coefficients to find a solution for $P_t$ in terms of $C_t$ and $P_{t+1}$ in terms of $C_{t+1}$
-
-## Log-Normality
 
 ## Asset Pricing
 
