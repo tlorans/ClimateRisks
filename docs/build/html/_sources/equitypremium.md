@@ -10,15 +10,31 @@ To compare the CCAPM' predictions to US data, Mehra and Prescott began by modify
 
 Mehra and Prescott assumed that consumption growth $\Delta c_{t+1}$ is log-normally distributed, meaning that the natural logarithm of $\Delta c_{t+1}$ is normally distributed. They also assumed that $\Delta c_{t+1}$ is independant and identically distributed (iid) over time, meaning that $\mu_{\Delta {c_{t_+1}}}$ and $\sigma^2_{\Delta {c_{t+1}}}$ are constant over time.
 
+EQUILIBRIUM CONDITIONS $c_t = d_t$ () 
+
 ## Value Function
 
-Let's now assume a functional form for the utility, namely a classic Constant Relative Risk Aversion:
+Let's now assume a functional form for the utility, namely a classic Constant Relative Risk Aversion (CRRA):
 
 \begin{equation}
 u(c_t) = \frac{c_t^{1-\gamma} - 1}{1 - \gamma}
 \end{equation}
 
+USE THE NOTE CRRA-UTILIY
+
 ## Euler Equation
+
+BASED ON CRRA, Euler Equation with gross rate of consumption within
+
+USE ch12slides
+
+## Log-Normality and Method of Undetermined Coefficients
+
+From slide 75 ch12slides
+
+In general the Euler equation has a mathematical sructure similar to that of a differential equation.
+
+With CRRA utility and iid consumption growth, we can use method of undetermined coefficients to find a solution for $P_t$ in terms of $C_t$ and $P_{t+1}$ in terms of $C_{t+1}$
 
 ## Asset Pricing
 

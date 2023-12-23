@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Solving for Dynamics &#8212; Climate Risks in Finance 0.1 documentation</title>
+    <title>Methods of Undetermined Coefficients &#8212; Climate Risks in Finance 0.1 documentation</title>
   
   
   
@@ -42,8 +42,6 @@
     <script src="_static/doctools.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'introdynamics';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -129,15 +127,12 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="part1modellertoolkit.html">Part 1: Modeller Toolkit</a></li>
 <li class="toctree-l1"><a class="reference internal" href="introrecursivemethods.html">Recursive Methods</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Solving for Dynamics</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Methods of Undetermined Coefficients</a></li>
 <li class="toctree-l1"><a class="reference internal" href="introstatespacemethods.html">State Space Methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="introestimation.html">Model Estimation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="part2fromrbc.html">Part 2. From RBC Models…</a></li>
-<li class="toctree-l1"><a class="reference internal" href="rbcequilibrium.html">Hansen’s RBC Model: Equilibrium Conditions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="rbcdynamics.html">Hansen’s RBC Dynamics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="estimatingrbc.html">Estimating Hansen’s RBC Model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="part3toassetpricing.html">Part 3: … to Asset Pricing Models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="part4esgdynamicequilibrium.html">Part 4: ESG Dynamic Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="part2assetpricing.html">Part 2: Dynamic Asset Pricing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="equitypremium.html">The Equity Premium Puzzle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recursivepreferences.html">Epstein Zin Preferences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="longrunrisks.html">Long Run Risk</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 </ul>
 
@@ -262,9 +257,7 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</label>
+
 </div></div>
       
     </div>
@@ -275,28 +268,11 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Solving for Dynamics</h1>
+    <h1>Methods of Undetermined Coefficients</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#log-linearization-techniques">Log Linearization Techniques</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basics-of-log-linearization">Basics of Log Linearization</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uhlig-s-method-of-log-linearization">Uhlig’s Method of Log Linearization</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-method-of-undetermined-coefficients">The Method of Undetermined Coefficients</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conjecturing-a-linear-recursive-law-of-motion">Conjecturing a Linear Recursive Law of Motion</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-for-the-undetermined-coefficients-of-the-linear-recursive-law-of-motion">Solving for the Undetermined Coefficients of the Linear Recursive Law of Motion</a></li>
-</ul>
-</li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -306,58 +282,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="solving-for-dynamics">
-<h1>Solving for Dynamics<a class="headerlink" href="#solving-for-dynamics" title="Permalink to this headline">#</a></h1>
-<section id="log-linearization-techniques">
-<h2>Log Linearization Techniques<a class="headerlink" href="#log-linearization-techniques" title="Permalink to this headline">#</a></h2>
-<p>Handling and solving models with substantial nonlinearity is often difficult. If the model is relatively simple, one can find an approximation to the policy function by recursively solving for the value function.</p>
-<p>Linear models are often much easier to solve, and there exist well-developed methods for solving linear models. The problem is to convert a nonlinear model into a sufficiently good linear approximation so that the solutions to the linear approximation are helpful in understanding the behavior of the underlying nonlinear system.</p>
-<p>A now standard method for a linear approximation is to log-linearize a model around its stationary state. The assumption is that, if the model is not too far from the stationary state, the linear version that results closely approximate the original model.</p>
-<section id="basics-of-log-linearization">
-<h3>Basics of Log Linearization<a class="headerlink" href="#basics-of-log-linearization" title="Permalink to this headline">#</a></h3>
-<p>Consider a nonlinear model that can be represented by a set of equations of the general form:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-425a246e-59aa-4ed9-8caa-b68c76a6d9d4">
-<span class="eqno">(1)<a class="headerlink" href="#equation-425a246e-59aa-4ed9-8caa-b68c76a6d9d4" title="Permalink to this equation">#</a></span>\[\begin{equation}
-F(x_t) = \frac{G(x_t)}{H(x_t)}
-\end{equation}\]</div>
-<p>where <span class="math notranslate nohighlight">\(x_t\)</span> is a vector of the variables of the model that can include expectational variables and lagged variables in addition to contemporaneous variables.</p>
-<p>The process of log linearization is to first take the logarithms of te function <span class="math notranslate nohighlight">\(F()\)</span>, <span class="math notranslate nohighlight">\(G()\)</span> and <span class="math notranslate nohighlight">\(H()\)</span> and then take a first-order Taylor series approximation. Taking the logarithms gives:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-06bda4f2-3e38-4c58-ad20-1820d8ee3913">
-<span class="eqno">(2)<a class="headerlink" href="#equation-06bda4f2-3e38-4c58-ad20-1820d8ee3913" title="Permalink to this equation">#</a></span>\[\begin{equation}
-\ln(F(x_t)) = \ln(G(x_t)) - \ln(H(x_t))
-\end{equation}\]</div>
-<p>and taking the first-order Taylor series expansion around the stationary state values, <span class="math notranslate nohighlight">\(\bar{x}\)</span>, gives:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a51cd4d7-48f4-433f-9f4a-8278684ccf4d">
-<span class="eqno">(3)<a class="headerlink" href="#equation-a51cd4d7-48f4-433f-9f4a-8278684ccf4d" title="Permalink to this equation">#</a></span>\[\begin{equation}
-\ln(F(\bar{x})) + \frac{F'(\bar{x})}{F(\bar{x})}(x_t - \bar{x}) \approx \ln(G(\bar{x})) + \frac{G'(\bar{x})}{G(\bar{x})}(x_t - \bar{x}) - \ln(H(\bar{x})) - \frac{H'(\bar{x})}{H(\bar{x})}(x_t - \bar{x})
-\end{equation}\]</div>
-<p>where the notation <span class="math notranslate nohighlight">\(X'(\bar{x})\)</span> is used to indicate the gradient at the stationary state. Notice that the model is now linear in <span class="math notranslate nohighlight">\(x_t\)</span>, since <span class="math notranslate nohighlight">\(\frac{F'(\bar{x})}{F(\bar{x})}\)</span>, <span class="math notranslate nohighlight">\(\frac{G'(\bar{x})}{G(\bar{x})}\)</span>, <span class="math notranslate nohighlight">\(\frac{H'(\bar{x})}{H(\bar{x})}\)</span>, <span class="math notranslate nohighlight">\(\ln(G(\bar{x}))\)</span>, <span class="math notranslate nohighlight">\(\ln(G(\bar{x}))\)</span> and <span class="math notranslate nohighlight">\(\ln(H(\bar{x}))\)</span> are constants.</p>
-<p>Given that the log version of the model holds at the stationary state:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c6e309a4-711b-4bf2-bdf4-48dcb0b87839">
-<span class="eqno">(4)<a class="headerlink" href="#equation-c6e309a4-711b-4bf2-bdf4-48dcb0b87839" title="Permalink to this equation">#</a></span>\[\begin{equation}
-\ln(F(\bar{x})) = \ln(G(\bar{x})) - \ln(H(\bar{x}))
-\end{equation}\]</div>
-<p>We can eliminate the three <span class="math notranslate nohighlight">\(\ln()\)</span> components, and the equation simplifies to:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9e2b5dfe-d12e-4e72-84ba-ba97ee421bdd">
-<span class="eqno">(5)<a class="headerlink" href="#equation-9e2b5dfe-d12e-4e72-84ba-ba97ee421bdd" title="Permalink to this equation">#</a></span>\[\begin{equation}
-
-\end{equation}\]</div>
-</section>
-<section id="uhlig-s-method-of-log-linearization">
-<h3>Uhlig’s Method of Log Linearization<a class="headerlink" href="#uhlig-s-method-of-log-linearization" title="Permalink to this headline">#</a></h3>
-</section>
-</section>
-<section id="the-method-of-undetermined-coefficients">
-<h2>The Method of Undetermined Coefficients<a class="headerlink" href="#the-method-of-undetermined-coefficients" title="Permalink to this headline">#</a></h2>
-<section id="conjecturing-a-linear-recursive-law-of-motion">
-<h3>Conjecturing a Linear Recursive Law of Motion<a class="headerlink" href="#conjecturing-a-linear-recursive-law-of-motion" title="Permalink to this headline">#</a></h3>
-<p>What is given in our system is the state variables at time <span class="math notranslate nohighlight">\(t\)</span>. We need to find the value of the endogeneous variables in our model.</p>
-<p>We can conjecture a linear recursive law of motion.</p>
-</section>
-<section id="solving-for-the-undetermined-coefficients-of-the-linear-recursive-law-of-motion">
-<h3>Solving for the Undetermined Coefficients of the Linear Recursive Law of Motion<a class="headerlink" href="#solving-for-the-undetermined-coefficients-of-the-linear-recursive-law-of-motion" title="Permalink to this headline">#</a></h3>
-</section>
-</section>
+  <section class="tex2jax_ignore mathjax_ignore" id="methods-of-undetermined-coefficients">
+<h1>Methods of Undetermined Coefficients<a class="headerlink" href="#methods-of-undetermined-coefficients" title="Permalink to this headline">#</a></h1>
 </section>
 
 
@@ -393,29 +319,6 @@ F(x_t) = \frac{G(x_t)}{H(x_t)}
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#log-linearization-techniques">Log Linearization Techniques</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basics-of-log-linearization">Basics of Log Linearization</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uhlig-s-method-of-log-linearization">Uhlig’s Method of Log Linearization</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-method-of-undetermined-coefficients">The Method of Undetermined Coefficients</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conjecturing-a-linear-recursive-law-of-motion">Conjecturing a Linear Recursive Law of Motion</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-for-the-undetermined-coefficients-of-the-linear-recursive-law-of-motion">Solving for the Undetermined Coefficients of the Linear Recursive Law of Motion</a></li>
-</ul>
-</li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>
