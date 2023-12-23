@@ -17,7 +17,6 @@ This course is under heavy development
 
 part1modellertoolkit
 introrecursivemethods
-introstatespacemethods
 part2assetpricing
 equitypremium
 recursivepreferences

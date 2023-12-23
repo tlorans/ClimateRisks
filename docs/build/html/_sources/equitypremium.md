@@ -40,6 +40,8 @@ With CRRA utility and iid consumption growth, we can use method of undetermined 
 
 ## Asset Pricing
 
+
+CONCLUSION:
 With CRRA utility and iid, log-normal consumption growth, the CCAPM implies an equity premium that is positive and gets larger as either:
 - $\sigma^{2}_{\Delta c_{t+1}}$
 increases, to that aggregate risk increase
