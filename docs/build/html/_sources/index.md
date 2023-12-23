@@ -17,7 +17,6 @@ This course is under heavy development
 
 part1modellertoolkit
 introrecursivemethods
-introdynamics
 introstatespacemethods
 part2assetpricing
 equitypremium

@@ -28,7 +28,7 @@ BASED ON CRRA, Euler Equation with gross rate of consumption within
 
 USE ch12slides
 
-## Log-Normality and Method of Undetermined Coefficients
+## Method of Undetermined Coefficients
 
 From slide 75 ch12slides
 
@@ -36,9 +36,13 @@ In general the Euler equation has a mathematical sructure similar to that of a d
 
 With CRRA utility and iid consumption growth, we can use method of undetermined coefficients to find a solution for $P_t$ in terms of $C_t$ and $P_{t+1}$ in terms of $C_{t+1}$
 
+## Log-Normality
+
 ## Asset Pricing
 
 With CRRA utility and iid, log-normal consumption growth, the CCAPM implies an equity premium that is positive and gets larger as either:
 - $\sigma^{2}_{\Delta c_{t+1}}$
 increases, to that aggregate risk increase
 - $\gamma$ increases, so that investors become more risk averse
+
+## Testing
