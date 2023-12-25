@@ -466,4 +466,50 @@ which is constant since $\mathbb{E}_t(G_{t+1}^{1-\gamma})$ is constant over time
 
 ### Pricing the Risk-Free Asset 
 
+Now we are ready to address the question of how well the CCAPM fits the facts. 
+
+Consider, first, the risk-free rate of return $r_{f,t+1}$, which satisfies:
+
+\begin{equation}
+1 = \beta \mathbb{E}_t[G_{t+1}^{-\gamma}(1 + r_{f,t+1})]
+\end{equation}
+
+or 
+
+\begin{equation}
+1 + r_{f,t+1} = \frac{1}{\beta \mathbb{E}_t(G_{t+1}^{-\gamma})}
+\end{equation}
+
+Since $\ln(G_{t+1}) \sim N(\mu_g, \sigma^2_g)$:
+
+\begin{equation}
+\mathbb{E}[G_{t+1}^{\alpha}] = e^{\alpha \mu_g + \frac{1}{2}\alpha^2\sigma^2_g}
+\end{equation}
+
+for any value of $\alpha$. In particular:
+
+\begin{equation}
+\mathbb{E}[G_{t+1}^{-\gamma}] = e^{-\gamma \mu_g + \frac{1}{2} \gamma^2 \sigma^2_g}
+\end{equation}
+
+Now we use the fact that:
+
+\begin{equation}
+\frac{1}{e^x} = e^{-x}
+\end{equation}
+
+To rewrite this last equation as:
+
+\begin{equation}
+\frac{1}{\mathbb{E}[G_{t+1}^{-\gamma}]} = e^{\gamma \mu_g - \frac{1}{2}\gamma^2\sigma^2_g}
+\end{equation}
+
+We substitute this last equation into our previous $1 + r_{f,t+1} = \frac{1}{\beta \mathbb{E}_t[G_{t+1}^{-\gamma}]}$ to obtain:
+
+\begin{equation}
+1 + r_{f,t+1} = (\frac{1}{\beta})e^{\gamma \mu_g - \frac{1}{2}\gamma^2 \sigma^2_g}
+\end{equation}
+
+This equation shows specifically how, according to the model, the risk-free rate depends on the preference parameters $\beta$ and $\gamma$ and the mean and variance $\mu_g$ and $\sigma^2_g$ of log consumption growth.
+
 ### Pricing a Risky Asset

@@ -47,6 +47,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'ccapm';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Recursive Preferences and Long-Run Risks" href="recursivepreferences.html" />
+    <link rel="prev" title="ESG Risk Factor Modelling with Python" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -124,11 +126,10 @@
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="part1modellertoolkit.html">Part 1: Modeller Toolkit</a></li>
-<li class="toctree-l1"><a class="reference internal" href="introrecursivemethods.html">Recursive Methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="recursivepreferences.html">Recursive Preferences and Long-Run Risk</a></li>
-<li class="toctree-l1"><a class="reference internal" href="longrunrisks.html">Long Run Risk</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">The Consumption CAPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recursivepreferences.html">Recursive Preferences and Long-Run Risks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="esgdynamicequilibrium.html">ESG Dynamic Equilibrium</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 </ul>
 
@@ -321,46 +322,46 @@ document.write(`
 <p>Due to the assumption that all agents are identical with respecto to both preferences and enowments, we can work with a representative agent. The agents’ economic activity in each period consists of trading shares, where a share represents a claim to the future stream of dividends.</p>
 <p>We let <span class="math notranslate nohighlight">\(p_{i,t}\)</span> be the price of tree <span class="math notranslate nohighlight">\(i\)</span> in period <span class="math notranslate nohighlight">\(t\)</span> (i.e., of a claim to the entire income stream <span class="math notranslate nohighlight">\(\{d_{i,t+\tau}\}^{\infty}_{\tau = 0}\)</span>), measured in terms of the consumption commodity, and <span class="math notranslate nohighlight">\(z_{i,t}\)</span> the quantity of tree <span class="math notranslate nohighlight">\(i\)</span> that the agent holds between <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(t+1\)</span>.</p>
 <p>Our aim is to find <span class="math notranslate nohighlight">\(p_{i,t}\)</span> as a function of the stochastic payofss, <span class="math notranslate nohighlight">\(\{d_{i,t+\tau}\}^{\infty}_{\tau = 0}\)</span>. Stated formally, the representative consume chooses <span class="math notranslate nohighlight">\(\{z_{1,t}, z_{2,t},...,z_{N,t};c_t\}^{\infty}_{t=0}\)</span> to maximize:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d7fab66f-34ad-4b03-ae93-edc220de6667">
-<span class="eqno">(1)<a class="headerlink" href="#equation-d7fab66f-34ad-4b03-ae93-edc220de6667" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4de41ecf-9011-4e06-b102-8b435eb7091c">
+<span class="eqno">(1)<a class="headerlink" href="#equation-4de41ecf-9011-4e06-b102-8b435eb7091c" title="Permalink to this equation">#</a></span>\[\begin{equation}
 E_t \sum^{\infty}_{s = t} \beta^{s-t}u(c_s)
 \end{equation}\]</div>
 <p>subjet to the budget constraint:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-fa59b46e-2bb9-4efc-8cdb-12afd9d941c0">
-<span class="eqno">(2)<a class="headerlink" href="#equation-fa59b46e-2bb9-4efc-8cdb-12afd9d941c0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ce98e1a9-beb6-4ef7-9e9a-8baaecf91331">
+<span class="eqno">(2)<a class="headerlink" href="#equation-ce98e1a9-beb6-4ef7-9e9a-8baaecf91331" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sum^{N}_{i=0}z_{i,t+1}p_{i,t} + c_t \leq \sum^{N}_{i=0}z_{i,t}d_{i,t}+\sum^{N}_{i=0}z_{i,t}p_{i,t}
 \end{equation}\]</div>
 <p>The budget constraint has the following interpretation: the ownership of share <span class="math notranslate nohighlight">\(i\)</span> at the beginning of period <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(z_{i,t}\)</span>, entitles the owner to receive dividend <span class="math notranslate nohighlight">\(d_{i,t}\)</span> in period <span class="math notranslate nohighlight">\(t\)</span> and to have the right to sell the ree at price <span class="math notranslate nohighlight">\(p_{i,t}\)</span> in period <span class="math notranslate nohighlight">\(t\)</span>. Thus, the agent’s source of funds in period <span class="math notranslate nohighlight">\(t\)</span> are given by the sum of shares that the agent holds times their respective dividents <span class="math notranslate nohighlight">\(\sum^{N}_{i=0}z_{i,t}d_{i,t}\)</span>, plus the revenue of the sale of the shares at the prevailing prices <span class="math notranslate nohighlight">\(\sum^{N}_{i=0}z_{i,t}p_{i,t}\)</span>.
 On the left hand side of the inequality we have got the agent’s use of funds, saying that the proceedings are either consumed or spent for the number of shares the agent wants to hold in period <span class="math notranslate nohighlight">\(t+1\)</span>.</p>
 <p>For a market equilibrium, the quantities of each tree demanded must equal to the given supply, that is, the number of shares for each tree must sump up to one. Since there is only one agent, equilibrium implies that <span class="math notranslate nohighlight">\(z_{i,t} = 1\)</span> for all <span class="math notranslate nohighlight">\(i,t\)</span>. In other words, there is no other agent in the economy with whom to trade. From the budget constraint, this implies that consumption of the representative agent must equal to output, which is the sum of dividends.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d5cb3ed6-9c5b-40e5-8499-9115b60a9dc4">
-<span class="eqno">(3)<a class="headerlink" href="#equation-d5cb3ed6-9c5b-40e5-8499-9115b60a9dc4" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-2ee4681a-2a1c-4eeb-a13b-50c4bce55ede">
+<span class="eqno">(3)<a class="headerlink" href="#equation-2ee4681a-2a1c-4eeb-a13b-50c4bce55ede" title="Permalink to this equation">#</a></span>\[\begin{equation}
 c_t \leq \sum^N_{i=0}d_{i,t}
 \end{equation}\]</div>
 <p>We can assume that there is only one tree. Thus, the representative agent maximizes:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7c03d8b2-e93e-42ba-a830-0d40ef09dbcc">
-<span class="eqno">(4)<a class="headerlink" href="#equation-7c03d8b2-e93e-42ba-a830-0d40ef09dbcc" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4fa34df4-7a22-45b1-b625-3fa7fb0b1847">
+<span class="eqno">(4)<a class="headerlink" href="#equation-4fa34df4-7a22-45b1-b625-3fa7fb0b1847" title="Permalink to this equation">#</a></span>\[\begin{equation}
 E_t \sum^{\infty}_{s=t}\beta^{s-t}u(c_s)
 \end{equation}\]</div>
 <p>subject to the budget constraint:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-062608f8-868a-4763-8aed-7577d83bb532">
-<span class="eqno">(5)<a class="headerlink" href="#equation-062608f8-868a-4763-8aed-7577d83bb532" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0c2f52c8-4e40-400f-a31f-52b6bacb5e80">
+<span class="eqno">(5)<a class="headerlink" href="#equation-0c2f52c8-4e40-400f-a31f-52b6bacb5e80" title="Permalink to this equation">#</a></span>\[\begin{equation}
 z_{t+1}p_t + c_t \leq z_td_t +z_tp_t
 \end{equation}\]</div>
 <p>and market clearing conditions:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-28ba3edf-5e71-47dc-9dfd-52530a1e7646">
-<span class="eqno">(6)<a class="headerlink" href="#equation-28ba3edf-5e71-47dc-9dfd-52530a1e7646" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-aed07782-0370-41bf-8ce3-6cacb167c38c">
+<span class="eqno">(6)<a class="headerlink" href="#equation-aed07782-0370-41bf-8ce3-6cacb167c38c" title="Permalink to this equation">#</a></span>\[\begin{equation}
 c_t = d_t
 \end{equation}\]</div>
 <p>This representative agent’s problem can again being treated as a problem of dynamic optimization.</p>
 <p>With <span class="math notranslate nohighlight">\(z_{t+1}\)</span> as our control variables and <span class="math notranslate nohighlight">\(z_t\)</span> and <span class="math notranslate nohighlight">\(d_t\)</span> as our states variables, the Bellman equatoin can be written as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a0b00b66-3139-47e3-b0fe-1541efd77233">
-<span class="eqno">(7)<a class="headerlink" href="#equation-a0b00b66-3139-47e3-b0fe-1541efd77233" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e3b3a6c2-579e-41f1-8e5b-4617110260a7">
+<span class="eqno">(7)<a class="headerlink" href="#equation-e3b3a6c2-579e-41f1-8e5b-4617110260a7" title="Permalink to this equation">#</a></span>\[\begin{equation}
 V(z_{t},d_{t}) = \max_{z_{t+1}}[u(c_t) + \beta \mathbb{E}[V(z_{t+1}, d_{t+1})]]
 \end{equation}\]</div>
 <p>Reexpressing the budget constraint and making the substitution we have:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5a4f04be-e4e2-4093-a831-854095b1bfba">
-<span class="eqno">(8)<a class="headerlink" href="#equation-5a4f04be-e4e2-4093-a831-854095b1bfba" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e3d4715c-8124-44ad-81b3-166e361bec5a">
+<span class="eqno">(8)<a class="headerlink" href="#equation-e3d4715c-8124-44ad-81b3-166e361bec5a" title="Permalink to this equation">#</a></span>\[\begin{equation}
 V(z_{t},d_{t}) = \max_{z_{t+1}}[u(d_tz_t - p_tz_{t+1}+p_tz_t) + \beta \mathbb{E}[V(z_{t+1}, d_{t+1})]]
 \end{equation}\]</div>
 </section>
@@ -404,8 +405,8 @@ V(z_{t},d_{t}) = \max_{z_{t+1}}[u(d_tz_t - p_tz_{t+1}+p_tz_t) + \beta \mathbb{E}
 <p><span class="math notranslate nohighlight">\(\beta \left({d}_{t + 1} + {p}_{t + 1}\right) \frac{\partial}{\partial {c}_{t + 1}} u{\left({c}_{t + 1} \right)} - \frac{\partial}{\partial {c}_{t}} u{\left({c}_{t} \right)} {p}_{t} = 0
 \)</span></p>
 <p>Again, please note that we should have an expectation operator:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-428ba50a-5435-4fa1-bbfe-3a7dcb46f365">
-<span class="eqno">(9)<a class="headerlink" href="#equation-428ba50a-5435-4fa1-bbfe-3a7dcb46f365" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-368c4e72-ae1b-430b-8c21-b61fcb5218b3">
+<span class="eqno">(9)<a class="headerlink" href="#equation-368c4e72-ae1b-430b-8c21-b61fcb5218b3" title="Permalink to this equation">#</a></span>\[\begin{equation}
 p_tu'(c_t) = \beta \mathbb{E}_t[(p_{t+1}+d_{t+1})u'(c_{t+1})]
 \end{equation}\]</div>
 <p>The Euler equation has an intuitive interpretation. The left-hand side gives the marginal utility (loss) to giving up a small amount of consumption, and using it to buy some of the asset at price <span class="math notranslate nohighlight">\(p_t\)</span>. The right-hand side gives the discounted expected marginal utility (gain) at date <span class="math notranslate nohighlight">\(t+1\)</span> from having an increased amount of the asset: part of the utility gain comes from the expected resale value of the additional amount of the asset and part of it comes from the dividend which this additional amount of the asset brings. Thus, the Euler equation is simply saying that given prices <span class="math notranslate nohighlight">\(p_t\)</span> and dividends <span class="math notranslate nohighlight">\(d_t\)</span>, agents will find it optimal to increase their demand of the asset if the expected future gains to doing so (ie. the RHS) are greater than the costs (ie. the LHS).
@@ -417,95 +418,95 @@ The Euler equation is also saying that the agents will find it optimal to decrea
 EULER EQUATION TO SDF</p>
 <p>Although the Tree Model assumes there is only one asset, we can turn it into a more general model by introducing additional assets.</p>
 <p>Let <span class="math notranslate nohighlight">\(R_{j,t+1}\)</span> denote the gross return on asset <span class="math notranslate nohighlight">\(j\)</span> between <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(t+1\)</span> and let <span class="math notranslate nohighlight">\(r_{j,t+1}\)</span> be the associated net return, so that:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-32cdb609-bc8b-43f6-8e3a-5bd8c9ec62c3">
-<span class="eqno">(10)<a class="headerlink" href="#equation-32cdb609-bc8b-43f6-8e3a-5bd8c9ec62c3" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-187e56a6-9b2e-4045-96ba-3541de9974c4">
+<span class="eqno">(10)<a class="headerlink" href="#equation-187e56a6-9b2e-4045-96ba-3541de9974c4" title="Permalink to this equation">#</a></span>\[\begin{equation}
 1 + r_{j,t+1} = R_{j,t+1}
 \end{equation}\]</div>
 <p>For shares in the tree, the gross return is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-666ca751-9ca0-4a2e-a007-e00303fde29e">
-<span class="eqno">(11)<a class="headerlink" href="#equation-666ca751-9ca0-4a2e-a007-e00303fde29e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ed19631e-5cd3-445d-a8be-c59bbca7baa9">
+<span class="eqno">(11)<a class="headerlink" href="#equation-ed19631e-5cd3-445d-a8be-c59bbca7baa9" title="Permalink to this equation">#</a></span>\[\begin{equation}
 R_{t+1} = \frac{d_{t+1} + p_{t+1}}{p_t}
 \end{equation}\]</div>
 <p>and the net return:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-011229a3-ae29-4414-8e35-484016d78765">
-<span class="eqno">(12)<a class="headerlink" href="#equation-011229a3-ae29-4414-8e35-484016d78765" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8dc2012a-a95d-4d3c-82c4-34a0d606d82a">
+<span class="eqno">(12)<a class="headerlink" href="#equation-8dc2012a-a95d-4d3c-82c4-34a0d606d82a" title="Permalink to this equation">#</a></span>\[\begin{equation}
 r_{t+1} = \frac{d_{t+1} + p_{t+1} - p_t}{p_t}
 \end{equation}\]</div>
 <p>More generally, our previously derived Euler equation implies that the return on any asset <span class="math notranslate nohighlight">\(j\)</span> must satisfy:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c75aeace-3354-44ab-a853-0b5ec7134bbb">
-<span class="eqno">(13)<a class="headerlink" href="#equation-c75aeace-3354-44ab-a853-0b5ec7134bbb" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b998b4dc-9f22-45bc-82df-5b61955714e8">
+<span class="eqno">(13)<a class="headerlink" href="#equation-b998b4dc-9f22-45bc-82df-5b61955714e8" title="Permalink to this equation">#</a></span>\[\begin{equation}
 u'(c_t) = \beta \mathbb{E}_t[u'(c_{t+1})R_{j,t+1}] = \beta \mathbb{E}_t[u'(c_{t+1})(1 + r_{j,t+1})]
 \end{equation}\]</div>
 <section id="pricing-the-risk-free-asset">
 <h3>Pricing the Risk-Free Asset<a class="headerlink" href="#pricing-the-risk-free-asset" title="Permalink to this headline">#</a></h3>
 <p>Consider first a riskless asset, like a bank account or a short-term Government bond, with return <span class="math notranslate nohighlight">\(r_{f,t+1}\)</span> that is known at <span class="math notranslate nohighlight">\(t\)</span>. For this asset, the Euler equation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9f168686-7dac-4c80-8023-5f1704c85c99">
-<span class="eqno">(14)<a class="headerlink" href="#equation-9f168686-7dac-4c80-8023-5f1704c85c99" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-582e84d7-5c3e-4f6c-ae3c-9bf576cdb7f5">
+<span class="eqno">(14)<a class="headerlink" href="#equation-582e84d7-5c3e-4f6c-ae3c-9bf576cdb7f5" title="Permalink to this equation">#</a></span>\[\begin{equation}
 u'(c_t) = \beta \mathbb{E}_t[u'(c_{t+1})R_{j,t+1}] = \beta \mathbb{E}_t[u'(c_{t+1})(1 + r_{f,t+1})]
 \end{equation}\]</div>
 <p>implies:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d8fa4013-9105-4682-9ea2-b54700eb4d06">
-<span class="eqno">(15)<a class="headerlink" href="#equation-d8fa4013-9105-4682-9ea2-b54700eb4d06" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-89c9a59f-a688-4cd9-9ebe-575ca4ef39ce">
+<span class="eqno">(15)<a class="headerlink" href="#equation-89c9a59f-a688-4cd9-9ebe-575ca4ef39ce" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \frac{1}{1 + r_{f,t+1}} = \mathbb{E}_t[\frac{\beta u'(c_{t+1})}{u'(c_t)}]
 \end{equation}\]</div>
 </section>
 <section id="pricing-a-risky-asset">
 <h3>Pricing a Risky Asset<a class="headerlink" href="#pricing-a-risky-asset" title="Permalink to this headline">#</a></h3>
 <p>Next, consider a risky asset. The Euler equation can be rewritten:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-187c8e05-ec41-4dcb-8b19-f5378fc66ede">
-<span class="eqno">(16)<a class="headerlink" href="#equation-187c8e05-ec41-4dcb-8b19-f5378fc66ede" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a7f62e3f-a891-4629-87bd-fc5949131ebd">
+<span class="eqno">(16)<a class="headerlink" href="#equation-a7f62e3f-a891-4629-87bd-fc5949131ebd" title="Permalink to this equation">#</a></span>\[\begin{equation}
 1 = \mathbb{E}_t[(\frac{\beta u'(c_{t+1})}{u'(c_t)})(1 + r_{j,t+1})]
 \end{equation}\]</div>
 <p>But what does this equation imply about <span class="math notranslate nohighlight">\(\mathbb{E}_t(r_{j,t+1}))\)</span>, the expected return on the risky asset?</p>
 <hr class="docutils" />
 <p><strong>NOTE</strong></p>
 <p>Recall that for any two random variables X and Y with <span class="math notranslate nohighlight">\(\mathbb{E}[X] = \mu_X\)</span> and <span class="math notranslate nohighlight">\(\mathbb{E}[Y] = \mu_Y\)</span>, the covariance between <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> is defined as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-981bd1f5-49fa-4539-b60c-e2605eb39144">
-<span class="eqno">(17)<a class="headerlink" href="#equation-981bd1f5-49fa-4539-b60c-e2605eb39144" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d013c15a-9e4d-40b3-abda-8512e991a1cd">
+<span class="eqno">(17)<a class="headerlink" href="#equation-d013c15a-9e4d-40b3-abda-8512e991a1cd" title="Permalink to this equation">#</a></span>\[\begin{equation}
 Cov(X,Y) = \mathbb{E}[(X - \mu_x)(Y - \mu_Y)]
 \end{equation}\]</div>
 <p>This definition implies:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-dd9b0119-1be4-4d1c-a6aa-695462c3d24e">
-<span class="eqno">(18)<a class="headerlink" href="#equation-dd9b0119-1be4-4d1c-a6aa-695462c3d24e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-701ee9dd-9233-44bf-925b-8d24024f30ad">
+<span class="eqno">(18)<a class="headerlink" href="#equation-701ee9dd-9233-44bf-925b-8d24024f30ad" title="Permalink to this equation">#</a></span>\[\begin{equation}
 Cov(X,Y) = \mathbb{E}[XY] - \mathbb{E}[X]\mathbb{E}[Y]
 \end{equation}\]</div>
 <p>Or, equivalently:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e15f6a48-1fd4-4172-a356-f8a500891838">
-<span class="eqno">(19)<a class="headerlink" href="#equation-e15f6a48-1fd4-4172-a356-f8a500891838" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-82f7fda6-f15a-4013-b962-1522c88f251e">
+<span class="eqno">(19)<a class="headerlink" href="#equation-82f7fda6-f15a-4013-b962-1522c88f251e" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathbb{E}[XY] = \mathbb{E}[X]\mathbb{E}[Y] + Cov(X,Y)
 \end{equation}\]</div>
 <hr class="docutils" />
 <p>With the simple definition of the expression of the expectation of a product of two random variables, the Euler equation can be rewritten as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-cac02d79-f997-43f4-bd9b-3c26710b7be1">
-<span class="eqno">(20)<a class="headerlink" href="#equation-cac02d79-f997-43f4-bd9b-3c26710b7be1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-9fd6b224-f1c4-4151-aa63-a97a3e4c7f03">
+<span class="eqno">(20)<a class="headerlink" href="#equation-9fd6b224-f1c4-4151-aa63-a97a3e4c7f03" title="Permalink to this equation">#</a></span>\[\begin{equation}
 1 = \mathbb{E}[\frac{\beta u'(c_{t+1})}{u'(c_t)}] \mathbb{E}_t[1 + r_{j,t+1}] + Cov_t[\frac{\beta u'(c_{t+1})}{u'(c_t)}, r_{j,t+1}]
 \end{equation}\]</div>
 <p>Combining this equation with the price of a risk-free asset <span class="math notranslate nohighlight">\(\frac{1}{1 + r_{f,t+1}} = \mathbb{E}_t[\frac{\beta u'(c_{t+1})}{u'(c_t)}]\)</span> we obtain:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d83762a1-c72f-455d-a1a9-83bb166dbb6c">
-<span class="eqno">(21)<a class="headerlink" href="#equation-d83762a1-c72f-455d-a1a9-83bb166dbb6c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-24c008f2-b10a-4008-ac28-f510a0cb11a6">
+<span class="eqno">(21)<a class="headerlink" href="#equation-24c008f2-b10a-4008-ac28-f510a0cb11a6" title="Permalink to this equation">#</a></span>\[\begin{equation}
 1 = \frac{E_t(1 + r_{j,t+1})}{1 + r_{f,t+1}} + Cov_t[\frac{\beta u'(c_{t+1})}{u'(c_t)}, r_{j,t+1}]
 \end{equation}\]</div>
 <p>which implies:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a943acb3-8678-4ef9-863c-14c77cb96768">
-<span class="eqno">(22)<a class="headerlink" href="#equation-a943acb3-8678-4ef9-863c-14c77cb96768" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-31a8dca8-d839-441e-a502-4290c1893d8a">
+<span class="eqno">(22)<a class="headerlink" href="#equation-31a8dca8-d839-441e-a502-4290c1893d8a" title="Permalink to this equation">#</a></span>\[\begin{equation}
 1 + r_{f,t+1} = 1 + \mathbb{E}_t[r_{j,t+1}] + ( 1 + r_{f,t+1})Cov_t[\frac{\beta u'(c_{t+1})}{u'(c_t)}, r_{j,t+1}]
 \end{equation}\]</div>
 <p>and then:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-413ea2ca-101d-4fa0-a738-4c4e6fa650e5">
-<span class="eqno">(23)<a class="headerlink" href="#equation-413ea2ca-101d-4fa0-a738-4c4e6fa650e5" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-abb10e1c-940f-474e-8bef-548de6d3555a">
+<span class="eqno">(23)<a class="headerlink" href="#equation-abb10e1c-940f-474e-8bef-548de6d3555a" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathbb{E}_t(r_{j,t+1})-r_{f,t+1} = -(1 + r_{f,t+1})Cov_t[\frac{\beta u'(c_{t+1})}{u'(c_t)}, r_{j,t+1}]
 \end{equation}\]</div>
 <p>This equation look a lot like the equations from the CAPM. In fact, is has similar implications: The expected return on asset <span class="math notranslate nohighlight">\(j\)</span> will be above the risk-free rate if the covariance between the actual return on asset <span class="math notranslate nohighlight">\(j\)</span> and the repreentative investor’s IMRS (or SDF) is negative.</p>
 <p>If the utility function is concave, the investor’s IMRS (or the SDF):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6145cd7e-9bbd-4b40-8077-07d7d12a090a">
-<span class="eqno">(24)<a class="headerlink" href="#equation-6145cd7e-9bbd-4b40-8077-07d7d12a090a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0d4d74f8-4151-42de-97ee-b604855a63d4">
+<span class="eqno">(24)<a class="headerlink" href="#equation-0d4d74f8-4151-42de-97ee-b604855a63d4" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \frac{\beta u'(c_{t+1})}{u'(c_t)}
 \end{equation}\]</div>
 <p>will be high if <span class="math notranslate nohighlight">\(c_{t+1}\)</span> is low relative to <span class="math notranslate nohighlight">\(c_t\)</span> and low if <span class="math notranslate nohighlight">\(c_{t+1}\)</span> is high relative to <span class="math notranslate nohighlight">\(c_t\)</span>.</p>
 <p>Hene, the IMRS (or SDF) is inversely related to the business cycle: it is high during recessions and low during booms.</p>
 <p>Then, our previous equation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f319b125-dc62-48b9-9724-5431f0523a96">
-<span class="eqno">(25)<a class="headerlink" href="#equation-f319b125-dc62-48b9-9724-5431f0523a96" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f7ae530c-da52-4382-9f00-8801e200cd9a">
+<span class="eqno">(25)<a class="headerlink" href="#equation-f7ae530c-da52-4382-9f00-8801e200cd9a" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathbb{E}_t(r_{j,t+1})-r_{f,t+1} = -(1 + r_{f,t+1})Cov_t[\frac{\beta u'(c_{t+1})}{u'(c_t)}, r_{j,t+1}]
 \end{equation}\]</div>
 <p>Means that the risky asset, as the covariance between its return and the IMRS (or SDF) is negative (that is, the asset return is high during booms and low during recessions), it exposes investors to additional aggregate risk. In equilibrium, it must offer a higher expected return to compensate.</p>
@@ -521,8 +522,8 @@ Cov(X,Y) = \mathbb{E}[XY] - \mathbb{E}[X]\mathbb{E}[Y]
 <p>But their paper has inspired an enormous amount of additional research, which continues today, directed at modifying or extending the model to improves its empirical performance.</p>
 <p>To compare the CCAPM’s predictions to US data, Mehra and Prescott began by modifying Lucas’ Tree model to allow for fluctuations in consumption growth as opposed to consumption itself, reflecting the fact in the US, consumption follows an upward trend over time.</p>
 <p>They continued to assume that there is a single representative investor, with an infinite horizon and CRRA utility:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5d657c57-fa57-4e1f-a3c2-92879df555ef">
-<span class="eqno">(26)<a class="headerlink" href="#equation-5d657c57-fa57-4e1f-a3c2-92879df555ef" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ed4ee85d-040d-4519-809a-c1a364a89050">
+<span class="eqno">(26)<a class="headerlink" href="#equation-ed4ee85d-040d-4519-809a-c1a364a89050" title="Permalink to this equation">#</a></span>\[\begin{equation}
 u(c) = \frac{c^{1-\gamma}- 1}{1 - \gamma}
 \end{equation}\]</div>
 <hr class="docutils" />
@@ -575,54 +576,54 @@ u(c) = \frac{c^{1-\gamma}- 1}{1 - \gamma}
 <p><span class="math notranslate nohighlight">\({p}_{t} = \beta \left({d}_{t + 1} + {p}_{t + 1}\right) {c}_{t + 1}^{- \gamma} {c}_{t}^{\gamma}\)</span></p>
 <hr class="docutils" />
 <p>Which can be expressed, with the expectation operator:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d9ceb9f4-b4e4-4a9d-8351-1bd954fc937b">
-<span class="eqno">(27)<a class="headerlink" href="#equation-d9ceb9f4-b4e4-4a9d-8351-1bd954fc937b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-94ade5ce-cd80-4899-942a-f5e7464a18b3">
+<span class="eqno">(27)<a class="headerlink" href="#equation-94ade5ce-cd80-4899-942a-f5e7464a18b3" title="Permalink to this equation">#</a></span>\[\begin{equation}
 p_t = \beta \mathbb{E}_t[(\frac{c_{t+1}}{c_t})^{-\gamma}(d_{t+1}+p_{t+1})]
 \end{equation}\]</div>
 <p>and rewritting with <span class="math notranslate nohighlight">\(G_{t+1} = \frac{c_{t+1}}{c_{t}}\)</span>, the gross rate of consumption growth between <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(t+1\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3b880a61-9e6a-4dc1-b234-175f603c6fdb">
-<span class="eqno">(28)<a class="headerlink" href="#equation-3b880a61-9e6a-4dc1-b234-175f603c6fdb" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c2d85106-45d3-4294-b2ba-84814039b6c7">
+<span class="eqno">(28)<a class="headerlink" href="#equation-c2d85106-45d3-4294-b2ba-84814039b6c7" title="Permalink to this equation">#</a></span>\[\begin{equation}
 p_t = \beta \mathbb{E}_t[G_{t+1}^{-\gamma}(d_{t+1}+p_{t+1})]
 \end{equation}\]</div>
 <section id="log-normality-assumption">
 <h3>Log-Normality Assumption<a class="headerlink" href="#log-normality-assumption" title="Permalink to this headline">#</a></h3>
 <p>Mehras and Prescott assumed that consumption growth <span class="math notranslate nohighlight">\(G_{t+1}\)</span> is log-normally distributed, meaning that the natural logarithm of <span class="math notranslate nohighlight">\(G_{t+1}\)</span> is normally distributed, with:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ac9dc66d-f715-476d-ba47-3fa1f2870258">
-<span class="eqno">(29)<a class="headerlink" href="#equation-ac9dc66d-f715-476d-ba47-3fa1f2870258" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-94d1444b-1f2d-4749-b245-fe05e6caa394">
+<span class="eqno">(29)<a class="headerlink" href="#equation-94d1444b-1f2d-4749-b245-fe05e6caa394" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \ln(G_{t+1}) \sim N(\mu_g, \sigma^2g)
 \end{equation}\]</div>
 <p>They also assumed that <span class="math notranslate nohighlight">\(G_{t+1}\)</span> is idependent and identically distributed (iid) over time, so that the mean <span class="math notranslate nohighlight">\(\mu_g\)</span> and variance <span class="math notranslate nohighlight">\(\sigma^2_g\)</span> of the log of <span class="math notranslate nohighlight">\(G_{t+1}\)</span> are constant over time.</p>
 <p>Let denote <span class="math notranslate nohighlight">\(g_{t+1} = G_{t+1} -1\)</span> the net rate of consumption growth.</p>
 <p>The approximation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-cebc1e2b-f063-48c8-b1fd-158659a1e0c4">
-<span class="eqno">(30)<a class="headerlink" href="#equation-cebc1e2b-f063-48c8-b1fd-158659a1e0c4" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-6c585723-1c2b-40bb-b17b-d56d489c81ae">
+<span class="eqno">(30)<a class="headerlink" href="#equation-6c585723-1c2b-40bb-b17b-d56d489c81ae" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \ln(G_{t+1}) = \ln(1 + g_{t+1}) \approx g_{t+1}
 \end{equation}\]</div>
 <p>show that, since <span class="math notranslate nohighlight">\(G_{t+1}\)</span> is log-normally distributed, <span class="math notranslate nohighlight">\(\ln(G_{t+1})\)</span> is normally distributed, and therefore <span class="math notranslate nohighlight">\(g_{t+1}\)</span> is approximately normally distributed.</p>
 <p>Since, by definition:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a51e59d5-919e-41e6-95af-95cced00b4c9">
-<span class="eqno">(31)<a class="headerlink" href="#equation-a51e59d5-919e-41e6-95af-95cced00b4c9" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f982f36b-a9d5-4e58-b3a1-92c8f6a1882d">
+<span class="eqno">(31)<a class="headerlink" href="#equation-f982f36b-a9d5-4e58-b3a1-92c8f6a1882d" title="Permalink to this equation">#</a></span>\[\begin{equation}
 G_{t+1} = e^{\ln(G_{t+1})}
 \end{equation}\]</div>
 <p>Jensen’s inequality implies that the mean and variance of <span class="math notranslate nohighlight">\(G_{t+1}\)</span> can’t be found simply by calculating <span class="math notranslate nohighlight">\(e^{\mu_g}\)</span> and <span class="math notranslate nohighlight">\(e^{\sigma^2_g}\)</span>.</p>
 <p>In particular, since the exponential function is convex:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-05f611c2-7b03-4a70-a390-6a5b6d550c95">
-<span class="eqno">(32)<a class="headerlink" href="#equation-05f611c2-7b03-4a70-a390-6a5b6d550c95" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4820e0aa-05cf-49b9-b2c0-9b0899faa20b">
+<span class="eqno">(32)<a class="headerlink" href="#equation-4820e0aa-05cf-49b9-b2c0-9b0899faa20b" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathbb{E}[G_{t+1}] &gt; e^{\mathbb{E}[ln(G_{t+1})]} = e^{\mu_g}
 \end{equation}\]</div>
 <p>In particular, if <span class="math notranslate nohighlight">\(G_{t+1}\)</span> is log-normally distributed, with:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-01e8e060-d1f3-43d8-8866-18001c311e55">
-<span class="eqno">(33)<a class="headerlink" href="#equation-01e8e060-d1f3-43d8-8866-18001c311e55" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-1cf84d77-1496-48c7-a672-4c3ba1b2c3d9">
+<span class="eqno">(33)<a class="headerlink" href="#equation-1cf84d77-1496-48c7-a672-4c3ba1b2c3d9" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \ln{G_{t+1}} \sim N(\mu_g, \sigma^2_g)
 \end{equation}\]</div>
 <p>then</p>
-<div class="amsmath math notranslate nohighlight" id="equation-cf23d0ee-98af-4987-b701-d3c976d0c9cd">
-<span class="eqno">(34)<a class="headerlink" href="#equation-cf23d0ee-98af-4987-b701-d3c976d0c9cd" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4966f90d-7b1b-4f33-9524-198cc3a236fc">
+<span class="eqno">(34)<a class="headerlink" href="#equation-4966f90d-7b1b-4f33-9524-198cc3a236fc" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathbb{E}[G_{t+1}] = e^{\mu_g + \frac{1}{2} \sigma^2_g}
 \end{equation}\]</div>
 <p>where the <span class="math notranslate nohighlight">\(\frac{1}{2}\sigma^2_g\)</span> is the “Jensen’s inequality term”. In addition:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a998784b-8099-40c7-a98a-910865e2e690">
-<span class="eqno">(35)<a class="headerlink" href="#equation-a998784b-8099-40c7-a98a-910865e2e690" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0ba295b3-fd21-4606-8203-f122b322fbd8">
+<span class="eqno">(35)<a class="headerlink" href="#equation-0ba295b3-fd21-4606-8203-f122b322fbd8" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathbb{E}[G_{t+1}^{\alpha}] = e^{\alpha\mu_g + \frac{1}{2} \sigma^2_g}
 \end{equation}\]</div>
 <p>for any value of <span class="math notranslate nohighlight">\(\alpha\)</span>.</p>
@@ -631,53 +632,90 @@ G_{t+1} = e^{\ln(G_{t+1})}
 <h3>The Method of Undetermined Coefficients<a class="headerlink" href="#the-method-of-undetermined-coefficients" title="Permalink to this headline">#</a></h3>
 <p>In general the Euler equation has a mathematical structure similar to that of a differential equation. With CRRA utility and iid consumption growth, a guess-and-verify procedure (the method of undetermined coefficients) can be used to find the solution of <span class="math notranslate nohighlight">\(p_t\)</span> in terms of <span class="math notranslate nohighlight">\(c_t\)</span> and <span class="math notranslate nohighlight">\(p_{t+1}\)</span> in terms of <span class="math notranslate nohighlight">\(c_{t+1}\)</span>.</p>
 <p>In particular, you can conjecture that:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-40725680-47a0-4a1f-b10e-7408c1989316">
-<span class="eqno">(36)<a class="headerlink" href="#equation-40725680-47a0-4a1f-b10e-7408c1989316" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-617d6534-262e-407c-863b-6b61bf6f32e0">
+<span class="eqno">(36)<a class="headerlink" href="#equation-617d6534-262e-407c-863b-6b61bf6f32e0" title="Permalink to this equation">#</a></span>\[\begin{equation}
 p_t = vc_t
 \end{equation}\]</div>
 <p>and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9aaad77e-54b9-4cb2-b174-0bdc77225b78">
-<span class="eqno">(37)<a class="headerlink" href="#equation-9aaad77e-54b9-4cb2-b174-0bdc77225b78" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f83d2d28-a0f2-47bc-b700-48bcac73d175">
+<span class="eqno">(37)<a class="headerlink" href="#equation-f83d2d28-a0f2-47bc-b700-48bcac73d175" title="Permalink to this equation">#</a></span>\[\begin{equation}
 p_{t+1} = vc_{t+1}
 \end{equation}\]</div>
 <p>Recall that in equilibrium, <span class="math notranslate nohighlight">\(c_t = d_t\)</span>, thus we can also write:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-82f0aa58-df7b-4c42-8f95-6233092463fc">
-<span class="eqno">(38)<a class="headerlink" href="#equation-82f0aa58-df7b-4c42-8f95-6233092463fc" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-15b48560-4664-4b0d-b2ce-45cd1e1d9367">
+<span class="eqno">(38)<a class="headerlink" href="#equation-15b48560-4664-4b0d-b2ce-45cd1e1d9367" title="Permalink to this equation">#</a></span>\[\begin{equation}
 p_t = vd_t
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-f59d821d-b14a-4286-90d9-a6e103f57340">
-<span class="eqno">(39)<a class="headerlink" href="#equation-f59d821d-b14a-4286-90d9-a6e103f57340" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8aa6f7b4-95a3-4606-8aeb-db19de6d5530">
+<span class="eqno">(39)<a class="headerlink" href="#equation-8aa6f7b4-95a3-4606-8aeb-db19de6d5530" title="Permalink to this equation">#</a></span>\[\begin{equation}
 p_{t+1} = vd_{t+1}
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(v\)</span> is a constant to be determined.</p>
 <p>Substitute these guesses into the Euler equation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a4a4efe7-890c-4b78-9a0a-056a17e6b972">
-<span class="eqno">(40)<a class="headerlink" href="#equation-a4a4efe7-890c-4b78-9a0a-056a17e6b972" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b2567a49-3e36-4469-b601-7739fc801351">
+<span class="eqno">(40)<a class="headerlink" href="#equation-b2567a49-3e36-4469-b601-7739fc801351" title="Permalink to this equation">#</a></span>\[\begin{equation}
 p_t = \beta \mathbb{E}_t[G_{t+1}^{-\gamma}(d_{t+1}-p_{t+1})]
 \end{equation}\]</div>
 <p>to obtain:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-491ce6ea-4877-4fa2-938a-da0c92f46896">
-<span class="eqno">(41)<a class="headerlink" href="#equation-491ce6ea-4877-4fa2-938a-da0c92f46896" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-6386aea3-6703-496e-bff8-ae3d2f5d8828">
+<span class="eqno">(41)<a class="headerlink" href="#equation-6386aea3-6703-496e-bff8-ae3d2f5d8828" title="Permalink to this equation">#</a></span>\[\begin{equation}
 vc_t = \beta \mathbb{E}_t[G_{t+1}^{-\gamma}(c_{t+1} + v c_{t+1})]
 \end{equation}\]</div>
 <p>implies:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-26dc4841-f06f-4d3b-9d5b-2d849285d09a">
-<span class="eqno">(42)<a class="headerlink" href="#equation-26dc4841-f06f-4d3b-9d5b-2d849285d09a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-75587da7-dcdf-49fa-a165-647261c05771">
+<span class="eqno">(42)<a class="headerlink" href="#equation-75587da7-dcdf-49fa-a165-647261c05771" title="Permalink to this equation">#</a></span>\[\begin{equation}
 v = \beta \mathbb{E}_t[G_{t+1}^{-\gamma}(1 + v)(\frac{c_{t+1}}{c_t})]
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-dd82fd5d-1374-4e59-8ef8-c98559784a5e">
-<span class="eqno">(43)<a class="headerlink" href="#equation-dd82fd5d-1374-4e59-8ef8-c98559784a5e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-dfe83c3d-7534-45d2-a44b-5c16483ce378">
+<span class="eqno">(43)<a class="headerlink" href="#equation-dfe83c3d-7534-45d2-a44b-5c16483ce378" title="Permalink to this equation">#</a></span>\[\begin{equation}
 v = (1 + v) \beta * E_t (G_{t+1}^{1 - \gamma})
 \end{equation}\]</div>
 <p>and hence:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-32ce8834-7457-476d-aa8d-7405a23c6417">
-<span class="eqno">(44)<a class="headerlink" href="#equation-32ce8834-7457-476d-aa8d-7405a23c6417" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-df2da9c2-8506-44f8-8b24-5aa986ce2fe1">
+<span class="eqno">(44)<a class="headerlink" href="#equation-df2da9c2-8506-44f8-8b24-5aa986ce2fe1" title="Permalink to this equation">#</a></span>\[\begin{equation}
 v = \frac{\beta \mathbb{E}_t(G_{t+1}^{1 - \gamma})}{1 - \beta  \mathbb{E}_t(G_{t+1}^{1 - \gamma})}
 \end{equation}\]</div>
 <p>which is constant since <span class="math notranslate nohighlight">\(\mathbb{E}_t(G_{t+1}^{1-\gamma})\)</span> is constant over time when <span class="math notranslate nohighlight">\(G_{t+1}\)</span> is iid.</p>
 </section>
 <section id="id2">
 <h3>Pricing the Risk-Free Asset<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
+<p>Now we are ready to address the question of how well the CCAPM fits the facts.</p>
+<p>Consider, first, the risk-free rate of return <span class="math notranslate nohighlight">\(r_{f,t+1}\)</span>, which satisfies:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-ecb720f9-8af1-4d3a-b1c3-e54a4b7770a5">
+<span class="eqno">(45)<a class="headerlink" href="#equation-ecb720f9-8af1-4d3a-b1c3-e54a4b7770a5" title="Permalink to this equation">#</a></span>\[\begin{equation}
+1 = \beta \mathbb{E}_t[G_{t+1}^{-\gamma}(1 + r_{f,t+1})]
+\end{equation}\]</div>
+<p>or</p>
+<div class="amsmath math notranslate nohighlight" id="equation-c41eb8d2-e4f1-45a2-919a-a259ec6402a9">
+<span class="eqno">(46)<a class="headerlink" href="#equation-c41eb8d2-e4f1-45a2-919a-a259ec6402a9" title="Permalink to this equation">#</a></span>\[\begin{equation}
+1 + r_{f,t+1} = \frac{1}{\beta \mathbb{E}_t(G_{t+1}^{-\gamma})}
+\end{equation}\]</div>
+<p>Since <span class="math notranslate nohighlight">\(\ln(G_{t+1}) \sim N(\mu_g, \sigma^2_g)\)</span>:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-c1ac8317-6a50-4b9c-8c2b-9453db628ed9">
+<span class="eqno">(47)<a class="headerlink" href="#equation-c1ac8317-6a50-4b9c-8c2b-9453db628ed9" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\mathbb{E}[G_{t+1}^{\alpha}] = e^{\alpha \mu_g + \frac{1}{2}\alpha^2\sigma^2_g}
+\end{equation}\]</div>
+<p>for any value of <span class="math notranslate nohighlight">\(\alpha\)</span>. In particular:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-8a92175c-ae63-4abc-9d49-e366ec7f67cc">
+<span class="eqno">(48)<a class="headerlink" href="#equation-8a92175c-ae63-4abc-9d49-e366ec7f67cc" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\mathbb{E}[G_{t+1}^{-\gamma}] = e^{-\gamma \mu_g + \frac{1}{2} \gamma^2 \sigma^2_g}
+\end{equation}\]</div>
+<p>Now we use the fact that:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-14a55940-c7db-48a2-ae4a-95a09c912080">
+<span class="eqno">(49)<a class="headerlink" href="#equation-14a55940-c7db-48a2-ae4a-95a09c912080" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\frac{1}{e^x} = e^{-x}
+\end{equation}\]</div>
+<p>To rewrite this last equation as:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-db848564-2ef3-42ae-8042-55b814266623">
+<span class="eqno">(50)<a class="headerlink" href="#equation-db848564-2ef3-42ae-8042-55b814266623" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\frac{1}{\mathbb{E}[G_{t+1}^{-\gamma}]} = e^{\gamma \mu_g - \frac{1}{2}\gamma^2\sigma^2_g}
+\end{equation}\]</div>
+<p>We substitute this last equation into our previous <span class="math notranslate nohighlight">\(1 + r_{f,t+1} = \frac{1}{\beta \mathbb{E}_t[G_{t+1}^{-\gamma}]}\)</span> to obtain:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-12c470e9-ed7d-4f8d-9c1d-4d114b3d32c0">
+<span class="eqno">(51)<a class="headerlink" href="#equation-12c470e9-ed7d-4f8d-9c1d-4d114b3d32c0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+1 + r_{f,t+1} = (\frac{1}{\beta})e^{\gamma \mu_g - \frac{1}{2}\gamma^2 \sigma^2_g}
+\end{equation}\]</div>
+<p>This equation shows specifically how, according to the model, the risk-free rate depends on the preference parameters <span class="math notranslate nohighlight">\(\beta\)</span> and <span class="math notranslate nohighlight">\(\gamma\)</span> and the mean and variance <span class="math notranslate nohighlight">\(\mu_g\)</span> and <span class="math notranslate nohighlight">\(\sigma^2_g\)</span> of log consumption growth.</p>
 </section>
 <section id="id3">
 <h3>Pricing a Risky Asset<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
@@ -694,6 +732,24 @@ v = \frac{\beta \mathbb{E}_t(G_{t+1}^{1 - \gamma})}{1 - \beta  \mathbb{E}_t(G_{t
                 <footer class="bd-footer-article">
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">ESG Risk Factor Modelling with Python</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="recursivepreferences.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Recursive Preferences and Long-Run Risks</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               

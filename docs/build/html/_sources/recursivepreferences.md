@@ -1,4 +1,4 @@
-# Recursive Preferences and Long-Run Risk
+# Recursive Preferences and Long-Run Risks
 
 Use Ec2021_Lecture9r3 to explain it
 
