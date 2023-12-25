@@ -232,7 +232,7 @@ which implies:
 and then:
 
 \begin{equation}
-\mathbb{E}_t(r_{j,t+1})-r_{f,t+1} = -(1 + r_{f,t+1})Cov_t[\frac{\betau'(c_{t+1})}{u'(c_t)}, r_{j,t+1}]
+\mathbb{E}_t(r_{j,t+1})-r_{f,t+1} = -(1 + r_{f,t+1})Cov_t[\frac{\beta u'(c_{t+1})}{u'(c_t)}, r_{j,t+1}]
 \end{equation}
 
 This equation look a lot like the equations from the CAPM. In fact, is has similar implications: The expected return on asset $j$ will be above the risk-free rate if the covariance between the actual return on asset $j$ and the repreentative investor's IMRS (or SDF) is negative.
@@ -250,7 +250,7 @@ Hene, the IMRS (or SDF) is inversely related to the business cycle: it is high d
 Then, our previous equation:
 
 \begin{equation}
-\mathbb{E}_t(r_{j,t+1})-r_{f,t+1} = -(1 + r_{f,t+1})Cov_t[\frac{\betau'(c_{t+1})}{u'(c_t)}, r_{j,t+1}]
+\mathbb{E}_t(r_{j,t+1})-r_{f,t+1} = -(1 + r_{f,t+1})Cov_t[\frac{\beta u'(c_{t+1})}{u'(c_t)}, r_{j,t+1}]
 \end{equation}
 
 Means that the risky asset, as the covariance between its return and the IMRS (or SDF) is negative (that is, the asset return is high during booms and low during recessions), it exposes investors to additional aggregate risk. In equilibrium, it must offer a higher expected return to compensate.
