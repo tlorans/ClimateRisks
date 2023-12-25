@@ -1,4 +1,4 @@
-# Part 2: Dynamic Asset Pricing
+# The Consumption CAPM
 
 REWRITE IT USING NOTATIONS AND EXPLANATIONS from Ch12 slides
 

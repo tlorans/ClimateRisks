@@ -17,7 +17,7 @@ This course is under heavy development
 
 part1modellertoolkit
 introrecursivemethods
-part2assetpricing
+ccapm
 recursivepreferences
 longrunrisks
 references
