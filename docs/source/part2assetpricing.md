@@ -350,3 +350,57 @@ and rewritting with $G_{t+1} = \frac{c_{t+1}}{c_{t}}$, the gross rate of consump
 \begin{equation}
 p_t = \beta \mathbb{E}_t[G_{t+1}^{-\gamma}(d_{t+1}+p_{t+1})]
 \end{equation}
+
+### Log-Normality Assumption
+
+Mehras and Prescott assumed that consumption growth $G_{t+1}$ is log-normally distributed, meaning that the natural logarithm of $G_{t+1}$ is normally distributed, with:
+
+\begin{equation}
+\ln(G_{t+1}) \sim N(\mu_g, \sigma^2g)
+\end{equation}
+
+They also assumed that $G_{t+1}$ is idependent and identically distributed (iid) over time, so that the mean $\mu_g$ and variance $\sigma^2_g$ of the log of $G_{t+1}$ are constant over time.
+
+Let denote $g_{t+1} = G_{t+1} -1$ the net rate of consumption growth.
+
+The approximation:
+
+\begin{equation}
+\ln(G_{t+1}) = \ln(1 + g_{t+1}) \approx g_{t+1}
+\end{equation}
+
+show that, since $G_{t+1}$ is log-normally distributed, $\ln(G_{t+1})$ is normally distributed, and therefore $g_{t+1}$ is approximately normally distributed.
+
+Since, by definition:
+
+\begin{equation}
+G_{t+1} = e^{\ln(G_{t+1})}
+\end{equation}
+
+Jensen's inequality implies that the mean and variance of $G_{t+1}$ can't be found simply by calculating $e^{\mu_g}$ and $e^{\sigma^2_g}$.
+
+In particular, since the exponential function is convex:
+
+\begin{equation}
+\mathbb{E}[G_{t+1}] > e^{\mathbb{E}[ln(G_{t+1})]} = e^{\mu_g}
+\end{equation}
+
+In particular, if $G_{t+1}$ is log-normally distributed, with:
+
+\begin{equation}
+\ln{G_{t+1}} \sim N(\mu_g, \sigma^2_g)
+\end{equation}
+
+then
+
+\begin{equation}
+\mathbb{E}[G_{t+1}] = e^{\mu_g + \frac{1}{2} \sigma^2_g}
+\end{equation}
+
+where the $\frac{1}{2}\sigma^2_g$ is the "Jensen's inequality term". In addition:
+
+\begin{equation}
+\mathbb{E}[G_{t+1}^{\alpha}] = e^{\alpha\mu_g + \frac{1}{2} \sigma^2_g}
+\end{equation}
+
+for any value of $\alpha$.
