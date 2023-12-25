@@ -571,3 +571,21 @@ Using $e^x e^y = e^{x+y}$, it simplifies to:
 \begin{equation}
 1 + \mathbb{E}_t[r_{e,t+1}] = (\frac{1}{\beta})e^{\gamma \mu_g + \frac{1}{2}\gamma^2\sigma^2_g}e^{\gamma \sigma^2_g}
 \end{equation}
+
+To interpret this result, recall that:
+
+\begin{equation}
+1 + r_{f,t+1} = (\frac{1}{\beta})e^{\gamma \mu_g - \frac{1}{2}\gamma^2\sigma^2_g}
+\end{equation}
+
+So we can combine both solutions to obtain something simpler:
+
+\begin{equation}
+1 + \mathbb{E}_t[r_{e,t+1}] = (1 + r_{f,t+1})e^{\gamma \sigma^2_g}
+\end{equation}
+
+implying:
+
+\begin{equation}
+\frac{1 + \mathbb{E}_t[r_{e,t+1}]}{1 + r_{f,t+1}} = e^{\gamma \sigma^2_g} > 1
+\end{equation}
