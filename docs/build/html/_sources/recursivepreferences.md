@@ -1,1 +1,1 @@
-# Epstein Zin Preferences
+# Recursive Preferences
