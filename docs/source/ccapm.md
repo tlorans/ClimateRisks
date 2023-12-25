@@ -513,3 +513,61 @@ We substitute this last equation into our previous $1 + r_{f,t+1} = \frac{1}{\be
 This equation shows specifically how, according to the model, the risk-free rate depends on the preference parameters $\beta$ and $\gamma$ and the mean and variance $\mu_g$ and $\sigma^2_g$ of log consumption growth.
 
 ### Pricing a Risky Asset
+
+We now consider the return $r_{e,t+1}$ on stocks (equities) which the CCAPM associates with the retunr on trees as:
+
+\begin{equation}
+1 + r_{e,t+1} = \frac{d_{t+1}+p_{t+1}}{p_t} = \frac{c_{t+1}+v c_{t+1}}{vc_{t+1}} = (\frac{1}{v} + 1)G_{t+1}
+\end{equation}
+
+implies:
+
+\begin{equation}
+\mathbb{E}_t(r_{e,t+1}) = (\frac{1}{v} +1) \mathbb{E}_t(G_{t+1}) - 1
+\end{equation}
+
+Using $v = \frac{\beta \mathbb{E}_t[G_{t+1}^{1-\gamma}]}{1 - \beta \mathbb{E}_t[G_{t+1}^{1-\gamma}]}$, we have:
+
+\begin{equation}
+\frac{1}{v} + 1 = \frac{1 - \beta \mathbb{E}_t[G_{t+1}^{1-\gamma}]}{\beta \mathbb{E}_t[G_{t+1}^{1-\gamma}]} + 1 = \frac{1}{\beta \mathbb{E}_t[G_{t+1}^{1 - \gamma}]}
+\end{equation}
+
+and hence:
+
+\begin{equation}
+\mathbb{E}_t[r_{e,t+1}] = (\frac{1}{v} + 1) \mathbb{E}_t[G_{t+1}] - 1
+\end{equation}
+
+implies:
+
+\begin{equation}
+1 + \mathbb{E}_t[r_{e,t+1}] = \frac{\mathbb{E}_t[G_{t+1}]}{\beta \mathbb{E}_t[G_{t+1}^{1-\gamma}]}
+\end{equation}
+
+Since $\ln(G_{t+1}) \sim N(\mu_g, \sigma^2_g)$, then we transform the numerator as:
+
+\begin{equation}
+\mathbb{E}_t[G_{t+1}] = e^{\mu_g + \frac{1}{2}\sigma^2_g}
+\end{equation}
+
+and in the denominator we have:
+
+\begin{equation}
+\mathbb{E}_t[G_{t+1}^{1 - \gamma}] = e^{(1 - \gamma) \mu_g + \frac{1}{2}(1 - \gamma)^2 \sigma^2_g}
+\end{equation}
+
+Therefore we have:
+
+\begin{equation}
+1 + \mathbb{E}_t[r_{e,t+1}] = \frac{e^{\mu_g + \frac{1}{2}\sigma^2_g}}{\beta e^{(1 - \gamma) \mu_g + \frac{1}{2}(1 - \gamma)^2 \sigma^2_g}}
+\end{equation}
+
+\begin{equation}
+= (\frac{1}{\beta})e^{\mu_g + \frac{1}{2}\sigma^2_g}e^{-(1 - \gamma)\mu_g - \frac{1}{2}(1 - \gamma)^2 \sigma^2_g}
+\end{equation}
+
+Using $e^x e^y = e^{x+y}$, it simplifies to:
+
+\begin{equation}
+1 + \mathbb{E}_t[r_{e,t+1}] = (\frac{1}{\beta})e^{\gamma \mu_g + \frac{1}{2}\gamma^2\sigma^2_g}e^{\gamma \sigma^2_g}
+\end{equation}
