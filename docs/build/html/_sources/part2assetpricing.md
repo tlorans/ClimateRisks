@@ -263,3 +263,90 @@ Like the traditional CAPM, the CCAPM implies that assets offer higher expected r
 
 
 ## Testing the CCAPM
+
+A famous paper that evaluated CCAPM in terms of its ability to account for averager returns on stocks and bonds in the US is Rajnish Mehra and Edward Prescott: "The Equity Premium: A Puzzle" (1985). 
+
+Mehra and Prescott's results are strikingly negative, in that they show that the CCAPM has great difficulty in matching even the most basic aspects of the data.
+
+But their paper has inspired an enormous amount of additional research, which continues today, directed at modifying or extending the model to improves its empirical performance.
+
+To compare the CCAPM's predictions to US data, Mehra and Prescott began by modifying Lucas' Tree model to allow for fluctuations in consumption growth as opposed to consumption itself, reflecting the fact in the US, consumption follows an upward trend over time.
+
+They continued to assume that there is a single representative investor, with an infinite horizon and CRRA utility:
+
+\begin{equation}
+u(c) = \frac{c^{1-\gamma}- 1}{1 - \gamma}
+\end{equation}
+
+
+---
+**NOTE**
+
+We have previously worked without assuming a specific form to the utility function. 
+
+Let's implement the corresponding Bellman's equation:
+
+```Python
+import sympy as smp
+
+t = smp.symbols('t', cls = smp.Idx)
+
+Z = smp.IndexedBase('z') # Shares
+P = smp.IndexedBase('p') # price of shares
+C = smp.IndexedBase('c') # consumption
+D = smp.IndexedBase('d') # dividends
+
+beta = smp.symbols('beta')
+gamma = smp.symbols('gamma') # relative risk aversion
+
+resource_constraint = smp.Eq(Z[t+1]*P[t] + C[t], Z[t]*D[t] + Z[t]*P[t])
+
+u = smp.Function('u')(C[t]) # utility function
+
+CRRA = smp.Eq(u,(C[t]**(1 - gamma)-1)/(1 - gamma))
+
+V = smp.Function('V')
+
+bellman = smp.Eq(V(Z[t], D[t]), CRRA.rhs + beta * V(Z[t+1], D[t+1]))
+resource_constraint = smp.Eq(C[t], smp.solve(resource_constraint, C[t])[0])
+bellman = bellman.subs(resource_constraint.lhs, resource_constraint.rhs)
+```
+$V{\left({z}_{t},{d}_{t} \right)} = \beta V{\left({z}_{t + 1},{d}_{t + 1} \right)} + \frac{\left({d}_{t} {z}_{t} - {p}_{t} {z}_{t + 1} + {p}_{t} {z}_{t}\right)^{1 - \gamma} - 1}{1 - \gamma}
+$
+
+We have the following first-order condition with respect to $z_{t+1}$:
+
+```Python
+FOC = smp.Eq(smp.diff(bellman.rhs, Z[t+1]),0).subs(resource_constraint.rhs, resource_constraint.lhs).simplify()
+```
+$\beta \frac{\partial}{\partial {z}_{t + 1}} V{\left({z}_{t + 1},{d}_{t + 1} \right)} - \frac{{c}_{t}^{1 - \gamma} {p}_{t}}{{c}_{t}} = 0$
+
+The envelope condition is:
+
+```Python
+BS = smp.Eq(smp.diff(V(Z[t],D[t]), Z[t]), smp.diff(bellman.rhs, Z[t])).subs(resource_constraint.rhs, resource_constraint.lhs).simplify()
+BS = BS.subs(t, t+1)
+```
+$\frac{\partial}{\partial {z}_{t + 1}} V{\left({z}_{t + 1},{d}_{t + 1} \right)} = \left({d}_{t + 1} + {p}_{t + 1}\right) {c}_{t + 1}^{- \gamma}$
+
+Plugging it into the initial FOC and rearranging:
+
+```Python
+Euler = FOC.subs(BS.lhs, BS.rhs).simplify()
+Euler = smp.Eq(P[t], smp.solve(Euler, P[t])[0])
+```
+${p}_{t} = \beta \left({d}_{t + 1} + {p}_{t + 1}\right) {c}_{t + 1}^{- \gamma} {c}_{t}^{\gamma}$
+
+---
+
+Which can be expressed, with the expectation operator:
+
+\begin{equation}
+p_t = \beta \mathbb{E}_t[(\frac{c_{t+1}}{c_t})^{-\gamma}(d_{t+1}+p_{t+1})]
+\end{equation}
+
+and rewritting with $G_{t+1} = \frac{c_{t+1}}{c_{t}}$, the gross rate of consumption growth between $t$ and $t+1$:
+
+\begin{equation}
+p_t = \beta \mathbb{E}_t[G_{t+1}^{-\gamma}(d_{t+1}+p_{t+1})]
+\end{equation}
