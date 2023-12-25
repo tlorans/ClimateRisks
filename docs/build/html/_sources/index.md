@@ -17,5 +17,6 @@ This course is under heavy development
 
 ccapm
 recursivepreferences
+esgdynamicequilibrium
 references
 ```
