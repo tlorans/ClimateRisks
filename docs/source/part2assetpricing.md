@@ -178,8 +178,88 @@ implies:
 \frac{1}{1 + r_{f,t+1}} = \mathbb{E}_t[\frac{\beta u'(c_{t+1})}{u'(c_t)}]
 \end{equation}
 
+### Pricing a Risky Asset
 
+Next, consider a risky asset. The Euler equation can be rewritten:
 
+\begin{equation}
+1 = \mathbb{E}_t[(\frac{\beta u'(c_{t+1})}{u'(c_t)})(1 + r_{j,t+1})]
+\end{equation}
+
+But what does this equation imply about $\mathbb{E}_t(r_{j,t+1}))$, the expected return on the risky asset?
+
+---
+**NOTE**
+
+Recall that for any two random variables X and Y with $\mathbb{E}[X] = \mu_X$ and $\mathbb{E}[Y] = \mu_Y$, the covariance between $X$ and $Y$ is defined as:
+
+\begin{equation}
+Cov(X,Y) = \mathbb{E}[(X - \mu_x)(Y - \mu_Y)]
+\end{equation}
+
+This definition implies:
+
+\begin{equation}
+Cov(X,Y) = \mathbb{E}[XY] - \mathbb{E}[X]\mathbb{E}[Y]
+\end{equation}
+
+Or, equivalently:
+
+\begin{equation}
+\mathbb{E}[XY] = \mathbb{E}[X]\mathbb{E}[Y] + Cov(X,Y)
+\end{equation}
+
+---
+
+With the simple definition of the expression of the expectation of a product of two random variables, the Euler equation can be rewritten as:
+
+\begin{equation}
+1 = \mathbb{E}[\frac{\beta u'(c_{t+1})}{u'(c_t)}] \mathbb{E}_t[1 + r_{j,t+1}] + Cov_t[\frac{\beta u'(c_{t+1})}{u'(c_t)}, r_{j,t+1}]
+\end{equation}
+
+Combining this equation with the price of a risk-free asset $\frac{1}{1 + r_{f,t+1}} = \mathbb{E}_t[\frac{\beta u'(c_{t+1})}{u'(c_t)}]$ we obtain:
+
+\begin{equation}
+1 = \frac{E_t(1 + r_{j,t+1})}{1 + r_{f,t+1}} + Cov_t[\frac{\beta u'(c_{t+1})}{u'(c_t)}, r_{j,t+1}]
+\end{equation}
+
+which implies:
+
+\begin{equation}
+1 + r_{f,t+1} = 1 + \mathbb{E}_t[r_{j,t+1}] + ( 1 + r_{f,t+1})Cov_t[\frac{\beta u'(c_{t+1})}{u'(c_t)}, r_{j,t+1}]
+\end{equation}
+
+and then:
+
+\begin{equation}
+\mathbb{E}_t(r_{j,t+1})-r_{f,t+1} = -(1 + r_{f,t+1})Cov_t[\frac{\betau'(c_{t+1})}{u'(c_t)}, r_{j,t+1}]
+\end{equation}
+
+This equation look a lot like the equations from the CAPM. In fact, is has similar implications: The expected return on asset $j$ will be above the risk-free rate if the covariance between the actual return on asset $j$ and the repreentative investor's IMRS (or SDF) is negative.
+
+If the utility function is concave, the investor's IMRS (or the SDF):
+
+\begin{equation}
+\frac{\beta u'(c_{t+1})}{u'(c_t)}
+\end{equation}
+
+will be high if $c_{t+1}$ is low relative to $c_t$ and low if $c_{t+1}$ is high relative to $c_t$.
+
+Hene, the IMRS (or SDF) is inversely related to the business cycle: it is high during recessions and low during booms.
+
+Then, our previous equation:
+
+\begin{equation}
+\mathbb{E}_t(r_{j,t+1})-r_{f,t+1} = -(1 + r_{f,t+1})Cov_t[\frac{\betau'(c_{t+1})}{u'(c_t)}, r_{j,t+1}]
+\end{equation}
+
+Means that the risky asset, as the covariance between its return and the IMRS (or SDF) is negative (that is, the asset return is high during booms and low during recessions), it exposes investors to additional aggregate risk. In equilibrium, it must offer a higher expected return to compensate.
+
+Conversely, the expected return on aset $j$ will be below the risk-free rate if the covariance between the actual return on asset $j$ and the investor's IMRS is positive: that is, if the asset return is high during recessions and low during booms.
+
+This asset insures investors against aggregate risk. Its low expected return reflects the premium that investors are willing to pay to obtain this insurance.
+
+Like the traditional CAPM, the CCAPM implies that assets offer higher expected returns only when they expose investors to additional aggregate risk. The CCAPM goes further, by explicitly linking aggregate risk to business cycle.
 
 
 ## Testing the CCAPM
