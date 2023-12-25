@@ -138,6 +138,42 @@ The Euler equation is also saying that the agents will find it optimal to decrea
 HOW TO PRICE RISK FREE, RISKY RETURNS
 EULER EQUATION TO SDF
 
+Although the Tree Model assumes there is only one asset, we can turn it into a more general model by introducing additional assets.
+
+Let $R_{j,t+1}$ denote the gross return on asset $j$ between $t$ and $t+1$ and let $r_{j,t+1}$ be the associated net return, so that:
+
+\begin{equation}
+1 + r_{j,t+1} = R_{j,t+1}
+\end{equation}
+
+For shares in the tree, the gross return is:
+
+\begin{equation}
+R_{t+1} = \frac{d_{t+1} + p_{t+1}}{p_t}
+\end{equation}
+
+and the net return:
+
+\begin{equation}
+r_{t+1} = \frac{d_{t+1} + p_{t+1} - p_t}{p_t}
+\end{equation}
+
+More generally, our previously derived Euler equation implies that the return on any asset $j$ must satisfy:
+
+\begin{equation}
+u'(c_t) = \beta \mathbb{E}_t[u'(c_{t+1})R_{j,t+1}] = \beta \mathbb{E}_t[u'(c_{t+1})(1 + r_{j,t+1})]
+\end{equation}
+
+### Pricing the Risk-Free Asset
+
+Consider first a riskless asset, like a bank account or a short-term Government bond, with return $r_{f,t+1}$ that is known at $t$. For this asset, the Euler equation:
+
+\begin{equation}
+u'(c_t) = \beta \mathbb{E}_t[u'(c_{t+1})R_{j,t+1}] = \beta \mathbb{E}_t[u'(c_{t+1})(1 + r_{f,t+1})]
+\end{equation}
+
+
+
 
 
 ## Testing the CCAPM
