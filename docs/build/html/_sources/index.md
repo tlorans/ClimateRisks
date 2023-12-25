@@ -13,12 +13,9 @@ This course is under heavy development
 
 ```{toctree}
 :caption: 'Contents:'
-:maxdepth: 1
+:maxdepth: 3
 
-part1modellertoolkit
-introrecursivemethods
 ccapm
 recursivepreferences
-longrunrisks
 references
 ```
