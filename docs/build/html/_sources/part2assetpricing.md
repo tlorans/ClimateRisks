@@ -445,3 +445,25 @@ to obtain:
 \begin{equation}
 vc_t = \beta \mathbb{E}_t[G_{t+1}^{-\gamma}(c_{t+1} + v c_{t+1})]
 \end{equation}
+
+implies:
+
+\begin{equation}
+v = \beta \mathbb{E}_t[G_{t+1}^{-\gamma}(1 + v)(\frac{c_{t+1}}{c_t})]
+\end{equation}
+
+\begin{equation}
+v = (1 + v) \beta * E_t (G_{t+1}^{1 - \gamma})
+\end{equation}
+
+and hence:
+
+\begin{equation}
+v = \frac{\beta \mathbb{E}_t(G_{t+1}^{1 - \gamma})}{1 - \beta  \mathbb{E}_t(G_{t+1}^{1 - \gamma})}
+\end{equation}
+
+which is constant since $\mathbb{E}_t(G_{t+1}^{1-\gamma})$ is constant over time when $G_{t+1}$ is iid.
+
+### Pricing the Risk-Free Asset 
+
+### Pricing a Risky Asset
