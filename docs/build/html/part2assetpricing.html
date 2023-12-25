@@ -47,7 +47,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'part2assetpricing';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="The Equity Premium Puzzle" href="equitypremium.html" />
+    <link rel="next" title="Recursive Preferences" href="recursivepreferences.html" />
     <link rel="prev" title="Recursive Methods" href="introrecursivemethods.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
@@ -130,8 +130,7 @@
 <li class="toctree-l1"><a class="reference internal" href="part1modellertoolkit.html">Part 1: Modeller Toolkit</a></li>
 <li class="toctree-l1"><a class="reference internal" href="introrecursivemethods.html">Recursive Methods</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Part 2: Dynamic Asset Pricing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="equitypremium.html">The Equity Premium Puzzle</a></li>
-<li class="toctree-l1"><a class="reference internal" href="recursivepreferences.html">Epstein Zin Preferences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recursivepreferences.html">Recursive Preferences</a></li>
 <li class="toctree-l1"><a class="reference internal" href="longrunrisks.html">Long Run Risk</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 </ul>
@@ -315,46 +314,46 @@ document.write(`
 <p>Due to the assumption that all agents are identical with respecto to both preferences and enowments, we can work with a representative agent. The agents’ economic activity in each period consists of trading shares, where a share represents a claim to the future stream of dividends.</p>
 <p>We let <span class="math notranslate nohighlight">\(p_{i,t}\)</span> be the price of tree <span class="math notranslate nohighlight">\(i\)</span> in period <span class="math notranslate nohighlight">\(t\)</span> (i.e., of a claim to the entire income stream <span class="math notranslate nohighlight">\(\{d_{i,t+\tau}\}^{\infty}_{\tau = 0}\)</span>), measured in terms of the consumption commodity, and <span class="math notranslate nohighlight">\(z_{i,t}\)</span> the quantity of tree <span class="math notranslate nohighlight">\(i\)</span> that the agent holds between <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(t+1\)</span>.</p>
 <p>Our aim is to find <span class="math notranslate nohighlight">\(p_{i,t}\)</span> as a function of the stochastic payofss, <span class="math notranslate nohighlight">\(\{d_{i,t+\tau}\}^{\infty}_{\tau = 0}\)</span>. Stated formally, the representative consume chooses <span class="math notranslate nohighlight">\(\{z_{1,t}, z_{2,t},...,z_{N,t};c_t\}^{\infty}_{t=0}\)</span> to maximize:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3a55a5fc-26bd-469e-8a1c-b33bc23594b5">
-<span class="eqno">(1)<a class="headerlink" href="#equation-3a55a5fc-26bd-469e-8a1c-b33bc23594b5" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a37b0b57-a326-4dac-aa51-3d3d3497cd4a">
+<span class="eqno">(1)<a class="headerlink" href="#equation-a37b0b57-a326-4dac-aa51-3d3d3497cd4a" title="Permalink to this equation">#</a></span>\[\begin{equation}
 E_t \sum^{\infty}_{s = t} \beta^{s-t}u(c_s)
 \end{equation}\]</div>
 <p>subjet to the budget constraint:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-93982735-32ea-462a-aa80-0560f3e4a7fa">
-<span class="eqno">(2)<a class="headerlink" href="#equation-93982735-32ea-462a-aa80-0560f3e4a7fa" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-eea5d12a-5b46-4c98-ab46-a15fe1a7ed2a">
+<span class="eqno">(2)<a class="headerlink" href="#equation-eea5d12a-5b46-4c98-ab46-a15fe1a7ed2a" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sum^{N}_{i=0}z_{i,t+1}p_{i,t} + c_t \leq \sum^{N}_{i=0}z_{i,t}d_{i,t}+\sum^{N}_{i=0}z_{i,t}p_{i,t}
 \end{equation}\]</div>
 <p>The budget constraint has the following interpretation: the ownership of share <span class="math notranslate nohighlight">\(i\)</span> at the beginning of period <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(z_{i,t}\)</span>, entitles the owner to receive dividend <span class="math notranslate nohighlight">\(d_{i,t}\)</span> in period <span class="math notranslate nohighlight">\(t\)</span> and to have the right to sell the ree at price <span class="math notranslate nohighlight">\(p_{i,t}\)</span> in period <span class="math notranslate nohighlight">\(t\)</span>. Thus, the agent’s source of funds in period <span class="math notranslate nohighlight">\(t\)</span> are given by the sum of shares that the agent holds times their respective dividents <span class="math notranslate nohighlight">\(\sum^{N}_{i=0}z_{i,t}d_{i,t}\)</span>, plus the revenue of the sale of the shares at the prevailing prices <span class="math notranslate nohighlight">\(\sum^{N}_{i=0}z_{i,t}p_{i,t}\)</span>.
 On the left hand side of the inequality we have got the agent’s use of funds, saying that the proceedings are either consumed or spent for the number of shares the agent wants to hold in period <span class="math notranslate nohighlight">\(t+1\)</span>.</p>
 <p>For a market equilibrium, the quantities of each tree demanded must equal to the given supply, that is, the number of shares for each tree must sump up to one. Since there is only one agent, equilibrium implies that <span class="math notranslate nohighlight">\(z_{i,t} = 1\)</span> for all <span class="math notranslate nohighlight">\(i,t\)</span>. In other words, there is no other agent in the economy with whom to trade. From the budget constraint, this implies that consumption of the representative agent must equal to output, which is the sum of dividends.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-439ca64b-658d-45b4-82d7-7b12e9121ec2">
-<span class="eqno">(3)<a class="headerlink" href="#equation-439ca64b-658d-45b4-82d7-7b12e9121ec2" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-13786888-d5a6-40e6-817c-1993a119cb10">
+<span class="eqno">(3)<a class="headerlink" href="#equation-13786888-d5a6-40e6-817c-1993a119cb10" title="Permalink to this equation">#</a></span>\[\begin{equation}
 c_t \leq \sum^N_{i=0}d_{i,t}
 \end{equation}\]</div>
 <p>We can assume that there is only one tree. Thus, the representative agent maximizes:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ff82d1e1-7848-43d0-bcc4-62a7aca31c08">
-<span class="eqno">(4)<a class="headerlink" href="#equation-ff82d1e1-7848-43d0-bcc4-62a7aca31c08" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0a07b508-2e6b-4172-a869-e2efa045b338">
+<span class="eqno">(4)<a class="headerlink" href="#equation-0a07b508-2e6b-4172-a869-e2efa045b338" title="Permalink to this equation">#</a></span>\[\begin{equation}
 E_t \sum^{\infty}_{s=t}\beta^{s-t}u(c_s)
 \end{equation}\]</div>
 <p>subject to the budget constraint:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-aa9dc145-800c-447c-b13d-5cd21d23bd21">
-<span class="eqno">(5)<a class="headerlink" href="#equation-aa9dc145-800c-447c-b13d-5cd21d23bd21" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b5cffda5-fae4-4cbd-9ba0-ec622d36e0ca">
+<span class="eqno">(5)<a class="headerlink" href="#equation-b5cffda5-fae4-4cbd-9ba0-ec622d36e0ca" title="Permalink to this equation">#</a></span>\[\begin{equation}
 z_{t+1}p_t + c_t \leq z_td_t +z_tp_t
 \end{equation}\]</div>
 <p>and market clearing conditions:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-38957800-403d-4aa0-bd1f-a04152064d60">
-<span class="eqno">(6)<a class="headerlink" href="#equation-38957800-403d-4aa0-bd1f-a04152064d60" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-1805659d-bb5a-451e-a589-048b4af8525d">
+<span class="eqno">(6)<a class="headerlink" href="#equation-1805659d-bb5a-451e-a589-048b4af8525d" title="Permalink to this equation">#</a></span>\[\begin{equation}
 c_t = d_t
 \end{equation}\]</div>
 <p>This representative agent’s problem can again being treated as a problem of dynamic optimization.</p>
 <p>With <span class="math notranslate nohighlight">\(z_{t+1}\)</span> as our control variables and <span class="math notranslate nohighlight">\(z_t\)</span> and <span class="math notranslate nohighlight">\(d_t\)</span> as our states variables, the Bellman equatoin can be written as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-fec84482-47e5-454b-aa34-7c14be0a7f26">
-<span class="eqno">(7)<a class="headerlink" href="#equation-fec84482-47e5-454b-aa34-7c14be0a7f26" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-6435655a-cec3-4260-8d52-17d8cb71f8d3">
+<span class="eqno">(7)<a class="headerlink" href="#equation-6435655a-cec3-4260-8d52-17d8cb71f8d3" title="Permalink to this equation">#</a></span>\[\begin{equation}
 V(z_{t},d_{t}) = \max_{z_{t+1}}[u(c_t) + \beta \mathbb{E}[V(z_{t+1}, d_{t+1})]]
 \end{equation}\]</div>
 <p>Reexpressing the budget constraint and making the substitution we have:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f061e253-6f2c-4e49-9322-9dd200b42cfe">
-<span class="eqno">(8)<a class="headerlink" href="#equation-f061e253-6f2c-4e49-9322-9dd200b42cfe" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-56062dd9-631d-4345-aebc-d0c06698d369">
+<span class="eqno">(8)<a class="headerlink" href="#equation-56062dd9-631d-4345-aebc-d0c06698d369" title="Permalink to this equation">#</a></span>\[\begin{equation}
 V(z_{t},d_{t}) = \max_{z_{t+1}}[u(d_tz_t - p_tz_{t+1}+p_tz_t) + \beta \mathbb{E}[V(z_{t+1}, d_{t+1})]]
 \end{equation}\]</div>
 </section>
@@ -395,11 +394,11 @@ V(z_{t},d_{t}) = \max_{z_{t+1}}[u(d_tz_t - p_tz_{t+1}+p_tz_t) + \beta \mathbb{E}
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">Euler</span> <span class="o">=</span> <span class="n">FOC</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">BS</span><span class="o">.</span><span class="n">lhs</span><span class="p">,</span> <span class="n">BS</span><span class="o">.</span><span class="n">rhs</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><span class="math notranslate nohighlight">\(\frac{\partial}{\partial {c}_{t}} u{\left({c}_{t} \right)} {p}_{t} = \beta \left({d}_{t + 1} + {p}_{t + 1}\right) \frac{\partial}{\partial {c}_{t + 1}} u{\left({c}_{t + 1} \right)}
+<p><span class="math notranslate nohighlight">\(\beta \left({d}_{t + 1} + {p}_{t + 1}\right) \frac{\partial}{\partial {c}_{t + 1}} u{\left({c}_{t + 1} \right)} - \frac{\partial}{\partial {c}_{t}} u{\left({c}_{t} \right)} {p}_{t} = 0
 \)</span></p>
 <p>Again, please note that we should have an expectation operator:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b1c57816-9fb4-48df-b776-365ed6240766">
-<span class="eqno">(9)<a class="headerlink" href="#equation-b1c57816-9fb4-48df-b776-365ed6240766" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-47690299-94bd-485c-b5c8-468ac8f81085">
+<span class="eqno">(9)<a class="headerlink" href="#equation-47690299-94bd-485c-b5c8-468ac8f81085" title="Permalink to this equation">#</a></span>\[\begin{equation}
 p_tu'(c_t) = \beta \mathbb{E}_t[(p_{t+1}+d_{t+1})u'(c_{t+1})]
 \end{equation}\]</div>
 <p>The Euler equation has an intuitive interpretation. The left-hand side gives the marginal utility (loss) to giving up a small amount of consumption, and using it to buy some of the asset at price <span class="math notranslate nohighlight">\(p_t\)</span>. The right-hand side gives the discounted expected marginal utility (gain) at date <span class="math notranslate nohighlight">\(t+1\)</span> from having an increased amount of the asset: part of the utility gain comes from the expected resale value of the additional amount of the asset and part of it comes from the dividend which this additional amount of the asset brings. Thus, the Euler equation is simply saying that given prices <span class="math notranslate nohighlight">\(p_t\)</span> and dividends <span class="math notranslate nohighlight">\(d_t\)</span>, agents will find it optimal to increase their demand of the asset if the expected future gains to doing so (ie. the RHS) are greater than the costs (ie. the LHS).
@@ -407,6 +406,8 @@ The Euler equation is also saying that the agents will find it optimal to decrea
 </section>
 <section id="deriving-the-ccapm">
 <h2>Deriving the CCAPM<a class="headerlink" href="#deriving-the-ccapm" title="Permalink to this headline">#</a></h2>
+<p>HOW TO PRICE RISK FREE, RISKY RETURNS
+EULER EQUATION TO SDF</p>
 </section>
 <section id="testing-the-ccapm">
 <h2>Testing the CCAPM<a class="headerlink" href="#testing-the-ccapm" title="Permalink to this headline">#</a></h2>
@@ -432,11 +433,11 @@ The Euler equation is also saying that the agents will find it optimal to decrea
       </div>
     </a>
     <a class="right-next"
-       href="equitypremium.html"
+       href="recursivepreferences.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">The Equity Premium Puzzle</p>
+        <p class="prev-next-title">Recursive Preferences</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

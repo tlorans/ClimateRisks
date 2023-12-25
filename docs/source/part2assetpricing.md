@@ -121,7 +121,7 @@ Euler = FOC.subs(BS.lhs, BS.rhs)
 
 ```
 
-$\frac{\partial}{\partial {c}_{t}} u{\left({c}_{t} \right)} {p}_{t} = \beta \left({d}_{t + 1} + {p}_{t + 1}\right) \frac{\partial}{\partial {c}_{t + 1}} u{\left({c}_{t + 1} \right)}
+$\beta \left({d}_{t + 1} + {p}_{t + 1}\right) \frac{\partial}{\partial {c}_{t + 1}} u{\left({c}_{t + 1} \right)} - \frac{\partial}{\partial {c}_{t}} u{\left({c}_{t} \right)} {p}_{t} = 0
 $
 
 Again, please note that we should have an expectation operator:
@@ -134,5 +134,10 @@ The Euler equation has an intuitive interpretation. The left-hand side gives the
 The Euler equation is also saying that the agents will find it optimal to decrease their demand of the assets whenever the costs in utility terms to buying an additional amount of the asset (i.e. the LHS) are greater than the expected future gains (the RHS). Taken together, that means that if agents are just indifferent between increasing and decreasing the amount of the asset which they demand, then they are already demanding the optimal amount of the asset.
 
 ## Deriving the CCAPM
+
+HOW TO PRICE RISK FREE, RISKY RETURNS
+EULER EQUATION TO SDF
+
+
 
 ## Testing the CCAPM
