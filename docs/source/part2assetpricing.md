@@ -404,3 +404,44 @@ where the $\frac{1}{2}\sigma^2_g$ is the "Jensen's inequality term". In addition
 \end{equation}
 
 for any value of $\alpha$.
+
+### The Method of Undetermined Coefficients
+
+In general the Euler equation has a mathematical structure similar to that of a differential equation. With CRRA utility and iid consumption growth, a guess-and-verify procedure (the method of undetermined coefficients) can be used to find the solution of $p_t$ in terms of $c_t$ and $p_{t+1}$ in terms of $c_{t+1}$.
+
+In particular, you can conjecture that:
+
+\begin{equation}
+p_t = vc_t
+\end{equation}
+
+and 
+
+\begin{equation}
+p_{t+1} = vc_{t+1}
+\end{equation}
+
+Recall that in equilibrium, $c_t = d_t$, thus we can also write:
+
+\begin{equation}
+p_t = vd_t
+\end{equation}
+
+\begin{equation}
+p_{t+1} = vd_{t+1}
+\end{equation}
+
+
+where $v$ is a constant to be determined.
+
+Substitute these guesses into the Euler equation:
+
+\begin{equation}
+p_t = \beta \mathbb{E}_t[G_{t+1}^{-\gamma}(d_{t+1}-p_{t+1})]
+\end{equation}
+
+to obtain:
+
+\begin{equation}
+vc_t = \beta \mathbb{E}_t[G_{t+1}^{-\gamma}(c_{t+1} + v c_{t+1})]
+\end{equation}
