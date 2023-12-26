@@ -8,7 +8,7 @@ e^{\gamma \sigma^2_g}
 
 That requires high volatility of consumption growth ($\sigma^2_g$) or high risk aversion $\gamma$.
 
-Another approach, to give more degree of freedoms with more parameters, is to relax assumption of time-separability utility, such that the marginal utility $u'(c_t)$ would depends on things besides current consumption. It allow to make $u'(c_t)$ much more volatility than consumption growth. 
+Another approach, to give more degree of freedoms with more parameters, is to relax assumption of time-separability utility, such that the marginal utility $u'(c_t)$ would depends on things besides current consumption. It allow to make $u'(c_t)$ much more volatilite than consumption growth. 
 
 We are going to focus on the solution with Recursive Preferences. In that case, the marginal utility depends on expected future consumption, and not current consumption only.
 
@@ -91,7 +91,7 @@ This is an arbitrary restriction. Why should the willingness to substitue across
 
 This restriction is the fundamental cause of the Equity Premium Puzzle: we need a high $\gamma$ to explain the mean return on risky assets, but then this implies a very low EIS, which generates a very high risk-free rate.
 
-### Indiferrence to the Timing of Resolution of Uncertainty
+### Timing of Resolution of Uncertainty
 
 Time-additive / expected utility preferences imply an indifference to the timing of resolution of uncertainty. Consider the following 2 lotteries:
 
@@ -106,12 +106,15 @@ An agent with time-additive / expected utility preferences will be indifferent t
 
 In the first lottery, uncertainty is resolved earlier... 
 
-## Value Function: Time Aggregator and Certainty Equivalence
+## Value Function with Recursive Preferences
 
+Kreps and Porteus proposed to relax time-additivity by defining current utility recursively, using two distinct functions:
+
+Epstein and Zin (1989, 1991 {cite:p}`epstein1991substitution`) 
 
 ## Euler Equation
 
-## Pricing
+## Pricing with the Long-Run Risks Approach
 
 Ec2021_Lecture9 slide 10
 
