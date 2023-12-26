@@ -1,4 +1,4 @@
-# Recursive Preferences and Long-Run Risks
+# Recursive Preferences
 
 The observed level of risk premia and return volatility require a volatile SDF. In CCAPM model, we have seen something of the form:
 
@@ -112,24 +112,19 @@ Kreps and Porteus proposed to relax time-additivity by defining current utility 
 
 Epstein and Zin (1989, 1991 {cite:p}`epstein1991substitution`) 
 
-## Euler Equation
+## Euler Equation and Stochastic Discount Factor
 
 ## Pricing
 
 Ec2021_Lecture9 slide 10
 
+## Eliminating the Value Function from the Pricing Rules Altogether
 
-### Market Return 
+A key advantage of the CCAPM is that it is based on observable data. In constrat, the ICAPM of Merton (1973) required observable proxies for the marginal value of wealth. 
 
-First approach: relate innovation in continuation utility with the return on the market portfolio (approach followed by EZ).
+In a sense, the EZ model combines the CCAPM and ICAPM. We must find observable proxies for the value function.
 
-Second approach: use log linear approximation to express the return on the market portfolio in terms of revisions in expected future aggregate consumption growth: long-run risks literature
-
-Both strategies: we need to relate returns on the market portfolio to continuation utility. 
-
-Major drawback to EZ approach: we don't observe the market portfolio. EZ used the return on an equity index as a proxy, but this is a rather narrow definition.
-
-In response, in recent years empirical work has been based on log-linear approximations, which allow observed consumption growth to replace the unobserved market portfolio return.
+A first approach consists in relating the value function to the return on the market portfolio, defined as an asset that pays aggregate consumption as its dividend.
 
 
-## Long-Run Risks
+
