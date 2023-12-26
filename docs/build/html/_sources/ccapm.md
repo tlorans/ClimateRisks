@@ -74,7 +74,7 @@ Reexpressing the budget constraint and making the substitution we have:
 V(z_{t},d_{t}) = \max_{z_{t+1}}[u(d_tz_t - p_tz_{t+1}+p_tz_t) + \beta \mathbb{E}[V(z_{t+1}, d_{t+1})]]
 \end{equation}
 
-## Euler Equation
+## Deriving the CCAPM
 
 We can state our problem in Python as before:
 
@@ -133,7 +133,7 @@ p_tu'(c_t) = \beta \mathbb{E}_t[(p_{t+1}+d_{t+1})u'(c_{t+1})]
 The Euler equation has an intuitive interpretation. The left-hand side gives the marginal utility (loss) to giving up a small amount of consumption, and using it to buy some of the asset at price $p_t$. The right-hand side gives the discounted expected marginal utility (gain) at date $t+1$ from having an increased amount of the asset: part of the utility gain comes from the expected resale value of the additional amount of the asset and part of it comes from the dividend which this additional amount of the asset brings. Thus, the Euler equation is simply saying that given prices $p_t$ and dividends $d_t$, agents will find it optimal to increase their demand of the asset if the expected future gains to doing so (ie. the RHS) are greater than the costs (ie. the LHS).
 The Euler equation is also saying that the agents will find it optimal to decrease their demand of the assets whenever the costs in utility terms to buying an additional amount of the asset (i.e. the LHS) are greater than the expected future gains (the RHS). Taken together, that means that if agents are just indifferent between increasing and decreasing the amount of the asset which they demand, then they are already demanding the optimal amount of the asset.
 
-## Deriving the CCAPM
+## Asset Pricing
 
 HOW TO PRICE RISK FREE, RISKY RETURNS
 EULER EQUATION TO SDF
@@ -405,7 +405,7 @@ where the $\frac{1}{2}\sigma^2_g$ is the "Jensen's inequality term". In addition
 
 for any value of $\alpha$.
 
-### The Method of Undetermined Coefficients
+### Deriving the Elasticity Coefficient for Price in Terms of Consumption
 
 In general the Euler equation has a mathematical structure similar to that of a differential equation. With CRRA utility and iid consumption growth, a guess-and-verify procedure (the method of undetermined coefficients) can be used to find the solution of $p_t$ in terms of $c_t$ and $p_{t+1}$ in terms of $c_{t+1}$.
 

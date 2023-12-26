@@ -114,7 +114,7 @@ Epstein and Zin (1989, 1991 {cite:p}`epstein1991substitution`)
 
 ## Euler Equation
 
-## Pricing with the Long-Run Risks Approach
+## Pricing
 
 Ec2021_Lecture9 slide 10
 
@@ -132,3 +132,4 @@ Major drawback to EZ approach: we don't observe the market portfolio. EZ used th
 In response, in recent years empirical work has been based on log-linear approximations, which allow observed consumption growth to replace the unobserved market portfolio return.
 
 
+## Long-Run Risks
