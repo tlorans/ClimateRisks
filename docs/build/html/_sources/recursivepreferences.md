@@ -110,9 +110,53 @@ In the first lottery, uncertainty is resolved earlier...
 
 Kreps and Porteus proposed to relax time-additivity by defining current utility recursively, using two distinct functions:
 
-Epstein and Zin (1989, 1991 {cite:p}`epstein1991substitution`) 
+\begin{equation}
+U_t = W(c_t, \mu(U_{t+1}))
+\end{equation}
+
+The Certainty Equivalent operator, $\mu_t(U{t+1})$, translates random future utility into consumption units.
+The Time Aggregator, $W(.)$, combines current consumption and the certainty euqivalent of future utility into a measure of current utility. The Certainty Equivalent operator captures risk aversion, while the Time Aggregator captures intertemporal substitution.
+
+Kreps and Porteus show that attitudes toward the timing of the resolution of uncertainty are captured by the curvature of $W$ with respect to its second arguments. 
+
+Epstein and Zin (1989, 1991 {cite:p}`epstein1991substitution`) develop a special case of Kreps-Porteus preferences, where both the Time Aggregator and Certainty Equivalent are CES functions:
+
+\begin{equation}
+W(c_t, \mu_t) = [(1 - \beta)c_t^{\rho} + \beta \mu_t^{\rho}]^{\frac{1}{\rho}}
+\end{equation}
+
+\begin{equation}
+\mu_t(U_{t+1}) = [\mathbb{E}_t[U_{t+1}](1 - \gamma)]^{\frac{1}{1 - \gamma}}
+\end{equation}
+
+Combining, we can then write EZ preferences as follows:
+
+\begin{equation}
+U_t = [(1 - \delta)C_t^{1 - \rho} + \delta \mathbb{E}_t[U_{t+1}^{1 - \gamma}]^{\frac{(1-rho)}{1 - \gamma}}]^{\frac{1}{1 - \rho}}
+\end{equation}
+
+
+We formulate the value function with $z_{t+1}$ as our control variables and $z_t$ and $d_t$ as our state variable, the Bellman equatoin can be written as:
+
+\begin{equation}
+V(z_{t},d_{t}) = \max_{z_{t+1}}[(1 - \beta)c_t^{\rho} + \beta \mu_t[V(z_{t+1}, d_{t+1})]^{\rho}]^{\frac{1}{\rho}}
+\end{equation}
+
+with $\mu_t[V(z_{t+1}, d_{t+1})] = \mathbb{E}[V(z_{t+1}, d_{t+1})^{1-\gamma}]^{\frac{1}{1 - \gamma}}$.
+
+Reexpressing the budget constraint and making the substitution we have:
+
+\begin{equation}
+V(z_{t},d_{t}) = \max_{z_{t+1}}[(1 - \beta)(d_tz_t - p_tz_{t+1}+p_tz_t)^{\rho} + \beta \mu_t[V(z_{t+1}, d_{t+1})]^{\rho}]^{\frac{1}{\rho}}
+\end{equation}
 
 ## Euler Equation and Stochastic Discount Factor
+
+The first-order condition for the choice of $z_{t+1}$ is of the form:
+
+\begin{equation}
+\frac{\partial W}{\partial c_t} = \frac{\partial W}{\partial \mu_t} \frac{\partial \mu_t}{\partial z_{t+1}}
+\end{equation}
 
 ## Pricing
 
