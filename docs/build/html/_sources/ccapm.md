@@ -589,3 +589,8 @@ implying:
 \begin{equation}
 \frac{1 + \mathbb{E}_t[r_{e,t+1}]}{1 + r_{f,t+1}} = e^{\gamma \sigma^2_g} > 1
 \end{equation}
+
+Thus, with CRRA utility and iid, log-normal consumption growth, the CCAPM implies an equity premium that is positive and gets larger as either:
+1. $\sigma^2_g$ increases, so that aggregate risk increases
+2. $\gamma$ increases, so that investors become more risk averse
+
