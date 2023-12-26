@@ -93,6 +93,19 @@ This restriction is the fundamental cause of the Equity Premium Puzzle: we need 
 
 ### Indiferrence to the Timing of Resolution of Uncertainty
 
+Time-additive / expected utility preferences imply an indifference to the timing of resolution of uncertainty. Consider the following 2 lotteries:
+
+1. At time 0, a single coin is tossed. If it's Heads, then $c_t = H$ for all $t$. If it's Tails, then $c_t = T$ for all $t$.
+2. At each date $t$, a coin will be tossed. If it's Heads, then $c_t = H$. If Tails, then $C_t = T$.
+
+An agent with time-additive / expected utility preferences will be indifferent to these 2 lotteries, since the expectured utiltiy of both is:
+
+\begin{equation}
+\sum^{\infty}_{t=1} \beta^t[\frac{1}{2}u(H) + \frac{1}{2}u(T)]
+\end{equation}
+
+In the first lottery, uncertainty is resolved earlier... 
+
 ## Value Function: Time Aggregator and Certainty Equivalence
 
 
