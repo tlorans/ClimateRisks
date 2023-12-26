@@ -20,7 +20,76 @@ Unfortunately, this convenience comes at a cost. Indeed, time-additive / expecte
 
 ### Elasticity of Intertemporal Substition and Coefficient of Relative Risk Aversion
 
-First, it implies that the Elasticity of Intertemporal Substitution (EIS) is the reciprocal of the Coefficient of Relative Risk Aversion (RRA). 
+First, it implies that the Elasticity of Intertemporal Substitution (EIS) is the reciprocal of the Coefficient of Relative Risk Aversion (RRA). This is unsurprising as $\gamma$ is the only parameters describing preferences.
+
+
+---
+**NOTE**
+
+We have already used the basic Constant Relative Risk Aversion form of utility function in our previous time-additive preferences model (CCAPM):
+
+\begin{equation}
+u(c) = \frac{c^{1-\gamma}}{1 - \gamma}
+\end{equation}
+
+The parameter $\gamma$ represents the relative risk aversion.
+
+To see this, note that:
+
+\begin{equation}
+u'(c) = c^{-\gamma}
+\end{equation}
+
+\begin{equation}
+u''(c) = -\gamma c^{-\gamma - 1}
+\end{equation}
+
+Using the definition of measure of relative risk aversion RRA and our particular utility function, we have:
+
+\begin{equation}
+RRA = -\frac{c u''(c)}{u'(c)} = \frac{-\gamma c^{-\gamma - 1}}{c^{-\gamma}} = \gamma
+\end{equation}
+---
+
+It can be shown by starting with the Euler condition from household optimisation:
+
+\begin{equation}
+u'(c_t) = \beta (1 + r)u'(c_{t+1})
+\end{equation}
+
+which, with CRRA utility becomes:
+
+\begin{equation}
+c_t^{-\gamma} = \beta(1+r)c_{t+1}^{-\gamma}
+\end{equation}
+
+Rearranging:
+
+\begin{equation}
+(\frac{c_{t+1}}{c_t})^{\gamma} = \beta(1 + r)
+\end{equation}
+
+Taking the logs:
+
+\begin{equation}
+\ln(c_{t+1}/c_t) = \frac{1}{\gamma} \ln \beta + \frac{1}{\gamma} \ln (1 + r)
+\end{equation}
+
+And the approximation with $\ln(1 + r) \approx r$:
+
+\begin{equation}
+\ln(c_{t+1}/c_t) = \frac{1}{\gamma} \ln \beta + \frac{1}{\gamma} r
+\end{equation}
+
+Finally, applying the definition of the Elasticity of Intertemporal Substitution gives:
+
+\begin{equation}
+EIS = \frac{\partial \ln (c_{t+1}/c_t)}{\partial r} = \frac{1}{\gamma}
+\end{equation}
+
+This is an arbitrary restriction. Why should the willingness to substitue across dates (or smoothing the consumption across time measured by the EIS) be related to the willingness to substitue across states (risk aversion, measured with the RRA)?
+
+This restriction is the fundamental cause of the Equity Premium Puzzle: we need a high $\gamma$ to explain the mean return on risky assets, but then this implies a very low EIS, which generates a very high risk-free rate.
 
 ### Indiferrence to the Timing of Resolution of Uncertainty
 
